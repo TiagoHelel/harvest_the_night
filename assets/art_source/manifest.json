@@ -34101,110 +34101,6 @@
       "output_sha256": "11df77c7dbf37b3100317c09d3aeaa55a417267df7eb11e6b9aff07876d0152e"
     },
     {
-      "id": "ui/icon_tech",
-      "owner": "raster",
-      "source": "assets/art_source/ui/tech.png",
-      "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
-      "crop_xywh": [
-        306,
-        316,
-        643,
-        624
-      ],
-      "canvas_wh": [
-        16,
-        16
-      ],
-      "pivot_xy": [
-        8,
-        8
-      ],
-      "content_scale": 0.02177293934681182,
-      "content_anchor_xy": [
-        7,
-        7
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "animation": "ui/icon_tech",
-      "frame": 0,
-      "seconds": 1.0,
-      "loop": false,
-      "output": "sprites/ui/icon_tech.png",
-      "prompt": "implementation/sprites/generation/0018-tech.prompt.txt",
-      "prompt_sha256": "6f711b979fa8672039d6c415c015f60563c26e1ebd987a3e3e34be5eba6da6bf",
-      "references": [
-        {
-          "path": "docs/reference-sheet.png",
-          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
-          "role": "As indexed in exact submitted prompt"
-        },
-        {
-          "path": "assets/art_source/ui/wood.png",
-          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
-          "role": "As indexed in exact submitted prompt"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0018",
-      "revision": 0,
-      "resource_id": "tech",
-      "display_role": "inventory",
-      "output_sha256": "884ccf99ed8701ece103cc9c3639066ad55556af6b38b48d910720996faf08e8"
-    },
-    {
-      "id": "ui/hud_tech",
-      "owner": "raster",
-      "source": "assets/art_source/ui/tech.png",
-      "source_sha256": "6a72bbfce6ae216646a7bc63f65708872b97ad887c7d2d216c5b6b8e24072c6c",
-      "crop_xywh": [
-        306,
-        316,
-        643,
-        624
-      ],
-      "canvas_wh": [
-        10,
-        10
-      ],
-      "pivot_xy": [
-        5,
-        5
-      ],
-      "content_scale": 0.012441679626749611,
-      "content_anchor_xy": [
-        4,
-        4
-      ],
-      "alpha_threshold": 128,
-      "palette": "tools/palette.py:COLOURS",
-      "animation": "ui/hud_tech",
-      "frame": 0,
-      "seconds": 1.0,
-      "loop": false,
-      "output": "sprites/ui/hud_tech.png",
-      "prompt": "implementation/sprites/generation/0018-tech.prompt.txt",
-      "prompt_sha256": "6f711b979fa8672039d6c415c015f60563c26e1ebd987a3e3e34be5eba6da6bf",
-      "references": [
-        {
-          "path": "docs/reference-sheet.png",
-          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
-          "role": "As indexed in exact submitted prompt"
-        },
-        {
-          "path": "assets/art_source/ui/wood.png",
-          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
-          "role": "As indexed in exact submitted prompt"
-        }
-      ],
-      "tool": "built-in ImageGen",
-      "generation_task": "0018",
-      "revision": 0,
-      "resource_id": "tech",
-      "display_role": "compact_hud",
-      "output_sha256": "1af9d660469b11234de5bf38fa64a94ae089e57b0f518c5171e6adb6c9388974"
-    },
-    {
       "id": "interior/floor",
       "owner": "raster",
       "source": "assets/art_source/interior/farmhouse-v1.png",
@@ -121160,6 +121056,1510 @@
         40
       ],
       "output_sha256": "306f4371958742f93286593e41cf0cfe99506b4569850be1983635894e065164"
+    },
+    {
+      "id": "components/A036-night-loot/bone-meal-clusters-dry-a",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A036-night-loot/bone-meal-clusters-dry-a",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-dry-a.png",
+      "input": "components/A036-night-loot/bone-meal-granule-dry",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-dry",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            2,
+            4
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-dry",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            10,
+            4
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-dry",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            5,
+            8
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/bone-meal-clusters-dry-a.png",
+          "sha256": "fdf762d92c1ccf55869c44a5172302efbfacfd311fa9c7937191329847a2a705",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "20e5113cfdfd292a74abeb0acf57f72382ac884099493b723715b46f195c6d2b"
+    },
+    {
+      "id": "components/A036-night-loot/bone-meal-clusters-dry-b",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A036-night-loot/bone-meal-clusters-dry-b",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-dry-b.png",
+      "input": "components/A036-night-loot/bone-meal-granule-dry",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-dry",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            12,
+            8
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-dry",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            3,
+            12
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-dry",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            9,
+            12
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/bone-meal-clusters-dry-b.png",
+          "sha256": "55713b74752d1400f8874a6ecf3142c05ac5e511ed47bdbaf08d8426da9ad667",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "ea073a953d73f6e408f9c22f7fe08f54aca0e69cdd854d37dba12b2e038ef55a"
+    },
+    {
+      "id": "components/A036-night-loot/bone-meal-clusters-wet-a",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A036-night-loot/bone-meal-clusters-wet-a",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-wet-a.png",
+      "input": "components/A036-night-loot/bone-meal-granule-wet",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-wet",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            2,
+            4
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-wet",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            10,
+            4
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-wet",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            5,
+            8
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/bone-meal-clusters-wet-a.png",
+          "sha256": "9b8174ebf1851c145e7db491a3a69518bca45e8addfc79dea69ca7574890d892",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "919c3c2a05cb19c6ec8963ca947520b1053f25e13665c1f90f5f130d6d22bea8"
+    },
+    {
+      "id": "components/A036-night-loot/bone-meal-clusters-wet-b",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A036-night-loot/bone-meal-clusters-wet-b",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-wet-b.png",
+      "input": "components/A036-night-loot/bone-meal-granule-wet",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-wet",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            12,
+            8
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-wet",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            3,
+            12
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-granule-wet",
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "paste_xy": [
+            9,
+            12
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/bone-meal-clusters-wet-b.png",
+          "sha256": "96a9d4f3a9f170a03cde92c5aa436d904f8cf0cdba57af0238ca3b18c40b606f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "1756bf45cdd135fb36153a9be356c591e5a38930deec8ce6c4072a8826b2c4e7"
+    },
+    {
+      "id": "components/A036-night-loot/bone-meal-granule-dry",
+      "owner": "raster",
+      "source": "assets/art_source/crops/night_loot/recovered-tilled_fertilised-r3.png",
+      "source_sha256": "fcf33bc98225323616a71da14102298f37d7f76b922def03fc4e27348a12d1c6",
+      "crop_xywh": [
+        232,
+        52,
+        20,
+        20
+      ],
+      "canvas_wh": [
+        2,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.1,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "bone_dark"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A036-night-loot/bone-meal-granule-dry",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/bone-meal-granule-dry.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.call.json",
+          "sha256": "41744455e51ad89993f99ba81220e7986cf9d6083eed0af38e690908022dbe01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/bone-meal-granule-dry.png",
+          "sha256": "e253fc5f4a7e5817f7987b3588edd20117a4528aa9b84e192cd0243805cc40d5",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "57526bcc3299eed4c1fb859baa506a1f301d46a4e82123bddf200b7da70c97b1"
+    },
+    {
+      "id": "components/A036-night-loot/bone-meal-granule-wet",
+      "owner": "raster",
+      "source": "assets/art_source/crops/night_loot/recovered-tilled_fertilised-r3.png",
+      "source_sha256": "fcf33bc98225323616a71da14102298f37d7f76b922def03fc4e27348a12d1c6",
+      "crop_xywh": [
+        232,
+        52,
+        20,
+        20
+      ],
+      "canvas_wh": [
+        2,
+        2
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 0.1,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "stone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A036-night-loot/bone-meal-granule-wet",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/bone-meal-granule-wet.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.call.json",
+          "sha256": "41744455e51ad89993f99ba81220e7986cf9d6083eed0af38e690908022dbe01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/bone-meal-granule-wet.png",
+          "sha256": "541d1f202498f0bd3f43d76515c21a3c0d3199e2ab6180b6ec7eee7568f38fa9",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "d5fe2a172fac723928f382920cdcfc3278832eda07d35c7d1fa72e707a7ad3ed"
+    },
+    {
+      "id": "components/A036-night-loot/soil-dry",
+      "owner": "raster",
+      "source": "assets/art_source/crops/night_loot/soil-dry.png",
+      "source_sha256": "32156b4d8a591f689db0e64693be086df9e85d75824d1a12edabd55ebb36be1e",
+      "crop_xywh": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A036-night-loot/soil-dry",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/soil-dry.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/bone_meal-r1.prompt.txt",
+      "prompt_sha256": "4a276c0bc04c36bbcfbcbae4cadc04bd751c2cae9d86e43593c3f6d1931e0c63",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/soil-dry.png",
+          "sha256": "32156b4d8a591f689db0e64693be086df9e85d75824d1a12edabd55ebb36be1e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af"
+    },
+    {
+      "id": "components/A036-night-loot/soil-wet",
+      "owner": "raster",
+      "source": "assets/art_source/crops/night_loot/soil-wet.png",
+      "source_sha256": "b8dcfce0ec0fdddb15ee1cbcb52d189e297661338dacc85ff659edc22722aca2",
+      "crop_xywh": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "content_scale": 1.0,
+      "content_anchor_xy": [
+        0,
+        0
+      ],
+      "alpha_threshold": 128,
+      "palette": "exact-source",
+      "animation": "components/A036-night-loot/soil-wet",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A036-night-loot/soil-wet.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/bone_meal-r1.prompt.txt",
+      "prompt_sha256": "4a276c0bc04c36bbcfbcbae4cadc04bd751c2cae9d86e43593c3f6d1931e0c63",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/components/soil-wet.png",
+          "sha256": "b8dcfce0ec0fdddb15ee1cbcb52d189e297661338dacc85ff659edc22722aca2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "assembly_component_of": "A036",
+      "output_sha256": "f3be498c9b31064979a3ce8295221572ad75464256e4f6bb932456a28f49e73c"
+    },
+    {
+      "id": "ui/icon_bone_meal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/bone_meal-r1.png",
+      "source_sha256": "edac91d97fd070871dbe1f255ee6df86244ce8f654f9e14f4b0176019ddc4ad5",
+      "crop_xywh": [
+        330,
+        341,
+        596,
+        638
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.0219435736677116,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_bone_meal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_bone_meal.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/bone_meal-r1.prompt.txt",
+      "prompt_sha256": "4a276c0bc04c36bbcfbcbae4cadc04bd751c2cae9d86e43593c3f6d1931e0c63",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/bone_meal-r1.call.json",
+          "sha256": "6112812950037ebf15e0611ba656d8aa9d6df5f22ad62f5d8bf8a112ba890941",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/icon_bone_meal/none/01.png",
+          "sha256": "a548e72259ae00a54059b78ed73ad89504e2e553280a5ac6438f4a8d0c0e019b",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "ff0703f7e36927061c65d05b2441356fccac7462525c216262da13d463115e18"
+    },
+    {
+      "id": "ui/hud_bone_meal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/bone_meal-r1.png",
+      "source_sha256": "edac91d97fd070871dbe1f255ee6df86244ce8f654f9e14f4b0176019ddc4ad5",
+      "crop_xywh": [
+        330,
+        341,
+        596,
+        638
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.012539184952978056,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_bone_meal",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_bone_meal.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/bone_meal-r1.prompt.txt",
+      "prompt_sha256": "4a276c0bc04c36bbcfbcbae4cadc04bd751c2cae9d86e43593c3f6d1931e0c63",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/bone_meal-r1.call.json",
+          "sha256": "6112812950037ebf15e0611ba656d8aa9d6df5f22ad62f5d8bf8a112ba890941",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/hud_bone_meal/none/01.png",
+          "sha256": "3dc5a419eba389157a8fa56d13c584a0bc29c7484b691402aa8d4245f3626154",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "9e230bdb20465837656592b68ad38190fcd0d6e0184eb8c0d61622b8d23ed54d"
+    },
+    {
+      "id": "ui/icon_tech",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/tech-r1.png",
+      "source_sha256": "2a9ea86f7ee64482586cca9717d72ee48b7f6bb14af807647285f165680eb309",
+      "crop_xywh": [
+        354,
+        353,
+        547,
+        705
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.019858156028368795,
+      "content_anchor_xy": [
+        5,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_tech",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_tech.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/tech-r1.prompt.txt",
+      "prompt_sha256": "7df1912d068366ed8d4e449e33a761f64c1dca0f79369bac82cfe20f6599714e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/tech-r1.call.json",
+          "sha256": "a9994b452c33fc1ab75e38d5ec11adfa329074da16f688432efb50c9e55ca07d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/icon_tech/none/01.png",
+          "sha256": "3f3605fce24f2fceb959b7729df6a9b5e11518f21d5e79a8f1f518302e7335fa",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "cce7414458152daff51a18d9876f7c8ec1891cdbb66e413b5405752abc933791"
+    },
+    {
+      "id": "ui/hud_tech",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/tech-r1.png",
+      "source_sha256": "2a9ea86f7ee64482586cca9717d72ee48b7f6bb14af807647285f165680eb309",
+      "crop_xywh": [
+        354,
+        353,
+        547,
+        705
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011347517730496455,
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_tech",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_tech.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/tech-r1.prompt.txt",
+      "prompt_sha256": "7df1912d068366ed8d4e449e33a761f64c1dca0f79369bac82cfe20f6599714e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/tech-r1.call.json",
+          "sha256": "a9994b452c33fc1ab75e38d5ec11adfa329074da16f688432efb50c9e55ca07d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/hud_tech/none/01.png",
+          "sha256": "ab35d7628e1ad48f757792202d5fbad598d9b62917cdb3b2ebcfc72e931de866",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "83a369bf66077563fea7445fd4ce40602ed38b09f6615682c3075fbbcfcaae85"
+    },
+    {
+      "id": "ui/icon_bones",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/bones-r1.png",
+      "source_sha256": "0a504c14f3fe03279d39c42545083e669b6124181999eb55bcc57e758a260683",
+      "crop_xywh": [
+        425,
+        312,
+        701,
+        437
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.019971469329529243,
+      "content_anchor_xy": [
+        7,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_bones",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_bones.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/bones-r1.prompt.txt",
+      "prompt_sha256": "d3a781f295bf851eacba2e965184a249cffb434915a4ac76bcf7cbb957200423",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/bones-r1.call.json",
+          "sha256": "69d08a8d1cbe17c0ee076e9a49d5d691c8e74c7708065749047b8a749bef4bce",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/icon_bones/none/01.png",
+          "sha256": "a6142d8ed831c3eae472f4ccb1b41acee200c118d340936e2b330ce4f7d75830",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "6c6bdc397af9779a5fee6a622fff7f2d69c3a2fbd9dd50fe76c1f1519c5b99f1"
+    },
+    {
+      "id": "ui/hud_bones",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/bones-r1.png",
+      "source_sha256": "0a504c14f3fe03279d39c42545083e669b6124181999eb55bcc57e758a260683",
+      "crop_xywh": [
+        425,
+        312,
+        701,
+        437
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011412268188302425,
+      "content_anchor_xy": [
+        4,
+        2
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_bones",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_bones.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/bones-r1.prompt.txt",
+      "prompt_sha256": "d3a781f295bf851eacba2e965184a249cffb434915a4ac76bcf7cbb957200423",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/bones-r1.call.json",
+          "sha256": "69d08a8d1cbe17c0ee076e9a49d5d691c8e74c7708065749047b8a749bef4bce",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/hud_bones/none/01.png",
+          "sha256": "0b56724c02fb2c0ccae3059b2b0cea96d411e48a95d7ab7ab7bee4b3d108cf02",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "8db98cc1912aa240de33071089dd1d87b0b58080ff7fa3d89aae13e0305a5681"
+    },
+    {
+      "id": "ui/icon_moon_stone",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/moon_stone_icon-r1.png",
+      "source_sha256": "f1600c1e09df7edd236e424ba86e78198e03e32ae085207de23aa08d4e23f55a",
+      "crop_xywh": [
+        475,
+        305,
+        593,
+        463
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.023608768971332208,
+      "content_anchor_xy": [
+        7,
+        5
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_moon_stone",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_moon_stone.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone_icon-r1.prompt.txt",
+      "prompt_sha256": "6b30e4e360ac0adf1ce4bb01835a49c90f1187ae4e82405e894ff3017db0a6e7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone_icon-r1.call.json",
+          "sha256": "f6e0d32d7d936df6a534fea186312f9315ac2d08b5420f6819500337a3eb2701",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/icon_moon_stone/none/01.png",
+          "sha256": "1b19fbce676392011469a519c1591750e3e53e8c90c08f934518b5eb98c0f146",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "819f49c6a7339535dcc6cff4a858ea340009354a379a7df15cff55babb30d137"
+    },
+    {
+      "id": "ui/hud_moon_stone",
+      "owner": "raster",
+      "source": "assets/art_source/ui/night_loot/moon_stone_icon-r1.png",
+      "source_sha256": "f1600c1e09df7edd236e424ba86e78198e03e32ae085207de23aa08d4e23f55a",
+      "crop_xywh": [
+        475,
+        305,
+        593,
+        463
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.013490725126475547,
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_moon_stone",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_moon_stone.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone_icon-r1.prompt.txt",
+      "prompt_sha256": "6b30e4e360ac0adf1ce4bb01835a49c90f1187ae4e82405e894ff3017db0a6e7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone_icon-r1.call.json",
+          "sha256": "f6e0d32d7d936df6a534fea186312f9315ac2d08b5420f6819500337a3eb2701",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/hud_moon_stone/none/01.png",
+          "sha256": "0a29ca35a79669777a2e8e44df37ad93f5b761b36af236c256e8d719bac9bdeb",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "c0cecc562adb31357ca85087d5f311255c877c2a2c6e19a404ecf3cbf231d3d6"
+    },
+    {
+      "id": "props/bone_pile",
+      "owner": "raster",
+      "source": "assets/art_source/props/night_loot/bone_pile-r1.png",
+      "source_sha256": "0d001ecc0a8afc7dff6132ac81d906ea399b29abf16633807b5c32bc0e620c9e",
+      "crop_xywh": [
+        432,
+        334,
+        689,
+        416
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.016826923076923076,
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone_light",
+        "bone_dark",
+        "bone"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/bone_pile",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/props/bone_pile.png",
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/bone_pile-r1.prompt.txt",
+      "prompt_sha256": "b122b811718877d82695162e007810905010d8c023e02372cb810f77f0727d26",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/bone_pile-r1.call.json",
+          "sha256": "b0297b529a8430191496df4f1ce01f8cf34f4afb0b0e7b9310ff433585bfbb05",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/bone_pile/none/01.png",
+          "sha256": "0e10870953df38fa7725414b1f5be573faffc7b6e43030c809627d9db0703751",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "46c9386d2b125d9c1193e36826784e00d260382bd9f2a0404d37b5cbdbf28674"
+    },
+    {
+      "id": "props/moon_stone_0",
+      "owner": "raster",
+      "source": "assets/art_source/props/night_loot/moon_stone-r1.png",
+      "source_sha256": "9b7b4a68551ce19e664005ebe64f3c6140b43ad74797aa4b81780a100cbc184d",
+      "crop_xywh": [
+        544,
+        386,
+        450,
+        361
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0221606648199446,
+      "content_anchor_xy": [
+        5,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "water_light",
+        "moon"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/moon_stone",
+      "frame": 0,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/props/moon_stone_0.png",
+      "light_xy": [
+        6,
+        8
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone-r1.prompt.txt",
+      "prompt_sha256": "7e5adabaa2f0ee18300feb1eeffe66f9ddfcc0fe1171cfa44ef1115576326c27",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone-r1.call.json",
+          "sha256": "af6c1b54a2e1420aca2f65c79b7c6f287ba99c1326f64b97fe9df52eebcfd790",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/moon_stone/none/01.png",
+          "sha256": "0bedcd9537713038cc1b0b56dfccfccdee9296cdc9d3e91f9767706cb6d9b8d5",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "8675ac403ff893a5a7e96e23f4abd92b1cc13d856ca61df478c557f511597f03"
+    },
+    {
+      "id": "props/moon_stone_1",
+      "owner": "raster",
+      "source": "assets/art_source/props/night_loot/moon_stone_glint-r1.png",
+      "source_sha256": "ae6c142c4f7ec501f55bb7f240f03230310dd5ec5176f6422097737cb439cf63",
+      "crop_xywh": [
+        544,
+        386,
+        450,
+        361
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.0221606648199446,
+      "content_anchor_xy": [
+        5,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "water_light",
+        "moon"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/moon_stone",
+      "frame": 1,
+      "seconds": 0.4,
+      "loop": true,
+      "output": "sprites/props/moon_stone_1.png",
+      "light_xy": [
+        6,
+        8
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone_glint-r1.prompt.txt",
+      "prompt_sha256": "b3af25698e85f7c1e7f942271df77d171ddd70a9d9fe4edcdb8589c5a8a3e056",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/moon_stone_glint-r1.call.json",
+          "sha256": "4d9919fac582f14f1a719a66404bc6d59837ac2ceb12544d5a6b64a3e4bf4315",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/moon_stone/none/02.png",
+          "sha256": "d3737b00862e941d2cc3457f4be4f8aca7b9e43a83efde873868dda0c3a7ca70",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "90668d446b3a94eb17c7492398afa01bb7121095f9c39965e29e6a90aab52d42"
+    },
+    {
+      "id": "crops/tilled_fertilised",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/tilled_fertilised",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/tilled_fertilised.png",
+      "input": "components/A036-night-loot/soil-dry",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A036-night-loot/soil-dry",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-clusters-dry-a",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-clusters-dry-b",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.call.json",
+          "sha256": "41744455e51ad89993f99ba81220e7986cf9d6083eed0af38e690908022dbe01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/tilled_fertilised/none/01.png",
+          "sha256": "aeaa104928127b0b371d650f275e268a33f7ba20b5c59fff5a3819ef25777d29",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "19ed7577a2ead8ebe8d157765abb098fa0c2f7d8ae7b9674682a8c5951339565"
+    },
+    {
+      "id": "crops/tilled_fertilised_wet",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/tilled_fertilised_wet",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/tilled_fertilised_wet.png",
+      "input": "components/A036-night-loot/soil-wet",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A036-night-loot/soil-wet",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-clusters-wet-a",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A036-night-loot/bone-meal-clusters-wet-b",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/raw/recovered-tilled_fertilised-r3.call.json",
+          "sha256": "41744455e51ad89993f99ba81220e7986cf9d6083eed0af38e690908022dbe01",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/native/tilled_fertilised_wet/none/01.png",
+          "sha256": "40b08cc3436c8e697e99d344a7cfadf984be74cd15ee0c77b3af94dcb7086404",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/contract.json",
+          "sha256": "3c3ba8b99a8b9cd75c3417c75c84ea9e5c72856d3210bdc46413b8256429328f",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+          "sha256": "39b0ae9d6e403150555e8a50bf94ee8b91acee37da10d9ac41adce72382d6a88",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A036",
+      "integration_task": "0235",
+      "revision": 1,
+      "approval": "A036 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0235",
+      "output_sha256": "93c3e9db90920fe6b9b77d06f17b6c28ff95202e1380a976e45ed033f4b018d8"
     }
   ]
 }

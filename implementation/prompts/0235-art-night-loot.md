@@ -1,7 +1,7 @@
 # 0235 - Art: bones, moon stones and essence
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0221, 0222, 0219
 - **Likely files:** assets/art_source/props/, assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_prop_art.py, tools/check_crop_art.py, tools/check_ui_art.py
 - **Art packs:** A036

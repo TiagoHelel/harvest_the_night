@@ -207,21 +207,6 @@ const ORNAMENT := {"canvas": Vector2i(64, 12), "pivot": Vector2i(32, 6), "draw_s
 ## `bare` is a static file with no frame number (`hud_bait.png`). One line
 ## each, like `POSES`.
 const ART := {
-	# 0185's animals at home and the dog: A026's sheep and pig, A027's cow
-	# and chicken and A028's dog, as the cow's and the chicken's props -
-	# tinted and scaled, every frame the same picture - until 0209, 0210
-	# and 0245: the sheep the hen paled and grown (a tinted cow stayed a
-	# cow), the pig the cow in pink, the dog the cow small and brown.
-	# `AnimalView` plays them.
-	# A036's night loot (task 0221): the bones' icon the stone paled to bone
-	# and the moon stone's the stone cooled to moonlight, until 0235; the
-	# pile and the stone on the ground drawn in code (`LootView`).
-	&"icon_bones": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(1.3, 1.28, 1.12), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_bones": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(1.3, 1.28, 1.12), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"bone_pile": {"pack": "A036", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
-	&"moon_stone": {"pack": "A036", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE},
 	# A049's digger (task 0250): the walker caked in soil, every pose its own,
 	# until 0263; its mound while it is under a fence drawn in code
 	# (`DiggerArt`), and its forecast head the box over the walker's head.
@@ -288,13 +273,6 @@ const ART := {
 	# The Blood Moon's (task 0257): a red disc with a drip, drawn in code.
 	&"icon_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
-	# the fertilised earth the tilled tile paled with it, dry and wet, until
-	# 0235.
-	&"icon_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"tilled_fertilised": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	&"tilled_fertilised_wet": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 	# A056's collection book (task 0287), until 0288 integrates it: the
 	# cover, the ornament and every badge drawn by code (`CollectionArt`);

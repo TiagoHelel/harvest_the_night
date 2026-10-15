@@ -8,11 +8,10 @@ extends Node2D
 ## **View only.** It reads `Loot` and writes nothing; the shimmer runs on a
 ## wall clock, so the determinism hash cannot see it.
 ##
-## A036's bone pile and moon stone, drawn in code in their 16x16 boxes at
-## (8,14) until 0235 integrates the pack (`PlaceholderArt.is_drawn`): a low
-## heap of two pale bones, and a smooth pale stone whose crescent glint
-## slides along it between two frames. Its glow is code too - a faint halo
-## here by day, and `Lighting`'s cold point after dark.
+## A036's bone pile and moon stone in their 16x16 boxes standing on (8,14),
+## the pack's art since task 0235: a low heap of bones, and a smooth pale
+## stone whose glint slides along it between two frames. Its glow stays code -
+## a faint halo here by day, and `Lighting`'s cold point after dark.
 
 ## How long a frame of the moon stone's shimmer lasts: A036's 0.4 seconds.
 const SHIMMER_SECONDS := 0.4
@@ -21,6 +20,7 @@ const SHIMMER_SECONDS := 0.4
 ## night glow here.
 const STONE_LIGHT := Vector2(6.5, 8.5)
 const PILE_PATH := "res://sprites/props/bone_pile.png"
+const STONE_PATH := "res://sprites/props/moon_stone_%d.png"
 
 var _state: Dictionary = {}
 var _signature := ""
@@ -82,78 +82,21 @@ func _draw() -> void:
 			_draw_stone(at)
 
 
-# ------------------------------------------------------------------- bones
+# ------------------------------------------------------------- the pictures
 
-## A036's bone pile, drawn in code until 0235: two pale bones heaped one
-## above the other, each with the two-lobed ends that make a bone a bone, on a
-## soft shadow - visible 12 wide and 7 tall, its lowest row 13.
+## A036's bone pile.
 func _draw_bones(at: Vector2) -> void:
-	if not PlaceholderArt.is_drawn(PILE_PATH):
-		var texture := _texture(PILE_PATH)
-		if texture != null:
-			draw_texture(texture, at)
-			return
-	_rect(at, 2, 13, 12, 1, &"ink_soft")
-	# The long one underneath: a lobe above and below at each end, the shaft
-	# between them.
-	_bone(at, 2, 10, 12)
-	# The shorter one on top of it, set right.
-	_bone(at, 5, 7, 8)
+	var texture := _texture(PILE_PATH)
+	if texture != null:
+		draw_texture(texture, at)
 
 
-## One bone lying across: `length` wide from `(x, y)`, three rows tall - the
-## two lobes at each end on the outer rows, the shaft on the middle one and
-## the notch where it meets the end.
-func _bone(at: Vector2, x: int, y: int, length: int) -> void:
-	var right := x + length - 2
-	_rect(at, x, y, 2, 1, &"bone")
-	_rect(at, right, y, 2, 1, &"bone")
-	_rect(at, x + 1, y + 1, length - 2, 1, &"bone")
-	_rect(at, x, y + 2, 2, 1, &"bone_dark")
-	_rect(at, right, y + 2, 2, 1, &"bone_dark")
-	# The shaft's underside, in the shade of the lobes.
-	_rect(at, x + 3, y + 2, length - 6, 1, &"stone_light")
-
-
-# -------------------------------------------------------------- the stone
-
-## A036's moon stone, drawn in code until 0235: a smooth, rounded pale stone,
-## cool blue-white, shaded to blue at its lower right - never the grey of a
-## rock - with a glint sliding along the sheen of its upper left between the
-## two frames: visible 10 wide and 8 tall, its lowest row 13, over a halo of
-## its own light.
+## A036's moon stone on its frame of the shimmer, over a halo of its light.
 func _draw_stone(at: Vector2) -> void:
-	var path := PlaceholderArt.art_path(&"moon_stone", _frame)
-	if not PlaceholderArt.is_drawn(path):
-		var texture := _texture(path)
-		if texture != null:
-			_halo(at)
-			draw_texture(texture, at)
-			return
 	_halo(at)
-	# The outline, rounded at the corners.
-	_rect(at, 5, 6, 6, 1, &"ink_soft")
-	_rect(at, 4, 7, 1, 1, &"ink_soft")
-	_rect(at, 11, 7, 1, 1, &"ink_soft")
-	_rect(at, 3, 8, 1, 4, &"ink_soft")
-	_rect(at, 12, 8, 1, 4, &"ink")
-	_rect(at, 4, 12, 1, 1, &"ink")
-	_rect(at, 11, 12, 1, 1, &"ink")
-	_rect(at, 5, 13, 6, 1, &"ink")
-	# The body, pale and cool, and its shade.
-	_rect(at, 5, 7, 6, 1, &"moon")
-	_rect(at, 4, 8, 8, 4, &"moon")
-	_rect(at, 5, 12, 6, 1, &"water_light")
-	_rect(at, 7, 11, 5, 1, &"water_light")
-	_rect(at, 10, 9, 2, 2, &"water_light")
-	_rect(at, 7, 12, 3, 1, &"stone")
-	# The glint, sliding along the sheen: low on its left, then over its top.
-	if _frame == 0:
-		_rect(at, 5, 9, 1, 2, &"bone")
-		_rect(at, 6, 8, 1, 1, &"bone")
-	else:
-		_rect(at, 6, 8, 1, 1, &"bone")
-		_rect(at, 7, 7, 2, 1, &"bone")
+	var texture := _texture(STONE_PATH % _frame)
+	if texture != null:
+		draw_texture(texture, at)
 
 
 ## The stone's own light by day: a faint cold pool round `STONE_LIGHT`.
@@ -163,10 +106,6 @@ func _halo(at: Vector2) -> void:
 	for ring in [[7.0, 0.08], [5.0, 0.12], [3.0, 0.16]]:
 		colour.a = float(ring[1])
 		draw_circle(at + STONE_LIGHT, float(ring[0]), colour)
-
-
-func _rect(at: Vector2, x: int, y: int, w: int, h: int, colour: StringName) -> void:
-	draw_rect(Rect2(at + Vector2(x, y), Vector2(w, h)), _colour(colour))
 
 
 func _colour(id: StringName) -> Color:

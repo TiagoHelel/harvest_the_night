@@ -21,6 +21,33 @@ REGROW={'strawberry':([16,16],[8,14]),'pepper':([16,16],[8,14]),'corn':([16,24],
 OVERLAYS=('trampled','withered')
 TURF=('tilled_edge_n','tilled_edge_corner_nw')
 
+## A036's fertilised earth (task 0235): the tilled tile dry and wet with the
+## bone meal on it - opaque 16x16 standing on (8,16), the meal's six clusters
+## on the same pixels dry and wet and nothing else changed from `tilled` and
+## `tilled_wet` (their furrows kept), the wet one at least 20 darker.
+FERTILISED = (('tilled_fertilised', 'tilled'), ('tilled_fertilised_wet', 'tilled_wet'))
+
+
+def check_fertilised(entries, files, images):
+    brightness = lambda im: sum(sum(p[:3]) / 3 for p in import_art.samples(im)) / 256
+    marks = []
+    for name, base in FERTILISED:
+        e = entries['crops/' + name]
+        im, under = images['crops/' + name], images['crops/' + base]
+        if e.get('generation_task') != 'A036' or e['canvas_wh'] != [16, 16] or e['pivot_xy'] != [8, 16]:
+            raise ValueError('Fertilised soil off its tile: ' + name)
+        if im.getchannel('A').getextrema() != (255, 255):
+            raise ValueError('Fertilised soil must fill one opaque cell: ' + name)
+        marks.append(sorted((x, y) for y in range(16) for x in range(16) if im.getpixel((x, y)) != under.getpixel((x, y))))
+        if (import_art.ROOT / e['output']).read_bytes() != files[e['output']]:
+            raise ValueError('Fertilised soil differs from its approved source: ' + name)
+    if not marks[0] or marks[0] != marks[1]:
+        raise ValueError('The meal lies differently dry and wet')
+    if brightness(images['crops/tilled_fertilised']) - brightness(images['crops/tilled_fertilised_wet']) < 20:
+        raise ValueError('Wet fertilised soil loses the moisture cue')
+    return len(marks[0])
+
+
 def main():
     data=import_art.load_manifest();files,images=import_art.build(data)
     entries={e['id']:e for e in data['assets']}
@@ -32,6 +59,8 @@ def main():
             raise ValueError('Crop lacks raw species/soil source: '+name)
         if (art_ownership.ROOT/e['output']).read_bytes()!=files[e['output']]:
             raise ValueError('Crop differs from its accepted source: '+name)
+    meal=check_fertilised(entries,files,images)
+    print("OK: A036's fertilised earth: the meal's %d pixels on the same cells dry and wet, the furrows kept, wet darker"%meal)
     soil=[images['crops/'+n] for n in ('tilled','tilled_wet')]
     for im in soil:
         if im.size!=(16,16) or im.getchannel('A').getextrema()!=(255,255):

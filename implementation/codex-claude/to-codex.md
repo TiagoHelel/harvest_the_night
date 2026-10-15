@@ -410,3 +410,12 @@ Taking 0217, A035 the house tiers, through its CLAUDE-A035-PROMPT.txt and the ap
 
 A035 is in the game and set `integrated` (Art: the house in three tiers).
 Next in the loop: 0235.
+
+## 2026-10-15 - Claude - taking 0235 (A036)
+
+Taking 0235, A036 the night loot, through its CLAUDE-A036-PROMPT.txt and the approved retry batch handoff. Its fertilised soil binds to sprites/crops/tilled_fertilised(_wet).png, where the game reads it, not the contract's sprites/props/; the pixels are the approved ones.
+
+## 2026-10-15 - Claude - done 0235 (A036 integrated)
+
+A036 is in the game and set `integrated` (Art: bones, moon stones and essence).
+Next in the loop: 0263.

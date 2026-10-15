@@ -1,0 +1,36 @@
+{
+  "pack": "A036",
+  "date": "2026-10-15",
+  "status": "approved for integration",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+  "approved_folder": "implementation/backlog/deliveries/A036-night-loot",
+  "approved_sha256": {
+    "native/tilled_fertilised_wet/none/01.png": "40b08cc3436c8e697e99d344a7cfadf984be74cd15ee0c77b3af94dcb7086404",
+    "native/tilled_fertilised/none/01.png": "aeaa104928127b0b371d650f275e268a33f7ba20b5c59fff5a3819ef25777d29",
+    "native/moon_stone/none/01.png": "0bedcd9537713038cc1b0b56dfccfccdee9296cdc9d3e91f9767706cb6d9b8d5",
+    "native/moon_stone/none/02.png": "d3737b00862e941d2cc3457f4be4f8aca7b9e43a83efde873868dda0c3a7ca70",
+    "native/icon_tech/none/01.png": "3f3605fce24f2fceb959b7729df6a9b5e11518f21d5e79a8f1f518302e7335fa",
+    "native/icon_moon_stone/none/01.png": "1b19fbce676392011469a519c1591750e3e53e8c90c08f934518b5eb98c0f146",
+    "native/icon_bone_meal/none/01.png": "a548e72259ae00a54059b78ed73ad89504e2e553280a5ac6438f4a8d0c0e019b",
+    "native/icon_bones/none/01.png": "a6142d8ed831c3eae472f4ccb1b41acee200c118d340936e2b330ce4f7d75830",
+    "native/hud_tech/none/01.png": "ab35d7628e1ad48f757792202d5fbad598d9b62917cdb3b2ebcfc72e931de866",
+    "native/hud_moon_stone/none/01.png": "0a29ca35a79669777a2e8e44df37ad93f5b761b36af236c256e8d719bac9bdeb",
+    "native/hud_bone_meal/none/01.png": "3dc5a419eba389157a8fa56d13c584a0bc29c7484b691402aa8d4245f3626154",
+    "native/hud_bones/none/01.png": "0b56724c02fb2c0ccae3059b2b0cea96d411e48a95d7ab7ab7bee4b3d108cf02",
+    "native/bone_pile/none/01.png": "0e10870953df38fa7725414b1f5be573faffc7b6e43030c809627d9db0703751"
+  },
+  "approved_component_sha256": {
+    "components/bone-meal-clusters-dry-a.png": "fdf762d92c1ccf55869c44a5172302efbfacfd311fa9c7937191329847a2a705",
+    "components/bone-meal-clusters-dry-b.png": "55713b74752d1400f8874a6ecf3142c05ac5e511ed47bdbaf08d8426da9ad667",
+    "components/bone-meal-clusters-wet-a.png": "9b8174ebf1851c145e7db491a3a69518bca45e8addfc79dea69ca7574890d892",
+    "components/bone-meal-clusters-wet-b.png": "96a9d4f3a9f170a03cde92c5aa436d904f8cf0cdba57af0238ca3b18c40b606f",
+    "components/bone-meal-granule-dry.png": "e253fc5f4a7e5817f7987b3588edd20117a4528aa9b84e192cd0243805cc40d5",
+    "components/bone-meal-granule-wet.png": "541d1f202498f0bd3f43d76515c21a3c0d3199e2ab6180b6ec7eee7568f38fa9",
+    "components/soil-dry.png": "32156b4d8a591f689db0e64693be086df9e85d75824d1a12edabd55ebb36be1e",
+    "components/soil-wet.png": "b8dcfce0ec0fdddb15ee1cbcb52d189e297661338dacc85ff659edc22722aca2"
+  },
+  "frames": 13,
+  "runtime_integrated": false,
+  "review_page": "implementation/backlog/deliveries/A003-guardian/retry-final-review.html",
+  "approval_scope": "All outputs on the final thirteen-pack correction review; no source pixels changed on approval."
+}

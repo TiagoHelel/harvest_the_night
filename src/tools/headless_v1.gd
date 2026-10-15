@@ -207,6 +207,7 @@ func _run() -> void:
 	_task_0215_shipping_bin()
 	_task_0216_peddler()
 	_task_0217_house_tiers()
+	_task_0235_night_loot()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14579,6 +14580,32 @@ func _task_0217_house_tiers() -> void:
 		and panes.size() == 5 and panes[0] == contact - Vector2(shape["pivot"]) + Vector2((shape["windows"] as Array)[0]),
 		"A035's three house tiers, whole and hurt, are raster art at full density over the 6x4 footprint, sliced, their glass and chimney on the drawing's own points",
 		"%s; smoke %s, panes %s" % [str(wrong), smoke, str(panes)])
+	_completed += 1
+
+
+## **A036's night loot** (task 0235): the bone pile and the moon stone's two
+## frames, the fertilised earth dry and wet beside the tilled tiles, and the
+## icons of the bones, the moon stone, the bone meal and the essence - whose
+## id stays `tech` - all raster art, none a stand-in or tinted; the stone's
+## light where `LootView` puts it.
+func _task_0235_night_loot() -> void:
+	var wrong: Array = []
+	for path in ["res://sprites/props/bone_pile.png", "res://sprites/props/moon_stone_0.png",
+			"res://sprites/props/moon_stone_1.png", "res://sprites/crops/tilled_fertilised.png",
+			"res://sprites/crops/tilled_fertilised_wet.png"]:
+		var frame := PlaceholderArt.frame(path)
+		if frame.is_empty() or frame.has("stand_in") or PlaceholderArt.is_drawn(path):
+			wrong.append(path.get_file())
+	for id in [GameData.BONES, GameData.MOON_STONE, GameData.BONE_MEAL, &"tech"]:
+		for cut in [["icon", false], ["hud", true]]:
+			var texture := UiKit.icon(id, bool(cut[1]))
+			if texture == null or texture.resource_path != "res://sprites/ui/%s_%s.png" % [cut[0], id] \
+					or PlaceholderArt.art_tint(StringName("%s_%s" % [cut[0], id])) != Color.WHITE:
+				wrong.append("%s_%s" % [cut[0], id])
+	var light: Vector2i = PlaceholderArt.frame("res://sprites/props/moon_stone_0.png").get("light", Vector2i(-1, -1))
+	expect(wrong.is_empty() and Vector2(light) + Vector2(0.5, 0.5) == LootView.STONE_LIGHT,
+		"A036's night loot, fertilised earth and icons are raster art, the stone's light on its sheen",
+		"%s; light %s" % [str(wrong), light])
 	_completed += 1
 
 

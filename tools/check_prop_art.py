@@ -271,6 +271,35 @@ def check_bin(data, files, images):
     return len(BIN)
 
 
+## A036's night loot (task 0235): the bone pile and the moon stone's two
+## shimmer frames, 16x16 standing on (8,14), each its own drawing and the
+## approved pixels; the stone's light on the same sheen in both frames.
+LOOT = ('bone_pile', 'moon_stone_0', 'moon_stone_1')
+
+
+def check_loot(data, files, images):
+    by_id = {e['id']: e for e in data['assets']}
+    seen = set()
+    for name in LOOT:
+        e = by_id['props/' + name]
+        if e.get('generation_task') != 'A036' or e['canvas_wh'] != [16, 16] or e['pivot_xy'] != [8, 14]:
+            raise ValueError('Loot off its box: ' + e['id'])
+        image = images[e['id']]
+        box = image.getbbox()
+        if not box or box[3] > 14:
+            raise ValueError('Loot below its ground: ' + e['id'])
+        if image.tobytes() in seen:
+            raise ValueError('A loot frame repeats: ' + e['id'])
+        seen.add(image.tobytes())
+        if (import_art.ROOT / e['output']).read_bytes() != files[e['output']]:
+            raise ValueError('Runtime loot diverges: ' + e['id'])
+    stones = [by_id['props/moon_stone_%d' % i] for i in range(2)]
+    if any(s['seconds'] != 0.4 or s['loop'] is not True for s in stones) \
+            or stones[0].get('light_xy') != stones[1].get('light_xy') or not stones[0].get('light_xy'):
+        raise ValueError('The moon stone does not shimmer on one sheen')
+    return len(LOOT)
+
+
 ## A018's sprinklers (task 0201): each tier's idle cut and its four-frame
 ## spray, 16x16 standing on (8,14) at 1.0. The spray frames are A018's
 ## compositions from its own components, a tenth of a second each, round and
@@ -428,6 +457,8 @@ def main():
     sprays = check_sprinklers(data, files, images)
     animals = check_animals(data, files, images)
     bins = check_bin(data, files, images)
+    loot = check_loot(data, files, images)
+    print("OK: A036's night loot: %d frames, the stone shimmering on one sheen" % loot)
     print("OK: A033's shipping bin: %d frames, the lid rising on a still body" % bins)
     print("OK: the barnyard's animals: %d frames over %s, west-facing, on their feet, every frame its own"
           % (animals, ', '.join(sorted({spec.get('pack', label) for label, spec in ANIMALS.items()}))))

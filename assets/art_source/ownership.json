@@ -3350,6 +3350,38 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-dry-a.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-dry-b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-wet-a.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A036-night-loot/bone-meal-clusters-wet-b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A036-night-loot/bone-meal-granule-dry.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A036-night-loot/bone-meal-granule-wet.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A036-night-loot/soil-dry.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A036-night-loot/soil-wet.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/beet_0.png",
       "owner": "raster"
     },
@@ -3551,6 +3583,14 @@
     },
     {
       "output": "sprites/crops/tilled_edge_n.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/tilled_fertilised.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/tilled_fertilised_wet.png",
       "owner": "raster"
     },
     {
@@ -4322,6 +4362,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/bone_pile.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/chicken.png",
       "owner": "raster"
     },
@@ -4655,6 +4699,14 @@
     },
     {
       "output": "sprites/props/iron_sprinkler_spray_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/moon_stone_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/moon_stone_1.png",
       "owner": "raster"
     },
     {
@@ -5310,6 +5362,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_bone_meal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_bones.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_book_fish.png",
       "owner": "raster"
     },
@@ -5574,6 +5634,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_moon_stone.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_mortar.png",
       "owner": "raster"
     },
@@ -5807,6 +5871,14 @@
     },
     {
       "output": "sprites/ui/icon_beet_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_bone_meal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_bones.png",
       "owner": "raster"
     },
     {
@@ -6071,6 +6143,10 @@
     },
     {
       "output": "sprites/ui/icon_money.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_moon_stone.png",
       "owner": "raster"
     },
     {

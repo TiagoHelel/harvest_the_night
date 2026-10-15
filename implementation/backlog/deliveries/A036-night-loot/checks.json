@@ -1,0 +1,167 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "fertiliser_cluster_sizes": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "fertiliser_clusters_ok": true,
+  "frame_count_matches": true,
+  "frames_expected": 13,
+  "frames_found": 13,
+  "furrow_rows_preserved": true,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "icon_colours_at_least2": true,
+  "icon_density": true,
+  "icons_unique": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/bone_pile/none/01.png": {
+      "bounds": [
+        2,
+        7,
+        14,
+        14
+      ],
+      "opaque_pixels": 50
+    },
+    "native/hud_bone_meal/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 40
+    },
+    "native/hud_bones/none/01.png": {
+      "bounds": [
+        1,
+        3,
+        9,
+        8
+      ],
+      "opaque_pixels": 23
+    },
+    "native/hud_moon_stone/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        8
+      ],
+      "opaque_pixels": 35
+    },
+    "native/hud_tech/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        8,
+        9
+      ],
+      "opaque_pixels": 34
+    },
+    "native/icon_bone_meal/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 126
+    },
+    "native/icon_bones/none/01.png": {
+      "bounds": [
+        1,
+        4,
+        15,
+        13
+      ],
+      "opaque_pixels": 70
+    },
+    "native/icon_moon_stone/none/01.png": {
+      "bounds": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "opaque_pixels": 123
+    },
+    "native/icon_tech/none/01.png": {
+      "bounds": [
+        3,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 107
+    },
+    "native/moon_stone/none/01.png": {
+      "bounds": [
+        3,
+        6,
+        13,
+        14
+      ],
+      "opaque_pixels": 61
+    },
+    "native/moon_stone/none/02.png": {
+      "bounds": [
+        3,
+        6,
+        13,
+        14
+      ],
+      "opaque_pixels": 61
+    },
+    "native/tilled_fertilised/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 256
+    },
+    "native/tilled_fertilised_wet/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "opaque_pixels": 256
+    }
+  },
+  "mirror_pairs_exact": true,
+  "moon_alpha_identical": true,
+  "moon_changed_pixels": 6,
+  "moon_glint_3_to_8": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "same_crop_per_pair": true,
+  "soil_fully_opaque": true,
+  "source_transparency_matches_call": true,
+  "visible_targets": true,
+  "wet_brightness_delta": 31.566406250000007,
+  "wet_clusters_same_positions": true,
+  "wet_darker_by_20": true
+}

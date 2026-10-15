@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-283 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+284 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -326,6 +326,7 @@ voz alta.
 | 0215 | Art: the shipping bin | 2026-10-15 |
 | 0216 | Art: the peddler | 2026-10-15 |
 | 0217 | Art: the house in three tiers | 2026-10-15 |
+| 0235 | Art: bones, moon stones and essence | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

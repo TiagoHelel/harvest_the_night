@@ -38,6 +38,9 @@ PAIRS = {
              'melon_seed'],
     # Task 0206: the worm and the fish bait (0181), and the fish book's tab (0182).
     'A023': ['worm', 'bait', 'book_fish'],
+    # Task 0235: the night's loot (0221), the bone meal (0222) and the essence
+    # that pays for tech (0219), whose id stays `tech`.
+    'A036': ['bones', 'moon_stone', 'bone_meal', 'tech'],
     # Task 0201: the three sprinklers' build-list icons (0178).
     'A018': ['copper_sprinkler', 'iron_sprinkler', 'gold_sprinkler'],
     # Task 0200: autumn's produce (0168) and its four seed packets (0170).
@@ -141,8 +144,12 @@ def check_approved(e, art):
 def main():
     manifest=import_art.load_manifest();files,images=import_art.build(manifest)
     plans=json.loads((import_art.ROOT/'implementation/sprites/generation/0018-plan.json').read_text(encoding='utf-8'))
+    # **Tech left 0018's set on purpose** (task 0235): A036's essence art is
+    # `ui/icon_tech` and `ui/hud_tech` now - the id stays `tech` - so 0018
+    # keeps fourteen of its fifteen plans, and A036's pair is in `PAIRS`.
+    plans=[plan for plan in plans if plan['id']!='tech']
     entries=[e for e in manifest['assets'] if e.get('generation_task')=='0018']
-    assert len(plans)==15 and len(entries)==30,'Incomplete resource family'
+    assert len(plans)==14 and len(entries)==28,'Incomplete resource family'
     registry=art_ownership.registry();seen={16:set(),10:set()}
     for plan in plans:
         resource=plan['id']
@@ -296,7 +303,7 @@ def main():
     focus=Image.open(import_art.ROOT/'sprites/ui/button_focus.png').convert('RGBA')
     assert focus.getpixel((8,8))[3]==0 and focus.getpixel((1,8))[3]==255,'Focus must be a visible open ring'
     print('OK: %d cursor frames, seven looks pulsing, unlit, aim keeps its plus' % len(cursors))
-    print('OK: 15 exact generated resources / 30 distinct native cuts / %d pack icons at their approved pixels (%s) / ingots, gold and coal / cream milk and wool / %d book portraits, no shared silhouette (%s) / %d exact forecast heads (%s) / clear margins / palette alpha / preserved three-pixel frame profiles / focus ring'
+    print('OK: 14 exact generated resources / 28 distinct native cuts / %d pack icons at their approved pixels (%s) / ingots, gold and coal / cream milk and wool / %d book portraits, no shared silhouette (%s) / %d exact forecast heads (%s) / clear margins / palette alpha / preserved three-pixel frame profiles / focus ring'
           % (pairs,', '.join(sorted(PAIRS)),portraits,', '.join(sorted(PORTRAITS)),heads,', '.join(sorted(HEADS))))
 
 

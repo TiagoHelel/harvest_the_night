@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0217's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0235's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 270 done, 26 todo, 0 blocked (91%).**
+**The game backlog: 296 tasks, 271 done, 25 todo, 0 blocked (92%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0235). Only the farmer packs the owner deferred (3c) still wait on
+says 0263). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -115,7 +115,7 @@ source:
 | A033 | The shipping bin (**integrated** by 0215, 2026-10-15) | 0215 |
 | A034 | The peddler at the stall (**integrated** by 0216, 2026-10-15) | 0216 |
 | A035 | The house in three tiers (**integrated** by 0217, 2026-10-15) | 0217 |
-| A036 | Bones, moon stones and essence | 0235 |
+| A036 | Bones, moon stones and essence (**integrated** by 0235, 2026-10-15) | 0235 |
 | A057 | The morning report header (optional) | 0289 |
 
 ### 3c. Farmer sprites the owner deferred (7)

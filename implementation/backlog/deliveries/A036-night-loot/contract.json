@@ -1,0 +1,1566 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "bone_pile",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/bone_pile-none-0-night.png",
+          "path": "native/bone_pile/none/01.png",
+          "points": {},
+          "pose": "bone_pile 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "bone_pile 0"
+      ]
+    },
+    {
+      "anim": "hud_bone_meal",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_bone_meal-none-0-night.png",
+          "path": "native/hud_bone_meal/none/01.png",
+          "points": {},
+          "pose": "hud_bone_meal 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_bone_meal 0"
+      ]
+    },
+    {
+      "anim": "hud_bones",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_bones-none-0-night.png",
+          "path": "native/hud_bones/none/01.png",
+          "points": {},
+          "pose": "hud_bones 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_bones 0"
+      ]
+    },
+    {
+      "anim": "hud_moon_stone",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_moon_stone-none-0-night.png",
+          "path": "native/hud_moon_stone/none/01.png",
+          "points": {},
+          "pose": "hud_moon_stone 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_moon_stone 0"
+      ]
+    },
+    {
+      "anim": "hud_tech",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_tech-none-0-night.png",
+          "path": "native/hud_tech/none/01.png",
+          "points": {},
+          "pose": "hud_tech 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "hud_tech 0"
+      ]
+    },
+    {
+      "anim": "icon_bone_meal",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_bone_meal-none-0-night.png",
+          "path": "native/icon_bone_meal/none/01.png",
+          "points": {},
+          "pose": "icon_bone_meal 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_bone_meal 0"
+      ]
+    },
+    {
+      "anim": "icon_bones",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_bones-none-0-night.png",
+          "path": "native/icon_bones/none/01.png",
+          "points": {},
+          "pose": "icon_bones 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_bones 0"
+      ]
+    },
+    {
+      "anim": "icon_moon_stone",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_moon_stone-none-0-night.png",
+          "path": "native/icon_moon_stone/none/01.png",
+          "points": {},
+          "pose": "icon_moon_stone 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_moon_stone 0"
+      ]
+    },
+    {
+      "anim": "icon_tech",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_tech-none-0-night.png",
+          "path": "native/icon_tech/none/01.png",
+          "points": {},
+          "pose": "icon_tech 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "icon_tech 0"
+      ]
+    },
+    {
+      "anim": "moon_stone",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/moon_stone-none-0-night.png",
+          "path": "native/moon_stone/none/01.png",
+          "points": {
+            "light_xy": [
+              6,
+              8
+            ]
+          },
+          "pose": "moon_stone 0"
+        },
+        {
+          "issue": "",
+          "night": "preview/moon_stone-none-1-night.png",
+          "path": "native/moon_stone/none/02.png",
+          "points": {
+            "light_xy": [
+              6,
+              8
+            ]
+          },
+          "pose": "moon_stone 1"
+        }
+      ],
+      "frame_seconds": 0.4,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "moon_stone 0",
+        "moon_stone 1"
+      ]
+    },
+    {
+      "anim": "tilled_fertilised",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tilled_fertilised-none-0-night.png",
+          "path": "native/tilled_fertilised/none/01.png",
+          "points": {},
+          "pose": "tilled_fertilised 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "poses": [
+        "tilled_fertilised 0"
+      ]
+    },
+    {
+      "anim": "tilled_fertilised_wet",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tilled_fertilised_wet-none-0-night.png",
+          "path": "native/tilled_fertilised_wet/none/01.png",
+          "points": {},
+          "pose": "tilled_fertilised_wet 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "poses": [
+        "tilled_fertilised_wet 0"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/props/rock.png",
+      "pivot_xy": [
+        8,
+        14
+      ]
+    }
+  ],
+  "components": {
+    "bone-meal-clusters-dry-a": {
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "compose",
+      "output": "components/bone-meal-clusters-dry-a.png",
+      "parts": [
+        {
+          "input": "bone-meal-granule-dry",
+          "paste_xy": [
+            2,
+            4
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-dry",
+          "paste_xy": [
+            10,
+            4
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-dry",
+          "paste_xy": [
+            5,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "fdf762d92c1ccf55869c44a5172302efbfacfd311fa9c7937191329847a2a705"
+    },
+    "bone-meal-clusters-dry-b": {
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "compose",
+      "output": "components/bone-meal-clusters-dry-b.png",
+      "parts": [
+        {
+          "input": "bone-meal-granule-dry",
+          "paste_xy": [
+            12,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-dry",
+          "paste_xy": [
+            3,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-dry",
+          "paste_xy": [
+            9,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "55713b74752d1400f8874a6ecf3142c05ac5e511ed47bdbaf08d8426da9ad667"
+    },
+    "bone-meal-clusters-wet-a": {
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "compose",
+      "output": "components/bone-meal-clusters-wet-a.png",
+      "parts": [
+        {
+          "input": "bone-meal-granule-wet",
+          "paste_xy": [
+            2,
+            4
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-wet",
+          "paste_xy": [
+            10,
+            4
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-wet",
+          "paste_xy": [
+            5,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "9b8174ebf1851c145e7db491a3a69518bca45e8addfc79dea69ca7574890d892"
+    },
+    "bone-meal-clusters-wet-b": {
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "operation": "compose",
+      "output": "components/bone-meal-clusters-wet-b.png",
+      "parts": [
+        {
+          "input": "bone-meal-granule-wet",
+          "paste_xy": [
+            12,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-wet",
+          "paste_xy": [
+            3,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        },
+        {
+          "input": "bone-meal-granule-wet",
+          "paste_xy": [
+            9,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "96a9d4f3a9f170a03cde92c5aa436d904f8cf0cdba57af0238ca3b18c40b606f"
+    },
+    "bone-meal-granule-dry": {
+      "call": "raw/recovered-tilled_fertilised-r3.call.json",
+      "canvas_wh": [
+        2,
+        2
+      ],
+      "operation": "render",
+      "output": "components/bone-meal-granule-dry.png",
+      "palette_keys": [
+        "bone_dark"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.1,
+        "crop_xywh": [
+          232,
+          52,
+          20,
+          20
+        ]
+      },
+      "sha256": "e253fc5f4a7e5817f7987b3588edd20117a4528aa9b84e192cd0243805cc40d5",
+      "source": "raw/recovered-tilled_fertilised-r3.png",
+      "source_sha256": "fcf33bc98225323616a71da14102298f37d7f76b922def03fc4e27348a12d1c6"
+    },
+    "bone-meal-granule-wet": {
+      "call": "raw/recovered-tilled_fertilised-r3.call.json",
+      "canvas_wh": [
+        2,
+        2
+      ],
+      "operation": "render",
+      "output": "components/bone-meal-granule-wet.png",
+      "palette_keys": [
+        "stone"
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "prompt": "raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "recipe": {
+        "content_anchor_xy": [
+          0,
+          0
+        ],
+        "content_scale": 0.1,
+        "crop_xywh": [
+          232,
+          52,
+          20,
+          20
+        ]
+      },
+      "sha256": "541d1f202498f0bd3f43d76515c21a3c0d3199e2ab6180b6ec7eee7568f38fa9",
+      "source": "raw/recovered-tilled_fertilised-r3.png",
+      "source_sha256": "fcf33bc98225323616a71da14102298f37d7f76b922def03fc4e27348a12d1c6"
+    },
+    "soil-dry": {
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "imagegen_manifest_provenance": {
+        "alpha_threshold": 128,
+        "animation": "crops/tilled",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "content_scale": 0.012759170653907496,
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "frame": 0,
+        "generation_task": "0010",
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "id": "crops/tilled",
+        "loop": false,
+        "output": "sprites/crops/tilled.png",
+        "output_sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+        "owner": "raster",
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "ink_soft",
+          "ink"
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "prompt": "implementation/sprites/generation/0010-tilled.prompt.txt",
+        "prompt_sha256": "e90820278421d9cf236354763e14be571bf772414fd77a6d4d10fc4610481322",
+        "references": [
+          {
+            "path": "assets/art_source/terrain/soil.png",
+            "role": "reference/edit target as indexed explicitly in exact saved prompt",
+            "sha256": "66b14e30ca51158206c29c56c34908b0ee696d9c088f640f9d54897d9d1df754"
+          }
+        ],
+        "revision": 0,
+        "seconds": 0.55,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "source": "assets/art_source/crops/tilled.png",
+        "source_sha256": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3",
+        "tool": "built-in ImageGen"
+      },
+      "operation": "reference",
+      "output": "components/soil-dry.png",
+      "path": "raw/reference-soil-dry.png",
+      "reference_sha256": "6ebcb96545a85493925d913004de5539037b3592d192d9dc609d9686127779af",
+      "sha256": "32156b4d8a591f689db0e64693be086df9e85d75824d1a12edabd55ebb36be1e"
+    },
+    "soil-wet": {
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "imagegen_manifest_provenance": {
+        "alpha_threshold": 128,
+        "animation": "crops/tilled_wet",
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "content_scale": 0.012759170653907496,
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "frame": 0,
+        "generation_task": "0010",
+        "gutter_xy": [
+          0,
+          0
+        ],
+        "id": "crops/tilled_wet",
+        "loop": false,
+        "output": "sprites/crops/tilled_wet.png",
+        "output_sha256": "f3be498c9b31064979a3ce8295221572ad75464256e4f6bb932456a28f49e73c",
+        "owner": "raster",
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "ink_soft",
+          "ink"
+        ],
+        "pivot_xy": [
+          8,
+          16
+        ],
+        "prompt": "implementation/sprites/generation/0010-tilled_wet.prompt.txt",
+        "prompt_sha256": "5596c6aae7f6d35438ad3862cd3f243535cadb85e7cda404e25a6c421e974e75",
+        "references": [
+          {
+            "path": "assets/art_source/crops/tilled.png",
+            "role": "reference/edit target as indexed explicitly in exact saved prompt",
+            "sha256": "059b4694178aa87883540b3b648831918f8f650caeaf2fb953bc2338c6e5b4e3"
+          }
+        ],
+        "revision": 0,
+        "seconds": 0.55,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "source": "assets/art_source/crops/tilled_wet.png",
+        "source_sha256": "9eefdaa50a729463d491094e771e3232e37698dd4e1cf67cc78ba7b896b141d7",
+        "tool": "built-in ImageGen"
+      },
+      "operation": "reference",
+      "output": "components/soil-wet.png",
+      "path": "raw/reference-soil-wet.png",
+      "reference_sha256": "f3be498c9b31064979a3ce8295221572ad75464256e4f6bb932456a28f49e73c",
+      "sha256": "b8dcfce0ec0fdddb15ee1cbcb52d189e297661338dacc85ff659edc22722aca2"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "icon_bone_meal",
+      "call": "raw/bone_meal-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_bone_meal/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_bone_meal 0",
+      "prompt": "raw/bone_meal-r1.prompt.txt",
+      "prompt_sha256": "4a276c0bc04c36bbcfbcbae4cadc04bd751c2cae9d86e43593c3f6d1931e0c63",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.0219435736677116,
+        "crop_xywh": [
+          330,
+          341,
+          596,
+          638
+        ]
+      },
+      "resource_id": "bone_meal",
+      "runtime_name": "sprites/ui/icon_bone_meal.png",
+      "seconds": 1,
+      "sha256": "a548e72259ae00a54059b78ed73ad89504e2e553280a5ac6438f4a8d0c0e019b",
+      "source": "raw/bone_meal-r1.png",
+      "source_sha256": "edac91d97fd070871dbe1f255ee6df86244ce8f654f9e14f4b0176019ddc4ad5"
+    },
+    {
+      "anim": "hud_bone_meal",
+      "call": "raw/bone_meal-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_bone_meal/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_bone_meal 0",
+      "prompt": "raw/bone_meal-r1.prompt.txt",
+      "prompt_sha256": "4a276c0bc04c36bbcfbcbae4cadc04bd751c2cae9d86e43593c3f6d1931e0c63",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.012539184952978056,
+        "crop_xywh": [
+          330,
+          341,
+          596,
+          638
+        ]
+      },
+      "resource_id": "bone_meal",
+      "runtime_name": "sprites/ui/hud_bone_meal.png",
+      "seconds": 1,
+      "sha256": "3dc5a419eba389157a8fa56d13c584a0bc29c7484b691402aa8d4245f3626154",
+      "source": "raw/bone_meal-r1.png",
+      "source_sha256": "edac91d97fd070871dbe1f255ee6df86244ce8f654f9e14f4b0176019ddc4ad5"
+    },
+    {
+      "anim": "icon_tech",
+      "call": "raw/tech-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_tech/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_tech 0",
+      "prompt": "raw/tech-r1.prompt.txt",
+      "prompt_sha256": "7df1912d068366ed8d4e449e33a761f64c1dca0f79369bac82cfe20f6599714e",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          7
+        ],
+        "content_scale": 0.019858156028368795,
+        "crop_xywh": [
+          354,
+          353,
+          547,
+          705
+        ]
+      },
+      "resource_id": "tech",
+      "runtime_name": "sprites/ui/icon_tech.png",
+      "seconds": 1,
+      "sha256": "3f3605fce24f2fceb959b7729df6a9b5e11518f21d5e79a8f1f518302e7335fa",
+      "source": "raw/tech-r1.png",
+      "source_sha256": "2a9ea86f7ee64482586cca9717d72ee48b7f6bb14af807647285f165680eb309"
+    },
+    {
+      "anim": "hud_tech",
+      "call": "raw/tech-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_tech/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_tech 0",
+      "prompt": "raw/tech-r1.prompt.txt",
+      "prompt_sha256": "7df1912d068366ed8d4e449e33a761f64c1dca0f79369bac82cfe20f6599714e",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.011347517730496455,
+        "crop_xywh": [
+          354,
+          353,
+          547,
+          705
+        ]
+      },
+      "resource_id": "tech",
+      "runtime_name": "sprites/ui/hud_tech.png",
+      "seconds": 1,
+      "sha256": "ab35d7628e1ad48f757792202d5fbad598d9b62917cdb3b2ebcfc72e931de866",
+      "source": "raw/tech-r1.png",
+      "source_sha256": "2a9ea86f7ee64482586cca9717d72ee48b7f6bb14af807647285f165680eb309"
+    },
+    {
+      "anim": "icon_bones",
+      "call": "raw/bones-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_bones/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_bones 0",
+      "prompt": "raw/bones-r1.prompt.txt",
+      "prompt_sha256": "d3a781f295bf851eacba2e965184a249cffb434915a4ac76bcf7cbb957200423",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "content_scale": 0.019971469329529243,
+        "crop_xywh": [
+          425,
+          312,
+          701,
+          437
+        ]
+      },
+      "resource_id": "bones",
+      "runtime_name": "sprites/ui/icon_bones.png",
+      "seconds": 1,
+      "sha256": "a6142d8ed831c3eae472f4ccb1b41acee200c118d340936e2b330ce4f7d75830",
+      "source": "raw/bones-r1.png",
+      "source_sha256": "0a504c14f3fe03279d39c42545083e669b6124181999eb55bcc57e758a260683"
+    },
+    {
+      "anim": "hud_bones",
+      "call": "raw/bones-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_bones/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_bones 0",
+      "prompt": "raw/bones-r1.prompt.txt",
+      "prompt_sha256": "d3a781f295bf851eacba2e965184a249cffb434915a4ac76bcf7cbb957200423",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.011412268188302425,
+        "crop_xywh": [
+          425,
+          312,
+          701,
+          437
+        ]
+      },
+      "resource_id": "bones",
+      "runtime_name": "sprites/ui/hud_bones.png",
+      "seconds": 1,
+      "sha256": "0b56724c02fb2c0ccae3059b2b0cea96d411e48a95d7ab7ab7bee4b3d108cf02",
+      "source": "raw/bones-r1.png",
+      "source_sha256": "0a504c14f3fe03279d39c42545083e669b6124181999eb55bcc57e758a260683"
+    },
+    {
+      "anim": "icon_moon_stone",
+      "call": "raw/moon_stone_icon-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "display_role": "inventory",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_moon_stone/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "icon_moon_stone 0",
+      "prompt": "raw/moon_stone_icon-r1.prompt.txt",
+      "prompt_sha256": "6b30e4e360ac0adf1ce4bb01835a49c90f1187ae4e82405e894ff3017db0a6e7",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "content_scale": 0.023608768971332208,
+        "crop_xywh": [
+          475,
+          305,
+          593,
+          463
+        ]
+      },
+      "resource_id": "moon_stone",
+      "runtime_name": "sprites/ui/icon_moon_stone.png",
+      "seconds": 1,
+      "sha256": "1b19fbce676392011469a519c1591750e3e53e8c90c08f934518b5eb98c0f146",
+      "source": "raw/moon_stone_icon-r1.png",
+      "source_sha256": "f1600c1e09df7edd236e424ba86e78198e03e32ae085207de23aa08d4e23f55a"
+    },
+    {
+      "anim": "hud_moon_stone",
+      "call": "raw/moon_stone_icon-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "display_role": "compact_hud",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_moon_stone/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "hud_moon_stone 0",
+      "prompt": "raw/moon_stone_icon-r1.prompt.txt",
+      "prompt_sha256": "6b30e4e360ac0adf1ce4bb01835a49c90f1187ae4e82405e894ff3017db0a6e7",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.013490725126475547,
+        "crop_xywh": [
+          475,
+          305,
+          593,
+          463
+        ]
+      },
+      "resource_id": "moon_stone",
+      "runtime_name": "sprites/ui/hud_moon_stone.png",
+      "seconds": 1,
+      "sha256": "0a29ca35a79669777a2e8e44df37ad93f5b761b36af236c256e8d719bac9bdeb",
+      "source": "raw/moon_stone_icon-r1.png",
+      "source_sha256": "f1600c1e09df7edd236e424ba86e78198e03e32ae085207de23aa08d4e23f55a"
+    },
+    {
+      "anim": "bone_pile",
+      "call": "raw/bone_pile-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/bone_pile/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone_light",
+        "bone_dark",
+        "bone"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "bone_pile 0",
+      "prompt": "raw/bone_pile-r1.prompt.txt",
+      "prompt_sha256": "b122b811718877d82695162e007810905010d8c023e02372cb810f77f0727d26",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.016826923076923076,
+        "crop_xywh": [
+          432,
+          334,
+          689,
+          416
+        ]
+      },
+      "runtime_name": "sprites/props/bone_pile.png",
+      "seconds": 0.55,
+      "sha256": "0e10870953df38fa7725414b1f5be573faffc7b6e43030c809627d9db0703751",
+      "source": "raw/bone_pile-r1.png",
+      "source_sha256": "0d001ecc0a8afc7dff6132ac81d906ea399b29abf16633807b5c32bc0e620c9e",
+      "visible_limits_wh": [
+        [
+          11,
+          13
+        ],
+        [
+          6,
+          8
+        ]
+      ]
+    },
+    {
+      "anim": "moon_stone",
+      "call": "raw/moon_stone-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "output": "native/moon_stone/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "water_light",
+        "moon"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "light_xy": [
+          6,
+          8
+        ]
+      },
+      "pose": "moon_stone 0",
+      "prompt": "raw/moon_stone-r1.prompt.txt",
+      "prompt_sha256": "7e5adabaa2f0ee18300feb1eeffe66f9ddfcc0fe1171cfa44ef1115576326c27",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          8
+        ],
+        "content_scale": 0.0221606648199446,
+        "crop_xywh": [
+          544,
+          386,
+          450,
+          361
+        ]
+      },
+      "runtime_name": "sprites/props/moon_stone_0.png",
+      "seconds": 0.4,
+      "sha256": "0bedcd9537713038cc1b0b56dfccfccdee9296cdc9d3e91f9767706cb6d9b8d5",
+      "source": "raw/moon_stone-r1.png",
+      "source_sha256": "9b7b4a68551ce19e664005ebe64f3c6140b43ad74797aa4b81780a100cbc184d",
+      "visible_limits_wh": [
+        [
+          9,
+          11
+        ],
+        [
+          7,
+          9
+        ]
+      ]
+    },
+    {
+      "anim": "moon_stone",
+      "call": "raw/moon_stone_glint-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "none",
+      "output": "native/moon_stone/none/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "water_light",
+        "moon"
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {
+        "light_xy": [
+          6,
+          8
+        ]
+      },
+      "pose": "moon_stone 1",
+      "prompt": "raw/moon_stone_glint-r1.prompt.txt",
+      "prompt_sha256": "b3af25698e85f7c1e7f942271df77d171ddd70a9d9fe4edcdb8589c5a8a3e056",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          8
+        ],
+        "content_scale": 0.0221606648199446,
+        "crop_xywh": [
+          544,
+          386,
+          450,
+          361
+        ]
+      },
+      "runtime_name": "sprites/props/moon_stone_1.png",
+      "seconds": 0.4,
+      "sha256": "d3737b00862e941d2cc3457f4be4f8aca7b9e43a83efde873868dda0c3a7ca70",
+      "source": "raw/moon_stone_glint-r1.png",
+      "source_sha256": "ae6c142c4f7ec501f55bb7f240f03230310dd5ec5176f6422097737cb439cf63",
+      "visible_limits_wh": [
+        [
+          9,
+          11
+        ],
+        [
+          7,
+          9
+        ]
+      ]
+    },
+    {
+      "anim": "tilled_fertilised",
+      "call": "raw/recovered-tilled_fertilised-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/tilled_fertilised/none/01.png",
+      "palette_keys": [
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "ink_soft",
+        "ink",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone"
+      ],
+      "parts": [
+        {
+          "input": "soil-dry",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "input": "bone-meal-clusters-dry-a",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "input": "bone-meal-clusters-dry-b",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "points": {},
+      "pose": "tilled_fertilised 0",
+      "prompt": "raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.012759170653907496,
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      },
+      "runtime_name": "sprites/props/tilled_fertilised.png",
+      "seconds": 0.55,
+      "sha256": "aeaa104928127b0b371d650f275e268a33f7ba20b5c59fff5a3819ef25777d29",
+      "source": "raw/recovered-tilled_fertilised-r3.png",
+      "source_sha256": "fcf33bc98225323616a71da14102298f37d7f76b922def03fc4e27348a12d1c6"
+    },
+    {
+      "anim": "tilled_fertilised_wet",
+      "call": "raw/recovered-tilled_fertilised-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/tilled_fertilised_wet/none/01.png",
+      "palette_keys": [
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "ink_soft",
+        "ink",
+        "stone",
+        "stone_light",
+        "bone_dark",
+        "bone"
+      ],
+      "parts": [
+        {
+          "input": "soil-wet",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "input": "bone-meal-clusters-wet-a",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "input": "bone-meal-clusters-wet-b",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        16
+      ],
+      "points": {},
+      "pose": "tilled_fertilised_wet 0",
+      "prompt": "raw/recovered-tilled_fertilised-r3.prompt.txt",
+      "prompt_sha256": "bd1b08ffcfcb9830d9e69ed4f1a70ed0f49bd34bcaa6cb39cfae410f66341787",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          16
+        ],
+        "content_scale": 0.012759170653907496,
+        "crop_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      },
+      "runtime_name": "sprites/props/tilled_fertilised_wet.png",
+      "seconds": 0.55,
+      "sha256": "40b08cc3436c8e697e99d344a7cfadf984be74cd15ee0c77b3af94dcb7086404",
+      "source": "raw/recovered-tilled_fertilised-r3.png",
+      "source_sha256": "fcf33bc98225323616a71da14102298f37d7f76b922def03fc4e27348a12d1c6"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A036",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A036-night-loot\\raw\\bone_pile-r1.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "0d001ecc0a8afc7dff6132ac81d906ea399b29abf16633807b5c32bc0e620c9e"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A036-night-loot\\raw\\moon_stone-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "9b7b4a68551ce19e664005ebe64f3c6140b43ad74797aa4b81780a100cbc184d"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A036-night-loot",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "Bones, moon stones and essence",
+  "tool": "built-in ImageGen"
+}

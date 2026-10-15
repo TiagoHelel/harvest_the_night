@@ -1,0 +1,398 @@
+{
+  "pack": "A036",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/bone_meal-r1.png",
+      "source_sha256": "edac91d97fd070871dbe1f255ee6df86244ce8f654f9e14f4b0176019ddc4ad5",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_bone_meal/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.0219435736677116,
+            "crop_xywh": [
+              330,
+              341,
+              596,
+              638
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_bone_meal/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.012539184952978056,
+            "crop_xywh": [
+              330,
+              341,
+              596,
+              638
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/tech-r1.png",
+      "source_sha256": "2a9ea86f7ee64482586cca9717d72ee48b7f6bb14af807647285f165680eb309",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_tech/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              7
+            ],
+            "content_scale": 0.019858156028368795,
+            "crop_xywh": [
+              354,
+              353,
+              547,
+              705
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_tech/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.011347517730496455,
+            "crop_xywh": [
+              354,
+              353,
+              547,
+              705
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/bones-r1.png",
+      "source_sha256": "0a504c14f3fe03279d39c42545083e669b6124181999eb55bcc57e758a260683",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_bones/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              7,
+              4
+            ],
+            "content_scale": 0.019971469329529243,
+            "crop_xywh": [
+              425,
+              312,
+              701,
+              437
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_bones/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              2
+            ],
+            "content_scale": 0.011412268188302425,
+            "crop_xywh": [
+              425,
+              312,
+              701,
+              437
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/moon_stone_icon-r1.png",
+      "source_sha256": "f1600c1e09df7edd236e424ba86e78198e03e32ae085207de23aa08d4e23f55a",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_moon_stone/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              7,
+              5
+            ],
+            "content_scale": 0.023608768971332208,
+            "crop_xywh": [
+              475,
+              305,
+              593,
+              463
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_moon_stone/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              3
+            ],
+            "content_scale": 0.013490725126475547,
+            "crop_xywh": [
+              475,
+              305,
+              593,
+              463
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/bone_pile-r1.png",
+      "source_sha256": "0d001ecc0a8afc7dff6132ac81d906ea399b29abf16633807b5c32bc0e620c9e",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/bone_pile/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.016826923076923076,
+            "crop_xywh": [
+              432,
+              334,
+              689,
+              416
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/moon_stone-r1.png",
+      "source_sha256": "9b7b4a68551ce19e664005ebe64f3c6140b43ad74797aa4b81780a100cbc184d",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/moon_stone/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              8
+            ],
+            "content_scale": 0.0221606648199446,
+            "crop_xywh": [
+              544,
+              386,
+              450,
+              361
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/moon_stone_glint-r1.png",
+      "source_sha256": "ae6c142c4f7ec501f55bb7f240f03230310dd5ec5176f6422097737cb439cf63",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/moon_stone/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              8
+            ],
+            "content_scale": 0.0221606648199446,
+            "crop_xywh": [
+              544,
+              386,
+              450,
+              361
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-tilled_fertilised-r3.png",
+      "source_sha256": "fcf33bc98225323616a71da14102298f37d7f76b922def03fc4e27348a12d1c6",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/tilled_fertilised/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              16
+            ],
+            "content_scale": 0.012759170653907496,
+            "crop_xywh": [
+              0,
+              0,
+              1254,
+              1254
+            ]
+          },
+          "parts": [
+            {
+              "input": "soil-dry",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                16
+              ]
+            },
+            {
+              "input": "bone-meal-clusters-dry-a",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                16
+              ]
+            },
+            {
+              "input": "bone-meal-clusters-dry-b",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/tilled_fertilised_wet/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              16
+            ],
+            "content_scale": 0.012759170653907496,
+            "crop_xywh": [
+              0,
+              0,
+              1254,
+              1254
+            ]
+          },
+          "parts": [
+            {
+              "input": "soil-wet",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                16
+              ]
+            },
+            {
+              "input": "bone-meal-clusters-wet-a",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                16
+              ]
+            },
+            {
+              "input": "bone-meal-clusters-wet-b",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                16,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "component": "bone-meal-granule-dry",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.1,
+            "crop_xywh": [
+              232,
+              52,
+              20,
+              20
+            ]
+          }
+        },
+        {
+          "component": "bone-meal-granule-wet",
+          "recipe": {
+            "content_anchor_xy": [
+              0,
+              0
+            ],
+            "content_scale": 0.1,
+            "crop_xywh": [
+              232,
+              52,
+              20,
+              20
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

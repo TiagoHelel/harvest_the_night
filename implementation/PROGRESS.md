@@ -33156,3 +33156,70 @@ today's house with a plaque of studs over the door.
 - `python implementation/backlog/assets.py set A035 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0235 - Art: bones, moon stones and essence - done 2026-10-15
+
+A036 is integrated. The owner approved the corrected pack on 2026-10-15
+with the retried batch ("tudo aprovado"), as recorded in the delivery's
+`APPROVAL.json`. Now in the game:
+
+- the bone pile and the moon stone on the ground, the stone's two-frame
+  shimmer;
+- the fertilised earth, dry and wet;
+- the icons of the bones, the moon stone, the bone meal and the essence -
+  whose id stays `tech`.
+
+They replace the stand-ins of 0219, 0221 and 0222.
+
+- **Promotion**:
+  - The fertilised earth's two tiles are compositions over 8 assembly
+    components: the plain tilled soil dry and wet kept as exact references,
+    and the meal's granules and clusters cut and composed.
+  - The other 11 files are direct cuts.
+  - The sources are byte for byte in `assets/art_source/ui/night_loot/`,
+    `props/night_loot/` and `crops/night_loot/`.
+  - Every node and file was sha-checked, and decodes to its approved RGBA.
+  - The icon cuts carry their `display_role`.
+- **The fertilised earth where the game reads it**: the contract names
+  `sprites/props/tilled_fertilised(_wet).png`, but the view, the registry
+  and this task's prompt have them beside `tilled` in `sprites/crops/`. They
+  are bound there - the approved pixels, under the game's runtime name.
+  - The promoter took a `--rename` for it.
+  - Codex is told in the mailbox.
+- **The essence takes `tech`'s picture**: `ui/icon_tech` and `ui/hud_tech`
+  are A036's now, replacing task 0018's.
+  - `check_ui_art.py` takes `tech` out of 0018's set on purpose - 14 plans
+    and 28 cuts now - and checks A036's pair in `PAIRS` with the bones,
+    the moon stone and the bone meal.
+- **`LootView` draws the art**: the pile, and the stone on its frame of the
+  shimmer over the halo it keeps by day; `Lighting`'s cold point after dark
+  is unchanged and on the stone's measured `light_xy`. The code drawings are
+  gone.
+- **The stand-ins retired**: A036's ten `PlaceholderArt` entries, with their
+  comments, and a stale comment for the animals 0209 and 0210 had already
+  taken out. `placeholders.py --check` passes, with 105 stand-ins left over
+  14 packs.
+- **Checks**:
+  - `check_crop_art.py`: the fertilised earth opaque on its tile, the
+    meal's 24 pixels on the same cells dry and wet, nothing else changed
+    from `tilled` and `tilled_wet` (the furrows kept), the wet one at least
+    20 darker (31.6).
+  - `check_prop_art.py`: the pile and the stone's two frames on their box,
+    each its own, the stone looping at 0.4 s on one sheen.
+- **Tests**: `_task_0235_night_loot` (headless_v1) checks:
+  - the ground art and the fertilised earth are raster art, none drawn in
+    code;
+  - the four icon pairs are what `UiKit.icon` hands out, untinted;
+  - the stone's light is `LootView.STONE_LIGHT`.
+- **Shots** (`implementation/shots/0235/`, FHD 1920x1080, looked at):
+  - `night_loot`: the report after Spring 7's Full Moon, the loot counted.
+  - `night_loot_morning`: the moon stones in their halos and the bone
+    piles along the road.
+  - `bone_meal`, `bone_meal_workshop`: plain and fertilised earth side by
+    side, dry and watered; the bench grinding meal.
+  - `tech`: the tree with the essence's icon.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A036 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

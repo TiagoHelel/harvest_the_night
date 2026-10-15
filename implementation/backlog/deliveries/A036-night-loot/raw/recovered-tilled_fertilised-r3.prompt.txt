@@ -1,0 +1,147 @@
+OPAQUE pixel art, every scene pixel fully opaque, no checkerboard or transparent margins.
+CORRECTION: FULL OPAQUE square16x16native pattern. Fourdarkfurrow doubledrows2-3,6-7,10-11,14-15. Exactly SIX tiny crumbclusters, each3nativepixels inLshape, total18, withONE lightbonepixel andTWO tanbone_darkpixels percluster. Placeatnative(3,1),(10,1),(4,5),(11,7),(3,11),(10,12) withoutouterring; all4quadrants. Noadditionalbonecoloured soilhighlights. Soil limitedonlysoil_dark/soil/soil_light. Flat dry tile, avoidextratexture/speckle.
+Apply requested asset only, specification:
+# A036 - Bones, moon stones and essence
+
+- **Status:** generating
+- **For game task:** 0235
+- **Dressed by game tasks:** 0219, 0221, 0222
+- **Spec after game task:** 0222
+- **Family:** props
+- **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette
+- **Size of the job:** 13 PNGs from 9 raw sources: 2 ground pickups (one with a 2-frame shimmer), 2 soil tiles, 4 icons (each cut at 16x16 and 10x10)
+
+## What it is for
+
+The night now leaves something for the morning.
+
+- **Bones.** Zombies leave a bone pile on the cell where they fall (0221). The piles appear at night, during the fight, and the farmer collects them on his morning round by stepping on the cell.
+- **Moon stones.** After a Full Moon, moon stones lie along the horde's road (0221).
+- **Bone meal.** Bones are ground into bone meal, which marks a tilled plot as fertilised until the next morning's growth (0222).
+- **Essence.** Essence, the tech currency (id `tech`, 0219), gets its own icon in place of today's gear.
+
+At 1080p, next to the 32px farmer, the pickups must read as small loot lying on grass or path, by day and in the night preview. They sit on the contrast ladder above ground and below actors, and must never look like a rock, an ore node or a crop. A fertilised plot must be told apart from a plain tilled plot, dry and wet, even with a crop on it.
+
+## Deliverables
+
+**Final since game task 0222** (2026-10-10). Tasks 0221 and 0222 drew every row below in code or as a tinted stand-in at exactly this canvas and pivot, and the game reads them at these runtime names. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+What the game settled:
+
+- **The pickups lie on one cell each.** A cell holds bones, a moon stone, or both, drawn in that order (`src/ui/loot_view.gd`).
+  - The 16x16 canvas is the cell itself.
+  - They lie on the ground layer, under the farmer and every actor, by day and by night.
+- **The moon stone's light is code.** Its sprite carries `light_xy` (6,8). The game centres a faint day halo and a cold night glow there (`LootView.STONE_LIGHT`, `Lighting`).
+- **The fertilised soil is the plot's earth.** It replaces `tilled` / `tilled_wet` while the plot is marked, in every season, under a crop or bare. It goes back to the plain tile the morning the mark is spent (`src/ui/world_view.gd`).
+- **The icons follow the inventory's family:** 16x16 at (8,8) for the panels and 10x10 at (5,5) for compact rows. Each is looked up as `icon_<id>` / `hud_<id>`.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `bone_pile` | 16x16 | (8,14) | 1 / 0.55 / static | A low heap of 3-4 pale bones (long bones, a rib), no skull. Visible 11-13 wide x 6-8 tall (the code drawing: 12 x 7, its lowest row 13). One drawing for any pile, 1 to 9 bones. Goes to `sprites/props/`. |
+| `moon_stone_0..1` | 16x16 | (8,14) | 2 / 0.4 / loop | A smooth, rounded pale stone with a cool blue-white crescent sheen. Not a faceted gem and not a crystal cluster. Visible 9-11 wide x 7-9 tall (the code drawing: 10 x 8). `light_xy` (6,8). Goes to `sprites/props/`. See the shimmer rule below. |
+| `tilled_fertilised` | 16x16 | (8,16) | 1 / 0.55 / static | Opaque. Today's dry tilled soil with bone-meal clusters. Drawn under a crop at any stage. Goes to `sprites/crops/`. |
+| `tilled_fertilised_wet` | 16x16 | (8,16) | 1 / 0.55 / static | Opaque. The same plot, damp. Goes to `sprites/crops/`. |
+| `icon_bones` / `hud_bones` | 16x16 / 10x10 | (8,8) / (5,5) | 1 / 1.0 / static | Two pale bones side by side on a diagonal, with knobbed ends. Cream, so it never reads as the grey iron ingot. |
+| `icon_bone_meal` / `hud_bone_meal` | 16x16 / 10x10 | (8,8) / (5,5) | 1 / 1.0 / static | A small open burlap sack of pale powder, with the knobbed end of one bone sticking out. The bone is what tells it apart from a flour sack. |
+| `icon_moon_stone` / `hud_moon_stone` | 16x16 / 10x10 | (8,8) / (5,5) | 1 / 1.0 / static | The world moon stone, larger, with its crescent sheen. It must not read as the grey `icon_stone`. |
+| `icon_tech` / `hud_tech` | 16x16 / 10x10 | (8,8) / (5,5) | 1 / 1.0 / static | Essence: a small corked glass vial holding a swirl of pale moon-blue light. No halo. It replaces today's gear (task 0018), and the id stays `tech`. |
+
+Rules for every row:
+
+- **Direction and naming.**
+  - `dir` is `none` and there are no mirrors.
+  - Files are `native/<runtime name without index>/none/01..NN.png`, e.g. `native/moon_stone/none/02.png` and `native/hud_bone_meal/none/01.png`.
+  - Draw scale is 1.0.
+- **Pickups.** The lowest opaque row is 13, and the visible bounds are centred on x=8 (Â±1). They are no taller than `sprites/props/rock.png` (visible 14x10).
+- **Moon stone shimmer.**
+  - Both frames have an identical alpha mask.
+  - 3-8 interior pixels differ: the bright `moon` glint slides along the crescent.
+  - `light_xy` is the same point in both frames, on an opaque pixel of the sheen. The view's code glow (0221) is centred there.
+  - The stone itself never looks lit.
+- **Soil.**
+  - Both tiles are fully opaque.
+  - The dark furrow rows stay on rows 2-3, 6-7, 10-11 and 14-15, as in `sprites/crops/tilled.png` and `tilled_wet.png`, so a fertilised plot sits seamlessly beside a plain one.
+  - Bone meal is 5-8 pale clusters of 2-4 px each, 14-32 px in all, with at least one in each 8x8 quadrant so a crop on the plot never hides them all. None touch the outer 1 px ring. No single-pixel speckle.
+  - The dry clusters are `bone_dark`, with at most one `bone` pixel each.
+  - On the wet tile the clusters keep their places and turn a damp grey (`stone`, `stone_light`), still lighter than the soil.
+  - The wet tile's mean brightness is at least 20 below the dry one's (`check_crop_art.py`'s metric: the mean of (r+g+b)/3 over all 256 pixels).
+- **Icons.**
+  - One raw source per item gives both cuts with the same `crop_xywh` and two `content_scale` values.
+  - `content_anchor_xy` is `(scaled_w // 2, scaled_h // 2)`.
+  - The visible size is at most 14 (16x16) and at most 8 (10x10), with at least 1 clear pixel on every side.
+  - There are more than 24 (16x16) or 7 (10x10) opaque pixels, in 2 or more colours.
+  - The silhouette is unlike the 15 icons in `sprites/ui/`.
+  - Each icon's file entry carries `resource_id` (`bones`, `bone_meal`, `moon_stone`, `tech`) and `display_role` (`inventory` or `compact_hud`), as today's manifest does.
+- **`palette_keys`.**
+  - `bone_pile`: `ink, ink_soft, stone_dark, stone_light, bone_dark, bone`.
+  - `moon_stone`: `ink, ink_soft, night_light, stone_dark, stone, stone_light, water_light, moon`.
+  - Both soil tiles: `soil_dark, soil, soil_light, ink_soft, ink, stone, stone_light, bone_dark, bone`.
+  - Icons: none (all 42).
+
+## Match these
+
+- **Soil.** `sprites/crops/tilled.png` and `tilled_wet.png` (16x16, pivot (8,16), opaque; mean brightness 81 and 53) set the furrows, ramp and the dry-to-wet step. Their raw sources are `assets/art_source/crops/tilled.png` and `tilled_wet.png` (1254x1254, opaque). The wet one was made as an ImageGen edit of the dry one: see `implementation/sprites/generation/0010-tilled_wet.prompt.txt` and `-call.json`.
+- **Pickups.** `sprites/props/rock.png`, `seam.png` and `stump.png` (16x16, pivot (8,14)) set the outline and how a small node sits. The pickups must be lower and smaller than these.
+- **Icons.**
+  - `sprites/ui/icon_*.png` and `hud_*.png`: all 15, with `assets/art_source/ui/wood.png` as the icon family master. Avoid look-alikes of `icon_iron` (pale ingot), `icon_stone` (grey rocks) and `icon_oil` and `icon_energy`.
+  - `sprites/ui/icon_tech.png` is the gear being replaced. Show it beside the new one.
+- **Scale.** The farmer is `implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png` (visible 16x32).
+- **Look.** `docs/reference-sheet.png` and `assets/art_source/masters/style-night.png`.
+
+## How to make it
+
+1. **Prompt.** Build it as contract section 8 says.
+   - Pickups: BASE + RESOURCE_PROP. Replace its braces with the pickup and "16x16, contact pivot (8,14)", and keep its "no gem fantasy crystal" line.
+   - Soil: BASE + the CROP soil sentence, written the way `0010-tilled_wet.prompt.txt` was.
+   - Icons: BASE + ICON.
+   - Revisions: + CORRECTION.
+2. **Tool.** Built-in ImageGen, one subject per call. Use `transparent_background=true` for the pickups and icons, and `false` for the two soil tiles. Attach `docs/reference-sheet.png` (role: style reference) to every call.
+3. **Order.**
+   1. **`bone_pile`.**
+   2. **`icon_bones`**, with the pile's raw attached as its identity reference.
+   3. **`moon_stone` frame 0.**
+   4. **Moon stone frame 1**, an edit of frame 0 (EDIT TARGET): "change only the bright glint: slide it along the crescent; keep silhouette, size and framing".
+   5. **`icon_moon_stone`**, with frame 0's raw attached as its identity reference.
+   6. **`tilled_fertilised`**, an edit of `assets/art_source/crops/tilled.png` (EDIT TARGET): "keep the four furrows, ramp and framing exactly; add a few small pale bone-meal clusters on ridges and furrow edges in every quadrant; no seeds, plants, stones or sparkle".
+   7. **`tilled_fertilised_wet`**, an edit of the accepted dry tile (EDIT TARGET), with `assets/art_source/crops/tilled_wet.png` attached as its moisture reference: "darken to damp soil like the reference; keep furrows and every bone-meal cluster in place, damp grey".
+   8. **`icon_bone_meal`.**
+   9. **`icon_tech`.**
+   
+   Run at most 3 CORRECTION revisions per asset.
+4. **Reduce** with the mode A recipe (`render_source` in `tools/import_art.py`, imported read-only).
+   - **Pickups.** `crop_xywh` is the measured visible box. Pick `content_scale` for the visible target. The default anchor gives row 13.
+   - **Moon stone frame 1.** Use frame 0's `crop_xywh` and `content_scale` exactly. If the reduced alpha masks differ, or fewer than 3 pixels change, revise the edit.
+   - **Soil.**
+     - The crop is the whole square raw, with `content_scale` = 16 / side.
+     - The default anchor (8,16) fills the tile.
+     - If the furrow rows land elsewhere, regenerate. Never shift or patch pixels.
+   - **Icons.** One crop gives two scales, with the anchor as above.
+
+## Acceptance
+
+- [ ] There are 13 PNGs. Canvases and pivots are exactly as in the table, and every `dir` is `none`.
+- [ ] Both pickups have their lowest opaque row on 13 and are centred on x=8 (Â±1).
+- [ ] The two moon stone frames have identical alpha and 3-8 changed pixels. `light_xy` is opaque and the same in both frames (`points_on_opaque`).
+- [ ] The soil is fully opaque, with the furrow rows unchanged and the cluster rule met. Wet is at least 20 darker (`wet_darker_by_20`).
+- [ ] The icons meet the size and margin rules, with one crop per item (`icon_bounds_ok`). They have no text, number, panel, shadow or glow, and no duplicate of an existing icon.
+- [ ] Alpha is binary everywhere except the opaque soil. There is no baked glow, shadow, grass or ground under the pickups, and the bones and the moon stone do not look lit in the night preview.
+- [ ] Only the 42 colours are used, within the `palette_keys` above, and `importer_recipe_matches` holds.
+- [ ] `build.py` twice gives identical bytes, `--check` passes, and checks.json is all `true`.
+
+## Delivery
+
+Deliver to `implementation/backlog/deliveries/A036-night-loot/` with `raw/`, `native/`, `preview/`, `rejected/`, contract.json, checks.json, build.py, index.html and review-log.txt (contract 9.1-9.6). This pack has no `runtime/`.
+
+contract.json has:
+
+- `palette_mode: "A"`;
+- `points: {"light_xy": [x, y]}` on `moon_stone` and on both of its file entries.
+
+After the owner approves, write APPROVAL.json (9.7) and CLAUDE-A036-PROMPT.txt (9.8). The prompt maps every file, for example:
+
+- `native/moon_stone/none/01..02.png -> sprites/props/moon_stone_0..1.png  16x16 pivot (8,14) draw 1.0  0.4 s loop`;
+- `native/icon_tech/none/01.png -> sprites/ui/icon_tech.png` (it replaces the 0018 gear; the resource id stays `tech`).
+
+The prompt also names the stand-ins of 0219, 0221 and 0222 that these replace.
+
+The last step is `python implementation/backlog/assets.py set A036 approved`, and only after the owner approves in words recorded in APPROVAL.json.

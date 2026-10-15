@@ -1,6 +1,6 @@
 # A036 - Bones, moon stones and essence
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0235
 - **Dressed by game tasks:** 0219, 0221, 0222
 - **Spec after game task:** 0222
