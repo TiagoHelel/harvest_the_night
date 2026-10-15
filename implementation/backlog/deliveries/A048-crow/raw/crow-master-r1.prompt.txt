@@ -1,0 +1,9 @@
+Use case: stylized-concept
+Asset type: production sprite source for HARVEST THE NIGHT, A048 crow identity candidate1.
+Primary request: ONE undead CROW standing on ground, folded wings, side view WEST/LEFT.
+Inputs: Image1 reference-sheet for farm camera/materials/outline; Image2 walker master for undead palette andoutline only, NOT humanoid anatomy. Crow is black lean bird, NOT white chicken.
+Handcrafted coarsepixelart with broad deliberate clusters, coloured outlines, restrained texture and readableplanes. Orthographic three-quarter top-down rectangulargrid, neutralday upper-left highlights. Native32x24, pivot(16,22), fullbody14long x11high, target13–16long and10–12high, feet centred, lowestrow21.
+Identity: ragged blue-BLACK feathers with violet-grey highlights, coolmoon/silver edge along back so it reads atnight; few missingfeathers show mattebone ononewing, sharpgrey WEST beak and palecloudyboneeye. Lean, sharp, menacing, notcute.
+Slightly hunched crow with a shortsharp greybeak, longlean neckruff and a pointed foldedtail.
+Keep beak/eye readable at14x11, eye a broad palecream dot1logicalpixel withdarkrim, not microdetail. Feathers matte, NOTglowing. No colours borrowed frombrownfarmer/zombierags ontofeathers.
+Truealpha0 outside solidsharp art. No groundshadow (gamecode owns it), lift, grass, groundpatch, glow, halos, mist, labels/text/UI/particles/crops/wall/scenery. No blur, gradient, vector/3D, speckle orblackbox. Wholecomplete unclipped bird withclearoutermargin.

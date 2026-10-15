@@ -2430,6 +2430,70 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/enemies/crow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_fly_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_fly_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_fly_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_fly_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_land_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_peck_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_peck_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_peck_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/crow_walk_b.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/enemies/giant.png",
       "owner": "raster"
     },
@@ -3371,6 +3435,10 @@
     },
     {
       "output": "sprites/ui/head_breaker.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_crow.png",
       "owner": "raster"
     },
     {

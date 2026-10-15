@@ -1,0 +1,214 @@
+[
+  {
+    "recipe": {
+      "id": "crow-death-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-death-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        546,
+        724
+      ],
+      "crop_xywh": [
+        76,
+        216,
+        448,
+        380
+      ],
+      "content_scale": 0.03191964285714286,
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      9,
+      10,
+      23,
+      22
+    ],
+    "unclipped_scaled_wh": [
+      14,
+      12
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-death-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-death-r1.png",
+      "sheet_cell_xywh": [
+        546,
+        0,
+        523,
+        724
+      ],
+      "crop_xywh": [
+        570,
+        209,
+        474,
+        357
+      ],
+      "content_scale": 0.03191964285714286,
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      9,
+      11,
+      24,
+      22
+    ],
+    "unclipped_scaled_wh": [
+      15,
+      11
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-death-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-death-r1.png",
+      "sheet_cell_xywh": [
+        1069,
+        0,
+        544,
+        724
+      ],
+      "crop_xywh": [
+        1096,
+        377,
+        506,
+        250
+      ],
+      "content_scale": 0.03191964285714286,
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      8,
+      14,
+      24,
+      22
+    ],
+    "unclipped_scaled_wh": [
+      16,
+      8
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-death-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-death-r1.png",
+      "sheet_cell_xywh": [
+        1613,
+        0,
+        559,
+        724
+      ],
+      "crop_xywh": [
+        1625,
+        453,
+        500,
+        180
+      ],
+      "content_scale": 0.03191964285714286,
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      8,
+      16,
+      24,
+      22
+    ],
+    "unclipped_scaled_wh": [
+      16,
+      6
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A048 crow forecast head for HARVEST THE NIGHT.\nCreate ONE three-quarter LEFT crow head-and-neck bust, cut flat at bottom. Use input crow identity, dark blue-black coarse feathers, sharp grey beak, ragged neck ruff, cloudy pale BONE eye, cool silver edge along back. Not full bird, no wings or feet. Native 16x16 icon, visible 12\u201313 high at most13 wide, centred x8, lowest opaque row14. Bold single cream eye must survive as1\u20132 nativepixels. Upright tall bust including neck/ruff to fill12\u201313 height, not long horizontal beak silhouette. Handcrafted coarse pixelart, same coloured outline and broad clusters as reference, upper-left neutral daylight. Exact character and own feather palette. True transparent alpha0 outside crisp opaque pixel edges. No glowing eye, halo, haze, soft alpha, shadow, scenery, text, frame, border, labels, blur, 3D. Complete unclipped bust with spacious margins.\nCorrection: input2 is rejected head1. Its eye becomes invisible in the 13pixel-high export. Make the matte BONE/cream eye a bold simple square, at least18percent bust height and12percent bust width, surrounded by darksocket. The grey beak stays grey, NOTcream. Fewer larger featherclusters. Keep a narrow tall bust 12wide x13high. No glow.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-master-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/head-crow-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-master-r1.png",
+      "sha256": "044c68ff1cc77599c06ac343695f59567e180931e0e100c287e845f5a860c04a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/head-crow-r1.png",
+      "sha256": "703fee4926a6e8f1c16b386ca75cd512d74f31b087fbfa0bf00130d09a76609e",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\rejected\\head-crow-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-50699ee2-a4b6-4717-a355-e6d277f84d10.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A048-crow\\raw\\head-crow-r2.png",
+  "sha256": "cb7b8a7cca964caa98a238485ceb20ae7b7a448942d71d1ade6f3a925c973000",
+  "revision": 2,
+  "decision": "selected for final owner review, not approved"
+}

@@ -302,3 +302,12 @@ Taking 0261, A047 the rat swarm, through its CLAUDE-A047-PROMPT.txt.
 
 A047 is in the game and set `integrated` (the rat swarm: 12 native PNGs sha-checked; check_enemy_art now takes a spec per family, and the rat is tracked with three death frames).
 Next in the loop: 0262.
+
+## 2026-10-15 - Claude - taking 0262 (A048)
+
+Taking 0262, A048 the crow, through its CLAUDE-A048-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0262 (A048 integrated)
+
+A048 is in the game and set `integrated` (Art: the crow).
+Next in the loop: 0145.

@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-271 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+272 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -314,6 +314,7 @@ voz alta.
 | 0245 | Art: the dog | 2026-10-15 |
 | 0260 | Art: the spitter | 2026-10-15 |
 | 0261 | Art: the rat swarm | 2026-10-15 |
+| 0262 | Art: the crow | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

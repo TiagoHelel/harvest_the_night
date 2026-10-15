@@ -1,0 +1,107 @@
+{
+  "status": "review",
+  "issues": [],
+  "files": {
+    "crow/west/0": {
+      "stem": "crow-master-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "crow_fly/west/0": {
+      "stem": "crow-fly-r2",
+      "index": 0,
+      "fields": {}
+    },
+    "crow_fly/west/1": {
+      "stem": "crow-fly-r2",
+      "index": 1,
+      "fields": {}
+    },
+    "crow_fly/west/2": {
+      "stem": "crow-fly-r2",
+      "index": 2,
+      "fields": {}
+    },
+    "crow_fly/west/3": {
+      "stem": "crow-fly-r2",
+      "index": 3,
+      "fields": {}
+    },
+    "crow_land/west/0": {
+      "stem": "crow-land-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "crow_peck/west/0": {
+      "stem": "crow-peck-r3",
+      "index": 0,
+      "fields": {}
+    },
+    "crow_peck/west/1": {
+      "stem": "crow-peck-r3",
+      "index": 1,
+      "fields": {}
+    },
+    "crow_peck/west/2": {
+      "stem": "crow-peck-r3",
+      "index": 2,
+      "fields": {}
+    },
+    "crow_death/west/0": {
+      "stem": "crow-death-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "crow_death/west/1": {
+      "stem": "crow-death-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "crow_death/west/2": {
+      "stem": "crow-death-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "crow_death/west/3": {
+      "stem": "crow-death-r1",
+      "index": 3,
+      "fields": {}
+    },
+    "head_crow/none/0": {
+      "stem": "head-crow-r2",
+      "index": 0,
+      "fields": {
+        "inspection_eye_xy": [
+          6,
+          5
+        ]
+      }
+    }
+  },
+  "rejected": {
+    "crow-fly-r1": "Fourth wing is raised rather than level upstroke; superseded by r2.",
+    "crow-peck-r1": "Beak does not reach ground.",
+    "crow-peck-r2": "Beak still stops above ground.",
+    "head-crow-r1": "Eye disappears in native13px portrait."
+  },
+  "decisions": {
+    "crow-master-r1": {
+      "decision": "selected for final owner review, not approved"
+    },
+    "crow-fly-r2": {
+      "decision": "selected for final owner review, not approved"
+    },
+    "crow-land-r1": {
+      "decision": "selected for final owner review, not approved"
+    },
+    "crow-peck-r3": {
+      "decision": "selected for final owner review, not approved"
+    },
+    "crow-death-r1": {
+      "decision": "selected for final owner review, not approved"
+    },
+    "head-crow-r2": {
+      "decision": "selected for final owner review, not approved"
+    }
+  }
+}

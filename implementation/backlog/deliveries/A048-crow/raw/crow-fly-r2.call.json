@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A048 production CROW fly source for HARVEST THE NIGHT.\nPrimary request: ONE horizontal strip, exactly4 sequential frames ofsamecrow, facing WEST/LEFT.\nInputimage1 accepted crowmaster is identity. Handcrafted coarsepixelart, sameblue-black featherbody, greybeak, raggedneckruff, coolsilver/moonbackedge, mattebonewingnotch and palecloudyeye. Lean sharpbird, NOTchicken/cute. Sameorthographic three-quarter top-downcamera, neutral upper-leftdaylight, colouredoutline, broadclusters.\nNative32x24, pivot(16,22), allopaqueartwithincolumns1\u201330androws1\u201321, fullheadtotail body13\u201316logicalpixels long. One sharedphysicalscale acrossallframes; bodyvolume/identityfixed. Truealpha0outsidesharppixels.\nENEMY_STRIP + STRIP orderedposes wingsup, wingsleveldownstroke, wingsfullydown, wingslevelupstroke. ONLY WINGS MOVE. Torso/head/beak/tail stay in exactlysameplace in allcells. Feet tucked. Torso/headbody length14nativepixels, torso bottom native row18, centrex16. Wings fit rows1\u201321, never pixelonrow22 orbelow. Peak wingspan max26pixels. Frames2and4 wingedges differ (down/upstroke), not duplicates. Loop closes. Sprite drawn atgroundlevel; gamecode adds10pxflightlift andshadow, do notlift/source-shadow it.\nCompleteunclipped objects SMALLwithin equalvirtualcells atmost50percentwidth/height, huge fullheight transparentgutters andoutermargins. Samebodypoint/camera/source scale; do notenlarge smallerposes.\nNo actualshadow/lift/glow/halos/haze/gradient/blur, no scenery/crops/targets/wall/text/UI/labels. Runtimeflightheightandshadow belongtocode. Crisp opaquecreature, no shadowpatch or mist. Darkfeathers retain coolpale edgefornightreadability.\nThe accepted master is candidate1 (cleantransparency). Candidate2 had a halo and is rejected, not a reference.\nCORRECTION: Image2 is edit target. Change ONLY fourthcell wingpose: it is currently raised UP likeframe1, but must be LEVEL on the UPSTROKE, sweepingbackeast horizontally with slightlycurled-up feather tips. Match frame2's generalhorizontalangle, but show distinct upstroke featherfringe, not a copy. Lower raised fourthwingtip from aroundrawy194 toabouty290\u2013330; bodyhead/torso/eye/beak/tail/tuckedfeet retain originalsourcepositions. Leave otherthreecells and allbirdidentity/palette/camera/scale/baseline completelyunchanged. No glow, keeptruealpha0 andwidegutters.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-master-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-fly-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-master-r1.png",
+      "sha256": "044c68ff1cc77599c06ac343695f59567e180931e0e100c287e845f5a860c04a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-fly-r1.png",
+      "sha256": "1abb45bb173fb1544fdb4357b6da71debcf7e5addcc3ef15c9b246eef174063d",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\rejected\\crow-fly-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-dfef524f-30ef-4c5d-8e66-d49f65ac4ae9.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r2.png",
+  "sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c",
+  "revision": 2,
+  "decision": "selected for final owner review, not approved"
+}

@@ -1,0 +1,188 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "body_clear_border": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "death_heights": [
+    12,
+    11,
+    8,
+    6
+  ],
+  "death_settles": true,
+  "family_checks_complete": true,
+  "flight_body_registered": true,
+  "fly_wings_up_level_down_level": true,
+  "frame_count_matches": true,
+  "frames_distinct": true,
+  "frames_expected": 14,
+  "frames_found": 14,
+  "grounded_on_pivot": true,
+  "head_body_palette_only": true,
+  "head_eye_bone": true,
+  "icon_bounds_ok": true,
+  "importer_recipe_matches": true,
+  "master_size_ok": true,
+  "measurements": {
+    "native/crow/west/01.png": {
+      "bounds": [
+        7,
+        11,
+        22,
+        22
+      ],
+      "opaque_pixels": 73
+    },
+    "native/crow_death/west/01.png": {
+      "bounds": [
+        9,
+        10,
+        23,
+        22
+      ],
+      "opaque_pixels": 82
+    },
+    "native/crow_death/west/02.png": {
+      "bounds": [
+        9,
+        11,
+        24,
+        22
+      ],
+      "opaque_pixels": 81
+    },
+    "native/crow_death/west/03.png": {
+      "bounds": [
+        8,
+        14,
+        24,
+        22
+      ],
+      "opaque_pixels": 67
+    },
+    "native/crow_death/west/04.png": {
+      "bounds": [
+        8,
+        16,
+        24,
+        22
+      ],
+      "opaque_pixels": 67
+    },
+    "native/crow_fly/west/01.png": {
+      "bounds": [
+        9,
+        6,
+        23,
+        20
+      ],
+      "opaque_pixels": 97
+    },
+    "native/crow_fly/west/02.png": {
+      "bounds": [
+        9,
+        11,
+        25,
+        20
+      ],
+      "opaque_pixels": 77
+    },
+    "native/crow_fly/west/03.png": {
+      "bounds": [
+        9,
+        11,
+        23,
+        22
+      ],
+      "opaque_pixels": 70
+    },
+    "native/crow_fly/west/04.png": {
+      "bounds": [
+        9,
+        11,
+        25,
+        20
+      ],
+      "opaque_pixels": 76
+    },
+    "native/crow_land/west/01.png": {
+      "bounds": [
+        9,
+        8,
+        24,
+        22
+      ],
+      "opaque_pixels": 104
+    },
+    "native/crow_peck/west/01.png": {
+      "bounds": [
+        9,
+        10,
+        24,
+        22
+      ],
+      "opaque_pixels": 79
+    },
+    "native/crow_peck/west/02.png": {
+      "bounds": [
+        9,
+        14,
+        23,
+        22
+      ],
+      "opaque_pixels": 65
+    },
+    "native/crow_peck/west/03.png": {
+      "bounds": [
+        9,
+        10,
+        24,
+        22
+      ],
+      "opaque_pixels": 78
+    },
+    "native/head_crow/none/01.png": {
+      "bounds": [
+        2,
+        2,
+        14,
+        15
+      ],
+      "opaque_pixels": 89
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [],
+  "owner_visual_approval_recorded": true,
+  "peck_beak_reaches_ground": true,
+  "peck_feet_bounds": [
+    [
+      0,
+      0,
+      5,
+      2
+    ],
+    [
+      0,
+      0,
+      4,
+      2
+    ],
+    [
+      0,
+      0,
+      5,
+      2
+    ]
+  ],
+  "peck_feet_registered": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "wing_span_at_most26": true
+}

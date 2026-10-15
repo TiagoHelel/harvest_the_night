@@ -179,6 +179,7 @@ const SCENARIOS: Array = [
 	["winter_build", "the build step on Winter 2: a route from every side", ""],
 	["forecast_dusk", "Spring 14 at 18:30: the boss night's forecast, every kind's head on it", ""],
 	["forecast_summer", "Summer 10 at 18:30: a summer night's forecast, the spitter's and the rat's heads among the kinds coming (task 0260)", ""],
+	["forecast_autumn", "Autumn 10 at 18:30: an autumn night's forecast, the crow's head among the kinds coming (task 0262)", ""],
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
 	["forecast_calm", "Summer 1 at 18:30: the forecast of a calm night", ""],
 	["forecast_fog", "a foggy night's forecast at 18:30: the first night of the shots' run that Weather makes foggy, found and never forced - its mark beside the night's own and FOG in words", ""],
@@ -876,6 +877,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"winter_build": _set_winter_build(state)
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_summer": _set_forecast_summer(state)
+		"forecast_autumn": _set_forecast_autumn(state)
 		"forecast_build": _set_forecast_build(state)
 		"forecast_calm": _set_forecast_calm(state)
 		"forecast_fog": _set_forecast_fog(state)
@@ -2841,6 +2843,16 @@ func _set_forecast_dusk(state: Dictionary) -> void:
 ## heads are on the panel by day.
 func _set_forecast_summer(state: Dictionary) -> void:
 	_on_date(state, GameData.SEASON_DAYS + 10)
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
+		- int(state["day_tick"]), 1))
+
+
+## **An autumn night's forecast** (task 0262): Autumn 10 at 18:30, where the
+## autumn's kinds - the crow among them - are in the night's mix, so their
+## heads are on the panel by day.
+func _set_forecast_autumn(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 10)
 	_a_sown_field(state)
 	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
 		- int(state["day_tick"]), 1))

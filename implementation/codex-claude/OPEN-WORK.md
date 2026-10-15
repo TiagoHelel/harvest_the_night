@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0261's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0262's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 258 done, 38 todo, 0 blocked (87%).**
+**The game backlog: 296 tasks, 259 done, 37 todo, 0 blocked (88%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0262). Only the farmer packs the owner deferred (3c) still wait on
+says 0145). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -66,7 +66,7 @@ The owner approved 15 at 16:56 and the other six's additions at 21:11
 | A028 | The dog (**integrated** by 0245, 2026-10-15) | 0245 |
 | A046 | The spitter (**integrated** by 0260, 2026-10-15) | 0260 |
 | A047 | The rat swarm (**integrated** by 0261, 2026-10-15) | 0261 |
-| A048 | The crow | 0262 |
+| A048 | The crow (**integrated** by 0262, 2026-10-15) | 0262 |
 | A049 | The digger | 0263 |
 | A050 | The frost zombie | 0264 |
 | A051 | The wraith | 0265 |

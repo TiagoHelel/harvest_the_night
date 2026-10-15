@@ -38,7 +38,9 @@ func after_tick(state: Dictionary) -> void:
 			if Entities.alive(state, int(id)):
 				continue
 			var before: Dictionary = _before[id]
-			if not EnemyMotion.tracks(before["kind"]):
+			# A tracked kind's, and since task 0262 a flyer's fall (A048's
+			# crow), which has its own poses in the air.
+			if not EnemyMotion.tracks(before["kind"]) and not Enemies.flies(before["kind"]):
 				continue
 			var at: Array = before["coordinates"]
 			if _cues.size() == CAP:

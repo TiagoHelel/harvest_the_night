@@ -82,6 +82,7 @@ HEADS = {
 PACK_HEADS = {
     'A046': ['spitter'],
     'A047': ['rat'],
+    'A048': ['crow'],
 }
 
 

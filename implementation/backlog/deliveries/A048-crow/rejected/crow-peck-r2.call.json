@@ -1,0 +1,25 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Edit this three-frame crow peck strip. Preserve identity, all three cell positions, physical scale, body, wing and especially feet positions. Change ONLY the MIDDLE pose: lower and extend the grey beak so its very tip touches exactly the baseline of the claws. The current beak stops above that baseline and this is wrong. Feet must stay fixed in all3 poses. First headup and third tugup remain, same darkblue black undead crow as source. No crop/soil/shadow/glow. True alpha0 background, coarse broad pixel clusters, crisp opaque edges. Retain fullheight transparent gutters and margins.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-peck-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-peck-r1.png",
+      "sha256": "dcae0bc73ee8325616e47347eda5502051bb6c0f625d0af84dff7875a2c98bdc",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\rejected\\crow-peck-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-edd49daa-1869-4e96-ae82-6e6bbb35a0d4.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-peck-r2.png",
+  "sha256": "09e1cd165f7f13bf41a40eb82a469af78158bb73e77cb498d61b381a6e8b2fd0",
+  "revision": 2,
+  "decision": "rejected: Beak still stops above ground.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\rejected\\crow-peck-r2.png"
+}

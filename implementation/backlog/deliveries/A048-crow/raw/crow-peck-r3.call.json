@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Edit this three-frame crow peck strip. Preserve identity, all three cell positions, physical scale, body, wing and especially feet positions. Change ONLY the MIDDLE pose: lower and extend the grey beak so its very tip touches exactly the baseline of the claws. The current beak stops above that baseline and this is wrong. Feet must stay fixed in all3 poses. First headup and third tugup remain, same darkblue black undead crow as source. No crop/soil/shadow/glow. True alpha0 background, coarse broad pixel clusters, crisp opaque edges. Retain fullheight transparent gutters and margins.\nCRITICAL correction: the second source still ends the beak above the lowest feet. Extend the middle beak downward by TWO whole chunky feather-pixel rows (roughly60sourcepixels) so its tip is slightly BELOW the lowest claw. Long downward beak actively digging ground, not held at chestlevel. All feet remainexactlyfixed. Onlymiddlehead/beakchange.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-peck-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A048-crow/raw/crow-peck-r2.png",
+      "sha256": "09e1cd165f7f13bf41a40eb82a469af78158bb73e77cb498d61b381a6e8b2fd0",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\rejected\\crow-peck-r2.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-ae34cae4-b1b6-4a17-a463-ebc8752f92a7.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-peck-r3.png",
+  "sha256": "f3cdf98846859ba58334b0d1efb34e38b233e8fadfe735f68ebe44254242a497",
+  "revision": 3,
+  "decision": "selected for final owner review, not approved"
+}

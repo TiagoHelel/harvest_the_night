@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production sprite source for HARVEST THE NIGHT, A048 crow identity candidate1.\nPrimary request: ONE undead CROW standing on ground, folded wings, side view WEST/LEFT.\nInputs: Image1 reference-sheet for farm camera/materials/outline; Image2 walker master for undead palette andoutline only, NOT humanoid anatomy. Crow is black lean bird, NOT white chicken.\nHandcrafted coarsepixelart with broad deliberate clusters, coloured outlines, restrained texture and readableplanes. Orthographic three-quarter top-down rectangulargrid, neutralday upper-left highlights. Native32x24, pivot(16,22), fullbody14long x11high, target13\u201316long and10\u201312high, feet centred, lowestrow21.\nIdentity: ragged blue-BLACK feathers with violet-grey highlights, coolmoon/silver edge along back so it reads atnight; few missingfeathers show mattebone ononewing, sharpgrey WEST beak and palecloudyboneeye. Lean, sharp, menacing, notcute.\nSlightly hunched crow with a shortsharp greybeak, longlean neckruff and a pointed foldedtail.\nKeep beak/eye readable at14x11, eye a broad palecream dot1logicalpixel withdarkrim, not microdetail. Feathers matte, NOTglowing. No colours borrowed frombrownfarmer/zombierags ontofeathers.\nTruealpha0 outside solidsharp art. No groundshadow (gamecode owns it), lift, grass, groundpatch, glow, halos, mist, labels/text/UI/particles/crops/wall/scenery. No blur, gradient, vector/3D, speckle orblackbox. Wholecomplete unclipped bird withclearoutermargin.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-eb047680-ffa1-4423-923d-b78a0c3dbd4c.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-master-r1.png",
+  "sha256": "044c68ff1cc77599c06ac343695f59567e180931e0e100c287e845f5a860c04a",
+  "revision": 1,
+  "decision": "selected for final owner review, not approved"
+}

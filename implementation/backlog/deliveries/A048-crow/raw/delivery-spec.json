@@ -1,0 +1,330 @@
+{
+  "title": "The crow",
+  "date": "2026-10-14",
+  "status": "generating",
+  "palette_mode": "A",
+  "expected_files": 14,
+  "files": [
+    {
+      "anim": "crow",
+      "dir": "west",
+      "frame": 0,
+      "pose": "standing_folded",
+      "output": "native/crow/west/01.png",
+      "runtime_name": "sprites/enemies/crow.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "crow_fly",
+      "dir": "west",
+      "frame": 0,
+      "pose": "wings_up",
+      "output": "native/crow_fly/west/01.png",
+      "runtime_name": "sprites/enemies/crow_fly_0.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "crow_fly",
+      "dir": "west",
+      "frame": 1,
+      "pose": "level_downstroke",
+      "output": "native/crow_fly/west/02.png",
+      "runtime_name": "sprites/enemies/crow_fly_1.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "crow_fly",
+      "dir": "west",
+      "frame": 2,
+      "pose": "wings_down",
+      "output": "native/crow_fly/west/03.png",
+      "runtime_name": "sprites/enemies/crow_fly_2.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "crow_fly",
+      "dir": "west",
+      "frame": 3,
+      "pose": "level_upstroke",
+      "output": "native/crow_fly/west/04.png",
+      "runtime_name": "sprites/enemies/crow_fly_3.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "crow_land",
+      "dir": "west",
+      "frame": 0,
+      "pose": "touchdown",
+      "output": "native/crow_land/west/01.png",
+      "runtime_name": "sprites/enemies/crow_land_0.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "crow_peck",
+      "dir": "west",
+      "frame": 0,
+      "pose": "head_up",
+      "output": "native/crow_peck/west/01.png",
+      "runtime_name": "sprites/enemies/crow_peck_0.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "crow_peck",
+      "dir": "west",
+      "frame": 1,
+      "pose": "beak_down",
+      "output": "native/crow_peck/west/02.png",
+      "runtime_name": "sprites/enemies/crow_peck_1.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "crow_peck",
+      "dir": "west",
+      "frame": 2,
+      "pose": "tug_up",
+      "output": "native/crow_peck/west/03.png",
+      "runtime_name": "sprites/enemies/crow_peck_2.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "crow_death",
+      "dir": "west",
+      "frame": 0,
+      "pose": "hit",
+      "output": "native/crow_death/west/01.png",
+      "runtime_name": "sprites/enemies/crow_death_0.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "crow_death",
+      "dir": "west",
+      "frame": 1,
+      "pose": "tumble",
+      "output": "native/crow_death/west/02.png",
+      "runtime_name": "sprites/enemies/crow_death_1.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "crow_death",
+      "dir": "west",
+      "frame": 2,
+      "pose": "tumble_lower",
+      "output": "native/crow_death/west/03.png",
+      "runtime_name": "sprites/enemies/crow_death_2.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "crow_death",
+      "dir": "west",
+      "frame": 3,
+      "pose": "lie_side",
+      "output": "native/crow_death/west/04.png",
+      "runtime_name": "sprites/enemies/crow_death_3.png",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "head_crow",
+      "dir": "none",
+      "frame": 0,
+      "pose": "bust",
+      "output": "native/head_crow/none/01.png",
+      "runtime_name": "sprites/ui/head_crow.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/enemies/walker.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+[
+  {
+    "recipe": {
+      "id": "crow-fly-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        544,
+        724
+      ],
+      "crop_xywh": [
+        71,
+        142,
+        420,
+        427
+      ],
+      "content_scale": 0.03333333333333333,
+      "content_anchor_xy": [
+        7,
+        16
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      9,
+      6,
+      23,
+      20
+    ],
+    "measured_body_point": [
+      281,
+      496
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-fly-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r2.png",
+      "sheet_cell_xywh": [
+        544,
+        0,
+        579,
+        724
+      ],
+      "crop_xywh": [
+        598,
+        288,
+        501,
+        282
+      ],
+      "content_scale": 0.03333333333333333,
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      9,
+      11,
+      25,
+      20
+    ],
+    "measured_body_point": [
+      808,
+      496
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-fly-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r2.png",
+      "sheet_cell_xywh": [
+        1123,
+        0,
+        491,
+        724
+      ],
+      "crop_xywh": [
+        1148,
+        288,
+        431,
+        343
+      ],
+      "content_scale": 0.03333333333333333,
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      9,
+      11,
+      23,
+      22
+    ],
+    "measured_body_point": [
+      1358,
+      496
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-fly-r2-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r2.png",
+      "sheet_cell_xywh": [
+        1614,
+        0,
+        558,
+        724
+      ],
+      "crop_xywh": [
+        1651,
+        288,
+        481,
+        282
+      ],
+      "content_scale": 0.03333333333333333,
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ]
+    },
+    "native_bounds": [
+      9,
+      11,
+      25,
+      20
+    ],
+    "measured_body_point": [
+      1861,
+      496
+    ]
+  }
+]

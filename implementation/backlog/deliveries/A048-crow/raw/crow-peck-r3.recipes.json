@@ -1,0 +1,191 @@
+[
+  {
+    "recipe": {
+      "id": "crow-peck-r3-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-peck-r3.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        791,
+        724
+      ],
+      "crop_xywh": [
+        137,
+        149,
+        616,
+        487
+      ],
+      "content_scale": 0.024127310061601643,
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "content_anchor_xy": [
+        7,
+        12
+      ]
+    },
+    "native_bounds": [
+      9,
+      10,
+      24,
+      22
+    ],
+    "unclipped_scaled_wh": [
+      15,
+      12
+    ],
+    "measured_feet_region_raw_xywh": [
+      320,
+      535,
+      222,
+      101
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-peck-r3-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-peck-r3.png",
+      "sheet_cell_xywh": [
+        791,
+        0,
+        627,
+        724
+      ],
+      "crop_xywh": [
+        830,
+        297,
+        567,
+        348
+      ],
+      "content_scale": 0.024127310061601643,
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "content_anchor_xy": [
+        7,
+        8
+      ]
+    },
+    "native_bounds": [
+      9,
+      14,
+      23,
+      22
+    ],
+    "unclipped_scaled_wh": [
+      14,
+      8
+    ],
+    "measured_feet_region_raw_xywh": [
+      990,
+      540,
+      224,
+      105
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-peck-r3-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-peck-r3.png",
+      "sheet_cell_xywh": [
+        1418,
+        0,
+        754,
+        724
+      ],
+      "crop_xywh": [
+        1440,
+        158,
+        617,
+        478
+      ],
+      "content_scale": 0.024127310061601643,
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "content_anchor_xy": [
+        7,
+        12
+      ]
+    },
+    "native_bounds": [
+      9,
+      10,
+      24,
+      22
+    ],
+    "unclipped_scaled_wh": [
+      15,
+      12
+    ],
+    "measured_feet_region_raw_xywh": [
+      1620,
+      536,
+      231,
+      100
+    ]
+  }
+]

@@ -1,0 +1,174 @@
+[
+  {
+    "recipe": {
+      "id": "crow-fly-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        552,
+        724
+      ],
+      "crop_xywh": [
+        78,
+        143,
+        421,
+        427
+      ],
+      "content_scale": 0.0332541567695962,
+      "content_anchor_xy": [
+        7,
+        16
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      6,
+      23,
+      20
+    ],
+    "measured_body_point": [
+      288.5,
+      496
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-fly-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r1.png",
+      "sheet_cell_xywh": [
+        552,
+        0,
+        578,
+        724
+      ],
+      "crop_xywh": [
+        607,
+        289,
+        499,
+        281
+      ],
+      "content_scale": 0.0332541567695962,
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      11,
+      25,
+      20
+    ],
+    "measured_body_point": [
+      817.5,
+      496
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-fly-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r1.png",
+      "sheet_cell_xywh": [
+        1130,
+        0,
+        488,
+        724
+      ],
+      "crop_xywh": [
+        1155,
+        288,
+        428,
+        345
+      ],
+      "content_scale": 0.0332541567695962,
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      11,
+      23,
+      22
+    ],
+    "measured_body_point": [
+      1365.5,
+      496
+    ]
+  },
+  {
+    "recipe": {
+      "id": "crow-fly-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-fly-r1.png",
+      "sheet_cell_xywh": [
+        1618,
+        0,
+        554,
+        724
+      ],
+      "crop_xywh": [
+        1655,
+        194,
+        440,
+        376
+      ],
+      "content_scale": 0.0332541567695962,
+      "content_anchor_xy": [
+        7,
+        14
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      8,
+      24,
+      21
+    ],
+    "measured_body_point": [
+      1865.5,
+      496
+    ]
+  }
+]

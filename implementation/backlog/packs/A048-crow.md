@@ -1,6 +1,6 @@
 # A048 - The crow
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0262
 - **Dressed by game tasks:** 0249
 - **Spec after game task:** 0249

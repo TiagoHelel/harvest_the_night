@@ -1,0 +1,31 @@
+{
+  "pack": "A048",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A048-crow",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/crow/west/01.png": "d05ca6ea0c26274cf533764e3d1a4d89722d003076e0e8d66a869af90bf1f0e9",
+    "native/crow_fly/west/01.png": "950c269b8671af680b038bda73e8635ae036595b872afd41767ec1c9ff2690a7",
+    "native/crow_fly/west/02.png": "5b8371961745b8848cb2fe831ca08fb4798ad3b6fab4ee21aada6c30cd0c31f8",
+    "native/crow_fly/west/03.png": "7c773fe59360b42d58ddcf8e2e58facd4441a50a2eee13f0756fcf99920b5c2a",
+    "native/crow_fly/west/04.png": "0c23d986e0fb0fcd674d3e816e6375b067fd38149b18a6d8d7e8e0b07ec6f4ff",
+    "native/crow_land/west/01.png": "43d069fecdfec2b2a94aa39b3129e8cc7b1b6f6765edaffb84d3c90d38eb583e",
+    "native/crow_peck/west/01.png": "b8a3b478cff628d25a9493575000f998357ce0dface33eab18572f55ee452c2e",
+    "native/crow_peck/west/02.png": "bb16019c22f8a02c406702e640d6ddaaa182ccf40876d6a65eb8139858b8374d",
+    "native/crow_peck/west/03.png": "2f1496812025948b3d0d2f34610478d892c070ab1fbd05e0edfb4e943f70e7c3",
+    "native/crow_death/west/01.png": "536af8f6feb28dbc42354e27912b7d4ffad5b16e7a4f032af35fccb27535ad99",
+    "native/crow_death/west/02.png": "29dfe780b2f7207566f0d5e2a3e9234640ed350d02499406307d11e5e2e86909",
+    "native/crow_death/west/03.png": "58a6cf14ce39aed9e9513339938a0e9283b3752aac78ca96219e58aea842986d",
+    "native/crow_death/west/04.png": "ac99567dfc2c33c49fbfe6ec5350fdf02e80bd032fd57f959bea5473f5f95f15",
+    "native/head_crow/none/01.png": "0f716356cc019a38e588fa41121407c0a727078ff81944f34191d4cba8565fab"
+  },
+  "frames": 14,
+  "frames_expected": 14,
+  "accepted_visual_checks": [],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

@@ -16,7 +16,29 @@ PACK_FAMILIES = {
     'spitter':dict(ORDINARY,task='A046'),
     'rat':{'task':'A047','canvas':[24,16],'pivot':[12,14],'offset':[-4,2],
            'counts':{'master':1,'walk':4,'attack':3,'death':3},'dead':6},
+    # The flying exception (task 0262): the crow flies, lands, pecks and
+    # falls on 32x24 at (16,22). Flying and falling frames are clear of the
+    # ground row but one body - no shadow baked in, 0249's stays code - and
+    # its aliases name the flight, the peck and the fall.
+    'crow':{'task':'A048','canvas':[32,24],'pivot':[16,22],'offset':[-8,-6],
+            'counts':{'master':1,'fly':4,'land':1,'peck':3,'death':4},'dead':8,
+            'aloft':('fly','death'),'aliases':(('walk_b','fly_2'),('attack','peck_1'),('death','death_3'))},
 }
+
+def bodies(image):
+    """How many 8-connected opaque parts an image has."""
+    alpha=image.getchannel('A');w,h=image.size
+    points={(x,y) for y in range(h) for x in range(w) if alpha.getpixel((x,y))}
+    parts=0
+    while points:
+        todo=[points.pop()];parts+=1
+        while todo:
+            x,y=todo.pop()
+            for dx in (-1,0,1):
+                for dy in (-1,0,1):
+                    if (x+dx,y+dy) in points:
+                        points.remove((x+dx,y+dy));todo.append((x+dx,y+dy))
+    return parts
 
 def silhouette(image):
     alpha=image.getchannel('A'); box=alpha.getbbox()
@@ -56,8 +78,11 @@ def main():
                 if e['canvas_wh']!=canvas or e['pivot_xy']!=pivot or e['cell_offset_xy']!=spec['offset']:
                     raise ValueError('Enemy ground/contact drift: '+e['id'])
                 image=images[e['id']]; box=image.getbbox()
-                if not box or box[0]<1 or box[1]<1 or box[2]>=canvas[0] or box[3]!=pivot[1]:
+                aloft=motion in spec.get('aloft',())
+                if not box or box[0]<1 or box[1]<1 or box[2]>=canvas[0] or (box[3]>pivot[1] if aloft else box[3]!=pivot[1]):
                     raise ValueError('Floating or clipped pose: '+e['id'])
+                if aloft and bodies(image)!=1:
+                    raise ValueError('A shadow or a stray part baked into a flying frame: '+e['id'])
                 if any(p[3] not in (0,255) for p in import_art.samples(image)):
                     raise ValueError('Enemy alpha halo: '+e['id'])
                 if image.tobytes() in seen:
@@ -79,7 +104,7 @@ def main():
                             raise ValueError('Translated walk clone: '+family)
         signatures[family]=silhouette(images['enemies/'+family])
         last='death_%d'%(spec['counts']['death']-1)
-        for alias,target in (('walk_b','walk_2'),('attack','attack_1'),('death',last)):
+        for alias,target in spec.get('aliases',(('walk_b','walk_2'),('attack','attack_1'),('death',last))):
             e=entries['enemies/'+family+'_'+alias]
             if e.get('alias_of')!='enemies/'+family+'_'+target or e.get('operation')!='copy' or e['input']!=e['alias_of']:
                 raise ValueError('Stale legacy compatibility alias: '+e['id'])

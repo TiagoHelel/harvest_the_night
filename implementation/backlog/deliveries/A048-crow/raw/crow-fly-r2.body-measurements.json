@@ -1,0 +1,24 @@
+{
+  "body_length_raw": 420,
+  "body_length_native": 14,
+  "torso_bottom_native": 18,
+  "body_points_raw_xy": [
+    [
+      281,
+      496
+    ],
+    [
+      808,
+      496
+    ],
+    [
+      1358,
+      496
+    ],
+    [
+      1861,
+      496
+    ]
+  ],
+  "method": "Measured beak/tail length from raised-wing pose and common belly row; checked head position aroundsource y288–350 on allcells. Moving wings are excluded from body registration."
+}

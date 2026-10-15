@@ -1,0 +1,24 @@
+{
+  "body_length_raw": 421,
+  "body_length_native": 14,
+  "torso_bottom_native": 18,
+  "body_points_raw_xy": [
+    [
+      288.5,
+      496
+    ],
+    [
+      817.5,
+      496
+    ],
+    [
+      1365.5,
+      496
+    ],
+    [
+      1865.5,
+      496
+    ]
+  ],
+  "method": "Read body beak/tail length on first raised-wing frame and belly-bottom row, checked against all four source poses. Moving wing bounds are not used for scale or body registration."
+}

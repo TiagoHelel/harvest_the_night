@@ -80817,6 +80817,1318 @@
       "operation": "copy",
       "alias_of": "enemies/rat_death_2",
       "output_sha256": "20a97e085c412ee5beb9d91dd467543d8a8e456f8fdc2560af042a30f9921341"
+    },
+    {
+      "id": "enemies/crow",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-master-r1.png",
+      "source_sha256": "044c68ff1cc77599c06ac343695f59567e180931e0e100c287e845f5a860c04a",
+      "crop_xywh": [
+        249,
+        260,
+        964,
+        786
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "master",
+      "content_scale": 0.015267175572519083,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-master-r1.prompt.txt",
+      "prompt_sha256": "a2b6b1ec48153998422ce2750fc430acb133dc602f95e77121fbf10a4ae97b0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-master-r1.call.json",
+          "sha256": "80ec03d25e7e08e268eb2c95764c3fa1be57c9444868bf6c0a9f4907629ddb90",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow/west/01.png",
+          "sha256": "d05ca6ea0c26274cf533764e3d1a4d89722d003076e0e8d66a869af90bf1f0e9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        9,
+        11
+      ],
+      "output_sha256": "d05ca6ea0c26274cf533764e3d1a4d89722d003076e0e8d66a869af90bf1f0e9"
+    },
+    {
+      "id": "enemies/crow_fly_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c",
+      "crop_xywh": [
+        71,
+        142,
+        420,
+        427
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "fly",
+      "content_scale": 0.03333333333333333,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_fly",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/crow_fly_0.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.call.json",
+          "sha256": "295aa020598bf24b6baae709a2d5ca384673ff82a0ee0b0b4d2f3ab5a96b8ca8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_fly/west/01.png",
+          "sha256": "950c269b8671af680b038bda73e8635ae036595b872afd41767ec1c9ff2690a7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        16
+      ],
+      "output_sha256": "950c269b8671af680b038bda73e8635ae036595b872afd41767ec1c9ff2690a7"
+    },
+    {
+      "id": "enemies/crow_fly_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c",
+      "crop_xywh": [
+        598,
+        288,
+        501,
+        282
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "fly",
+      "content_scale": 0.03333333333333333,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_fly",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/crow_fly_1.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.call.json",
+          "sha256": "295aa020598bf24b6baae709a2d5ca384673ff82a0ee0b0b4d2f3ab5a96b8ca8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_fly/west/02.png",
+          "sha256": "5b8371961745b8848cb2fe831ca08fb4798ad3b6fab4ee21aada6c30cd0c31f8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "output_sha256": "5b8371961745b8848cb2fe831ca08fb4798ad3b6fab4ee21aada6c30cd0c31f8"
+    },
+    {
+      "id": "enemies/crow_fly_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c",
+      "crop_xywh": [
+        1148,
+        288,
+        431,
+        343
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "fly",
+      "content_scale": 0.03333333333333333,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_fly",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/crow_fly_2.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.call.json",
+          "sha256": "295aa020598bf24b6baae709a2d5ca384673ff82a0ee0b0b4d2f3ab5a96b8ca8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_fly/west/03.png",
+          "sha256": "7c773fe59360b42d58ddcf8e2e58facd4441a50a2eee13f0756fcf99920b5c2a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "output_sha256": "7c773fe59360b42d58ddcf8e2e58facd4441a50a2eee13f0756fcf99920b5c2a"
+    },
+    {
+      "id": "enemies/crow_fly_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c",
+      "crop_xywh": [
+        1651,
+        288,
+        481,
+        282
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "fly",
+      "content_scale": 0.03333333333333333,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_fly",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/crow_fly_3.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.call.json",
+          "sha256": "295aa020598bf24b6baae709a2d5ca384673ff82a0ee0b0b4d2f3ab5a96b8ca8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_fly/west/04.png",
+          "sha256": "0c23d986e0fb0fcd674d3e816e6375b067fd38149b18a6d8d7e8e0b07ec6f4ff",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "output_sha256": "0c23d986e0fb0fcd674d3e816e6375b067fd38149b18a6d8d7e8e0b07ec6f4ff"
+    },
+    {
+      "id": "enemies/crow_land_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-land-r1.png",
+      "source_sha256": "bfc5738c5cb46c5ae8b4f0385b6fb0c93d336056ef39914fcd09695cd94066fd",
+      "crop_xywh": [
+        240,
+        148,
+        967,
+        903
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "land",
+      "content_scale": 0.015748031496062992,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_land_0",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow_land_0.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-land-r1.prompt.txt",
+      "prompt_sha256": "76c9d7b846d9d655ba621853c76f08eb71d26963de96e97cafd52faa2161d981",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-land-r1.call.json",
+          "sha256": "ffb342869380f812dc35f86cae6b4ce4f7ae7cade7c419f546e6a6eec50cbea7",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_land/west/01.png",
+          "sha256": "43d069fecdfec2b2a94aa39b3129e8cc7b1b6f6765edaffb84d3c90d38eb583e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        14
+      ],
+      "output_sha256": "43d069fecdfec2b2a94aa39b3129e8cc7b1b6f6765edaffb84d3c90d38eb583e"
+    },
+    {
+      "id": "enemies/crow_peck_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-peck-r3.png",
+      "source_sha256": "f3cdf98846859ba58334b0d1efb34e38b233e8fadfe735f68ebe44254242a497",
+      "crop_xywh": [
+        137,
+        149,
+        616,
+        487
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "peck",
+      "content_scale": 0.024127310061601643,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_peck",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/enemies/crow_peck_0.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.prompt.txt",
+      "prompt_sha256": "a20dc70a2c7cad93d81b5238022208887178a44072530a0d3d4c382e419faed5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.call.json",
+          "sha256": "b71eb5bb5fd5340fa15dc642dc266bdf0d14897586a9f809157f6be6ec1d40f5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_peck/west/01.png",
+          "sha256": "b8a3b478cff628d25a9493575000f998357ce0dface33eab18572f55ee452c2e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        12
+      ],
+      "output_sha256": "b8a3b478cff628d25a9493575000f998357ce0dface33eab18572f55ee452c2e"
+    },
+    {
+      "id": "enemies/crow_peck_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-peck-r3.png",
+      "source_sha256": "f3cdf98846859ba58334b0d1efb34e38b233e8fadfe735f68ebe44254242a497",
+      "crop_xywh": [
+        830,
+        297,
+        567,
+        348
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "peck",
+      "content_scale": 0.024127310061601643,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_peck",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/enemies/crow_peck_1.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.prompt.txt",
+      "prompt_sha256": "a20dc70a2c7cad93d81b5238022208887178a44072530a0d3d4c382e419faed5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.call.json",
+          "sha256": "b71eb5bb5fd5340fa15dc642dc266bdf0d14897586a9f809157f6be6ec1d40f5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_peck/west/02.png",
+          "sha256": "bb16019c22f8a02c406702e640d6ddaaa182ccf40876d6a65eb8139858b8374d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        8
+      ],
+      "output_sha256": "bb16019c22f8a02c406702e640d6ddaaa182ccf40876d6a65eb8139858b8374d"
+    },
+    {
+      "id": "enemies/crow_peck_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-peck-r3.png",
+      "source_sha256": "f3cdf98846859ba58334b0d1efb34e38b233e8fadfe735f68ebe44254242a497",
+      "crop_xywh": [
+        1440,
+        158,
+        617,
+        478
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "peck",
+      "content_scale": 0.024127310061601643,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_peck",
+      "frame": 2,
+      "seconds": 0.12,
+      "loop": true,
+      "output": "sprites/enemies/crow_peck_2.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.prompt.txt",
+      "prompt_sha256": "a20dc70a2c7cad93d81b5238022208887178a44072530a0d3d4c382e419faed5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.call.json",
+          "sha256": "b71eb5bb5fd5340fa15dc642dc266bdf0d14897586a9f809157f6be6ec1d40f5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_peck/west/03.png",
+          "sha256": "2f1496812025948b3d0d2f34610478d892c070ab1fbd05e0edfb4e943f70e7c3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        12
+      ],
+      "output_sha256": "2f1496812025948b3d0d2f34610478d892c070ab1fbd05e0edfb4e943f70e7c3"
+    },
+    {
+      "id": "enemies/crow_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20",
+      "crop_xywh": [
+        76,
+        216,
+        448,
+        380
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "death",
+      "content_scale": 0.03191964285714286,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.call.json",
+          "sha256": "8f715e93b3eaa4c39be4cf5ed4ac24ce1224fafb6e848feb382f9691775d3676",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_death/west/01.png",
+          "sha256": "536af8f6feb28dbc42354e27912b7d4ffad5b16e7a4f032af35fccb27535ad99",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        12
+      ],
+      "output_sha256": "536af8f6feb28dbc42354e27912b7d4ffad5b16e7a4f032af35fccb27535ad99"
+    },
+    {
+      "id": "enemies/crow_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20",
+      "crop_xywh": [
+        570,
+        209,
+        474,
+        357
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "death",
+      "content_scale": 0.03191964285714286,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.call.json",
+          "sha256": "8f715e93b3eaa4c39be4cf5ed4ac24ce1224fafb6e848feb382f9691775d3676",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_death/west/02.png",
+          "sha256": "29dfe780b2f7207566f0d5e2a3e9234640ed350d02499406307d11e5e2e86909",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        7,
+        11
+      ],
+      "output_sha256": "29dfe780b2f7207566f0d5e2a3e9234640ed350d02499406307d11e5e2e86909"
+    },
+    {
+      "id": "enemies/crow_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20",
+      "crop_xywh": [
+        1096,
+        377,
+        506,
+        250
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "death",
+      "content_scale": 0.03191964285714286,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.call.json",
+          "sha256": "8f715e93b3eaa4c39be4cf5ed4ac24ce1224fafb6e848feb382f9691775d3676",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_death/west/03.png",
+          "sha256": "58a6cf14ce39aed9e9513339938a0e9283b3752aac78ca96219e58aea842986d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        8,
+        8
+      ],
+      "output_sha256": "58a6cf14ce39aed9e9513339938a0e9283b3752aac78ca96219e58aea842986d"
+    },
+    {
+      "id": "enemies/crow_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/crow/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20",
+      "crop_xywh": [
+        1625,
+        453,
+        500,
+        180
+      ],
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "enemy_family": "crow",
+      "enemy_motion": "death",
+      "content_scale": 0.03191964285714286,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "bone",
+        "bone_dark",
+        "gold_dark"
+      ],
+      "animation": "enemies/crow_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow_death_3.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.call.json",
+          "sha256": "8f715e93b3eaa4c39be4cf5ed4ac24ce1224fafb6e848feb382f9691775d3676",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_death/west/04.png",
+          "sha256": "ac99567dfc2c33c49fbfe6ec5350fdf02e80bd032fd57f959bea5473f5f95f15",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        8,
+        6
+      ],
+      "output_sha256": "ac99567dfc2c33c49fbfe6ec5350fdf02e80bd032fd57f959bea5473f5f95f15"
+    },
+    {
+      "id": "ui/head_crow",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/head-crow-r2.png",
+      "source_sha256": "cb7b8a7cca964caa98a238485ceb20ae7b7a448942d71d1ade6f3a925c973000",
+      "crop_xywh": [
+        339,
+        213,
+        776,
+        835
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.015568862275449102,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "night",
+        "night_light",
+        "moon"
+      ],
+      "animation": "ui/head_crow",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/head_crow.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/head-crow-r2.prompt.txt",
+      "prompt_sha256": "17398dbdaeb2a4d890cb826e73e66f9ba87bfca12ed6f787934bf2e7c91a05be",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/head-crow-r2.call.json",
+          "sha256": "119eea672ae64de848484d52d0a4cc77200abfa956beca57baf6c8d2a1618994",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/head_crow/none/01.png",
+          "sha256": "0f716356cc019a38e588fa41121407c0a727078ff81944f34191d4cba8565fab",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "approval": "A048 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0262",
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "output_sha256": "0f716356cc019a38e588fa41121407c0a727078ff81944f34191d4cba8565fab"
+    },
+    {
+      "id": "enemies/crow_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/crow_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-fly-r2.call.json",
+          "sha256": "295aa020598bf24b6baae709a2d5ca384673ff82a0ee0b0b4d2f3ab5a96b8ca8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_fly/west/03.png",
+          "sha256": "7c773fe59360b42d58ddcf8e2e58facd4441a50a2eee13f0756fcf99920b5c2a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "enemy_family": "crow",
+      "enemy_motion": "fly",
+      "enemy_master_id": "enemies/crow",
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "input": "enemies/crow_fly_2",
+      "operation": "copy",
+      "alias_of": "enemies/crow_fly_2",
+      "output_sha256": "7c773fe59360b42d58ddcf8e2e58facd4441a50a2eee13f0756fcf99920b5c2a"
+    },
+    {
+      "id": "enemies/crow_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/crow_compat_attack",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/crow_attack.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.prompt.txt",
+      "prompt_sha256": "a20dc70a2c7cad93d81b5238022208887178a44072530a0d3d4c382e419faed5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-peck-r3.call.json",
+          "sha256": "b71eb5bb5fd5340fa15dc642dc266bdf0d14897586a9f809157f6be6ec1d40f5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_peck/west/02.png",
+          "sha256": "bb16019c22f8a02c406702e640d6ddaaa182ccf40876d6a65eb8139858b8374d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "enemy_family": "crow",
+      "enemy_motion": "peck",
+      "enemy_master_id": "enemies/crow",
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "input": "enemies/crow_peck_1",
+      "operation": "copy",
+      "alias_of": "enemies/crow_peck_1",
+      "output_sha256": "bb16019c22f8a02c406702e640d6ddaaa182ccf40876d6a65eb8139858b8374d"
+    },
+    {
+      "id": "enemies/crow_death",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/crow_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/crow_death.png",
+      "prompt": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/raw/crow-death-r1.call.json",
+          "sha256": "8f715e93b3eaa4c39be4cf5ed4ac24ce1224fafb6e848feb382f9691775d3676",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/native/crow_death/west/04.png",
+          "sha256": "ac99567dfc2c33c49fbfe6ec5350fdf02e80bd032fd57f959bea5473f5f95f15",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/contract.json",
+          "sha256": "24b746954aadf0b91640c1cd9f9eccaa15696c158b55f15c57032f8731a9fb45",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A048-crow/APPROVAL.json",
+          "sha256": "d1d0c7a8879f3e701468498bfd580654dc9463e8dbd1a038b4dac47d1f9628ee",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A048",
+      "integration_task": "0262",
+      "revision": 1,
+      "enemy_family": "crow",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/crow",
+      "cell_offset_xy": [
+        -8,
+        -6
+      ],
+      "input": "enemies/crow_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/crow_death_3",
+      "output_sha256": "ac99567dfc2c33c49fbfe6ec5350fdf02e80bd032fd57f959bea5473f5f95f15"
     }
   ]
 }

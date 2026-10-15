@@ -1,0 +1,13 @@
+2026-10-14 / Task0249 done verified. A047 remainsreview forfinalbatch; explicitowner21packinstruction defersinterimapproval andadvances onlyauthorisedunstartedIDs. No approvalinferred, runner/contractunchanged. Allnamedcrow context references opened; camera/style references previouslyinspected.
+
+2026-10-14 / Material ramp
+Full palette borrowed water and cloth_light ramps for feather surfaces. Selected the packs prescribed coolcrow palette_keys for allbodystrips: ink/ink_soft/night/night_light/moon/stone_dark/stone/stone_light/cloth_dark/bone/bone_dark/gold_dark. Standard importer nearest-palette mapping only, source geometry and RGB files untouched. Master1 chosen for clean transparency; master2halo rejected. Flight scale measured from bodyhead/tail, not movingwingheight, torso row18 registration.
+
+2026-10-14 / Measured native export
+
+No art approval inferred. 14 of 14 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+14/14 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: none. Complete delivery released for Claude integration.

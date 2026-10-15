@@ -1,0 +1,1173 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "crow",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/crow-west-0-night.png",
+          "path": "native/crow/west/01.png",
+          "points": {},
+          "pose": "standing_folded"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "poses": [
+        "standing_folded"
+      ]
+    },
+    {
+      "anim": "crow_death",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/crow_death-west-0-night.png",
+          "path": "native/crow_death/west/01.png",
+          "points": {},
+          "pose": "hit"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_death-west-1-night.png",
+          "path": "native/crow_death/west/02.png",
+          "points": {},
+          "pose": "tumble"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_death-west-2-night.png",
+          "path": "native/crow_death/west/03.png",
+          "points": {},
+          "pose": "tumble_lower"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_death-west-3-night.png",
+          "path": "native/crow_death/west/04.png",
+          "points": {},
+          "pose": "lie_side"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "poses": [
+        "hit",
+        "tumble",
+        "tumble_lower",
+        "lie_side"
+      ]
+    },
+    {
+      "anim": "crow_fly",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/crow_fly-west-0-night.png",
+          "path": "native/crow_fly/west/01.png",
+          "points": {},
+          "pose": "wings_up"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_fly-west-1-night.png",
+          "path": "native/crow_fly/west/02.png",
+          "points": {},
+          "pose": "level_downstroke"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_fly-west-2-night.png",
+          "path": "native/crow_fly/west/03.png",
+          "points": {},
+          "pose": "wings_down"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_fly-west-3-night.png",
+          "path": "native/crow_fly/west/04.png",
+          "points": {},
+          "pose": "level_upstroke"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "poses": [
+        "wings_up",
+        "level_downstroke",
+        "wings_down",
+        "level_upstroke"
+      ]
+    },
+    {
+      "anim": "crow_land",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/crow_land-west-0-night.png",
+          "path": "native/crow_land/west/01.png",
+          "points": {},
+          "pose": "touchdown"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "poses": [
+        "touchdown"
+      ]
+    },
+    {
+      "anim": "crow_peck",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/crow_peck-west-0-night.png",
+          "path": "native/crow_peck/west/01.png",
+          "points": {},
+          "pose": "head_up"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_peck-west-1-night.png",
+          "path": "native/crow_peck/west/02.png",
+          "points": {},
+          "pose": "beak_down"
+        },
+        {
+          "issue": "",
+          "night": "preview/crow_peck-west-2-night.png",
+          "path": "native/crow_peck/west/03.png",
+          "points": {},
+          "pose": "tug_up"
+        }
+      ],
+      "frame_seconds": 0.12,
+      "frames": 3,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "poses": [
+        "head_up",
+        "beak_down",
+        "tug_up"
+      ]
+    },
+    {
+      "anim": "head_crow",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/head_crow-none-0-night.png",
+          "path": "native/head_crow/none/01.png",
+          "points": {},
+          "pose": "bust"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "bust"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/enemies/walker.png",
+      "pivot_xy": [
+        32,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "accepted_checks": [],
+      "change": "The owner accepted the exact displayed artwork, including the documented visual QA differences. Missing outputs are not approved or invented.",
+      "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+      "rule": "Reviewed visual constraints"
+    }
+  ],
+  "files": [
+    {
+      "anim": "crow",
+      "call": "raw/crow-master-r1.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/crow/west/01.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "standing_folded",
+      "prompt": "raw/crow-master-r1.prompt.txt",
+      "prompt_sha256": "a2b6b1ec48153998422ce2750fc430acb133dc602f95e77121fbf10a4ae97b0e",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          9,
+          11
+        ],
+        "content_scale": 0.015267175572519083,
+        "crop_xywh": [
+          249,
+          260,
+          964,
+          786
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1402,
+          1122
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow.png",
+      "seconds": 0.1,
+      "sha256": "d05ca6ea0c26274cf533764e3d1a4d89722d003076e0e8d66a869af90bf1f0e9",
+      "source": "raw/crow-master-r1.png",
+      "source_sha256": "044c68ff1cc77599c06ac343695f59567e180931e0e100c287e845f5a860c04a"
+    },
+    {
+      "anim": "crow_fly",
+      "call": "raw/crow-fly-r2.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/crow_fly/west/01.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "wings_up",
+      "prompt": "raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          16
+        ],
+        "content_scale": 0.03333333333333333,
+        "crop_xywh": [
+          71,
+          142,
+          420,
+          427
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          544,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_fly_0.png",
+      "seconds": 0.1,
+      "sha256": "950c269b8671af680b038bda73e8635ae036595b872afd41767ec1c9ff2690a7",
+      "source": "raw/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c"
+    },
+    {
+      "anim": "crow_fly",
+      "call": "raw/crow-fly-r2.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/crow_fly/west/02.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "level_downstroke",
+      "prompt": "raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          11
+        ],
+        "content_scale": 0.03333333333333333,
+        "crop_xywh": [
+          598,
+          288,
+          501,
+          282
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          544,
+          0,
+          579,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_fly_1.png",
+      "seconds": 0.1,
+      "sha256": "5b8371961745b8848cb2fe831ca08fb4798ad3b6fab4ee21aada6c30cd0c31f8",
+      "source": "raw/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c"
+    },
+    {
+      "anim": "crow_fly",
+      "call": "raw/crow-fly-r2.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/crow_fly/west/03.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "wings_down",
+      "prompt": "raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          11
+        ],
+        "content_scale": 0.03333333333333333,
+        "crop_xywh": [
+          1148,
+          288,
+          431,
+          343
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          1123,
+          0,
+          491,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_fly_2.png",
+      "seconds": 0.1,
+      "sha256": "7c773fe59360b42d58ddcf8e2e58facd4441a50a2eee13f0756fcf99920b5c2a",
+      "source": "raw/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c"
+    },
+    {
+      "anim": "crow_fly",
+      "call": "raw/crow-fly-r2.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": false,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/crow_fly/west/04.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "level_upstroke",
+      "prompt": "raw/crow-fly-r2.prompt.txt",
+      "prompt_sha256": "0b7be59d06197d4a10b01429939677de1bc0e64765b2d0f1c7511f7fedfdbe41",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          11
+        ],
+        "content_scale": 0.03333333333333333,
+        "crop_xywh": [
+          1651,
+          288,
+          481,
+          282
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          1614,
+          0,
+          558,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_fly_3.png",
+      "seconds": 0.1,
+      "sha256": "0c23d986e0fb0fcd674d3e816e6375b067fd38149b18a6d8d7e8e0b07ec6f4ff",
+      "source": "raw/crow-fly-r2.png",
+      "source_sha256": "db9a8211b9ae0ec30b2d6cea79157b589a408045246af0f0fbb5f83a702a3e8c"
+    },
+    {
+      "anim": "crow_land",
+      "call": "raw/crow-land-r1.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/crow_land/west/01.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "touchdown",
+      "prompt": "raw/crow-land-r1.prompt.txt",
+      "prompt_sha256": "76c9d7b846d9d655ba621853c76f08eb71d26963de96e97cafd52faa2161d981",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          14
+        ],
+        "content_scale": 0.015748031496062992,
+        "crop_xywh": [
+          240,
+          148,
+          967,
+          903
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1402,
+          1122
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_land_0.png",
+      "seconds": 0.1,
+      "sha256": "43d069fecdfec2b2a94aa39b3129e8cc7b1b6f6765edaffb84d3c90d38eb583e",
+      "source": "raw/crow-land-r1.png",
+      "source_sha256": "bfc5738c5cb46c5ae8b4f0385b6fb0c93d336056ef39914fcd09695cd94066fd"
+    },
+    {
+      "anim": "crow_peck",
+      "call": "raw/crow-peck-r3.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/crow_peck/west/01.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "head_up",
+      "prompt": "raw/crow-peck-r3.prompt.txt",
+      "prompt_sha256": "a20dc70a2c7cad93d81b5238022208887178a44072530a0d3d4c382e419faed5",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          12
+        ],
+        "content_scale": 0.024127310061601643,
+        "crop_xywh": [
+          137,
+          149,
+          616,
+          487
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          791,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_peck_0.png",
+      "seconds": 0.12,
+      "sha256": "b8a3b478cff628d25a9493575000f998357ce0dface33eab18572f55ee452c2e",
+      "source": "raw/crow-peck-r3.png",
+      "source_sha256": "f3cdf98846859ba58334b0d1efb34e38b233e8fadfe735f68ebe44254242a497"
+    },
+    {
+      "anim": "crow_peck",
+      "call": "raw/crow-peck-r3.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/crow_peck/west/02.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "beak_down",
+      "prompt": "raw/crow-peck-r3.prompt.txt",
+      "prompt_sha256": "a20dc70a2c7cad93d81b5238022208887178a44072530a0d3d4c382e419faed5",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          8
+        ],
+        "content_scale": 0.024127310061601643,
+        "crop_xywh": [
+          830,
+          297,
+          567,
+          348
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          791,
+          0,
+          627,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_peck_1.png",
+      "seconds": 0.12,
+      "sha256": "bb16019c22f8a02c406702e640d6ddaaa182ccf40876d6a65eb8139858b8374d",
+      "source": "raw/crow-peck-r3.png",
+      "source_sha256": "f3cdf98846859ba58334b0d1efb34e38b233e8fadfe735f68ebe44254242a497"
+    },
+    {
+      "anim": "crow_peck",
+      "call": "raw/crow-peck-r3.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/crow_peck/west/03.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "tug_up",
+      "prompt": "raw/crow-peck-r3.prompt.txt",
+      "prompt_sha256": "a20dc70a2c7cad93d81b5238022208887178a44072530a0d3d4c382e419faed5",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          12
+        ],
+        "content_scale": 0.024127310061601643,
+        "crop_xywh": [
+          1440,
+          158,
+          617,
+          478
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          1418,
+          0,
+          754,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_peck_2.png",
+      "seconds": 0.12,
+      "sha256": "2f1496812025948b3d0d2f34610478d892c070ab1fbd05e0edfb4e943f70e7c3",
+      "source": "raw/crow-peck-r3.png",
+      "source_sha256": "f3cdf98846859ba58334b0d1efb34e38b233e8fadfe735f68ebe44254242a497"
+    },
+    {
+      "anim": "crow_death",
+      "call": "raw/crow-death-r1.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/crow_death/west/01.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "hit",
+      "prompt": "raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03191964285714286,
+        "crop_xywh": [
+          76,
+          216,
+          448,
+          380
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          546,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_death_0.png",
+      "seconds": 0.1,
+      "sha256": "536af8f6feb28dbc42354e27912b7d4ffad5b16e7a4f032af35fccb27535ad99",
+      "source": "raw/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20"
+    },
+    {
+      "anim": "crow_death",
+      "call": "raw/crow-death-r1.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/crow_death/west/02.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "tumble",
+      "prompt": "raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03191964285714286,
+        "crop_xywh": [
+          570,
+          209,
+          474,
+          357
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          546,
+          0,
+          523,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_death_1.png",
+      "seconds": 0.1,
+      "sha256": "29dfe780b2f7207566f0d5e2a3e9234640ed350d02499406307d11e5e2e86909",
+      "source": "raw/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20"
+    },
+    {
+      "anim": "crow_death",
+      "call": "raw/crow-death-r1.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/crow_death/west/03.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "tumble_lower",
+      "prompt": "raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03191964285714286,
+        "crop_xywh": [
+          1096,
+          377,
+          506,
+          250
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          1069,
+          0,
+          544,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_death_2.png",
+      "seconds": 0.1,
+      "sha256": "58a6cf14ce39aed9e9513339938a0e9283b3752aac78ca96219e58aea842986d",
+      "source": "raw/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20"
+    },
+    {
+      "anim": "crow_death",
+      "call": "raw/crow-death-r1.call.json",
+      "canvas_wh": [
+        32,
+        24
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/crow_death/west/04.png",
+      "pivot_xy": [
+        16,
+        22
+      ],
+      "points": {},
+      "pose": "lie_side",
+      "prompt": "raw/crow-death-r1.prompt.txt",
+      "prompt_sha256": "cbb43e54f9bdc707f4e44600c667fb1a11b94c75a6204ba49223d664fa83cd86",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03191964285714286,
+        "crop_xywh": [
+          1625,
+          453,
+          500,
+          180
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "bone",
+          "bone_dark",
+          "gold_dark"
+        ],
+        "sheet_cell_xywh": [
+          1613,
+          0,
+          559,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/crow_death_3.png",
+      "seconds": 0.1,
+      "sha256": "ac99567dfc2c33c49fbfe6ec5350fdf02e80bd032fd57f959bea5473f5f95f15",
+      "source": "raw/crow-death-r1.png",
+      "source_sha256": "3a82f9b0592255400a6421f4360cc270210422135794e0d4af34a0dc82825f20"
+    },
+    {
+      "anim": "head_crow",
+      "call": "raw/head-crow-r2.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "inspection_eye_xy": [
+        6,
+        5
+      ],
+      "loop": false,
+      "mirror": "none",
+      "output": "native/head_crow/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "bust",
+      "prompt": "raw/head-crow-r2.prompt.txt",
+      "prompt_sha256": "17398dbdaeb2a4d890cb826e73e66f9ba87bfca12ed6f787934bf2e7c91a05be",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          6
+        ],
+        "content_scale": 0.015568862275449102,
+        "crop_xywh": [
+          339,
+          213,
+          776,
+          835
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "bone",
+          "bone_dark",
+          "cloth_dark",
+          "night",
+          "night_light",
+          "moon"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1402,
+          1122
+        ]
+      },
+      "runtime_name": "sprites/ui/head_crow.png",
+      "seconds": 1,
+      "sha256": "0f716356cc019a38e588fa41121407c0a727078ff81944f34191d4cba8565fab",
+      "source": "raw/head-crow-r2.png",
+      "source_sha256": "cb7b8a7cca964caa98a238485ceb20ae7b7a448942d71d1ade6f3a925c973000"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+    "scope": "complete_reviewed_delivery"
+  },
+  "pack": "A048",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\walker\\master.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-master-r1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "044c68ff1cc77599c06ac343695f59567e180931e0e100c287e845f5a860c04a"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A048-crow",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The crow",
+  "tool": "built-in ImageGen"
+}

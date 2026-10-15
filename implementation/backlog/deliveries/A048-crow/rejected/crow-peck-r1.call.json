@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A048 production CROW peck source for HARVEST THE NIGHT.\nPrimary request: ONE horizontal strip, exactly3 sequential frames ofsamecrow, facing WEST/LEFT.\nInputimage1 accepted crowmaster is identity. Handcrafted coarsepixelart, sameblue-black featherbody, greybeak, raggedneckruff, coolsilver/moonbackedge, mattebonewingnotch and palecloudyeye. Lean sharpbird, NOTchicken/cute. Sameorthographic three-quarter top-downcamera, neutral upper-leftdaylight, colouredoutline, broadclusters.\nNative32x24, pivot(16,22), allopaqueartwithincolumns1\u201330androws1\u201321, fullheadtotail body13\u201316logicalpixels long. One sharedphysicalscale acrossallframes; bodyvolume/identityfixed. Truealpha0outsidesharppixels.\nENEMY_STRIP + STRIP orderedposes headup, beakdown, tugheadup. Feet FIXED in all3frames, lowestrow21. Headup, beakdowntogroundrow21, headtugsbackup. Bodyvolume/feathers/tail/headscale identical. No crop/food baked in. Loopcloses. Keep matteboneeye and beakvisible.\nCompleteunclipped objects SMALLwithin equalvirtualcells atmost50percentwidth/height, huge fullheight transparentgutters andoutermargins. Samebodypoint/camera/source scale; do notenlarge smallerposes.\nNo actualshadow/lift/glow/halos/haze/gradient/blur, no scenery/crops/targets/wall/text/UI/labels. Runtimeflightheightandshadow belongtocode. Crisp opaquecreature, no shadowpatch or mist. Darkfeathers retain coolpale edgefornightreadability.\nThe accepted master is candidate1 (cleantransparency). Candidate2 had a halo and is rejected, not a reference.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-master-r1.png",
+      "sha256": "044c68ff1cc77599c06ac343695f59567e180931e0e100c287e845f5a860c04a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8091072c-73ec-4f43-bc89-eae2f911186d.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A048-crow\\raw\\crow-peck-r1.png",
+  "sha256": "dcae0bc73ee8325616e47347eda5502051bb6c0f625d0af84dff7875a2c98bdc",
+  "revision": 1,
+  "decision": "rejected: Beak does not reach ground.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A048-crow\\rejected\\crow-peck-r1.png"
+}

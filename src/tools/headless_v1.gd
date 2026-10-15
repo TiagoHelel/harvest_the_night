@@ -10134,11 +10134,16 @@ func _task_0249_crow() -> void:
 			off.append("%s %s" % [name, used])
 	var head := WorldView.drawn_enemy("res://sprites/ui/head_crow.png")
 	var head_used := head.get_image().get_used_rect() if head != null else Rect2i()
-	expect(off.is_empty() and shapes.size() == grounded.size() + aloft.size()
+	# A048's own, nothing of 0120's road; its fall played as a death (task
+	# 0262) though it flies untracked.
+	var crow_art := (PlaceholderArt.art(&"crow_fly").is_empty() and PlaceholderArt.art(&"head_crow").is_empty()
+		and head != null and head.resource_path == "res://sprites/ui/head_crow.png"
+		and Enemies.flies(&"crow") and not EnemyMotion.tracks(&"crow") and EnemyDeaths.death_frames(&"crow") == 4)
+	expect(off.is_empty() and crow_art and shapes.size() == grounded.size() + aloft.size()
 		and int(tall[&"crow_death_1"]) <= int(tall[&"crow_death_0"]) and int(tall[&"crow_death_2"]) <= int(tall[&"crow_death_1"])
 		and int(tall[&"crow_death_3"]) <= mini(int(tall[&"crow_death_2"]), 8)
 		and head != null and head_used.end.y == 15 and head_used.size.x <= 13 and head_used.size.y >= 12 and head_used.size.y <= 13,
-		"the crow is drawn on A048's canvas: grounded on row 21, flying clear of it, every frame its own, the fall settling at 8 at most, the head on A011's box",
+		"the crow is A048's art (task 0262): grounded on row 21, flying clear of it, every frame its own, the fall settling at 8 at most, the head on A011's box",
 		"%s %s head %s" % [str(off), str(tall), str(head_used)])
 	_completed += 1
 

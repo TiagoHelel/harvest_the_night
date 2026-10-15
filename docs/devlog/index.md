@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-271 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
+272 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -315,6 +315,7 @@ is the sort of thing this list exists to say out loud.
 | 0245 | Art: the dog | 2026-10-15 |
 | 0260 | Art: the spitter | 2026-10-15 |
 | 0261 | Art: the rat swarm | 2026-10-15 |
+| 0262 | Art: the crow | 2026-10-15 |
 
 ## Every time the game changed underneath itself
 

@@ -1,0 +1,9 @@
+Use case: stylized-concept
+Asset type: A048 production CROW land source for HARVEST THE NIGHT.
+Primary request: ONE complete crow touchdown pose, facing WEST/LEFT.
+Inputimage1 accepted crowmaster is identity. Handcrafted coarsepixelart, sameblue-black featherbody, greybeak, raggedneckruff, coolsilver/moonbackedge, mattebonewingnotch and palecloudyeye. Lean sharpbird, NOTchicken/cute. Sameorthographic three-quarter top-downcamera, neutral upper-leftdaylight, colouredoutline, broadclusters.
+Native32x24, pivot(16,22), allopaqueartwithincolumns1–30androws1–21, fullheadtotail body13–16logicalpixels long. One sharedphysicalscale acrossallframes; bodyvolume/identityfixed. Truealpha0outsidesharppixels.
+ENEMY_STRIP + STRIP orderedposes touchdown. Wings raised/spread, legsreachdown and feet TOUCH groundpivotrow22 (lowestopaque21). Complete birdbody/headtotail14pixels, same scale asmaster. Wings inside32x24border. No cropdrawn.
+Completeunclipped objects SMALLwithin equalvirtualcells atmost50percentwidth/height, huge fullheight transparentgutters andoutermargins. Samebodypoint/camera/source scale; do notenlarge smallerposes.
+No actualshadow/lift/glow/halos/haze/gradient/blur, no scenery/crops/targets/wall/text/UI/labels. Runtimeflightheightandshadow belongtocode. Crisp opaquecreature, no shadowpatch or mist. Darkfeathers retain coolpale edgefornightreadability.
+The accepted master is candidate1 (cleantransparency). Candidate2 had a halo and is rejected, not a reference.

@@ -32377,3 +32377,63 @@ recorded in the delivery's `APPROVAL.json`. 0248's code drawing is gone.
 - `python implementation/backlog/assets.py set A047 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (62 of 62) on the second run, after the two fixes above.
+
+## 0262 - Art: the crow - done 2026-10-15
+
+A048 is integrated. The crow is the owner-approved art now: standing, its
+four-frame flight, its touchdown, its three-frame peck, its four-frame fall
+and its head in the forecast. The owner approved it on 2026-10-14 in the
+batch review, as recorded in the delivery's `APPROVAL.json`. 0249's code
+drawing is gone.
+
+- **Promotion**: the 14 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their six raw sources were copied byte for byte into
+    `assets/art_source/enemies/crow/` and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - **The flying exception**: 32x24 standing on (16,22), cell offset
+    [-8,-6]. Its three aliases name the flight, the peck and the fall:
+    `_walk_b` (fly 2), `_attack` (peck 1) and `_death` (death 3). Each
+    carries the frame's prompt and references.
+- **Not tracked, but its fall plays**: a crow keeps 0249's own poses in the
+  air, so `EnemyMotion` does not track it. `EnemyDeaths` collected only
+  tracked kinds' deaths; it now collects a flyer's too, so the four-frame
+  fall plays where a crow is shot down.
+- **`CrowArt` loads A048's frames** for the callers that ask by path
+  (`WorldView.drawn_enemy`). Its drawing is gone; the shadow under a flying
+  crow stays the view's code, as 0249 set.
+- **The stand-ins retired**: A048's `PlaceholderArt` entries and its
+  geometry are gone. `placeholders.py --check` passes, with 190 stand-ins
+  left over 26 packs.
+- **Checks**:
+  - `check_enemy_art.py` takes the crow's spec: 32x24 at (16,22), [-8,-6],
+    master 1, fly 4, land 1, peck 3, death 4, settling at 8 at most.
+  - A flying or falling frame may sit clear of the ground row, but must be
+    one body: a shadow or stray part baked in fails it (`bodies`).
+  - A family can name its own aliases. Result: 84 poses and 21 aliases,
+    every silhouette apart.
+  - `check_ui_art.py`'s `PACK_HEADS` takes the crow's head.
+- **Tests**: 0249's view check now asks for A048's art, with nothing of
+  0120's road left. The crow is a flyer and untracked, and has four fall
+  frames. The approved art meets the rules 0249 set: grounded on row 21,
+  flying clear of it, every frame its own, the fall settling at 8 at most,
+  the head on A011's box.
+- **A new scene, `forecast_autumn`**: Autumn 10 at 18:30, where the crow is
+  in the night's mix, so its head is on the panel by day. No scene showed
+  an autumn forecast. `headless_check` counts 127 scenes.
+- **Shots** (`implementation/shots/0262/`, FHD 1920x1080, looked at):
+  - `crow`, 0249's scene at night: one crow landed on the field and pecking,
+    another flying over the wall with its shadow on the ground below it.
+    Black on the night's blue, the one over the wall reads as a dark bird
+    against the wall's dark posts more than as a silhouette; that is the
+    approved art at native size.
+  - `forecast_autumn`: the crow's head last among the night's eight kinds.
+- **Found on the way, fixed**: 0261 promoted the rat's head source
+  (`assets/art_source/ui/heads/head-rat-r1.png`) into the manifest but did
+  not commit the file. It is committed here.
+- **The delivery folder** `implementation/backlog/deliveries/A048-crow/` is
+  committed, as A047's was.
+- `python implementation/backlog/assets.py set A048 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (62 of 62).
