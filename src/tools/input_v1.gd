@@ -3897,9 +3897,9 @@ func _case_0224_decoy() -> void:
 	await frames(2)
 	var slot := locate_control("Hotbar_decoy")
 	var icon: TextureRect = slot.get_node_or_null("Icon") as TextureRect if slot != null else null
-	expect(Building.selected(state) == &"decoy" and icon != null and icon.texture == DecoyArt.texture(&"decoy")
-		and locate_control("Hotbar_wall") == null,
-		"the arrow turns the hotbar to summer's page, and a click there picks the decoy, wearing A037's art",
+	expect(Building.selected(state) == &"decoy" and icon != null and icon.texture != null
+		and icon.texture.resource_path == "res://sprites/ui/icon_decoy.png" and locate_control("Hotbar_wall") == null,
+		"the arrow turns the hotbar to summer's page, and a click there picks the decoy, wearing A045's icon",
 		String(Building.selected(state)))
 
 	var spot := Vector2i(-1, -1)

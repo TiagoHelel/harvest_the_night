@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-267 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
+268 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -311,6 +311,7 @@ is the sort of thing this list exists to say out loud.
 | 0241 | Art: the electric fence | 2026-10-15 |
 | 0242 | Art: hardwood walls and sandbags | 2026-10-15 |
 | 0243 | Art: the day tarps | 2026-10-15 |
+| 0244 | Art: power and new weapon icons | 2026-10-15 |
 
 ## Every time the game changed underneath itself
 

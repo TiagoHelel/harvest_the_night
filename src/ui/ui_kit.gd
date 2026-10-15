@@ -142,6 +142,14 @@ static func orphan_icons() -> Array:
 		wanted["icon_%s" % id] = true
 	for id in GameData.DEFENCES.keys() + NightHud.ICONS + CalendarMark.MARKS:
 		wanted["icon_%s" % id] = true
+	# **The powers' pictures and a defence's later levels** (A045, task
+	# 0244): the bell, the dog and the repair, and the hardwood wall that is
+	# the stone wall's level two.
+	for id in Ability.ORDER:
+		wanted["icon_%s" % id] = true
+	for id in GameData.TOWER_LEVELS:
+		for step in (GameData.TOWER_LEVELS[id] as Array).size():
+			wanted["icon_%s_%d" % [id, step + 2]] = true
 	for tool in GameData.TOOLS:
 		for tier in (GameData.TOOLS[tool] as Array).size():
 			wanted["icon_%s" % ToolTiers.item(tool, tier)] = true

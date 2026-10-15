@@ -1,6 +1,6 @@
 # A045 - Power icons and the new weapons' icons
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0244
 - **Dressed by game tasks:** 0233, 0234
 - **Spec after game task:** 0234

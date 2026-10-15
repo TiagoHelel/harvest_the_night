@@ -1,7 +1,7 @@
 # 0244 - Art: power and new weapon icons
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0233, 0234
 - **Likely files:** assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py
 - **Art packs:** A045

@@ -7370,8 +7370,8 @@ func _task_0224_decoy() -> void:
 	var icon := bar._icon_of(&"decoy")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
-	expect(icon == DecoyArt.texture(&"decoy") and order.find(&"decoy") >= _first_of_season(order, 1),
-		"the hotbar shows A037's decoy, among summer's after spring's, which keep their places", str(order))
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_decoy.png" and order.find(&"decoy") >= _first_of_season(order, 1),
+		"the hotbar shows A045's decoy icon (task 0244), among summer's after spring's, which keep their places", str(order))
 	var said := {}
 	for locale in ["en", "pt_BR"]:
 		I18n.use(locale)
@@ -7817,10 +7817,10 @@ func _task_0226_beehive() -> void:
 	var icon := bar._icon_of(&"beehive")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
-	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_mortar.png"
-		and PlaceholderArt.art(&"icon_beehive").get("pack", "") == "A045"
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_beehive.png"
+		and PlaceholderArt.art(&"icon_beehive").is_empty()
 		and order.find(&"beehive") >= _first_of_season(order, 1),
-		"the hotbar shows the hive's stand-in - A045's road since task 0234, the mortar's icon - among summer's after spring's", str(order))
+		"the hotbar shows A045's hive icon (task 0244), among summer's after spring's", str(order))
 	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
 	expect(shots.contains("[\"beehive\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A038-beehive.md").contains("Final geometry settled by game task 0226"),
@@ -8093,10 +8093,10 @@ func _task_0227_catapult() -> void:
 	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
 		if GameData.SEASONS.find(GameData.defence_season(GameData.DEFENCES[id])) < 2:
 			before_autumn += 1
-	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_auto_crossbow.png"
-		and PlaceholderArt.art(&"icon_catapult").get("pack", "") == "A045"
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_catapult.png"
+		and PlaceholderArt.art(&"icon_catapult").is_empty()
 		and order.find(&"catapult") >= before_autumn,
-		"the hotbar shows its stand-in - A045's road since task 0234, the crossbow's icon - among autumn's, after spring's and summer's", str(order))
+		"the hotbar shows A045's catapult icon (task 0244), among autumn's, after spring's and summer's", str(order))
 	var shots := FileAccess.get_file_as_string("res://src/tools/shot.gd")
 	expect(shots.contains("[\"catapult\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A039-catapult.md").contains("Final geometry settled by game task 0227"),
@@ -8325,7 +8325,7 @@ func _task_0228_garlic() -> void:
 	var mode := BuildMode.new()
 	var previews := mode._blocks_the_way(&"garlic_braid") and mode._blocks_the_way(&"wall") and not mode._blocks_the_way(&"gun_tower")
 	mode.free()
-	expect(drawn.is_empty() and icon == GarlicArt.texture(&"garlic_braid") and previews
+	expect(drawn.is_empty() and icon != null and icon.resource_path == "res://sprites/ui/icon_garlic_braid.png" and previews
 		and not WorldView.lies_flat(&"garlic_braid") and WorldView.lies_flat(&"zombie_bait"),
 		"A040's art at 16x24 on (8,20), fresh, wilted and spent apart by its nights; standing among the feet that pass, not under them; the hotbar's icon; and a braid in hand draws the route as a wall does",
 		str(drawn))
@@ -8498,7 +8498,7 @@ func _task_0229_light() -> void:
 	bar.free()
 	expect(road.is_empty() and WorldView.authored_tower(&"searchlight") and not WorldView.stand_in_tower(&"searchlight")
 		and shown == [&"searchlight_2_fire", &"searchlight_2"]
-		and icon != null and icon.resource_path == "res://sprites/ui/icon_gun_tower.png",
+		and icon != null and icon.resource_path == "res://sprites/ui/icon_searchlight.png",
 		"A041's art: an authored tower at 32x48 on (16,44), its lens a light point on all but the wreck and no muzzle; lit at night at full power, dark by day; the hotbar's icon",
 		"%s %s" % [str(road), str(shown)])
 	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"searchlight\", ")
@@ -8738,9 +8738,9 @@ func _task_0230_electric_fence() -> void:
 	var icon := bar._icon_of(&"electric_fence")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
-	expect(icon != null and icon == ElectricFenceArt.texture(ElectricFenceArt.name_of(10, false))
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_electric_fence.png"
 		and order.find(&"electric_fence") >= 0 and order.find(&"electric_fence") == order.find(&"searchlight") - 1,
-		"the hotbar shows a straight run of it, winter's first, before the searchlight", str(order))
+		"the hotbar shows A045's electric fence icon (task 0244), winter's first, before the searchlight", str(order))
 	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"electric_fence\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A042-electric-fence.md").contains("Final geometry settled by game task 0230"),
 		"shot.gd has a joined run of electric fence, and A042's table says the geometry this task settled")
@@ -8991,9 +8991,9 @@ func _task_0231_strong_walls() -> void:
 	var icon := bar._icon_of(&"sandbag_wall")
 	bar.free()
 	var order := Building.placeable_ids().slice(0, GameData.DEFENCES.size())
-	expect(icon != null and icon == StrongWallArt.texture(JoinRecipe.name_of(StrongWallArt.SANDBAGS, 10, false))
+	expect(icon != null and icon.resource_path == "res://sprites/ui/icon_sandbag_wall.png"
 		and order.find(&"sandbag_wall") >= _first_of_season(order, 1) and Building.season_of(&"sandbag_wall") == 1,
-		"the hotbar shows a straight run of sandbags, among summer's", str(order))
+		"the hotbar shows A045's sandbags icon (task 0244), among summer's", str(order))
 	expect(FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"strong_walls\", ")
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A043-strong-walls.md").contains("Final geometry settled by game task 0231"),
 		"shot.gd has a mixed line, and A043's table says the geometry this task settled")
@@ -9286,7 +9286,8 @@ func _task_0233_powers() -> void:
 	var keyed := true
 	for id in [Ability.FARM_BELL, Ability.CALL_DOG, Ability.EMERGENCY_REPAIR]:
 		keyed = keyed and InputMap.has_action(id) and ActionsScript.names().has(id)
-		keyed = keyed and PlaceholderArt.art(StringName("hud_%s" % id)).get("pack", "") == "A045"
+		keyed = (keyed and PlaceholderArt.art(StringName("hud_%s" % id)).is_empty()
+			and RasterArt.FRAMES.has("res://sprites/ui/hud_%s.png" % id) and RasterArt.FRAMES.has("res://sprites/ui/icon_%s.png" % id))
 		keyed = keyed and UiKit.picture(StringName("hud_%s" % id)) != null
 	expect((words["en"] as Array) == ["farm bell", "call the dog", "emergency repair", "a good dog",
 		"an emergency repair: a structure gets back three tenths at once"]
@@ -9481,7 +9482,7 @@ func _task_0234_arsenal() -> void:
 		"%s / %s / %s" % [gun_line, kit_line, stake_line])
 
 	# **The new families sleep under tarps and wake at dusk** (0223's list,
-	# A044's footprints), and wear A045's icons through 0120's road.
+	# A044's footprints), and wear A045's icons (its art since task 0244).
 	var covered := true
 	for pair in [[&"beehive", &"tarp_tower"], [&"catapult", &"tarp_tower"], [&"searchlight", &"tarp_tower"],
 			[&"decoy", &"tarp_tall"], [&"garlic_braid", &"tarp_short"]]:
@@ -9492,11 +9493,12 @@ func _task_0234_arsenal() -> void:
 		and Transition.WAKES.has(&"searchlight")
 	var unregistered: Array = []
 	for id in [&"decoy", &"beehive", &"catapult", &"garlic_braid", &"searchlight", &"electric_fence", &"sandbag_wall"]:
-		if PlaceholderArt.art(StringName("icon_%s" % id)).get("pack", "") != "A045":
+		if not PlaceholderArt.art(StringName("icon_%s" % id)).is_empty() \
+				or not RasterArt.FRAMES.has("res://sprites/ui/icon_%s.png" % id):
 			unregistered.append(id)
 	expect(covered and woken and unregistered.is_empty()
 		and PlaceholderArt.art(&"icon_zombie_bait").is_empty() and RasterArt.FRAMES.has("res://sprites/ui/icon_zombie_bait.png"),
-		"the hive, the catapult and the searchlight sleep under the tower's tarp and wake, the decoy under the tall one, the braid under the short one - never the sandbags, the wire or the bait; each wears A045's icon through 0120's road, the bait A037's art since 0236",
+		"the hive, the catapult and the searchlight sleep under the tower's tarp and wake, the decoy under the tall one, the braid under the short one - never the sandbags, the wire or the bait; each wears A045's icon (its art since 0244), the bait A037's since 0236",
 		str(unregistered))
 
 	# **The robot plans round a shut season**, as round any refusal - in the

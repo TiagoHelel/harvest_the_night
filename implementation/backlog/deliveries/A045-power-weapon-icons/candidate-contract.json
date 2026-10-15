@@ -1,0 +1,22 @@
+{
+  "alpha_threshold": 128,
+  "animations": [],
+  "colour_ramp": [],
+  "comparison": [],
+  "date": "2026-10-14",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [],
+  "mirror_pairs": {},
+  "pack": "A045",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [],
+  "runtime_integrated": false,
+  "slug": "A045-power-weapon-icons",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "Power icons and the new weapons' icons",
+  "tool": "built-in ImageGen"
+}

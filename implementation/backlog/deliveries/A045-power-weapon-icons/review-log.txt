@@ -1,0 +1,12 @@
+2026-10-14 / All required input statuses checked through assets.py status. A005 integrated; all eight newworldinputpacks blocked. Awaiting owner's dependency-reference exception. No artapproval inferred. Continue independentenemy work within authorized21packbatch.
+
+2026-10-14 / Measured native export
+Task0234 is done. A005 integrated; A028,A037,A038,A039,A040,A041,A042,A043 are blocked, not approved/integrated. A045 Howtomakeit step1 forbids generation with missing approved world references. Owner question asks whether candidates/descriptions may substitute for this batch; answer pending. No ImageGen call or production export.
+No art approval inferred. 0 of 22 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Completed22/22 native cuts from11 distinct built-in ImageGen raws. Each pair uses the same measuredcrop, scale14/max and8/max; exactbinaryalpha andprojectpalette. All iconbounds/margins/areas/uniqueness/sourcehash/buildtwice/--check checks pass. Candidate reference exception retained; no approval inferred. New icons and six-pack additions await final owner review.
+
+2026-10-14 / Complete continuation owner approval
+Owner words: tudo aprovado, falta mais?
+Review: implementation/backlog/deliveries/A028-dog/continuation-final-review.html
+All 22 native outputs approved, including 22 new PNGs. Original approved PNGs remain byte-identical. Accepted measured visual differences: none. No art, motion, palette, timing or runtime files changed.

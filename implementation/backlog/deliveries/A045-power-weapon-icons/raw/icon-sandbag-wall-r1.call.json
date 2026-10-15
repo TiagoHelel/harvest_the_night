@@ -1,0 +1,61 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Usecase: stylized-concept. Create ONE isolated NIGHT HOTBAR ICON for HARVEST THE NIGHT. Image1 is A005 gun-tower icon STYLE MASTER only: same framing, chunkycoloredoutline, 2–3materialplanes, objectfill, upperleft neutraldaylight, squarepixelclusters, not the weaponitself. Image2 is the requestedsubject identity/material reference, not a backdrop. Image3 is projectstyle only. This is a REALTINY inventorysprite: final16x16pivot8,8 maxvisible14; also SAMEsourcecut10x10pivot5,5 maxvisible8. Broad SIMPLEBOLD silhouette thatreads ateight visiblepixels, no thinlinedecoration,hatching,microtexture or detailsneeding30px. Onecenteredcompleteobject withgenerousoutertransparentpadding, approximatelysquareframing. Crisp pixelart, darkvioletcoloredink, no softpainting, antialiasing, smoothgradients, halo/glow, shadow, floor, scene, panel, frame, lettering,numbers, UI, labels or watermark. TRUEtransparentbackground. No alternateviews, variants, contact sheetor multipleicons. SubjectSANDBAGWALL: aLOWSTACK ofTANBURLAPSACKS, THREE BELOWandTWO ABOVE. Plumpsquareclothbagswithonesimplecrease andtwineknots, darkcoloredoutline, notstones or goldingots. A compactbroadbarricadestack, fivebagsclearlygrouped, no groundpatch, loosepileofsand, woodenframe or wallbehind. Differentfromsingleinventorysandbagicon. Boldbroadplanesreadateightpixels.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\native\\sandbag_wall_horizontal\\none\\01.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9eae82a2-b2be-43e8-be86-590f1d981c9e.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "approvedhotbarstylemaster",
+    "authorized candidateworldidentity reference",
+    "projectstyle"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0",
+      "role": "approvedhotbarstylemaster"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\native\\sandbag_wall_horizontal\\none\\01.png",
+      "sha256": "81d67511e87a906a38ea4834fae6c9cb35ae4bd9bb889f6d6c8eb6bf8cc17563",
+      "role": "authorized candidateworldidentity reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "projectstyle"
+    }
+  ],
+  "copied_path": "raw/icon-sandbag-wall-r1.png",
+  "sha256": "7d8ace99d8712855d73a0cb0c1d0d45976fff3a25b1636553e0b509b59b7c9c0",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      158,
+      505,
+      1097,
+      929
+    ]
+  },
+  "selected_native_exports": [
+    "native/icon_sandbag_wall/none/01.png",
+    "native/hud_sandbag_wall/none/01.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

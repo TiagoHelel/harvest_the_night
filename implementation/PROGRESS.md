@@ -32121,3 +32121,55 @@ is gone.
 - `python implementation/backlog/assets.py set A044 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (62 of 62, the new tarp check among them).
+
+## 0244 - Art: power and new weapon icons - done 2026-10-15
+
+A045 is integrated: the three powers' pictures and the new defences' icons
+are the owner-approved art now, each 16x16 for the hotbar (`icon_*`) and
+10x10 for the night HUD (`hud_*`). The powers are the farm bell, the call of
+the dog and the emergency repair. The defences are the decoy, the hive, the
+catapult, the garlic braid, the searchlight, the electric fence, the
+hardwood wall and the sandbags. The owner approved them on 2026-10-14 ("tudo
+aprovado, falta mais?"), as recorded in the delivery's `APPROVAL.json`.
+0233's and 0234's stand-ins are gone.
+
+- **Promotion**: the 22 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their eleven raw sources, one an icon pair as the resource icons, were
+    copied byte for byte into `assets/art_source/ui/power/`.
+  - Each output has a manifest entry with full provenance, an
+    `ownership.json` row, and `display_role` inventory or compact_hud, as
+    A005's and A037's do. Each decodes to the approved pixels exactly.
+- **No view change in the hotbar or the HUD**. With the stand-ins gone,
+  `Hotbar._icon_of` finds `sprites/ui/icon_<id>.png` as it finds A005's.
+  The night HUD's power buttons take `hud_<id>` through
+  `UiKit.tinted_picture`, untinted now.
+- **`UiKit.orphan_icons` claims the new names**: the powers
+  (`Ability.ORDER`) and a defence's later levels (`icon_<id>_<level>`,
+  for the hardwood wall the stone wall's level two). Three checks keep
+  every icon in `sprites/ui` claimed: two in `headless_v1` and one in
+  `headless_check` and the UI showcase. They reported these four as
+  orphans until then.
+- **The stand-ins retired**: A045's 16 `PlaceholderArt` entries are gone.
+  `placeholders.py --check` passes, with 214 stand-ins left over 30
+  packs.
+- **Checks**: `check_ui_art.py` holds A045's eleven pairs, and the UI
+  showcase passes with 17,008 checks.
+- **Tests** that named the stand-ins now name the art:
+  - in `headless_v1`, the hotbar icons of the decoy (0224), the hive
+    (0226), the catapult (0227), the braid (0228), the searchlight (0229),
+    the wire (0230) and the sandbags (0231);
+  - also in `headless_v1`, the powers' pictures (0233) and the new
+    defences' icons (0234);
+  - `input_v1`'s decoy case: the slot wears A045's icon.
+- **Shots** (`implementation/shots/0244/`, FHD 1920x1080, looked at):
+  - `arsenal_spring` and `arsenal_winter`, the hotbar at the build step.
+    Winter's page shows the electric fence and the searchlight in A045's
+    icons.
+  - `powers` at night, with the power bar's bell, dog and repair in
+    A045's 10x10 pictures.
+- **The delivery folder** `implementation/backlog/deliveries/A045-power-weapon-icons/` is
+  committed, as A044's was.
+- `python implementation/backlog/assets.py set A045 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (62 of 62).

@@ -1,0 +1,8 @@
+{
+  "status": "blocked",
+  "files": {},
+  "issues": [
+    "Task0234 is done. A005 integrated; A028,A037,A038,A039,A040,A041,A042,A043 are blocked, not approved/integrated. A045 Howtomakeit step1 forbids generation with missing approved world references. Owner question asks whether candidates/descriptions may substitute for this batch; answer pending. No ImageGen call or production export."
+  ],
+  "rejected": {}
+}

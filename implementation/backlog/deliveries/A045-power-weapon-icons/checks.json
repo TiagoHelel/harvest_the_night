@@ -1,0 +1,233 @@
+{
+  "approved_art_hashes_match": true,
+  "approved_sitting_unchanged": true,
+  "at_least_two_colours": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 22,
+  "frames_found": 22,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "icon_margin_ok": true,
+  "icon_opaque_counts_ok": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/hud_beehive/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "opaque_pixels": 42
+    },
+    "native/hud_call_dog/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 40
+    },
+    "native/hud_catapult/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        8
+      ],
+      "opaque_pixels": 23
+    },
+    "native/hud_decoy/none/01.png": {
+      "bounds": [
+        1,
+        3,
+        9,
+        8
+      ],
+      "opaque_pixels": 18
+    },
+    "native/hud_electric_fence/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        8
+      ],
+      "opaque_pixels": 30
+    },
+    "native/hud_emergency_repair/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "opaque_pixels": 30
+    },
+    "native/hud_farm_bell/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 33
+    },
+    "native/hud_garlic_braid/none/01.png": {
+      "bounds": [
+        3,
+        1,
+        7,
+        9
+      ],
+      "opaque_pixels": 24
+    },
+    "native/hud_sandbag_wall/none/01.png": {
+      "bounds": [
+        1,
+        3,
+        9,
+        7
+      ],
+      "opaque_pixels": 26
+    },
+    "native/hud_searchlight/none/01.png": {
+      "bounds": [
+        1,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 46
+    },
+    "native/hud_wall_2/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "opaque_pixels": 36
+    },
+    "native/icon_beehive/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "opaque_pixels": 128
+    },
+    "native/icon_call_dog/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 117
+    },
+    "native/icon_catapult/none/01.png": {
+      "bounds": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "opaque_pixels": 77
+    },
+    "native/icon_decoy/none/01.png": {
+      "bounds": [
+        1,
+        4,
+        15,
+        13
+      ],
+      "opaque_pixels": 59
+    },
+    "native/icon_electric_fence/none/01.png": {
+      "bounds": [
+        1,
+        3,
+        15,
+        13
+      ],
+      "opaque_pixels": 91
+    },
+    "native/icon_emergency_repair/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        14
+      ],
+      "opaque_pixels": 86
+    },
+    "native/icon_farm_bell/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 110
+    },
+    "native/icon_garlic_braid/none/01.png": {
+      "bounds": [
+        5,
+        1,
+        12,
+        15
+      ],
+      "opaque_pixels": 64
+    },
+    "native/icon_sandbag_wall/none/01.png": {
+      "bounds": [
+        1,
+        5,
+        15,
+        11
+      ],
+      "opaque_pixels": 67
+    },
+    "native/icon_searchlight/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 131
+    },
+    "native/icon_wall_2/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        14
+      ],
+      "opaque_pixels": 117
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "no_zombie_bait_output": true,
+  "not_existing_icons": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [],
+  "owner_reference_exception_recorded": true,
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "same_crop_per_pair": true,
+  "twenty_two_icons_complete": true,
+  "unique_icons": true
+}

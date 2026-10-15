@@ -75494,6 +75494,1392 @@
         15
       ],
       "output_sha256": "a26f7e2508db93f9cb28586368f326758fcd14b9f815a9d915ef8d670455c352"
+    },
+    {
+      "id": "ui/icon_farm_bell",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-farm-bell-r1.png",
+      "source_sha256": "766576e0365610d5726959fdc853d6c27c15ec46aa82b96b95c86746a19f949b",
+      "crop_xywh": [
+        338,
+        301,
+        610,
+        663
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.021116138763197588,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_farm_bell",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_farm_bell.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-farm-bell-r1.prompt.txt",
+      "prompt_sha256": "1d0ac84a2b928711d527e7fe998fac2073e21ffd6ae705d8a0be1ff9de475756",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-farm-bell-r1.call.json",
+          "sha256": "e2b67b1a38bb92ddef1115a8fafbb0ee6672f8dfc40563d397b394475555d259",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_farm_bell/none/01.png",
+          "sha256": "09ff8fb04cfbfaa28d4210c844bd3fd44f41848964f1f12352ce252f6872db11",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "09ff8fb04cfbfaa28d4210c844bd3fd44f41848964f1f12352ce252f6872db11",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_farm_bell",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-farm-bell-r1.png",
+      "source_sha256": "766576e0365610d5726959fdc853d6c27c15ec46aa82b96b95c86746a19f949b",
+      "crop_xywh": [
+        338,
+        301,
+        610,
+        663
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.012066365007541479,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_farm_bell",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_farm_bell.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-farm-bell-r1.prompt.txt",
+      "prompt_sha256": "1d0ac84a2b928711d527e7fe998fac2073e21ffd6ae705d8a0be1ff9de475756",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-farm-bell-r1.call.json",
+          "sha256": "e2b67b1a38bb92ddef1115a8fafbb0ee6672f8dfc40563d397b394475555d259",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_farm_bell/none/01.png",
+          "sha256": "7f85cecc0175916e4338538721777f45e65f1cb26cfaffb37390b46692772e5b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "7f85cecc0175916e4338538721777f45e65f1cb26cfaffb37390b46692772e5b",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_call_dog",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-call-dog-r1.png",
+      "source_sha256": "cbc4ba1efae47c2514255b3ea41610f10b703c72228728171e482c8f347f825f",
+      "crop_xywh": [
+        302,
+        254,
+        673,
+        796
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.017587939698492462,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_call_dog",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_call_dog.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-call-dog-r1.prompt.txt",
+      "prompt_sha256": "160a045dd8c61b621b9ce3dd11f86cc68eb2731ddce61754615a2d3a51a8660b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-call-dog-r1.call.json",
+          "sha256": "2a05f4cbcbd7e39750abaf599ed89f12115afcb3aca23e969764dfff8009bec0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_call_dog/none/01.png",
+          "sha256": "f1fd62e791454c4765cd7bfff360699560ad7d22de1ec1211168293f404556e5",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "f1fd62e791454c4765cd7bfff360699560ad7d22de1ec1211168293f404556e5",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_call_dog",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-call-dog-r1.png",
+      "source_sha256": "cbc4ba1efae47c2514255b3ea41610f10b703c72228728171e482c8f347f825f",
+      "crop_xywh": [
+        302,
+        254,
+        673,
+        796
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.010050251256281407,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_call_dog",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_call_dog.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-call-dog-r1.prompt.txt",
+      "prompt_sha256": "160a045dd8c61b621b9ce3dd11f86cc68eb2731ddce61754615a2d3a51a8660b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-call-dog-r1.call.json",
+          "sha256": "2a05f4cbcbd7e39750abaf599ed89f12115afcb3aca23e969764dfff8009bec0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_call_dog/none/01.png",
+          "sha256": "a38e30d54293dc96502bbf54b453b4585764c3c1f8b4c34e111a53938e3997e5",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "a38e30d54293dc96502bbf54b453b4585764c3c1f8b4c34e111a53938e3997e5",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_emergency_repair",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-emergency-repair-r1.png",
+      "source_sha256": "b97994d47362ab7e5d643cf1ba984f5f752d20f2010971daf04e0fca8dbd459e",
+      "crop_xywh": [
+        256,
+        313,
+        756,
+        663
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.018518518518518517,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_emergency_repair",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_emergency_repair.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-emergency-repair-r1.prompt.txt",
+      "prompt_sha256": "bae2ddb21a29a52f51186bbaf1593b7c78ccb41365e2c840237dcf5743e5e12d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-emergency-repair-r1.call.json",
+          "sha256": "3e12b5db62e81684d69113559129af8e99c1f1771684d7c93c1731976512e96a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_emergency_repair/none/01.png",
+          "sha256": "3103ed607f11f088b111655546e12160312e39d1b660cc52a024d12b2a928acc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "3103ed607f11f088b111655546e12160312e39d1b660cc52a024d12b2a928acc",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_emergency_repair",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-emergency-repair-r1.png",
+      "source_sha256": "b97994d47362ab7e5d643cf1ba984f5f752d20f2010971daf04e0fca8dbd459e",
+      "crop_xywh": [
+        256,
+        313,
+        756,
+        663
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.010582010582010581,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_emergency_repair",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_emergency_repair.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-emergency-repair-r1.prompt.txt",
+      "prompt_sha256": "bae2ddb21a29a52f51186bbaf1593b7c78ccb41365e2c840237dcf5743e5e12d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-emergency-repair-r1.call.json",
+          "sha256": "3e12b5db62e81684d69113559129af8e99c1f1771684d7c93c1731976512e96a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_emergency_repair/none/01.png",
+          "sha256": "0de2a62a22d7b55c8307225fe9c1494d4492a88ef5bb4239511f38247829f051",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "0de2a62a22d7b55c8307225fe9c1494d4492a88ef5bb4239511f38247829f051",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_decoy",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-decoy-r1.png",
+      "source_sha256": "cf5617e67a0289bed22c136b280f50b980130df89dd329e189231d8b9dab345b",
+      "crop_xywh": [
+        135,
+        306,
+        986,
+        663
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.014198782961460446,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_decoy",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_decoy.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-decoy-r1.prompt.txt",
+      "prompt_sha256": "5abfc9b0608d72dda5b2647f8e537884acc174315f8c5cd04a543afd2ea05f5d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-decoy-r1.call.json",
+          "sha256": "939edcaadacf4cfa913ee5bed24858a7ec5f06163574a0a857cbe8c5f8dd3679",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_decoy/none/01.png",
+          "sha256": "bbfe379b326b7ad027c224a06b87cf941c075ac4807b90bc48901476db2e34fc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        7,
+        4
+      ],
+      "output_sha256": "bbfe379b326b7ad027c224a06b87cf941c075ac4807b90bc48901476db2e34fc",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_decoy",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-decoy-r1.png",
+      "source_sha256": "cf5617e67a0289bed22c136b280f50b980130df89dd329e189231d8b9dab345b",
+      "crop_xywh": [
+        135,
+        306,
+        986,
+        663
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.008113590263691683,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_decoy",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_decoy.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-decoy-r1.prompt.txt",
+      "prompt_sha256": "5abfc9b0608d72dda5b2647f8e537884acc174315f8c5cd04a543afd2ea05f5d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-decoy-r1.call.json",
+          "sha256": "939edcaadacf4cfa913ee5bed24858a7ec5f06163574a0a857cbe8c5f8dd3679",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_decoy/none/01.png",
+          "sha256": "827213a564cd1982be1bb31f4a6f583ab7831de581cbcfad5089333df3e7e9c7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        2
+      ],
+      "output_sha256": "827213a564cd1982be1bb31f4a6f583ab7831de581cbcfad5089333df3e7e9c7",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_beehive",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-beehive-r1.png",
+      "source_sha256": "45d2cea5aa2cbfbc518a4a0a103681e7a768cf73b293caf3b4ae33036371587e",
+      "crop_xywh": [
+        295,
+        369,
+        689,
+        618
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.020319303338171262,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_beehive",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_beehive.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-beehive-r1.prompt.txt",
+      "prompt_sha256": "e5a7f83f799d3d8b8352303981a8c78533349c3bc514e7e794699effe4552c74",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-beehive-r1.call.json",
+          "sha256": "b44c3530f779a17e7f27296ab0bb077f81b3327fe885c505ba23979c0178d14c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_beehive/none/01.png",
+          "sha256": "820211f1aa671f4ad1da148522451688e0942df2aa183fc286dbf80748f605c8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "820211f1aa671f4ad1da148522451688e0942df2aa183fc286dbf80748f605c8",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_beehive",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-beehive-r1.png",
+      "source_sha256": "45d2cea5aa2cbfbc518a4a0a103681e7a768cf73b293caf3b4ae33036371587e",
+      "crop_xywh": [
+        295,
+        369,
+        689,
+        618
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011611030478955007,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_beehive",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_beehive.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-beehive-r1.prompt.txt",
+      "prompt_sha256": "e5a7f83f799d3d8b8352303981a8c78533349c3bc514e7e794699effe4552c74",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-beehive-r1.call.json",
+          "sha256": "b44c3530f779a17e7f27296ab0bb077f81b3327fe885c505ba23979c0178d14c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_beehive/none/01.png",
+          "sha256": "8286b7cae438b3e49841723c1d2a7888e14d09b91dfdff35858a391db3bfca93",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "8286b7cae438b3e49841723c1d2a7888e14d09b91dfdff35858a391db3bfca93",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_catapult",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-catapult-r1.png",
+      "source_sha256": "178e6f834258c61670c6852875dea2ac7ce81fcaf9ea593558e0c8191928409e",
+      "crop_xywh": [
+        173,
+        261,
+        1010,
+        776
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.013861386138613862,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_catapult",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_catapult.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-catapult-r1.prompt.txt",
+      "prompt_sha256": "1fd37b4370301a23bde66282589e04bc8ba5463b5a91eed3999753984f402cd9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-catapult-r1.call.json",
+          "sha256": "2f0ecca252b1b22ecd7c9b3beeb9bee0a0274e792d5c83c6ae73a4264d726dcb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_catapult/none/01.png",
+          "sha256": "cb32af559ea699add5cbc338a335c463b53194f9afbd8d67c4781083d48efeef",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        7,
+        5
+      ],
+      "output_sha256": "cb32af559ea699add5cbc338a335c463b53194f9afbd8d67c4781083d48efeef",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_catapult",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-catapult-r1.png",
+      "source_sha256": "178e6f834258c61670c6852875dea2ac7ce81fcaf9ea593558e0c8191928409e",
+      "crop_xywh": [
+        173,
+        261,
+        1010,
+        776
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.007920792079207921,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_catapult",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_catapult.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-catapult-r1.prompt.txt",
+      "prompt_sha256": "1fd37b4370301a23bde66282589e04bc8ba5463b5a91eed3999753984f402cd9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-catapult-r1.call.json",
+          "sha256": "2f0ecca252b1b22ecd7c9b3beeb9bee0a0274e792d5c83c6ae73a4264d726dcb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_catapult/none/01.png",
+          "sha256": "08b4e3368c6a5620a1b0060b339fce1cf274f5d521098b822684704fec82f2fe",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "08b4e3368c6a5620a1b0060b339fce1cf274f5d521098b822684704fec82f2fe",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_garlic_braid",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-garlic-braid-r1.png",
+      "source_sha256": "52764ae231c75a06ac5d227d439edaf8deb72460369363668f38326d6b508343",
+      "crop_xywh": [
+        414,
+        197,
+        440,
+        906
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.01545253863134658,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_garlic_braid",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_garlic_braid.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-garlic-braid-r1.prompt.txt",
+      "prompt_sha256": "780f2af6aa69012bc4d401f83438470bd8f0bc5fdfa9054c433962c03a3d0f92",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-garlic-braid-r1.call.json",
+          "sha256": "facf256a2f50beab98b63290e4bca4d0311285dd3b90f68bbd2ac37f94b2cdb2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_garlic_braid/none/01.png",
+          "sha256": "6eedf444d1c573b0459fcde5ad3b30fba3008b5f964461aaced0fb2f1b1eb2c8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        3,
+        7
+      ],
+      "output_sha256": "6eedf444d1c573b0459fcde5ad3b30fba3008b5f964461aaced0fb2f1b1eb2c8",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_garlic_braid",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-garlic-braid-r1.png",
+      "source_sha256": "52764ae231c75a06ac5d227d439edaf8deb72460369363668f38326d6b508343",
+      "crop_xywh": [
+        414,
+        197,
+        440,
+        906
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.008830022075055188,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_garlic_braid",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_garlic_braid.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-garlic-braid-r1.prompt.txt",
+      "prompt_sha256": "780f2af6aa69012bc4d401f83438470bd8f0bc5fdfa9054c433962c03a3d0f92",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-garlic-braid-r1.call.json",
+          "sha256": "facf256a2f50beab98b63290e4bca4d0311285dd3b90f68bbd2ac37f94b2cdb2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_garlic_braid/none/01.png",
+          "sha256": "9d6fef5b5ebdecdf30e4c3c3bfb3a43b7e46d6081ae71418163a2d985dd2b905",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        2,
+        4
+      ],
+      "output_sha256": "9d6fef5b5ebdecdf30e4c3c3bfb3a43b7e46d6081ae71418163a2d985dd2b905",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_searchlight",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-searchlight-r1.png",
+      "source_sha256": "f0bbc8a2088328aa0aa5d8678beca337ba34da8d4d8c6ffd0d27f2464c179c3c",
+      "crop_xywh": [
+        344,
+        306,
+        636,
+        673
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.020802377414561663,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_searchlight",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_searchlight.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-searchlight-r1.prompt.txt",
+      "prompt_sha256": "d8489aff0885085dd500f9ccd901cf7069d8b2dc927e2d94b9635f8e11f71863",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-searchlight-r1.call.json",
+          "sha256": "35163d9721b328c706ba0e45128b00c4f0c144a210c7c793622d6114bb4c6a08",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_searchlight/none/01.png",
+          "sha256": "51e566f20c2267c4166cba664cd4b8a080f076d128060bb714b4e2a4659dde9d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "51e566f20c2267c4166cba664cd4b8a080f076d128060bb714b4e2a4659dde9d",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_searchlight",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-searchlight-r1.png",
+      "source_sha256": "f0bbc8a2088328aa0aa5d8678beca337ba34da8d4d8c6ffd0d27f2464c179c3c",
+      "crop_xywh": [
+        344,
+        306,
+        636,
+        673
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.01188707280832095,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_searchlight",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_searchlight.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-searchlight-r1.prompt.txt",
+      "prompt_sha256": "d8489aff0885085dd500f9ccd901cf7069d8b2dc927e2d94b9635f8e11f71863",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-searchlight-r1.call.json",
+          "sha256": "35163d9721b328c706ba0e45128b00c4f0c144a210c7c793622d6114bb4c6a08",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_searchlight/none/01.png",
+          "sha256": "b8cdf5826be8d0baa833bf3fd819dcfdc78145afa433d9f72c48bc468713400d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "output_sha256": "b8cdf5826be8d0baa833bf3fd819dcfdc78145afa433d9f72c48bc468713400d",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_electric_fence",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-electric-fence-r1.png",
+      "source_sha256": "9e20761ec18ac94a1afa024c26a256e93c9bf0fd83ec7ff9e801079f792a875b",
+      "crop_xywh": [
+        376,
+        501,
+        502,
+        356
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.027888446215139442,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_electric_fence",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_electric_fence.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-electric-fence-r1.prompt.txt",
+      "prompt_sha256": "376b4997b6dcf2a7f7b48724c44c0097f141c393cba43cd93d78cf276cd64e5d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-electric-fence-r1.call.json",
+          "sha256": "f4fd4a1724faf2c9ee5c00d0123458bc5e9e70044be3a0f6da589d850950c24c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_electric_fence/none/01.png",
+          "sha256": "beeda57e9e730f8b67fa4270decdcfc1bbd59e4cd38b89afcce50b0d635e48c6",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        7,
+        5
+      ],
+      "output_sha256": "beeda57e9e730f8b67fa4270decdcfc1bbd59e4cd38b89afcce50b0d635e48c6",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_electric_fence",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-electric-fence-r1.png",
+      "source_sha256": "9e20761ec18ac94a1afa024c26a256e93c9bf0fd83ec7ff9e801079f792a875b",
+      "crop_xywh": [
+        376,
+        501,
+        502,
+        356
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.01593625498007968,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_electric_fence",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_electric_fence.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-electric-fence-r1.prompt.txt",
+      "prompt_sha256": "376b4997b6dcf2a7f7b48724c44c0097f141c393cba43cd93d78cf276cd64e5d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-electric-fence-r1.call.json",
+          "sha256": "f4fd4a1724faf2c9ee5c00d0123458bc5e9e70044be3a0f6da589d850950c24c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_electric_fence/none/01.png",
+          "sha256": "f5386aea68897ab42c8aa4b99622b69475228175ee3e6f92d0777ff2b8dd81f4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "f5386aea68897ab42c8aa4b99622b69475228175ee3e6f92d0777ff2b8dd81f4",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_wall_2",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-wall-2-r1.png",
+      "source_sha256": "243042ec4717ffd5c2f3a185d7fa0f02205f73011f1c30faa2de6e101cc52492",
+      "crop_xywh": [
+        263,
+        344,
+        778,
+        674
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.017994858611825194,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_wall_2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_wall_2.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-wall-2-r1.prompt.txt",
+      "prompt_sha256": "2f2168fcf6e2fa297d574176978b582629ddd69a0fdd6991f15f432b054acf4e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-wall-2-r1.call.json",
+          "sha256": "8e3b13220e64ea88d9f7a8f1febca2d19e64eeb5454b150bb2349b17d995e301",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_wall_2/none/01.png",
+          "sha256": "a02733e3a7536799e7a742d7436f19a8d4bf54c417317d508807ed45b4ab3dd0",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "a02733e3a7536799e7a742d7436f19a8d4bf54c417317d508807ed45b4ab3dd0",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_wall_2",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-wall-2-r1.png",
+      "source_sha256": "243042ec4717ffd5c2f3a185d7fa0f02205f73011f1c30faa2de6e101cc52492",
+      "crop_xywh": [
+        263,
+        344,
+        778,
+        674
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.010282776349614395,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_wall_2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_wall_2.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-wall-2-r1.prompt.txt",
+      "prompt_sha256": "2f2168fcf6e2fa297d574176978b582629ddd69a0fdd6991f15f432b054acf4e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-wall-2-r1.call.json",
+          "sha256": "8e3b13220e64ea88d9f7a8f1febca2d19e64eeb5454b150bb2349b17d995e301",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_wall_2/none/01.png",
+          "sha256": "dd3b289cda2b3e303db98b29d6e97b6b4b4c08c674b433196f264004dd123330",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "dd3b289cda2b3e303db98b29d6e97b6b4b4c08c674b433196f264004dd123330",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_sandbag_wall",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-sandbag-wall-r1.png",
+      "source_sha256": "7d8ace99d8712855d73a0cb0c1d0d45976fff3a25b1636553e0b509b59b7c9c0",
+      "crop_xywh": [
+        158,
+        505,
+        939,
+        424
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.014909478168264111,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_sandbag_wall",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/icon_sandbag_wall.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-sandbag-wall-r1.prompt.txt",
+      "prompt_sha256": "389985ad810162cff1b94141e6a7206b9e0faa662ce6cac7f30ba104c6ed8d0b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-sandbag-wall-r1.call.json",
+          "sha256": "935f7b26703210957764de511272ac672ec93481228a1e5234c00c1419b9533e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/icon_sandbag_wall/none/01.png",
+          "sha256": "605aa3b5ac2b151039988a45c4d628db6a46b7ba511632b186094b902e093796",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        7,
+        3
+      ],
+      "output_sha256": "605aa3b5ac2b151039988a45c4d628db6a46b7ba511632b186094b902e093796",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_sandbag_wall",
+      "owner": "raster",
+      "source": "assets/art_source/ui/power/icon-sandbag-wall-r1.png",
+      "source_sha256": "7d8ace99d8712855d73a0cb0c1d0d45976fff3a25b1636553e0b509b59b7c9c0",
+      "crop_xywh": [
+        158,
+        505,
+        939,
+        424
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.008519701810436636,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_sandbag_wall",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/hud_sandbag_wall.png",
+      "prompt": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-sandbag-wall-r1.prompt.txt",
+      "prompt_sha256": "389985ad810162cff1b94141e6a7206b9e0faa662ce6cac7f30ba104c6ed8d0b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/raw/icon-sandbag-wall-r1.call.json",
+          "sha256": "935f7b26703210957764de511272ac672ec93481228a1e5234c00c1419b9533e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/native/hud_sandbag_wall/none/01.png",
+          "sha256": "449bc395d39447c5324cda56cd3840755ce1ae3b3c099009c5f9b66276758b8b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/contract.json",
+          "sha256": "ded1dcaefb9d11554e85049f5e1bdf2268e4a11b2edacebfc91dfeb4137a3a16",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A045-power-weapon-icons/APPROVAL.json",
+          "sha256": "6c1729355568d21c02b1a9c1cd0d98c550956f1573e722ada23997510d1510d6",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A045",
+      "integration_task": "0244",
+      "revision": 1,
+      "approval": "A045 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0244",
+      "content_anchor_xy": [
+        4,
+        2
+      ],
+      "output_sha256": "449bc395d39447c5324cda56cd3840755ce1ae3b3c099009c5f9b66276758b8b",
+      "display_role": "compact_hud"
     }
   ]
 }

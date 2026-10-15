@@ -308,11 +308,10 @@ func _key_of(index: int) -> String:
 	return text if text.length() <= 1 else ""
 
 
-## The defence's `icon_<id>` - A005's eight since task 0147 - or a later
-## pack's registered stand-in (A045's since task 0234); a defence no pack has
-## drawn yet falls back to its own building sprite, so a new one still shows
-## something - the drawing made in code when that is all there is (task
-## 0224's decoy, until A037).
+## The defence's `icon_<id>` - A005's eight since task 0147, A037's bait
+## since 0236 and A045's eleven since 0244 - or a later pack's registered
+## stand-in; a defence no pack has drawn yet falls back to its own building
+## sprite, so a new one still shows something.
 func _icon_of(id: StringName) -> Texture2D:
 	var name := StringName("icon_%s" % id)
 	var file := "res://sprites/buildings/%s.png" % id

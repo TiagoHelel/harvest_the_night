@@ -1,0 +1,61 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Usecase: stylized-concept. Create ONE isolated NIGHT HOTBAR ICON for HARVEST THE NIGHT. Image1 is A005 gun-tower icon STYLE MASTER only: same framing, chunkycoloredoutline, 2–3materialplanes, objectfill, upperleft neutraldaylight, squarepixelclusters, not the weaponitself. Image2 is the requestedsubject identity/material reference, not a backdrop. Image3 is projectstyle only. This is a REALTINY inventorysprite: final16x16pivot8,8 maxvisible14; also SAMEsourcecut10x10pivot5,5 maxvisible8. Broad SIMPLEBOLD silhouette thatreads ateight visiblepixels, no thinlinedecoration,hatching,microtexture or detailsneeding30px. Onecenteredcompleteobject withgenerousoutertransparentpadding, approximatelysquareframing. Crisp pixelart, darkvioletcoloredink, no softpainting, antialiasing, smoothgradients, halo/glow, shadow, floor, scene, panel, frame, lettering,numbers, UI, labels or watermark. TRUEtransparentbackground. No alternateviews, variants, contact sheetor multipleicons. POWERICON SubjectCALLDOG: the SAME caramelfarmdogHEAD of Image2, friendlycollie/shepherd, creamforeheadstripe/creamMUZZLE andCHEST, darknose/eye, uprightEARSwfoldedtips. A compactHEADBUST turned3/4LEFT, mouthOPENINBARK, broadmuzzle, twoearsreadable. No collar, accessories, whistle, fullbody or paw. Notawolf, fox or newbreed. Keep caramel/creamcolorplacement of currentapproved dog, simplifysquareclusters for8pixelread. No soundlines, text, background or glow.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\native\\dog_sit\\west\\01.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d1715a14-a299-47eb-9c31-ff08ee7f6ac4.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "approvedhotbarstylemaster",
+    "approved dog identity",
+    "projectstyle"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0",
+      "role": "approvedhotbarstylemaster"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\native\\dog_sit\\west\\01.png",
+      "sha256": "37a9b23974755eaf67d4b44687b9a7915ee7fcc0fc561d6b7b519e1c0fb38391",
+      "role": "approved dog identity"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "projectstyle"
+    }
+  ],
+  "copied_path": "raw/icon-call-dog-r1.png",
+  "sha256": "cbc4ba1efae47c2514255b3ea41610f10b703c72228728171e482c8f347f825f",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      302,
+      254,
+      975,
+      1050
+    ]
+  },
+  "selected_native_exports": [
+    "native/icon_call_dog/none/01.png",
+    "native/hud_call_dog/none/01.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

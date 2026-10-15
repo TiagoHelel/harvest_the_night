@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-267 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+268 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -310,6 +310,7 @@ voz alta.
 | 0241 | Art: the electric fence | 2026-10-15 |
 | 0242 | Art: hardwood walls and sandbags | 2026-10-15 |
 | 0243 | Art: the day tarps | 2026-10-15 |
+| 0244 | Art: power and new weapon icons | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

@@ -3198,6 +3198,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_beehive.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_boss_night.png",
       "owner": "raster"
     },
@@ -3211,6 +3215,10 @@
     },
     {
       "output": "sprites/ui/hud_butter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_call_dog.png",
       "owner": "raster"
     },
     {
@@ -3239,6 +3247,10 @@
     },
     {
       "output": "sprites/ui/hud_carrot_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_catapult.png",
       "owner": "raster"
     },
     {
@@ -3274,6 +3286,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_decoy.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_dorado.png",
       "owner": "raster"
     },
@@ -3286,7 +3302,19 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_electric_fence.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_emergency_repair.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_energy.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_farm_bell.png",
       "owner": "raster"
     },
     {
@@ -3319,6 +3347,10 @@
     },
     {
       "output": "sprites/ui/hud_garlic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_garlic_braid.png",
       "owner": "raster"
     },
     {
@@ -3482,6 +3514,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_sandbag_wall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_searchlight.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_speed.png",
       "owner": "raster"
     },
@@ -3554,6 +3594,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_wall_2.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_wheat.png",
       "owner": "raster"
     },
@@ -3602,6 +3646,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_beehive.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_boss_night.png",
       "owner": "raster"
     },
@@ -3615,6 +3663,10 @@
     },
     {
       "output": "sprites/ui/icon_butter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_call_dog.png",
       "owner": "raster"
     },
     {
@@ -3643,6 +3695,10 @@
     },
     {
       "output": "sprites/ui/icon_carrot_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_catapult.png",
       "owner": "raster"
     },
     {
@@ -3678,6 +3734,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_decoy.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_dorado.png",
       "owner": "raster"
     },
@@ -3690,7 +3750,19 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_electric_fence.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_emergency_repair.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_energy.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_farm_bell.png",
       "owner": "raster"
     },
     {
@@ -3723,6 +3795,10 @@
     },
     {
       "output": "sprites/ui/icon_garlic.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_garlic_braid.png",
       "owner": "raster"
     },
     {
@@ -3886,6 +3962,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_sandbag_wall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_searchlight.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_speed.png",
       "owner": "raster"
     },
@@ -3955,6 +4039,10 @@
     },
     {
       "output": "sprites/ui/icon_wall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_wall_2.png",
       "owner": "raster"
     },
     {

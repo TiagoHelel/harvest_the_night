@@ -266,3 +266,12 @@ Taking 0243, A044 the day tarps, through its CLAUDE-A044-PROMPT.txt.
 
 A044 is in the game and set `integrated` (the day tarps: 12 native PNGs sha-checked; a new check_tarp_art.py wired into verify).
 Next in the loop: 0244.
+
+## 2026-10-15 - Claude - taking 0244 (A045)
+
+Taking 0244, A045 the power and weapon icons, through its CLAUDE-A045-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0244 (A045 integrated)
+
+A045 is in the game and set `integrated` (the power and weapon icons: 22 native PNGs sha-checked; UiKit.orphan_icons claims the powers and the hardwood wall's level).
+Next in the loop: 0245.

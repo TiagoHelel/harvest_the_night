@@ -1,0 +1,61 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Usecase: stylized-concept. Create ONE isolated NIGHT HOTBAR ICON for HARVEST THE NIGHT. Image1 is A005 gun-tower icon STYLE MASTER only: same framing, chunkycoloredoutline, 2–3materialplanes, objectfill, upperleft neutraldaylight, squarepixelclusters, not the weaponitself. Image2 is the requestedsubject identity/material reference, not a backdrop. Image3 is projectstyle only. This is a REALTINY inventorysprite: final16x16pivot8,8 maxvisible14; also SAMEsourcecut10x10pivot5,5 maxvisible8. Broad SIMPLEBOLD silhouette thatreads ateight visiblepixels, no thinlinedecoration,hatching,microtexture or detailsneeding30px. Onecenteredcompleteobject withgenerousoutertransparentpadding, approximatelysquareframing. Crisp pixelart, darkvioletcoloredink, no softpainting, antialiasing, smoothgradients, halo/glow, shadow, floor, scene, panel, frame, lettering,numbers, UI, labels or watermark. TRUEtransparentbackground. No alternateviews, variants, contact sheetor multipleicons. POWERICON / Image2 overrides subjectrole: it is the approved flare POWERFAMILY STYLE/framing only, DO NOTDRAW a flare. SubjectFARMBELL: ONE brassbell hangingfrom aSHORTWOODENYOKE, tiltedmidswing. Broadgold/brass dome withdarkinside andclappershowing, gold_dark/gold/gold_lighthighlights, smallbrownwoodbeam/yoke. Simplecompactbelloutline, no churchtower,cow,ribbon, scene, or SOUNDLINES. No glow, detachedstar or halo. Recognizablebell at8visiblepixels.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\flare-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-754bd3ad-10b0-4c02-bcb8-0aa620329e69.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "approvedhotbarstylemaster",
+    "approved flare POWERFAMILY style only, not subject",
+    "projectstyle"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0",
+      "role": "approvedhotbarstylemaster"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\flare-r1.png",
+      "sha256": "cada43ef7a8c0695297812a9e18678171028ecaf0d08805eb79442850182b7c2",
+      "role": "approved flare POWERFAMILY style only, not subject"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "projectstyle"
+    }
+  ],
+  "copied_path": "raw/icon-farm-bell-r1.png",
+  "sha256": "766576e0365610d5726959fdc853d6c27c15ec46aa82b96b95c86746a19f949b",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      338,
+      301,
+      948,
+      964
+    ]
+  },
+  "selected_native_exports": [
+    "native/icon_farm_bell/none/01.png",
+    "native/hud_farm_bell/none/01.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

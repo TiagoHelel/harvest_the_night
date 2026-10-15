@@ -297,30 +297,6 @@ const ART := {
 	# brown cow small, until 0245.
 	&"dog_run": {"pack": "A028", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.08, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	&"dog_bite": {"pack": "A028", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	# A045's powers' pictures (task 0233), until 0244: the bell START's horn
-	# in brass, the dog the meat it is called with, the repair the iron
-	# pickaxe warmed - each tinted, in both boxes.
-	&"icon_farm_bell": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_start", "tint": Color(1.3, 1.08, 0.55), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_farm_bell": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_start", "tint": Color(1.3, 1.08, 0.55), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_call_dog": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.15, 0.9, 0.62), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_call_dog": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.15, 0.9, 0.62), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_emergency_repair": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_pickaxe_iron", "tint": Color(1.3, 1.12, 0.8), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_emergency_repair": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_pickaxe_iron", "tint": Color(1.3, 1.12, 0.8), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A045's icons for the new defences (task 0234), until 0244: the ones
-	# drawn in code in the world drawn in code in the hotbar too - the decoy,
-	# the braid, the wire and the sandbags, whose 10x10 the hint goes without -
-	# and the three stand-in towers the icon of the tower they stand in for,
-	# tinted as they are on the farm.
-	&"icon_decoy": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"icon_beehive": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_mortar", "tint": Color(1.3, 1.0, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_beehive": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_mortar", "tint": Color(1.3, 1.0, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_catapult": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_auto_crossbow", "tint": Color(1.35, 0.8, 0.45), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_catapult": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_auto_crossbow", "tint": Color(1.35, 0.8, 0.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_garlic_braid": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"icon_searchlight": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_gun_tower", "tint": Color(0.85, 1.0, 1.35), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"hud_searchlight": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gun_tower", "tint": Color(0.85, 1.0, 1.35), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"icon_electric_fence": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
-	&"icon_sandbag_wall": {"pack": "A045", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	# A036's night loot (task 0221): the bones' icon the stone paled to bone
 	# and the moon stone's the stone cooled to moonlight, until 0235; the
 	# pile and the stone on the ground drawn in code (`LootView`).

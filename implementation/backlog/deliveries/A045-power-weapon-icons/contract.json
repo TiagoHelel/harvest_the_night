@@ -1,0 +1,1715 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "hud_beehive",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_beehive-none-0-night.png",
+          "path": "native/hud_beehive/none/01.png",
+          "points": {},
+          "pose": "static beehive"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static beehive"
+      ]
+    },
+    {
+      "anim": "hud_call_dog",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_call_dog-none-0-night.png",
+          "path": "native/hud_call_dog/none/01.png",
+          "points": {},
+          "pose": "static call_dog"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static call_dog"
+      ]
+    },
+    {
+      "anim": "hud_catapult",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_catapult-none-0-night.png",
+          "path": "native/hud_catapult/none/01.png",
+          "points": {},
+          "pose": "static catapult"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static catapult"
+      ]
+    },
+    {
+      "anim": "hud_decoy",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_decoy-none-0-night.png",
+          "path": "native/hud_decoy/none/01.png",
+          "points": {},
+          "pose": "static decoy"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static decoy"
+      ]
+    },
+    {
+      "anim": "hud_electric_fence",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_electric_fence-none-0-night.png",
+          "path": "native/hud_electric_fence/none/01.png",
+          "points": {},
+          "pose": "static electric_fence"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static electric_fence"
+      ]
+    },
+    {
+      "anim": "hud_emergency_repair",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_emergency_repair-none-0-night.png",
+          "path": "native/hud_emergency_repair/none/01.png",
+          "points": {},
+          "pose": "static emergency_repair"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static emergency_repair"
+      ]
+    },
+    {
+      "anim": "hud_farm_bell",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_farm_bell-none-0-night.png",
+          "path": "native/hud_farm_bell/none/01.png",
+          "points": {},
+          "pose": "static farm_bell"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static farm_bell"
+      ]
+    },
+    {
+      "anim": "hud_garlic_braid",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_garlic_braid-none-0-night.png",
+          "path": "native/hud_garlic_braid/none/01.png",
+          "points": {},
+          "pose": "static garlic_braid"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static garlic_braid"
+      ]
+    },
+    {
+      "anim": "hud_sandbag_wall",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_sandbag_wall-none-0-night.png",
+          "path": "native/hud_sandbag_wall/none/01.png",
+          "points": {},
+          "pose": "static sandbag_wall"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static sandbag_wall"
+      ]
+    },
+    {
+      "anim": "hud_searchlight",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_searchlight-none-0-night.png",
+          "path": "native/hud_searchlight/none/01.png",
+          "points": {},
+          "pose": "static searchlight"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static searchlight"
+      ]
+    },
+    {
+      "anim": "hud_wall_2",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_wall_2-none-0-night.png",
+          "path": "native/hud_wall_2/none/01.png",
+          "points": {},
+          "pose": "static wall_2"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "poses": [
+        "static wall_2"
+      ]
+    },
+    {
+      "anim": "icon_beehive",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_beehive-none-0-night.png",
+          "path": "native/icon_beehive/none/01.png",
+          "points": {},
+          "pose": "static beehive"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static beehive"
+      ]
+    },
+    {
+      "anim": "icon_call_dog",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_call_dog-none-0-night.png",
+          "path": "native/icon_call_dog/none/01.png",
+          "points": {},
+          "pose": "static call_dog"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static call_dog"
+      ]
+    },
+    {
+      "anim": "icon_catapult",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_catapult-none-0-night.png",
+          "path": "native/icon_catapult/none/01.png",
+          "points": {},
+          "pose": "static catapult"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static catapult"
+      ]
+    },
+    {
+      "anim": "icon_decoy",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_decoy-none-0-night.png",
+          "path": "native/icon_decoy/none/01.png",
+          "points": {},
+          "pose": "static decoy"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static decoy"
+      ]
+    },
+    {
+      "anim": "icon_electric_fence",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_electric_fence-none-0-night.png",
+          "path": "native/icon_electric_fence/none/01.png",
+          "points": {},
+          "pose": "static electric_fence"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static electric_fence"
+      ]
+    },
+    {
+      "anim": "icon_emergency_repair",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_emergency_repair-none-0-night.png",
+          "path": "native/icon_emergency_repair/none/01.png",
+          "points": {},
+          "pose": "static emergency_repair"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static emergency_repair"
+      ]
+    },
+    {
+      "anim": "icon_farm_bell",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_farm_bell-none-0-night.png",
+          "path": "native/icon_farm_bell/none/01.png",
+          "points": {},
+          "pose": "static farm_bell"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static farm_bell"
+      ]
+    },
+    {
+      "anim": "icon_garlic_braid",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_garlic_braid-none-0-night.png",
+          "path": "native/icon_garlic_braid/none/01.png",
+          "points": {},
+          "pose": "static garlic_braid"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static garlic_braid"
+      ]
+    },
+    {
+      "anim": "icon_sandbag_wall",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_sandbag_wall-none-0-night.png",
+          "path": "native/icon_sandbag_wall/none/01.png",
+          "points": {},
+          "pose": "static sandbag_wall"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static sandbag_wall"
+      ]
+    },
+    {
+      "anim": "icon_searchlight",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_searchlight-none-0-night.png",
+          "path": "native/icon_searchlight/none/01.png",
+          "points": {},
+          "pose": "static searchlight"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static searchlight"
+      ]
+    },
+    {
+      "anim": "icon_wall_2",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_wall_2-none-0-night.png",
+          "path": "native/icon_wall_2/none/01.png",
+          "points": {},
+          "pose": "static wall_2"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "static wall_2"
+      ]
+    }
+  ],
+  "approved_existing_files": {
+    "native/hud_beehive/none/01.png": "8286b7cae438b3e49841723c1d2a7888e14d09b91dfdff35858a391db3bfca93",
+    "native/hud_call_dog/none/01.png": "a38e30d54293dc96502bbf54b453b4585764c3c1f8b4c34e111a53938e3997e5",
+    "native/hud_catapult/none/01.png": "08b4e3368c6a5620a1b0060b339fce1cf274f5d521098b822684704fec82f2fe",
+    "native/hud_decoy/none/01.png": "827213a564cd1982be1bb31f4a6f583ab7831de581cbcfad5089333df3e7e9c7",
+    "native/hud_electric_fence/none/01.png": "f5386aea68897ab42c8aa4b99622b69475228175ee3e6f92d0777ff2b8dd81f4",
+    "native/hud_emergency_repair/none/01.png": "0de2a62a22d7b55c8307225fe9c1494d4492a88ef5bb4239511f38247829f051",
+    "native/hud_farm_bell/none/01.png": "7f85cecc0175916e4338538721777f45e65f1cb26cfaffb37390b46692772e5b",
+    "native/hud_garlic_braid/none/01.png": "9d6fef5b5ebdecdf30e4c3c3bfb3a43b7e46d6081ae71418163a2d985dd2b905",
+    "native/hud_sandbag_wall/none/01.png": "449bc395d39447c5324cda56cd3840755ce1ae3b3c099009c5f9b66276758b8b",
+    "native/hud_searchlight/none/01.png": "b8cdf5826be8d0baa833bf3fd819dcfdc78145afa433d9f72c48bc468713400d",
+    "native/hud_wall_2/none/01.png": "dd3b289cda2b3e303db98b29d6e97b6b4b4c08c674b433196f264004dd123330",
+    "native/icon_beehive/none/01.png": "820211f1aa671f4ad1da148522451688e0942df2aa183fc286dbf80748f605c8",
+    "native/icon_call_dog/none/01.png": "f1fd62e791454c4765cd7bfff360699560ad7d22de1ec1211168293f404556e5",
+    "native/icon_catapult/none/01.png": "cb32af559ea699add5cbc338a335c463b53194f9afbd8d67c4781083d48efeef",
+    "native/icon_decoy/none/01.png": "bbfe379b326b7ad027c224a06b87cf941c075ac4807b90bc48901476db2e34fc",
+    "native/icon_electric_fence/none/01.png": "beeda57e9e730f8b67fa4270decdcfc1bbd59e4cd38b89afcce50b0d635e48c6",
+    "native/icon_emergency_repair/none/01.png": "3103ed607f11f088b111655546e12160312e39d1b660cc52a024d12b2a928acc",
+    "native/icon_farm_bell/none/01.png": "09ff8fb04cfbfaa28d4210c844bd3fd44f41848964f1f12352ce252f6872db11",
+    "native/icon_garlic_braid/none/01.png": "6eedf444d1c573b0459fcde5ad3b30fba3008b5f964461aaced0fb2f1b1eb2c8",
+    "native/icon_sandbag_wall/none/01.png": "605aa3b5ac2b151039988a45c4d628db6a46b7ba511632b186094b902e093796",
+    "native/icon_searchlight/none/01.png": "51e566f20c2267c4166cba664cd4b8a080f076d128060bb714b4e2a4659dde9d",
+    "native/icon_wall_2/none/01.png": "a02733e3a7536799e7a742d7436f19a8d4bf54c417317d508807ed45b4ab3dd0"
+  },
+  "colour_ramp": [],
+  "comparison": [],
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Use the available candidate world sprites of A028/A040/A042/A043 as identity/material references only. Existing approvals are preserved; using a candidate reference does not approve or integrate that art.",
+      "owner_words": "Sim, usar candidatas como refer\u00eancia",
+      "rule": "Subject reference prerequisite"
+    },
+    {
+      "accepted_checks": [],
+      "change": "Owner accepted the exact displayed artwork and the documented visual differences; measurements remain unchanged.",
+      "owner_words": "tudo aprovado, falta mais?",
+      "rule": "Reviewed visual measurements"
+    }
+  ],
+  "files": [
+    {
+      "anim": "icon_farm_bell",
+      "call": "raw/icon-farm-bell-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_farm_bell/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static farm_bell",
+      "prompt": "raw/icon-farm-bell-r1.prompt.txt",
+      "prompt_sha256": "1d0ac84a2b928711d527e7fe998fac2073e21ffd6ae705d8a0be1ff9de475756",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.021116138763197588,
+        "crop_xywh": [
+          338,
+          301,
+          610,
+          663
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_farm_bell.png",
+      "seconds": 1,
+      "sha256": "09ff8fb04cfbfaa28d4210c844bd3fd44f41848964f1f12352ce252f6872db11",
+      "source": "raw/icon-farm-bell-r1.png",
+      "source_sha256": "766576e0365610d5726959fdc853d6c27c15ec46aa82b96b95c86746a19f949b"
+    },
+    {
+      "anim": "hud_farm_bell",
+      "call": "raw/icon-farm-bell-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_farm_bell/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static farm_bell",
+      "prompt": "raw/icon-farm-bell-r1.prompt.txt",
+      "prompt_sha256": "1d0ac84a2b928711d527e7fe998fac2073e21ffd6ae705d8a0be1ff9de475756",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.012066365007541479,
+        "crop_xywh": [
+          338,
+          301,
+          610,
+          663
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_farm_bell.png",
+      "seconds": 1,
+      "sha256": "7f85cecc0175916e4338538721777f45e65f1cb26cfaffb37390b46692772e5b",
+      "source": "raw/icon-farm-bell-r1.png",
+      "source_sha256": "766576e0365610d5726959fdc853d6c27c15ec46aa82b96b95c86746a19f949b"
+    },
+    {
+      "anim": "icon_call_dog",
+      "call": "raw/icon-call-dog-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_call_dog/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static call_dog",
+      "prompt": "raw/icon-call-dog-r1.prompt.txt",
+      "prompt_sha256": "160a045dd8c61b621b9ce3dd11f86cc68eb2731ddce61754615a2d3a51a8660b",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.017587939698492462,
+        "crop_xywh": [
+          302,
+          254,
+          673,
+          796
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_call_dog.png",
+      "seconds": 1,
+      "sha256": "f1fd62e791454c4765cd7bfff360699560ad7d22de1ec1211168293f404556e5",
+      "source": "raw/icon-call-dog-r1.png",
+      "source_sha256": "cbc4ba1efae47c2514255b3ea41610f10b703c72228728171e482c8f347f825f"
+    },
+    {
+      "anim": "hud_call_dog",
+      "call": "raw/icon-call-dog-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_call_dog/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static call_dog",
+      "prompt": "raw/icon-call-dog-r1.prompt.txt",
+      "prompt_sha256": "160a045dd8c61b621b9ce3dd11f86cc68eb2731ddce61754615a2d3a51a8660b",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.010050251256281407,
+        "crop_xywh": [
+          302,
+          254,
+          673,
+          796
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_call_dog.png",
+      "seconds": 1,
+      "sha256": "a38e30d54293dc96502bbf54b453b4585764c3c1f8b4c34e111a53938e3997e5",
+      "source": "raw/icon-call-dog-r1.png",
+      "source_sha256": "cbc4ba1efae47c2514255b3ea41610f10b703c72228728171e482c8f347f825f"
+    },
+    {
+      "anim": "icon_emergency_repair",
+      "call": "raw/icon-emergency-repair-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_emergency_repair/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static emergency_repair",
+      "prompt": "raw/icon-emergency-repair-r1.prompt.txt",
+      "prompt_sha256": "bae2ddb21a29a52f51186bbaf1593b7c78ccb41365e2c840237dcf5743e5e12d",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.018518518518518517,
+        "crop_xywh": [
+          256,
+          313,
+          756,
+          663
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_emergency_repair.png",
+      "seconds": 1,
+      "sha256": "3103ed607f11f088b111655546e12160312e39d1b660cc52a024d12b2a928acc",
+      "source": "raw/icon-emergency-repair-r1.png",
+      "source_sha256": "b97994d47362ab7e5d643cf1ba984f5f752d20f2010971daf04e0fca8dbd459e"
+    },
+    {
+      "anim": "hud_emergency_repair",
+      "call": "raw/icon-emergency-repair-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_emergency_repair/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static emergency_repair",
+      "prompt": "raw/icon-emergency-repair-r1.prompt.txt",
+      "prompt_sha256": "bae2ddb21a29a52f51186bbaf1593b7c78ccb41365e2c840237dcf5743e5e12d",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.010582010582010581,
+        "crop_xywh": [
+          256,
+          313,
+          756,
+          663
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_emergency_repair.png",
+      "seconds": 1,
+      "sha256": "0de2a62a22d7b55c8307225fe9c1494d4492a88ef5bb4239511f38247829f051",
+      "source": "raw/icon-emergency-repair-r1.png",
+      "source_sha256": "b97994d47362ab7e5d643cf1ba984f5f752d20f2010971daf04e0fca8dbd459e"
+    },
+    {
+      "anim": "icon_decoy",
+      "call": "raw/icon-decoy-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_decoy/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static decoy",
+      "prompt": "raw/icon-decoy-r1.prompt.txt",
+      "prompt_sha256": "5abfc9b0608d72dda5b2647f8e537884acc174315f8c5cd04a543afd2ea05f5d",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          4
+        ],
+        "content_scale": 0.014198782961460446,
+        "crop_xywh": [
+          135,
+          306,
+          986,
+          663
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_decoy.png",
+      "seconds": 1,
+      "sha256": "bbfe379b326b7ad027c224a06b87cf941c075ac4807b90bc48901476db2e34fc",
+      "source": "raw/icon-decoy-r1.png",
+      "source_sha256": "cf5617e67a0289bed22c136b280f50b980130df89dd329e189231d8b9dab345b"
+    },
+    {
+      "anim": "hud_decoy",
+      "call": "raw/icon-decoy-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_decoy/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static decoy",
+      "prompt": "raw/icon-decoy-r1.prompt.txt",
+      "prompt_sha256": "5abfc9b0608d72dda5b2647f8e537884acc174315f8c5cd04a543afd2ea05f5d",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.008113590263691683,
+        "crop_xywh": [
+          135,
+          306,
+          986,
+          663
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_decoy.png",
+      "seconds": 1,
+      "sha256": "827213a564cd1982be1bb31f4a6f583ab7831de581cbcfad5089333df3e7e9c7",
+      "source": "raw/icon-decoy-r1.png",
+      "source_sha256": "cf5617e67a0289bed22c136b280f50b980130df89dd329e189231d8b9dab345b"
+    },
+    {
+      "anim": "icon_beehive",
+      "call": "raw/icon-beehive-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_beehive/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static beehive",
+      "prompt": "raw/icon-beehive-r1.prompt.txt",
+      "prompt_sha256": "e5a7f83f799d3d8b8352303981a8c78533349c3bc514e7e794699effe4552c74",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.020319303338171262,
+        "crop_xywh": [
+          295,
+          369,
+          689,
+          618
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_beehive.png",
+      "seconds": 1,
+      "sha256": "820211f1aa671f4ad1da148522451688e0942df2aa183fc286dbf80748f605c8",
+      "source": "raw/icon-beehive-r1.png",
+      "source_sha256": "45d2cea5aa2cbfbc518a4a0a103681e7a768cf73b293caf3b4ae33036371587e"
+    },
+    {
+      "anim": "hud_beehive",
+      "call": "raw/icon-beehive-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_beehive/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static beehive",
+      "prompt": "raw/icon-beehive-r1.prompt.txt",
+      "prompt_sha256": "e5a7f83f799d3d8b8352303981a8c78533349c3bc514e7e794699effe4552c74",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.011611030478955007,
+        "crop_xywh": [
+          295,
+          369,
+          689,
+          618
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_beehive.png",
+      "seconds": 1,
+      "sha256": "8286b7cae438b3e49841723c1d2a7888e14d09b91dfdff35858a391db3bfca93",
+      "source": "raw/icon-beehive-r1.png",
+      "source_sha256": "45d2cea5aa2cbfbc518a4a0a103681e7a768cf73b293caf3b4ae33036371587e"
+    },
+    {
+      "anim": "icon_catapult",
+      "call": "raw/icon-catapult-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_catapult/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static catapult",
+      "prompt": "raw/icon-catapult-r1.prompt.txt",
+      "prompt_sha256": "1fd37b4370301a23bde66282589e04bc8ba5463b5a91eed3999753984f402cd9",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "content_scale": 0.013861386138613862,
+        "crop_xywh": [
+          173,
+          261,
+          1010,
+          776
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_catapult.png",
+      "seconds": 1,
+      "sha256": "cb32af559ea699add5cbc338a335c463b53194f9afbd8d67c4781083d48efeef",
+      "source": "raw/icon-catapult-r1.png",
+      "source_sha256": "178e6f834258c61670c6852875dea2ac7ce81fcaf9ea593558e0c8191928409e"
+    },
+    {
+      "anim": "hud_catapult",
+      "call": "raw/icon-catapult-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_catapult/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static catapult",
+      "prompt": "raw/icon-catapult-r1.prompt.txt",
+      "prompt_sha256": "1fd37b4370301a23bde66282589e04bc8ba5463b5a91eed3999753984f402cd9",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.007920792079207921,
+        "crop_xywh": [
+          173,
+          261,
+          1010,
+          776
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_catapult.png",
+      "seconds": 1,
+      "sha256": "08b4e3368c6a5620a1b0060b339fce1cf274f5d521098b822684704fec82f2fe",
+      "source": "raw/icon-catapult-r1.png",
+      "source_sha256": "178e6f834258c61670c6852875dea2ac7ce81fcaf9ea593558e0c8191928409e"
+    },
+    {
+      "anim": "icon_garlic_braid",
+      "call": "raw/icon-garlic-braid-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_garlic_braid/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static garlic_braid",
+      "prompt": "raw/icon-garlic-braid-r1.prompt.txt",
+      "prompt_sha256": "780f2af6aa69012bc4d401f83438470bd8f0bc5fdfa9054c433962c03a3d0f92",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          7
+        ],
+        "content_scale": 0.01545253863134658,
+        "crop_xywh": [
+          414,
+          197,
+          440,
+          906
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_garlic_braid.png",
+      "seconds": 1,
+      "sha256": "6eedf444d1c573b0459fcde5ad3b30fba3008b5f964461aaced0fb2f1b1eb2c8",
+      "source": "raw/icon-garlic-braid-r1.png",
+      "source_sha256": "52764ae231c75a06ac5d227d439edaf8deb72460369363668f38326d6b508343"
+    },
+    {
+      "anim": "hud_garlic_braid",
+      "call": "raw/icon-garlic-braid-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_garlic_braid/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static garlic_braid",
+      "prompt": "raw/icon-garlic-braid-r1.prompt.txt",
+      "prompt_sha256": "780f2af6aa69012bc4d401f83438470bd8f0bc5fdfa9054c433962c03a3d0f92",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          4
+        ],
+        "content_scale": 0.008830022075055188,
+        "crop_xywh": [
+          414,
+          197,
+          440,
+          906
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_garlic_braid.png",
+      "seconds": 1,
+      "sha256": "9d6fef5b5ebdecdf30e4c3c3bfb3a43b7e46d6081ae71418163a2d985dd2b905",
+      "source": "raw/icon-garlic-braid-r1.png",
+      "source_sha256": "52764ae231c75a06ac5d227d439edaf8deb72460369363668f38326d6b508343"
+    },
+    {
+      "anim": "icon_searchlight",
+      "call": "raw/icon-searchlight-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_searchlight/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static searchlight",
+      "prompt": "raw/icon-searchlight-r1.prompt.txt",
+      "prompt_sha256": "d8489aff0885085dd500f9ccd901cf7069d8b2dc927e2d94b9635f8e11f71863",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.020802377414561663,
+        "crop_xywh": [
+          344,
+          306,
+          636,
+          673
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_searchlight.png",
+      "seconds": 1,
+      "sha256": "51e566f20c2267c4166cba664cd4b8a080f076d128060bb714b4e2a4659dde9d",
+      "source": "raw/icon-searchlight-r1.png",
+      "source_sha256": "f0bbc8a2088328aa0aa5d8678beca337ba34da8d4d8c6ffd0d27f2464c179c3c"
+    },
+    {
+      "anim": "hud_searchlight",
+      "call": "raw/icon-searchlight-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_searchlight/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static searchlight",
+      "prompt": "raw/icon-searchlight-r1.prompt.txt",
+      "prompt_sha256": "d8489aff0885085dd500f9ccd901cf7069d8b2dc927e2d94b9635f8e11f71863",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          4
+        ],
+        "content_scale": 0.01188707280832095,
+        "crop_xywh": [
+          344,
+          306,
+          636,
+          673
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_searchlight.png",
+      "seconds": 1,
+      "sha256": "b8cdf5826be8d0baa833bf3fd819dcfdc78145afa433d9f72c48bc468713400d",
+      "source": "raw/icon-searchlight-r1.png",
+      "source_sha256": "f0bbc8a2088328aa0aa5d8678beca337ba34da8d4d8c6ffd0d27f2464c179c3c"
+    },
+    {
+      "anim": "icon_electric_fence",
+      "call": "raw/icon-electric-fence-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_electric_fence/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static electric_fence",
+      "prompt": "raw/icon-electric-fence-r1.prompt.txt",
+      "prompt_sha256": "376b4997b6dcf2a7f7b48724c44c0097f141c393cba43cd93d78cf276cd64e5d",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "content_scale": 0.027888446215139442,
+        "crop_xywh": [
+          376,
+          501,
+          502,
+          356
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_electric_fence.png",
+      "seconds": 1,
+      "sha256": "beeda57e9e730f8b67fa4270decdcfc1bbd59e4cd38b89afcce50b0d635e48c6",
+      "source": "raw/icon-electric-fence-r1.png",
+      "source_sha256": "9e20761ec18ac94a1afa024c26a256e93c9bf0fd83ec7ff9e801079f792a875b"
+    },
+    {
+      "anim": "hud_electric_fence",
+      "call": "raw/icon-electric-fence-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_electric_fence/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static electric_fence",
+      "prompt": "raw/icon-electric-fence-r1.prompt.txt",
+      "prompt_sha256": "376b4997b6dcf2a7f7b48724c44c0097f141c393cba43cd93d78cf276cd64e5d",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.01593625498007968,
+        "crop_xywh": [
+          376,
+          501,
+          502,
+          356
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_electric_fence.png",
+      "seconds": 1,
+      "sha256": "f5386aea68897ab42c8aa4b99622b69475228175ee3e6f92d0777ff2b8dd81f4",
+      "source": "raw/icon-electric-fence-r1.png",
+      "source_sha256": "9e20761ec18ac94a1afa024c26a256e93c9bf0fd83ec7ff9e801079f792a875b"
+    },
+    {
+      "anim": "icon_wall_2",
+      "call": "raw/icon-wall-2-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_wall_2/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static wall_2",
+      "prompt": "raw/icon-wall-2-r1.prompt.txt",
+      "prompt_sha256": "2f2168fcf6e2fa297d574176978b582629ddd69a0fdd6991f15f432b054acf4e",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.017994858611825194,
+        "crop_xywh": [
+          263,
+          344,
+          778,
+          674
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_wall_2.png",
+      "seconds": 1,
+      "sha256": "a02733e3a7536799e7a742d7436f19a8d4bf54c417317d508807ed45b4ab3dd0",
+      "source": "raw/icon-wall-2-r1.png",
+      "source_sha256": "243042ec4717ffd5c2f3a185d7fa0f02205f73011f1c30faa2de6e101cc52492"
+    },
+    {
+      "anim": "hud_wall_2",
+      "call": "raw/icon-wall-2-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_wall_2/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static wall_2",
+      "prompt": "raw/icon-wall-2-r1.prompt.txt",
+      "prompt_sha256": "2f2168fcf6e2fa297d574176978b582629ddd69a0fdd6991f15f432b054acf4e",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "content_scale": 0.010282776349614395,
+        "crop_xywh": [
+          263,
+          344,
+          778,
+          674
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_wall_2.png",
+      "seconds": 1,
+      "sha256": "dd3b289cda2b3e303db98b29d6e97b6b4b4c08c674b433196f264004dd123330",
+      "source": "raw/icon-wall-2-r1.png",
+      "source_sha256": "243042ec4717ffd5c2f3a185d7fa0f02205f73011f1c30faa2de6e101cc52492"
+    },
+    {
+      "anim": "icon_sandbag_wall",
+      "call": "raw/icon-sandbag-wall-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/icon_sandbag_wall/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "static sandbag_wall",
+      "prompt": "raw/icon-sandbag-wall-r1.prompt.txt",
+      "prompt_sha256": "389985ad810162cff1b94141e6a7206b9e0faa662ce6cac7f30ba104c6ed8d0b",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          3
+        ],
+        "content_scale": 0.014909478168264111,
+        "crop_xywh": [
+          158,
+          505,
+          939,
+          424
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_sandbag_wall.png",
+      "seconds": 1,
+      "sha256": "605aa3b5ac2b151039988a45c4d628db6a46b7ba511632b186094b902e093796",
+      "source": "raw/icon-sandbag-wall-r1.png",
+      "source_sha256": "7d8ace99d8712855d73a0cb0c1d0d45976fff3a25b1636553e0b509b59b7c9c0"
+    },
+    {
+      "anim": "hud_sandbag_wall",
+      "call": "raw/icon-sandbag-wall-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/hud_sandbag_wall/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "static sandbag_wall",
+      "prompt": "raw/icon-sandbag-wall-r1.prompt.txt",
+      "prompt_sha256": "389985ad810162cff1b94141e6a7206b9e0faa662ce6cac7f30ba104c6ed8d0b",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          2
+        ],
+        "content_scale": 0.008519701810436636,
+        "crop_xywh": [
+          158,
+          505,
+          939,
+          424
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_sandbag_wall.png",
+      "seconds": 1,
+      "sha256": "449bc395d39447c5324cda56cd3840755ce1ae3b3c099009c5f9b66276758b8b",
+      "source": "raw/icon-sandbag-wall-r1.png",
+      "source_sha256": "7d8ace99d8712855d73a0cb0c1d0d45976fff3a25b1636553e0b509b59b7c9c0"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "tudo aprovado, falta mais?",
+    "scope": "complete_reviewed_delivery"
+  },
+  "pack": "A045",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "pending_review_files": [],
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "role": "approvedhotbarstylemaster",
+      "sha256": "23cc5f7567d1eda2969b6e08fe8c7282964f9e50e94a2060331b26e0cbe1d4e0"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\flare-r1.png",
+      "role": "approved flare POWERFAMILY style only, not subject",
+      "sha256": "cada43ef7a8c0695297812a9e18678171028ecaf0d08805eb79442850182b7c2"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "projectstyle",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\native\\dog_sit\\west\\01.png",
+      "role": "approved dog identity",
+      "sha256": "37a9b23974755eaf67d4b44687b9a7915ee7fcc0fc561d6b7b519e1c0fb38391"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A037-decoy\\native\\decoy\\none\\01.png",
+      "role": "approved A037 decoy subject identity",
+      "sha256": "4a42542fdd1779f816d9f6dd6da0537ab7efcb0f6450724d8a656abf4a3289f7"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\native\\beehive\\none\\01.png",
+      "role": "subject worldidentity reference",
+      "sha256": "e69b56f9fa843e9fa1aec37f361054fb1614d3f731b64d24a1365b51f95c37da"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\native\\catapult\\none\\01.png",
+      "role": "subject worldidentity reference",
+      "sha256": "5a50e3f8a9cf8235e267ca9eb18b7bb67ffa78439e08642861caf9fbb9197aaa"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A040-garlic-braid\\native\\garlic_braid\\none\\01.png",
+      "role": "subject worldidentity reference",
+      "sha256": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\native\\searchlight\\none\\01.png",
+      "role": "subject worldidentity reference; candidate-reference exception authorized",
+      "sha256": "1fe201a4caa32a2dc7812918acd35220ff20a6e1ea3868e263c14a0c79b7bb79"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\native\\electric_fence_join_10\\none\\01.png",
+      "role": "subject worldidentity reference; candidate-reference exception authorized",
+      "sha256": "8668fdeb255bb949744dccfad009384dacd8df9755706a35607c076e98aee2d0"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\native\\wall_2_horizontal\\none\\01.png",
+      "role": "authorized candidateworldidentity reference",
+      "sha256": "3d82316cf32ad585bca4561ae332f3a45ea2dae4abccf7c75b6ffe2eb1b66a31"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\wall-r1.png",
+      "role": "approvedstonewall iconframingreference",
+      "sha256": "662f925b48db04f0162d1a5322abbc17facb6ed9543484511ec955c51b2e5729"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\native\\sandbag_wall_horizontal\\none\\01.png",
+      "role": "authorized candidateworldidentity reference",
+      "sha256": "81d67511e87a906a38ea4834fae6c9cb35ae4bd9bb889f6d6c8eb6bf8cc17563"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A045-power-weapon-icons",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "Power icons and the new weapons' icons",
+  "tool": "built-in ImageGen"
+}

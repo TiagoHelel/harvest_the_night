@@ -146,6 +146,9 @@ func _families(speaking: String, high: bool) -> void:
 			GameData.PEPPER_SEED, GameData.SUNFLOWER_SEED, GameData.MELON_SEED],
 		"A022": GameData.sorted_names(GameData.FISH_SPECIES.keys()),
 		"A037": [&"zombie_bait"],
+		# Task 0244: the powers' pictures and the new defences' icons.
+		"A045": [&"farm_bell", &"call_dog", &"emergency_repair", &"decoy", &"beehive", &"catapult",
+			&"garlic_braid", &"searchlight", &"electric_fence", &"wall_2", &"sandbag_wall"],
 		"A032": [GameData.WINE, GameData.JUICE, GameData.JELLY, GameData.PICKLES, GameData.CHEESE,
 			GameData.BUTTER, GameData.CLOTH, GameData.SANDBAG, GameData.FLOUR, GameData.SUGAR,
 			GameData.BREAD]}

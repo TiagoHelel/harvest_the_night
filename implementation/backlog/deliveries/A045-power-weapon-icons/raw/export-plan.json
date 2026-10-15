@@ -1,0 +1,878 @@
+{
+  "title": "Power icons and the new weapons' icons",
+  "date": "2026-10-14",
+  "status": "review",
+  "palette_mode": "A",
+  "expected_files": 22,
+  "files": [
+    {
+      "anim": "icon_farm_bell",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static farm_bell",
+      "output": "native/icon_farm_bell/none/01.png",
+      "runtime_name": "sprites/ui/icon_farm_bell.png",
+      "source": "raw/icon-farm-bell-r1.png",
+      "prompt": "raw/icon-farm-bell-r1.prompt.txt",
+      "call": "raw/icon-farm-bell-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          338,
+          301,
+          610,
+          663
+        ],
+        "content_scale": 0.021116138763197588,
+        "content_anchor_xy": [
+          6,
+          7
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_farm_bell",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static farm_bell",
+      "output": "native/hud_farm_bell/none/01.png",
+      "runtime_name": "sprites/ui/hud_farm_bell.png",
+      "source": "raw/icon-farm-bell-r1.png",
+      "prompt": "raw/icon-farm-bell-r1.prompt.txt",
+      "call": "raw/icon-farm-bell-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          338,
+          301,
+          610,
+          663
+        ],
+        "content_scale": 0.012066365007541479,
+        "content_anchor_xy": [
+          3,
+          4
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_call_dog",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static call_dog",
+      "output": "native/icon_call_dog/none/01.png",
+      "runtime_name": "sprites/ui/icon_call_dog.png",
+      "source": "raw/icon-call-dog-r1.png",
+      "prompt": "raw/icon-call-dog-r1.prompt.txt",
+      "call": "raw/icon-call-dog-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          302,
+          254,
+          673,
+          796
+        ],
+        "content_scale": 0.017587939698492462,
+        "content_anchor_xy": [
+          6,
+          7
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_call_dog",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static call_dog",
+      "output": "native/hud_call_dog/none/01.png",
+      "runtime_name": "sprites/ui/hud_call_dog.png",
+      "source": "raw/icon-call-dog-r1.png",
+      "prompt": "raw/icon-call-dog-r1.prompt.txt",
+      "call": "raw/icon-call-dog-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          302,
+          254,
+          673,
+          796
+        ],
+        "content_scale": 0.010050251256281407,
+        "content_anchor_xy": [
+          3,
+          4
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_emergency_repair",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static emergency_repair",
+      "output": "native/icon_emergency_repair/none/01.png",
+      "runtime_name": "sprites/ui/icon_emergency_repair.png",
+      "source": "raw/icon-emergency-repair-r1.png",
+      "prompt": "raw/icon-emergency-repair-r1.prompt.txt",
+      "call": "raw/icon-emergency-repair-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          256,
+          313,
+          756,
+          663
+        ],
+        "content_scale": 0.018518518518518517,
+        "content_anchor_xy": [
+          7,
+          6
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_emergency_repair",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static emergency_repair",
+      "output": "native/hud_emergency_repair/none/01.png",
+      "runtime_name": "sprites/ui/hud_emergency_repair.png",
+      "source": "raw/icon-emergency-repair-r1.png",
+      "prompt": "raw/icon-emergency-repair-r1.prompt.txt",
+      "call": "raw/icon-emergency-repair-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          256,
+          313,
+          756,
+          663
+        ],
+        "content_scale": 0.010582010582010581,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_decoy",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static decoy",
+      "output": "native/icon_decoy/none/01.png",
+      "runtime_name": "sprites/ui/icon_decoy.png",
+      "source": "raw/icon-decoy-r1.png",
+      "prompt": "raw/icon-decoy-r1.prompt.txt",
+      "call": "raw/icon-decoy-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          135,
+          306,
+          986,
+          663
+        ],
+        "content_scale": 0.014198782961460446,
+        "content_anchor_xy": [
+          7,
+          4
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_decoy",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static decoy",
+      "output": "native/hud_decoy/none/01.png",
+      "runtime_name": "sprites/ui/hud_decoy.png",
+      "source": "raw/icon-decoy-r1.png",
+      "prompt": "raw/icon-decoy-r1.prompt.txt",
+      "call": "raw/icon-decoy-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          135,
+          306,
+          986,
+          663
+        ],
+        "content_scale": 0.008113590263691683,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_beehive",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static beehive",
+      "output": "native/icon_beehive/none/01.png",
+      "runtime_name": "sprites/ui/icon_beehive.png",
+      "source": "raw/icon-beehive-r1.png",
+      "prompt": "raw/icon-beehive-r1.prompt.txt",
+      "call": "raw/icon-beehive-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          295,
+          369,
+          689,
+          618
+        ],
+        "content_scale": 0.020319303338171262,
+        "content_anchor_xy": [
+          7,
+          6
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_beehive",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static beehive",
+      "output": "native/hud_beehive/none/01.png",
+      "runtime_name": "sprites/ui/hud_beehive.png",
+      "source": "raw/icon-beehive-r1.png",
+      "prompt": "raw/icon-beehive-r1.prompt.txt",
+      "call": "raw/icon-beehive-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          295,
+          369,
+          689,
+          618
+        ],
+        "content_scale": 0.011611030478955007,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_catapult",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static catapult",
+      "output": "native/icon_catapult/none/01.png",
+      "runtime_name": "sprites/ui/icon_catapult.png",
+      "source": "raw/icon-catapult-r1.png",
+      "prompt": "raw/icon-catapult-r1.prompt.txt",
+      "call": "raw/icon-catapult-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          173,
+          261,
+          1010,
+          776
+        ],
+        "content_scale": 0.013861386138613862,
+        "content_anchor_xy": [
+          7,
+          5
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_catapult",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static catapult",
+      "output": "native/hud_catapult/none/01.png",
+      "runtime_name": "sprites/ui/hud_catapult.png",
+      "source": "raw/icon-catapult-r1.png",
+      "prompt": "raw/icon-catapult-r1.prompt.txt",
+      "call": "raw/icon-catapult-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          173,
+          261,
+          1010,
+          776
+        ],
+        "content_scale": 0.007920792079207921,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_garlic_braid",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static garlic_braid",
+      "output": "native/icon_garlic_braid/none/01.png",
+      "runtime_name": "sprites/ui/icon_garlic_braid.png",
+      "source": "raw/icon-garlic-braid-r1.png",
+      "prompt": "raw/icon-garlic-braid-r1.prompt.txt",
+      "call": "raw/icon-garlic-braid-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          414,
+          197,
+          440,
+          906
+        ],
+        "content_scale": 0.01545253863134658,
+        "content_anchor_xy": [
+          3,
+          7
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_garlic_braid",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static garlic_braid",
+      "output": "native/hud_garlic_braid/none/01.png",
+      "runtime_name": "sprites/ui/hud_garlic_braid.png",
+      "source": "raw/icon-garlic-braid-r1.png",
+      "prompt": "raw/icon-garlic-braid-r1.prompt.txt",
+      "call": "raw/icon-garlic-braid-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          414,
+          197,
+          440,
+          906
+        ],
+        "content_scale": 0.008830022075055188,
+        "content_anchor_xy": [
+          2,
+          4
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_searchlight",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static searchlight",
+      "output": "native/icon_searchlight/none/01.png",
+      "runtime_name": "sprites/ui/icon_searchlight.png",
+      "source": "raw/icon-searchlight-r1.png",
+      "prompt": "raw/icon-searchlight-r1.prompt.txt",
+      "call": "raw/icon-searchlight-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          344,
+          306,
+          636,
+          673
+        ],
+        "content_scale": 0.020802377414561663,
+        "content_anchor_xy": [
+          6,
+          7
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_searchlight",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static searchlight",
+      "output": "native/hud_searchlight/none/01.png",
+      "runtime_name": "sprites/ui/hud_searchlight.png",
+      "source": "raw/icon-searchlight-r1.png",
+      "prompt": "raw/icon-searchlight-r1.prompt.txt",
+      "call": "raw/icon-searchlight-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          344,
+          306,
+          636,
+          673
+        ],
+        "content_scale": 0.01188707280832095,
+        "content_anchor_xy": [
+          4,
+          4
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_electric_fence",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static electric_fence",
+      "output": "native/icon_electric_fence/none/01.png",
+      "runtime_name": "sprites/ui/icon_electric_fence.png",
+      "source": "raw/icon-electric-fence-r1.png",
+      "prompt": "raw/icon-electric-fence-r1.prompt.txt",
+      "call": "raw/icon-electric-fence-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          376,
+          501,
+          502,
+          356
+        ],
+        "content_scale": 0.027888446215139442,
+        "content_anchor_xy": [
+          7,
+          5
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_electric_fence",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static electric_fence",
+      "output": "native/hud_electric_fence/none/01.png",
+      "runtime_name": "sprites/ui/hud_electric_fence.png",
+      "source": "raw/icon-electric-fence-r1.png",
+      "prompt": "raw/icon-electric-fence-r1.prompt.txt",
+      "call": "raw/icon-electric-fence-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          376,
+          501,
+          502,
+          356
+        ],
+        "content_scale": 0.01593625498007968,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_wall_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static wall_2",
+      "output": "native/icon_wall_2/none/01.png",
+      "runtime_name": "sprites/ui/icon_wall_2.png",
+      "source": "raw/icon-wall-2-r1.png",
+      "prompt": "raw/icon-wall-2-r1.prompt.txt",
+      "call": "raw/icon-wall-2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          263,
+          344,
+          778,
+          674
+        ],
+        "content_scale": 0.017994858611825194,
+        "content_anchor_xy": [
+          7,
+          6
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_wall_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static wall_2",
+      "output": "native/hud_wall_2/none/01.png",
+      "runtime_name": "sprites/ui/hud_wall_2.png",
+      "source": "raw/icon-wall-2-r1.png",
+      "prompt": "raw/icon-wall-2-r1.prompt.txt",
+      "call": "raw/icon-wall-2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          263,
+          344,
+          778,
+          674
+        ],
+        "content_scale": 0.010282776349614395,
+        "content_anchor_xy": [
+          4,
+          3
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "icon_sandbag_wall",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static sandbag_wall",
+      "output": "native/icon_sandbag_wall/none/01.png",
+      "runtime_name": "sprites/ui/icon_sandbag_wall.png",
+      "source": "raw/icon-sandbag-wall-r1.png",
+      "prompt": "raw/icon-sandbag-wall-r1.prompt.txt",
+      "call": "raw/icon-sandbag-wall-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          158,
+          505,
+          939,
+          424
+        ],
+        "content_scale": 0.014909478168264111,
+        "content_anchor_xy": [
+          7,
+          3
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "hud_sandbag_wall",
+      "dir": "none",
+      "frame": 0,
+      "pose": "static sandbag_wall",
+      "output": "native/hud_sandbag_wall/none/01.png",
+      "runtime_name": "sprites/ui/hud_sandbag_wall.png",
+      "source": "raw/icon-sandbag-wall-r1.png",
+      "prompt": "raw/icon-sandbag-wall-r1.prompt.txt",
+      "call": "raw/icon-sandbag-wall-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          158,
+          505,
+          939,
+          424
+        ],
+        "content_scale": 0.008519701810436636,
+        "content_anchor_xy": [
+          4,
+          2
+        ]
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    }
+  ],
+  "deviations": [
+    {
+      "rule": "Subject reference prerequisite",
+      "owner_words": "Sim, usar candidatas como refer\u00eancia",
+      "change": "Use the available candidate world sprites of A028/A040/A042/A043 as identity/material references only. Existing approvals are preserved; using a candidate reference does not approve or integrate that art."
+    }
+  ],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [],
+  "quality_issues": []
+}

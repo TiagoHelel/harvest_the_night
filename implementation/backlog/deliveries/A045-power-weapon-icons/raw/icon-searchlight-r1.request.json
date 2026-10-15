@@ -1,0 +1,20 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Usecase: stylized-concept. Create ONE isolated NIGHT HOTBAR ICON for HARVEST THE NIGHT. Image1 is A005 gun-tower icon STYLE MASTER only: same framing, chunkycoloredoutline, 2–3materialplanes, objectfill, upperleft neutraldaylight, squarepixelclusters, not the weaponitself. Image2 is the requestedsubject identity/material reference, not a backdrop. Image3 is projectstyle only. This is a REALTINY inventorysprite: final16x16pivot8,8 maxvisible14; also SAMEsourcecut10x10pivot5,5 maxvisible8. Broad SIMPLEBOLD silhouette thatreads ateight visiblepixels, no thinlinedecoration,hatching,microtexture or detailsneeding30px. Onecenteredcompleteobject withgenerousoutertransparentpadding, approximatelysquareframing. Crisp pixelart, darkvioletcoloredink, no softpainting, antialiasing, smoothgradients, halo/glow, shadow, floor, scene, panel, frame, lettering,numbers, UI, labels or watermark. TRUEtransparentbackground. No alternateviews, variants, contact sheetor multipleicons. SubjectSEARCHLIGHT: sameapprovedLAMPDRUM onitsU-SHAPEDYOKE, tiltedtoUPPERRIGHT. Croptothelamp/yokeonly, no tallstand or base. UnlitDARKGLASS roundlens withONLYONESMALLpalehighlight, darksteelrim andwarmwood/metalbracketofreference. Broadclearrounddrum shape, no lightbeam, rays, glow, burningfire, gunbarrel or goldcoin.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A005-night-icons\\raw\\gun_tower-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A041-searchlight\\native\\searchlight\\none\\01.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-feeba38b-1c53-480e-af46-fd6b9c7479c7.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "approved hotbaricon style master",
+    "subject worldidentity reference; candidate-reference exception authorized",
+    "projectstyle reference"
+  ]
+}

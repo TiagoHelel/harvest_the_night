@@ -44,6 +44,9 @@ PAIRS = {
              'sunfish', 'tilapia', 'trout', 'old_catfish', 'golden_queen', 'ghost_pike', 'ice_sturgeon'],
     # Task 0236: the zombie bait's kit (0225).
     'A037': ['zombie_bait'],
+    # Task 0244: the powers' pictures and the new defences' icons.
+    'A045': ['farm_bell', 'call_dog', 'emergency_repair', 'decoy', 'beehive', 'catapult',
+             'garlic_braid', 'searchlight', 'electric_fence', 'wall_2', 'sandbag_wall'],
 }
 
 ## A022's book portraits (task 0205): each species' third cut, 32x32 at
