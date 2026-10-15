@@ -61106,6 +61106,858 @@
       ],
       "output_sha256": "b6efda5650b2b748f2d25726aae6e1ec8e75885080c1bf0b200354c64c1543fd",
       "display_role": "compact_hud"
+    },
+    {
+      "id": "buildings/beehive",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11",
+      "crop_xywh": [
+        156,
+        126,
+        360,
+        456
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 1,
+      "content_scale": 0.046052631578947366,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive.png",
+      "muzzle_region_xywh": [
+        17,
+        34,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        19,
+        36
+      ],
+      "muzzles_xy": [
+        [
+          19,
+          36
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.call.json",
+          "sha256": "8685af8fac79b25ceb4c86b8f941392697cc217af2311eb034c40aedd1828be0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive/none/01.png",
+          "sha256": "e69b56f9fa843e9fa1aec37f361054fb1614d3f731b64d24a1365b51f95c37da",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        8,
+        21
+      ],
+      "output_sha256": "c96f27ee7b7293cb4d24b15eec1c51e8d3947d68f08310e2d06a9b450cd67809"
+    },
+    {
+      "id": "buildings/beehive_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11",
+      "crop_xywh": [
+        762,
+        135,
+        363,
+        457
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 1,
+      "variant_of": "buildings/beehive",
+      "content_scale": 0.046052631578947366,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive_hurt.png",
+      "muzzle_region_xywh": [
+        17,
+        34,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        19,
+        36
+      ],
+      "muzzles_xy": [
+        [
+          19,
+          36
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.call.json",
+          "sha256": "8685af8fac79b25ceb4c86b8f941392697cc217af2311eb034c40aedd1828be0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive_hurt/none/01.png",
+          "sha256": "b76c3fba33a56cba37c61c9a6f355345340817d6211231f16c0a38937d1ad54d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        8,
+        21
+      ],
+      "output_sha256": "cada548fb91912f64f8ef3a81067bac672d9dbbd0f971250d379afecb70f5713"
+    },
+    {
+      "id": "buildings/beehive_fire",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11",
+      "crop_xywh": [
+        156,
+        709,
+        364,
+        455
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 1,
+      "variant_of": "buildings/beehive",
+      "content_scale": 0.046052631578947366,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive_fire.png",
+      "muzzle_region_xywh": [
+        17,
+        34,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        19,
+        36
+      ],
+      "muzzles_xy": [
+        [
+          19,
+          36
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.call.json",
+          "sha256": "8685af8fac79b25ceb4c86b8f941392697cc217af2311eb034c40aedd1828be0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive_fire/none/01.png",
+          "sha256": "0cd9ea5da3c58e3f9bace88fdd645a93a4d2b28e866079ae5467f1682161d813",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        8,
+        21
+      ],
+      "output_sha256": "87d3adf4eab9f5db33305974e76b1bb9334447b669dc2c05e18df424cb399e51"
+    },
+    {
+      "id": "buildings/beehive_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11",
+      "crop_xywh": [
+        773,
+        931,
+        334,
+        219
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 1,
+      "variant_of": "buildings/beehive",
+      "content_scale": 0.046052631578947366,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.call.json",
+          "sha256": "8685af8fac79b25ceb4c86b8f941392697cc217af2311eb034c40aedd1828be0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive_wreck/none/01.png",
+          "sha256": "db24aa7d9534345ea2752c82d1dfa5ff0cc26db6bbc255c0593d027ec6f7375f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        7,
+        10
+      ],
+      "output_sha256": "a21e0655b2750d1aa18c7e8242cfedd523a1a48a5fd2d6f4ce362f5d5bf62aae"
+    },
+    {
+      "id": "buildings/beehive_2",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e",
+      "crop_xywh": [
+        133,
+        101,
+        413,
+        507
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 2,
+      "content_scale": 0.0523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive_2.png",
+      "muzzle_region_xywh": [
+        16,
+        31,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        18,
+        33
+      ],
+      "muzzles_xy": [
+        [
+          18,
+          33
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.call.json",
+          "sha256": "94c43b78404243c04503e103c2e39cc70812da2e7ed62197fa034a24cf239c42",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive_2/none/01.png",
+          "sha256": "0db90e8ba4d3002d3217845a6c03c1d53532dece35a5cce31a7fff0ea520525b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        11,
+        27
+      ],
+      "output_sha256": "e5659779bcbe8947ed6fd98969d87585b720f69617280fa2f9638c8219ff5e5b"
+    },
+    {
+      "id": "buildings/beehive_2_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e",
+      "crop_xywh": [
+        742,
+        102,
+        412,
+        508
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 2,
+      "variant_of": "buildings/beehive_2",
+      "content_scale": 0.0523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive_2_hurt.png",
+      "muzzle_region_xywh": [
+        16,
+        31,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        18,
+        33
+      ],
+      "muzzles_xy": [
+        [
+          18,
+          33
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.call.json",
+          "sha256": "94c43b78404243c04503e103c2e39cc70812da2e7ed62197fa034a24cf239c42",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive_2_hurt/none/01.png",
+          "sha256": "b666819a5ca2251919fc3b25800073614bee3efbdbc8b2a33c76b0394977cd32",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        11,
+        27
+      ],
+      "output_sha256": "fb9d076a74afd1c7ee96b0615184592d642eb27abe5820c1ab5f52bb9ebe6f89"
+    },
+    {
+      "id": "buildings/beehive_2_fire",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e",
+      "crop_xywh": [
+        138,
+        704,
+        432,
+        500
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 2,
+      "variant_of": "buildings/beehive_2",
+      "content_scale": 0.0523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive_2_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive_2_fire.png",
+      "muzzle_region_xywh": [
+        16,
+        31,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        18,
+        33
+      ],
+      "muzzles_xy": [
+        [
+          18,
+          33
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.call.json",
+          "sha256": "94c43b78404243c04503e103c2e39cc70812da2e7ed62197fa034a24cf239c42",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive_2_fire/none/01.png",
+          "sha256": "d2f0549fbf4144fc577f00c74de3e7b936103467ec8690b7d71ba3ff5299f9ac",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        11,
+        26
+      ],
+      "output_sha256": "67cac400aaa59a496d91c6b8ffb126401a37f321f0a4b20d97fbd9d286d69ce6"
+    },
+    {
+      "id": "buildings/beehive_2_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/beehive/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e",
+      "crop_xywh": [
+        727,
+        914,
+        426,
+        285
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "beehive",
+      "tower_level": 2,
+      "variant_of": "buildings/beehive_2",
+      "content_scale": 0.0523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/beehive_2_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/beehive_2_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/beehive-l2-r1.call.json",
+          "sha256": "94c43b78404243c04503e103c2e39cc70812da2e7ed62197fa034a24cf239c42",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/beehive_2_wreck/none/01.png",
+          "sha256": "1b0dca555e2e3a1a88bbd12ed93c65ef24f629eb41b5474f545fc2501e4487a9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        11,
+        15
+      ],
+      "output_sha256": "08ee8cade8e2d4b9334d8d902726dce3fb00f7489a703790e6da341b78f450cb"
+    },
+    {
+      "id": "effects/bee_swarm_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bee_swarm/bee-swarm-r1.png",
+      "source_sha256": "b0ca10c7b3ec9859b109a0dcd59066725843d818fabb4928cdfa21af33a927e9",
+      "crop_xywh": [
+        245,
+        252,
+        258,
+        199
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.023255813953488372,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "animation": "effects/bee_swarm",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "bee_swarm",
+      "fx_origin": "center",
+      "output": "sprites/effects/bee_swarm_0.png",
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/bee-swarm-r1.prompt.txt",
+      "prompt_sha256": "aa65f647a927d582cfed09fefe40cd06256bdc7439b28d2a29d3b8bf444945cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/bee-swarm-r1.call.json",
+          "sha256": "c3b3b0393739fab5a0bfedcf60da59fc5e9582d80100ecfa5d54f7f8631b4f4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/bee_swarm/none/01.png",
+          "sha256": "fd4dcea7cac0c3bf19b1eeb52f82f5c8ac6de1a2200fe37819d5aa6b521561a1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "output_sha256": "7143e705407fc623000acd675035071d2a1560518648289aedcf678ab2118673"
+    },
+    {
+      "id": "effects/bee_swarm_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bee_swarm/bee-swarm-r1.png",
+      "source_sha256": "b0ca10c7b3ec9859b109a0dcd59066725843d818fabb4928cdfa21af33a927e9",
+      "crop_xywh": [
+        958,
+        234,
+        241,
+        218
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.023255813953488372,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "animation": "effects/bee_swarm",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "bee_swarm",
+      "fx_origin": "center",
+      "variant_of": "effects/bee_swarm_0",
+      "output": "sprites/effects/bee_swarm_1.png",
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/bee-swarm-r1.prompt.txt",
+      "prompt_sha256": "aa65f647a927d582cfed09fefe40cd06256bdc7439b28d2a29d3b8bf444945cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/bee-swarm-r1.call.json",
+          "sha256": "c3b3b0393739fab5a0bfedcf60da59fc5e9582d80100ecfa5d54f7f8631b4f4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/bee_swarm/none/02.png",
+          "sha256": "e8954fe37c9fada0f16299d11cfaa74917b4a80d2f91bbb37a2ce18a6112717c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "output_sha256": "f5c221fa1056dc88884654b1616c3b817b24e433ba1f39c58e965a75ecb0b2ba"
+    },
+    {
+      "id": "effects/bee_swarm_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/bee_swarm/bee-swarm-r1.png",
+      "source_sha256": "b0ca10c7b3ec9859b109a0dcd59066725843d818fabb4928cdfa21af33a927e9",
+      "crop_xywh": [
+        1684,
+        248,
+        248,
+        196
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.023255813953488372,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "animation": "effects/bee_swarm",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "bee_swarm",
+      "fx_origin": "center",
+      "variant_of": "effects/bee_swarm_0",
+      "output": "sprites/effects/bee_swarm_2.png",
+      "prompt": "implementation/backlog/deliveries/A038-beehive/raw/bee-swarm-r1.prompt.txt",
+      "prompt_sha256": "aa65f647a927d582cfed09fefe40cd06256bdc7439b28d2a29d3b8bf444945cc",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/raw/bee-swarm-r1.call.json",
+          "sha256": "c3b3b0393739fab5a0bfedcf60da59fc5e9582d80100ecfa5d54f7f8631b4f4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/native/bee_swarm/none/03.png",
+          "sha256": "a1dc157261f4e459909708c933f74bd41e865320abb80808ab179bff655f3261",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/contract.json",
+          "sha256": "0b272ab2bac67f423bc54a4cc3c4c536ae1b79899b3f0ad8bf0c15fdab7731f4",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A038-beehive/APPROVAL.json",
+          "sha256": "71c99315828163cb9371d84dd35af03871ad87ac279a134f1c8d28bb256ecceb",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A038",
+      "integration_task": "0237",
+      "revision": 1,
+      "approval": "A038 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0237",
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "output_sha256": "41bf9b2877f0a820a53c91717759585fb31beddabb9cd4be38a5a826c6541730"
     }
   ]
 }

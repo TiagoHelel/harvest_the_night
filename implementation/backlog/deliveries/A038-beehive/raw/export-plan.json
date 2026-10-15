@@ -1,0 +1,633 @@
+{
+  "title": "The beehive",
+  "date": "2026-10-13",
+  "status": "approved for integration",
+  "palette_mode": "A",
+  "colour_ramp": [],
+  "expected_files": 11,
+  "files": [
+    {
+      "anim": "beehive",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive/none/01.png",
+      "runtime_name": "sprites/buildings/beehive.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {
+        "muzzle_xy": [
+          19,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            19,
+            36
+          ]
+        ],
+        "muzzle_region_xywh": [
+          17,
+          34,
+          5,
+          5
+        ]
+      },
+      "grounded": true,
+      "source": "raw/beehive-l1-r2.png",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "call": "raw/beehive-l1-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          156,
+          126,
+          360,
+          456
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          640,
+          650
+        ],
+        "content_scale": 0.046052631578947366,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "whole"
+    },
+    {
+      "anim": "beehive_hurt",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/beehive_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {
+        "muzzle_xy": [
+          19,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            19,
+            36
+          ]
+        ],
+        "muzzle_region_xywh": [
+          17,
+          34,
+          5,
+          5
+        ]
+      },
+      "grounded": true,
+      "source": "raw/beehive-l1-r2.png",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "call": "raw/beehive-l1-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          762,
+          135,
+          363,
+          457
+        ],
+        "sheet_cell_xywh": [
+          640,
+          0,
+          614,
+          650
+        ],
+        "content_scale": 0.046052631578947366,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "hurt"
+    },
+    {
+      "anim": "beehive_fire",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive_fire/none/01.png",
+      "runtime_name": "sprites/buildings/beehive_fire.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {
+        "muzzle_xy": [
+          19,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            19,
+            36
+          ]
+        ],
+        "muzzle_region_xywh": [
+          17,
+          34,
+          5,
+          5
+        ]
+      },
+      "grounded": true,
+      "review_issue": "Original ImageGen fire copy changes hive body pixels outside the bee cue. L1 correction limit reached; composition authorization is pending.",
+      "source": "raw/beehive-l1-r2.png",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "call": "raw/beehive-l1-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          156,
+          709,
+          364,
+          455
+        ],
+        "sheet_cell_xywh": [
+          0,
+          650,
+          640,
+          604
+        ],
+        "content_scale": 0.046052631578947366,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "fire"
+    },
+    {
+      "anim": "beehive_wreck",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/beehive_wreck.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/beehive-l1-r2.png",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "call": "raw/beehive-l1-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          773,
+          931,
+          334,
+          219
+        ],
+        "sheet_cell_xywh": [
+          640,
+          650,
+          614,
+          604
+        ],
+        "content_scale": 0.046052631578947366,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "wreck"
+    },
+    {
+      "anim": "beehive_2",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive_2/none/01.png",
+      "runtime_name": "sprites/buildings/beehive_2.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {
+        "muzzle_xy": [
+          18,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            18,
+            33
+          ]
+        ],
+        "muzzle_region_xywh": [
+          16,
+          31,
+          5,
+          5
+        ]
+      },
+      "grounded": true,
+      "source": "raw/beehive-l2-r1.png",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "call": "raw/beehive-l2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          133,
+          101,
+          413,
+          507
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          648,
+          656
+        ],
+        "content_scale": 0.0523,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "whole"
+    },
+    {
+      "anim": "beehive_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/beehive_2_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {
+        "muzzle_xy": [
+          18,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            18,
+            33
+          ]
+        ],
+        "muzzle_region_xywh": [
+          16,
+          31,
+          5,
+          5
+        ]
+      },
+      "grounded": true,
+      "source": "raw/beehive-l2-r1.png",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "call": "raw/beehive-l2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          742,
+          102,
+          412,
+          508
+        ],
+        "sheet_cell_xywh": [
+          648,
+          0,
+          606,
+          656
+        ],
+        "content_scale": 0.0523,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "hurt"
+    },
+    {
+      "anim": "beehive_2_fire",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive_2_fire/none/01.png",
+      "runtime_name": "sprites/buildings/beehive_2_fire.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {
+        "muzzle_xy": [
+          18,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            18,
+            33
+          ]
+        ],
+        "muzzle_region_xywh": [
+          16,
+          31,
+          5,
+          5
+        ]
+      },
+      "grounded": true,
+      "review_issue": "Original ImageGen fire copy changes hive body pixels outside the bee cue. L1 correction limit reached; composition authorization is pending.",
+      "source": "raw/beehive-l2-r1.png",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "call": "raw/beehive-l2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          138,
+          704,
+          432,
+          500
+        ],
+        "sheet_cell_xywh": [
+          0,
+          656,
+          648,
+          598
+        ],
+        "content_scale": 0.0523,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "fire"
+    },
+    {
+      "anim": "beehive_2_wreck",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/beehive_2_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/beehive_2_wreck.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/beehive-l2-r1.png",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "call": "raw/beehive-l2-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          727,
+          914,
+          426,
+          285
+        ],
+        "sheet_cell_xywh": [
+          648,
+          656,
+          606,
+          598
+        ],
+        "content_scale": 0.0523,
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "pose": "wreck"
+    },
+    {
+      "anim": "bee_swarm",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/bee_swarm/none/01.png",
+      "runtime_name": "sprites/effects/bee_swarm_0.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/bee-swarm-r1.png",
+      "prompt": "raw/bee-swarm-r1.prompt.txt",
+      "call": "raw/bee-swarm-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          245,
+          252,
+          258,
+          199
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          730,
+          724
+        ],
+        "content_scale": 0.023255813953488372,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "gold"
+        ],
+        "mirrored_from": null
+      },
+      "pose": "cloud_a",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ]
+    },
+    {
+      "anim": "bee_swarm",
+      "dir": "none",
+      "frame": 1,
+      "output": "native/bee_swarm/none/02.png",
+      "runtime_name": "sprites/effects/bee_swarm_1.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/bee-swarm-r1.png",
+      "prompt": "raw/bee-swarm-r1.prompt.txt",
+      "call": "raw/bee-swarm-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          958,
+          234,
+          241,
+          218
+        ],
+        "sheet_cell_xywh": [
+          730,
+          0,
+          711,
+          724
+        ],
+        "content_scale": 0.023255813953488372,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "gold"
+        ],
+        "mirrored_from": null
+      },
+      "pose": "cloud_b",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ]
+    },
+    {
+      "anim": "bee_swarm",
+      "dir": "none",
+      "frame": 2,
+      "output": "native/bee_swarm/none/03.png",
+      "runtime_name": "sprites/effects/bee_swarm_2.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/bee-swarm-r1.png",
+      "prompt": "raw/bee-swarm-r1.prompt.txt",
+      "call": "raw/bee-swarm-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1684,
+          248,
+          248,
+          196
+        ],
+        "sheet_cell_xywh": [
+          1441,
+          0,
+          731,
+          724
+        ],
+        "content_scale": 0.023255813953488372,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "gold"
+        ],
+        "mirrored_from": null
+      },
+      "pose": "cloud_c",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "deviations": [],
+  "supersedes": [],
+  "comparison": [
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

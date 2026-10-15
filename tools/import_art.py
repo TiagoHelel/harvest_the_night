@@ -385,7 +385,7 @@ def metadata(data):
         if "muzzles_xy" in entry:
             points = ", ".join("Vector2i(%d, %d)" % tuple(p) for p in entry["muzzles_xy"])
             lines[-1] = lines[-1][:-2] + ', "muzzles": [%s]},' % points
-        if entry.get("generation_task") == "0013":
+        if entry.get("generation_task") == "0013" or "tower_family" in entry:
             lines[-1] = lines[-1][:-2] + ', "tower": true},'
         if "join_mask" in entry:
             mask = entry["join_mask"]

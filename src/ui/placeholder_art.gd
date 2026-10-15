@@ -196,11 +196,6 @@ const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dra
 const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
-## A038's hive (task 0226): the tower family's 32x48 standing on (16,44), and
-## the bee swarm's 8x8 round its middle (4,4), both drawn at 1.0.
-const HIVE := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
-const SWARM := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
-
 ## A039's catapult (task 0227): the tower family's 32x48 on (16,44), the
 ## pumpkin shot's 8x8 round (4,4), and the splat's 20x16 on (10,14) - the
 ## splash's - all drawn at 1.0.
@@ -379,18 +374,6 @@ const ART := {
 	&"tarp_short": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
 	&"tarp_short_hurt": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT, "bare": true},
 	&"tarp_short_unveil": {"pack": "A044", "dir": "res://sprites/buildings/", "frames": 2, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": TARP_SHORT, "final": TARP_SHORT},
-	# A038's hive (task 0226): the mortar - the low tower on the family's
-	# canvas - in honey, at each level and state, until 0237; the bee swarm
-	# drawn in code by `HiveArt`.
-	&"beehive": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"beehive_hurt": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_hurt", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"beehive_fire": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_fire", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"beehive_wreck": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_wreck", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"beehive_2": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"beehive_2_hurt": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_hurt", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"beehive_2_fire": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_fire", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"beehive_2_wreck": {"pack": "A038", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/mortar_2_wreck", "tint": Color(1.3, 1.0, 0.45), "geometry": HIVE, "final": HIVE, "bare": true},
-	&"bee_swarm": {"pack": "A038", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": SWARM, "final": SWARM},
 	# A046's spitter (task 0247): the walker - the same canvas, the same feet -
 	# soured to the sac's yellow-green, every pose its own, until 0260; its
 	# glob and the splat where it lands drawn in code (`SpitterArt`), and its

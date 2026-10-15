@@ -1,0 +1,1075 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "bee_swarm",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/bee_swarm-none-0-night.png",
+          "path": "preview/candidates/bee_swarm/none/01.png",
+          "points": {},
+          "pose": "cloud_a"
+        },
+        {
+          "issue": "",
+          "night": "preview/bee_swarm-none-1-night.png",
+          "path": "preview/candidates/bee_swarm/none/02.png",
+          "points": {},
+          "pose": "cloud_b"
+        },
+        {
+          "issue": "",
+          "night": "preview/bee_swarm-none-2-night.png",
+          "path": "preview/candidates/bee_swarm/none/03.png",
+          "points": {},
+          "pose": "cloud_c"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "poses": [
+        "cloud_a",
+        "cloud_b",
+        "cloud_c"
+      ]
+    },
+    {
+      "anim": "beehive",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/beehive-none-0-night.png",
+          "path": "preview/candidates/beehive/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              17,
+              34,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              19,
+              36
+            ],
+            "muzzles_xy": [
+              [
+                19,
+                36
+              ]
+            ]
+          },
+          "pose": "whole"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "whole"
+      ]
+    },
+    {
+      "anim": "beehive_2",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/beehive_2-none-0-night.png",
+          "path": "preview/candidates/beehive_2/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              16,
+              31,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              18,
+              33
+            ],
+            "muzzles_xy": [
+              [
+                18,
+                33
+              ]
+            ]
+          },
+          "pose": "whole"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "whole"
+      ]
+    },
+    {
+      "anim": "beehive_2_fire",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Original ImageGen fire copy changes hive body pixels outside the bee cue. L1 correction limit reached; composition authorization is pending.",
+          "night": "preview/beehive_2_fire-none-0-night.png",
+          "path": "preview/candidates/beehive_2_fire/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              16,
+              31,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              18,
+              33
+            ],
+            "muzzles_xy": [
+              [
+                18,
+                33
+              ]
+            ]
+          },
+          "pose": "fire"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "fire"
+      ]
+    },
+    {
+      "anim": "beehive_2_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/beehive_2_hurt-none-0-night.png",
+          "path": "preview/candidates/beehive_2_hurt/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              16,
+              31,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              18,
+              33
+            ],
+            "muzzles_xy": [
+              [
+                18,
+                33
+              ]
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "beehive_2_wreck",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/beehive_2_wreck-none-0-night.png",
+          "path": "preview/candidates/beehive_2_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "beehive_fire",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Original ImageGen fire copy changes hive body pixels outside the bee cue. L1 correction limit reached; composition authorization is pending.",
+          "night": "preview/beehive_fire-none-0-night.png",
+          "path": "preview/candidates/beehive_fire/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              17,
+              34,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              19,
+              36
+            ],
+            "muzzles_xy": [
+              [
+                19,
+                36
+              ]
+            ]
+          },
+          "pose": "fire"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "fire"
+      ]
+    },
+    {
+      "anim": "beehive_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/beehive_hurt-none-0-night.png",
+          "path": "preview/candidates/beehive_hurt/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              17,
+              34,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              19,
+              36
+            ],
+            "muzzles_xy": [
+              [
+                19,
+                36
+              ]
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "beehive_wreck",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/beehive_wreck-none-0-night.png",
+          "path": "preview/candidates/beehive_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "poses": [
+        "wreck"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/gun_tower.png",
+      "pivot_xy": [
+        16,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-13",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "beehive",
+      "call": "raw/beehive-l1-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          17,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          19,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            19,
+            36
+          ]
+        ]
+      },
+      "pose": "whole",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.046052631578947366,
+        "crop_xywh": [
+          156,
+          126,
+          360,
+          456
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          640,
+          650
+        ]
+      },
+      "runtime_name": "sprites/buildings/beehive.png",
+      "seconds": 0.55,
+      "sha256": "e69b56f9fa843e9fa1aec37f361054fb1614d3f731b64d24a1365b51f95c37da",
+      "source": "raw/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11"
+    },
+    {
+      "anim": "beehive_hurt",
+      "call": "raw/beehive-l1-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          17,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          19,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            19,
+            36
+          ]
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.046052631578947366,
+        "crop_xywh": [
+          762,
+          135,
+          363,
+          457
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          640,
+          0,
+          614,
+          650
+        ]
+      },
+      "runtime_name": "sprites/buildings/beehive_hurt.png",
+      "seconds": 0.55,
+      "sha256": "b76c3fba33a56cba37c61c9a6f355345340817d6211231f16c0a38937d1ad54d",
+      "source": "raw/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11"
+    },
+    {
+      "anim": "beehive_fire",
+      "call": "raw/beehive-l1-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive_fire/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          17,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          19,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            19,
+            36
+          ]
+        ]
+      },
+      "pose": "fire",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.046052631578947366,
+        "crop_xywh": [
+          156,
+          709,
+          364,
+          455
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          650,
+          640,
+          604
+        ]
+      },
+      "review_issue": "Original ImageGen fire copy changes hive body pixels outside the bee cue. L1 correction limit reached; composition authorization is pending.",
+      "runtime_name": "sprites/buildings/beehive_fire.png",
+      "seconds": 0.55,
+      "sha256": "0cd9ea5da3c58e3f9bace88fdd645a93a4d2b28e866079ae5467f1682161d813",
+      "source": "raw/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11"
+    },
+    {
+      "anim": "beehive_wreck",
+      "call": "raw/beehive-l1-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive_wreck/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/beehive-l1-r2.prompt.txt",
+      "prompt_sha256": "f06e3e20842c4d1de4b7411e3c0c889a7fed4f597ec044afbb5f0e56cb3b5f96",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.046052631578947366,
+        "crop_xywh": [
+          773,
+          931,
+          334,
+          219
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          640,
+          650,
+          614,
+          604
+        ]
+      },
+      "runtime_name": "sprites/buildings/beehive_wreck.png",
+      "seconds": 0.55,
+      "sha256": "db24aa7d9534345ea2752c82d1dfa5ff0cc26db6bbc255c0593d027ec6f7375f",
+      "source": "raw/beehive-l1-r2.png",
+      "source_sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11"
+    },
+    {
+      "anim": "beehive_2",
+      "call": "raw/beehive-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive_2/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          16,
+          31,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          18,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            18,
+            33
+          ]
+        ]
+      },
+      "pose": "whole",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0523,
+        "crop_xywh": [
+          133,
+          101,
+          413,
+          507
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          648,
+          656
+        ]
+      },
+      "runtime_name": "sprites/buildings/beehive_2.png",
+      "seconds": 0.55,
+      "sha256": "0db90e8ba4d3002d3217845a6c03c1d53532dece35a5cce31a7fff0ea520525b",
+      "source": "raw/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e"
+    },
+    {
+      "anim": "beehive_2_hurt",
+      "call": "raw/beehive-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive_2_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          16,
+          31,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          18,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            18,
+            33
+          ]
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0523,
+        "crop_xywh": [
+          742,
+          102,
+          412,
+          508
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          648,
+          0,
+          606,
+          656
+        ]
+      },
+      "runtime_name": "sprites/buildings/beehive_2_hurt.png",
+      "seconds": 0.55,
+      "sha256": "b666819a5ca2251919fc3b25800073614bee3efbdbc8b2a33c76b0394977cd32",
+      "source": "raw/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e"
+    },
+    {
+      "anim": "beehive_2_fire",
+      "call": "raw/beehive-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive_2_fire/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          16,
+          31,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          18,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            18,
+            33
+          ]
+        ]
+      },
+      "pose": "fire",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0523,
+        "crop_xywh": [
+          138,
+          704,
+          432,
+          500
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          656,
+          648,
+          598
+        ]
+      },
+      "review_issue": "Original ImageGen fire copy changes hive body pixels outside the bee cue. L1 correction limit reached; composition authorization is pending.",
+      "runtime_name": "sprites/buildings/beehive_2_fire.png",
+      "seconds": 0.55,
+      "sha256": "d2f0549fbf4144fc577f00c74de3e7b936103467ec8690b7d71ba3ff5299f9ac",
+      "source": "raw/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e"
+    },
+    {
+      "anim": "beehive_2_wreck",
+      "call": "raw/beehive-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/beehive_2_wreck/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/beehive-l2-r1.prompt.txt",
+      "prompt_sha256": "c312ad3a00c085c1eac6e922c498c50f51e5bb652516446540832e5b6a3cb896",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0523,
+        "crop_xywh": [
+          727,
+          914,
+          426,
+          285
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          648,
+          656,
+          606,
+          598
+        ]
+      },
+      "runtime_name": "sprites/buildings/beehive_2_wreck.png",
+      "seconds": 0.55,
+      "sha256": "1b0dca555e2e3a1a88bbd12ed93c65ef24f629eb41b5474f545fc2501e4487a9",
+      "source": "raw/beehive-l2-r1.png",
+      "source_sha256": "ddda14d369861390ed7b5459c512efd0aa43e716610ed48dda701f694874e78e"
+    },
+    {
+      "anim": "bee_swarm",
+      "call": "raw/bee-swarm-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/bee_swarm/none/01.png",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "cloud_a",
+      "prompt": "raw/bee-swarm-r1.prompt.txt",
+      "prompt_sha256": "aa65f647a927d582cfed09fefe40cd06256bdc7439b28d2a29d3b8bf444945cc",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "content_scale": 0.023255813953488372,
+        "crop_xywh": [
+          245,
+          252,
+          258,
+          199
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "gold"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          730,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/bee_swarm_0.png",
+      "seconds": 0.1,
+      "sha256": "fd4dcea7cac0c3bf19b1eeb52f82f5c8ac6de1a2200fe37819d5aa6b521561a1",
+      "source": "raw/bee-swarm-r1.png",
+      "source_sha256": "b0ca10c7b3ec9859b109a0dcd59066725843d818fabb4928cdfa21af33a927e9"
+    },
+    {
+      "anim": "bee_swarm",
+      "call": "raw/bee-swarm-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/bee_swarm/none/02.png",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "cloud_b",
+      "prompt": "raw/bee-swarm-r1.prompt.txt",
+      "prompt_sha256": "aa65f647a927d582cfed09fefe40cd06256bdc7439b28d2a29d3b8bf444945cc",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "content_scale": 0.023255813953488372,
+        "crop_xywh": [
+          958,
+          234,
+          241,
+          218
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "gold"
+        ],
+        "sheet_cell_xywh": [
+          730,
+          0,
+          711,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/bee_swarm_1.png",
+      "seconds": 0.1,
+      "sha256": "e8954fe37c9fada0f16299d11cfaa74917b4a80d2f91bbb37a2ce18a6112717c",
+      "source": "raw/bee-swarm-r1.png",
+      "source_sha256": "b0ca10c7b3ec9859b109a0dcd59066725843d818fabb4928cdfa21af33a927e9"
+    },
+    {
+      "anim": "bee_swarm",
+      "call": "raw/bee-swarm-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/bee_swarm/none/03.png",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "cloud_c",
+      "prompt": "raw/bee-swarm-r1.prompt.txt",
+      "prompt_sha256": "aa65f647a927d582cfed09fefe40cd06256bdc7439b28d2a29d3b8bf444945cc",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "content_scale": 0.023255813953488372,
+        "crop_xywh": [
+          1684,
+          248,
+          248,
+          196
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "gold"
+        ],
+        "sheet_cell_xywh": [
+          1441,
+          0,
+          731,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/bee_swarm_2.png",
+      "seconds": 0.1,
+      "sha256": "a1dc157261f4e459909708c933f74bd41e865320abb80808ab179bff655f3261",
+      "source": "raw/bee-swarm-r1.png",
+      "source_sha256": "b0ca10c7b3ec9859b109a0dcd59066725843d818fabb4928cdfa21af33a927e9"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A038",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l1-r2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\gun_tower\\level-3.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\effects\\muzzle_1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "fe8a03c41b5d5f87cb849f1b4421fbbf997f5a5ae4f5f9f698ac588e81473a21"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A038-beehive",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "The beehive",
+  "tool": "built-in ImageGen"
+}

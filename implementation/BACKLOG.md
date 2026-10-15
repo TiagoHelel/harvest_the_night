@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`####################....`  **247 / 296 done**
+`####################....`  **248 / 296 done**
 
-0 doing / 49 todo / 0 blocked across 18 phases.
+0 doing / 48 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-49 task(s) left, the ready ones first, then what they
+48 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -373,25 +373,6 @@ The approved bones, moon stones, fertilised soil and night-loot icons go into th
   - done when: FHD (1920x1080) captures by day and by night of bone piles, a moon stone, a fertilised plot and the essence counter in the real game, opened and looked at, in `implementation/shots/0235/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0237 - Art: the beehive
-
-Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
-
-The approved beehive and its bees replace the stand-ins 0226 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A038` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A038-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/` and `assets/art_source/effects/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_tower_art.py` `FAMILIES`, `check_effect_art.py`, `ArtPlacement` if needed).
-- `buildings/beehive` and `beehive_2` x {'', `_hurt`, `_fire`, `_wreck`} at 32x48, pivot (16,44), one scale per level. `check_tower_art.py` loops levels 1-3 for every family, accepts only `generation_task` 0013 and demands a `muzzle_xy` on every non-wreck state: make the level count and the metadata point per family (the hive's own point, where the swarm leaves, or none - as the pack's contract says) and accept the pack. Keep `gen_sprites.migrated_towers()` to the four legacy families (the checker compares it with `FAMILIES`). `import_art.py` writes `"tower": true` only for 0013 - extend it
-- The bee swarm (8x8, 3 frames) loops while a hive stings: a looping effect, which `check_effect_art.py` (one-shots only) has to be taught deliberately
-- Retire 0226's stand-ins from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A038 integrated`.
-
-  - done when: The family checks (`check_tower_art.py`, `check_effect_art.py`) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --effects --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of a hive at each level stinging a crowd in the real game, opened and looked at, in `implementation/shots/0237/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
 ### 0238 - Art: the pumpkin catapult
 
 Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py`.
@@ -413,7 +394,7 @@ The approved catapult, its pumpkin and its splat replace the stand-ins 0227 left
 
 ### 0239 - Art: the garlic braid
 
-Waits for Codex art A040.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/verify.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/verify.py`.
 
 The approved garlic braid, fresh, wilted and spent, replaces the stand-in 0228 left.
 
@@ -451,7 +432,7 @@ The approved searchlight replaces the stand-in 0229 left, and its beam starts fr
 
 ### 0241 - Art: the electric fence
 
-Waits for Codex art A042.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_effect_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_effect_art.py`.
 
 The approved electric fence, joined on all sixteen masks, and its zap replace the stand-ins 0230 left.
 
@@ -470,7 +451,7 @@ The approved electric fence, joined on all sixteen masks, and its zap replace th
 
 ### 0242 - Art: hardwood walls and sandbags
 
-Waits for Codex art A043.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py`.
 
 The approved hardwood wall and sandbags replace the stand-ins 0231 left.
 
@@ -508,7 +489,7 @@ The approved tarps cover the defences by day and unveil at nightfall, in place o
 
 ### 0244 - Art: power and new weapon icons
 
-Waits for Codex art A045.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
+Ready to pick up.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
 
 The approved icons of the three powers and the nine new defences replace the hotbar and HUD stand-ins 0233 and 0234 left.
 
@@ -527,7 +508,7 @@ The approved icons of the three powers and the nine new defences replace the hot
 
 ### 0245 - Art: the dog
 
-Waits for Codex art A028.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/art_placement.gd`.
+Ready to pick up.  Likely files: `assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/art_placement.gd`.
 
 The approved farm dog replaces the stand-ins of 0185 by day and of 0233's call-the-dog power at night.
 
@@ -689,7 +670,7 @@ The Scarecrow King as Codex drew it, in place of 0254's stand-in, raising its ar
 
 ### 0268 - Art: the Winter Lord
 
-Waits for Codex art A054.  Likely files: `assets/art_source/enemies/winter_lord/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, tools/check_effect_art.py, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
+Ready to pick up.  Likely files: `assets/art_source/enemies/winter_lord/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, tools/check_effect_art.py, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd`.
 
 The Winter Lord as Codex drew it, in place of 0255's stand-in: the last thing the year sends, and the cast that freezes the line.
 
@@ -822,7 +803,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -1194,7 +1175,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md) - waits for art A034
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md) - waits for art A035
 
-## 13 - Weapons of the night  (18/28)
+## 13 - Weapons of the night  (19/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1215,15 +1196,15 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0234** [The arsenal grows with the seasons](prompts/0234-arsenal-by-season.md)
 - [ ] **0235** [Art: bones, moon stones and essence](prompts/0235-art-night-loot.md) - waits for art A036
 - [x] **0236** [Art: the scarecrow decoy and zombie bait](prompts/0236-art-decoy.md)
-- [ ] **0237** [Art: the beehive](prompts/0237-art-beehive.md)
+- [x] **0237** [Art: the beehive](prompts/0237-art-beehive.md)
 - [ ] **0238** [Art: the pumpkin catapult](prompts/0238-art-catapult.md)
-- [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md) - waits for art A040
+- [ ] **0239** [Art: the garlic braid](prompts/0239-art-garlic.md)
 - [ ] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md)
-- [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md) - waits for art A042
-- [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md) - waits for art A043
+- [ ] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md)
+- [ ] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md)
 - [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md)
-- [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md) - waits for art A045
-- [ ] **0245** [Art: the dog](prompts/0245-art-dog.md) - waits for art A028
+- [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md)
+- [ ] **0245** [Art: the dog](prompts/0245-art-dog.md)
 
 ## 14 - Enemies and bosses  (14/24)
 
@@ -1249,7 +1230,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0265** [Art: the wraith](prompts/0265-art-wraith.md)
 - [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md)
 - [ ] **0267** [Art: the Scarecrow King](prompts/0267-art-scarecrow-king.md)
-- [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md) - waits for art A054
+- [ ] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md)
 - [ ] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md)
 
 ## 15 - Fifty-six nights and balance  (8/11)
@@ -1277,7 +1258,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md) - waits for art A057
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0237, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0238, 0239, 0240, 0241, 0242, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (2/7)
 

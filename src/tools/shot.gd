@@ -167,7 +167,7 @@ const SCENARIOS: Array = [
 	["boss", "a boss winding up: Spring 14's night, the Giant come up to a line of wall east of the house and winding up its blow on it, the ring on its target - its bar and name up top and its intro across the screen under them, clear of the time to dawn and of the hotbar", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
 	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
-	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page", ""],
+	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page; then the same hives by day (task 0237), the tarps off to show A038's art and three walkers set down by them so the sting shows in daylight", ""],
 	["zombie_bait", "a crowd turned toward a zombie bait at night: a rotten fish thrown past a defended farm's fence, the nearest already eating on it and the rest - from further than a decoy pulls - on their way; the bait picked on the hotbar, one kit left", ""],
 	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
 	["night_loot", "the morning after Spring 7's Full Moon, fought from a defended farm: the report counting the bones and moon stones lying about; then him out by the moon stone nearest the house, the night's bones about it", "ResultScreen"],
@@ -976,6 +976,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		await process_frame
 		await _shoot("fish_book_unknown", folder)
 		print("  fish_book on %s, then %s" % [ledger.book().shown(), FishBook.species()[FishBook.species().find(GameData.OLD_CATFISH) + 1]])
+		return
+	if name == "beehive":
+		await _shoot("beehive", folder)
+		await _take_beehive_day(main, state, folder)
 		return
 	if name == "decoy_art":
 		await _strike_decoy(state)
@@ -3148,6 +3152,7 @@ func _set_beehive(state: Dictionary) -> void:
 		_look_at(_the_defence_line(state))
 		return
 	Building.upgrade(state, middle + Vector2i(0, 2))
+	_hive_cell = middle
 	# The bed: three by three west of the first hive, grown and watered.
 	for dy in range(-2, 1):
 		for dx in range(-3, 0):
@@ -3171,6 +3176,56 @@ func _set_beehive(state: Dictionary) -> void:
 		Entities.count(state)])
 	Building.select(state, &"beehive")
 	_look_at(middle + Vector2i(2, 1))
+
+
+## The first hive of the scene, which the day twin finds again.
+var _hive_cell := Vector2i(-1, -1)
+
+
+## **The same by day** (task 0237): the night over and the hives standing in
+## the morning - the first whole, the upgraded one, the third's ruin - with the
+## tarps off so A038's art shows, as the tower showcase does. A crowd never
+## comes by day: three walkers are set down by the hives and the hives tick
+## once by hand, so the sting and its swarm are seen in daylight.
+func _take_beehive_day(main: Node, state: Dictionary, folder: String) -> void:
+	if _hive_cell.x < 0:
+		return
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	# The night's hive on the hotbar put away: no build mode by day.
+	Building.set_active(state, false)
+	# East of the hives, facing them: the day's camera follows him.
+	_stand(state, _hive_cell + Vector2i(4, 2))
+	state["player"]["facing"] = Player.WEST
+	var view := main.get_node("%WorldView") as WorldView
+	view.tarps = false
+	_only_showing(main, "")
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	for at in [Vector2i(1, -1), Vector2i(1, 1), Vector2i(1, 3)]:
+		Entities.spawn(state, &"walker", _hive_cell + (at as Vector2i))
+	# Until both hives have stung, from wherever their reload stood at dawn.
+	for _t in GameData.SECONDS * 3:
+		if (state["stung"] as Dictionary).size() >= 3:
+			break
+		Towers.tick(state)
+	for _i in 3:
+		await process_frame
+	await RenderingServer.frame_post_draw
+	await _shoot("beehive_day", folder)
+	print("  beehive by day, %s: %d of %d stung, the hives %s and %s" % [Phases.name_of(int(state["phase"])),
+		(state["stung"] as Dictionary).size(), Entities.count(state),
+		str(Farm.occupant(state, _hive_cell).get("level", 1)), str(Farm.occupant(state, _hive_cell + Vector2i(0, 2)).get("level", 1))])
+	view.tarps = true
 
 
 ## **A lit and an unlit tower line** (task 0229): Winter 2. A generator put up

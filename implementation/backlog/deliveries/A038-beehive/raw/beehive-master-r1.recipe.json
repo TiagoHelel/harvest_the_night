@@ -1,0 +1,20 @@
+{
+  "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-master-r1.png",
+  "crop_xywh": [
+    269,
+    542,
+    502,
+    658
+  ],
+  "content_scale": 0.031914893617021274,
+  "canvas_wh": [
+    32,
+    48
+  ],
+  "pivot_xy": [
+    16,
+    44
+  ],
+  "palette": "tools/palette.py:COLOURS",
+  "alpha_threshold": 128
+}

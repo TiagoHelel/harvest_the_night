@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nImage1 is the LEVEL1 beehive FOUR-state sheet EDIT TARGET. Keep source1254x1254, same2x2order and margins, WHOLE upper-left,HURT upper-right,FIRE lower-left,WRECK lower-right. Preserve WHOLE,HURT and the corrected compact WRECK unchanged.\nCorrect ONLY the FIRE lower-left copy. It MUST use the exact pixel art body of the upper-left WHOLE, shifted into its cell, with identical roof, box, stand, feet, outline and ALL shading. Please copy that WHOLE drawing exactly; do not repaint/rerender it or change geometry/color. Its opaque body bbox should have the same359-360sourcepxwidth and456sourcepxheight, and same native17x21silhouette.\nAdd ONLY3-5 extremely tiny GOLD/INK bee dashes at the entrance. They must be gold #c49646 with ink #241f2e, no white/grey/blue wings. No flames, smoke or glow. Bees are simple1-2nativepixel pairs, not detailed insects.\nMeasured failure: the earlier FIRE changed56native body pixels and5alpha edge pixels outside the entrance cue, making the body flicker. This must leave zero body changes outside the small bee cue. The roof tiles, board lines, landing board, post corners and legs must be exact copies of WHOLE.\nNative each32x48 pivot16,44 draw1, common source scale per level, lowestrow43 and same base centre. Keep original geometry of all other states. Equal cells and large transparent gutters. No ground/shadow/haze/text/checkerboard/extra objects, no texture noise or gradients. True transparent alpha. ExactlyFOUR hive states, no extra master."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r2.png",
+      "sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5ee1052d-dd11-4b65-870e-d3b12d0cbc9a.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l1-r3.png",
+  "sha256": "94972d9efe3a870da3ba921a0bc8b87597ab897252950b31d0fe810f9abb3a66",
+  "revision": 3,
+  "decision": "rejected: Third full-sheet attempt still changes65native body pixels outside bee cue.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\rejected\\beehive-l1-r3.png"
+}

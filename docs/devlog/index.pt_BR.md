@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-260 tarefas em 12 dias, de  a 2026-10-14. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+261 tarefas em 12 dias, de  a 2026-10-14. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -303,6 +303,7 @@ voz alta.
 | 0277 | Balancing the year, the Winter Lord's company | 2026-10-14 |
 | 0277 | Balancing the year | 2026-10-14 |
 | 0236 | Art: the scarecrow decoy and zombie bait | 2026-10-14 |
+| 0237 | Art: the beehive | 2026-10-14 |
 
 ## Toda vez que o jogo mudou por baixo
 

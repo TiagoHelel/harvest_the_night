@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png"
+    ],
+    "prompt": "Use case: stylized-concept\nAsset type: production raster tower sprite source, HARVEST THE NIGHT.\nPrimary request: ONE standing LEVEL1 farm beehive whole identity master, one object.\nInput1 approved farm direction sheet: warm timber/terracotta and camera STYLE reference only. Input2 approved gun_tower native sprite: one-cell family scale/base and colored outline reference only, do not draw a gun. Input3 approved32px farmer: SCALE reference only, no farmer in output.\nSubject: a SINGLE simple timber hive box with pitched terracotta-shingle roof on a LOW four-leg wooden stand. A DARK horizontal entrance slot and small landing board clearly visible on its front. Plain farm hive, simple compact box. NO stacked boxes, weapon, barrel, gun, windows, doors, signs, flowers, honey jar, bees or honey puddle on this idle master.\nCamera orthographic three-quarter top-down rectangular farm view, showing roof top and front with a little side. Neutral warm daylight, highlights upper-left, darker undersides. Deliberate coarse pixel clusters, restrained texture, colored outlines,2-3 material planes; no 3D/vector/painting or diamond-isometric ground.\nNative target32x48 pivot16,44 draw1.0. Standing hive visible WIDTH16-18 by HEIGHT20-22 native pixels, about17x21; smaller than32px farmer, one-cell base, centred. Final opaque bottom row43. Four short feet/stand legs on one ground plane. Native entrance nearx16-18,y35-37. Simple bold roof/wood/entrance shapes must survive17x21 reduction.\nFull object centred with generous genuine transparent margins, no ground, shadow, glow, haze, smoke, labels, text, watermark, checkerboard, UI, extra objects or scenic backdrop. Warm wood browns, terracotta reds, dark violet underside outline, minimal quiet detail, no speckle, blur or smooth gradients. ExactlyONE farm hive."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-af90d457-8e3d-457f-bb28-0192c7bedcdc.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-master-r1.png",
+  "sha256": "3adacfc8a219bf800fc5ce0b43b917c45d41e039424234618fb4b86f47df1e72",
+  "revision": 1,
+  "decision": "internally acceptable source/identity for final owner review; pack incomplete and unapproved"
+}

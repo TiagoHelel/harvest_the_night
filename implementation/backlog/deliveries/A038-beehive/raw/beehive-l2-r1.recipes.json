@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "beehive-l2-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l2-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        648,
+        656
+      ],
+      "crop_xywh": [
+        133,
+        101,
+        413,
+        507
+      ],
+      "content_scale": 0.05325443786982249,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      5,
+      17,
+      27,
+      44
+    ],
+    "visible_wh": [
+      22,
+      27
+    ]
+  },
+  {
+    "recipe": {
+      "id": "beehive-l2-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l2-r1.png",
+      "sheet_cell_xywh": [
+        648,
+        0,
+        606,
+        656
+      ],
+      "crop_xywh": [
+        742,
+        102,
+        412,
+        508
+      ],
+      "content_scale": 0.05325443786982249,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      5,
+      17,
+      27,
+      44
+    ],
+    "visible_wh": [
+      22,
+      27
+    ]
+  },
+  {
+    "recipe": {
+      "id": "beehive-l2-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l2-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        656,
+        648,
+        598
+      ],
+      "crop_xywh": [
+        138,
+        704,
+        432,
+        500
+      ],
+      "content_scale": 0.05325443786982249,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      5,
+      17,
+      28,
+      44
+    ],
+    "visible_wh": [
+      23,
+      27
+    ]
+  },
+  {
+    "recipe": {
+      "id": "beehive-l2-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l2-r1.png",
+      "sheet_cell_xywh": [
+        648,
+        656,
+        606,
+        598
+      ],
+      "crop_xywh": [
+        727,
+        914,
+        426,
+        285
+      ],
+      "content_scale": 0.05325443786982249,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      5,
+      29,
+      28,
+      44
+    ],
+    "visible_wh": [
+      23,
+      15
+    ]
+  }
+]

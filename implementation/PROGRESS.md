@@ -31634,3 +31634,87 @@ delivery's `APPROVAL.json`). The code drawing of 0224 and 0225 is gone.
 - `python implementation/backlog/assets.py set A037 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS.
+
+## 0237 - Art: the beehive - done 2026-10-14
+
+A038 is integrated: the hive at both levels, whole, hurt, stinging and
+wrecked, and the bee swarm on the stung are the owner-approved art now
+(approved 2026-10-14 in the batch review, recorded by Codex in the
+delivery's `APPROVAL.json`). 0226's stand-ins are gone.
+
+- **Promotion**: the 11 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their three raw sources were copied byte for byte into
+    `assets/art_source/defences/beehive/` (one sheet a level) and
+    `assets/art_source/effects/bee_swarm/`.
+  - Each output has a manifest entry with its prompt, call, native,
+    contract and approval provenance, and an `ownership.json` row. Then
+    `tools/import_art.py` ran.
+  - The scratch promoter of 0236 solved each entry's `content_anchor_xy` so
+    the render decodes to the approved pixels exactly. All 11 do.
+  - The hive's cell offset is the towers' [-8,-28]. It carries the
+    contract's points on every state but the wreck: `muzzle_xy` (19,36) at
+    level 1 and (18,33) at level 2, where the swarm leaves the hive.
+  - New metadata, as the checks want it: `tower_family` `beehive`,
+    `tower_level` 1 or 2 and `variant_of` on the hive's states;
+    `fx_family` `bee_swarm`, `fx_origin` `center` and `variant_of` on the
+    swarm's frames.
+  - Not carried over, as in 0236: the contract's `sheet_cell_xywh`.
+- **`import_art.py`** writes `"tower": true` for 0013's entries and now for
+  any entry naming a `tower_family`. That makes the hive an authored tower
+  (`WorldView.authored_tower`), drawn by the same resolver as the gun's:
+  level, then `_fire` while it stings, then `_hurt`.
+- **The stand-ins retired**:
+  - A038's nine `PlaceholderArt` entries and the `HIVE`/`SWARM` geometry
+    are gone. `placeholders.py --check` passes, with 364 stand-ins left
+    over 37 packs.
+  - `HiveArt` loses its drawing and loads A038's three frames.
+  - `stand_in_tower` stays for 0229's searchlight until A041.
+- **The sting's flash and glow** now sit on A038's `muzzle_xy`, the hive's
+  mouth, where 0226 left them at the mortar's fallback point.
+- **Checks**:
+  - `check_tower_art.py`: `FAMILIES` holds each family's level count and
+    its task, with the four legacy towers at three levels (0013) and the
+    hive at two (A038). The first and last levels are compared, the
+    outlets are counted, and the crop stands in for a missing sheet cell.
+    `gen_sprites.migrated_towers()` is still checked against the four
+    legacy families. Result: 5 families, 14 levels, 56 states, 45 outlets.
+  - `check_effect_art.py` checks the swarm deliberately as the one loop:
+    three distinct frames of one strip and one scale, 8x8 round (4,4),
+    0.1 s, `loop` true, and a cloud that neither grows nor dies away.
+  - The tower showcase has the hive as a fifth column: 1,609 checks. Each
+    family places as many levels as it has. The columns moved to five
+    tiles apart, clear of `_mixed_night`'s house.
+  - The effect showcase gains `_stinging`, with 3,096 checks: real hives at
+    both levels sting real walkers, every stung head wears the swarm's
+    frame of the moment, all three frames play and go round again, and
+    none outlives its sting.
+- **Tests**: `_task_0226_beehive`'s view half now checks the art. It covers
+  the eight states as authored towers on (16,44) with the point on all but
+  the wreck, the resolver's fire/hurt/whole, and the swarm's three looping
+  frames and their timing.
+- **Shots** (`implementation/shots/0237/`, FHD 1920x1080, looked at):
+  - `beehive`, the scene of 0226 at night: the hives at levels 1 and 2 by
+    the sunflowers, the third's wreck, four of six walkers stung, each
+    with its swarm.
+  - `beehive_day`, its new twin: the morning after, with the tarps off and
+    build mode put away. The two hives and the third's ruin stand, and
+    three walkers are set down beside them while the hives tick by hand,
+    so the sting and the swarm show in daylight.
+  - A crowd never comes by day, so this one picture is staged. The day
+    HUD's seed panel is in it, as in 0236's.
+- **The delivery folder** `implementation/backlog/deliveries/A038-beehive/` is
+  committed, as A037's was: the manifest's provenance hashes point into it.
+- `python implementation/backlog/assets.py set A038 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - 60 of 61 pass. `perf` fails on
+  one benchmark: `view_rain`, a single sample of the rain's frame,
+  measured 690, 693 and 826 us against a 687 us limit (the 491 us baseline
+  plus 40%). The first full run passed it on the same rain code, which this
+  task does not touch. `path_refresh`, core-only, went over its budget on
+  one run and passed on the next. It is noise, with the Codex app busy
+  alongside. The owner chose to commit; the baseline was not moved.
+- **Found on the way**: the first run failed on a parse error in the new
+  swarm test, a multi-line `x = x and ...` without parentheses, as in 0236.
+  That crash left a breadcrumb that failed two `input_check` cases. Both
+  passed once the test was fixed.

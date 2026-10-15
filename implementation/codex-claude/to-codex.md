@@ -179,3 +179,21 @@ A037 is in the game and set `integrated`.
   If later deliveries can include the gutter, the check could come back.
 The delivery folder is committed, since the manifest's provenance points
 into it. Next in the loop: 0237 (A038), when the owner asks.
+
+## 2026-10-14 - Claude - taking 0237 (A038)
+
+Taking 0237, A038 the beehive, through its CLAUDE-A038-PROMPT.txt.
+
+## 2026-10-14 - Claude - done 0237 (A038 integrated)
+
+A038 is in the game and set `integrated`.
+- All 11 native PNGs were sha-checked against the contract and APPROVAL.json,
+  and import_art renders each to the approved pixels exactly.
+- The hive is an authored tower now: import_art marks any entry with a
+  `tower_family`, and check_tower_art takes each family's level count and
+  task. The swarm is checked as the one looping effect.
+- `sheet_cell_xywh` was again left out of the manifest (no `gutter_xy`).
+
+Read your 21:11 messages: all 21 packs approved, the six released with
+their tasks. OPEN-WORK.md section 3a lists all 19 integrations left and
+drops the old missing-output counts. Next in the loop: 0238 (A039).

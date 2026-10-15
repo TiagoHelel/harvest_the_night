@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A038-beehive/raw/beehive-master-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/defences/gun_tower/level-3.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nAsset type: LEVEL1 beehive four-state production pixel sheet, HARVEST THE NIGHT.\nInput1 is accepted L1 farm hive identity MASTER/edit target: copy its compact SINGLE timber box, pitched terracotta roof, short four-leg stand, dark front entrance and landing board. Input2 is LAYOUT REFERENCE ONLY: two rows and two columns, four states. Do not draw a gun/tower/barrel or stacked hive boxes.\nGenerate exactly FOUR complete separate state copies of this ONE L1 hive in a TWO-ROW TWO-COLUMN square sheet: WHOLE top-left, HURT top-right, FIRE bottom-left, WRECK bottom-right. Generous genuine transparent horizontal AND vertical cross gutters, no labels/grid lines. Identical camera, magnification and base-centre/bottom-baseline relative to every cell.\nWHOLE: exact idle hive, NO BEES.\nHURT: same box on same base, cracked boards, one missing roof shingle and one leaning leg; dark entrance remains intact, no bees.\nFIRE: copy ALL WHOLE hive body pixels exactly, add ONLY a tiny cluster of3-5 little gold/ink bee dashes just leaving the dark entrance. Each bee reduces to1-2nativepx. Do not change roof, box, feet, outline, shading or landing board. No blaze/flash/smoke/glow; these are bees, not weapon fire.\nWRECK: same-sized box toppled off the stand, roof slid off, low broken boards on the same base, inside WHOLE's width; not a standing hive. No bees or honey puddle. DO NOT enlarge the collapsed state to fill its cell.\nNative EACH32x48 pivot16,44 draw1.0. WHOLE visible16-18wide20-22tall (master16x21), lowest opaque row43. One source scale across all four states. Entrance opaque point stays same native location in whole/hurt/fire, aroundx16-18,y35-37.\nFour-state sheet contract: all objects small, at most55percent of virtual cell WIDTH and HEIGHT, including bee cue. Huge completely transparent cross-shaped gutters at least25percent of a cell. Equal cells, same construction scale and planted-base centre/baseline per cell. Each complete object stays in its own cell with15percent side clearance; no overlap.\nOrthographic three-quarter top-down farm camera, upper-left neutral daytime, warm timber/terracotta, dark colored outlines, deliberate simple coarse pixel clusters and restrained texture. No ground/shadow/haze/glow/background/checkerboard/text/UI/extra props or extra states. True transparent alpha."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A038-beehive/raw/beehive-master-r1.png",
+      "sha256": "3adacfc8a219bf800fc5ce0b43b917c45d41e039424234618fb4b86f47df1e72",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/defences/gun_tower/level-3.png",
+      "sha256": "8ae73e8523abdf59976d032ff71b8a4e89fc6f2e05df382e669cee028b0cb954",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d425cb08-2529-460c-be90-b72f7a0d1a25.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l1-r1.png",
+  "sha256": "7d6af8e1368cd9b4800ce40947d91eb023166abf506d72c91dc9e7137e7b21a9",
+  "revision": 1,
+  "decision": "rejected: Wreck19px exceeds whole17px; fire changes body/edge pixels outside bee cue.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\rejected\\beehive-l1-r1.png"
+}

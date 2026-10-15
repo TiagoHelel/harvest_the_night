@@ -4,7 +4,11 @@ from PIL import Image
 import import_art
 import gen_sprites
 
-FAMILIES = ('gun_tower', 'flame_tower', 'mortar', 'auto_crossbow')
+# Each family's levels and the task whose art it is. The four legacy towers
+# are 0013's, three levels each; A038's hive (task 0237) has one step.
+FAMILIES = {'gun_tower': (3, '0013'), 'flame_tower': (3, '0013'), 'mortar': (3, '0013'),
+            'auto_crossbow': (3, '0013'), 'beehive': (2, 'A038')}
+LEGACY = ('gun_tower', 'flame_tower', 'mortar', 'auto_crossbow')
 STATES = ('', '_hurt', '_fire', '_wreck')
 
 
@@ -13,18 +17,19 @@ def main():
     files, images = import_art.build(data)
     entries = {e['id']: e for e in data['assets']}
     migrated = gen_sprites.migrated_towers()
-    if set(migrated) != {'buildings/' + name for name in FAMILIES}:
+    if set(migrated) != {'buildings/' + name for name in LEGACY}:
         raise ValueError('Legacy tower recipes still own a complete migrated family')
-    for family in FAMILIES:
+    levels = states = outlets = 0
+    for family, (count, task) in FAMILIES.items():
         whole_levels = []
-        for level in (1, 2, 3):
+        for level in range(1, count + 1):
             name = family + ('_%d' % level if level > 1 else '')
             master = entries['buildings/' + name]
             seen, cells = [], []
             for suffix in STATES:
                 ident = 'buildings/' + name + suffix
                 e, image = entries[ident], images[ident]
-                if e.get('generation_task') != '0013' or e.get('tower_family') != family or e.get('tower_level') != level:
+                if e.get('generation_task') != task or e.get('tower_family') != family or e.get('tower_level') != level:
                     raise ValueError('Wrong authored family/level: ' + ident)
                 if not e.get('source', '').startswith('assets/art_source/defences/' + family + '/'):
                     raise ValueError('Tower borrows another source: ' + ident)
@@ -52,9 +57,14 @@ def main():
                     for point in points:
                         if image.getpixel(tuple(point))[3] != 255:
                             raise ValueError('Weapon outlet floats outside source: ' + ident)
+                    outlets += len(points)
                 elif 'muzzle_xy' in e or 'muzzles_xy' in e:
                     raise ValueError('A wreck emits a weapon flash: ' + ident)
-                cells.append(e['sheet_cell_xywh'])
+                if not import_art.ROOT.joinpath(e['output']).exists() or e['output'] != 'sprites/' + ident + '.png':
+                    raise ValueError('Tower output is not its runtime name: ' + ident)
+                # A038's cuts carry no sheet cell: its crop is the cut.
+                cells.append(e.get('sheet_cell_xywh', e['crop_xywh']))
+                states += 1
             # A shared transparent gutter row/column is allowed; opaque pixels
             # can never be shared by cuts, even before alpha reduction.
             with Image.open(import_art.ROOT / master['source']) as raw:
@@ -65,13 +75,14 @@ def main():
                         if right > left and bottom > top and alpha.crop((left, top, right, bottom)).getbbox():
                             raise ValueError('Tower state cuts share opaque pixels: ' + name)
             whole_levels.append(images[master['id']])
-        if len({im.tobytes() for im in whole_levels}) != 3:
+            levels += 1
+        if len({im.tobytes() for im in whole_levels}) != count:
             raise ValueError('Levels repeat the same construction: ' + family)
-        first, last = whole_levels[0], whole_levels[2]
+        first, last = whole_levels[0], whole_levels[-1]
         changed = sum(a != b for a, b in zip(import_art.samples(first), import_art.samples(last)))
         if changed < 80:
-            raise ValueError('L1/L3 reinforcement is too small at native scale: ' + family)
-    print('OK: 4 tower families / 12 authored levels / 48 distinct states, exact cuts, common canvas/contact, 39 opaque weapon outlets and complete legacy migration')
+            raise ValueError('First/last level reinforcement is too small at native scale: ' + family)
+    print('OK: %d tower families / %d authored levels / %d distinct states, exact cuts, common canvas/contact, %d opaque weapon outlets and complete legacy migration' % (len(FAMILIES), levels, states, outlets))
     return 0
 
 

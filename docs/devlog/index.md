@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-260 tasks over 12 days,  to 2026-10-14. One at a time, each one finished and checked before the next was started.
+261 tasks over 12 days,  to 2026-10-14. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -304,6 +304,7 @@ is the sort of thing this list exists to say out loud.
 | 0277 | Balancing the year, the Winter Lord's company | 2026-10-14 |
 | 0277 | Balancing the year | 2026-10-14 |
 | 0236 | Art: the scarecrow decoy and zombie bait | 2026-10-14 |
+| 0237 | Art: the beehive | 2026-10-14 |
 
 ## Every time the game changed underneath itself
 

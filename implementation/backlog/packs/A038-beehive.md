@@ -1,6 +1,6 @@
 # A038 - The beehive
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0237
 - **Dressed by game tasks:** 0226
 - **Spec after game task:** 0226

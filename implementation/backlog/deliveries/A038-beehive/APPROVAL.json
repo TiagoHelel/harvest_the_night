@@ -1,0 +1,31 @@
+{
+  "pack": "A038",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A038-beehive",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/beehive/none/01.png": "e69b56f9fa843e9fa1aec37f361054fb1614d3f731b64d24a1365b51f95c37da",
+    "native/beehive_hurt/none/01.png": "b76c3fba33a56cba37c61c9a6f355345340817d6211231f16c0a38937d1ad54d",
+    "native/beehive_fire/none/01.png": "0cd9ea5da3c58e3f9bace88fdd645a93a4d2b28e866079ae5467f1682161d813",
+    "native/beehive_wreck/none/01.png": "db24aa7d9534345ea2752c82d1dfa5ff0cc26db6bbc255c0593d027ec6f7375f",
+    "native/beehive_2/none/01.png": "0db90e8ba4d3002d3217845a6c03c1d53532dece35a5cce31a7fff0ea520525b",
+    "native/beehive_2_hurt/none/01.png": "b666819a5ca2251919fc3b25800073614bee3efbdbc8b2a33c76b0394977cd32",
+    "native/beehive_2_fire/none/01.png": "d2f0549fbf4144fc577f00c74de3e7b936103467ec8690b7d71ba3ff5299f9ac",
+    "native/beehive_2_wreck/none/01.png": "1b0dca555e2e3a1a88bbd12ed93c65ef24f629eb41b5474f545fc2501e4487a9",
+    "native/bee_swarm/none/01.png": "fd4dcea7cac0c3bf19b1eeb52f82f5c8ac6de1a2200fe37819d5aa6b521561a1",
+    "native/bee_swarm/none/02.png": "e8954fe37c9fada0f16299d11cfaa74917b4a80d2f91bbb37a2ce18a6112717c",
+    "native/bee_swarm/none/03.png": "a1dc157261f4e459909708c933f74bd41e865320abb80808ab179bff655f3261"
+  },
+  "frames": 11,
+  "frames_expected": 11,
+  "accepted_visual_checks": [
+    "beehive_2_fire_body_exact",
+    "beehive_fire_body_exact"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

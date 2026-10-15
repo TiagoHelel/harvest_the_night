@@ -1,0 +1,166 @@
+{
+  "approved_art_hashes_match": true,
+  "beehive_2_body_pixels_changed_outside_cue": 292,
+  "beehive_2_entrance_points_shared": true,
+  "beehive_2_fire_body_exact": false,
+  "beehive_2_one_source_scale": true,
+  "beehive_2_states_distinct": true,
+  "beehive_2_whole_targets": true,
+  "beehive_2_wreck_inside_whole": true,
+  "beehive_body_pixels_changed_outside_cue": 83,
+  "beehive_entrance_points_shared": true,
+  "beehive_fire_body_exact": false,
+  "beehive_one_source_scale": true,
+  "beehive_states_distinct": true,
+  "beehive_whole_targets": true,
+  "beehive_wreck_inside_whole": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 11,
+  "frames_found": 11,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "level_upgrade_differs_80px": true,
+  "measurements": {
+    "native/bee_swarm/none/01.png": {
+      "bounds": [
+        2,
+        2,
+        7,
+        7
+      ],
+      "opaque_pixels": 6
+    },
+    "native/bee_swarm/none/02.png": {
+      "bounds": [
+        1,
+        2,
+        7,
+        7
+      ],
+      "opaque_pixels": 6
+    },
+    "native/bee_swarm/none/03.png": {
+      "bounds": [
+        1,
+        2,
+        7,
+        7
+      ],
+      "opaque_pixels": 5
+    },
+    "native/beehive/none/01.png": {
+      "bounds": [
+        8,
+        23,
+        25,
+        44
+      ],
+      "opaque_pixels": 226
+    },
+    "native/beehive_2/none/01.png": {
+      "bounds": [
+        5,
+        17,
+        27,
+        44
+      ],
+      "opaque_pixels": 400
+    },
+    "native/beehive_2_fire/none/01.png": {
+      "bounds": [
+        5,
+        18,
+        28,
+        44
+      ],
+      "opaque_pixels": 380
+    },
+    "native/beehive_2_hurt/none/01.png": {
+      "bounds": [
+        5,
+        17,
+        27,
+        44
+      ],
+      "opaque_pixels": 418
+    },
+    "native/beehive_2_wreck/none/01.png": {
+      "bounds": [
+        5,
+        29,
+        27,
+        44
+      ],
+      "opaque_pixels": 211
+    },
+    "native/beehive_fire/none/01.png": {
+      "bounds": [
+        8,
+        23,
+        25,
+        44
+      ],
+      "opaque_pixels": 226
+    },
+    "native/beehive_hurt/none/01.png": {
+      "bounds": [
+        8,
+        23,
+        25,
+        44
+      ],
+      "opaque_pixels": 228
+    },
+    "native/beehive_wreck/none/01.png": {
+      "bounds": [
+        9,
+        34,
+        24,
+        44
+      ],
+      "opaque_pixels": 95
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "beehive_2_fire_body_exact",
+    "beehive_fire_body_exact"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "swarm_components": [
+    [
+      2,
+      1,
+      2,
+      1
+    ],
+    [
+      1,
+      2,
+      1,
+      2
+    ],
+    [
+      1,
+      1,
+      2,
+      1
+    ]
+  ],
+  "swarm_four_to_six_tiny_bees": true,
+  "swarm_gold_ink_only": true,
+  "swarm_inside_six_px": true,
+  "swarm_size_variation_quarter": true,
+  "swarm_three_distinct": true
+}

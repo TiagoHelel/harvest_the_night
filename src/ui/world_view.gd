@@ -1649,8 +1649,9 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 		art = _worn_stand_in(id, Farm.occupant(_state, anchor))
 	if Crafting.is_station(id):
 		art = _stand_in_station_art(id, Farm.occupant(_state, anchor), anchor)
-	# **A stand-in tower** (task 0226's hive, until A038): its level's
-	# stand-in, lit as it stings and hurt past the wear threshold.
+	# **A stand-in tower** (task 0226's hive until 0237 brought A038's art;
+	# 0229's searchlight): its level's stand-in, lit as it fires and hurt
+	# past the wear threshold.
 	if stand_in_tower(id):
 		art = _stand_in_tower_art(Farm.occupant(_state, anchor))
 	if art != id:
@@ -1697,9 +1698,9 @@ func _stand_in_station_art(id: StringName, on: Dictionary, anchor: Vector2i) -> 
 	return active if not PlaceholderArt.art(active).is_empty() or _exists(active) else id
 
 
-## Whether `id` is a tower drawn through 0120's road (task 0226's hive): a
-## defence that shoots - or lights (task 0229's searchlight) - with a stand-in
-## where its pack's art will go.
+## Whether `id` is a tower drawn through 0120's road (task 0226's hive until
+## 0237 brought A038's art): a defence that shoots - or lights (task 0229's
+## searchlight) - with a stand-in where its pack's art will go.
 static func stand_in_tower(id: StringName) -> bool:
 	var row: Dictionary = GameData.DEFENCES.get(id, {})
 	return not authored_tower(id) and (row.has("reload_ticks") or row.has("light_tiles")) \

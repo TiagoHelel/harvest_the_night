@@ -646,6 +646,38 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/beehive.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/beehive_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/beehive_2_fire.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/beehive_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/beehive_2_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/beehive_fire.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/beehive_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/beehive_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/dairy.png",
       "owner": "raster"
     },
@@ -1555,6 +1587,18 @@
     },
     {
       "output": "sprites/crops/withered.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bee_swarm_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bee_swarm_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/bee_swarm_2.png",
       "owner": "raster"
     },
     {

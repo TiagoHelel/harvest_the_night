@@ -1,0 +1,11 @@
+2026-10-13 / New batch generation started
+Owner words, verbatim: "Gerar os 21 novos pacotes e montar o HTML de revisão ao final"
+A038 eligible: specification task0226 done. Eleven frames expected. No approval inferred; owner reviews the unified HTML at the end.
+
+2026-10-14 / Full11frame diagnostics; L1 fire-copy limit reached
+L1r2 retained as partial source: cells0,1,3 are geometrically valid, fire is not accepted. L2r1 uses one scale0.0523 across all states; wreck22wide fits whole22wide. Swarm uses palette_keys ink/gold through standard nearest-palette conversion, excluding unintended wood/night edge shades; four1-2px bee components at native size, no pixel painting. Both fire poses still change body pixels outside cue; after L1third failed attempt, pack blocked with zero production exports. Owner composition-method question remains pending. Continue other new packs; no integration approval inferred.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+11/11 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: beehive_2_fire_body_exact, beehive_fire_body_exact. Complete delivery released for Claude integration.

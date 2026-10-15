@@ -1,0 +1,188 @@
+[
+  {
+    "recipe": {
+      "id": "bee-swarm-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\bee-swarm-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        730,
+        724
+      ],
+      "crop_xywh": [
+        245,
+        252,
+        258,
+        199
+      ],
+      "content_scale": 0.023255813953488372,
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      2,
+      2,
+      7,
+      7
+    ],
+    "opaque_pixels": 6,
+    "component_sizes_4": [
+      1,
+      1,
+      2,
+      2
+    ],
+    "opaque_colours": [
+      [
+        36,
+        31,
+        46
+      ],
+      [
+        196,
+        150,
+        70
+      ]
+    ]
+  },
+  {
+    "recipe": {
+      "id": "bee-swarm-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\bee-swarm-r1.png",
+      "sheet_cell_xywh": [
+        730,
+        0,
+        711,
+        724
+      ],
+      "crop_xywh": [
+        958,
+        234,
+        241,
+        218
+      ],
+      "content_scale": 0.023255813953488372,
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      1,
+      2,
+      7,
+      7
+    ],
+    "opaque_pixels": 6,
+    "component_sizes_4": [
+      1,
+      1,
+      2,
+      2
+    ],
+    "opaque_colours": [
+      [
+        36,
+        31,
+        46
+      ],
+      [
+        196,
+        150,
+        70
+      ]
+    ]
+  },
+  {
+    "recipe": {
+      "id": "bee-swarm-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\raw\\bee-swarm-r1.png",
+      "sheet_cell_xywh": [
+        1441,
+        0,
+        731,
+        724
+      ],
+      "crop_xywh": [
+        1684,
+        248,
+        248,
+        196
+      ],
+      "content_scale": 0.023255813953488372,
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "gold"
+      ],
+      "alpha_threshold": 128
+    },
+    "native_bounds": [
+      1,
+      2,
+      7,
+      7
+    ],
+    "opaque_pixels": 5,
+    "component_sizes_4": [
+      1,
+      1,
+      1,
+      2
+    ],
+    "opaque_colours": [
+      [
+        36,
+        31,
+        46
+      ],
+      [
+        196,
+        150,
+        70
+      ]
+    ]
+  }
+]

@@ -32,6 +32,7 @@ func _run() -> void:
 	await _forms_gallery(false)
 	await _forms_gallery(true)
 	await _firing()
+	await _stinging()
 	await _chimney()
 	await _working()
 	await _crowd()
@@ -238,6 +239,58 @@ func _firing() -> void:
 	for phase in 3:
 		_fx._forms.advance(0.07,_fx)
 		await _shoot("towers_after%d"%phase,"Localized muzzle dissipation without repeated render emissions")
+
+
+## **The bee swarm loops on the stung** (task 0237): A038's one looping
+## effect. Real hives at both levels sting real walkers, and the view hangs
+## the swarm's three frames round each stung head, round and round on its
+## centre, for as long as the sting lasts and not a frame after.
+func _stinging() -> void:
+	_state = _blank(true)
+	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
+	_state["tech_owned"] = [&"true sights"]
+	for level in [1, 2]:
+		var cell := Vector2i(8 + level * 6, 9)
+		expect(Building.place(_state, &"beehive", cell), "A real hive can be placed")
+		if level == 2:
+			expect(Building.upgrade(_state, cell), "A real hive's one step")
+		for dy in [-1, 0, 1]:
+			Entities.spawn(_state, &"walker", cell + Vector2i(1, dy))
+	_state["phase"] = Phases.NIGHT
+	await _settle()
+	_core_tick(true)
+	var stung := (_state["stung"] as Dictionary).size()
+	expect(stung >= 3, "Both real hives sting the walkers in reach: %d" % stung)
+	var seen := {}
+	var wrapped := false
+	var last := -1
+	for step in 9:
+		# The actors are placed before the view's clock moves on this frame.
+		var frame := HiveArt.frame_at(_world._ambient_time)
+		_world._process(0.05)
+		var path := HiveArt.path_of(frame)
+		var shown := 0
+		for sprite in _world._swarm_sprites:
+			if not sprite.visible:
+				continue
+			shown += 1
+			expect(sprite.texture != null and sprite.texture.resource_path == path, "Every stung head wears the swarm's frame of the moment: " + path)
+			expect(sprite.centered and RasterArt.FRAMES[path]["pivot"] == Vector2i(4, 4) and bool(RasterArt.FRAMES[path]["loop"]), "The swarm hangs on its source centre and is a loop")
+		expect(shown == stung, "One swarm per stung head: %d of %d" % [shown, stung])
+		seen[path] = true
+		wrapped = wrapped or frame < last
+		last = frame
+		if step == 1:
+			await _shoot("bee_swarm", "A038's swarm on the stung / hives L1 and L2")
+	expect(seen.size() == HiveArt.FRAMES and wrapped, "The swarm plays all three frames and goes round again: " + str(seen.keys()))
+	var bytes := var_to_bytes(_state)
+	Enemies.withdraw(_state)
+	_world._process(0.0)
+	var left := 0
+	for sprite in _world._swarm_sprites:
+		left += int(sprite.visible)
+	expect(left == 0, "No swarm outlives its sting")
+	expect(var_to_bytes(_state) != bytes, "The fixture really cleared the stings")
 
 
 func _chimney() -> void:

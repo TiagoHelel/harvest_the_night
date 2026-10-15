@@ -1,7 +1,7 @@
 # 0237 - Art: the beehive
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0226
 - **Likely files:** assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_tower_art.py, tools/check_effect_art.py, tools/import_art.py
 - **Art packs:** A038

@@ -1,14 +1,15 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-14**, after commit `0fb4d2e6`; section 3a after Codex's messages of 21:49 and 21:53.
+Kept by Claude. Last updated **2026-10-14**, with task 0237's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 245 done, 50 todo, 1 blocked (83%).**
-Nothing can be started today. One task waits on the owner, 41 wait on art,
-and the other 9 wait on those.
+**The game backlog: 296 tasks, 248 done, 48 todo, 0 blocked (84%).**
+19 art integrations are ready, one a run as the owner asks (`task.py next`
+says 0238). 20 more wait on art that is blocked or deferred (3b, 3c), and
+the rest of the backlog on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
 
@@ -34,28 +35,35 @@ What is left goes to 0278 and 0280. Every call and trial is in
 | 0296 | The store page and trailer for 1.0 | 0290, 0294 |
 | 0297 | Releasing 1.0 | 0290, 0291, 0294, 0295, 0296 |
 
-## 3. Waiting on art: 41 game tasks, one pack each
+## 3. The art: 39 game tasks left, one pack each
 
 Each game task integrates one Codex pack. The game already plays every
 one of these with a placeholder (task 0120's road). The pack's state is
 `implementation/backlog/INDEX.md`'s.
 
-### 3a. The 21 new packs: 15 approved for integration (2026-10-14)
+### 3a. The 21 new packs: all approved and complete (2026-10-14)
 
-Codex recorded the owner's approval at 16:56. The details are in:
-- `implementation/backlog/deliveries/A028-dog/CLAUDE-BATCH-DETAILS.md`,
-  `CLAUDE-BATCH-PROMPT.txt` and `batch-approval.json`;
-- each pack's own `APPROVAL.json` and `CLAUDE-Axxx-PROMPT.txt`.
+The owner approved 15 at 16:56 and the other six's additions at 21:11
+("tudo aprovado, falta mais?"): 422 PNGs, none missing. The details are in:
+- `implementation/backlog/deliveries/A028-dog/CLAUDE-CONTINUATION-APPROVED.md`
+  (it supersedes the older batch notes for the six), `CLAUDE-BATCH-DETAILS.md`
+  and `batch-approval.json`;
+- each pack's own `APPROVAL.json`, `contract.json` and `CLAUDE-Axxx-PROMPT.txt`.
 
-**Approved and complete; Claude integrates each through its game task**:
+**Claude integrates each through its game task, one a run**:
 
 | Pack | What | Game task |
 | --- | --- | --- |
 | A037 | The scarecrow decoy and zombie bait (**integrated** by 0236, 2026-10-14) | 0236 |
-| A038 | The beehive | 0237 |
+| A038 | The beehive (**integrated** by 0237, 2026-10-14) | 0237 |
 | A039 | The pumpkin catapult | 0238 |
+| A040 | The garlic braid | 0239 |
 | A041 | The searchlight | 0240 |
+| A042 | The electric fence | 0241 |
+| A043 | Hardwood walls and sandbags | 0242 |
 | A044 | Day tarps over the defences | 0243 |
+| A045 | The power and weapon icons | 0244 |
+| A028 | The dog | 0245 |
 | A046 | The spitter | 0260 |
 | A047 | The rat swarm | 0261 |
 | A048 | The crow | 0262 |
@@ -64,17 +72,19 @@ Codex recorded the owner's approval at 16:56. The details are in:
 | A051 | The wraith | 0265 |
 | A052 | The Harvester | 0266 |
 | A053 | The Scarecrow King | 0267 |
+| A054 | The Winter Lord | 0268 |
 | A055 | Fog, rain and the Blood Moon icons | 0269 |
 | A056 | The collection book, trophies and badges | 0288 |
 
-**Approved in part, still blocked for their missing outputs**:
-- A028, the dog (2 of 20);
-- A040, the garlic braid (1 of 3);
-- A042, the electric fence (3 of 42);
-- A054, the Winter Lord (14 of 22).
-
-**No images yet**: A043, hardwood walls and sandbags (0 of 78), and A045,
-the power and weapon icons (0 of 22).
+Notes for the six released at 21:11:
+- A042 and A043 compose their pieces from `joins.parts`, in N, W, E, S,
+  post order, through import_art's compose entries.
+- Some measured differences are accepted by the owner and stay recorded as
+  false checks, not to be asked again:
+  - A028: the wag, bark and sleep motion;
+  - A040: the braid's size;
+  - A042: the post span and the sparks;
+  - A054: the death's height.
 
 ### 3b. Packs blocked after three attempts (13): the owner's call
 

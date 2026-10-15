@@ -7772,41 +7772,41 @@ func _task_0226_beehive() -> void:
 		and (said["pt_BR"] as String).contains("COLMEIA") and (said["pt_BR"] as String).contains("girassóis")
 		and (said["pt_BR"] as String).contains("ferrão"),
 		"its name, its sting and its sunflowers, in both languages", str(said))
+	# **A038's art since task 0237**: an authored tower at each level and
+	# state, on the family's canvas, with the point the swarm leaves from.
 	var road: Array = []
 	for name in [&"beehive", &"beehive_hurt", &"beehive_fire", &"beehive_wreck",
 			&"beehive_2", &"beehive_2_hurt", &"beehive_2_fire", &"beehive_2_wreck"]:
-		var path := PlaceholderArt.art_path(name, 0)
-		var frame := PlaceholderArt.frame(path)
-		var file := PlaceholderArt.texture_path(path)
+		var path := WorldView.BUILDING_DIR + str(name) + ".png"
+		var frame: Dictionary = RasterArt.FRAMES.get(path, {})
+		var wreck := str(name).ends_with("_wreck")
 		if frame.get("canvas") != Vector2i(32, 48) or frame.get("pivot") != Vector2i(16, 44) \
-				or not file.begins_with("res://sprites/buildings/mortar") or not ResourceLoader.exists(file) \
-				or PlaceholderArt.art_tint(name) == Color.WHITE or str(PlaceholderArt.art(name).get("pack", "")) != "A038":
+				or not bool(frame.get("tower", false)) or frame.has("muzzle") == wreck \
+				or not ResourceLoader.exists(path) or PlaceholderArt.is_drawn(path) or not PlaceholderArt.art(name).is_empty():
 			road.append(name)
 	var view := WorldView.new()
-	var states := [view._stand_in_tower_art({"id": &"beehive", "level": 2, "hp": 10, "reload": GameData.SECONDS}),
-		view._stand_in_tower_art({"id": &"beehive", "level": 1, "hp": 10, "reload": 0}),
-		view._stand_in_tower_art({"id": &"beehive", "level": 2, "hp": 90, "reload": 0})]
+	var states := [view._worn(&"beehive", {"id": &"beehive", "level": 2, "hp": 10, "reload": GameData.SECONDS}),
+		view._worn(&"beehive", {"id": &"beehive", "level": 1, "hp": 10, "reload": 0}),
+		view._worn(&"beehive", {"id": &"beehive", "level": 2, "hp": 90, "reload": 0})]
 	view.free()
-	expect(road.is_empty() and WorldView.stand_in_tower(&"beehive") and not WorldView.stand_in_tower(&"gun_tower")
+	expect(road.is_empty() and WorldView.authored_tower(&"beehive") and not WorldView.stand_in_tower(&"beehive")
 		and states == [&"beehive_2_fire", &"beehive_hurt", &"beehive_2"],
-		"drawn through 0120's road: the mortar in honey at A038's 32x48 on (16,44), each level and state, lit as it stings and hurt below its threshold",
+		"A038's art: an authored tower at 32x48 on (16,44), each level and state, the swarm's point on all but the wreck, lit as it stings and hurt below its threshold",
 		"%s %s" % [str(road), str(states)])
 	var frames: Array = []
-	var inside := true
+	var swarm_art := true
 	for i in 3:
-		var image := HiveArt.drawing(i)
-		frames.append(image.get_data())
-		var lit := 0
-		for y in image.get_height():
-			for x in image.get_width():
-				if image.get_pixel(x, y).a > 0.0:
-					lit += 1
-					inside = inside and x >= 1 and x <= 6 and y >= 1 and y <= 6
-		inside = inside and lit == 10 and image.get_size() == Vector2i(8, 8)
-	expect(inside and frames[0] != frames[1] and frames[1] != frames[2] and frames[0] != frames[2]
-		and PlaceholderArt.is_drawn(HiveArt.path_of(0)) and HiveArt.frame_at(0.05) == 0
-		and HiveArt.frame_at(0.15) == 1 and HiveArt.frame_at(0.35) == 0,
-		"the swarm: three 8x8 frames of five bees inside x 1..6 and y 1..6, a tenth of a second each round and round, drawn in code for A038")
+		var texture := HiveArt.swarm(i)
+		var frame := PlaceholderArt.frame(HiveArt.path_of(i))
+		swarm_art = (swarm_art and texture != null and texture.resource_path == HiveArt.path_of(i)
+			and RasterArt.FRAMES.has(HiveArt.path_of(i)) and frame.get("canvas") == Vector2i(8, 8)
+			and frame.get("pivot") == Vector2i(4, 4) and bool(frame.get("loop", false)))
+		if texture != null:
+			frames.append(texture.get_image().get_data())
+	expect(swarm_art and frames.size() == 3 and frames[0] != frames[1] and frames[1] != frames[2] and frames[0] != frames[2]
+		and PlaceholderArt.art(&"bee_swarm").is_empty() and HiveArt.frame_at(0.05) == 0
+		and HiveArt.frame_at(0.15) == 1 and HiveArt.frame_at(0.35) == 0 and HiveArt.swarm(3) == HiveArt.swarm(0),
+		"the swarm: A038's three looping 8x8 frames round (4,4), a tenth of a second each round and round")
 	var bar := Hotbar.new()
 	var icon := bar._icon_of(&"beehive")
 	bar.free()

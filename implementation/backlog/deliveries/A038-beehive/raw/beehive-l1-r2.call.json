@@ -1,0 +1,32 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r1.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nImage1 is the LEVEL1 four-state beehive sheet EDIT TARGET. Keep exactly the same1254x1254 square2x2layout: WHOLE top-left, HURT top-right, bees-emitting FIRE bottom-left, WRECK bottom-right. Preserve every unaffected object, camera, materials, body scale and feet. Do not add or remove states.\nCorrect ONLY the bottom-right WRECK: it is too wide and too tall. Measured source407x318 reduces to19x15native, while whole359x451 is17x21. Make the collapsed pile genuinely LOW and COMPACT, inside the whole hive's width: source width at most350px and height about200-235px. Box toppled, roof slid down lying flat, short broken stand/boards tucked into one pile. Do not enlarge the wreck to fill its cell, no long board sticking outside the whole width. Same actual scale as the whole's box and roof, one source scale for all states.\nKeep bottom-right ground contact baseline at the same cell-relative position as the other states, centred. Native32x48 pivot16,44, contactrow43. The wreck must fit wholly inside the whole's17px width. No bees, honey puddle, flames, smoke or standing intact hive on the wreck.\nPreserve all three other states exactly, including their pixel shading, geometry, entrance and stand. True transparent background and large cross gutters, no ground/shadow/haze/glow/text/checkerboard/extra objects. Crisp clustered pixel art, warm wood and terracotta, upper-left neutral daytime."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A038-beehive/raw/beehive-l1-r1.png",
+      "sha256": "7d6af8e1368cd9b4800ce40947d91eb023166abf506d72c91dc9e7137e7b21a9",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A038-beehive\\rejected\\beehive-l1-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9fb643b7-7b10-4be1-a9f3-10c29be1bb90.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A038-beehive\\raw\\beehive-l1-r2.png",
+  "sha256": "6df7c0c89836ee72cb52c9d96ffa5652be30b8f012fad78b327b6bb50fad0d11",
+  "revision": 2,
+  "decision": "cells0,1,3 internally acceptable; cell2 FIRE rejected for body changes; shown as diagnostic only",
+  "accepted_cells": [
+    0,
+    1,
+    3
+  ],
+  "rejected_cells": [
+    2
+  ]
+}

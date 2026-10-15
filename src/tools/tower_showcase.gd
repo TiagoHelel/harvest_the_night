@@ -6,7 +6,8 @@ class LampProbe extends Lighting:
 	func _glow_at(at: Vector2, _radius: float, _colour: Color, _strength: float) -> void:
 		outlets.append(at)
 
-const FAMILIES: Array[StringName] = [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow"]
+# A038's hive since task 0237: an authored tower of two levels.
+const FAMILIES: Array[StringName] = [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow", &"beehive"]
 var _world: WorldView
 var _view: PlayerView
 var _lighting: Lighting
@@ -70,13 +71,13 @@ func _run() -> void:
 		_fixture(material_light)
 		await _settle()
 		_check_standing("")
-		await _shoot("levels_%d_whole" % material_light, "Gun / flame / mortar / crossbow - rows L1 / L2 / L3")
+		await _shoot("levels_%d_whole" % material_light, "Gun / flame / mortar / crossbow / hive - rows L1 / L2 / L3")
 		for cell in _cells:
 			var on := Farm.occupant(_state, cell)
 			Farm.damage(_state, cell, int(on["hp"]) / 2 + 1)
 		await _settle()
 		_check_standing("_hurt")
-		await _shoot("levels_%d_hurt" % material_light, "Authored structural damage at all 12 levels")
+		await _shoot("levels_%d_hurt" % material_light, "Authored structural damage at all %d levels" % _cells.size())
 		for cell in _cells:
 			var on := Farm.occupant(_state, cell)
 			on["reload"] = WorldView.levelled_stat(on, "reload_ticks")
@@ -139,9 +140,11 @@ func _place(family: StringName, level: int, cell: Vector2i) -> void:
 func _fixture(material_light: int = 0) -> void:
 	_state = _blank(material_light)
 	_cells.clear()
+	# Each family's own levels (task 0237: the hive has two), a column five
+	# tiles apart, clear of the house `_mixed_night` puts up.
 	for col in FAMILIES.size():
-		for row in 3:
-			var cell := Vector2i(10 + col * 6, 5 + row * 4)
+		for row in (GameData.TOWER_LEVELS[FAMILIES[col]] as Array).size() + 1:
+			var cell := Vector2i(7 + col * 5, 5 + row * 4)
 			_place(FAMILIES[col], row + 1, cell)
 			_cells.append(cell)
 
@@ -227,7 +230,7 @@ func _outlets() -> void:
 	probe.show_state(_state)
 	probe.set_quality(Lighting.STEADY)
 	probe._draw()
-	expect(probe.outlets.size() == expected.size(), "Actual lighting visits exactly 13 measured weapon outlets")
+	expect(probe.outlets.size() == expected.size(), "Actual lighting visits exactly the %d measured weapon outlets" % expected.size())
 	for point in expected:
 		expect(probe.outlets.count(point) == 1, "Actual lamp uses each measured outlet once, including both L3 gun barrels")
 	probe.queue_free()
@@ -263,7 +266,7 @@ func _outlets() -> void:
 	sparks.after_tick(particle_state)
 	expect(sparks._forms.records.size()==expected.size(),"Repeated rendered/after-tick observations cannot duplicate launches")
 	expect(var_to_bytes(_state) == before, "Particles and emission probes cannot alter gameplay or RNG")
-	await _shoot("outlets_night", "All 13 weapon outlets / real glow and authored launch forms")
+	await _shoot("outlets_night", "All %d weapon outlets / real glow and authored launch forms" % expected.size())
 	sparks.queue_free()
 	# Replacing a tower with a different cell at the same occupant count must
 	# invalidate the gun cache, unlike its former count-only key.
