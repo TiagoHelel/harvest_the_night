@@ -1,0 +1,222 @@
+{
+  "all_facing_west_metadata": true,
+  "approved_art_hashes_match": true,
+  "approved_sitting_unchanged": true,
+  "bark_paws_stationary": false,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "distinct_animation_frames": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 20,
+  "frames_found": 20,
+  "grounded_on_pivot": true,
+  "idle_body_identical": false,
+  "idle_paw_alpha_stationary": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/dog_bark/west/01.png": {
+      "bounds": [
+        10,
+        14,
+        31,
+        30
+      ],
+      "opaque_pixels": 171
+    },
+    "native/dog_bark/west/02.png": {
+      "bounds": [
+        9,
+        14,
+        31,
+        30
+      ],
+      "opaque_pixels": 174
+    },
+    "native/dog_bark/west/03.png": {
+      "bounds": [
+        10,
+        14,
+        31,
+        30
+      ],
+      "opaque_pixels": 173
+    },
+    "native/dog_bite/west/01.png": {
+      "bounds": [
+        8,
+        17,
+        33,
+        30
+      ],
+      "opaque_pixels": 198
+    },
+    "native/dog_bite/west/02.png": {
+      "bounds": [
+        7,
+        13,
+        34,
+        30
+      ],
+      "opaque_pixels": 217
+    },
+    "native/dog_bite/west/03.png": {
+      "bounds": [
+        8,
+        13,
+        32,
+        30
+      ],
+      "opaque_pixels": 211
+    },
+    "native/dog_run/west/01.png": {
+      "bounds": [
+        9,
+        15,
+        31,
+        30
+      ],
+      "opaque_pixels": 168
+    },
+    "native/dog_run/west/02.png": {
+      "bounds": [
+        11,
+        15,
+        29,
+        30
+      ],
+      "opaque_pixels": 147
+    },
+    "native/dog_run/west/03.png": {
+      "bounds": [
+        9,
+        15,
+        31,
+        30
+      ],
+      "opaque_pixels": 170
+    },
+    "native/dog_run/west/04.png": {
+      "bounds": [
+        8,
+        15,
+        32,
+        30
+      ],
+      "opaque_pixels": 176
+    },
+    "native/dog_sit/west/01.png": {
+      "bounds": [
+        13,
+        13,
+        28,
+        30
+      ],
+      "opaque_pixels": 135
+    },
+    "native/dog_sit/west/02.png": {
+      "bounds": [
+        13,
+        13,
+        28,
+        30
+      ],
+      "opaque_pixels": 135
+    },
+    "native/dog_sleep/west/01.png": {
+      "bounds": [
+        10,
+        20,
+        30,
+        30
+      ],
+      "opaque_pixels": 152
+    },
+    "native/dog_sleep/west/02.png": {
+      "bounds": [
+        10,
+        20,
+        30,
+        30
+      ],
+      "opaque_pixels": 156
+    },
+    "native/dog_wag/west/01.png": {
+      "bounds": [
+        9,
+        14,
+        31,
+        30
+      ],
+      "opaque_pixels": 177
+    },
+    "native/dog_wag/west/02.png": {
+      "bounds": [
+        9,
+        14,
+        31,
+        30
+      ],
+      "opaque_pixels": 171
+    },
+    "native/dog_walk/west/01.png": {
+      "bounds": [
+        9,
+        16,
+        31,
+        30
+      ],
+      "opaque_pixels": 160
+    },
+    "native/dog_walk/west/02.png": {
+      "bounds": [
+        9,
+        16,
+        31,
+        30
+      ],
+      "opaque_pixels": 156
+    },
+    "native/dog_walk/west/03.png": {
+      "bounds": [
+        9,
+        16,
+        31,
+        30
+      ],
+      "opaque_pixels": 163
+    },
+    "native/dog_walk/west/04.png": {
+      "bounds": [
+        10,
+        16,
+        31,
+        30
+      ],
+      "opaque_pixels": 150
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "bark_paws_stationary",
+    "idle_body_identical",
+    "sleep_head_paws_stationary",
+    "wag_only_tail_changes"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "run_stretch_visible_targets": true,
+  "seven_animations_complete": true,
+  "sitting_visible_targets": true,
+  "sleep_head_paws_stationary": false,
+  "sleep_visible_targets": true,
+  "wag_only_tail_changes": false,
+  "wag_paws_stationary": true
+}

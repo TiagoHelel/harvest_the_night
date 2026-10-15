@@ -1,0 +1,326 @@
+{
+  "date": "2026-10-14",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "packages": [
+    {
+      "id": "A028",
+      "folder": "A028-dog",
+      "title": "The dog",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 20,
+      "expected": 20,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "bark_paws_stationary",
+        "idle_body_identical",
+        "sleep_head_paws_stationary",
+        "wag_only_tail_changes"
+      ],
+      "approved_count": 20,
+      "pending_review_count": 0
+    },
+    {
+      "id": "A037",
+      "folder": "A037-decoy",
+      "title": "The scarecrow decoy and zombie bait",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 12,
+      "expected": 12,
+      "status": "integrated",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "decoy_hurt_sway_top_shift_ok"
+      ]
+    },
+    {
+      "id": "A038",
+      "folder": "A038-beehive",
+      "title": "The beehive",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 11,
+      "expected": 11,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "beehive_2_fire_body_exact",
+        "beehive_fire_body_exact"
+      ]
+    },
+    {
+      "id": "A039",
+      "folder": "A039-catapult",
+      "title": "The pumpkin catapult",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 19,
+      "expected": 19,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "catapult_2_stationary_base_exact",
+        "catapult_3_stationary_base_exact",
+        "catapult_3_whole_dimensions",
+        "catapult_3_wreck_inside_whole",
+        "catapult_stationary_base_exact",
+        "catapult_wreck_inside_whole"
+      ]
+    },
+    {
+      "id": "A040",
+      "folder": "A040-garlic-braid",
+      "title": "The garlic braid",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 3,
+      "expected": 3,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "fresh_braid_dimensions"
+      ],
+      "approved_count": 3,
+      "pending_review_count": 0
+    },
+    {
+      "id": "A041",
+      "folder": "A041-searchlight",
+      "title": "The searchlight",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 8,
+      "expected": 8,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "searchlight_2_only_lens_changes",
+        "searchlight_2_wreck_inside_whole",
+        "searchlight_only_lens_changes"
+      ]
+    },
+    {
+      "id": "A042",
+      "folder": "A042-electric-fence",
+      "title": "The electric fence",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 42,
+      "expected": 42,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "electric_fence_post_span_row20",
+        "zap_two_to_three_warm_sparks"
+      ],
+      "approved_count": 42,
+      "pending_review_count": 0
+    },
+    {
+      "id": "A043",
+      "folder": "A043-strong-walls",
+      "title": "Hardwood walls and sandbags",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 78,
+      "expected": 78,
+      "status": "approved",
+      "missing": 0,
+      "approved_count": 78,
+      "pending_review_count": 0,
+      "accepted_visual_checks": []
+    },
+    {
+      "id": "A044",
+      "folder": "A044-tarps",
+      "title": "Day tarps over the defences",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 12,
+      "expected": 12,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "tarp_tall_covered_dimensions",
+        "tarp_tall_lower_half_revealed"
+      ]
+    },
+    {
+      "id": "A045",
+      "folder": "A045-power-weapon-icons",
+      "title": "Power icons and the new weapons' icons",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 22,
+      "expected": 22,
+      "status": "approved",
+      "missing": 0,
+      "approved_count": 22,
+      "pending_review_count": 0,
+      "accepted_visual_checks": []
+    },
+    {
+      "id": "A046",
+      "folder": "A046-spitter",
+      "title": "The spitter",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 18,
+      "expected": 18,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "walk_leg_alternation_review"
+      ]
+    },
+    {
+      "id": "A047",
+      "folder": "A047-rats",
+      "title": "The rat swarm",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 12,
+      "expected": 12,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": []
+    },
+    {
+      "id": "A048",
+      "folder": "A048-crow",
+      "title": "The crow",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 14,
+      "expected": 14,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": []
+    },
+    {
+      "id": "A049",
+      "folder": "A049-digger",
+      "title": "The digger",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 24,
+      "expected": 24,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "burrow_meets_mound",
+        "emerge_matches_walk_pose",
+        "mixed_body_clod_palette_verified",
+        "walk_leg_alternation_review"
+      ]
+    },
+    {
+      "id": "A050",
+      "folder": "A050-frost-zombie",
+      "title": "The frost zombie",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 17,
+      "expected": 17,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": []
+    },
+    {
+      "id": "A051",
+      "folder": "A051-wraith",
+      "title": "The wraith",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 13,
+      "expected": 13,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": []
+    },
+    {
+      "id": "A052",
+      "folder": "A052-harvester",
+      "title": "The Harvester",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 25,
+      "expected": 25,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "head_lamps_bone"
+      ]
+    },
+    {
+      "id": "A053",
+      "folder": "A053-scarecrow-king",
+      "title": "The Scarecrow King",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 18,
+      "expected": 18,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "icon_eyes_bone_matte"
+      ]
+    },
+    {
+      "id": "A054",
+      "folder": "A054-winter-lord",
+      "title": "The Winter Lord",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 22,
+      "expected": 22,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "death_never_grows"
+      ],
+      "approved_count": 22,
+      "pending_review_count": 0
+    },
+    {
+      "id": "A055",
+      "folder": "A055-event-icons",
+      "title": "Fog, Rain and the Blood Moon",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 6,
+      "expected": 6,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": []
+    },
+    {
+      "id": "A056",
+      "folder": "A056-collections",
+      "title": "The collection book, trophies and badges",
+      "art_approval": "Approved",
+      "ready": true,
+      "available": 26,
+      "expected": 26,
+      "status": "approved",
+      "missing": 0,
+      "accepted_visual_checks": [
+        "badge_crop_bounds_within_2_percent",
+        "raw_source_count_contract_matches"
+      ]
+    }
+  ],
+  "complete_deliveries": 21,
+  "approved_partial_deliveries": 0,
+  "empty_deliveries": 0,
+  "candidate_complete_deliveries": 21,
+  "pending_review_deliveries": 0,
+  "new_pngs_pending_review": 0,
+  "approved_pngs_preserved": 255,
+  "continuation_review": "continuation-final-review.html",
+  "approved_pngs": 422,
+  "continuation_owner_words": "tudo aprovado, falta mais?",
+  "continuation_approval_date": "2026-10-14"
+}

@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r1.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nAsset type: production pixel sprite for HARVEST THE NIGHT, dog_sit_0 correction.\nImage 1 is the EDIT TARGET. Preserve the entire sitting dog, all head/ear/eye/nose/chest/body and paw pixels, its source framing1402x1122 and ground baseline, camera, palette and upper-left light.\nChange ONLY the tail silhouette: curl the fluffy cream-tipped tail tightly upward against the OUTER edge of the rear haunch, instead of sticking out far to the right. It must sit adjacent to the hip, not on the floor, and add almost no horizontal width.\nMeasured failure: previous visible source bounds336,162,1180,1034 (844x872) reduce to16x16, while required native sitter is13-15 wide and17-19 tall. Removing the rightward tail projection should bring the full visible width to about720-740 source pixels with the same872-pixel height, giving14-15 by17 at the same simple art density.\nKeep ALL unaffected anatomy and feet unchanged. Do not make the head larger, do not shorten the torso, do not move the dog across the image, do not add limbs, collar, ground or shadows. Side view WEST, closed mouth, no tongue. True transparent alpha, no text, no checkerboard. Crisp coarse pixel clusters with brown/cream limited ramps, no blur or gradients."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r1.png",
+      "sha256": "085f8068597941e8c02847ce59411273866e76289e8b66a1446ab26b5b2e6d26",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog_sit_0-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-487cf759-bdef-4550-b379-5e21dddd94a6.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r2.png",
+  "sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1",
+  "revision": 2,
+  "decision": "selected for candidate review; not newly owner-approved"
+}

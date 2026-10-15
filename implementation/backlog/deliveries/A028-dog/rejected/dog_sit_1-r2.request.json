@@ -1,0 +1,8 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_1-r1.png"
+  ],
+  "prompt": "Use case: precise-object-edit\nAsset type: dog_sit_1 correction, one pixel-art production sprite.\nImage1 is the EXACT body/feet/color/base EDIT TARGET dog_sit_0. Image2 is only a reference for the subtle far-ear flick wanted on dog_sit_1.\nMake the new frame by preserving Image1 entirely and changing ONLY a small tip of the far ear at the very top of the head to the ear pose of Image2. Everything outside that little ear tip must be copied from Image1 with exactly unchanged geometry, palette, pixels and source positions. Do NOT rerender the body.\nPrevious failure: Image2 changed paw pixels and brown/cream shading on the face, chest and hind leg, causing unwanted jitter in native40x32 previews. Preserve EVERY paw shape/pixel and every body color from Image1. There must be no differences in the lower body, no extra rear-paw outline pixels, no recolored chest or tail. Only the ear tip animates.\nSame source1402x1122, same source opaque ground bottom1035 as Image1, same sitting bounds336,161,1103,1036. Side-view WEST caramel/cream collie, no collar, same closed mouth, same eye and head size. True transparent alpha, no shadow/grass/ground/text/lines, no additional subjects. Crisp clustered pixels, no blur, no extra texture. Exactly ONE dog."
+}

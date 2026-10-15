@@ -1,0 +1,18 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / dog wag, third and last correction. Image 1 is the original standing dog, EXACT EDIT TARGET. Image 2 is the low tail pose reference ONLY. Change ONLY the tail of Image 1: lower the bushy tail to almost horizontal pointing right, keeping it above the paw baseline. Preserve the original entire left/body region source x=0..1010 literally pixel-for-pixel: identical ears, nose, eye, muzzle, chest, coat shading, rump, four legs/paws, positions, sizes, colors, outlines and alpha. Do not redraw the body. The original 1402x1122 canvas, dog position and transparent margins must be kept. Tail area x=1010..1340,y=430..850 only may change. Friendly caramel collie/shepherd with cream patches, west-facing, no collar. No shadow, text, background or new objects. True alpha. One isolated frame, not a strip.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-wag-low-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e7f96ae9-749c-4bd3-a193-6ac6484fefa0.png",
+  "date": "2026-10-14",
+  "revision": 3,
+  "roles": [
+    "original body: exact edit target",
+    "tail-pose-only reference"
+  ]
+}

@@ -146,6 +146,41 @@ def validate_shape(image, name, canvas, pivot):
         raise ValueError("Detached prop pixels: " + name)
 
 
+# Task 0245: A028's dog - every pose's frames, drawn facing west on a 40x32
+# canvas standing on (20,30), mirrored east at runtime.
+DOG = {'sit': 2, 'wag': 2, 'walk': 4, 'bark': 3, 'sleep': 2, 'run': 4, 'bite': 3}
+
+
+def check_dog(data, files, images):
+    entries = [e for e in data['assets'] if e.get('generation_task') == 'A028']
+    if len(entries) != sum(DOG.values()):
+        raise ValueError('Dog contract incomplete: %d' % len(entries))
+    for pose, count in DOG.items():
+        frames = sorted((e for e in entries if e['animation'] == 'props/dog_' + pose), key=lambda e: e['frame'])
+        if [e['frame'] for e in frames] != list(range(count)):
+            raise ValueError('Dog pose frames: ' + pose)
+        if len({e['content_scale'] for e in frames}) != 1 or len({e['seconds'] for e in frames}) != 1:
+            raise ValueError('Dog pose refits or retimes itself: ' + pose)
+        seen = set()
+        for e in frames:
+            image = images[e['id']]
+            if e['canvas_wh'] != [40, 32] or e['pivot_xy'] != [20, 30]:
+                raise ValueError('Dog off its canvas: ' + e['id'])
+            if e['output'] != 'sprites/props/dog_%s_%d.png' % (pose, e['frame']):
+                raise ValueError('Dog frame named wrongly: ' + e['id'])
+            box = image.getbbox()
+            if not box or box[0] < 1 or box[1] < 1 or box[2] >= 40 or box[3] != 30:
+                raise ValueError('Dog clipped or off its feet: %s %s' % (e['id'], box))
+            if any(p[3] not in (0, 255) for p in import_art.samples(image)):
+                raise ValueError('Dog alpha halo: ' + e['id'])
+            if (import_art.ROOT / e['output']).read_bytes() != files[e['output']]:
+                raise ValueError('Runtime dog diverges: ' + e['id'])
+            seen.add(image.tobytes())
+        if len(seen) != count:
+            raise ValueError('Dog pose repeats a frame: ' + pose)
+    return len(entries)
+
+
 def main():
     data = import_art.load_manifest()
     files, images = import_art.build(data)
@@ -258,11 +293,13 @@ def main():
     x0, y0, x1, y1 = images["props/truffle_spot"].getbbox()
     if not (11 <= x1 - x0 <= 13 and 7 <= y1 - y0 <= 9 and y1 == 14 and abs((x0 + x1) / 2 - 8) <= 1):
         raise ValueError("Truffle spot off its recorded box: %s" % str((x0, y0, x1, y1)))
+    dogs = check_dog(data, files, images)
     print(("OK: %d source-owned props; 4 distinct same-scale variants; clean silhouettes and exact ground pivots"
           "; 6 seasonal trees, grounded variants of props/tree, autumn without flame_hot and winter bare"
           "; 9 snow caps fitted to their hosts; spring blossom: %d single-pixel cluster, the owner's accepted exception"
           "; the truffle spot's mound in its box"
-          "; A021: 8 nodes in their envelopes and ramps, capped in winter") % (len(NAMES), singles))
+          "; A021: 8 nodes in their envelopes and ramps, capped in winter"
+          "; A028's dog: %d frames over 7 poses, grounded, distinct") % (len(NAMES), singles, dogs))
     return 0
 
 

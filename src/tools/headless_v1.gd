@@ -9292,7 +9292,11 @@ func _task_0233_powers() -> void:
 	expect((words["en"] as Array) == ["farm bell", "call the dog", "emergency repair", "a good dog",
 		"an emergency repair: a structure gets back three tenths at once"]
 		and (words["pt_BR"] as Array)[0] == "sino da fazenda" and keyed
-		and PlaceholderArt.art(&"dog_run").get("pack", "") == "A028" and PlaceholderArt.art(&"dog_bite").get("pack", "") == "A028"
+		and PlaceholderArt.art(&"dog_run").is_empty() and PlaceholderArt.art(&"dog_bite").is_empty()
+		and AnimalView.dog_frames(&"dog_run") == 4 and AnimalView.dog_frames(&"dog_bite") == 3
+		and AnimalView.dog_frames(&"dog_walk") == 4 and AnimalView.dog_frames(&"dog_sit") == 2
+		and is_equal_approx(AnimalView.dog_seconds(&"dog_run"), 0.08)
+		and ResourceLoader.exists(AnimalView.dog_path(&"dog_bite", 2))
 		and FileAccess.get_file_as_string("res://implementation/backlog/packs/A028-dog.md").contains("Final geometry settled by game task 0233")
 		and FileAccess.get_file_as_string("res://src/tools/shot.gd").contains("[\"powers\", "),
 		"the powers and their nodes named in both languages, an action and a picture each, the dog's run and bite through 0120's road, A028's table final and a shot of the three at work",

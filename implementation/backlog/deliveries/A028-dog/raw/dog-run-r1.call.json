@@ -1,0 +1,63 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept / identity-preserve.\nAsset type: short production animation strip for HARVEST THE NIGHT, a cozy pixel-art farm defended against zombies.\nInput images: Image 1 is the standing dog identity master: exact breed, face, fur markings, body proportions and camera reference. Image 2 is the owner-approved sitting dog, identity and caramel/cream color reference only; do not copy its sitting pose into this action. Image 3 is the approved game style reference, not a request to draw its scene.\nUse exactly the same friendly medium farm dog in every frame: collie/shepherd type, caramel back, ears and bushy tail, cream forehead stripe, muzzle, chest, paws and tail tip; dark nose/eye, upright ears with folded tips, no collar or accessories. It is not a wolf, a plush mascot or a new breed.\nAll poses face LEFT/WEST with the same three-quarter top-down farm camera. Upper-left daytime highlights; deliberate square pixel-art clusters, colored outlines and a limited warm wood/bone ramp. No 3D, painting, smooth gradients, blur, antialiasing or dithering.\nFinal native frame canvas is 40x32, contact pivot (20,30), draw scale 1.0. Normal standing body is 22 pixels wide and 16 pixels tall, half the farmer height. Keep the same torso mass, head/ear size and fur markings across the strip. Do not individually enlarge poses or center each pose by its changing silhouette.\nLayout: one clean horizontal row of equal-size source cells, with generous fully transparent gutters between poses. Keep the dog's torso at the same cell-center x and every grounded paw on the same source baseline; preserve complete unclipped tails and ears. The exporter will use ONE uniform content_scale for the whole strip. No labels, borders or separators, no extra still pose.\nTrue transparent background outside the dog. No ground, shadow, grass, kennel, person, enemy, impact, motion streaks, sound glyphs, text, UI, glow, halo, extra objects or night lighting.\nGenerate exactly FOUR frames of dog_run in order, 0.08 seconds each, a coherent loop: 1) front paws landing, hind paws recovering; 2) gathered posture with paws tucked under the torso and one paw supporting on the baseline; 3) hind paws pushing off, front paws reaching toward the LEFT; 4) stretched forward reach, with one hind toe still on the baseline before front paws land again in frame 1. Normal torso size and head size remain the same. A stretched run pose may be 24-28 native pixels wide and 12-15 tall. No airborne frame: at least one paw must touch the common baseline in every pose. The same four legs move through the cycle; no missing paw, swapping limbs, frozen lead leg or repeated walking contacts.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-dc3a53d6-bafa-4a25-a157-819a10f74429.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "standing dog identity/camera master",
+    "approved sitting identity/colors reference",
+    "project style reference only"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "sha256": "9bd7a4695e9e6d7a22210abd4b0601075111282ba6952e707a1fffc64398cdd6",
+      "role": "standing dog identity/camera master"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r2.png",
+      "sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1",
+      "role": "approved sitting identity/colors reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "project style reference only"
+    }
+  ],
+  "copied_path": "raw/dog-run-r1.png",
+  "sha256": "2892a7674c138639b46d529a4afeb94f6b9280669b48155212f084ab844d5d00",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      1983,
+      793
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      48,
+      261,
+      1941,
+      585
+    ]
+  },
+  "selected_native_exports": [
+    "native/dog_run/west/01.png",
+    "native/dog_run/west/02.png",
+    "native/dog_run/west/03.png",
+    "native/dog_run/west/04.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

@@ -1,0 +1,1 @@
+Sitting native bounds 16x16 fail required 13-15 wide and 17-19 tall; tail projection too wide.

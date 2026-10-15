@@ -1,0 +1,9 @@
+Use case: precise-object-edit.
+Asset type: one production pixel-art animation frame for HARVEST THE NIGHT.
+Primary request: edit Image 1 ONLY to make dog_wag frame 1: the exact same standing dog lowers its bushy tail slightly while being petted. Image 1 itself is frame 0 with the tail raised; that frame is retained unchanged.
+Input images: Image 1 is the standing identity master and exact edit target. Image 2 is the owner-approved sitting dog, an identity/colors reference only; do not make it sit. Image 3 is the game's farm pixel-art style reference.
+Constraints: keep every head, ear, eye, mouth, neck, torso, chest, leg and paw pixel from Image 1 unchanged. Change ONLY the tail and cream tail tip to a low, gently curved tail, still entirely above the paw ground line. Do not move the dog, change its pose, repaint its body, open its mouth, add a tongue, or change its coat colors.
+Preserve the exact 1402x1122 canvas, pixel size, positions and camera of Image 1, including transparent margins. Preserve the source framing so crop (155,183,1173,849) and common content_scale 0.01884570082449941 will reproduce the unchanged body at 22x16 native pixels.
+One isolated friendly medium caramel farm dog, collie/shepherd type, head on the LEFT facing west. Caramel back/ears/tail; cream muzzle/chest/paws/tail tip; dark nose/eye; no collar or accessories. Three-quarter top-down camera, upper-left daytime light, crisp deliberate square clusters and colored outlines.
+Native game canvas is 40x32, pivot (20,30), draw scale 1.0, 0.12 second animation frame. All four paws remain exactly where they were; lowest opaque row is 29. Do not enlarge the dog to fill the canvas.
+True transparent background. No floor, ground shadow, halo, glow, scent/sound lines, labels, text, UI, grass, person, zombie, blur, gradients, antialiasing, smooth painting or 3D. Output exactly ONE frame, no strip.

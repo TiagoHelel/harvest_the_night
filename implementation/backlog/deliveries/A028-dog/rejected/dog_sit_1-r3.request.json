@@ -1,0 +1,7 @@
+{
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png"
+  ],
+  "prompt": "Use case: precise-object-edit\nImage1 is the EDIT TARGET. This is a VERY SMALL localized correction to a pixel-art sprite; absolutely preserve the input image everywhere except the topmost tip of the BACK ear.\nChange only that ear tip, bending it by one small native pixel toward the back/right. No head tilt, no blink. Every part below the ear must be unchanged, including face, head outline, eyes, muzzle, body shading, chest, belly, legs, feet, tail. Please preserve the original actual pixels of the image, rather than repainting those areas. The output should be nearly identical to Image1 and keep its entire shape.\nNative fixed reduction40x32 produced12 unwanted changed pixels, including six body/paw pixels, from the earlier whole-image edit. Those jitter between idle frames. This final revision must have ZERO changes to lower body or feet.\nKeep source1402x1122, exact dog framing/ground baseline/opaque bounds ofImage1. One sitting caramel-and-cream WEST-facing dog with closed mouth. Real transparent background. No background, text, accessories, lines, ground, shadow, smoothing, gradients, new subject or altered palette. ONLY the tiny back ear tip is different; everything else exactly copied fromImage1."
+}

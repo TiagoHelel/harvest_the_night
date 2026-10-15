@@ -1,0 +1,49 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / dog_walk r3. Image 1 is the four-frame walk strip to edit. The front paws now alternate correctly; KEEP those corrected front legs and all bodies, heads, ears, tails, colors, sizes, camera and frame order unchanged.\nOne correction only: make the HIND PAWS alternate in the opposite phase to the front paws. The near hind leg currently trails in both contact frames.\nFRAME 1: keep the near hind paw trailing toward the RIGHT and far hind paw ahead toward the LEFT, as it already is.\nFRAME 3: the NEAR hind leg (bright cream leg connected to the visible outer hip below the tail) must swing FORWARD toward the LEFT under the belly, with its paw planted below the middle of the belly. The FAR hind leg must instead trail to the RIGHT, nearer the tail, partly occluded. Do not keep the near hind paw stretched toward the RIGHT in frame 3.\nIn frame 3 local cell coordinates, near hind paw should be approximately x=300 rather than x=420; far hind paw should be near x=420. Keep paws on the same existing source baseline. Frames 2 and 4 show the intervening passing motion without swapping leg identity. No extra or detached paw.\nPreserve the corrected front contact pair, the exact 2171x724 source strip framing and four equally spaced cells. True transparent background. No new object, text, shadow, halo, color changes, pose scaling or body movement. Image 2 is identity reference only; do not restore its standing hind legs.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-walk-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-45a97d27-e70e-4103-a4f9-2b4ee9703d9c.png",
+  "date": "2026-10-14",
+  "revision": 3,
+  "roles": [
+    "walk strip with corrected front contacts; hind-leg edit target",
+    "standing identity reference"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-walk-r2.png",
+      "sha256": "23918b528fae5e63309f117981328b7093f901e3829abe912e4275504ffaf5f2",
+      "role": "walk strip with corrected front contacts; hind-leg edit target"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "sha256": "9bd7a4695e9e6d7a22210abd4b0601075111282ba6952e707a1fffc64398cdd6",
+      "role": "standing identity reference"
+    }
+  ],
+  "copied_path": "rejected/dog-walk-r3.png",
+  "sha256": "815e424535b3c47cdc24ba45f865255b6f3dca955301fff124cfad0bd214d106",
+  "decision": "rejected / The hind-leg correction weakened the front-contact sequence; r2 retained for review.",
+  "inspection": {
+    "canvas_wh": [
+      2172,
+      724
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      23,
+      193,
+      2158,
+      537
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+Idle edit changes body/paw pixels outside the intended ear area. Lower alpha can align, but body RGB differs.

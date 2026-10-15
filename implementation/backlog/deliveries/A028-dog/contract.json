@@ -1,0 +1,1506 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "dog_bark",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dog_bark-west-0-night.png",
+          "path": "native/dog_bark/west/01.png",
+          "points": {},
+          "pose": "mouth closed, head back"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_bark-west-1-night.png",
+          "path": "native/dog_bark/west/02.png",
+          "points": {},
+          "pose": "mouth open"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_bark-west-2-night.png",
+          "path": "native/dog_bark/west/03.png",
+          "points": {},
+          "pose": "mouth closing"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "poses": [
+        "mouth closed, head back",
+        "mouth open",
+        "mouth closing"
+      ]
+    },
+    {
+      "anim": "dog_bite",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dog_bite-west-0-night.png",
+          "path": "native/dog_bite/west/01.png",
+          "points": {},
+          "pose": "crouch"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_bite-west-1-night.png",
+          "path": "native/dog_bite/west/02.png",
+          "points": {
+            "bite_xy": [
+              9,
+              21
+            ]
+          },
+          "pose": "open-jaw lunge"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_bite-west-2-night.png",
+          "path": "native/dog_bite/west/03.png",
+          "points": {},
+          "pose": "recover"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {
+        "bite_xy": [
+          9,
+          21
+        ]
+      },
+      "poses": [
+        "crouch",
+        "open-jaw lunge",
+        "recover"
+      ]
+    },
+    {
+      "anim": "dog_run",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dog_run-west-0-night.png",
+          "path": "native/dog_run/west/01.png",
+          "points": {},
+          "pose": "front landing"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_run-west-1-night.png",
+          "path": "native/dog_run/west/02.png",
+          "points": {},
+          "pose": "gathered"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_run-west-2-night.png",
+          "path": "native/dog_run/west/03.png",
+          "points": {},
+          "pose": "hind push"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_run-west-3-night.png",
+          "path": "native/dog_run/west/04.png",
+          "points": {},
+          "pose": "stretched"
+        }
+      ],
+      "frame_seconds": 0.08,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "poses": [
+        "front landing",
+        "gathered",
+        "hind push",
+        "stretched"
+      ]
+    },
+    {
+      "anim": "dog_sit",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Owner-approved sitting frame, exact pixels preserved.",
+          "night": "preview/dog_sit-west-0-night.png",
+          "path": "native/dog_sit/west/01.png",
+          "points": {},
+          "pose": "sitting master"
+        },
+        {
+          "issue": "Owner-approved sitting frame, exact pixels preserved.",
+          "night": "preview/dog_sit-west-1-night.png",
+          "path": "native/dog_sit/west/02.png",
+          "points": {},
+          "pose": "ear flick; unwanted body color changes"
+        }
+      ],
+      "frame_seconds": 0.5,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "poses": [
+        "sitting master",
+        "ear flick; unwanted body color changes"
+      ]
+    },
+    {
+      "anim": "dog_sleep",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dog_sleep-west-0-night.png",
+          "path": "native/dog_sleep/west/01.png",
+          "points": {},
+          "pose": "curled asleep"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_sleep-west-1-night.png",
+          "path": "native/dog_sleep/west/02.png",
+          "points": {},
+          "pose": "breathing"
+        }
+      ],
+      "frame_seconds": 0.6,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "poses": [
+        "curled asleep",
+        "breathing"
+      ]
+    },
+    {
+      "anim": "dog_wag",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dog_wag-west-0-night.png",
+          "path": "native/dog_wag/west/01.png",
+          "points": {},
+          "pose": "standing, tail high"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_wag-west-1-night.png",
+          "path": "native/dog_wag/west/02.png",
+          "points": {},
+          "pose": "standing, tail low"
+        }
+      ],
+      "frame_seconds": 0.12,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "poses": [
+        "standing, tail high",
+        "standing, tail low"
+      ]
+    },
+    {
+      "anim": "dog_walk",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/dog_walk-west-0-night.png",
+          "path": "native/dog_walk/west/01.png",
+          "points": {},
+          "pose": "near front contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_walk-west-1-night.png",
+          "path": "native/dog_walk/west/02.png",
+          "points": {},
+          "pose": "passing"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_walk-west-2-night.png",
+          "path": "native/dog_walk/west/03.png",
+          "points": {},
+          "pose": "opposite front contact"
+        },
+        {
+          "issue": "",
+          "night": "preview/dog_walk-west-3-night.png",
+          "path": "native/dog_walk/west/04.png",
+          "points": {},
+          "pose": "opposite passing"
+        }
+      ],
+      "frame_seconds": 0.15,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "poses": [
+        "near front contact",
+        "passing",
+        "opposite front contact",
+        "opposite passing"
+      ]
+    }
+  ],
+  "approved_existing_files": {
+    "native/dog_bark/west/01.png": "c778968a5b370781a5801c0c082a7f22a63d96254b87c44b433e425069aa8b33",
+    "native/dog_bark/west/02.png": "48e5f6d9ee579193c8a99c2f1271a03820c220090a2700a10f3b228614214ad4",
+    "native/dog_bark/west/03.png": "06455dc8ecb3e98ebf66cedabbd81916e7e1944f71fdc4f038191bef9d1fd379",
+    "native/dog_bite/west/01.png": "4e2b3dfc36c8baf5f82eb0f640d11e0db0bbd2caff15e4670fd8876b4335fd74",
+    "native/dog_bite/west/02.png": "685d26ac2a8f734588f4073e88457565b141b0d2db4f3450a7731948c2b7f283",
+    "native/dog_bite/west/03.png": "82d189972ef035e5fa430be0dc1892dad9bd4e0765ec8edc21a1318a330b37be",
+    "native/dog_run/west/01.png": "725d945217e21ec8f0c2ebba1bd716b0f96de94198b869a026b1fd5d62c57581",
+    "native/dog_run/west/02.png": "93b12addfcea10539d0e975d101c24a432d6d2515e0db0da434631beddbaddb7",
+    "native/dog_run/west/03.png": "7a59b7e523cff4c48cc9ad73c70efed1d8dbd65d705d5a3591536dc19e63e99e",
+    "native/dog_run/west/04.png": "49c2ee5cef216cd83c65d1b0cb51c490354e238e8977dc3cb657c115c6b9a179",
+    "native/dog_sit/west/01.png": "37a9b23974755eaf67d4b44687b9a7915ee7fcc0fc561d6b7b519e1c0fb38391",
+    "native/dog_sit/west/02.png": "fad1b48ab412007775bd274392e64643a1cdc922ff07dc094b1ceb5ac7eef0f1",
+    "native/dog_sleep/west/01.png": "e03c7fb31299aff11852987921892e3a62284c86bd9e7a6a746463efe00b9cfe",
+    "native/dog_sleep/west/02.png": "099ba4af3b9d6feae7116efa85c07270f7bedae11cb6743062f3a4dc7e4293d8",
+    "native/dog_wag/west/01.png": "1c78bf53579b602c72ac478e9f50b807dff0ad815f72a878cf56cd8e460d04ab",
+    "native/dog_wag/west/02.png": "c0c49eeb6b67edf87b49be042dfb060efac601ceb17dcc496b3d3a6e8bb916cb",
+    "native/dog_walk/west/01.png": "6be2887f6330ac32fa8d057b7d5c6f336719d1c29b9bbe8d13ff8a3a32bdfcc1",
+    "native/dog_walk/west/02.png": "28cd559bfdf1d1c24e5842e289ba8f74684a0101d2ab6b072cd49617f8f82cc4",
+    "native/dog_walk/west/03.png": "18dbdc0f8281e962b486a5b82f9ec1e48ef856220e8604af2463de8d5e81ed75",
+    "native/dog_walk/west/04.png": "1cea9d6a1d76bb9632f5b8b18ed9cb5277255ffa1ded0222707ebf999099fb7a"
+  },
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/props/cow.png",
+      "pivot_xy": [
+        12,
+        22
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Use sprites/props/cow.png and sprites/props/chicken.png as animal-family style references instead of unapproved A026/A027 deliveries. Native dog geometry, palette, animation and quality requirements remain as specified.",
+      "owner_words": "Usar os sprites atuais dos animais no jogo como refer\u00c3\u00aancia"
+    },
+    {
+      "change": "ImageGen returned unequal frame gaps. Each frame is cropped inside its measured opaque x bounds, using one shared content_scale and cell height per animation; this prevents neighbour leakage. No pose is individually resized or painted.",
+      "rule": "Strip spacing"
+    },
+    {
+      "accepted_checks": [
+        "bark_paws_stationary",
+        "idle_body_identical",
+        "sleep_head_paws_stationary",
+        "wag_only_tail_changes"
+      ],
+      "change": "Owner accepted the exact displayed artwork and the documented visual differences; measurements remain unchanged.",
+      "owner_words": "tudo aprovado, falta mais?",
+      "rule": "Reviewed visual measurements"
+    }
+  ],
+  "files": [
+    {
+      "anim": "dog_sit",
+      "call": "raw/dog_sit_0-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_sit/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "sitting master",
+      "prompt": "raw/dog_sit_0-r2.prompt.txt",
+      "prompt_sha256": "6382ed87cdd6719af06972f987ecb14e150510858645001b9251f5314b14f87f",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          17
+        ],
+        "content_scale": 0.019428571428571427,
+        "crop_xywh": [
+          336,
+          159,
+          768,
+          877
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "soil_dark",
+          "bone_dark",
+          "bone",
+          "roof_light"
+        ],
+        "sheet_cell_xywh": null
+      },
+      "review_issue": "Owner-approved sitting frame, exact pixels preserved.",
+      "runtime_name": "sprites/props/dog_sit_0.png",
+      "seconds": 0.5,
+      "sha256": "37a9b23974755eaf67d4b44687b9a7915ee7fcc0fc561d6b7b519e1c0fb38391",
+      "source": "raw/dog_sit_0-r2.png",
+      "source_sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1"
+    },
+    {
+      "anim": "dog_sit",
+      "call": "raw/dog_sit_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_sit/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "ear flick; unwanted body color changes",
+      "prompt": "raw/dog_sit_1-r1.prompt.txt",
+      "prompt_sha256": "16e145852a9b5b1650bf6d9d567b1313af6bfcb784e4f9ca1fe8bb67ce4cbf79",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          17
+        ],
+        "content_scale": 0.019428571428571427,
+        "crop_xywh": [
+          336,
+          161,
+          768,
+          877
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "soil_dark",
+          "bone_dark",
+          "bone",
+          "roof_light"
+        ],
+        "sheet_cell_xywh": null
+      },
+      "review_issue": "Owner-approved sitting frame, exact pixels preserved.",
+      "runtime_name": "sprites/props/dog_sit_1.png",
+      "seconds": 0.5,
+      "sha256": "fad1b48ab412007775bd274392e64643a1cdc922ff07dc094b1ceb5ac7eef0f1",
+      "source": "raw/dog_sit_1-r1.png",
+      "source_sha256": "0e28135ddd9ef8c2c75f0a90386e69a592eb1141e1b84eaf558f51c6a60db1ac"
+    },
+    {
+      "anim": "dog_wag",
+      "call": "raw/dog-master-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_wag/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "standing, tail high",
+      "prompt": "raw/dog-master-r1.prompt.txt",
+      "prompt_sha256": "73fe429be2b927f2b8783b23c0ba0ea2f71b200452ff72edc041ee9268f16dd2",
+      "recipe": {
+        "content_scale": 0.01884570082449941,
+        "crop_xywh": [
+          155,
+          183,
+          1173,
+          849
+        ]
+      },
+      "runtime_name": "sprites/props/dog_wag_0.png",
+      "seconds": 0.12,
+      "sha256": "1c78bf53579b602c72ac478e9f50b807dff0ad815f72a878cf56cd8e460d04ab",
+      "source": "raw/dog-master-r1.png",
+      "source_sha256": "9bd7a4695e9e6d7a22210abd4b0601075111282ba6952e707a1fffc64398cdd6"
+    },
+    {
+      "anim": "dog_wag",
+      "call": "raw/dog-wag-low-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_wag/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "standing, tail low",
+      "prompt": "raw/dog-wag-low-r2.prompt.txt",
+      "prompt_sha256": "16736d8c979994a7f8e04ff43fa5582f95c0a9dffc41d6fa30cd66067f7a5d8a",
+      "recipe": {
+        "content_scale": 0.01884570082449941,
+        "crop_xywh": [
+          155,
+          183,
+          1173,
+          849
+        ]
+      },
+      "runtime_name": "sprites/props/dog_wag_1.png",
+      "seconds": 0.12,
+      "sha256": "c0c49eeb6b67edf87b49be042dfb060efac601ceb17dcc496b3d3a6e8bb916cb",
+      "source": "raw/dog-wag-low-r2.png",
+      "source_sha256": "e7e0b0973fb87110152febcd359b3fc5ac30846a5325a06b10e0e38ed0e006a2"
+    },
+    {
+      "anim": "dog_walk",
+      "call": "raw/dog-walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_walk/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "near front contact",
+      "prompt": "raw/dog-walk-r2.prompt.txt",
+      "prompt_sha256": "1505c87b32a03aa9ed4bb9dc1a382d718acf652237930f9aeae6eccc7aa7a894",
+      "recipe": {
+        "content_anchor_xy": [
+          11,
+          15
+        ],
+        "content_scale": 0.042801556420233464,
+        "crop_xywh": [
+          24,
+          172,
+          514,
+          385
+        ]
+      },
+      "runtime_name": "sprites/props/dog_walk_0.png",
+      "seconds": 0.15,
+      "sha256": "6be2887f6330ac32fa8d057b7d5c6f336719d1c29b9bbe8d13ff8a3a32bdfcc1",
+      "source": "raw/dog-walk-r2.png",
+      "source_sha256": "23918b528fae5e63309f117981328b7093f901e3829abe912e4275504ffaf5f2"
+    },
+    {
+      "anim": "dog_walk",
+      "call": "raw/dog-walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_walk/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "passing",
+      "prompt": "raw/dog-walk-r2.prompt.txt",
+      "prompt_sha256": "1505c87b32a03aa9ed4bb9dc1a382d718acf652237930f9aeae6eccc7aa7a894",
+      "recipe": {
+        "content_anchor_xy": [
+          11,
+          15
+        ],
+        "content_scale": 0.042801556420233464,
+        "crop_xywh": [
+          567,
+          173,
+          510,
+          385
+        ]
+      },
+      "runtime_name": "sprites/props/dog_walk_1.png",
+      "seconds": 0.15,
+      "sha256": "28cd559bfdf1d1c24e5842e289ba8f74684a0101d2ab6b072cd49617f8f82cc4",
+      "source": "raw/dog-walk-r2.png",
+      "source_sha256": "23918b528fae5e63309f117981328b7093f901e3829abe912e4275504ffaf5f2"
+    },
+    {
+      "anim": "dog_walk",
+      "call": "raw/dog-walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_walk/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite front contact",
+      "prompt": "raw/dog-walk-r2.prompt.txt",
+      "prompt_sha256": "1505c87b32a03aa9ed4bb9dc1a382d718acf652237930f9aeae6eccc7aa7a894",
+      "recipe": {
+        "content_anchor_xy": [
+          11,
+          15
+        ],
+        "content_scale": 0.042801556420233464,
+        "crop_xywh": [
+          1108,
+          173,
+          508,
+          385
+        ]
+      },
+      "runtime_name": "sprites/props/dog_walk_2.png",
+      "seconds": 0.15,
+      "sha256": "18dbdc0f8281e962b486a5b82f9ec1e48ef856220e8604af2463de8d5e81ed75",
+      "source": "raw/dog-walk-r2.png",
+      "source_sha256": "23918b528fae5e63309f117981328b7093f901e3829abe912e4275504ffaf5f2"
+    },
+    {
+      "anim": "dog_walk",
+      "call": "raw/dog-walk-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_walk/west/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "opposite passing",
+      "prompt": "raw/dog-walk-r2.prompt.txt",
+      "prompt_sha256": "1505c87b32a03aa9ed4bb9dc1a382d718acf652237930f9aeae6eccc7aa7a894",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          15
+        ],
+        "content_scale": 0.042801556420233464,
+        "crop_xywh": [
+          1646,
+          173,
+          502,
+          385
+        ]
+      },
+      "runtime_name": "sprites/props/dog_walk_3.png",
+      "seconds": 0.15,
+      "sha256": "1cea9d6a1d76bb9632f5b8b18ed9cb5277255ffa1ded0222707ebf999099fb7a",
+      "source": "raw/dog-walk-r2.png",
+      "source_sha256": "23918b528fae5e63309f117981328b7093f901e3829abe912e4275504ffaf5f2"
+    },
+    {
+      "anim": "dog_bark",
+      "call": "raw/dog-bark-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/dog_bark/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "mouth closed, head back",
+      "prompt": "raw/dog-bark-r1.prompt.txt",
+      "prompt_sha256": "0e518120c8eabed7bf8e20c1acb971b505d2a4712b713eb215dc32db81584861",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          17
+        ],
+        "content_scale": 0.03426791277258567,
+        "crop_xywh": [
+          81,
+          124,
+          625,
+          532
+        ]
+      },
+      "runtime_name": "sprites/props/dog_bark_0.png",
+      "seconds": 0.1,
+      "sha256": "c778968a5b370781a5801c0c082a7f22a63d96254b87c44b433e425069aa8b33",
+      "source": "raw/dog-bark-r1.png",
+      "source_sha256": "0d562e51a3397ee6c0d7f6d53419b8aa3e85d14745e7e617c358e0714381284a"
+    },
+    {
+      "anim": "dog_bark",
+      "call": "raw/dog-bark-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/dog_bark/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "mouth open",
+      "prompt": "raw/dog-bark-r1.prompt.txt",
+      "prompt_sha256": "0e518120c8eabed7bf8e20c1acb971b505d2a4712b713eb215dc32db81584861",
+      "recipe": {
+        "content_anchor_xy": [
+          11,
+          17
+        ],
+        "content_scale": 0.03426791277258567,
+        "crop_xywh": [
+          754,
+          124,
+          642,
+          532
+        ]
+      },
+      "runtime_name": "sprites/props/dog_bark_1.png",
+      "seconds": 0.1,
+      "sha256": "48e5f6d9ee579193c8a99c2f1271a03820c220090a2700a10f3b228614214ad4",
+      "source": "raw/dog-bark-r1.png",
+      "source_sha256": "0d562e51a3397ee6c0d7f6d53419b8aa3e85d14745e7e617c358e0714381284a"
+    },
+    {
+      "anim": "dog_bark",
+      "call": "raw/dog-bark-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/dog_bark/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "mouth closing",
+      "prompt": "raw/dog-bark-r1.prompt.txt",
+      "prompt_sha256": "0e518120c8eabed7bf8e20c1acb971b505d2a4712b713eb215dc32db81584861",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          17
+        ],
+        "content_scale": 0.03426791277258567,
+        "crop_xywh": [
+          1460,
+          124,
+          611,
+          532
+        ]
+      },
+      "runtime_name": "sprites/props/dog_bark_2.png",
+      "seconds": 0.1,
+      "sha256": "06455dc8ecb3e98ebf66cedabbd81916e7e1944f71fdc4f038191bef9d1fd379",
+      "source": "raw/dog-bark-r1.png",
+      "source_sha256": "0d562e51a3397ee6c0d7f6d53419b8aa3e85d14745e7e617c358e0714381284a"
+    },
+    {
+      "anim": "dog_sleep",
+      "call": "raw/dog-sleep-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_sleep/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "curled asleep",
+      "prompt": "raw/dog-sleep-r2.prompt.txt",
+      "prompt_sha256": "4cf72ffd7a006631cfdb22a9d958606a7f1b15ce088c73b5cf94fac34d04329a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          11
+        ],
+        "content_scale": 0.029197080291970802,
+        "crop_xywh": [
+          200,
+          367,
+          685,
+          407
+        ]
+      },
+      "runtime_name": "sprites/props/dog_sleep_0.png",
+      "seconds": 0.6,
+      "sha256": "e03c7fb31299aff11852987921892e3a62284c86bd9e7a6a746463efe00b9cfe",
+      "source": "raw/dog-sleep-r2.png",
+      "source_sha256": "74c3391bc1ed581481097bd0ce16ad2b2a1b241bbb111e816d68e86a21fee5db"
+    },
+    {
+      "anim": "dog_sleep",
+      "call": "raw/dog-sleep-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_sleep/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "breathing",
+      "prompt": "raw/dog-sleep-r2.prompt.txt",
+      "prompt_sha256": "4cf72ffd7a006631cfdb22a9d958606a7f1b15ce088c73b5cf94fac34d04329a",
+      "recipe": {
+        "content_anchor_xy": [
+          10,
+          11
+        ],
+        "content_scale": 0.029197080291970802,
+        "crop_xywh": [
+          1142,
+          367,
+          674,
+          407
+        ]
+      },
+      "runtime_name": "sprites/props/dog_sleep_1.png",
+      "seconds": 0.6,
+      "sha256": "099ba4af3b9d6feae7116efa85c07270f7bedae11cb6743062f3a4dc7e4293d8",
+      "source": "raw/dog-sleep-r2.png",
+      "source_sha256": "74c3391bc1ed581481097bd0ce16ad2b2a1b241bbb111e816d68e86a21fee5db"
+    },
+    {
+      "anim": "dog_run",
+      "call": "raw/dog-run-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_run/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "front landing",
+      "prompt": "raw/dog-run-r1.prompt.txt",
+      "prompt_sha256": "9a294218ead8bc156c165a9e1a4554640aa5d087a4fd84e8851f0fe18bbec9c7",
+      "recipe": {
+        "content_anchor_xy": [
+          11,
+          16
+        ],
+        "content_scale": 0.047530864197530866,
+        "crop_xywh": [
+          48,
+          240,
+          455,
+          366
+        ]
+      },
+      "runtime_name": "sprites/props/dog_run_0.png",
+      "seconds": 0.08,
+      "sha256": "725d945217e21ec8f0c2ebba1bd716b0f96de94198b869a026b1fd5d62c57581",
+      "source": "raw/dog-run-r1.png",
+      "source_sha256": "2892a7674c138639b46d529a4afeb94f6b9280669b48155212f084ab844d5d00"
+    },
+    {
+      "anim": "dog_run",
+      "call": "raw/dog-run-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_run/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "gathered",
+      "prompt": "raw/dog-run-r1.prompt.txt",
+      "prompt_sha256": "9a294218ead8bc156c165a9e1a4554640aa5d087a4fd84e8851f0fe18bbec9c7",
+      "recipe": {
+        "content_anchor_xy": [
+          9,
+          16
+        ],
+        "content_scale": 0.047530864197530866,
+        "crop_xywh": [
+          542,
+          240,
+          375,
+          366
+        ]
+      },
+      "runtime_name": "sprites/props/dog_run_1.png",
+      "seconds": 0.08,
+      "sha256": "93b12addfcea10539d0e975d101c24a432d6d2515e0db0da434631beddbaddb7",
+      "source": "raw/dog-run-r1.png",
+      "source_sha256": "2892a7674c138639b46d529a4afeb94f6b9280669b48155212f084ab844d5d00"
+    },
+    {
+      "anim": "dog_run",
+      "call": "raw/dog-run-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_run/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "hind push",
+      "prompt": "raw/dog-run-r1.prompt.txt",
+      "prompt_sha256": "9a294218ead8bc156c165a9e1a4554640aa5d087a4fd84e8851f0fe18bbec9c7",
+      "recipe": {
+        "content_anchor_xy": [
+          11,
+          16
+        ],
+        "content_scale": 0.047530864197530866,
+        "crop_xywh": [
+          956,
+          240,
+          469,
+          366
+        ]
+      },
+      "runtime_name": "sprites/props/dog_run_2.png",
+      "seconds": 0.08,
+      "sha256": "7a59b7e523cff4c48cc9ad73c70efed1d8dbd65d705d5a3591536dc19e63e99e",
+      "source": "raw/dog-run-r1.png",
+      "source_sha256": "2892a7674c138639b46d529a4afeb94f6b9280669b48155212f084ab844d5d00"
+    },
+    {
+      "anim": "dog_run",
+      "call": "raw/dog-run-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/dog_run/west/04.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "stretched",
+      "prompt": "raw/dog-run-r1.prompt.txt",
+      "prompt_sha256": "9a294218ead8bc156c165a9e1a4554640aa5d087a4fd84e8851f0fe18bbec9c7",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          16
+        ],
+        "content_scale": 0.047530864197530866,
+        "crop_xywh": [
+          1437,
+          240,
+          504,
+          366
+        ]
+      },
+      "runtime_name": "sprites/props/dog_run_3.png",
+      "seconds": 0.08,
+      "sha256": "49c2ee5cef216cd83c65d1b0cb51c490354e238e8977dc3cb657c115c6b9a179",
+      "source": "raw/dog-run-r1.png",
+      "source_sha256": "2892a7674c138639b46d529a4afeb94f6b9280669b48155212f084ab844d5d00"
+    },
+    {
+      "anim": "dog_bite",
+      "call": "raw/dog-bite-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/dog_bite/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "crouch",
+      "prompt": "raw/dog-bite-r1.prompt.txt",
+      "prompt_sha256": "ecefe9c8f6d79d1b9b93c63d66b84c5d0ad93f22b8aceee2ea0397eafca33a93",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          18
+        ],
+        "content_scale": 0.03794642857142857,
+        "crop_xywh": [
+          62,
+          153,
+          652,
+          500
+        ]
+      },
+      "runtime_name": "sprites/props/dog_bite_0.png",
+      "seconds": 0.1,
+      "sha256": "4e2b3dfc36c8baf5f82eb0f640d11e0db0bbd2caff15e4670fd8876b4335fd74",
+      "source": "raw/dog-bite-r1.png",
+      "source_sha256": "1a8be7e5e0c43e0f767910053029af03c1b4a57c542f7a1b2e07008069667d3e"
+    },
+    {
+      "anim": "dog_bite",
+      "call": "raw/dog-bite-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/dog_bite/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {
+        "bite_xy": [
+          9,
+          21
+        ]
+      },
+      "pose": "open-jaw lunge",
+      "prompt": "raw/dog-bite-r1.prompt.txt",
+      "prompt_sha256": "ecefe9c8f6d79d1b9b93c63d66b84c5d0ad93f22b8aceee2ea0397eafca33a93",
+      "recipe": {
+        "content_anchor_xy": [
+          13,
+          18
+        ],
+        "content_scale": 0.03794642857142857,
+        "crop_xywh": [
+          743,
+          153,
+          701,
+          500
+        ]
+      },
+      "runtime_name": "sprites/props/dog_bite_1.png",
+      "seconds": 0.1,
+      "sha256": "685d26ac2a8f734588f4073e88457565b141b0d2db4f3450a7731948c2b7f283",
+      "source": "raw/dog-bite-r1.png",
+      "source_sha256": "1a8be7e5e0c43e0f767910053029af03c1b4a57c542f7a1b2e07008069667d3e"
+    },
+    {
+      "anim": "dog_bite",
+      "call": "raw/dog-bite-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/dog_bite/west/03.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "recover",
+      "prompt": "raw/dog-bite-r1.prompt.txt",
+      "prompt_sha256": "ecefe9c8f6d79d1b9b93c63d66b84c5d0ad93f22b8aceee2ea0397eafca33a93",
+      "recipe": {
+        "content_anchor_xy": [
+          12,
+          18
+        ],
+        "content_scale": 0.03794642857142857,
+        "crop_xywh": [
+          1504,
+          157,
+          632,
+          500
+        ]
+      },
+      "runtime_name": "sprites/props/dog_bite_2.png",
+      "seconds": 0.1,
+      "sha256": "82d189972ef035e5fa430be0dc1892dad9bd4e0765ec8edc21a1318a330b37be",
+      "source": "raw/dog-bite-r1.png",
+      "source_sha256": "1a8be7e5e0c43e0f767910053029af03c1b4a57c542f7a1b2e07008069667d3e"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "tudo aprovado, falta mais?",
+    "scope": "complete_reviewed_delivery"
+  },
+  "pack": "A028",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "pending_review_files": [],
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r2.png",
+      "role": "approved sitting identity/colors reference",
+      "sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\props\\cow.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "a22e639050fefdce2d3ffde6e82cc4e88ba527e8f91e78c12a0f237d2dda70c4"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\props\\cow.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "f6a2990f7b7d9f95acbf0927eae35fcb451b50b2c92c439a339e498b4f663374"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\left\\01.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "b24d95053eafcc2a11e4184932ff41badc3bf248c1e2d9af0785b7637660574a"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "game style reference only",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "role": "standing dog identity/camera master",
+      "sha256": "9bd7a4695e9e6d7a22210abd4b0601075111282ba6952e707a1fffc64398cdd6"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\enemies\\walker_walk_0.png",
+      "role": "walker bite-height reference only, never drawn",
+      "sha256": "48a68c09e6971c05cc191dcbe1ef56027ed8b31acdc7ef935d34a839ac2af4dc"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A028-dog",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The dog",
+  "tool": "built-in ImageGen"
+}

@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nAsset type: dog_sit_1 production pixel sprite.\nInput image1 is the accepted sitting pose dog_sit_0, EDIT TARGET. Copy it exactly. Change ONLY the tiny tip of the far ear to fold slightly backward (a relaxed small ear flick). Keep eyes open, mouth closed, look WEST. This is subtle day idle, not a new dog or a different sitting posture.\nAll pixels below the ear tips, including the face, eye, muzzle, chest, torso, paws, legs, haunches, tail MUST stay in the exact same source positions, shapes and colors. Preserve source canvas1402x1122, ground baseline, colored outline, caramel/cream markings and pixel block scale.\nDo NOT regenerate the lower body, do not move the dog, do not change head size or eye. Keep visible bounds about767x875, width13-15 height17-19 after native reduction40x32 pivot20,30. The body's lowermost paw remains exactly unchanged. One dog, true transparent background, no shadow, scenery, lines, accessories, text, new subject or fake checkerboard. Neutral warm upper-left light, no gradients or blur."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png",
+      "sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1847a51e-f209-4d7b-9241-1669ae145694.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_1-r1.png",
+  "sha256": "0e28135ddd9ef8c2c75f0a90386e69a592eb1141e1b84eaf558f51c6a60db1ac",
+  "revision": 1,
+  "decision": "rejected: Idle edit changes body/paw pixels outside the intended ear area. Lower alpha can align, but body RGB differs.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog_sit_1-r1.png"
+}

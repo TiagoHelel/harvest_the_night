@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog-master-r1.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nAsset type: production pixel sprite for HARVEST THE NIGHT.\nInput image 1 is the accepted dog standing identity master and EDIT TARGET. Preserve its caramel/cream markings, same eye/nose/head size, colored outline weight, ears, tail, top-down side view facing WEST. Only change the pose to SITTING.\nGenerate exactly ONE sitting pose dog_sit_0. Front paws stay on ground, hindquarters rest on ground, muzzle looks forward LEFT, head raised, both ears visible. Same compact torso volume and body thickness as master, no larger head.\nNative target canvas40x32 pivot(20,30), final visible sitter WIDTH13-15 and HEIGHT17-19 art pixels. Equivalent high-resolution pixel design, no gradients, no texture noise, no labels. Do not resize the dog independently to fill its available cell.\nUse the same 1402x1122 source framing as master. Retain the ground baseline at source y1031. Draw a narrower upright sitting dog with visible source body approx740x955 (about14x18 native). Same art pixel scale as the standing22x16 master; sitting is taller only from posture. Centre the sitting visible body on source x741, preserve source margin. Four correctly attached legs in the sitting pose, front cream paws separated and planted, rear folded haunches. No pose leftovers or extra limbs.\nNeutral warm daytime upper-left highlights. Limited colors: #241f2e,#3a3345,#6b4a2c,#8c6239,#a87c4e,#5c422a,#b8ae9a,#e8e0cf. No pink tongue in this sitting pose, closed mouth. True transparent alpha, no background/checkerboard/grass/ground/shadow/glow, no accessories, no other subjects."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog-master-r1.png",
+      "sha256": "9bd7a4695e9e6d7a22210abd4b0601075111282ba6952e707a1fffc64398cdd6",
+      "role": "accepted standing identity master and edit target"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-67907b54-5d83-453d-88b9-284e267fef78.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r1.png",
+  "sha256": "085f8068597941e8c02847ce59411273866e76289e8b66a1446ab26b5b2e6d26",
+  "revision": 1,
+  "decision": "rejected: Sitting native bounds 16x16 fail required 13-15 wide and 17-19 tall; tail projection too wide.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog_sit_0-r1.png"
+}

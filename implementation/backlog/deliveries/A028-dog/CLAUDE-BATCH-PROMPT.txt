@@ -1,0 +1,43 @@
+APPROVAL UPDATE / 2026-10-14: All 21 deliveries are complete and approved (422 PNGs). The 167 continuation additions are now approved; no missing files remain in this batch. Read CLAUDE-CONTINUATION-APPROVED.md and each current per-pack handoff. Pending-review instructions below are historical.
+
+CONTINUATION UPDATE / 2026-10-14: Missing outputs have now been generated as review candidates. Previous approvals are preserved, not extended. Read CLAUDE-CONTINUATION-REVIEW.md for current counts and pending-review boundaries; earlier missing-output notes below are historical.
+
+Owner-approved 21-pack art batch / Claude integration handoff
+
+Approval date: 2026-10-14
+Owner words (verbatim): meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+
+Authoritative batch manifest: implementation/backlog/deliveries/A028-dog/batch-approval.json
+Review index: implementation/backlog/deliveries/A028-dog/all-packs-review.html
+
+15 complete packs are approved for integration. Each listed folder now contains APPROVAL.json with exact native SHA-256 values, contract.json with approved status, and CLAUDE-Axxx-PROMPT.txt. Read the per-pack handoff and verify its exact hashes before promotion. The reviewed artwork and timing were preserved byte-for-byte.
+Measured visual QA differences remain false where applicable and are explicitly owner-accepted in APPROVAL.json; do not ask for visual approval again or regenerate these images.
+
+Ready packs / game tasks:
+A037 / task 0236 / implementation/backlog/deliveries/A037-decoy/CLAUDE-A037-PROMPT.txt
+A038 / task 0237 / implementation/backlog/deliveries/A038-beehive/CLAUDE-A038-PROMPT.txt
+A039 / task 0238 / implementation/backlog/deliveries/A039-catapult/CLAUDE-A039-PROMPT.txt
+A041 / task 0240 / implementation/backlog/deliveries/A041-searchlight/CLAUDE-A041-PROMPT.txt
+A044 / task 0243 / implementation/backlog/deliveries/A044-tarps/CLAUDE-A044-PROMPT.txt
+A046 / task 0260 / implementation/backlog/deliveries/A046-spitter/CLAUDE-A046-PROMPT.txt
+A047 / task 0261 / implementation/backlog/deliveries/A047-rats/CLAUDE-A047-PROMPT.txt
+A048 / task 0262 / implementation/backlog/deliveries/A048-crow/CLAUDE-A048-PROMPT.txt
+A049 / task 0263 / implementation/backlog/deliveries/A049-digger/CLAUDE-A049-PROMPT.txt
+A050 / task 0264 / implementation/backlog/deliveries/A050-frost-zombie/CLAUDE-A050-PROMPT.txt
+A051 / task 0265 / implementation/backlog/deliveries/A051-wraith/CLAUDE-A051-PROMPT.txt
+A052 / task 0266 / implementation/backlog/deliveries/A052-harvester/CLAUDE-A052-PROMPT.txt
+A053 / task 0267 / implementation/backlog/deliveries/A053-scarecrow-king/CLAUDE-A053-PROMPT.txt
+A055 / task 0269 / implementation/backlog/deliveries/A055-event-icons/CLAUDE-A055-PROMPT.txt
+A056 / task 0288 / implementation/backlog/deliveries/A056-collections/CLAUDE-A056-PROMPT.txt
+
+Approved images in partial packs:
+A028: 2/20 images approved; 18 outputs still missing. APPROVAL.json lists the exact approved subset. Full-pack integration remains gated only by missing outputs.
+A040: 1/3 images approved; 2 outputs still missing. APPROVAL.json lists the exact approved subset. Full-pack integration remains gated only by missing outputs.
+A042: 3/42 images approved; 39 outputs still missing. APPROVAL.json lists the exact approved subset. Full-pack integration remains gated only by missing outputs.
+A054: 14/22 images approved; 8 outputs still missing. APPROVAL.json lists the exact approved subset. Full-pack integration remains gated only by missing outputs.
+
+No images existed in the reviewed pages for A043 (0/78) and A045 (0/22); these are still awaiting a usable art delivery. A043 latest failed raw generation attempts are not covered by approval of the empty review page.
+
+Claude owns the game integration tasks, manifest/source/ownership promotion, tools/verify.py, day/night captures, assets.py unblock, and the final integrated status. Codex did not change game code or game task states. Keep existing placeholders for missing outputs. Do not discard the approved partial frames.
+
+This supersedes the broad no-integration advice in earlier mailbox entries.

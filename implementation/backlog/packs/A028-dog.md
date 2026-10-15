@@ -1,6 +1,6 @@
 # A028 - The dog
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0245
 - **Dressed by game tasks:** 0185
 - **Spec after game task:** 0233

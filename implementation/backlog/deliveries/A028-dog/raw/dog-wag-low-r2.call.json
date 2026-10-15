@@ -1,0 +1,54 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / dog_wag low tail r2. One correction: preserve every original BODY pixel outside the tail area. The first edit changed 17 native body/face/paw pixels outside the tail, causing unwanted color shimmer.\nImage 1 is the ORIGINAL standing dog and exact pixel-preserving edit target. Image 2 supplies only the desired low-tail pose. Output Image 1 with ONLY its tail replaced by that lower tail pose; keep head, ears, eyes, muzzle, chest, torso, rump surface, all legs and paws literally unchanged from Image 1.\nThe edited region is only the right-side tail, approximately source x=1010..1340, y=430..850. Everything else in the 1402x1122 source canvas, including transparent margins and every RGB/alpha value, must remain from Image 1. Do not re-render, recolor, sharpen, rescale or restyle the left side or body.\nHead faces left, caramel/cream fur, no collar. All four paws remain fixed. Keep tail tip above the paw baseline; preserve true transparency. No text, background, shadow, halo, blur or extra object. Output one isolated frame at the original exact framing, no strip.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-wag-low-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5c3cdc3c-4fe3-48cf-8e88-5ff2186c0112.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "original dog body: exact edit target",
+    "low tail pose only"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "sha256": "9bd7a4695e9e6d7a22210abd4b0601075111282ba6952e707a1fffc64398cdd6",
+      "role": "original dog body: exact edit target"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-wag-low-r1.png",
+      "sha256": "dd2b0021a18c4d7fb6b29b3ebe3fa65076884fef8f01224f3f9e081420497e30",
+      "role": "low tail pose only",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog-wag-low-r1.png"
+    }
+  ],
+  "copied_path": "raw/dog-wag-low-r2.png",
+  "sha256": "e7e0b0973fb87110152febcd359b3fc5ac30846a5325a06b10e0e38ed0e006a2",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      1402,
+      1122
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      156,
+      183,
+      1325,
+      1033
+    ]
+  },
+  "selected_native_exports": [
+    "native/dog_wag/west/02.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

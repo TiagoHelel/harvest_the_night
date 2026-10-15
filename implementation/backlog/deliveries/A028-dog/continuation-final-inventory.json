@@ -1,0 +1,955 @@
+{
+  "date": "2026-10-14",
+  "owner_continuation_words": "entao bora continuar essa poha",
+  "new_pngs": 167,
+  "previously_approved_pngs_preserved": 20,
+  "new_art_approval": "approved for integration",
+  "runtime_integrated": false,
+  "packs": [
+    {
+      "id": "A028",
+      "slug": "A028-dog",
+      "new_count": 18,
+      "existing_approved_count": 2,
+      "complete_count": 20,
+      "expected_count": 20,
+      "new_files": [
+        {
+          "output": "native/dog_wag/west/01.png",
+          "sha256": "1c78bf53579b602c72ac478e9f50b807dff0ad815f72a878cf56cd8e460d04ab",
+          "runtime_name": "sprites/props/dog_wag_0.png"
+        },
+        {
+          "output": "native/dog_wag/west/02.png",
+          "sha256": "c0c49eeb6b67edf87b49be042dfb060efac601ceb17dcc496b3d3a6e8bb916cb",
+          "runtime_name": "sprites/props/dog_wag_1.png"
+        },
+        {
+          "output": "native/dog_walk/west/01.png",
+          "sha256": "6be2887f6330ac32fa8d057b7d5c6f336719d1c29b9bbe8d13ff8a3a32bdfcc1",
+          "runtime_name": "sprites/props/dog_walk_0.png"
+        },
+        {
+          "output": "native/dog_walk/west/02.png",
+          "sha256": "28cd559bfdf1d1c24e5842e289ba8f74684a0101d2ab6b072cd49617f8f82cc4",
+          "runtime_name": "sprites/props/dog_walk_1.png"
+        },
+        {
+          "output": "native/dog_walk/west/03.png",
+          "sha256": "18dbdc0f8281e962b486a5b82f9ec1e48ef856220e8604af2463de8d5e81ed75",
+          "runtime_name": "sprites/props/dog_walk_2.png"
+        },
+        {
+          "output": "native/dog_walk/west/04.png",
+          "sha256": "1cea9d6a1d76bb9632f5b8b18ed9cb5277255ffa1ded0222707ebf999099fb7a",
+          "runtime_name": "sprites/props/dog_walk_3.png"
+        },
+        {
+          "output": "native/dog_bark/west/01.png",
+          "sha256": "c778968a5b370781a5801c0c082a7f22a63d96254b87c44b433e425069aa8b33",
+          "runtime_name": "sprites/props/dog_bark_0.png"
+        },
+        {
+          "output": "native/dog_bark/west/02.png",
+          "sha256": "48e5f6d9ee579193c8a99c2f1271a03820c220090a2700a10f3b228614214ad4",
+          "runtime_name": "sprites/props/dog_bark_1.png"
+        },
+        {
+          "output": "native/dog_bark/west/03.png",
+          "sha256": "06455dc8ecb3e98ebf66cedabbd81916e7e1944f71fdc4f038191bef9d1fd379",
+          "runtime_name": "sprites/props/dog_bark_2.png"
+        },
+        {
+          "output": "native/dog_sleep/west/01.png",
+          "sha256": "e03c7fb31299aff11852987921892e3a62284c86bd9e7a6a746463efe00b9cfe",
+          "runtime_name": "sprites/props/dog_sleep_0.png"
+        },
+        {
+          "output": "native/dog_sleep/west/02.png",
+          "sha256": "099ba4af3b9d6feae7116efa85c07270f7bedae11cb6743062f3a4dc7e4293d8",
+          "runtime_name": "sprites/props/dog_sleep_1.png"
+        },
+        {
+          "output": "native/dog_run/west/01.png",
+          "sha256": "725d945217e21ec8f0c2ebba1bd716b0f96de94198b869a026b1fd5d62c57581",
+          "runtime_name": "sprites/props/dog_run_0.png"
+        },
+        {
+          "output": "native/dog_run/west/02.png",
+          "sha256": "93b12addfcea10539d0e975d101c24a432d6d2515e0db0da434631beddbaddb7",
+          "runtime_name": "sprites/props/dog_run_1.png"
+        },
+        {
+          "output": "native/dog_run/west/03.png",
+          "sha256": "7a59b7e523cff4c48cc9ad73c70efed1d8dbd65d705d5a3591536dc19e63e99e",
+          "runtime_name": "sprites/props/dog_run_2.png"
+        },
+        {
+          "output": "native/dog_run/west/04.png",
+          "sha256": "49c2ee5cef216cd83c65d1b0cb51c490354e238e8977dc3cb657c115c6b9a179",
+          "runtime_name": "sprites/props/dog_run_3.png"
+        },
+        {
+          "output": "native/dog_bite/west/01.png",
+          "sha256": "4e2b3dfc36c8baf5f82eb0f640d11e0db0bbd2caff15e4670fd8876b4335fd74",
+          "runtime_name": "sprites/props/dog_bite_0.png"
+        },
+        {
+          "output": "native/dog_bite/west/02.png",
+          "sha256": "685d26ac2a8f734588f4073e88457565b141b0d2db4f3450a7731948c2b7f283",
+          "runtime_name": "sprites/props/dog_bite_1.png"
+        },
+        {
+          "output": "native/dog_bite/west/03.png",
+          "sha256": "82d189972ef035e5fa430be0dc1892dad9bd4e0765ec8edc21a1318a330b37be",
+          "runtime_name": "sprites/props/dog_bite_2.png"
+        }
+      ],
+      "existing_approved_sha256": {
+        "native/dog_sit/west/01.png": "37a9b23974755eaf67d4b44687b9a7915ee7fcc0fc561d6b7b519e1c0fb38391",
+        "native/dog_sit/west/02.png": "fad1b48ab412007775bd274392e64643a1cdc922ff07dc094b1ceb5ac7eef0f1"
+      },
+      "new_review_issues": [
+        "bark_paws_stationary",
+        "sleep_head_paws_stationary",
+        "wag_only_tail_changes"
+      ],
+      "checks": "../A028-dog/checks.json"
+    },
+    {
+      "id": "A040",
+      "slug": "A040-garlic-braid",
+      "new_count": 2,
+      "existing_approved_count": 1,
+      "complete_count": 3,
+      "expected_count": 3,
+      "new_files": [
+        {
+          "output": "native/garlic_braid_wilted/none/01.png",
+          "sha256": "4c764ede0a1b5700e58bd5c1c26a9341ef5bc71276fcb27e6356688b0f7a1301",
+          "runtime_name": "sprites/buildings/garlic_braid_wilted.png"
+        },
+        {
+          "output": "native/garlic_braid_spent/none/01.png",
+          "sha256": "707f14928903e0beaad2679142fbc16ce169764ff9a0ddd252362fac28c6de64",
+          "runtime_name": "sprites/buildings/garlic_braid_spent.png"
+        }
+      ],
+      "existing_approved_sha256": {
+        "native/garlic_braid/none/01.png": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119"
+      },
+      "new_review_issues": [],
+      "checks": "../A040-garlic-braid/checks.json"
+    },
+    {
+      "id": "A042",
+      "slug": "A042-electric-fence",
+      "new_count": 39,
+      "existing_approved_count": 3,
+      "complete_count": 42,
+      "expected_count": 42,
+      "new_files": [
+        {
+          "output": "native/electric_fence_post/none/01.png",
+          "sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+          "runtime_name": "sprites/buildings/modules/electric_fence_post.png"
+        },
+        {
+          "output": "native/electric_fence_horizontal/none/01.png",
+          "sha256": "baf857565d20bafddb6d822ed48198b2cc0f1750bac85ce0e2bc27033d99f170",
+          "runtime_name": "sprites/buildings/modules/electric_fence_horizontal.png"
+        },
+        {
+          "output": "native/electric_fence_vertical/none/01.png",
+          "sha256": "e005a52a1432f91b95ef99bd1e5ff80d3e6ce2d0db0886aaf521c93c178717f1",
+          "runtime_name": "sprites/buildings/modules/electric_fence_vertical.png"
+        },
+        {
+          "output": "native/electric_fence_wreck/none/01.png",
+          "sha256": "3ec3627221aaabe5fe6e8646178c439dfa8521c313bec8bcfffeebf9a2be649c",
+          "runtime_name": "sprites/buildings/electric_fence_wreck.png"
+        },
+        {
+          "output": "native/electric_fence_post_hurt/none/01.png",
+          "sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+          "runtime_name": "sprites/buildings/modules/electric_fence_post_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_horizontal_hurt/none/01.png",
+          "sha256": "f2f1c37547aa3ee7fbc885d54200dd908dd52c8dfc0c7502eb792eb25ee28915",
+          "runtime_name": "sprites/buildings/modules/electric_fence_horizontal_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_vertical_hurt/none/01.png",
+          "sha256": "6516da7a91796f96fbe12d0cc460684ae647cfcff43137927b37e94577d4b935",
+          "runtime_name": "sprites/buildings/modules/electric_fence_vertical_hurt.png"
+        },
+        {
+          "output": "native/electric_fence/none/01.png",
+          "sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+          "runtime_name": "sprites/buildings/electric_fence.png"
+        },
+        {
+          "output": "native/electric_fence_join_1/none/01.png",
+          "sha256": "ddeca87f971f6da9771c7c2b25e7f4e5c5a5a9a7c1da406dd7fb54da13a315e8",
+          "runtime_name": "sprites/buildings/electric_fence_join_1.png"
+        },
+        {
+          "output": "native/electric_fence_join_2/none/01.png",
+          "sha256": "d17e47a1ffc53396143fb514356b42fe3ceeaa9c0cb7deb43f770a98a2694d22",
+          "runtime_name": "sprites/buildings/electric_fence_join_2.png"
+        },
+        {
+          "output": "native/electric_fence_join_3/none/01.png",
+          "sha256": "e1c63d99be9f5090cddf25715220af6e0220b1f9a0a74df08637217560a33851",
+          "runtime_name": "sprites/buildings/electric_fence_join_3.png"
+        },
+        {
+          "output": "native/electric_fence_join_4/none/01.png",
+          "sha256": "918b0b426b69fcd294884b9bad7997fcecc1eb465d15e6ace64b48030c36d089",
+          "runtime_name": "sprites/buildings/electric_fence_join_4.png"
+        },
+        {
+          "output": "native/electric_fence_join_5/none/01.png",
+          "sha256": "9c7eb412b10f25e391edb9f8aa9014e0e2bda420fc6aa733d995e80da55ba1ff",
+          "runtime_name": "sprites/buildings/electric_fence_join_5.png"
+        },
+        {
+          "output": "native/electric_fence_join_6/none/01.png",
+          "sha256": "52907a38689e1890cb9e88f8f8c8b4e0c0029c6fe91853c430cfc7eecb8d1ab5",
+          "runtime_name": "sprites/buildings/electric_fence_join_6.png"
+        },
+        {
+          "output": "native/electric_fence_join_7/none/01.png",
+          "sha256": "bd3766c46f8ebed0ab2769dff88b08988d3b5808b26206f27ff7833f76a7f443",
+          "runtime_name": "sprites/buildings/electric_fence_join_7.png"
+        },
+        {
+          "output": "native/electric_fence_join_8/none/01.png",
+          "sha256": "79c254c9f34b394d41c200cb503cbce077bddb53f69d637d29570cebdcd68c95",
+          "runtime_name": "sprites/buildings/electric_fence_join_8.png"
+        },
+        {
+          "output": "native/electric_fence_join_9/none/01.png",
+          "sha256": "f4cf8702e704c05867e8c2090956a11b85ccee2ae51714b47591f90ecf7bf16d",
+          "runtime_name": "sprites/buildings/electric_fence_join_9.png"
+        },
+        {
+          "output": "native/electric_fence_join_10/none/01.png",
+          "sha256": "8668fdeb255bb949744dccfad009384dacd8df9755706a35607c076e98aee2d0",
+          "runtime_name": "sprites/buildings/electric_fence_join_10.png"
+        },
+        {
+          "output": "native/electric_fence_join_11/none/01.png",
+          "sha256": "e6d6013376f8860ec71d859859e1ebb64ece7516ca4b1e88b5bc0b637e85731f",
+          "runtime_name": "sprites/buildings/electric_fence_join_11.png"
+        },
+        {
+          "output": "native/electric_fence_join_12/none/01.png",
+          "sha256": "23aed2530bddb8047863517a7021799657ce0fe55d700e10a4582ddfc2faa836",
+          "runtime_name": "sprites/buildings/electric_fence_join_12.png"
+        },
+        {
+          "output": "native/electric_fence_join_13/none/01.png",
+          "sha256": "3b117214ca426ea0a73e05bd063a4b81875273974bf0b68ff1e2217b3d8e8f48",
+          "runtime_name": "sprites/buildings/electric_fence_join_13.png"
+        },
+        {
+          "output": "native/electric_fence_join_14/none/01.png",
+          "sha256": "54ea607edb50927d70f91e0c3a6112c8294448613eb020c2f6454eea4cb038e7",
+          "runtime_name": "sprites/buildings/electric_fence_join_14.png"
+        },
+        {
+          "output": "native/electric_fence_join_15/none/01.png",
+          "sha256": "4adc0fb2919185f156cb54cd0c26df78cd31606f7eb20dcc7632279387fdffce",
+          "runtime_name": "sprites/buildings/electric_fence_join_15.png"
+        },
+        {
+          "output": "native/electric_fence_hurt/none/01.png",
+          "sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+          "runtime_name": "sprites/buildings/electric_fence_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_1_hurt/none/01.png",
+          "sha256": "49a7bc68c86540aa1e846cc3cacd99535727db3de4a77078b340b186b1f16cc0",
+          "runtime_name": "sprites/buildings/electric_fence_join_1_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_2_hurt/none/01.png",
+          "sha256": "37db3b9ed91e166afc2b52bbe808b5069c5b8a21d404331c6d51d19344e4fdb7",
+          "runtime_name": "sprites/buildings/electric_fence_join_2_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_3_hurt/none/01.png",
+          "sha256": "2542a27690626348f1e939815d067a2585b4367d627502794c68a6b8d5781c2f",
+          "runtime_name": "sprites/buildings/electric_fence_join_3_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_4_hurt/none/01.png",
+          "sha256": "beef1ae472586491b21323b47e732051ebc2edcfd0e09e24080515c9d73d2dea",
+          "runtime_name": "sprites/buildings/electric_fence_join_4_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_5_hurt/none/01.png",
+          "sha256": "03894038a4e1ce2751c629954beadee41eee657e6470bc64cac3ee8939fa64f8",
+          "runtime_name": "sprites/buildings/electric_fence_join_5_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_6_hurt/none/01.png",
+          "sha256": "776d791303a1f6ac26be0f2e7d12cf2ca991d34d7fcca7b7e1660afaf7f4b470",
+          "runtime_name": "sprites/buildings/electric_fence_join_6_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_7_hurt/none/01.png",
+          "sha256": "66a93d51bdda0e53a01f109241bb37043e4b4b92befb5acc421891fb1e266053",
+          "runtime_name": "sprites/buildings/electric_fence_join_7_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_8_hurt/none/01.png",
+          "sha256": "ba6a8821bae1820cef2745a72db4e1ed5c0c57de969236695423d2fc4269a00c",
+          "runtime_name": "sprites/buildings/electric_fence_join_8_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_9_hurt/none/01.png",
+          "sha256": "4d2e5a5ee1bddc969eb24a637215aae94c45d2b71a9bd42681a53417328c40c2",
+          "runtime_name": "sprites/buildings/electric_fence_join_9_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_10_hurt/none/01.png",
+          "sha256": "c7cfa664b2ddafe67366d4c6fc86139bc6866ba633615660e89d19f1da171ee4",
+          "runtime_name": "sprites/buildings/electric_fence_join_10_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_11_hurt/none/01.png",
+          "sha256": "d7042359d6418e6fbb56d6af9c278de8f673e17bb5ac5c9753e024a9e018924d",
+          "runtime_name": "sprites/buildings/electric_fence_join_11_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_12_hurt/none/01.png",
+          "sha256": "0742464bdc612073029976c80c0d8730ea48075e49de76d846893b100cc8f8e7",
+          "runtime_name": "sprites/buildings/electric_fence_join_12_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_13_hurt/none/01.png",
+          "sha256": "6525ab7a732dc86c933d8a6e6d4a0bd6a5b6afbe4fa7869d688fcab7ba09243a",
+          "runtime_name": "sprites/buildings/electric_fence_join_13_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_14_hurt/none/01.png",
+          "sha256": "d78fe0ee6e46d73b37a66bec4969a5e24a0d7d6da59ef5c9b0f55560a3b1be70",
+          "runtime_name": "sprites/buildings/electric_fence_join_14_hurt.png"
+        },
+        {
+          "output": "native/electric_fence_join_15_hurt/none/01.png",
+          "sha256": "6a3fdc6e4c160747a5c4a04e04b94eeb5fa1fe40e9ded7c96a7bbe6f1409edae",
+          "runtime_name": "sprites/buildings/electric_fence_join_15_hurt.png"
+        }
+      ],
+      "existing_approved_sha256": {
+        "native/zap/none/01.png": "b2a5a7f93b7b11f1985982a70fd7315f44fe922181cac47b922e103b8bd36311",
+        "native/zap/none/02.png": "a920f347118519a342c3909d5d1a6441da3dbbec31d82e596d06067d628bde6e",
+        "native/zap/none/03.png": "b0ba73f0b45b9fe8f20df4a9366886d6d5d385efa0ee919115404ddb4618630f"
+      },
+      "new_review_issues": [
+        "electric_fence_post_span_row20"
+      ],
+      "checks": "../A042-electric-fence/checks.json"
+    },
+    {
+      "id": "A043",
+      "slug": "A043-strong-walls",
+      "new_count": 78,
+      "existing_approved_count": 0,
+      "complete_count": 78,
+      "expected_count": 78,
+      "new_files": [
+        {
+          "output": "native/wall_2_post/none/01.png",
+          "sha256": "c3c080d88ef7fdba057345739eddd0b589369d24a99e180d293df7050adfb9e0",
+          "runtime_name": "sprites/buildings/modules/wall_2_post.png"
+        },
+        {
+          "output": "native/wall_2_horizontal/none/01.png",
+          "sha256": "3d82316cf32ad585bca4561ae332f3a45ea2dae4abccf7c75b6ffe2eb1b66a31",
+          "runtime_name": "sprites/buildings/modules/wall_2_horizontal.png"
+        },
+        {
+          "output": "native/wall_2_vertical/none/01.png",
+          "sha256": "7cba94c32754b792107d42c5b1b83d61b8359310aa073bb4887829685425d9bc",
+          "runtime_name": "sprites/buildings/modules/wall_2_vertical.png"
+        },
+        {
+          "output": "native/wall_2_wreck/none/01.png",
+          "sha256": "240a22f793aaf481d48455e648edd2602c84cdbb6ad9029440beaa5598aeeb9e",
+          "runtime_name": "sprites/buildings/wall_2_wreck.png"
+        },
+        {
+          "output": "native/wall_2_post_hurt/none/01.png",
+          "sha256": "ebc8074b29360e98250aad502faa75f55cc82bd9f14365ce1acbed6890559450",
+          "runtime_name": "sprites/buildings/modules/wall_2_post_hurt.png"
+        },
+        {
+          "output": "native/wall_2_horizontal_hurt/none/01.png",
+          "sha256": "70128023f6fbba73aa5cc9ba0a0b6e6f31481aeef6f7f4f522ac7bcd8aec823d",
+          "runtime_name": "sprites/buildings/modules/wall_2_horizontal_hurt.png"
+        },
+        {
+          "output": "native/wall_2_vertical_hurt/none/01.png",
+          "sha256": "ca22304e6a8618cc69c08a148b26e3332b57e0cf9c7434f355b79df3fa72b91e",
+          "runtime_name": "sprites/buildings/modules/wall_2_vertical_hurt.png"
+        },
+        {
+          "output": "native/wall_2/none/01.png",
+          "sha256": "c3c080d88ef7fdba057345739eddd0b589369d24a99e180d293df7050adfb9e0",
+          "runtime_name": "sprites/buildings/wall_2.png"
+        },
+        {
+          "output": "native/wall_2_join_1/none/01.png",
+          "sha256": "44656e3405e5e19f4c2c11acd2924f78b10bd2caa07aec460526129a501638df",
+          "runtime_name": "sprites/buildings/wall_2_join_1.png"
+        },
+        {
+          "output": "native/wall_2_join_2/none/01.png",
+          "sha256": "9ef4b3c38b08a5e3dc179ff625910ea7256ab333746399191d1191c602503779",
+          "runtime_name": "sprites/buildings/wall_2_join_2.png"
+        },
+        {
+          "output": "native/wall_2_join_3/none/01.png",
+          "sha256": "e8811c10dacd9849b91013c92048b7abf93bddc44f4fa490f5f074749085b4cb",
+          "runtime_name": "sprites/buildings/wall_2_join_3.png"
+        },
+        {
+          "output": "native/wall_2_join_4/none/01.png",
+          "sha256": "6ef982a94becdb48e45db951e9f69c6a0e052334af838bf1766e094770e3ad25",
+          "runtime_name": "sprites/buildings/wall_2_join_4.png"
+        },
+        {
+          "output": "native/wall_2_join_5/none/01.png",
+          "sha256": "f90d4f78147f6668bbfdf504eeec40ac26496eacfbade611873007d980f86e31",
+          "runtime_name": "sprites/buildings/wall_2_join_5.png"
+        },
+        {
+          "output": "native/wall_2_join_6/none/01.png",
+          "sha256": "c0a707b4009c6a573b50917c16b74b8e182ae9ab7e1b908ed322d80dd0726bf8",
+          "runtime_name": "sprites/buildings/wall_2_join_6.png"
+        },
+        {
+          "output": "native/wall_2_join_7/none/01.png",
+          "sha256": "983ee72f18b500f07f53a2b1c5a50ad933b23ef39e61fda639e995cf9ce7c49b",
+          "runtime_name": "sprites/buildings/wall_2_join_7.png"
+        },
+        {
+          "output": "native/wall_2_join_8/none/01.png",
+          "sha256": "97560528460076fbb241ee0dabd6e2bec829a85903337d1079b945e7c3477f08",
+          "runtime_name": "sprites/buildings/wall_2_join_8.png"
+        },
+        {
+          "output": "native/wall_2_join_9/none/01.png",
+          "sha256": "d553606162cf243e3561e568d66eeb8db9dac3d7ca793edf54fcd3e05b2e4ba4",
+          "runtime_name": "sprites/buildings/wall_2_join_9.png"
+        },
+        {
+          "output": "native/wall_2_join_10/none/01.png",
+          "sha256": "329dc0ba0b6f28437a723312824c5ae65bde982956dad4027b2c68ef31254aac",
+          "runtime_name": "sprites/buildings/wall_2_join_10.png"
+        },
+        {
+          "output": "native/wall_2_join_11/none/01.png",
+          "sha256": "6e52e7dfac412f3346fc313b81876ae9d431e04b2fecbad3ed11db267120fb2d",
+          "runtime_name": "sprites/buildings/wall_2_join_11.png"
+        },
+        {
+          "output": "native/wall_2_join_12/none/01.png",
+          "sha256": "8e71273cc392fc86682b322eec1a98e5c6f6c9bcb7a5e70affd42b59548c699d",
+          "runtime_name": "sprites/buildings/wall_2_join_12.png"
+        },
+        {
+          "output": "native/wall_2_join_13/none/01.png",
+          "sha256": "4e7ad152738e2d917b2b3765b75777a30a676212fa27ea17a1f9f68f71d81cad",
+          "runtime_name": "sprites/buildings/wall_2_join_13.png"
+        },
+        {
+          "output": "native/wall_2_join_14/none/01.png",
+          "sha256": "ee28b907eab878e258ce7399c1df28e3dc1c00583f9bd64ccddfb8f75dfbe7ed",
+          "runtime_name": "sprites/buildings/wall_2_join_14.png"
+        },
+        {
+          "output": "native/wall_2_join_15/none/01.png",
+          "sha256": "216c0955823f9cba422c7a5dd9504df12bad60fe99c3a4c19d8cd522649effa8",
+          "runtime_name": "sprites/buildings/wall_2_join_15.png"
+        },
+        {
+          "output": "native/wall_2_hurt/none/01.png",
+          "sha256": "ebc8074b29360e98250aad502faa75f55cc82bd9f14365ce1acbed6890559450",
+          "runtime_name": "sprites/buildings/wall_2_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_1_hurt/none/01.png",
+          "sha256": "449ce63bd5e7a644b6372f178db5e699625a25b74ef85ab6513f0ca377f602d3",
+          "runtime_name": "sprites/buildings/wall_2_join_1_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_2_hurt/none/01.png",
+          "sha256": "75f645156a0c5294a6badae82c3f2aa9960e1976c0f0723b95b1d0f8cd23a819",
+          "runtime_name": "sprites/buildings/wall_2_join_2_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_3_hurt/none/01.png",
+          "sha256": "9e08164f5c02ad38917a310b2fe289a595b72fea2bc4dc325839030212436d4b",
+          "runtime_name": "sprites/buildings/wall_2_join_3_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_4_hurt/none/01.png",
+          "sha256": "5fbaaeb5eeb637c86549fd69cde68926f38e0d00e6f0f19d354f80373409a20f",
+          "runtime_name": "sprites/buildings/wall_2_join_4_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_5_hurt/none/01.png",
+          "sha256": "2ac3c50ad2b1ba512463c9b1f0a99ef91708f135b829664f85aed4330daafbcc",
+          "runtime_name": "sprites/buildings/wall_2_join_5_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_6_hurt/none/01.png",
+          "sha256": "5bb06c599a9dffc6f2799d62780f16bcab55f700f4c15c798d6c8452216c4235",
+          "runtime_name": "sprites/buildings/wall_2_join_6_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_7_hurt/none/01.png",
+          "sha256": "d380f907706889de344c693ade9c831aebf788fba976fe8c7fc173076169a710",
+          "runtime_name": "sprites/buildings/wall_2_join_7_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_8_hurt/none/01.png",
+          "sha256": "ab6611282facb657a9ceedccf3d6895d980f9456208326bfd7b7ac28640295e3",
+          "runtime_name": "sprites/buildings/wall_2_join_8_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_9_hurt/none/01.png",
+          "sha256": "faad30d0540ef3acd40ecaf31e08c92ed4bc0b02666aec1e8cd781982ddcc189",
+          "runtime_name": "sprites/buildings/wall_2_join_9_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_10_hurt/none/01.png",
+          "sha256": "417f2746ac181d66b23458b49499f8d26e03023dc6238677c2096c2556eaf941",
+          "runtime_name": "sprites/buildings/wall_2_join_10_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_11_hurt/none/01.png",
+          "sha256": "ed092fc5f0ad0b792e64625f2e95c9d24b52450d787e85d1f32e183e9fefb027",
+          "runtime_name": "sprites/buildings/wall_2_join_11_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_12_hurt/none/01.png",
+          "sha256": "83b9befba2969d2c0b11d6d353daf86e083207cebf1ac8c45980cd482caa7efd",
+          "runtime_name": "sprites/buildings/wall_2_join_12_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_13_hurt/none/01.png",
+          "sha256": "b515ed30a2a1a11c260dcc76bc915965f8fdee6cd9c1957e8fe047b3d386231d",
+          "runtime_name": "sprites/buildings/wall_2_join_13_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_14_hurt/none/01.png",
+          "sha256": "6c0ca209a186547fe61177d7f41b6e82648fb42218e3ff35f82ba4d4d42bab58",
+          "runtime_name": "sprites/buildings/wall_2_join_14_hurt.png"
+        },
+        {
+          "output": "native/wall_2_join_15_hurt/none/01.png",
+          "sha256": "d53742fd786d7b7442bb55469dd1011c91a08165a32944c0f1b47b2b13a1a9b5",
+          "runtime_name": "sprites/buildings/wall_2_join_15_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_post/none/01.png",
+          "sha256": "bafbb7ba63dd357552d0eb1580f5551afad9fc571f24d5662b741530a46f68e8",
+          "runtime_name": "sprites/buildings/modules/sandbag_wall_post.png"
+        },
+        {
+          "output": "native/sandbag_wall_horizontal/none/01.png",
+          "sha256": "81d67511e87a906a38ea4834fae6c9cb35ae4bd9bb889f6d6c8eb6bf8cc17563",
+          "runtime_name": "sprites/buildings/modules/sandbag_wall_horizontal.png"
+        },
+        {
+          "output": "native/sandbag_wall_vertical/none/01.png",
+          "sha256": "7c5f094870e4d48fe58d70d409ae11e01e9f94cff8600c0a22d317dc5e0039fa",
+          "runtime_name": "sprites/buildings/modules/sandbag_wall_vertical.png"
+        },
+        {
+          "output": "native/sandbag_wall_wreck/none/01.png",
+          "sha256": "8255ab79b87ec8093acd457f44010dd42f5d1105e17e94784c1baf5b8ba70afd",
+          "runtime_name": "sprites/buildings/sandbag_wall_wreck.png"
+        },
+        {
+          "output": "native/sandbag_wall_post_hurt/none/01.png",
+          "sha256": "446ea9b2f96c824bcfdde24c2d775725bf23acfcc1613590574b1e21e48358d4",
+          "runtime_name": "sprites/buildings/modules/sandbag_wall_post_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "sha256": "1a70aa3b90e79235bdd54b3fbfcabe56bcfd30b6c577a9d4ffc92d08c58f38d1",
+          "runtime_name": "sprites/buildings/modules/sandbag_wall_horizontal_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "sha256": "059280765c34dfe319069c42e17cb94577cadb360e35c234550eff41e978df38",
+          "runtime_name": "sprites/buildings/modules/sandbag_wall_vertical_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall/none/01.png",
+          "sha256": "bafbb7ba63dd357552d0eb1580f5551afad9fc571f24d5662b741530a46f68e8",
+          "runtime_name": "sprites/buildings/sandbag_wall.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_1/none/01.png",
+          "sha256": "2c30b8fff0bff80104ff2d9547aa2d0f64f34d40a44c8928c68b925d21a2727a",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_1.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_2/none/01.png",
+          "sha256": "8f82ffd3ff8e4b7f0855cb34fda12f07fb24255e84ac52713f6d1fa60914c9c8",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_2.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_3/none/01.png",
+          "sha256": "d8ad0621fad976d70c48e20916ad7299edff61a1aa564b8bd534f2c22f75d7cd",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_3.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_4/none/01.png",
+          "sha256": "fbabbcce7d05168b0ede829df95a941c2fdce133efa226dcb7cccb8ebf982057",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_4.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_5/none/01.png",
+          "sha256": "62b7272be77a85d8de5256cd252f07aa0f153d06fd151418e13a2ad0702a5533",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_5.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_6/none/01.png",
+          "sha256": "fe6d4280daa034d3d4ff1a85edbf693f2d7f5851907b23967000469aa8cf78f2",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_6.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_7/none/01.png",
+          "sha256": "ae7ce77c03f72c0373a8eb76b115b8c031feb4c169524ba74ffcacb162a176b0",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_7.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_8/none/01.png",
+          "sha256": "ab5893839d177f1055e442aaeb4c2c2e5f209518fe7fd4934f3643434f70fbf6",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_8.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_9/none/01.png",
+          "sha256": "6e316b62b6777dbd1820ad7ec899af80820589365e3bf47f97de8432891c3f89",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_9.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_10/none/01.png",
+          "sha256": "0e1fd3411cb1adf2735c1fa60d06b42823c9225ef427a150d71ddcc45b87af97",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_10.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_11/none/01.png",
+          "sha256": "434cc837b59506f756d743b32a3ae6e0663d850d014bcb11ec3efede226107c7",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_11.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_12/none/01.png",
+          "sha256": "70814900bb2065aa73a8d0ce17e25da900c49bda77b59a4dd5d52979d60181a0",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_12.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_13/none/01.png",
+          "sha256": "71145fcd2688e985854c1f4951af6801b2836476360a47a7dc35e6c67b805659",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_13.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_14/none/01.png",
+          "sha256": "97f79318085fd5171dbd37d507641c79453f370f1db3a4e78a93c498f4fd9240",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_14.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_15/none/01.png",
+          "sha256": "72ceea635cde6d1c1e20bff69f6da1dc40f5ec8a65a4653f6288d2cd5a96beef",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_15.png"
+        },
+        {
+          "output": "native/sandbag_wall_hurt/none/01.png",
+          "sha256": "446ea9b2f96c824bcfdde24c2d775725bf23acfcc1613590574b1e21e48358d4",
+          "runtime_name": "sprites/buildings/sandbag_wall_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_1_hurt/none/01.png",
+          "sha256": "794c7be3e2070b68303b0e23b66a762f819e5e4a0e4d7271958e5834d895c6d5",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_1_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_2_hurt/none/01.png",
+          "sha256": "a4900167bca23664966be54d54420cad079c8cc6a4797172bcfc5ca78c3cb0a0",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_2_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_3_hurt/none/01.png",
+          "sha256": "2a7c0b752d0ca57bc9ced5dcaf9d405449d954953c5e8fd6f817b9e7532b6765",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_3_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_4_hurt/none/01.png",
+          "sha256": "e154589b6b971b5d0e7095fa95e7436956f4365263ed01a210948b8eec12053f",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_4_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_5_hurt/none/01.png",
+          "sha256": "67f1e32d7a1384acc92b6c802edb9b6c778dd445e21ffcf97c3d20195dbb30fe",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_5_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_6_hurt/none/01.png",
+          "sha256": "3aca2784c1f858b8d8025b4f4baad4b82f0f62a32093d70caa22d9f3d33099c5",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_6_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_7_hurt/none/01.png",
+          "sha256": "c7e4c280a8f5456fd6f80874a64bb5ceb9bfffefed49eb469b3b18331a8abeb4",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_7_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_8_hurt/none/01.png",
+          "sha256": "c4a557b0ada28d201b3f6f0f0ca5bda1f776bbba62d1b2d656db5056ea69f322",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_8_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_9_hurt/none/01.png",
+          "sha256": "e33c35922953ccb913bb8b0548a6ff724138957694b577be3497794573ee3e48",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_9_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_10_hurt/none/01.png",
+          "sha256": "c79113c5848614f07adf8ba175a15688860f762ef695e5e830ddf4e1acbb885b",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_10_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_11_hurt/none/01.png",
+          "sha256": "3224a6aaae9e605a990da09cb3dc2a01d19825897f1488a4a0e7bafe5e883289",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_11_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_12_hurt/none/01.png",
+          "sha256": "7a20d41cf353bfd7029dc07613281b988656b408051302adb69946f3da3c2849",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_12_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_13_hurt/none/01.png",
+          "sha256": "484745575735c7b9d0370b598adb1902c6edab045044bbc217551664f444685c",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_13_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_14_hurt/none/01.png",
+          "sha256": "ff2162c2624877dc9ef8c3e4fdcdc9107747f4abb4c0e76997c22ca27e62157a",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_14_hurt.png"
+        },
+        {
+          "output": "native/sandbag_wall_join_15_hurt/none/01.png",
+          "sha256": "632d5baddc0633b66cce45be67d44819cf66f893d6e519681ee5c4f1bc015dde",
+          "runtime_name": "sprites/buildings/sandbag_wall_join_15_hurt.png"
+        }
+      ],
+      "existing_approved_sha256": {},
+      "new_review_issues": [],
+      "checks": "../A043-strong-walls/checks.json"
+    },
+    {
+      "id": "A045",
+      "slug": "A045-power-weapon-icons",
+      "new_count": 22,
+      "existing_approved_count": 0,
+      "complete_count": 22,
+      "expected_count": 22,
+      "new_files": [
+        {
+          "output": "native/icon_farm_bell/none/01.png",
+          "sha256": "09ff8fb04cfbfaa28d4210c844bd3fd44f41848964f1f12352ce252f6872db11",
+          "runtime_name": "sprites/ui/icon_farm_bell.png"
+        },
+        {
+          "output": "native/hud_farm_bell/none/01.png",
+          "sha256": "7f85cecc0175916e4338538721777f45e65f1cb26cfaffb37390b46692772e5b",
+          "runtime_name": "sprites/ui/hud_farm_bell.png"
+        },
+        {
+          "output": "native/icon_call_dog/none/01.png",
+          "sha256": "f1fd62e791454c4765cd7bfff360699560ad7d22de1ec1211168293f404556e5",
+          "runtime_name": "sprites/ui/icon_call_dog.png"
+        },
+        {
+          "output": "native/hud_call_dog/none/01.png",
+          "sha256": "a38e30d54293dc96502bbf54b453b4585764c3c1f8b4c34e111a53938e3997e5",
+          "runtime_name": "sprites/ui/hud_call_dog.png"
+        },
+        {
+          "output": "native/icon_emergency_repair/none/01.png",
+          "sha256": "3103ed607f11f088b111655546e12160312e39d1b660cc52a024d12b2a928acc",
+          "runtime_name": "sprites/ui/icon_emergency_repair.png"
+        },
+        {
+          "output": "native/hud_emergency_repair/none/01.png",
+          "sha256": "0de2a62a22d7b55c8307225fe9c1494d4492a88ef5bb4239511f38247829f051",
+          "runtime_name": "sprites/ui/hud_emergency_repair.png"
+        },
+        {
+          "output": "native/icon_decoy/none/01.png",
+          "sha256": "bbfe379b326b7ad027c224a06b87cf941c075ac4807b90bc48901476db2e34fc",
+          "runtime_name": "sprites/ui/icon_decoy.png"
+        },
+        {
+          "output": "native/hud_decoy/none/01.png",
+          "sha256": "827213a564cd1982be1bb31f4a6f583ab7831de581cbcfad5089333df3e7e9c7",
+          "runtime_name": "sprites/ui/hud_decoy.png"
+        },
+        {
+          "output": "native/icon_beehive/none/01.png",
+          "sha256": "820211f1aa671f4ad1da148522451688e0942df2aa183fc286dbf80748f605c8",
+          "runtime_name": "sprites/ui/icon_beehive.png"
+        },
+        {
+          "output": "native/hud_beehive/none/01.png",
+          "sha256": "8286b7cae438b3e49841723c1d2a7888e14d09b91dfdff35858a391db3bfca93",
+          "runtime_name": "sprites/ui/hud_beehive.png"
+        },
+        {
+          "output": "native/icon_catapult/none/01.png",
+          "sha256": "cb32af559ea699add5cbc338a335c463b53194f9afbd8d67c4781083d48efeef",
+          "runtime_name": "sprites/ui/icon_catapult.png"
+        },
+        {
+          "output": "native/hud_catapult/none/01.png",
+          "sha256": "08b4e3368c6a5620a1b0060b339fce1cf274f5d521098b822684704fec82f2fe",
+          "runtime_name": "sprites/ui/hud_catapult.png"
+        },
+        {
+          "output": "native/icon_garlic_braid/none/01.png",
+          "sha256": "6eedf444d1c573b0459fcde5ad3b30fba3008b5f964461aaced0fb2f1b1eb2c8",
+          "runtime_name": "sprites/ui/icon_garlic_braid.png"
+        },
+        {
+          "output": "native/hud_garlic_braid/none/01.png",
+          "sha256": "9d6fef5b5ebdecdf30e4c3c3bfb3a43b7e46d6081ae71418163a2d985dd2b905",
+          "runtime_name": "sprites/ui/hud_garlic_braid.png"
+        },
+        {
+          "output": "native/icon_searchlight/none/01.png",
+          "sha256": "51e566f20c2267c4166cba664cd4b8a080f076d128060bb714b4e2a4659dde9d",
+          "runtime_name": "sprites/ui/icon_searchlight.png"
+        },
+        {
+          "output": "native/hud_searchlight/none/01.png",
+          "sha256": "b8cdf5826be8d0baa833bf3fd819dcfdc78145afa433d9f72c48bc468713400d",
+          "runtime_name": "sprites/ui/hud_searchlight.png"
+        },
+        {
+          "output": "native/icon_electric_fence/none/01.png",
+          "sha256": "beeda57e9e730f8b67fa4270decdcfc1bbd59e4cd38b89afcce50b0d635e48c6",
+          "runtime_name": "sprites/ui/icon_electric_fence.png"
+        },
+        {
+          "output": "native/hud_electric_fence/none/01.png",
+          "sha256": "f5386aea68897ab42c8aa4b99622b69475228175ee3e6f92d0777ff2b8dd81f4",
+          "runtime_name": "sprites/ui/hud_electric_fence.png"
+        },
+        {
+          "output": "native/icon_wall_2/none/01.png",
+          "sha256": "a02733e3a7536799e7a742d7436f19a8d4bf54c417317d508807ed45b4ab3dd0",
+          "runtime_name": "sprites/ui/icon_wall_2.png"
+        },
+        {
+          "output": "native/hud_wall_2/none/01.png",
+          "sha256": "dd3b289cda2b3e303db98b29d6e97b6b4b4c08c674b433196f264004dd123330",
+          "runtime_name": "sprites/ui/hud_wall_2.png"
+        },
+        {
+          "output": "native/icon_sandbag_wall/none/01.png",
+          "sha256": "605aa3b5ac2b151039988a45c4d628db6a46b7ba511632b186094b902e093796",
+          "runtime_name": "sprites/ui/icon_sandbag_wall.png"
+        },
+        {
+          "output": "native/hud_sandbag_wall/none/01.png",
+          "sha256": "449bc395d39447c5324cda56cd3840755ce1ae3b3c099009c5f9b66276758b8b",
+          "runtime_name": "sprites/ui/hud_sandbag_wall.png"
+        }
+      ],
+      "existing_approved_sha256": {},
+      "new_review_issues": [],
+      "checks": "../A045-power-weapon-icons/checks.json"
+    },
+    {
+      "id": "A054",
+      "slug": "A054-winter-lord",
+      "new_count": 8,
+      "existing_approved_count": 14,
+      "complete_count": 22,
+      "expected_count": 22,
+      "new_files": [
+        {
+          "output": "native/winter_lord_walk/west/01.png",
+          "sha256": "f330827c5885f20d8775d8eb85a570dbfa4928e85023293071da101b410fe996",
+          "runtime_name": "sprites/enemies/winter_lord_walk_0.png"
+        },
+        {
+          "output": "native/winter_lord_walk/west/02.png",
+          "sha256": "ff8f4ea13ec8876b8e49b93016dabd088ffc97bef02d2709c08b7588125e79b7",
+          "runtime_name": "sprites/enemies/winter_lord_walk_1.png"
+        },
+        {
+          "output": "native/winter_lord_walk/west/03.png",
+          "sha256": "1b3caf551fbbfb0386eaa9ed2a704b779a03b7d20720ab6b7a35c1ec6880dee8",
+          "runtime_name": "sprites/enemies/winter_lord_walk_2.png"
+        },
+        {
+          "output": "native/winter_lord_walk/west/04.png",
+          "sha256": "20f5fd9dd50dedb08aee906a80d64a1dc3c76a65da5e65b37e12c21a603ae12d",
+          "runtime_name": "sprites/enemies/winter_lord_walk_3.png"
+        },
+        {
+          "output": "native/winter_lord_cast/west/01.png",
+          "sha256": "1053237b173778538c16f062880648fca3224d7db9a9a18afa4233966606dc57",
+          "runtime_name": "sprites/enemies/winter_lord_cast_0.png"
+        },
+        {
+          "output": "native/winter_lord_cast/west/02.png",
+          "sha256": "6b131904fbf0966d27d0a7d1fe5b1beb5c5d747e88d1e5eb59a44626fb6330b6",
+          "runtime_name": "sprites/enemies/winter_lord_cast_1.png"
+        },
+        {
+          "output": "native/winter_lord_cast/west/03.png",
+          "sha256": "6bc33ccb74d7ee222c6f05cee6528298328a2dd9677c39554a7de321b5ecdc70",
+          "runtime_name": "sprites/enemies/winter_lord_cast_2.png"
+        },
+        {
+          "output": "native/winter_lord_cast/west/04.png",
+          "sha256": "c3143d188915ac95535335be89e9c4cedb9e4812db4b674fb3ef3d0ade5f33e3",
+          "runtime_name": "sprites/enemies/winter_lord_cast_3.png"
+        }
+      ],
+      "existing_approved_sha256": {
+        "native/winter_lord/west/01.png": "e24b58c79a633f500221d5cbcda1978068b848e86d21ecc1d6c1d89827f0f6e0",
+        "native/winter_lord_attack/west/01.png": "94ebec5c58a0b5f91965909962aee50b5d5ab6ebba1f84c831461218f834265a",
+        "native/winter_lord_attack/west/02.png": "9f76e17e52e59529105be8fdd9d50446940b392bc46105ca657cebdfa9d00ee4",
+        "native/winter_lord_attack/west/03.png": "a804bf8ae228e5226f67b26b42c3e1ebb207dd209dac257a85cc263390912e3c",
+        "native/winter_lord_death/west/01.png": "1f6489f603fd3e6f099895dce5073ba4de5dea0ab7bbb0ed607688703e92b5c7",
+        "native/winter_lord_death/west/02.png": "d33d17c39842229a1e8c08edbd9cfcfae418bcd8868d6ffe2f7b8efeb603a657",
+        "native/winter_lord_death/west/03.png": "977974ca927f55ce84476385f52ba01a9f2621463130c9ad1c020355571f3f81",
+        "native/winter_lord_death/west/04.png": "8c4d843069e68cf6fe38e9a1f21d8a339215ac485fd90f8625b7c6f37ecb25dd",
+        "native/winter_lord_death/west/05.png": "e050c348861a32a03b7cfc914d89db50da5b149db864e24a63070c3715dd8a1b",
+        "native/ice_shards/none/01.png": "a527176023ef41001e5e11f485e4699f01271ba04cea4335882c3dfd0a0551a7",
+        "native/ice_shards/none/02.png": "6af0371695b9026c68e06595181ffeb74da2dfa6bb3522052eb1575b4c4d94fe",
+        "native/ice_shards/none/03.png": "3e56996344e991ce27f772dffc1ff0966349ee1823e17e877f75c89cea407b07",
+        "native/ice_shards/none/04.png": "35174a6601597d70d8c94239fd853450cab5aee1fcf5762528df86f5a4ea108e",
+        "native/head_winter_lord/none/01.png": "bedfc13c80763cd3b1f9c81decd32b0345b557947c5cb43132a68aa226766b8e"
+      },
+      "new_review_issues": [],
+      "checks": "../A054-winter-lord/checks.json"
+    }
+  ],
+  "owner_words": "tudo aprovado, falta mais?",
+  "approval_date": "2026-10-14"
+}

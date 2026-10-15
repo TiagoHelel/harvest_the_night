@@ -1,0 +1,165 @@
+{
+  "wag": {
+    "selected_revision": 2,
+    "comparison": [
+      {
+        "outside_tail_changed_pixels": 20,
+        "all_changed_pixels": 47
+      },
+      {
+        "outside_tail_changed_pixels": 14,
+        "all_changed_pixels": 42
+      },
+      {
+        "outside_tail_changed_pixels": 20,
+        "all_changed_pixels": 43
+      }
+    ]
+  },
+  "walk": {
+    "source": "raw/dog-walk-r2.png",
+    "measured_bounds": [
+      [
+        24,
+        196,
+        534,
+        538
+      ],
+      [
+        567,
+        196,
+        535,
+        1077
+      ],
+      [
+        1108,
+        196,
+        535,
+        1616
+      ],
+      [
+        1646,
+        196,
+        535,
+        2148
+      ]
+    ],
+    "shared_cell_wh": [
+      560,
+      385
+    ],
+    "content_scale": 0.042801556420233464
+  },
+  "bark": {
+    "source": "raw/dog-bark-r1.png",
+    "measured_bounds": [
+      [
+        81,
+        155,
+        627,
+        706
+      ],
+      [
+        754,
+        155,
+        627,
+        1396
+      ],
+      [
+        1460,
+        153,
+        627,
+        2071
+      ]
+    ],
+    "shared_cell_wh": [
+      700,
+      532
+    ],
+    "content_scale": 0.03426791277258567
+  },
+  "sleep": {
+    "source": "raw/dog-sleep-r2.png",
+    "measured_bounds": [
+      [
+        200,
+        401,
+        740,
+        885
+      ],
+      [
+        1142,
+        401,
+        740,
+        1816
+      ]
+    ],
+    "shared_cell_wh": [
+      753,
+      407
+    ],
+    "content_scale": 0.029197080291970802
+  },
+  "run": {
+    "source": "raw/dog-run-r1.png",
+    "measured_bounds": [
+      [
+        48,
+        264,
+        585,
+        503
+      ],
+      [
+        542,
+        261,
+        585,
+        917
+      ],
+      [
+        956,
+        261,
+        585,
+        1425
+      ],
+      [
+        1437,
+        271,
+        585,
+        1941
+      ]
+    ],
+    "shared_cell_wh": [
+      546,
+      366
+    ],
+    "content_scale": 0.047530864197530866
+  },
+  "bite": {
+    "source": "raw/dog-bite-r1.png",
+    "measured_bounds": [
+      [
+        62,
+        276,
+        627,
+        714
+      ],
+      [
+        743,
+        183,
+        627,
+        1444
+      ],
+      [
+        1504,
+        183,
+        631,
+        2136
+      ]
+    ],
+    "shared_cell_wh": [
+      753,
+      500
+    ],
+    "content_scale": 0.03794642857142857
+  }
+}

@@ -1,0 +1,5 @@
+Use case: precise-object-edit
+Asset type: dog_sit_1 production pixel sprite.
+Input image1 is the accepted sitting pose dog_sit_0, EDIT TARGET. Copy it exactly. Change ONLY the tiny tip of the far ear to fold slightly backward (a relaxed small ear flick). Keep eyes open, mouth closed, look WEST. This is subtle day idle, not a new dog or a different sitting posture.
+All pixels below the ear tips, including the face, eye, muzzle, chest, torso, paws, legs, haunches, tail MUST stay in the exact same source positions, shapes and colors. Preserve source canvas1402x1122, ground baseline, colored outline, caramel/cream markings and pixel block scale.
+Do NOT regenerate the lower body, do not move the dog, do not change head size or eye. Keep visible bounds about767x875, width13-15 height17-19 after native reduction40x32 pivot20,30. The body's lowermost paw remains exactly unchanged. One dog, true transparent background, no shadow, scenery, lines, accessories, text, new subject or fake checkerboard. Neutral warm upper-left light, no gradients or blur.

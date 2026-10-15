@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: production pixel sprite for HARVEST THE NIGHT, dog_sit_0 correction.
+Image 1 is the EDIT TARGET. Preserve the entire sitting dog, all head/ear/eye/nose/chest/body and paw pixels, its source framing1402x1122 and ground baseline, camera, palette and upper-left light.
+Change ONLY the tail silhouette: curl the fluffy cream-tipped tail tightly upward against the OUTER edge of the rear haunch, instead of sticking out far to the right. It must sit adjacent to the hip, not on the floor, and add almost no horizontal width.
+Measured failure: previous visible source bounds336,162,1180,1034 (844x872) reduce to16x16, while required native sitter is13-15 wide and17-19 tall. Removing the rightward tail projection should bring the full visible width to about720-740 source pixels with the same872-pixel height, giving14-15 by17 at the same simple art density.
+Keep ALL unaffected anatomy and feet unchanged. Do not make the head larger, do not shorten the torso, do not move the dog across the image, do not add limbs, collar, ground or shadows. Side view WEST, closed mouth, no tongue. True transparent alpha, no text, no checkerboard. Crisp coarse pixel clusters with brown/cream limited ramps, no blur or gradients.

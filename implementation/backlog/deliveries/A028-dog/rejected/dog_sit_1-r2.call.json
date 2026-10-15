@@ -1,0 +1,31 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_1-r1.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nAsset type: dog_sit_1 correction, one pixel-art production sprite.\nImage1 is the EXACT body/feet/color/base EDIT TARGET dog_sit_0. Image2 is only a reference for the subtle far-ear flick wanted on dog_sit_1.\nMake the new frame by preserving Image1 entirely and changing ONLY a small tip of the far ear at the very top of the head to the ear pose of Image2. Everything outside that little ear tip must be copied from Image1 with exactly unchanged geometry, palette, pixels and source positions. Do NOT rerender the body.\nPrevious failure: Image2 changed paw pixels and brown/cream shading on the face, chest and hind leg, causing unwanted jitter in native40x32 previews. Preserve EVERY paw shape/pixel and every body color from Image1. There must be no differences in the lower body, no extra rear-paw outline pixels, no recolored chest or tail. Only the ear tip animates.\nSame source1402x1122, same source opaque ground bottom1035 as Image1, same sitting bounds336,161,1103,1036. Side-view WEST caramel/cream collie, no collar, same closed mouth, same eye and head size. True transparent alpha, no shadow/grass/ground/text/lines, no additional subjects. Crisp clustered pixels, no blur, no extra texture. Exactly ONE dog."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png",
+      "sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_1-r1.png",
+      "sha256": "0e28135ddd9ef8c2c75f0a90386e69a592eb1141e1b84eaf558f51c6a60db1ac",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog_sit_1-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b5dcfbec-da43-41f2-b9ed-ee303f9dbe2c.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_1-r2.png",
+  "sha256": "064c8a324354b3cd5f2607a16b63981329dc9e0ed824da157bd5517d51362869",
+  "revision": 2,
+  "decision": "rejected: Second idle attempt changes twelve native pixels including body/paws; body is not stationary pixel for pixel.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog_sit_1-r2.png"
+}

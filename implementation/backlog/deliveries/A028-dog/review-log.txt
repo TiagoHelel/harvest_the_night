@@ -1,0 +1,24 @@
+2026-10-13 / New batch authorized
+Owner words, verbatim: "Gerar os 21 novos pacotes e montar o HTML de revisão ao final"
+Generate the 21 new eligible art packs. Owner reviews the unified HTML at the end. No runtime integration or approval inferred.
+
+2026-10-13 / Animal reference substitution
+Owner words, verbatim: "Usar os sprites atuais dos animais no jogo como referência"
+Use current cow/chicken game sprites as family references for the dog. A026/A027 remain blocked and their diagnostic frames are not used as approved references. All original dog geometry and animation requirements remain.
+
+2026-10-13 / Idle correction limit reached
+The third dog_sit_1 attempt still changes lower body/paw colors. Pack blocked with two diagnostic sitting frames and accepted identity/pose masters; 18 animation frames not generated. No production export and no approval. Continue the other 20 requested new packs; owner reviews this blocker in the final batch HTML.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+2/20 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: idle_body_identical. Approval applies only to displayed images. Missing outputs remain a delivery blocker, not a rejection of approved art.
+
+2026-10-14 / Resuming 18 missing frames. Both approved sitting hashes verified with the original PNG encoder; sitting pixels unchanged. The owner-approved sit_1 raw source is copied byte-for-byte from rejected/ into raw/ with explicit acceptance in its receipt.
+
+2026-10-14 / Continuation: 20/20 native frames produced; original two sitting SHA-256 values unchanged. Added wag2, walk4, bark3, sleep2, run4, bite3. Bite jaw point measured at (9,21), opaque. One scale per animation, binary alpha, palette/provenance and deterministic --check pass. Residual new-frame visual checks remain false: bark_paws_stationary, sleep_head_paws_stationary, wag_only_tail_changes. These are explicitly NOT waived or approved. Review the animated candidates at the end of the batch. No game integration.
+
+2026-10-14 / Complete continuation owner approval
+Owner words: tudo aprovado, falta mais?
+Review: implementation/backlog/deliveries/A028-dog/continuation-final-review.html
+All 20 native outputs approved, including 18 new PNGs. Original approved PNGs remain byte-identical. Accepted measured visual differences: bark_paws_stationary, idle_body_identical, sleep_head_paws_stationary, wag_only_tail_changes. No art, motion, palette, timing or runtime files changed.

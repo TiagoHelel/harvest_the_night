@@ -1,0 +1,57 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / dog_walk r2. One concrete correction: the FRONT LEGS in contact frames 1 and 3 must have opposite lead paws. The current strip keeps the near foreleg trailing in both contacts.\nImage 1 is the exact four-frame strip to edit. Keep its four cells, dog bodies, heads, ears, fur pattern, tails, framing and baseline unchanged. Image 2 is the dog identity reference; use no standing-leg pose from it.\nThe NEAR foreleg is the bright cream leg visibly attached to the large outer shoulder/chest, nearest the viewer. The FAR foreleg is the partly occluded leg behind it.\nIn FRAME 1 (leftmost), move the NEAR foreleg toward the LEFT/muzzle so its paw is planted ahead of the shoulder. Put the FAR foreleg behind the shoulder, toward the RIGHT/belly.\nIn FRAME 3, the NEAR foreleg must instead be behind the shoulder toward the RIGHT/belly, while the FAR foreleg is planted ahead toward the LEFT/muzzle. Clearly show the near foreleg sweeping through a forward-and-back arc, not freezing or disappearing. The two contact poses cannot share the same foreleg silhouette.\nFrames 2 and 4 are the corresponding passing poses under the shoulders, closing the cycle continuously; keep left/right anatomical identity and no detached or extra leg. Hind legs counter the forelegs. All four paws keep cream coloring with the far pair only naturally shaded; never exchange which leg is near.\nKeep at least one paw on the common baseline in every frame. Do not move, scale, bob or repaint the torso/head. Preserve the 2172x724 transparent strip composition and original four cells, no labels, shadows, halo or background. Same crisp pixel-art clusters and upper-left daylight. Exactly FOUR frames, no fifth master frame.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-walk-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-92ef08c9-1af1-47a0-84bd-84600cfd6a9a.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "four-frame walk correction target",
+    "dog identity reference"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-walk-r1.png",
+      "sha256": "5bd38cf5cd024c8f3cf2c82402a2b34c07536a6584ecf4934c51d038e7d41029",
+      "role": "four-frame walk correction target",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog-walk-r1.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "sha256": "9bd7a4695e9e6d7a22210abd4b0601075111282ba6952e707a1fffc64398cdd6",
+      "role": "dog identity reference"
+    }
+  ],
+  "copied_path": "raw/dog-walk-r2.png",
+  "sha256": "23918b528fae5e63309f117981328b7093f901e3829abe912e4275504ffaf5f2",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      2171,
+      724
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      24,
+      196,
+      2148,
+      535
+    ]
+  },
+  "selected_native_exports": [
+    "native/dog_walk/west/01.png",
+    "native/dog_walk/west/02.png",
+    "native/dog_walk/west/03.png",
+    "native/dog_walk/west/04.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

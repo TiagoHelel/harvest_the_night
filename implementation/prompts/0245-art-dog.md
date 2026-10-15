@@ -1,7 +1,7 @@
 # 0245 - Art: the dog
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0185, 0233
 - **Likely files:** assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py, src/ui/art_placement.gd
 - **Art packs:** A028

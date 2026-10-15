@@ -289,14 +289,6 @@ const ART := {
 	&"chicken_eat": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.2, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
 	&"chicken_sleep": {"pack": "A027", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/chicken", "tint": Color.WHITE, "stand_in_scale": 1.0, "geometry": ANIMAL_SMALL, "final": ANIMAL_SMALL},
 	&"pig_dig": {"pack": "A026", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"props/cow", "tint": Color(1.45, 0.72, 0.72), "stand_in_scale": 0.8, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"dog_sit": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.5, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"dog_wag": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.12, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"dog_walk": {"pack": "A028", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.15, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"dog_sleep": {"pack": "A028", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.6, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	# The dog called out at night (task 0233): its run and its bite, the same
-	# brown cow small, until 0245.
-	&"dog_run": {"pack": "A028", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.08, "loop": true, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
-	&"dog_bite": {"pack": "A028", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"props/cow", "tint": Color(0.85, 0.62, 0.42), "stand_in_scale": 0.65, "geometry": ANIMAL_LARGE, "final": ANIMAL_LARGE},
 	# A036's night loot (task 0221): the bones' icon the stone paled to bone
 	# and the moon stone's the stone cooled to moonlight, until 0235; the
 	# pile and the stone on the ground drawn in code (`LootView`).

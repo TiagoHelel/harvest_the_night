@@ -32173,3 +32173,58 @@ aprovado, falta mais?"), as recorded in the delivery's `APPROVAL.json`.
 - `python implementation/backlog/assets.py set A045 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (62 of 62).
+
+## 0245 - Art: the dog - done 2026-10-15
+
+A028 is integrated: the dog is the owner-approved art now, sitting, wagging,
+following, barking, asleep by the porch, running when it is called out at
+night and biting. The owner approved it on 2026-10-14 ("tudo aprovado, falta
+mais?"), as recorded in the delivery's `APPROVAL.json`. The owner accepted
+four measured differences, and they stay recorded as measured:
+`bark_paws_stationary`, `idle_body_identical`,
+`sleep_head_paws_stationary` and `wag_only_tail_changes`. The brown cow
+stand-in of 0185 and 0233 is gone.
+
+- **Promotion**: the 20 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their nine raw sources were copied byte for byte into
+    `assets/art_source/animals/dog/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - The contract's canvas is 40x32 on (20,30), the large animals' (not the
+    cow's 24x24), drawn facing west and mirrored east at runtime. The
+    bite's middle frame carries the contract's `bite_xy`.
+- **The dog's view reads the art, not the registry** (`AnimalView`).
+  - A pose's frame count and its seconds come off the art itself:
+    `dog_frames`, counted through `PlaceholderArt.frame` (only the lookup
+    reads `RasterArt`, as a suite checks); `dog_seconds`; and `dog_path`.
+  - The stand-in's tint, its 0.65 scale, the sleeping squash and the walking
+    bob are gone: A028's frames carry their own motion, standing on their
+    feet.
+  - The pet's states (0185) and the called dog's run and bite (0233) pick
+    their frames as before. The bite still follows its own ticks.
+- **The stand-ins retired**: the dog's six `PlaceholderArt` entries are
+  gone. `placeholders.py --check` passes, with 208 stand-ins left over 29
+  packs.
+- **Checks**: `check_prop_art.py` gains `check_dog`. All seven poses
+  (sit 2, wag 2, walk 4, bark 3, sleep 2, run 4, bite 3) must have:
+  - frames 0..n, on the 40x32 canvas and (20,30) pivot, named
+    `dog_<pose>_<n>`;
+  - one scale and one timing per pose;
+  - no frame clipped, every one on its feet on row 30, with no alpha halo;
+  - distinct frames and exact outputs.
+  The art showcase passes.
+- **Tests**: 0233's view check now asks for the art: no stand-in left; the
+  run's 4 frames and the bite's 3, the walk's 4 and the sit's 2; the run at
+  0.08 s; the bite's last frame on disk.
+- **Shots** (`implementation/shots/0245/`, FHD 1920x1080, looked at):
+  - `barnyard` at noon, the dog sitting a step behind the farmer among the
+    barn's and the coop's animals.
+  - `powers` at night, the dog called out and caught at its bite at the
+    tank's feet, turned toward it, with the bell's rings going out.
+- **The delivery folder** `implementation/backlog/deliveries/A028-dog/` is
+  committed, as A045's was. It also holds the batch reviews and handoffs
+  Codex kept there.
+- `python implementation/backlog/assets.py set A028 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (62 of 62). The review server's two logs in the delivery folder stay out of the commit.

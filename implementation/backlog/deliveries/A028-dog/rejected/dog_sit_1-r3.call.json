@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-13",
+  "arguments": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png"
+    ],
+    "prompt": "Use case: precise-object-edit\nImage1 is the EDIT TARGET. This is a VERY SMALL localized correction to a pixel-art sprite; absolutely preserve the input image everywhere except the topmost tip of the BACK ear.\nChange only that ear tip, bending it by one small native pixel toward the back/right. No head tilt, no blink. Every part below the ear must be unchanged, including face, head outline, eyes, muzzle, body shading, chest, belly, legs, feet, tail. Please preserve the original actual pixels of the image, rather than repainting those areas. The output should be nearly identical to Image1 and keep its entire shape.\nNative fixed reduction40x32 produced12 unwanted changed pixels, including six body/paw pixels, from the earlier whole-image edit. Those jitter between idle frames. This final revision must have ZERO changes to lower body or feet.\nKeep source1402x1122, exact dog framing/ground baseline/opaque bounds ofImage1. One sitting caramel-and-cream WEST-facing dog with closed mouth. Real transparent background. No background, text, accessories, lines, ground, shadow, smoothing, gradients, new subject or altered palette. ONLY the tiny back ear tip is different; everything else exactly copied fromImage1."
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/raw/dog_sit_0-r2.png",
+      "sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-150663fa-9d69-4448-95a8-9e2ce6c4e053.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_1-r3.png",
+  "sha256": "6ee7be19b0f1d226beeacb0706b6291b0c650732c4bd42b925b881dbd0c5507d",
+  "revision": 3,
+  "decision": "rejected: Third idle attempt changes twenty-six native pixels, including torso/paw shading; correction limit reached.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog_sit_1-r3.png"
+}

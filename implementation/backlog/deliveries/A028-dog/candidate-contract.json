@@ -1,0 +1,219 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "dog_sit",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Incomplete pack: idle body/paw colors still change after three attempts.",
+          "night": "preview/dog_sit-west-0-night.png",
+          "path": "preview/candidates/dog_sit/west/01.png",
+          "points": {},
+          "pose": "sitting master"
+        },
+        {
+          "issue": "Incomplete pack: idle body/paw colors still change after three attempts.",
+          "night": "preview/dog_sit-west-1-night.png",
+          "path": "preview/candidates/dog_sit/west/02.png",
+          "points": {},
+          "pose": "ear flick; unwanted body color changes"
+        }
+      ],
+      "frame_seconds": 0.5,
+      "frames": 2,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "poses": [
+        "sitting master",
+        "ear flick; unwanted body color changes"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/props/cow.png",
+      "pivot_xy": [
+        12,
+        22
+      ]
+    }
+  ],
+  "date": "2026-10-13",
+  "delivery_type": "owner-approved reviewed artwork; partial delivery",
+  "deviations": [
+    {
+      "change": "Use sprites/props/cow.png and sprites/props/chicken.png as animal-family style references instead of unapproved A026/A027 deliveries. Native dog geometry, palette, animation and quality requirements remain as specified.",
+      "owner_words": "Usar os sprites atuais dos animais no jogo como refer\u00eancia"
+    }
+  ],
+  "files": [
+    {
+      "anim": "dog_sit",
+      "call": "raw/dog_sit_0-r2.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "preview/candidates/dog_sit/west/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "sitting master",
+      "prompt": "raw/dog_sit_0-r2.prompt.txt",
+      "prompt_sha256": "6382ed87cdd6719af06972f987ecb14e150510858645001b9251f5314b14f87f",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          17
+        ],
+        "content_scale": 0.019428571428571427,
+        "crop_xywh": [
+          336,
+          159,
+          768,
+          877
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "soil_dark",
+          "bone_dark",
+          "bone",
+          "roof_light"
+        ],
+        "sheet_cell_xywh": null
+      },
+      "review_issue": "Incomplete pack: idle body/paw colors still change after three attempts.",
+      "runtime_name": "sprites/props/dog_sit_0.png",
+      "seconds": 0.5,
+      "sha256": "37a9b23974755eaf67d4b44687b9a7915ee7fcc0fc561d6b7b519e1c0fb38391",
+      "source": "raw/dog_sit_0-r2.png",
+      "source_sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1"
+    },
+    {
+      "anim": "dog_sit",
+      "call": "rejected/dog_sit_1-r1.call.json",
+      "canvas_wh": [
+        40,
+        32
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "preview/candidates/dog_sit/west/02.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "soil_dark",
+        "bone_dark",
+        "bone",
+        "roof_light"
+      ],
+      "pivot_xy": [
+        20,
+        30
+      ],
+      "points": {},
+      "pose": "ear flick; unwanted body color changes",
+      "prompt": "rejected/dog_sit_1-r1.prompt.txt",
+      "prompt_sha256": "16e145852a9b5b1650bf6d9d567b1313af6bfcb784e4f9ca1fe8bb67ce4cbf79",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          7,
+          17
+        ],
+        "content_scale": 0.019428571428571427,
+        "crop_xywh": [
+          336,
+          161,
+          768,
+          877
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "soil_dark",
+          "bone_dark",
+          "bone",
+          "roof_light"
+        ],
+        "sheet_cell_xywh": null
+      },
+      "review_issue": "Incomplete pack: idle body/paw colors still change after three attempts.",
+      "runtime_name": "sprites/props/dog_sit_1.png",
+      "seconds": 0.5,
+      "sha256": "fad1b48ab412007775bd274392e64643a1cdc922ff07dc094b1ceb5ac7eef0f1",
+      "source": "rejected/dog_sit_1-r1.png",
+      "source_sha256": "0e28135ddd9ef8c2c75f0a90386e69a592eb1141e1b84eaf558f51c6a60db1ac"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+    "scope": "available_reviewed_files_only"
+  },
+  "pack": "A028",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "15a3b10f06bf616521a3f753acde8f67bb84fa3d599b740725ff6b0e7d64a0c1"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A028-dog",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "The dog",
+  "tool": "built-in ImageGen"
+}

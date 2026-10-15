@@ -1,0 +1,48 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / sleeping dog two-frame strip. The attached image is the edit target: exactly the same two curled caramel/cream farm dog poses, facing LEFT. Make the second dog a literal copy of the first dog's face, ears, closed eyes, muzzle, forepaws and curled tail; keep those pixels and all lower-edge contact points identical within the two equal cells. Only a small upper-back patch on the second dog rises by about ONE FINAL NATIVE PIXEL in a slow breath. No head, paws, tail or fur-color shimmer. Keep the same dog identity and resting proportions, no collar. Exactly two same-scale poses with broad transparent space between them, equal body-cell positions, baseline and lighting. Final canvas per pose40x32 pivot20,30, curled visible20x10 maximum. True transparent alpha. No scene, ground, shadow, glyphs, text, labels, borders or extra objects. No smooth rendering, only the existing clean clustered pixel art. Do not enlarge or rotate the dog.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-sleep-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-355863d9-d53f-4951-acb0-8c9288e6045c.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "sleeping strip exact edit target"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-sleep-r1.png",
+      "sha256": "2c7ab107b1754041407683eb33e63b3da2f449f271b69cd55be2702d179a4612",
+      "role": "sleeping strip exact edit target",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\rejected\\dog-sleep-r1.png"
+    }
+  ],
+  "copied_path": "raw/dog-sleep-r2.png",
+  "sha256": "74c3391bc1ed581481097bd0ce16ad2b2a1b241bbb111e816d68e86a21fee5db",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      1983,
+      793
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      200,
+      401,
+      1816,
+      740
+    ]
+  },
+  "selected_native_exports": [
+    "native/dog_sleep/west/01.png",
+    "native/dog_sleep/west/02.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

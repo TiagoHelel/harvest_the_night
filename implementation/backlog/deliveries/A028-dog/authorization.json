@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-13",
+  "reference_substitution": {
+    "owner_words": "Usar os sprites atuais dos animais no jogo como referência",
+    "change": "Use sprites/props/cow.png and sprites/props/chicken.png as animal-family style references instead of unapproved A026/A027 deliveries. Native dog geometry, palette, animation and quality requirements remain as specified."
+  },
+  "pixel_edits_authorized": false,
+  "approval_for_integration": false
+}

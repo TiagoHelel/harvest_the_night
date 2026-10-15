@@ -1,0 +1,20 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit.\nAsset type: one production pixel-art animation frame for HARVEST THE NIGHT.\nPrimary request: edit Image 1 ONLY to make dog_wag frame 1: the exact same standing dog lowers its bushy tail slightly while being petted. Image 1 itself is frame 0 with the tail raised; that frame is retained unchanged.\nInput images: Image 1 is the standing identity master and exact edit target. Image 2 is the owner-approved sitting dog, an identity/colors reference only; do not make it sit. Image 3 is the game's farm pixel-art style reference.\nConstraints: keep every head, ear, eye, mouth, neck, torso, chest, leg and paw pixel from Image 1 unchanged. Change ONLY the tail and cream tail tip to a low, gently curved tail, still entirely above the paw ground line. Do not move the dog, change its pose, repaint its body, open its mouth, add a tongue, or change its coat colors.\nPreserve the exact 1402x1122 canvas, pixel size, positions and camera of Image 1, including transparent margins. Preserve the source framing so crop (155,183,1173,849) and common content_scale 0.01884570082449941 will reproduce the unchanged body at 22x16 native pixels.\nOne isolated friendly medium caramel farm dog, collie/shepherd type, head on the LEFT facing west. Caramel back/ears/tail; cream muzzle/chest/paws/tail tip; dark nose/eye; no collar or accessories. Three-quarter top-down camera, upper-left daytime light, crisp deliberate square clusters and colored outlines.\nNative game canvas is 40x32, pivot (20,30), draw scale 1.0, 0.12 second animation frame. All four paws remain exactly where they were; lowest opaque row is 29. Do not enlarge the dog to fill the canvas.\nTrue transparent background. No floor, ground shadow, halo, glow, scent/sound lines, labels, text, UI, grass, person, zombie, blur, gradients, antialiasing, smooth painting or 3D. Output exactly ONE frame, no strip.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-031db812-1689-47ca-b6cc-1bc50e2b338f.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "standing identity and exact tail-only edit target",
+    "owner-approved sitting identity/colors reference",
+    "project style reference"
+  ]
+}

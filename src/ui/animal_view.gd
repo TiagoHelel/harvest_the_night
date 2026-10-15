@@ -289,21 +289,39 @@ func _step_dog(delta: float) -> void:
 		_dog_mode = &"wag"
 	_dog_clock += delta
 	var name := StringName("dog_%s" % _dog_mode)
-	var entry := PlaceholderArt.art(name)
-	var frames := maxi(int(entry.get("frames", 1)), 1)
-	var frame := int(_dog_clock / maxf(float(entry.get("seconds", 0.5)), 0.05)) % frames
+	var frames := dog_frames(name)
+	var frame := int(_dog_clock / dog_seconds(name)) % frames
 	# The bite's frames follow its own ticks (task 0233).
 	if called.has("frame"):
 		frame = clampi(int(called["frame"]), 0, frames - 1)
-	_dog.texture = _texture(name, frame, &"dog")
+	# **A028's dog since task 0245**: its own frames, drawn facing west and
+	# mirrored east, on its feet - no tint, squash or bob of the stand-in.
+	var path := dog_path(name, frame)
+	if not _textures.has(path):
+		_textures[path] = load(path) if ResourceLoader.exists(path) else null
+	_dog.texture = _textures[path]
 	_dog.offset = -_pivot(_dog.texture)
 	_dog.flip_h = _dog_east
-	_dog.modulate = PlaceholderArt.art_tint(name)
-	var scale := PlaceholderArt.art_scale(name)
-	_dog.scale = Vector2(scale, scale * (0.75 if _dog_mode == &"sleep" else 1.0))
-	var lift := (-absf(sin(_dog_clock * (20.0 if _dog_mode == &"run" else 12.0)))
-		if _dog_mode in [&"walk", &"run"] else 0.0)
-	_dog.position = _dog_pos.round() + Vector2(0, lift)
+	_dog.modulate = Color.WHITE
+	_dog.scale = Vector2.ONE
+	_dog.position = _dog_pos.round()
+
+
+## **A pose of A028's dog** (task 0245): how many frames it has - counted off
+## the art - how long each shows, and where frame `frame` lives.
+static func dog_frames(name: StringName) -> int:
+	var count := 0
+	while not PlaceholderArt.frame(dog_path(name, count)).is_empty():
+		count += 1
+	return maxi(count, 1)
+
+
+static func dog_seconds(name: StringName) -> float:
+	return maxf(float(PlaceholderArt.frame(dog_path(name, 0)).get("seconds", 0.5)), 0.05)
+
+
+static func dog_path(name: StringName, frame: int) -> String:
+	return "res://sprites/props/%s_%d.png" % [name, frame]
 
 
 ## **The dog called out** (task 0233), placed by the rules' own clock - the

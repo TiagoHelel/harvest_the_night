@@ -1,0 +1,20 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept / identity-preserve.\nAsset type: short production animation strip for HARVEST THE NIGHT, a cozy pixel-art farm defended against zombies.\nInput images: Image 1 is the standing dog identity master: exact breed, face, fur markings, body proportions and camera reference. Image 2 is the owner-approved sitting dog, identity and caramel/cream color reference only; do not copy its sitting pose into this action. Image 3 is the approved game style reference, not a request to draw its scene.\nUse exactly the same friendly medium farm dog in every frame: collie/shepherd type, caramel back, ears and bushy tail, cream forehead stripe, muzzle, chest, paws and tail tip; dark nose/eye, upright ears with folded tips, no collar or accessories. It is not a wolf, a plush mascot or a new breed.\nAll poses face LEFT/WEST with the same three-quarter top-down farm camera. Upper-left daytime highlights; deliberate square pixel-art clusters, colored outlines and a limited warm wood/bone ramp. No 3D, painting, smooth gradients, blur, antialiasing or dithering.\nFinal native frame canvas is 40x32, contact pivot (20,30), draw scale 1.0. Normal standing body is 22 pixels wide and 16 pixels tall, half the farmer height. Keep the same torso mass, head/ear size and fur markings across the strip. Do not individually enlarge poses or center each pose by its changing silhouette.\nLayout: one clean horizontal row of equal-size source cells, with generous fully transparent gutters between poses. Keep the dog's torso at the same cell-center x and every grounded paw on the same source baseline; preserve complete unclipped tails and ears. The exporter will use ONE uniform content_scale for the whole strip. No labels, borders or separators, no extra still pose.\nTrue transparent background outside the dog. No ground, shadow, grass, kennel, person, enemy, impact, motion streaks, sound glyphs, text, UI, glow, halo, extra objects or night lighting.\nGenerate exactly THREE frames of dog_bark in order, 0.1 seconds each, one-shot: 1) standing with head gently drawn back, mouth CLOSED; 2) head forward, mouth OPEN in a short friendly bark, a tiny warm tongue is allowed; 3) mouth closes and the head recovers toward the master stance. Keep torso, legs, paws, tail and ear size fixed; only head/neck and mouth perform the action. No sound lines, symbols, word bubbles or snarl. All four paws stay in their original stance at the same baseline.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A028-dog\\raw\\dog_sit_0-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2ac55929-fb03-4ea7-943e-a5f4e1c3f27f.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "standing dog identity/camera master",
+    "approved sitting identity/colors reference",
+    "game style reference only"
+  ]
+}

@@ -275,3 +275,12 @@ Taking 0244, A045 the power and weapon icons, through its CLAUDE-A045-PROMPT.txt
 
 A045 is in the game and set `integrated` (the power and weapon icons: 22 native PNGs sha-checked; UiKit.orphan_icons claims the powers and the hardwood wall's level).
 Next in the loop: 0245.
+
+## 2026-10-15 - Claude - taking 0245 (A028)
+
+Taking 0245, A028 the dog, through its CLAUDE-A028-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0245 (A028 integrated)
+
+A028 is in the game and set `integrated` (the dog: 20 native PNGs sha-checked; AnimalView reads each pose's frames and timing off the art).
+Next in the loop: 0260.

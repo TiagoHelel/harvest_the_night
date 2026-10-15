@@ -1,0 +1,42 @@
+{
+  "pack": "A028",
+  "date": "2026-10-14",
+  "status": "Two sitting images approved; 18 new images await review",
+  "scope": "available_reviewed_files_only",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A028-dog",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "preview/candidates/dog_sit/west/01.png": "37a9b23974755eaf67d4b44687b9a7915ee7fcc0fc561d6b7b519e1c0fb38391",
+    "preview/candidates/dog_sit/west/02.png": "fad1b48ab412007775bd274392e64643a1cdc922ff07dc094b1ceb5ac7eef0f1"
+  },
+  "frames": 2,
+  "frames_expected": 20,
+  "accepted_visual_checks": [
+    "idle_body_identical"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false,
+  "delivery_complete": true,
+  "pending_review_outputs": [
+    "native/dog_wag/west/01.png",
+    "native/dog_wag/west/02.png",
+    "native/dog_walk/west/01.png",
+    "native/dog_walk/west/02.png",
+    "native/dog_walk/west/03.png",
+    "native/dog_walk/west/04.png",
+    "native/dog_bark/west/01.png",
+    "native/dog_bark/west/02.png",
+    "native/dog_bark/west/03.png",
+    "native/dog_sleep/west/01.png",
+    "native/dog_sleep/west/02.png",
+    "native/dog_run/west/01.png",
+    "native/dog_run/west/02.png",
+    "native/dog_run/west/03.png",
+    "native/dog_run/west/04.png",
+    "native/dog_bite/west/01.png",
+    "native/dog_bite/west/02.png",
+    "native/dog_bite/west/03.png"
+  ]
+}

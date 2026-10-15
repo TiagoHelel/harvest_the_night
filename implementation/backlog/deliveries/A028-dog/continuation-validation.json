@@ -1,0 +1,11 @@
+{
+  "new_pngs": 167,
+  "previously_approved_pngs_preserved": 20,
+  "six_pack_native_files": 187,
+  "all_expected_files_present": true,
+  "all_png_hashes_match_contract": true,
+  "all_html_local_links_exist": true,
+  "local_references_checked": 1029,
+  "new_art_approved": true,
+  "runtime_integrated": false
+}

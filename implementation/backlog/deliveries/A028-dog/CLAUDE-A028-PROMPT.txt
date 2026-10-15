@@ -1,0 +1,46 @@
+A028-dog: owner-approved artwork
+
+Approval date: 2026-10-14
+Owner words (verbatim): tudo aprovado, falta mais?
+Authoritative delivery: implementation/backlog/deliveries/A028-dog
+Game integration task: 0245
+
+Scope: Complete reviewed delivery approved for integration.
+Review-log.txt and APPROVAL.json preserve the owner acceptance of documented visual differences. Measured QA booleans remain unchanged; accepted visual checks are listed separately.
+No older delivery is superseded. The batch review HTML is an index, not an art source.
+Mode A: use the original raw ImageGen sources and the exact per-file crop, scale, pivot, alpha threshold and palette_keys in the contract; tools/palette.py:COLOURS is the palette. Preserve exact approved PNG hashes.
+01.png is frame 0. All per-file timing, canvas, pivot, points, aliases and mirror behavior are included below. A runtime mirror means east is obtained by flipping west in the game. Bind baked mirrors directly and do not flip them again.
+Use contract.json for complete deliveries. For partial deliveries, use candidate-contract.json only to locate the explicitly approved hashes in APPROVAL.json; it does not claim the missing frames exist.
+Never use raw rejected cells, screenshots, GIFs, or unlisted PNGs. Never regenerate, repaint, recolor, resample or retime these approved images.
+
+Exact mappings:
+native/dog_sit/west/01.png -> sprites/props/dog_sit_0.png | [40, 32] pivot [20, 30] draw 1 | frame 0 | 0.5 seconds | loop True | mirror runtime | points {}
+native/dog_sit/west/02.png -> sprites/props/dog_sit_1.png | [40, 32] pivot [20, 30] draw 1 | frame 1 | 0.5 seconds | loop True | mirror runtime | points {}
+native/dog_wag/west/01.png -> sprites/props/dog_wag_0.png | [40, 32] pivot [20, 30] draw 1 | frame 0 | 0.12 seconds | loop True | mirror runtime | points {}
+native/dog_wag/west/02.png -> sprites/props/dog_wag_1.png | [40, 32] pivot [20, 30] draw 1 | frame 1 | 0.12 seconds | loop True | mirror runtime | points {}
+native/dog_walk/west/01.png -> sprites/props/dog_walk_0.png | [40, 32] pivot [20, 30] draw 1 | frame 0 | 0.15 seconds | loop True | mirror runtime | points {}
+native/dog_walk/west/02.png -> sprites/props/dog_walk_1.png | [40, 32] pivot [20, 30] draw 1 | frame 1 | 0.15 seconds | loop True | mirror runtime | points {}
+native/dog_walk/west/03.png -> sprites/props/dog_walk_2.png | [40, 32] pivot [20, 30] draw 1 | frame 2 | 0.15 seconds | loop True | mirror runtime | points {}
+native/dog_walk/west/04.png -> sprites/props/dog_walk_3.png | [40, 32] pivot [20, 30] draw 1 | frame 3 | 0.15 seconds | loop True | mirror runtime | points {}
+native/dog_bark/west/01.png -> sprites/props/dog_bark_0.png | [40, 32] pivot [20, 30] draw 1 | frame 0 | 0.1 seconds | loop False | mirror runtime | points {}
+native/dog_bark/west/02.png -> sprites/props/dog_bark_1.png | [40, 32] pivot [20, 30] draw 1 | frame 1 | 0.1 seconds | loop False | mirror runtime | points {}
+native/dog_bark/west/03.png -> sprites/props/dog_bark_2.png | [40, 32] pivot [20, 30] draw 1 | frame 2 | 0.1 seconds | loop False | mirror runtime | points {}
+native/dog_sleep/west/01.png -> sprites/props/dog_sleep_0.png | [40, 32] pivot [20, 30] draw 1 | frame 0 | 0.6 seconds | loop True | mirror runtime | points {}
+native/dog_sleep/west/02.png -> sprites/props/dog_sleep_1.png | [40, 32] pivot [20, 30] draw 1 | frame 1 | 0.6 seconds | loop True | mirror runtime | points {}
+native/dog_run/west/01.png -> sprites/props/dog_run_0.png | [40, 32] pivot [20, 30] draw 1 | frame 0 | 0.08 seconds | loop True | mirror runtime | points {}
+native/dog_run/west/02.png -> sprites/props/dog_run_1.png | [40, 32] pivot [20, 30] draw 1 | frame 1 | 0.08 seconds | loop True | mirror runtime | points {}
+native/dog_run/west/03.png -> sprites/props/dog_run_2.png | [40, 32] pivot [20, 30] draw 1 | frame 2 | 0.08 seconds | loop True | mirror runtime | points {}
+native/dog_run/west/04.png -> sprites/props/dog_run_3.png | [40, 32] pivot [20, 30] draw 1 | frame 3 | 0.08 seconds | loop True | mirror runtime | points {}
+native/dog_bite/west/01.png -> sprites/props/dog_bite_0.png | [40, 32] pivot [20, 30] draw 1 | frame 0 | 0.1 seconds | loop False | mirror runtime | points {}
+native/dog_bite/west/02.png -> sprites/props/dog_bite_1.png | [40, 32] pivot [20, 30] draw 1 | frame 1 | 0.1 seconds | loop False | mirror runtime | points {"bite_xy": [9, 21]}
+native/dog_bite/west/03.png -> sprites/props/dog_bite_2.png | [40, 32] pivot [20, 30] draw 1 | frame 2 | 0.1 seconds | loop False | mirror runtime | points {}
+
+Integration procedure for complete deliveries:
+1. Verify APPROVAL.json and contract.json SHA-256 values before promotion.
+2. Promote versioned raw sources through assets/art_source/<family>/, the raster manifest, ownership.json and tools/import_art.py, with prompt/reference/approval provenance. Metadata points are native coordinates.
+3. Extend the relevant hard-coded family validation lists. Any changes to code, aliases and manifest bindings belong to the named game task.
+4. Run python tools/verify.py and inspect day/night FHD captures.
+5. Only after integration succeeds, run python implementation/backlog/assets.py set A028 integrated.
+6. Claude owns assets.py unblock and game-task state changes. Codex did not run them.
+
+Current approval covers the entire delivery, including all continuation additions. The owner accepted these measured visual checks: bark_paws_stationary, idle_body_identical, sleep_head_paws_stationary, wag_only_tail_changes. Keep their booleans honest; do not regenerate accepted art.

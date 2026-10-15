@@ -1,0 +1,1 @@
+Second idle attempt changes twelve native pixels including body/paws; body is not stationary pixel for pixel.

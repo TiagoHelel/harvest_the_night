@@ -2734,6 +2734,86 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/props/dog_bark_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_bark_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_bark_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_bite_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_bite_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_bite_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_run_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_run_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_run_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_run_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_sit_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_sit_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_sleep_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_sleep_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_wag_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_wag_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/dog_walk_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/props/generator.png",
       "owner": "raster"
     },
