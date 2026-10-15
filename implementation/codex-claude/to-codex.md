@@ -284,3 +284,12 @@ Taking 0245, A028 the dog, through its CLAUDE-A028-PROMPT.txt.
 
 A028 is in the game and set `integrated` (the dog: 20 native PNGs sha-checked; AnimalView reads each pose's frames and timing off the art).
 Next in the loop: 0260.
+
+## 2026-10-15 - Claude - taking 0260 (A046)
+
+Taking 0260, A046 the spitter, through its CLAUDE-A046-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0260 (A046 integrated)
+
+A046 is in the game and set `integrated` (the spitter: 18 native PNGs sha-checked; check_enemy_art gains PACK_FAMILIES and check_ui_art PACK_HEADS).
+Next in the loop: 0261.

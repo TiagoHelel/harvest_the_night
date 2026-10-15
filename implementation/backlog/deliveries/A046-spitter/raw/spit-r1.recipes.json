@@ -1,0 +1,112 @@
+[
+  {
+    "recipe": {
+      "id": "spit-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spit-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        884,
+        887
+      ],
+      "crop_xywh": [
+        380,
+        316,
+        378,
+        334
+      ],
+      "content_scale": 0.014354066985645933,
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ]
+    },
+    "native_bounds": [
+      2,
+      2,
+      7,
+      7
+    ],
+    "unclipped_scaled_wh": [
+      5,
+      5
+    ]
+  },
+  {
+    "recipe": {
+      "id": "spit-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spit-r1.png",
+      "sheet_cell_xywh": [
+        884,
+        0,
+        890,
+        887
+      ],
+      "crop_xywh": [
+        1011,
+        361,
+        418,
+        277
+      ],
+      "content_scale": 0.014354066985645933,
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ]
+    },
+    "native_bounds": [
+      1,
+      2,
+      7,
+      6
+    ],
+    "unclipped_scaled_wh": [
+      6,
+      4
+    ]
+  }
+]

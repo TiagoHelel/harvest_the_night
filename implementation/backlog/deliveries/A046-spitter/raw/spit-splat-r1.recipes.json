@@ -1,0 +1,167 @@
+[
+  {
+    "recipe": {
+      "id": "spit-splat-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spit-splat-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        667,
+        724
+      ],
+      "crop_xywh": [
+        287,
+        292,
+        187,
+        207
+      ],
+      "content_scale": 0.022727272727272728,
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ]
+    },
+    "native_bounds": [
+      4,
+      4,
+      8,
+      9
+    ],
+    "unclipped_scaled_wh": [
+      4,
+      5
+    ]
+  },
+  {
+    "recipe": {
+      "id": "spit-splat-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spit-splat-r1.png",
+      "sheet_cell_xywh": [
+        667,
+        0,
+        816,
+        724
+      ],
+      "crop_xywh": [
+        861,
+        191,
+        440,
+        339
+      ],
+      "content_scale": 0.022727272727272728,
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ]
+    },
+    "native_bounds": [
+      1,
+      3,
+      11,
+      10
+    ],
+    "unclipped_scaled_wh": [
+      10,
+      8
+    ]
+  },
+  {
+    "recipe": {
+      "id": "spit-splat-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spit-splat-r1.png",
+      "sheet_cell_xywh": [
+        1483,
+        0,
+        689,
+        724
+      ],
+      "crop_xywh": [
+        1667,
+        280,
+        289,
+        244
+      ],
+      "content_scale": 0.022727272727272728,
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        3,
+        3
+      ],
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ]
+    },
+    "native_bounds": [
+      3,
+      3,
+      10,
+      9
+    ],
+    "unclipped_scaled_wh": [
+      7,
+      6
+    ]
+  }
+]

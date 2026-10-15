@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: stylized-concept\nAsset type: A046 pixel effect source for HARVEST THE NIGHT.\nPrimary request: spit-splat, ONE horizontal strip of exactly3 frames. Inputimage1 accepted spitter identity is spitcolour reference; image2 impact is native effect scale/cluster style only, not orange/firematerial.\nHandcrafted pixel art, coarse deliberate clusters and coloured outlines, orthographiccamera, neutral daytime colour. Native 12x12, originpivot(6,6), centred with1pxclear border in ALLframes. FX localized origin, expansion/dissipation, no bloom.\nSame green spit hits asurface. Frame2largestarea withdroplets max10pxdimensions, lastframe shrinkingdrips smallerarea. One-shot. No tower or target, no permanentstain. Palette limited to ink, rot_dark, rot, leaf_dark, leaf, leaf_light, grass_dark, grass, grass_light, gold_light; keep body mid-green readable above nightrelight without emission.\nSTRIP orderedposes: smallblob, widestplash, shrinkingdrips. Equalcells, huge transparentgutters, samephysicalscale/origin acrossframes, no enlargement ofsmallposes. Truealpha0outside actualparticles. No background/glow/halo/gradient/shadow/text/labels/UI/target/motionstreak. Simple compact shapes that survive reduction.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/impact_1.png"
+  ]
+}

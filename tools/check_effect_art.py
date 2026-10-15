@@ -7,7 +7,9 @@ import import_art
 PACK_EFFECTS=[('bee_swarm','A038',3,[8,8],[4,4],'center',True,0.1),
               ('pumpkin_shot','A039',3,[8,8],[4,4],'center',True,0.1),
               ('pumpkin_splat','A039',4,[20,16],[10,14],'base',False,0.1),
-              ('zap','A042',3,[12,12],[6,6],'center',False,0.065)]
+              ('zap','A042',3,[12,12],[6,6],'center',False,0.065),
+              ('spit','A046',2,[8,8],[4,4],'center',True,0.1),
+              ('spit_splat','A046',3,[12,12],[6,6],'center',False,0.08)]
 
 
 def main():

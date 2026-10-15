@@ -2322,6 +2322,26 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/effects/spit_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/spit_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/spit_splat_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/spit_splat_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/spit_splat_2.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/effects/splash_0.png",
       "owner": "raster"
     },
@@ -2547,6 +2567,66 @@
     },
     {
       "output": "sprites/enemies/runner_walk_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_attack_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/spitter_walk_b.png",
       "owner": "raster"
     },
     {
@@ -3243,6 +3323,10 @@
     },
     {
       "output": "sprites/ui/head_runner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_spitter.png",
       "owner": "raster"
     },
     {

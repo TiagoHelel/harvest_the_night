@@ -76,6 +76,12 @@ WARM = {palette.COLOURS[k] for k in ('skin', 'skin_dark', 'skin_light', 'flame',
 HEADS = {
     'A011': ['walker', 'runner', 'tank', 'breaker', 'giant'],
 }
+## The later enemies' heads, drawn by their own packs (task 0260 on): the
+## same 16x16 at (8,8) standing on row 14 with row 15 clear, in the pack's
+## palette rather than an exact crop.
+PACK_HEADS = {
+    'A046': ['spitter'],
+}
 
 
 def check_icon(e, art, size, seen, files, registry):
@@ -190,6 +196,18 @@ def main():
             fingerprint=art.tobytes();assert fingerprint not in seen[16],'Duplicate head: '+kind;seen[16].add(fingerprint)
             assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
             check_approved(e,art)
+            heads+=1
+    for pack,kinds in PACK_HEADS.items():
+        for kind in kinds:
+            e=next((x for x in manifest['assets'] if x['id']=='ui/head_'+kind and x.get('generation_task')==pack),None)
+            assert e is not None,'Missing head: '+kind
+            assert e['canvas_wh']==[16,16] and e['pivot_xy']==[8,8] and not e['loop'] and e['frame']==0
+            assert registry[e['output']]=='raster'
+            art=images[e['id']];box=art.getbbox();pixels=list(import_art.samples(art))
+            assert box and 0<box[0] and 0<box[1] and box[2]<=15 and box[3]==15,'A head stands on row 14, row 15 clear: '+kind
+            assert all(p[3] in (0,255) for p in pixels)
+            fingerprint=art.tobytes();assert fingerprint not in seen[16],'Duplicate head: '+kind;seen[16].add(fingerprint)
+            assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
             heads+=1
     ascii_files=gen_sprites.everything()
     for name in ('panel','tooltip','tab','button_normal','button_hover','button_pressed','button_disabled',

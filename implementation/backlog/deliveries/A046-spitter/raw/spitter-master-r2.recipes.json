@@ -1,0 +1,52 @@
+[
+  {
+    "recipe": {
+      "id": "spitter-master-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-master-r2.png",
+      "crop_xywh": [
+        385,
+        116,
+        691,
+        914
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1448,
+        1086
+      ],
+      "content_scale": 0.03172866520787746,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        15,
+        29
+      ]
+    },
+    "native_bounds": [
+      17,
+      15,
+      39,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      22,
+      29
+    ],
+    "measured_contact_band_raw_xywh": [
+      385,
+      872,
+      691,
+      158
+    ],
+    "contact_centre_raw_x": 843.0
+  }
+]

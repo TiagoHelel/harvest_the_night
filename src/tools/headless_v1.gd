@@ -9729,9 +9729,10 @@ func _task_0247_spitter() -> void:
 		and is_equal_approx(-leaves.y, WorldView.SPIT_MOUTH_LIFT) and is_equal_approx(-arrives.y, WorldView.SPIT_HIT_LIFT),
 		"the view plays the spit off the rules, and the glob leaves the mouth and lands up the tower", str(poses))
 
-	# **The glob and the splat drawn in code** until A046: the glob 4-6
-	# pixels inside its 8x8, a frame squashed from the other; the splat
-	# growing then shrinking inside its 12x12; a pixel clear all round.
+	# **The glob and the splat**, A046's art since task 0260: the glob 4-6
+	# pixels inside its 8x8, its two frames apart, held for `draw_texture`;
+	# the splat growing then shrinking inside its 12x12; a pixel clear all
+	# round; nothing of 0120's road left.
 	var sizes: Array = []
 	var bordered := true
 	for i in SpitterArt.GLOB_FRAMES:
@@ -9754,9 +9755,15 @@ func _task_0247_spitter() -> void:
 	var round_glob := true
 	for size in sizes:
 		round_glob = round_glob and (size as Vector2i).x >= 4 and (size as Vector2i).x <= 6 and (size as Vector2i).y >= 4 and (size as Vector2i).y <= 6
-	expect(bordered and round_glob and sizes[0] != sizes[1] and int(areas[0]) < int(areas[1]) and int(areas[2]) < int(areas[1])
+	var raster := (SpitterArt.glob(0).resource_path == SpitterArt.GLOB_PATH % 0
+		and SpitterArt.splat(2).resource_path == SpitterArt.SPLAT_PATH % 2
+		and PlaceholderArt.art(&"spit").is_empty() and PlaceholderArt.art(&"spit_splat").is_empty()
+		and PlaceholderArt.art(&"spitter_walk").is_empty() and PlaceholderArt.art(&"head_spitter").is_empty()
+		and _held(func() -> Object: return SpitterArt.glob(1))
+		and SpitterArt.glob(0).get_image().get_data() != SpitterArt.glob(1).get_image().get_data())
+	expect(bordered and round_glob and raster and int(areas[0]) < int(areas[1]) and int(areas[2]) < int(areas[1])
 		and SpitterArt.splat(SpitterArt.SPLAT_FRAMES) == null,
-		"the glob is 4-6 pixels a frame, one a squash of the other, and the splat grows and shrinks, a pixel clear all round",
+		"A046's glob is 4-6 pixels a frame, its two frames apart and held; the splat grows and shrinks, a pixel clear all round",
 		"%s %s" % [str(sizes), str(areas)])
 	_completed += 1
 

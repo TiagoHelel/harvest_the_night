@@ -190,15 +190,6 @@ const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_s
 const GROUND_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "draw_scale": 1.0}
 const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "draw_scale": 1.0}
 
-## A046's spitter (task 0247): the ordinary families' 64x48 standing on
-## (32,44), drawn at 1.0; its glob in flight 8x8 round (4,4), and the splat
-## where it lands 12x12 round (6,6), an impact's box. The walker it stands in
-## as is soured to the throat sac's yellow-green.
-const SPITTER := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
-const SPIT := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
-const SPIT_SPLAT := {"canvas": Vector2i(12, 12), "pivot": Vector2i(6, 6), "draw_scale": 1.0}
-const SPITTER_TINT := Color(1.45, 1.65, 0.4)
-
 ## A047's rat (task 0248): 24x16 standing on (12,14), drawn at 1.0 - not the
 ## 64x48 of the zombies: a rat is a quarter of the farmer's height.
 const RAT := {"canvas": Vector2i(24, 16), "pivot": Vector2i(12, 14), "draw_scale": 1.0}
@@ -298,16 +289,6 @@ const ART := {
 	&"hud_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"bone_pile": {"pack": "A036", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
 	&"moon_stone": {"pack": "A036", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE},
-	# A046's spitter (task 0247): the walker - the same canvas, the same feet -
-	# soured to the sac's yellow-green, every pose its own, until 0260; its
-	# glob and the splat where it lands drawn in code (`SpitterArt`), and its
-	# forecast head the box over the walker's head, soured the same.
-	&"spitter": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker", "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER, "bare": true},
-	&"spitter_walk": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.125, "loop": true, "stand_in": &"enemies/walker_walk", "stand_in_frames": 4, "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER},
-	&"spitter_attack": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER},
-	&"spitter_death": {"pack": "A046", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": SPITTER_TINT, "geometry": SPITTER, "final": SPITTER},
-	&"spit": {"pack": "A046", "dir": "res://sprites/effects/", "frames": 2, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": SPIT, "final": SPIT},
-	&"spit_splat": {"pack": "A046", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.08, "loop": false, "stand_in": &"", "geometry": SPIT_SPLAT, "final": SPIT_SPLAT},
 	# A047's rat (task 0248), drawn in code by `RatArt` until 0261: the
 	# master, the scurry, the bite and the death, and its forecast head.
 	&"rat": {"pack": "A047", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": RAT, "final": RAT, "bare": true},
@@ -380,7 +361,6 @@ const ART := {
 	&"winter_lord_attack": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
 	&"winter_lord_death": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
 	&"head_winter_lord": {"pack": "A054", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": WINTER_LORD_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
-	&"head_spitter": {"pack": "A046", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": SPITTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A055's night weather (task 0256): fog and rain in the forecast's event
 	# slot, drawn in code (`WeatherArt`) at both boxes until 0269.
 	&"icon_fog": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},

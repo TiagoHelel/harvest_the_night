@@ -1,0 +1,972 @@
+{
+  "title": "The spitter",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "palette_mode": "A",
+  "expected_files": 18,
+  "files": [
+    {
+      "anim": "spitter",
+      "dir": "west",
+      "frame": 0,
+      "pose": "standing",
+      "output": "native/spitter/west/01.png",
+      "runtime_name": "sprites/enemies/spitter.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-master-r2.png",
+      "prompt": "raw/spitter-master-r2.prompt.txt",
+      "call": "raw/spitter-master-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          385,
+          116,
+          691,
+          914
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1448,
+          1086
+        ],
+        "content_scale": 0.03172866520787746,
+        "content_anchor_xy": [
+          15,
+          29
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spitter_walk",
+      "dir": "west",
+      "frame": 0,
+      "pose": "left_contact",
+      "output": "native/spitter_walk/west/01.png",
+      "runtime_name": "sprites/enemies/spitter_walk_0.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-walk-r3.png",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "call": "raw/spitter-walk-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          64,
+          192,
+          388,
+          482
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          497,
+          836
+        ],
+        "content_scale": 0.06016597510373444,
+        "content_anchor_xy": [
+          14,
+          29
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+    },
+    {
+      "anim": "spitter_walk",
+      "dir": "west",
+      "frame": 1,
+      "pose": "passing_left",
+      "output": "native/spitter_walk/west/02.png",
+      "runtime_name": "sprites/enemies/spitter_walk_1.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-walk-r3.png",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "call": "raw/spitter-walk-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          544,
+          192,
+          346,
+          482
+        ],
+        "sheet_cell_xywh": [
+          497,
+          0,
+          453,
+          836
+        ],
+        "content_scale": 0.06016597510373444,
+        "content_anchor_xy": [
+          13,
+          29
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+    },
+    {
+      "anim": "spitter_walk",
+      "dir": "west",
+      "frame": 2,
+      "pose": "right_contact",
+      "output": "native/spitter_walk/west/03.png",
+      "runtime_name": "sprites/enemies/spitter_walk_2.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-walk-r3.png",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "call": "raw/spitter-walk-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1011,
+          191,
+          356,
+          483
+        ],
+        "sheet_cell_xywh": [
+          950,
+          0,
+          477,
+          836
+        ],
+        "content_scale": 0.06016597510373444,
+        "content_anchor_xy": [
+          12,
+          29
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+    },
+    {
+      "anim": "spitter_walk",
+      "dir": "west",
+      "frame": 3,
+      "pose": "passing_right",
+      "output": "native/spitter_walk/west/04.png",
+      "runtime_name": "sprites/enemies/spitter_walk_3.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-walk-r3.png",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "call": "raw/spitter-walk-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1489,
+          191,
+          343,
+          478
+        ],
+        "sheet_cell_xywh": [
+          1427,
+          0,
+          455,
+          836
+        ],
+        "content_scale": 0.06016597510373444,
+        "content_anchor_xy": [
+          11,
+          29
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+    },
+    {
+      "anim": "spitter_attack",
+      "dir": "west",
+      "frame": 0,
+      "pose": "rear_swelling",
+      "output": "native/spitter_attack/west/01.png",
+      "runtime_name": "sprites/enemies/spitter_attack_0.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-attack-r1.png",
+      "prompt": "raw/spitter-attack-r1.prompt.txt",
+      "call": "raw/spitter-attack-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          150,
+          28,
+          502,
+          669
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          742,
+          724
+        ],
+        "content_scale": 0.04420731707317073,
+        "content_anchor_xy": [
+          15,
+          30
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spitter_attack",
+      "dir": "west",
+      "frame": 1,
+      "pose": "release",
+      "output": "native/spitter_attack/west/02.png",
+      "runtime_name": "sprites/enemies/spitter_attack_1.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "spit_xy": [
+          18,
+          25
+        ]
+      },
+      "grounded": true,
+      "source": "raw/spitter-attack-r1.png",
+      "prompt": "raw/spitter-attack-r1.prompt.txt",
+      "call": "raw/spitter-attack-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          834,
+          60,
+          556,
+          637
+        ],
+        "sheet_cell_xywh": [
+          742,
+          0,
+          755,
+          724
+        ],
+        "content_scale": 0.04420731707317073,
+        "content_anchor_xy": [
+          16,
+          28
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spitter_attack",
+      "dir": "west",
+      "frame": 2,
+      "pose": "recovery",
+      "output": "native/spitter_attack/west/03.png",
+      "runtime_name": "sprites/enemies/spitter_attack_2.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-attack-r1.png",
+      "prompt": "raw/spitter-attack-r1.prompt.txt",
+      "call": "raw/spitter-attack-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1606,
+          41,
+          512,
+          656
+        ],
+        "sheet_cell_xywh": [
+          1497,
+          0,
+          675,
+          724
+        ],
+        "content_scale": 0.04420731707317073,
+        "content_anchor_xy": [
+          15,
+          29
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spitter_death",
+      "dir": "west",
+      "frame": 0,
+      "pose": "buckle",
+      "output": "native/spitter_death/west/01.png",
+      "runtime_name": "sprites/enemies/spitter_death_0.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-death-r1.png",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "call": "raw/spitter-death-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          56,
+          140,
+          413,
+          524
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          499,
+          736
+        ],
+        "content_scale": 0.05534351145038168,
+        "content_anchor_xy": [
+          14,
+          29
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spitter_death",
+      "dir": "west",
+      "frame": 1,
+      "pose": "sac_flat",
+      "output": "native/spitter_death/west/02.png",
+      "runtime_name": "sprites/enemies/spitter_death_1.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-death-r1.png",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "call": "raw/spitter-death-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          531,
+          256,
+          393,
+          398
+        ],
+        "sheet_cell_xywh": [
+          499,
+          0,
+          456,
+          736
+        ],
+        "content_scale": 0.05534351145038168,
+        "content_anchor_xy": [
+          11,
+          22
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spitter_death",
+      "dir": "west",
+      "frame": 2,
+      "pose": "fall",
+      "output": "native/spitter_death/west/03.png",
+      "runtime_name": "sprites/enemies/spitter_death_2.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-death-r1.png",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "call": "raw/spitter-death-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          987,
+          398,
+          495,
+          258
+        ],
+        "sheet_cell_xywh": [
+          955,
+          0,
+          548,
+          736
+        ],
+        "content_scale": 0.05534351145038168,
+        "content_anchor_xy": [
+          14,
+          14
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spitter_death",
+      "dir": "west",
+      "frame": 3,
+      "pose": "lie",
+      "output": "native/spitter_death/west/04.png",
+      "runtime_name": "sprites/enemies/spitter_death_3.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/spitter-death-r1.png",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "call": "raw/spitter-death-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1526,
+          481,
+          590,
+          185
+        ],
+        "sheet_cell_xywh": [
+          1503,
+          0,
+          635,
+          736
+        ],
+        "content_scale": 0.05534351145038168,
+        "content_anchor_xy": [
+          16,
+          10
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spit",
+      "dir": "none",
+      "frame": 0,
+      "pose": "round",
+      "output": "native/spit/none/01.png",
+      "runtime_name": "sprites/effects/spit_0.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/spit-r1.png",
+      "prompt": "raw/spit-r1.prompt.txt",
+      "call": "raw/spit-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          380,
+          316,
+          378,
+          334
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          884,
+          887
+        ],
+        "content_scale": 0.014354066985645933,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spit",
+      "dir": "none",
+      "frame": 1,
+      "pose": "squash",
+      "output": "native/spit/none/02.png",
+      "runtime_name": "sprites/effects/spit_1.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/spit-r1.png",
+      "prompt": "raw/spit-r1.prompt.txt",
+      "call": "raw/spit-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1011,
+          361,
+          418,
+          277
+        ],
+        "sheet_cell_xywh": [
+          884,
+          0,
+          890,
+          887
+        ],
+        "content_scale": 0.014354066985645933,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spit_splat",
+      "dir": "none",
+      "frame": 0,
+      "pose": "blob",
+      "output": "native/spit_splat/none/01.png",
+      "runtime_name": "sprites/effects/spit_splat_0.png",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/spit-splat-r1.png",
+      "prompt": "raw/spit-splat-r1.prompt.txt",
+      "call": "raw/spit-splat-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          287,
+          292,
+          187,
+          207
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          667,
+          724
+        ],
+        "content_scale": 0.022727272727272728,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spit_splat",
+      "dir": "none",
+      "frame": 1,
+      "pose": "splash",
+      "output": "native/spit_splat/none/02.png",
+      "runtime_name": "sprites/effects/spit_splat_1.png",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/spit-splat-r1.png",
+      "prompt": "raw/spit-splat-r1.prompt.txt",
+      "call": "raw/spit-splat-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          861,
+          191,
+          440,
+          339
+        ],
+        "sheet_cell_xywh": [
+          667,
+          0,
+          816,
+          724
+        ],
+        "content_scale": 0.022727272727272728,
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "spit_splat",
+      "dir": "none",
+      "frame": 2,
+      "pose": "drips",
+      "output": "native/spit_splat/none/03.png",
+      "runtime_name": "sprites/effects/spit_splat_2.png",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/spit-splat-r1.png",
+      "prompt": "raw/spit-splat-r1.prompt.txt",
+      "call": "raw/spit-splat-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1667,
+          280,
+          289,
+          244
+        ],
+        "sheet_cell_xywh": [
+          1483,
+          0,
+          689,
+          724
+        ],
+        "content_scale": 0.022727272727272728,
+        "content_anchor_xy": [
+          3,
+          3
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "head_spitter",
+      "dir": "none",
+      "frame": 0,
+      "pose": "bust",
+      "output": "native/head_spitter/none/01.png",
+      "runtime_name": "sprites/ui/head_spitter.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/head-spitter-r3.png",
+      "prompt": "raw/head-spitter-r3.prompt.txt",
+      "call": "raw/head-spitter-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          245,
+          217,
+          808,
+          925
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.014054054054054054,
+        "content_anchor_xy": [
+          5,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "roof_dark",
+          "roof",
+          "roof_light",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "flame_hot",
+          "bone",
+          "bone_dark",
+          "skin_dark",
+          "skin_light",
+          "night",
+          "rot_dark",
+          "rot",
+          "blood"
+        ],
+        "mirrored_from": null
+      },
+      "inspection_eye_xy": [
+        6,
+        8
+      ]
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/enemies/walker.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "quality_issues": [
+    "WALK reached r3 limit: nearleg remains forward in both contact frames; farleg lifts behind rather than completing forward contact. All4walkingframes are diagnostics; do not integrate this gait.",
+    "All18deliverables are generated and measured. Attack/death/effects/head are independent final-review candidates. Feet/contact-band centre is registered by measured bottom5logicalpixel alpha span; no rasterpainting, only importer anchoring.",
+    "Head palette_keys are computed from this pack's body pixels; FX use requiredgreen keylist. Canonical contract exports zero frames because gait is incomplete.",
+    "Headr3 has one visible boneeye atnative(6,8); originalQA mistakenly banned flame_hot anywhere inhead, includingyellowthroatsac highlights. QA nowchecks the actual inspected eyepixel, not unrelatedsac colours. Only direct measured crop selected; transparentpadding experiments remain unselected diagnostics."
+  ]
+}

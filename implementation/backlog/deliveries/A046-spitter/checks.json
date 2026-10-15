@@ -1,0 +1,218 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "body_clear_border": true,
+  "body_frames_distinct": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "contact_band_centred": true,
+  "death_heights": [
+    29,
+    22,
+    14,
+    10
+  ],
+  "death_settles": true,
+  "effect_expands_then_fades": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 18,
+  "frames_found": 18,
+  "grounded_on_pivot": true,
+  "head_eye_bone": true,
+  "head_uses_body_colours": true,
+  "icon_bounds_ok": true,
+  "importer_recipe_matches": true,
+  "master_dimensions": true,
+  "measurements": {
+    "native/head_spitter/none/01.png": {
+      "bounds": [
+        3,
+        2,
+        14,
+        15
+      ],
+      "opaque_pixels": 89
+    },
+    "native/spit/none/01.png": {
+      "bounds": [
+        2,
+        2,
+        7,
+        7
+      ],
+      "opaque_pixels": 15
+    },
+    "native/spit/none/02.png": {
+      "bounds": [
+        1,
+        2,
+        7,
+        6
+      ],
+      "opaque_pixels": 14
+    },
+    "native/spit_splat/none/01.png": {
+      "bounds": [
+        4,
+        4,
+        8,
+        9
+      ],
+      "opaque_pixels": 10
+    },
+    "native/spit_splat/none/02.png": {
+      "bounds": [
+        1,
+        3,
+        11,
+        10
+      ],
+      "opaque_pixels": 30
+    },
+    "native/spit_splat/none/03.png": {
+      "bounds": [
+        3,
+        3,
+        10,
+        9
+      ],
+      "opaque_pixels": 13
+    },
+    "native/spitter/west/01.png": {
+      "bounds": [
+        17,
+        15,
+        39,
+        44
+      ],
+      "opaque_pixels": 320
+    },
+    "native/spitter_attack/west/01.png": {
+      "bounds": [
+        17,
+        14,
+        39,
+        44
+      ],
+      "opaque_pixels": 335
+    },
+    "native/spitter_attack/west/02.png": {
+      "bounds": [
+        16,
+        16,
+        41,
+        44
+      ],
+      "opaque_pixels": 337
+    },
+    "native/spitter_attack/west/03.png": {
+      "bounds": [
+        17,
+        15,
+        40,
+        44
+      ],
+      "opaque_pixels": 328
+    },
+    "native/spitter_death/west/01.png": {
+      "bounds": [
+        18,
+        15,
+        41,
+        44
+      ],
+      "opaque_pixels": 351
+    },
+    "native/spitter_death/west/02.png": {
+      "bounds": [
+        21,
+        22,
+        43,
+        44
+      ],
+      "opaque_pixels": 288
+    },
+    "native/spitter_death/west/03.png": {
+      "bounds": [
+        18,
+        30,
+        45,
+        44
+      ],
+      "opaque_pixels": 244
+    },
+    "native/spitter_death/west/04.png": {
+      "bounds": [
+        16,
+        34,
+        49,
+        44
+      ],
+      "opaque_pixels": 215
+    },
+    "native/spitter_walk/west/01.png": {
+      "bounds": [
+        18,
+        15,
+        41,
+        44
+      ],
+      "opaque_pixels": 335
+    },
+    "native/spitter_walk/west/02.png": {
+      "bounds": [
+        19,
+        15,
+        40,
+        44
+      ],
+      "opaque_pixels": 323
+    },
+    "native/spitter_walk/west/03.png": {
+      "bounds": [
+        20,
+        15,
+        41,
+        44
+      ],
+      "opaque_pixels": 331
+    },
+    "native/spitter_walk/west/04.png": {
+      "bounds": [
+        21,
+        15,
+        42,
+        44
+      ],
+      "opaque_pixels": 325
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "walk_leg_alternation_review"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "silhouette_distances": {
+    "breaker": 71,
+    "runner": 54,
+    "tank": 79,
+    "walker": 64
+  },
+  "silhouette_distinct": true,
+  "spit_clear_border": true,
+  "spit_distinct": true,
+  "spit_size_4_to_6": true,
+  "spit_splat_clear_border": true,
+  "spit_splat_distinct": true,
+  "standing_heights": true,
+  "walk_leg_alternation_review": false,
+  "walk_not_vertical_translation": true
+}

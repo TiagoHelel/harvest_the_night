@@ -4205,8 +4205,21 @@ func _case_0074_zombie_art() -> void:
 		var file := PlaceholderArt.texture_path(path)
 		if file == path or not ResourceLoader.exists(file):
 			wrong.append(path)
-	expect(standing.has(&"spitter") and standing.has(&"rat") and wrong.is_empty(),
-		"and a kind on its stand-in is drawn through the lookup", "%s: %s" % [str(standing), str(wrong)])
+	# **The kinds on a stand-in are the ones whose pack has not landed** -
+	# the spitter's A046 since task 0260 among those that have - and no other.
+	var unlanded: Array = []
+	for id in Entities.ids(state):
+		var kind: StringName = Entities.get_one(state, int(id))["kind"]
+		if not PlaceholderArt.art(kind).is_empty() and not unlanded.has(kind):
+			unlanded.append(kind)
+	var standing_kinds: Array = []
+	for kind in standing:
+		if not standing_kinds.has(kind):
+			standing_kinds.append(kind)
+	standing_kinds.sort()
+	unlanded.sort()
+	expect(standing_kinds == unlanded and not standing.has(&"spitter") and wrong.is_empty(),
+		"and a kind on its stand-in is drawn through the lookup", "%s: %s" % [str(standing_kinds), str(wrong)])
 
 	# **The pose follows the rules.** `winding_at` is the rules' own word for
 	# "about to hit something", and the Giant has a telegraph of its own.

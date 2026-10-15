@@ -1,0 +1,193 @@
+{
+  "status": "blocked",
+  "issues": [
+    "WALK reached r3 limit: nearleg remains forward in both contact frames; farleg lifts behind rather than completing forward contact. All4walkingframes are diagnostics; do not integrate this gait.",
+    "All18deliverables are generated and measured. Attack/death/effects/head are independent final-review candidates. Feet/contact-band centre is registered by measured bottom5logicalpixel alpha span; no rasterpainting, only importer anchoring.",
+    "Head palette_keys are computed from this pack's body pixels; FX use requiredgreen keylist. Canonical contract exports zero frames because gait is incomplete.",
+    "Headr3 has one visible boneeye atnative(6,8); originalQA mistakenly banned flame_hot anywhere inhead, includingyellowthroatsac highlights. QA nowchecks the actual inspected eyepixel, not unrelatedsac colours. Only direct measured crop selected; transparentpadding experiments remain unselected diagnostics."
+  ],
+  "files": {
+    "spitter/west/0": {
+      "stem": "spitter-master-r2",
+      "index": 0,
+      "fields": {}
+    },
+    "spitter_walk/west/0": {
+      "stem": "spitter-walk-r3",
+      "index": 0,
+      "fields": {
+        "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+      }
+    },
+    "spitter_walk/west/1": {
+      "stem": "spitter-walk-r3",
+      "index": 1,
+      "fields": {
+        "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+      }
+    },
+    "spitter_walk/west/2": {
+      "stem": "spitter-walk-r3",
+      "index": 2,
+      "fields": {
+        "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+      }
+    },
+    "spitter_walk/west/3": {
+      "stem": "spitter-walk-r3",
+      "index": 3,
+      "fields": {
+        "review_issue": "Leg alternation failed afterr3. Diagnosticonly."
+      }
+    },
+    "spitter_attack/west/0": {
+      "stem": "spitter-attack-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "spitter_attack/west/1": {
+      "stem": "spitter-attack-r1",
+      "index": 1,
+      "fields": {
+        "points": {
+          "spit_xy": [
+            18,
+            25
+          ]
+        }
+      }
+    },
+    "spitter_attack/west/2": {
+      "stem": "spitter-attack-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "spitter_death/west/0": {
+      "stem": "spitter-death-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "spitter_death/west/1": {
+      "stem": "spitter-death-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "spitter_death/west/2": {
+      "stem": "spitter-death-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "spitter_death/west/3": {
+      "stem": "spitter-death-r1",
+      "index": 3,
+      "fields": {}
+    },
+    "spit/none/0": {
+      "stem": "spit-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "spit/none/1": {
+      "stem": "spit-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "spit_splat/none/0": {
+      "stem": "spit-splat-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "spit_splat/none/1": {
+      "stem": "spit-splat-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "spit_splat/none/2": {
+      "stem": "spit-splat-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "head_spitter/none/0": {
+      "stem": "head-spitter-r3",
+      "index": 0,
+      "fields": {
+        "inspection_eye_xy": [
+          6,
+          8
+        ]
+      }
+    }
+  },
+  "rejected": {
+    "spitter-master-r1": "Second master has clearer hanging sac and higher minimum silhouette distance; retain history, not selected.",
+    "spitter-walk-r1": "Lastframe arm clips source right edge; nearleg remains forward in both contacts.",
+    "spitter-walk-r2": "Framing corrected, legalternation still incorrect.",
+    "head-spitter-r1": "Pale eyes vanish in13pxhead after reduction; no boneeyepixel.",
+    "head-spitter-r2": "Eye enlargement still loses boneeyepixels atnative13px."
+  },
+  "decisions": {
+    "spitter-master-r2": {
+      "decision": "internally accepted identity/geometry for generation; owner finalreview pending"
+    },
+    "spitter-walk-r3": {
+      "decision": "rejected gait at r3 limit, allfour cells retained as diagnostic only",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "spitter-attack-r1": {
+      "decision": "internally usable candidate, finalownerreview pending; fullpackblocked",
+      "accepted_cells": [
+        0,
+        1,
+        2
+      ],
+      "rejected_cells": []
+    },
+    "spitter-death-r1": {
+      "decision": "internally usable candidate, finalownerreview pending; fullpackblocked",
+      "accepted_cells": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "rejected_cells": []
+    },
+    "spit-r1": {
+      "decision": "internally usable candidate, finalownerreview pending; fullpackblocked",
+      "accepted_cells": [
+        0,
+        1
+      ],
+      "rejected_cells": []
+    },
+    "spit-splat-r1": {
+      "decision": "internally usable candidate, finalownerreview pending; fullpackblocked",
+      "accepted_cells": [
+        0,
+        1,
+        2
+      ],
+      "rejected_cells": []
+    },
+    "head-spitter-r1": {
+      "decision": "internally usable candidate, finalownerreview pending; fullpackblocked",
+      "accepted_cells": [
+        0
+      ],
+      "rejected_cells": []
+    },
+    "head-spitter-r3": {
+      "decision": "Internally usable portrait candidate:boneeye at6,8, dimensions11x13; finalownerreview pending",
+      "accepted_cells": [
+        0
+      ],
+      "rejected_cells": []
+    }
+  }
+}

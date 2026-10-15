@@ -1,0 +1,76 @@
+[
+  {
+    "recipe": {
+      "id": "head-spitter-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\head-spitter-r1.png",
+      "crop_xywh": [
+        249,
+        219,
+        782,
+        866
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.015011547344110854,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin_light",
+        "night",
+        "rot_dark",
+        "rot",
+        "blood"
+      ]
+    },
+    "native_bounds": [
+      2,
+      2,
+      14,
+      15
+    ],
+    "unclipped_scaled_wh": [
+      12,
+      13
+    ]
+  }
+]

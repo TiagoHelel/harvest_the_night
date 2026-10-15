@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, cozy farm against zombies.\nPrimary request: A046 spitter identity candidate2, ONE whole standing zombie, facing WEST/LEFT.\nInput images: Image1 reference-sheet is camera, materials and outline style; Image2 walker master is same-world enemy colour/density/camera, NOT the character to copy; Image3 approved32px farmer is native scale reference.\nStyle/medium: coherent handcrafted pixel art with deliberate large clusters, coloured outlines, restrained texture, readable material planes and simple bold forms.\nComposition/framing: orthographic three-quarter top-down on rectangulargrid, native64x48 with groundpivot(32,44); visible body about22wide x29tall, lowestrow43. Standing enemy a little shorter than32px farmer. Complete unclipped body, grounded feet centred.\nLighting: neutral daytime upper-left highlights, darker undersides; runtime supplies night.\nPalette: rot-green skin, sickly yellow-green throat sac, muted torn work shirt, brown boots, violet-grey shadow. Pale cloudy eye bone/bone_dark, no emission.\nWALKER family adapted: The spitter, a GAUNT HUNCHED zombie with an enormous swollen THROAT SAC and puffed cheeks. Sac grows directly from lowerface/neck, broad bulge around throat, NOT a ball held in hand. Thin arms, tattered cloth, stooped spit-ready stance, west-facing muzzle. Sac is centralidentity and visible at29pixels; silhouette differs from ordinarywalker, thinrunner, broadtank and breaker. Give a strongly rounded hanging throat sac and puffed side cheek, narrow torso, bent thin legs.\nBackground TRUE transparent, alpha0 outside sharp solidpixel edges. No globs/projectiles, weapons, extra limbs, ground shadow, grass, ground patch, glow, mist, halos, labels, text or UI.\nAvoid painting/vector/3D/antialiasing/blur/gradient/randomspeckle/thickblackboxes/diamondtiles/tiny details. Bold low-resolution anatomy and clean outlines; no cute big mascot head.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-6c5a05e7-685f-4dd2-9e1b-1e69c8aaa38f.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-master-r2.png",
+  "sha256": "7e9f4d792a7a79ee69014d07bf0100fc7c7589bdf73b784ee34d2057d53ef12b",
+  "revision": 2,
+  "decision": "internally accepted identity/geometry for generation; owner finalreview pending"
+}

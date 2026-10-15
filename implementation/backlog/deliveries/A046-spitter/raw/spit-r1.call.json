@@ -1,0 +1,34 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A046 pixel effect source for HARVEST THE NIGHT.\nPrimary request: spit, ONE horizontal strip of exactly2 frames. Inputimage1 accepted spitter identity is spitcolour reference; image2 impact is native effect scale/cluster style only, not orange/firematerial.\nHandcrafted pixel art, coarse deliberate clusters and coloured outlines, orthographiccamera, neutral daytime colour. Native 8x8, originpivot(4,4), centred with1pxclear border in ALLframes. FX localized origin, expansion/dissipation, no bloom.\nRound glob of sickly mid-green spit with yellow-green highlight and darkoutline. Visible4\u20136px. Frame2 slightly squashed, not a copy. Loop frame2toframe1. No white glowingcore. Palette limited to ink, rot_dark, rot, leaf_dark, leaf, leaf_light, grass_dark, grass, grass_light, gold_light; keep body mid-green readable above nightrelight without emission.\nSTRIP orderedposes: roundglob, squashglob. Equalcells, huge transparentgutters, samephysicalscale/origin acrossframes, no enlargement ofsmallposes. Truealpha0outside actualparticles. No background/glow/halo/gradient/shadow/text/labels/UI/target/motionstreak. Simple compact shapes that survive reduction.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/impact_1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.png",
+      "sha256": "7e9f4d792a7a79ee69014d07bf0100fc7c7589bdf73b784ee34d2057d53ef12b",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/impact_1.png",
+      "sha256": "6a5cff67720916e243ef4264acb21b903de449abc32ac5bb4aa5c2ef335a4f54",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9c743d10-7a40-4390-a736-225078e017b6.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A046-spitter\\raw\\spit-r1.png",
+  "sha256": "89a5e78fcbbc70f1877d7604440602547ea63b467d53542f1ba46c467ad0e316",
+  "revision": 1,
+  "decision": "internally usable candidate, finalownerreview pending; fullpackblocked",
+  "accepted_cells": [
+    0,
+    1
+  ],
+  "rejected_cells": []
+}

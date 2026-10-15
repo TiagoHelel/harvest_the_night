@@ -1,0 +1,152 @@
+[
+  {
+    "recipe": {
+      "id": "spitter-attack-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-attack-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        742,
+        724
+      ],
+      "crop_xywh": [
+        150,
+        28,
+        502,
+        669
+      ],
+      "content_scale": 0.04420731707317073,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        15,
+        30
+      ]
+    },
+    "native_bounds": [
+      17,
+      14,
+      39,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      22,
+      30
+    ],
+    "measured_contact_band_raw_xywh": [
+      150,
+      584,
+      502,
+      113
+    ],
+    "contact_centre_raw_x": 479.5
+  },
+  {
+    "recipe": {
+      "id": "spitter-attack-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-attack-r1.png",
+      "sheet_cell_xywh": [
+        742,
+        0,
+        755,
+        724
+      ],
+      "crop_xywh": [
+        834,
+        60,
+        556,
+        637
+      ],
+      "content_scale": 0.04420731707317073,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        16,
+        28
+      ]
+    },
+    "native_bounds": [
+      16,
+      16,
+      41,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      25,
+      28
+    ],
+    "measured_contact_band_raw_xywh": [
+      834,
+      584,
+      556,
+      113
+    ],
+    "contact_centre_raw_x": 1206.5
+  },
+  {
+    "recipe": {
+      "id": "spitter-attack-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-attack-r1.png",
+      "sheet_cell_xywh": [
+        1497,
+        0,
+        675,
+        724
+      ],
+      "crop_xywh": [
+        1606,
+        41,
+        512,
+        656
+      ],
+      "content_scale": 0.04420731707317073,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        15,
+        29
+      ]
+    },
+    "native_bounds": [
+      17,
+      15,
+      40,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      29
+    ],
+    "measured_contact_band_raw_xywh": [
+      1606,
+      584,
+      512,
+      113
+    ],
+    "contact_centre_raw_x": 1942.0
+  }
+]

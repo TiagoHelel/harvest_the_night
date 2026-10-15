@@ -1,0 +1,1380 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "head_spitter",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/head_spitter-none-0-night.png",
+          "path": "preview/candidates/head_spitter/none/01.png",
+          "points": {},
+          "pose": "bust"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "bust"
+      ]
+    },
+    {
+      "anim": "spit",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/spit-none-0-night.png",
+          "path": "preview/candidates/spit/none/01.png",
+          "points": {},
+          "pose": "round"
+        },
+        {
+          "issue": "",
+          "night": "preview/spit-none-1-night.png",
+          "path": "preview/candidates/spit/none/02.png",
+          "points": {},
+          "pose": "squash"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 2,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "poses": [
+        "round",
+        "squash"
+      ]
+    },
+    {
+      "anim": "spit_splat",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/spit_splat-none-0-night.png",
+          "path": "preview/candidates/spit_splat/none/01.png",
+          "points": {},
+          "pose": "blob"
+        },
+        {
+          "issue": "",
+          "night": "preview/spit_splat-none-1-night.png",
+          "path": "preview/candidates/spit_splat/none/02.png",
+          "points": {},
+          "pose": "splash"
+        },
+        {
+          "issue": "",
+          "night": "preview/spit_splat-none-2-night.png",
+          "path": "preview/candidates/spit_splat/none/03.png",
+          "points": {},
+          "pose": "drips"
+        }
+      ],
+      "frame_seconds": 0.08,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "poses": [
+        "blob",
+        "splash",
+        "drips"
+      ]
+    },
+    {
+      "anim": "spitter",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/spitter-west-0-night.png",
+          "path": "preview/candidates/spitter/west/01.png",
+          "points": {},
+          "pose": "standing"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "standing"
+      ]
+    },
+    {
+      "anim": "spitter_attack",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/spitter_attack-west-0-night.png",
+          "path": "preview/candidates/spitter_attack/west/01.png",
+          "points": {},
+          "pose": "rear_swelling"
+        },
+        {
+          "issue": "",
+          "night": "preview/spitter_attack-west-1-night.png",
+          "path": "preview/candidates/spitter_attack/west/02.png",
+          "points": {
+            "spit_xy": [
+              18,
+              25
+            ]
+          },
+          "pose": "release"
+        },
+        {
+          "issue": "",
+          "night": "preview/spitter_attack-west-2-night.png",
+          "path": "preview/candidates/spitter_attack/west/03.png",
+          "points": {},
+          "pose": "recovery"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "rear_swelling",
+        "release",
+        "recovery"
+      ]
+    },
+    {
+      "anim": "spitter_death",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/spitter_death-west-0-night.png",
+          "path": "preview/candidates/spitter_death/west/01.png",
+          "points": {},
+          "pose": "buckle"
+        },
+        {
+          "issue": "",
+          "night": "preview/spitter_death-west-1-night.png",
+          "path": "preview/candidates/spitter_death/west/02.png",
+          "points": {},
+          "pose": "sac_flat"
+        },
+        {
+          "issue": "",
+          "night": "preview/spitter_death-west-2-night.png",
+          "path": "preview/candidates/spitter_death/west/03.png",
+          "points": {},
+          "pose": "fall"
+        },
+        {
+          "issue": "",
+          "night": "preview/spitter_death-west-3-night.png",
+          "path": "preview/candidates/spitter_death/west/04.png",
+          "points": {},
+          "pose": "lie"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "buckle",
+        "sac_flat",
+        "fall",
+        "lie"
+      ]
+    },
+    {
+      "anim": "spitter_walk",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Leg alternation failed afterr3. Diagnosticonly.",
+          "night": "preview/spitter_walk-west-0-night.png",
+          "path": "preview/candidates/spitter_walk/west/01.png",
+          "points": {},
+          "pose": "left_contact"
+        },
+        {
+          "issue": "Leg alternation failed afterr3. Diagnosticonly.",
+          "night": "preview/spitter_walk-west-1-night.png",
+          "path": "preview/candidates/spitter_walk/west/02.png",
+          "points": {},
+          "pose": "passing_left"
+        },
+        {
+          "issue": "Leg alternation failed afterr3. Diagnosticonly.",
+          "night": "preview/spitter_walk-west-2-night.png",
+          "path": "preview/candidates/spitter_walk/west/03.png",
+          "points": {},
+          "pose": "right_contact"
+        },
+        {
+          "issue": "Leg alternation failed afterr3. Diagnosticonly.",
+          "night": "preview/spitter_walk-west-3-night.png",
+          "path": "preview/candidates/spitter_walk/west/04.png",
+          "points": {},
+          "pose": "passing_right"
+        }
+      ],
+      "frame_seconds": 0.125,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "left_contact",
+        "passing_left",
+        "right_contact",
+        "passing_right"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/enemies/walker.png",
+      "pivot_xy": [
+        32,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "spitter",
+      "call": "raw/spitter-master-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "standing",
+      "prompt": "raw/spitter-master-r2.prompt.txt",
+      "prompt_sha256": "dcd34757d530074d44d6f954553d13f36485b66dcb4b015b7360fcd558d570cd",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          15,
+          29
+        ],
+        "content_scale": 0.03172866520787746,
+        "crop_xywh": [
+          385,
+          116,
+          691,
+          914
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1448,
+          1086
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter.png",
+      "seconds": 0.1,
+      "sha256": "94ebdd9a641a594eea350d2919aff7293e65107ac382df5f2d59422fd0b8cd0f",
+      "source": "raw/spitter-master-r2.png",
+      "source_sha256": "7e9f4d792a7a79ee69014d07bf0100fc7c7589bdf73b784ee34d2057d53ef12b"
+    },
+    {
+      "anim": "spitter_walk",
+      "call": "raw/spitter-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_walk/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "left_contact",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          14,
+          29
+        ],
+        "content_scale": 0.06016597510373444,
+        "crop_xywh": [
+          64,
+          192,
+          388,
+          482
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          497,
+          836
+        ]
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly.",
+      "runtime_name": "sprites/enemies/spitter_walk_0.png",
+      "seconds": 0.125,
+      "sha256": "fbc49cc481d37440fe2a7877f3b6e9537d1d0d4ddec374a7cd5fe80cfc6d16ad",
+      "source": "raw/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937"
+    },
+    {
+      "anim": "spitter_walk",
+      "call": "raw/spitter-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_walk/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "passing_left",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          13,
+          29
+        ],
+        "content_scale": 0.06016597510373444,
+        "crop_xywh": [
+          544,
+          192,
+          346,
+          482
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          497,
+          0,
+          453,
+          836
+        ]
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly.",
+      "runtime_name": "sprites/enemies/spitter_walk_1.png",
+      "seconds": 0.125,
+      "sha256": "d77668675c4164bc3acf718e48ad8b43c90052277d9584b3649c6f3bc6455db4",
+      "source": "raw/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937"
+    },
+    {
+      "anim": "spitter_walk",
+      "call": "raw/spitter-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_walk/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "right_contact",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          12,
+          29
+        ],
+        "content_scale": 0.06016597510373444,
+        "crop_xywh": [
+          1011,
+          191,
+          356,
+          483
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          950,
+          0,
+          477,
+          836
+        ]
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly.",
+      "runtime_name": "sprites/enemies/spitter_walk_2.png",
+      "seconds": 0.125,
+      "sha256": "13ce4bb3b72cd83c698b343dc042207a576f152c144f64bc54324cdbb323abdf",
+      "source": "raw/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937"
+    },
+    {
+      "anim": "spitter_walk",
+      "call": "raw/spitter-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_walk/west/04.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "passing_right",
+      "prompt": "raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          11,
+          29
+        ],
+        "content_scale": 0.06016597510373444,
+        "crop_xywh": [
+          1489,
+          191,
+          343,
+          478
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1427,
+          0,
+          455,
+          836
+        ]
+      },
+      "review_issue": "Leg alternation failed afterr3. Diagnosticonly.",
+      "runtime_name": "sprites/enemies/spitter_walk_3.png",
+      "seconds": 0.125,
+      "sha256": "988f2c4c873596d6f9b2eec99695e587d94d2899eecac79f3e0880ae78c2f0ae",
+      "source": "raw/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937"
+    },
+    {
+      "anim": "spitter_attack",
+      "call": "raw/spitter-attack-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_attack/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "rear_swelling",
+      "prompt": "raw/spitter-attack-r1.prompt.txt",
+      "prompt_sha256": "f3edb9051ec8d78e35d3462dedecffbb40a2d9ca0530e028a3d22cc42995c46d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          15,
+          30
+        ],
+        "content_scale": 0.04420731707317073,
+        "crop_xywh": [
+          150,
+          28,
+          502,
+          669
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          742,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter_attack_0.png",
+      "seconds": 0.1,
+      "sha256": "601138a1d2fa82e460dac150cd93378566122b52bff55e78cb57cde751d33871",
+      "source": "raw/spitter-attack-r1.png",
+      "source_sha256": "8a26c46ab04a4d802c086f21e3a5291a077e7ad773d113618a802f9d3840a26b"
+    },
+    {
+      "anim": "spitter_attack",
+      "call": "raw/spitter-attack-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_attack/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {
+        "spit_xy": [
+          18,
+          25
+        ]
+      },
+      "pose": "release",
+      "prompt": "raw/spitter-attack-r1.prompt.txt",
+      "prompt_sha256": "f3edb9051ec8d78e35d3462dedecffbb40a2d9ca0530e028a3d22cc42995c46d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          16,
+          28
+        ],
+        "content_scale": 0.04420731707317073,
+        "crop_xywh": [
+          834,
+          60,
+          556,
+          637
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          742,
+          0,
+          755,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter_attack_1.png",
+      "seconds": 0.1,
+      "sha256": "815da37e4c8d0cd0f48b9ef1c7c8231770e9edef7cd18f545dc76c08128c4575",
+      "source": "raw/spitter-attack-r1.png",
+      "source_sha256": "8a26c46ab04a4d802c086f21e3a5291a077e7ad773d113618a802f9d3840a26b"
+    },
+    {
+      "anim": "spitter_attack",
+      "call": "raw/spitter-attack-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_attack/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "recovery",
+      "prompt": "raw/spitter-attack-r1.prompt.txt",
+      "prompt_sha256": "f3edb9051ec8d78e35d3462dedecffbb40a2d9ca0530e028a3d22cc42995c46d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          15,
+          29
+        ],
+        "content_scale": 0.04420731707317073,
+        "crop_xywh": [
+          1606,
+          41,
+          512,
+          656
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1497,
+          0,
+          675,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter_attack_2.png",
+      "seconds": 0.1,
+      "sha256": "0a48bb385284f7ed086841b0038c3a2b7b1e1efaf58d7748504ab72787b97b24",
+      "source": "raw/spitter-attack-r1.png",
+      "source_sha256": "8a26c46ab04a4d802c086f21e3a5291a077e7ad773d113618a802f9d3840a26b"
+    },
+    {
+      "anim": "spitter_death",
+      "call": "raw/spitter-death-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_death/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "buckle",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          14,
+          29
+        ],
+        "content_scale": 0.05534351145038168,
+        "crop_xywh": [
+          56,
+          140,
+          413,
+          524
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          499,
+          736
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter_death_0.png",
+      "seconds": 0.1,
+      "sha256": "8865755dc398a4d35ff018745a792ea980f0bbe51a28103935afb7590296e64c",
+      "source": "raw/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf"
+    },
+    {
+      "anim": "spitter_death",
+      "call": "raw/spitter-death-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_death/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "sac_flat",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          11,
+          22
+        ],
+        "content_scale": 0.05534351145038168,
+        "crop_xywh": [
+          531,
+          256,
+          393,
+          398
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          499,
+          0,
+          456,
+          736
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter_death_1.png",
+      "seconds": 0.1,
+      "sha256": "0984308b69c51a0a25950d2670c4162d35a57cf92df0d5a899ceca1d27ce6bee",
+      "source": "raw/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf"
+    },
+    {
+      "anim": "spitter_death",
+      "call": "raw/spitter-death-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_death/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "fall",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          14,
+          14
+        ],
+        "content_scale": 0.05534351145038168,
+        "crop_xywh": [
+          987,
+          398,
+          495,
+          258
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          955,
+          0,
+          548,
+          736
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter_death_2.png",
+      "seconds": 0.1,
+      "sha256": "6a9d2b8d3721621098b90260bc8f6b911f8e95305e01cc0a008d85a8a8fd78c5",
+      "source": "raw/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf"
+    },
+    {
+      "anim": "spitter_death",
+      "call": "raw/spitter-death-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "preview/candidates/spitter_death/west/04.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "lie",
+      "prompt": "raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          16,
+          10
+        ],
+        "content_scale": 0.05534351145038168,
+        "crop_xywh": [
+          1526,
+          481,
+          590,
+          185
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1503,
+          0,
+          635,
+          736
+        ]
+      },
+      "runtime_name": "sprites/enemies/spitter_death_3.png",
+      "seconds": 0.1,
+      "sha256": "7b5e96ff5a088d7f697a009519ccea90f6eda537e4453e5b9cfac8a2a9a5cc85",
+      "source": "raw/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf"
+    },
+    {
+      "anim": "spit",
+      "call": "raw/spit-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/spit/none/01.png",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "round",
+      "prompt": "raw/spit-r1.prompt.txt",
+      "prompt_sha256": "7f4c0fa5ebb3aa5e8c367385b4be0e78cbf7edf548fd147d0978565eccb42ad7",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.014354066985645933,
+        "crop_xywh": [
+          380,
+          316,
+          378,
+          334
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          884,
+          887
+        ]
+      },
+      "runtime_name": "sprites/effects/spit_0.png",
+      "seconds": 0.1,
+      "sha256": "1de6551f5c179300dc67e646677bdd19e006ab96673fdd76f27a72f5415abacd",
+      "source": "raw/spit-r1.png",
+      "source_sha256": "89a5e78fcbbc70f1877d7604440602547ea63b467d53542f1ba46c467ad0e316"
+    },
+    {
+      "anim": "spit",
+      "call": "raw/spit-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/spit/none/02.png",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "squash",
+      "prompt": "raw/spit-r1.prompt.txt",
+      "prompt_sha256": "7f4c0fa5ebb3aa5e8c367385b4be0e78cbf7edf548fd147d0978565eccb42ad7",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "content_scale": 0.014354066985645933,
+        "crop_xywh": [
+          1011,
+          361,
+          418,
+          277
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "sheet_cell_xywh": [
+          884,
+          0,
+          890,
+          887
+        ]
+      },
+      "runtime_name": "sprites/effects/spit_1.png",
+      "seconds": 0.1,
+      "sha256": "425cff6400469085c96a4df1fbc76b03b4b46b2dbb3610b18381bcac51317d36",
+      "source": "raw/spit-r1.png",
+      "source_sha256": "89a5e78fcbbc70f1877d7604440602547ea63b467d53542f1ba46c467ad0e316"
+    },
+    {
+      "anim": "spit_splat",
+      "call": "raw/spit-splat-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/spit_splat/none/01.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "blob",
+      "prompt": "raw/spit-splat-r1.prompt.txt",
+      "prompt_sha256": "52880c3247938a62ee32819d833b388e09376ed651fc7aa97904a02f9e65a3f8",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          287,
+          292,
+          187,
+          207
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          667,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/spit_splat_0.png",
+      "seconds": 0.08,
+      "sha256": "a823d9eb0c61bdd3b32dafcd60b361f2e3dc2b4b19e788aea4477856eda5de8e",
+      "source": "raw/spit-splat-r1.png",
+      "source_sha256": "c8ef665fe1e90116d4c2a067f8e463889ce1dfb9af9cfad1d7cfde7e3e6eec3a"
+    },
+    {
+      "anim": "spit_splat",
+      "call": "raw/spit-splat-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/spit_splat/none/02.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "splash",
+      "prompt": "raw/spit-splat-r1.prompt.txt",
+      "prompt_sha256": "52880c3247938a62ee32819d833b388e09376ed651fc7aa97904a02f9e65a3f8",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          861,
+          191,
+          440,
+          339
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "sheet_cell_xywh": [
+          667,
+          0,
+          816,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/spit_splat_1.png",
+      "seconds": 0.08,
+      "sha256": "f22a43a3110e4c74610265e82efd032dfc91de75a93f57abf8e94858154d05a9",
+      "source": "raw/spit-splat-r1.png",
+      "source_sha256": "c8ef665fe1e90116d4c2a067f8e463889ce1dfb9af9cfad1d7cfde7e3e6eec3a"
+    },
+    {
+      "anim": "spit_splat",
+      "call": "raw/spit-splat-r1.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/spit_splat/none/03.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "drips",
+      "prompt": "raw/spit-splat-r1.prompt.txt",
+      "prompt_sha256": "52880c3247938a62ee32819d833b388e09376ed651fc7aa97904a02f9e65a3f8",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          3
+        ],
+        "content_scale": 0.022727272727272728,
+        "crop_xywh": [
+          1667,
+          280,
+          289,
+          244
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "rot_dark",
+          "rot",
+          "leaf_dark",
+          "leaf",
+          "leaf_light",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "gold_light"
+        ],
+        "sheet_cell_xywh": [
+          1483,
+          0,
+          689,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/spit_splat_2.png",
+      "seconds": 0.08,
+      "sha256": "3b53e94af5caf8d1c6f0a5bd5eb76b23cd1a7cc565220a1ecaebe24eb7abd37e",
+      "source": "raw/spit-splat-r1.png",
+      "source_sha256": "c8ef665fe1e90116d4c2a067f8e463889ce1dfb9af9cfad1d7cfde7e3e6eec3a"
+    },
+    {
+      "anim": "head_spitter",
+      "call": "raw/head-spitter-r3.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "inspection_eye_xy": [
+        6,
+        8
+      ],
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/head_spitter/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "bust",
+      "prompt": "raw/head-spitter-r3.prompt.txt",
+      "prompt_sha256": "2d93be074cca956d827e38904dfa53467252b13bcc15cab9525f678f90dd5938",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          6
+        ],
+        "content_scale": 0.014054054054054054,
+        "crop_xywh": [
+          245,
+          217,
+          808,
+          925
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "roof_dark",
+          "roof",
+          "roof_light",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "flame_hot",
+          "bone",
+          "bone_dark",
+          "skin_dark",
+          "skin_light",
+          "night",
+          "rot_dark",
+          "rot",
+          "blood"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      },
+      "runtime_name": "sprites/ui/head_spitter.png",
+      "seconds": 1,
+      "sha256": "fc8c356340d7222a7aa5b8a666896cf03cb99c5893fd3a9ed9a8551a90e6a220",
+      "source": "raw/head-spitter-r3.png",
+      "source_sha256": "8ed65fe7e0f31465e64dcc69b145c3da9a64ce88ee28468e658061fdf892d777"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A046",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\walker\\master.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-master-r2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7e9f4d792a7a79ee69014d07bf0100fc7c7589bdf73b784ee34d2057d53ef12b"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\walker\\walk-v2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\effects\\impact_1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6a5cff67720916e243ef4264acb21b903de449abc32ac5bb4aa5c2ef335a4f54"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\preview\\walk0-head-reference-4x.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "c8de67d564e650423add803b9579c5b779f9a411e59fabbfb1aad11d4749f74e"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\ui\\head_walker.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7b2cdf912e308ee429a413b609af7c029275d369d8f6af6c00e18b1534a7d512"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A046-spitter",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "The spitter",
+  "tool": "built-in ImageGen"
+}

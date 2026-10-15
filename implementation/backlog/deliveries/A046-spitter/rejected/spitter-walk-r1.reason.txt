@@ -1,0 +1,1 @@
+Lastframe arm clips source right edge; nearleg remains forward in both contacts.

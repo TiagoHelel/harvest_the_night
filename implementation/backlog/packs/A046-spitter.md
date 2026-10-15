@@ -1,6 +1,6 @@
 # A046 - The spitter
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0260
 - **Dressed by game tasks:** 0247
 - **Spec after game task:** 0247

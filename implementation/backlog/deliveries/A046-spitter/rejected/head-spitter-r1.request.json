@@ -1,0 +1,10 @@
+{
+  "prompt": "Use case: stylized-concept\nAsset type: production forecast head icon for HARVEST THE NIGHT, A046 head_spitter.\nPrimary request: ONE head-and-shoulders bust of the same spitter, puffed cheeks and swollen hanging throat sac, three-quarter view turned LEFT, cut flat at chest.\nInput images: Image1 accepted spitter master is identity. Image2 native spitter WALK0 enlargedNEAREST4x is in-game colour/identity reference ONLY, not motion. Image3 woodraw is icon outline/framing style ONLY, not material/subject. Image4 integrated head_walker is16x16HUD framing/baseline reference only, not character.\nStyle: handcrafted coarsepixelart, deliberate broadclusters, colouredoutline, restrained texture, same farm orthographiccamera and neutral upper-left daytime light. Match hair, face, eyes, tornshirtcollar, yellow-green throat sac from master and in-gamebody.\nFinalnative16x16, pivot8,8, visible bust12–13high and atmost13wide, lowestopaque row14, row15empty, centrex8, at least1pxclear left/right/top. Bold simple forms that survive13pxheight; no bodybelowchest, no arms or legs. Flat chest cut.\nPalette colours come ONLY from spitter body: rotgreens, yellow-green sac, brownhair, mutedred/purplecloth collar, pale bone/bone_dark eyes withdarkoutline. No brightemissiveeye. Sacmustremainrecognizable, not a genericwalkerhead.\nTrue transparent background alpha0 outside sharpopaque pixels. No frame/panel/text/labels/numbers/watermark/ground/shadow/glow/halo/haze/gradient/blur/3D/vector/randomspeckle. One completeunclipped portrait, not a collage.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/preview/walk0-head-reference-4x.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/ui/head_walker.png"
+  ]
+}

@@ -1,0 +1,19 @@
+2026-10-14 / Task0247 done verified, all named source/native references inspected. Owner-authorized21newpackbatch. Only ImageGen for art; no intermediate artapproval.
+
+2026-10-14 / Measured native export
+WALK reached r3 limit: nearleg remains forward in both contact frames; farleg lifts behind rather than completing forward contact. All4walkingframes are diagnostics; do not integrate this gait.
+All18deliverables are generated and measured. Attack/death/effects/head are independent final-review candidates. Feet/contact-band centre is registered by measured bottom5logicalpixel alpha span; no rasterpainting, only importer anchoring.
+Head palette_keys are computed from this pack's body pixels; FX use requiredgreen keylist. Canonical contract exports zero frames because gait is incomplete.
+No art approval inferred. 18 of 18 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Measured native export
+WALK reached r3 limit: nearleg remains forward in both contact frames; farleg lifts behind rather than completing forward contact. All4walkingframes are diagnostics; do not integrate this gait.
+All18deliverables are generated and measured. Attack/death/effects/head are independent final-review candidates. Feet/contact-band centre is registered by measured bottom5logicalpixel alpha span; no rasterpainting, only importer anchoring.
+Head palette_keys are computed from this pack's body pixels; FX use requiredgreen keylist. Canonical contract exports zero frames because gait is incomplete.
+Headr3 has one visible boneeye atnative(6,8); originalQA mistakenly banned flame_hot anywhere inhead, includingyellowthroatsac highlights. QA nowchecks the actual inspected eyepixel, not unrelatedsac colours. Only direct measured crop selected; transparentpadding experiments remain unselected diagnostics.
+No art approval inferred. 18 of 18 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+18/18 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: walk_leg_alternation_review. Complete delivery released for Claude integration.

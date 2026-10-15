@@ -1,7 +1,7 @@
 # 0260 - Art: the spitter
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0247, 0246
 - **Likely files:** assets/art_source/enemies/spitter/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd
 - **Art packs:** A046

@@ -5,6 +5,9 @@ import import_art
 import gen_sprites
 
 FAMILIES = ('walker','runner','tank','breaker')
+# The packs' ordinary enemies (task 0260 on): the same canvas, contact and
+# motion as the four, each its own pack.
+PACK_FAMILIES = {'spitter':'A046'}
 COUNTS = {'master':1,'walk':4,'attack':3,'death':4}
 
 def silhouette(image):
@@ -26,7 +29,8 @@ def main():
         raise ValueError('Incomplete authored enemy ownership')
     old=gen_sprites.everything(dispatch=False)
     signatures={}
-    for family in FAMILIES:
+    for family in FAMILIES+tuple(PACK_FAMILIES):
+        task=PACK_FAMILIES.get(family,'0015')
         for motion,count in COUNTS.items():
             frames=[e for e in data['assets'] if e.get('enemy_family')==family and e.get('enemy_motion')==motion and 'source' in e]
             if len(frames)!=count or sorted(e['frame'] for e in frames)!=list(range(count)):
@@ -36,7 +40,7 @@ def main():
                 raise ValueError('Per-frame source or scale drift: '+family+'/'+motion)
             seen=[];heights=[]
             for e in sorted(frames,key=lambda x:x['frame']):
-                if e.get('generation_task')!='0015' or not e['source'].startswith('assets/art_source/enemies/'+family+'/'):
+                if e.get('generation_task')!=task or not e['source'].startswith('assets/art_source/enemies/'+family+'/'):
                     raise ValueError('Another identity or provisional recipe owns '+e['id'])
                 if e['canvas_wh']!=[64,48] or e['pivot_xy']!=[32,44] or e['cell_offset_xy']!=[-24,-28]:
                     raise ValueError('Enemy ground/contact drift: '+e['id'])
@@ -68,8 +72,9 @@ def main():
                 raise ValueError('Stale legacy compatibility alias: '+e['id'])
             if files[e['output']]!=files[entries[e['input']]['output']]:
                 raise ValueError('Compatibility alias changes source pixels: '+e['id'])
-    distances={a+'/'+b:sum(x!=y for x,y in zip(signatures[a],signatures[b])) for a,b in itertools.combinations(FAMILIES,2)}
+    distances={a+'/'+b:sum(x!=y for x,y in zip(signatures[a],signatures[b])) for a,b in itertools.combinations(FAMILIES+tuple(PACK_FAMILIES),2)}
     if min(distances.values())<16:raise ValueError('Ambiguous black enemy silhouettes: '+str(distances))
-    print('OK: 48 authored enemy poses, 12 exact aliases, fixed contacts, 4/3/4 motion; silhouette differences '+str(distances))
+    families=len(FAMILIES)+len(PACK_FAMILIES)
+    print('OK: %d authored enemy poses, %d exact aliases, fixed contacts, 4/3/4 motion; silhouette differences %s'%(12*families,3*families,distances))
 
 if __name__=='__main__':main()

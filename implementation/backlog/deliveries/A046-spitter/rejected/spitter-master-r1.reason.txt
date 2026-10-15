@@ -1,0 +1,1 @@
+Second master has clearer hanging sac and higher minimum silhouette distance; retain history, not selected.

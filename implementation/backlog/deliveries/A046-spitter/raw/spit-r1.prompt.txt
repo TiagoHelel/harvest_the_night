@@ -1,0 +1,6 @@
+Use case: stylized-concept
+Asset type: A046 pixel effect source for HARVEST THE NIGHT.
+Primary request: spit, ONE horizontal strip of exactly2 frames. Inputimage1 accepted spitter identity is spitcolour reference; image2 impact is native effect scale/cluster style only, not orange/firematerial.
+Handcrafted pixel art, coarse deliberate clusters and coloured outlines, orthographiccamera, neutral daytime colour. Native 8x8, originpivot(4,4), centred with1pxclear border in ALLframes. FX localized origin, expansion/dissipation, no bloom.
+Round glob of sickly mid-green spit with yellow-green highlight and darkoutline. Visible4–6px. Frame2 slightly squashed, not a copy. Loop frame2toframe1. No white glowingcore. Palette limited to ink, rot_dark, rot, leaf_dark, leaf, leaf_light, grass_dark, grass, grass_light, gold_light; keep body mid-green readable above nightrelight without emission.
+STRIP orderedposes: roundglob, squashglob. Equalcells, huge transparentgutters, samephysicalscale/origin acrossframes, no enlargement ofsmallposes. Truealpha0outside actualparticles. No background/glow/halo/gradient/shadow/text/labels/UI/target/motionstreak. Simple compact shapes that survive reduction.

@@ -78344,6 +78344,1473 @@
         18
       ],
       "output_sha256": "bf43c87ad7970b3199716ef5697f3bf6f565e570906ef922a95a1f3296b7b1dc"
+    },
+    {
+      "id": "enemies/spitter",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-master-r2.png",
+      "source_sha256": "7e9f4d792a7a79ee69014d07bf0100fc7c7589bdf73b784ee34d2057d53ef12b",
+      "crop_xywh": [
+        385,
+        116,
+        691,
+        914
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "master",
+      "content_scale": 0.03172866520787746,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.prompt.txt",
+      "prompt_sha256": "dcd34757d530074d44d6f954553d13f36485b66dcb4b015b7360fcd558d570cd",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.call.json",
+          "sha256": "721c22af1e8685553ba1bf4c579c7ffb70819a15ad58c48e03282a63c71c8116",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter/west/01.png",
+          "sha256": "94ebdd9a641a594eea350d2919aff7293e65107ac382df5f2d59422fd0b8cd0f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        15,
+        29
+      ],
+      "output_sha256": "94ebdd9a641a594eea350d2919aff7293e65107ac382df5f2d59422fd0b8cd0f"
+    },
+    {
+      "id": "enemies/spitter_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937",
+      "crop_xywh": [
+        64,
+        192,
+        388,
+        482
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "walk",
+      "content_scale": 0.06016597510373444,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_walk",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/spitter_walk_0.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.call.json",
+          "sha256": "e50063b97ea00621a74232c00b7a600046b0f937387ed1ca46cc4d6d18df0ab9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_walk/west/01.png",
+          "sha256": "fbc49cc481d37440fe2a7877f3b6e9537d1d0d4ddec374a7cd5fe80cfc6d16ad",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        14,
+        29
+      ],
+      "output_sha256": "fbc49cc481d37440fe2a7877f3b6e9537d1d0d4ddec374a7cd5fe80cfc6d16ad"
+    },
+    {
+      "id": "enemies/spitter_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937",
+      "crop_xywh": [
+        544,
+        192,
+        346,
+        482
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "walk",
+      "content_scale": 0.06016597510373444,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_walk",
+      "frame": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/spitter_walk_1.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.call.json",
+          "sha256": "e50063b97ea00621a74232c00b7a600046b0f937387ed1ca46cc4d6d18df0ab9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_walk/west/02.png",
+          "sha256": "d77668675c4164bc3acf718e48ad8b43c90052277d9584b3649c6f3bc6455db4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        13,
+        29
+      ],
+      "output_sha256": "d77668675c4164bc3acf718e48ad8b43c90052277d9584b3649c6f3bc6455db4"
+    },
+    {
+      "id": "enemies/spitter_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937",
+      "crop_xywh": [
+        1011,
+        191,
+        356,
+        483
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "walk",
+      "content_scale": 0.06016597510373444,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_walk",
+      "frame": 2,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/spitter_walk_2.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.call.json",
+          "sha256": "e50063b97ea00621a74232c00b7a600046b0f937387ed1ca46cc4d6d18df0ab9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_walk/west/03.png",
+          "sha256": "13ce4bb3b72cd83c698b343dc042207a576f152c144f64bc54324cdbb323abdf",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        12,
+        29
+      ],
+      "output_sha256": "13ce4bb3b72cd83c698b343dc042207a576f152c144f64bc54324cdbb323abdf"
+    },
+    {
+      "id": "enemies/spitter_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-walk-r3.png",
+      "source_sha256": "25b1559e1afa0ca873288c558556ef37dcfb595b14c508cf4a91885ebdeae937",
+      "crop_xywh": [
+        1489,
+        191,
+        343,
+        478
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "walk",
+      "content_scale": 0.06016597510373444,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_walk",
+      "frame": 3,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/spitter_walk_3.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.call.json",
+          "sha256": "e50063b97ea00621a74232c00b7a600046b0f937387ed1ca46cc4d6d18df0ab9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_walk/west/04.png",
+          "sha256": "988f2c4c873596d6f9b2eec99695e587d94d2899eecac79f3e0880ae78c2f0ae",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        11,
+        29
+      ],
+      "output_sha256": "988f2c4c873596d6f9b2eec99695e587d94d2899eecac79f3e0880ae78c2f0ae"
+    },
+    {
+      "id": "enemies/spitter_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-attack-r1.png",
+      "source_sha256": "8a26c46ab04a4d802c086f21e3a5291a077e7ad773d113618a802f9d3840a26b",
+      "crop_xywh": [
+        150,
+        28,
+        502,
+        669
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "attack",
+      "content_scale": 0.04420731707317073,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_attack_0.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.prompt.txt",
+      "prompt_sha256": "f3edb9051ec8d78e35d3462dedecffbb40a2d9ca0530e028a3d22cc42995c46d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.call.json",
+          "sha256": "4ca657e74c5bcbf35849fbcdd4717314cb061777ffbf43bd6c84d923223c3ad9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_attack/west/01.png",
+          "sha256": "601138a1d2fa82e460dac150cd93378566122b52bff55e78cb57cde751d33871",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        15,
+        30
+      ],
+      "output_sha256": "601138a1d2fa82e460dac150cd93378566122b52bff55e78cb57cde751d33871"
+    },
+    {
+      "id": "enemies/spitter_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-attack-r1.png",
+      "source_sha256": "8a26c46ab04a4d802c086f21e3a5291a077e7ad773d113618a802f9d3840a26b",
+      "crop_xywh": [
+        834,
+        60,
+        556,
+        637
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "attack",
+      "content_scale": 0.04420731707317073,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_attack_1.png",
+      "spit_xy": [
+        18,
+        25
+      ],
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.prompt.txt",
+      "prompt_sha256": "f3edb9051ec8d78e35d3462dedecffbb40a2d9ca0530e028a3d22cc42995c46d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.call.json",
+          "sha256": "4ca657e74c5bcbf35849fbcdd4717314cb061777ffbf43bd6c84d923223c3ad9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_attack/west/02.png",
+          "sha256": "815da37e4c8d0cd0f48b9ef1c7c8231770e9edef7cd18f545dc76c08128c4575",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        16,
+        28
+      ],
+      "output_sha256": "815da37e4c8d0cd0f48b9ef1c7c8231770e9edef7cd18f545dc76c08128c4575"
+    },
+    {
+      "id": "enemies/spitter_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-attack-r1.png",
+      "source_sha256": "8a26c46ab04a4d802c086f21e3a5291a077e7ad773d113618a802f9d3840a26b",
+      "crop_xywh": [
+        1606,
+        41,
+        512,
+        656
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "attack",
+      "content_scale": 0.04420731707317073,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_attack_2.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.prompt.txt",
+      "prompt_sha256": "f3edb9051ec8d78e35d3462dedecffbb40a2d9ca0530e028a3d22cc42995c46d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.call.json",
+          "sha256": "4ca657e74c5bcbf35849fbcdd4717314cb061777ffbf43bd6c84d923223c3ad9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_attack/west/03.png",
+          "sha256": "0a48bb385284f7ed086841b0038c3a2b7b1e1efaf58d7748504ab72787b97b24",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        15,
+        29
+      ],
+      "output_sha256": "0a48bb385284f7ed086841b0038c3a2b7b1e1efaf58d7748504ab72787b97b24"
+    },
+    {
+      "id": "enemies/spitter_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf",
+      "crop_xywh": [
+        56,
+        140,
+        413,
+        524
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "death",
+      "content_scale": 0.05534351145038168,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.call.json",
+          "sha256": "0f1ac8220c742c502d1896d9e7cfc3d6074b6a735393fedb29c04ac7bea90aa0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_death/west/01.png",
+          "sha256": "8865755dc398a4d35ff018745a792ea980f0bbe51a28103935afb7590296e64c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        14,
+        29
+      ],
+      "output_sha256": "8865755dc398a4d35ff018745a792ea980f0bbe51a28103935afb7590296e64c"
+    },
+    {
+      "id": "enemies/spitter_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf",
+      "crop_xywh": [
+        531,
+        256,
+        393,
+        398
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "death",
+      "content_scale": 0.05534351145038168,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.call.json",
+          "sha256": "0f1ac8220c742c502d1896d9e7cfc3d6074b6a735393fedb29c04ac7bea90aa0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_death/west/02.png",
+          "sha256": "0984308b69c51a0a25950d2670c4162d35a57cf92df0d5a899ceca1d27ce6bee",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        11,
+        22
+      ],
+      "output_sha256": "0984308b69c51a0a25950d2670c4162d35a57cf92df0d5a899ceca1d27ce6bee"
+    },
+    {
+      "id": "enemies/spitter_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf",
+      "crop_xywh": [
+        987,
+        398,
+        495,
+        258
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "death",
+      "content_scale": 0.05534351145038168,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.call.json",
+          "sha256": "0f1ac8220c742c502d1896d9e7cfc3d6074b6a735393fedb29c04ac7bea90aa0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_death/west/03.png",
+          "sha256": "6a9d2b8d3721621098b90260bc8f6b911f8e95305e01cc0a008d85a8a8fd78c5",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        14,
+        14
+      ],
+      "output_sha256": "6a9d2b8d3721621098b90260bc8f6b911f8e95305e01cc0a008d85a8a8fd78c5"
+    },
+    {
+      "id": "enemies/spitter_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/spitter/spitter-death-r1.png",
+      "source_sha256": "20ea8c0fb6491914782795dc8974979307e39ebd6bf28afd56f44010616e22cf",
+      "crop_xywh": [
+        1526,
+        481,
+        590,
+        185
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "spitter",
+      "enemy_motion": "death",
+      "content_scale": 0.05534351145038168,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_death_3.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.call.json",
+          "sha256": "0f1ac8220c742c502d1896d9e7cfc3d6074b6a735393fedb29c04ac7bea90aa0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_death/west/04.png",
+          "sha256": "7b5e96ff5a088d7f697a009519ccea90f6eda537e4453e5b9cfac8a2a9a5cc85",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        16,
+        10
+      ],
+      "output_sha256": "7b5e96ff5a088d7f697a009519ccea90f6eda537e4453e5b9cfac8a2a9a5cc85"
+    },
+    {
+      "id": "effects/spit_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/spit/spit-r1.png",
+      "source_sha256": "89a5e78fcbbc70f1877d7604440602547ea63b467d53542f1ba46c467ad0e316",
+      "crop_xywh": [
+        380,
+        316,
+        378,
+        334
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.014354066985645933,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ],
+      "animation": "effects/spit",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "spit",
+      "fx_origin": "center",
+      "output": "sprites/effects/spit_0.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spit-r1.prompt.txt",
+      "prompt_sha256": "7f4c0fa5ebb3aa5e8c367385b4be0e78cbf7edf548fd147d0978565eccb42ad7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spit-r1.call.json",
+          "sha256": "422be898f21797f974a12b8e5482141f5a02f7957bc892224a453966444de271",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spit/none/01.png",
+          "sha256": "1de6551f5c179300dc67e646677bdd19e006ab96673fdd76f27a72f5415abacd",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "output_sha256": "1de6551f5c179300dc67e646677bdd19e006ab96673fdd76f27a72f5415abacd"
+    },
+    {
+      "id": "effects/spit_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/spit/spit-r1.png",
+      "source_sha256": "89a5e78fcbbc70f1877d7604440602547ea63b467d53542f1ba46c467ad0e316",
+      "crop_xywh": [
+        1011,
+        361,
+        418,
+        277
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.014354066985645933,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ],
+      "animation": "effects/spit",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "spit",
+      "fx_origin": "center",
+      "variant_of": "effects/spit_0",
+      "output": "sprites/effects/spit_1.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spit-r1.prompt.txt",
+      "prompt_sha256": "7f4c0fa5ebb3aa5e8c367385b4be0e78cbf7edf548fd147d0978565eccb42ad7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spit-r1.call.json",
+          "sha256": "422be898f21797f974a12b8e5482141f5a02f7957bc892224a453966444de271",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spit/none/02.png",
+          "sha256": "425cff6400469085c96a4df1fbc76b03b4b46b2dbb3610b18381bcac51317d36",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "output_sha256": "425cff6400469085c96a4df1fbc76b03b4b46b2dbb3610b18381bcac51317d36"
+    },
+    {
+      "id": "effects/spit_splat_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/spit/spit-splat-r1.png",
+      "source_sha256": "c8ef665fe1e90116d4c2a067f8e463889ce1dfb9af9cfad1d7cfde7e3e6eec3a",
+      "crop_xywh": [
+        287,
+        292,
+        187,
+        207
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ],
+      "animation": "effects/spit_splat",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "spit_splat",
+      "fx_origin": "center",
+      "output": "sprites/effects/spit_splat_0.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spit-splat-r1.prompt.txt",
+      "prompt_sha256": "52880c3247938a62ee32819d833b388e09376ed651fc7aa97904a02f9e65a3f8",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spit-splat-r1.call.json",
+          "sha256": "705c2893523b944bc521ac5372e244d702907da946f87062e10ace64c725356c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spit_splat/none/01.png",
+          "sha256": "a823d9eb0c61bdd3b32dafcd60b361f2e3dc2b4b19e788aea4477856eda5de8e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "output_sha256": "a823d9eb0c61bdd3b32dafcd60b361f2e3dc2b4b19e788aea4477856eda5de8e"
+    },
+    {
+      "id": "effects/spit_splat_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/spit/spit-splat-r1.png",
+      "source_sha256": "c8ef665fe1e90116d4c2a067f8e463889ce1dfb9af9cfad1d7cfde7e3e6eec3a",
+      "crop_xywh": [
+        861,
+        191,
+        440,
+        339
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ],
+      "animation": "effects/spit_splat",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "spit_splat",
+      "fx_origin": "center",
+      "variant_of": "effects/spit_splat_0",
+      "output": "sprites/effects/spit_splat_1.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spit-splat-r1.prompt.txt",
+      "prompt_sha256": "52880c3247938a62ee32819d833b388e09376ed651fc7aa97904a02f9e65a3f8",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spit-splat-r1.call.json",
+          "sha256": "705c2893523b944bc521ac5372e244d702907da946f87062e10ace64c725356c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spit_splat/none/02.png",
+          "sha256": "f22a43a3110e4c74610265e82efd032dfc91de75a93f57abf8e94858154d05a9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "output_sha256": "f22a43a3110e4c74610265e82efd032dfc91de75a93f57abf8e94858154d05a9"
+    },
+    {
+      "id": "effects/spit_splat_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/spit/spit-splat-r1.png",
+      "source_sha256": "c8ef665fe1e90116d4c2a067f8e463889ce1dfb9af9cfad1d7cfde7e3e6eec3a",
+      "crop_xywh": [
+        1667,
+        280,
+        289,
+        244
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.022727272727272728,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "rot_dark",
+        "rot",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "gold_light"
+      ],
+      "animation": "effects/spit_splat",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "spit_splat",
+      "fx_origin": "center",
+      "variant_of": "effects/spit_splat_0",
+      "output": "sprites/effects/spit_splat_2.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spit-splat-r1.prompt.txt",
+      "prompt_sha256": "52880c3247938a62ee32819d833b388e09376ed651fc7aa97904a02f9e65a3f8",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spit-splat-r1.call.json",
+          "sha256": "705c2893523b944bc521ac5372e244d702907da946f87062e10ace64c725356c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spit_splat/none/03.png",
+          "sha256": "3b53e94af5caf8d1c6f0a5bd5eb76b23cd1a7cc565220a1ecaebe24eb7abd37e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        3,
+        3
+      ],
+      "output_sha256": "3b53e94af5caf8d1c6f0a5bd5eb76b23cd1a7cc565220a1ecaebe24eb7abd37e"
+    },
+    {
+      "id": "ui/head_spitter",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/head-spitter-r3.png",
+      "source_sha256": "8ed65fe7e0f31465e64dcc69b145c3da9a64ce88ee28468e658061fdf892d777",
+      "crop_xywh": [
+        245,
+        217,
+        808,
+        925
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.014054054054054054,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin_light",
+        "night",
+        "rot_dark",
+        "rot",
+        "blood"
+      ],
+      "animation": "ui/head_spitter",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/head_spitter.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/head-spitter-r3.prompt.txt",
+      "prompt_sha256": "2d93be074cca956d827e38904dfa53467252b13bcc15cab9525f678f90dd5938",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/head-spitter-r3.call.json",
+          "sha256": "57ee6a897acc2fe9c4967f8bb17408a13ec62666770f0f1d90d0e6b44131e6ed",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/head_spitter/none/01.png",
+          "sha256": "fc8c356340d7222a7aa5b8a666896cf03cb99c5893fd3a9ed9a8551a90e6a220",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "approval": "A046 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0260",
+      "content_anchor_xy": [
+        5,
+        6
+      ],
+      "output_sha256": "fc8c356340d7222a7aa5b8a666896cf03cb99c5893fd3a9ed9a8551a90e6a220"
+    },
+    {
+      "id": "enemies/spitter_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": false,
+      "output": "sprites/enemies/spitter_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.prompt.txt",
+      "prompt_sha256": "287a5c94a5eba6d51fc74a19ae0009aef54b87d6e9dc548c1b96181bfc67c069",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-walk-r3.call.json",
+          "sha256": "e50063b97ea00621a74232c00b7a600046b0f937387ed1ca46cc4d6d18df0ab9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_walk/west/03.png",
+          "sha256": "13ce4bb3b72cd83c698b343dc042207a576f152c144f64bc54324cdbb323abdf",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "enemy_family": "spitter",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/spitter",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/spitter_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/spitter_walk_2",
+      "output_sha256": "13ce4bb3b72cd83c698b343dc042207a576f152c144f64bc54324cdbb323abdf"
+    },
+    {
+      "id": "enemies/spitter_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_attack.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.prompt.txt",
+      "prompt_sha256": "f3edb9051ec8d78e35d3462dedecffbb40a2d9ca0530e028a3d22cc42995c46d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-attack-r1.call.json",
+          "sha256": "4ca657e74c5bcbf35849fbcdd4717314cb061777ffbf43bd6c84d923223c3ad9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_attack/west/02.png",
+          "sha256": "815da37e4c8d0cd0f48b9ef1c7c8231770e9edef7cd18f545dc76c08128c4575",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "enemy_family": "spitter",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/spitter",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/spitter_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/spitter_attack_1",
+      "output_sha256": "815da37e4c8d0cd0f48b9ef1c7c8231770e9edef7cd18f545dc76c08128c4575"
+    },
+    {
+      "id": "enemies/spitter_death",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/spitter_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/spitter_death.png",
+      "prompt": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.prompt.txt",
+      "prompt_sha256": "b35dfaf76a4548f5d013c3682cd4bb446b2a4e773ad73a6f706414d301072f11",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/raw/spitter-death-r1.call.json",
+          "sha256": "0f1ac8220c742c502d1896d9e7cfc3d6074b6a735393fedb29c04ac7bea90aa0",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/native/spitter_death/west/04.png",
+          "sha256": "7b5e96ff5a088d7f697a009519ccea90f6eda537e4453e5b9cfac8a2a9a5cc85",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/contract.json",
+          "sha256": "e27527def9437dabd79fedf633384b6eba114d4021db3a78a4fe4067008bb7ea",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A046-spitter/APPROVAL.json",
+          "sha256": "5560a31ed0a14e9e63fac762650e146b58b8d4d898cacb68b1d419f345e97a6d",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A046",
+      "integration_task": "0260",
+      "revision": 1,
+      "enemy_family": "spitter",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/spitter",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/spitter_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/spitter_death_3",
+      "output_sha256": "7b5e96ff5a088d7f697a009519ccea90f6eda537e4453e5b9cfac8a2a9a5cc85"
     }
   ]
 }

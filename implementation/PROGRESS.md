@@ -32228,3 +32228,79 @@ stand-in of 0185 and 0233 is gone.
 - `python implementation/backlog/assets.py set A028 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (62 of 62). The review server's two logs in the delivery folder stay out of the commit.
+
+## 0260 - Art: the spitter - done 2026-10-15
+
+A046 is integrated. The spitter is the owner-approved art now: standing,
+its four-frame walk, its three-frame spit, its four-frame death, its glob in
+the air, the splat it leaves up a tower, and its head in the forecast. The
+owner approved it on 2026-10-14 in the batch review, as recorded in the
+delivery's `APPROVAL.json`. 0247's soured walker and code-drawn glob are
+gone.
+
+- **Promotion**: the 18 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their seven raw sources were copied byte for byte into
+    `assets/art_source/enemies/spitter/`, `assets/art_source/effects/spit/`
+    and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - It sits on the ordinary enemies' 64x48 at (32,44), cell offset
+    [-24,-28].
+- **Metadata as the four families have it**: `enemy_family` `spitter` and
+  `enemy_motion` master, walk, attack or death on every pose.
+  - There are three compatibility aliases: `spitter_walk_b`,
+    `spitter_attack` and `spitter_death`, copies of walk 2, attack 1 and
+    death 3, as the walker's are. Each carries the frame's prompt and
+    references, which the importer asks of every entry.
+  - The glob and the splat carry `fx_family` `spit`/`spit_splat`.
+- **The spit drives the attack pose**, as 0247 already made it: the view
+  poses the spitter off the rules' spit (`posed_off_the_rules`, from
+  `spitting` and `spit_wait`), not off a bite. With the art there, those
+  poses are A046's frames.
+- **`SpitterArt` holds the glob's frames**: it is drawn with `draw_texture`
+  in `_draw_spit`, and 0238 found that a texture dropped there renders as a
+  white square. The drawing is gone.
+- **The stand-ins retired**: A046's seven `PlaceholderArt` entries and the
+  `SPITTER`/`SPIT`/`SPIT_SPLAT` geometry and `SPITTER_TINT` are gone.
+  `placeholders.py --check` passes, with 201 stand-ins left over 28 packs.
+- **Checks, each a block of its own beside the old counts**:
+  - `check_enemy_art.py` has `PACK_FAMILIES` (`spitter: A046`). The
+    spitter is held to the four's rules: 1/4/3/4 frames from one source and
+    scale each, grounded on row 44 and unclipped, no alpha halos, distinct
+    poses, no translated walk clones, a death that only shrinks to 16
+    pixels or less, exact aliases. Its silhouette stays at least 54 cells
+    from every other family's: 60 poses, 15 aliases.
+  - `check_effect_art.py` adds the glob (a loop, 0.1 s) and the splat (a
+    one-shot that grows and fades, 0.08 s).
+  - `check_ui_art.py` has `PACK_HEADS`. A pack's head is 16x16 at (8,8),
+    standing on row 14 with row 15 clear, distinct and exact. It is not
+    held to A011's exact-crop rule, because A046 drew its own bust.
+  - The enemy, effect and UI showcases pass with 2,089, 3,214 and 17,008
+    checks.
+- **Tests**: `_task_0247_spitter`'s art check now reads A046's glob and
+  splat. The glob is 4-6 pixels, its two frames apart and held. The splat
+  grows and shrinks a pixel clear of its edges. No stand-in is left.
+- **Shots** (`implementation/shots/0260/`, FHD 1920x1080, looked at):
+  - `spitter`, 0247's scene at night: three spitters spitting at a tower
+    line, a glob in the air and splats up the towers.
+  - `forecast_summer`, a new scene: Summer 10 at 18:30, the forecast by day
+    with the spitter's head among the night's kinds. 0247's `forecast_dusk`
+    is a spring night with no spitter in it. The scene count is 126.
+- **`input_check`'s stand-in case**, once "the spitter and the rat stand in",
+  now asks that the kinds on a stand-in be exactly those whose pack has not
+  landed, the spitter no longer among them, each drawn through the lookup.
+  The first full run failed there.
+- **A power cut** stopped the first run of the suites. The tree was intact,
+  and `import_art --check` and every family check passed again before
+  they were rerun.
+- **The delivery folder** `implementation/backlog/deliveries/A046-spitter/` is
+  committed, as A028's was.
+- `python implementation/backlog/assets.py set A046 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (62 of 62) on the third run.
+  - The first run failed on `input_check`'s stand-in case, fixed above.
+  - The second failed one `input_v2` case on a flake: the weather case
+    counts raindrops three frames after nightfall, and a loaded machine can
+    show none yet. It passed alone and on the next full run. A separate fix
+    is suggested.

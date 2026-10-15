@@ -1,0 +1,37 @@
+{
+  "pack": "A046",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A046-spitter",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/spitter/west/01.png": "94ebdd9a641a594eea350d2919aff7293e65107ac382df5f2d59422fd0b8cd0f",
+    "native/spitter_walk/west/01.png": "fbc49cc481d37440fe2a7877f3b6e9537d1d0d4ddec374a7cd5fe80cfc6d16ad",
+    "native/spitter_walk/west/02.png": "d77668675c4164bc3acf718e48ad8b43c90052277d9584b3649c6f3bc6455db4",
+    "native/spitter_walk/west/03.png": "13ce4bb3b72cd83c698b343dc042207a576f152c144f64bc54324cdbb323abdf",
+    "native/spitter_walk/west/04.png": "988f2c4c873596d6f9b2eec99695e587d94d2899eecac79f3e0880ae78c2f0ae",
+    "native/spitter_attack/west/01.png": "601138a1d2fa82e460dac150cd93378566122b52bff55e78cb57cde751d33871",
+    "native/spitter_attack/west/02.png": "815da37e4c8d0cd0f48b9ef1c7c8231770e9edef7cd18f545dc76c08128c4575",
+    "native/spitter_attack/west/03.png": "0a48bb385284f7ed086841b0038c3a2b7b1e1efaf58d7748504ab72787b97b24",
+    "native/spitter_death/west/01.png": "8865755dc398a4d35ff018745a792ea980f0bbe51a28103935afb7590296e64c",
+    "native/spitter_death/west/02.png": "0984308b69c51a0a25950d2670c4162d35a57cf92df0d5a899ceca1d27ce6bee",
+    "native/spitter_death/west/03.png": "6a9d2b8d3721621098b90260bc8f6b911f8e95305e01cc0a008d85a8a8fd78c5",
+    "native/spitter_death/west/04.png": "7b5e96ff5a088d7f697a009519ccea90f6eda537e4453e5b9cfac8a2a9a5cc85",
+    "native/spit/none/01.png": "1de6551f5c179300dc67e646677bdd19e006ab96673fdd76f27a72f5415abacd",
+    "native/spit/none/02.png": "425cff6400469085c96a4df1fbc76b03b4b46b2dbb3610b18381bcac51317d36",
+    "native/spit_splat/none/01.png": "a823d9eb0c61bdd3b32dafcd60b361f2e3dc2b4b19e788aea4477856eda5de8e",
+    "native/spit_splat/none/02.png": "f22a43a3110e4c74610265e82efd032dfc91de75a93f57abf8e94858154d05a9",
+    "native/spit_splat/none/03.png": "3b53e94af5caf8d1c6f0a5bd5eb76b23cd1a7cc565220a1ecaebe24eb7abd37e",
+    "native/head_spitter/none/01.png": "fc8c356340d7222a7aa5b8a666896cf03cb99c5893fd3a9ed9a8551a90e6a220"
+  },
+  "frames": 18,
+  "frames_expected": 18,
+  "accepted_visual_checks": [
+    "walk_leg_alternation_review"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

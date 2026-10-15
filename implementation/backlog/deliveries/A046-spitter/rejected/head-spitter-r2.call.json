@@ -1,0 +1,49 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production forecast head icon for HARVEST THE NIGHT, A046 head_spitter.\nPrimary request: ONE head-and-shoulders bust of the same spitter, puffed cheeks and swollen hanging throat sac, three-quarter view turned LEFT, cut flat at chest.\nInput images: Image1 accepted spitter master is identity. Image2 native spitter WALK0 enlargedNEAREST4x is in-game colour/identity reference ONLY, not motion. Image3 woodraw is icon outline/framing style ONLY, not material/subject. Image4 integrated head_walker is16x16HUD framing/baseline reference only, not character.\nStyle: handcrafted coarsepixelart, deliberate broadclusters, colouredoutline, restrained texture, same farm orthographiccamera and neutral upper-left daytime light. Match hair, face, eyes, tornshirtcollar, yellow-green throat sac from master and in-gamebody.\nFinalnative16x16, pivot8,8, visible bust12\u201313high and atmost13wide, lowestopaque row14, row15empty, centrex8, at least1pxclear left/right/top. Bold simple forms that survive13pxheight; no bodybelowchest, no arms or legs. Flat chest cut.\nPalette colours come ONLY from spitter body: rotgreens, yellow-green sac, brownhair, mutedred/purplecloth collar, pale bone/bone_dark eyes withdarkoutline. No brightemissiveeye. Sacmustremainrecognizable, not a genericwalkerhead.\nTrue transparent background alpha0 outside sharpopaque pixels. No frame/panel/text/labels/numbers/watermark/ground/shadow/glow/halo/haze/gradient/blur/3D/vector/randomspeckle. One completeunclipped portrait, not a collage.\nCORRECTION: Image5 is edit target. Change ONLY eye readability at13nativepixel bust height. Sourceeye shapes are under one outputpixel and vanish afterNEAREST reduction. Make both visible eye centres SIMPLE SOLID PALE CREAM squares, eachatleast85sourcepixels wide and85high oncurrent866pxsourceheight, surrounded bydarkink. Raw fill near#e8e0cf (bone), no yellow/whiteemission. One nativepixel pervisibleeye mustsurvive. Keep head/bustsize, hair, hangingyellow-green sac, collar, neutraldaylight, camera, bodypalette and flatbottom unchanged. No glow. True transparency, source is reducedto13pxhigh; no tiny facialtexture.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/preview/walk0-head-reference-4x.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/ui/head_walker.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/head-spitter-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/spitter-master-r2.png",
+      "sha256": "7e9f4d792a7a79ee69014d07bf0100fc7c7589bdf73b784ee34d2057d53ef12b",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/preview/walk0-head-reference-4x.png",
+      "sha256": "c8de67d564e650423add803b9579c5b779f9a411e59fabbfb1aad11d4749f74e",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/ui/head_walker.png",
+      "sha256": "7b2cdf912e308ee429a413b609af7c029275d369d8f6af6c00e18b1534a7d512",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A046-spitter/raw/head-spitter-r1.png",
+      "sha256": "ad542e697031eeed2cbc638fb92bd6191667ebaa7b785a4a8571332e425d927a",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\rejected\\head-spitter-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-35e7851d-a472-4fba-8380-a59b0d677c9f.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A046-spitter\\raw\\head-spitter-r2.png",
+  "sha256": "2335aed3be44993fd0485114c59c6d0b6c3286f42eb3def84f97a09c1ce4e267",
+  "revision": 2,
+  "decision": "rejected: Eye enlargement still loses boneeyepixels atnative13px.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\rejected\\head-spitter-r2.png"
+}

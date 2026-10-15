@@ -1,0 +1,202 @@
+[
+  {
+    "recipe": {
+      "id": "spitter-walk-r3-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-walk-r3.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        497,
+        836
+      ],
+      "crop_xywh": [
+        64,
+        192,
+        388,
+        482
+      ],
+      "content_scale": 0.06016597510373444,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        14,
+        29
+      ]
+    },
+    "native_bounds": [
+      18,
+      15,
+      41,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      29
+    ],
+    "measured_contact_band_raw_xywh": [
+      64,
+      591,
+      388,
+      83
+    ],
+    "contact_centre_raw_x": 296.0
+  },
+  {
+    "recipe": {
+      "id": "spitter-walk-r3-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-walk-r3.png",
+      "sheet_cell_xywh": [
+        497,
+        0,
+        453,
+        836
+      ],
+      "crop_xywh": [
+        544,
+        192,
+        346,
+        482
+      ],
+      "content_scale": 0.06016597510373444,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        13,
+        29
+      ]
+    },
+    "native_bounds": [
+      19,
+      15,
+      40,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      21,
+      29
+    ],
+    "measured_contact_band_raw_xywh": [
+      544,
+      591,
+      346,
+      83
+    ],
+    "contact_centre_raw_x": 754.0
+  },
+  {
+    "recipe": {
+      "id": "spitter-walk-r3-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-walk-r3.png",
+      "sheet_cell_xywh": [
+        950,
+        0,
+        477,
+        836
+      ],
+      "crop_xywh": [
+        1011,
+        191,
+        356,
+        483
+      ],
+      "content_scale": 0.06016597510373444,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        12,
+        29
+      ]
+    },
+    "native_bounds": [
+      20,
+      15,
+      41,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      21,
+      29
+    ],
+    "measured_contact_band_raw_xywh": [
+      1011,
+      591,
+      356,
+      83
+    ],
+    "contact_centre_raw_x": 1217.5
+  },
+  {
+    "recipe": {
+      "id": "spitter-walk-r3-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A046-spitter\\raw\\spitter-walk-r3.png",
+      "sheet_cell_xywh": [
+        1427,
+        0,
+        455,
+        836
+      ],
+      "crop_xywh": [
+        1489,
+        191,
+        343,
+        478
+      ],
+      "content_scale": 0.06016597510373444,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        11,
+        29
+      ]
+    },
+    "native_bounds": [
+      21,
+      15,
+      42,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      21,
+      29
+    ],
+    "measured_contact_band_raw_xywh": [
+      1489,
+      586,
+      343,
+      83
+    ],
+    "contact_centre_raw_x": 1675.5
+  }
+]
