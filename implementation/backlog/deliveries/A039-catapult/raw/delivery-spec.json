@@ -1,0 +1,440 @@
+{
+  "title": "The pumpkin catapult",
+  "date": "2026-10-14",
+  "status": "generating",
+  "palette_mode": "A",
+  "expected_files": 19,
+  "files": [
+    {
+      "anim": "catapult",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole",
+      "output": "native/catapult/none/01.png",
+      "runtime_name": "sprites/buildings/catapult.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "hurt",
+      "output": "native/catapult_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_fire",
+      "dir": "none",
+      "frame": 0,
+      "pose": "fire",
+      "output": "native/catapult_fire/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_fire.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck",
+      "output": "native/catapult_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_wreck.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole",
+      "output": "native/catapult_2/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_2.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "hurt",
+      "output": "native/catapult_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_2_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_2_fire",
+      "dir": "none",
+      "frame": 0,
+      "pose": "fire",
+      "output": "native/catapult_2_fire/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_2_fire.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_2_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck",
+      "output": "native/catapult_2_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_2_wreck.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_3",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole",
+      "output": "native/catapult_3/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_3.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_3_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "hurt",
+      "output": "native/catapult_3_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_3_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_3_fire",
+      "dir": "none",
+      "frame": 0,
+      "pose": "fire",
+      "output": "native/catapult_3_fire/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_3_fire.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "catapult_3_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck",
+      "output": "native/catapult_3_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/catapult_3_wreck.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "pumpkin_shot",
+      "dir": "none",
+      "frame": 0,
+      "pose": "stem12",
+      "output": "native/pumpkin_shot/none/01.png",
+      "runtime_name": "sprites/effects/pumpkin_shot_0.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "pumpkin_shot",
+      "dir": "none",
+      "frame": 1,
+      "pose": "stem4",
+      "output": "native/pumpkin_shot/none/02.png",
+      "runtime_name": "sprites/effects/pumpkin_shot_1.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "pumpkin_shot",
+      "dir": "none",
+      "frame": 2,
+      "pose": "stem8",
+      "output": "native/pumpkin_shot/none/03.png",
+      "runtime_name": "sprites/effects/pumpkin_shot_2.png",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "pumpkin_splat",
+      "dir": "none",
+      "frame": 0,
+      "pose": "squash",
+      "output": "native/pumpkin_splat/none/01.png",
+      "runtime_name": "sprites/effects/pumpkin_splat_0.png",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "pumpkin_splat",
+      "dir": "none",
+      "frame": 1,
+      "pose": "burst",
+      "output": "native/pumpkin_splat/none/02.png",
+      "runtime_name": "sprites/effects/pumpkin_splat_1.png",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "pumpkin_splat",
+      "dir": "none",
+      "frame": 2,
+      "pose": "fall",
+      "output": "native/pumpkin_splat/none/03.png",
+      "runtime_name": "sprites/effects/pumpkin_splat_2.png",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "pumpkin_splat",
+      "dir": "none",
+      "frame": 3,
+      "pose": "bits",
+      "output": "native/pumpkin_splat/none/04.png",
+      "runtime_name": "sprites/effects/pumpkin_splat_3.png",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/buildings/mortar.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

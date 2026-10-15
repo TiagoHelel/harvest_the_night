@@ -1,0 +1,225 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "catapult_2_one_source_scale": true,
+  "catapult_2_stationary_base_exact": false,
+  "catapult_2_whole_dimensions": true,
+  "catapult_2_wreck_inside_whole": true,
+  "catapult_3_one_source_scale": true,
+  "catapult_3_stationary_base_exact": false,
+  "catapult_3_whole_dimensions": false,
+  "catapult_3_wreck_inside_whole": false,
+  "catapult_one_source_scale": true,
+  "catapult_stationary_base_exact": false,
+  "catapult_whole_dimensions": true,
+  "catapult_wreck_inside_whole": false,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 19,
+  "frames_found": 19,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "level1_level3_differs80": true,
+  "measurements": {
+    "native/catapult/none/01.png": {
+      "bounds": [
+        5,
+        27,
+        27,
+        44
+      ],
+      "opaque_pixels": 209
+    },
+    "native/catapult_2/none/01.png": {
+      "bounds": [
+        4,
+        23,
+        28,
+        44
+      ],
+      "opaque_pixels": 284
+    },
+    "native/catapult_2_fire/none/01.png": {
+      "bounds": [
+        4,
+        19,
+        28,
+        44
+      ],
+      "opaque_pixels": 276
+    },
+    "native/catapult_2_hurt/none/01.png": {
+      "bounds": [
+        5,
+        23,
+        28,
+        44
+      ],
+      "opaque_pixels": 283
+    },
+    "native/catapult_2_wreck/none/01.png": {
+      "bounds": [
+        5,
+        29,
+        27,
+        44
+      ],
+      "opaque_pixels": 199
+    },
+    "native/catapult_3/none/01.png": {
+      "bounds": [
+        2,
+        21,
+        30,
+        44
+      ],
+      "opaque_pixels": 370
+    },
+    "native/catapult_3_fire/none/01.png": {
+      "bounds": [
+        2,
+        18,
+        30,
+        44
+      ],
+      "opaque_pixels": 383
+    },
+    "native/catapult_3_hurt/none/01.png": {
+      "bounds": [
+        2,
+        21,
+        31,
+        44
+      ],
+      "opaque_pixels": 377
+    },
+    "native/catapult_3_wreck/none/01.png": {
+      "bounds": [
+        1,
+        27,
+        31,
+        44
+      ],
+      "opaque_pixels": 326
+    },
+    "native/catapult_fire/none/01.png": {
+      "bounds": [
+        5,
+        25,
+        28,
+        44
+      ],
+      "opaque_pixels": 210
+    },
+    "native/catapult_hurt/none/01.png": {
+      "bounds": [
+        5,
+        27,
+        28,
+        44
+      ],
+      "opaque_pixels": 217
+    },
+    "native/catapult_wreck/none/01.png": {
+      "bounds": [
+        5,
+        31,
+        28,
+        44
+      ],
+      "opaque_pixels": 173
+    },
+    "native/pumpkin_shot/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        7,
+        7
+      ],
+      "opaque_pixels": 24
+    },
+    "native/pumpkin_shot/none/02.png": {
+      "bounds": [
+        1,
+        2,
+        7,
+        7
+      ],
+      "opaque_pixels": 25
+    },
+    "native/pumpkin_shot/none/03.png": {
+      "bounds": [
+        1,
+        1,
+        7,
+        7
+      ],
+      "opaque_pixels": 30
+    },
+    "native/pumpkin_splat/none/01.png": {
+      "bounds": [
+        5,
+        10,
+        14,
+        14
+      ],
+      "opaque_pixels": 20
+    },
+    "native/pumpkin_splat/none/02.png": {
+      "bounds": [
+        4,
+        3,
+        16,
+        14
+      ],
+      "opaque_pixels": 64
+    },
+    "native/pumpkin_splat/none/03.png": {
+      "bounds": [
+        5,
+        7,
+        15,
+        14
+      ],
+      "opaque_pixels": 27
+    },
+    "native/pumpkin_splat/none/04.png": {
+      "bounds": [
+        6,
+        11,
+        13,
+        13
+      ],
+      "opaque_pixels": 4
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "catapult_2_stationary_base_exact",
+    "catapult_3_stationary_base_exact",
+    "catapult_3_whole_dimensions",
+    "catapult_3_wreck_inside_whole",
+    "catapult_stationary_base_exact",
+    "catapult_wreck_inside_whole"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "pumpkin_shot_clearance": true,
+  "pumpkin_shot_count_distinct": true,
+  "pumpkin_shot_single_source_scale": true,
+  "pumpkin_splat_clearance": true,
+  "pumpkin_splat_count_distinct": true,
+  "pumpkin_splat_single_source_scale": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "splat_no_blood_rgb": true,
+  "splat_peak_then_dissipation": true,
+  "tower_clearance": true,
+  "twelve_distinct_tower_states": true
+}

@@ -166,7 +166,7 @@ const SCENARIOS: Array = [
 	["spitter", "a spitter working on a tower line: Summer 2's night, three towers in a row across open ground south-east of the house - a flamethrower each end, a gun tower between - and three spitters come up from the south, standing off at four tiles and spitting: a glob just landed on the line, another in the air", ""],
 	["boss", "a boss winding up: Spring 14's night, the Giant come up to a line of wall east of the house and winding up its blow on it, the ring on its target - its bar and name up top and its intro across the screen under them, clear of the time to dawn and of the hotbar", ""],
 	["garlic", "the route bending round a garlic braid: Autumn 2's build step, a braid hung on the east road, the preview drawing the road round its area where it ran straight - the second braid in hand, off the road, is what puts the preview up", ""],
-	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar", ""],
+	["catapult", "a volley landing at night: three pumpkin catapults past a defended farm's fence, one a level, throwing at a crowd coming from the east - a pumpkin burst on the ground, one in the air, level three's two on their way; the catapult picked on the hotbar; then the same catapults by day (task 0238), the tarps off to show A039's art and a crowd set down so each level throws and its pumpkins are in the air", ""],
 	["beehive", "a hive at work beside a sunflower bed at night: past a defended farm's fence, a hive beside a bed of nine grown sunflowers - fed at the waves, at its strongest - a second hive by it, upgraded, fed partly from the store, and a third knocked down to its wreck; walkers coming through their reach, the stung wearing the swarm; the hive picked on the hotbar's second page; then the same hives by day (task 0237), the tarps off to show A038's art and three walkers set down by them so the sting shows in daylight", ""],
 	["zombie_bait", "a crowd turned toward a zombie bait at night: a rotten fish thrown past a defended farm's fence, the nearest already eating on it and the rest - from further than a decoy pulls - on their way; the bait picked on the hotbar, one kit left", ""],
 	["bone_meal", "Spring 2 at noon: a starter row turned, plain and fertilised side by side, dry then watered, and carrot sprouts on fertilised earth dry and wet; bone meal chosen in the strip", ""],
@@ -976,6 +976,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		await process_frame
 		await _shoot("fish_book_unknown", folder)
 		print("  fish_book on %s, then %s" % [ledger.book().shown(), FishBook.species()[FishBook.species().find(GameData.OLD_CATFISH) + 1]])
+		return
+	if name == "catapult":
+		await _shoot("catapult", folder)
+		await _take_catapult_day(main, state, folder)
 		return
 	if name == "beehive":
 		await _shoot("beehive", folder)
@@ -3913,6 +3917,7 @@ func _set_catapult(state: Dictionary) -> void:
 	(state["tech_owned"] as Array).append_array([&"true sights", &"oiled works"])
 	var middle := _clear_patch(state, Player.cell(state) + Vector2i(19, 1), 4)
 	var throwers := [middle + Vector2i(-2, -2), middle + Vector2i(-2, 0), middle + Vector2i(-2, 2)]
+	_catapult_middle = middle
 	for i in throwers.size():
 		if middle.x < 0 or not Building.place(state, &"catapult", throwers[i]):
 			push_warning("shot: no open patch for the catapults")
@@ -3939,6 +3944,64 @@ func _set_catapult(state: Dictionary) -> void:
 		Entities.count(state), Resources.amount(state, GameData.PUMPKIN)])
 	Building.select(state, &"catapult")
 	_look_at(middle + Vector2i(1, 0))
+
+
+## The middle of `_set_catapult`'s patch, which the day twin finds again.
+var _catapult_middle := Vector2i(-1, -1)
+
+
+## **The same by day** (task 0238): the night over and the three catapults
+## standing in the morning, one a level, with the tarps off so A039's art
+## shows, as the tower showcase does. A crowd never comes by day: the night's
+## is set down again and the catapults tick by hand to the same first throws,
+## so each level is seen throwing and its pumpkins in the air. A pumpkin
+## bursts only by night (`WorldView._refresh_splats`), so there is no splat.
+func _take_catapult_day(main: Node, state: Dictionary, folder: String) -> void:
+	var middle := _catapult_middle
+	if middle.x < 0:
+		return
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	# The night's catapult on the hotbar put away: no build mode by day.
+	Building.set_active(state, false)
+	# Below the volley, facing it: the day's camera follows him.
+	_stand(state, middle + Vector2i(0, 4))
+	state["player"]["facing"] = Player.NORTH
+	var view := main.get_node("%WorldView") as WorldView
+	view.tarps = false
+	_only_showing(main, "")
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	Resources.gain(state, {GameData.PUMPKIN: 20})
+	var crowd := {Vector2i(2, -2): &"tank", Vector2i(3, 0): &"tank", Vector2i(2, 2): &"tank",
+		Vector2i(5, -2): &"walker", Vector2i(5, 1): &"walker", Vector2i(5, 3): &"walker"}
+	for at in crowd:
+		Entities.spawn(state, crowd[at], middle + (at as Vector2i))
+	var throwers := [middle + Vector2i(-2, -2), middle + Vector2i(-2, 0), middle + Vector2i(-2, 2)]
+	# Level three throws first and two at once, then two, then one, so the
+	# shutter finds the volley on its way and the others just loosed.
+	for i in throwers.size():
+		Farm.occupant(state, throwers[i])["reload"] = [14, 8, 2][i]
+	for _t in 16:
+		Towers.tick(state)
+		await process_frame
+	await RenderingServer.frame_post_draw
+	await _shoot("catapult_day", folder)
+	var up: Array = []
+	for shot in (state["projectiles"] as Array):
+		up.append("%s %d left" % [str(shot["to"]), int(shot["left"])])
+	print("  catapult by day, %s: levels %s; %d in the air (%s)" % [Phases.name_of(int(state["phase"])),
+		str(throwers.map(func(c: Vector2i) -> int: return Building.level_at(state, c))), up.size(), ", ".join(up)])
+	view.tarps = true
 
 
 ## The ticks before each of `_set_catapult`'s three throws its first pumpkin

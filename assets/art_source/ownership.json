@@ -678,6 +678,54 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/catapult.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_2_fire.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_2_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_3_fire.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_3_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_3_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_fire.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/catapult_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/dairy.png",
       "owner": "raster"
     },
@@ -1667,6 +1715,34 @@
     },
     {
       "output": "sprites/effects/muzzle_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/pumpkin_shot_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/pumpkin_shot_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/pumpkin_shot_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/pumpkin_splat_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/pumpkin_splat_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/pumpkin_splat_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/pumpkin_splat_3.png",
       "owner": "raster"
     },
     {

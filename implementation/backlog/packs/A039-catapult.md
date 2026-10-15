@@ -1,6 +1,6 @@
 # A039 - The pumpkin catapult
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0238
 - **Dressed by game tasks:** 0227
 - **Spec after game task:** 0227

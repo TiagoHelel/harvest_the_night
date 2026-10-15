@@ -1,0 +1,12 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.
+Primary request: A039 identity master, ONE level1 pumpkin catapult, whole/idle.
+Input images: Image1 docs/reference-sheet.png is style and materials only; Image2 mortar.png is the native tower scale and family camera reference, not the mechanism to copy; Image3 farmer is scale only.
+Style/medium: coherent hand-crafted pixel art with deliberate pixel clusters, colored outlines, restrained texture, readable material planes and clean forms.
+Composition/framing: orthographic three-quarter top-down view on a rectangular grid; match the approved family camera and scale. Final native canvas32x48 with ground pivot16,44, final visible target21wide x18tall. Keep source forms simple enough to survive reduction.
+Lighting/mood: neutral warm daytime, upper-left highlights, darker underside; runtime supplies night lighting.
+Color palette: warm timber, twisted beige rope, dark metal touches, a loaded orange pumpkin with dark brown stem, muted violet shadows; limited ramps.
+Scene/backdrop: true transparent background; NO ground shadow, grass, soil platform, labels, text, watermark or UI.
+Family contract: ONE low broad timber torsion catapult on a compact sled base, rope-twisted bundle and a plain wooden bucket. Arm cocked BACK toward lower-left/west, bucket LOW at west end holding ONE orange pumpkin. Stop bar near the upper-right end. It throws toward upper-right/east when released. Obvious throwing arm and bucket, NO metal cannon tube, no crossbow bow. Base centred, grounded. No permanent fire. Compact 7:6 width:height silhouette approximately. Keep all parts inside source. Do not create a tower on stilts. No ground shadow.
+Avoid smooth painting, vector look, 3D render, blur, gradients, anti-aliased halos, random speckle, black boxes, diamond tiles, tiny detail or duplicate objects.
+CORRECTION: Image4 is the edit target. The measured visible ratio was1067:693, giving28x18px rather than21x18. Shorten the westward arm projection and bring the bucket next to the sled so the complete silhouette width:height is7:6. Preserve torso/base height, rope, camera, materials and loaded pumpkin. Remove ALL diffuse coloured glow/shadow beyond solid object pixels, true transparency only. One compact object.

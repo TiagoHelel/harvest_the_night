@@ -1,0 +1,43 @@
+{
+  "pack": "A039",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A039-catapult",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/catapult/none/01.png": "5a50e3f8a9cf8235e267ca9eb18b7bb67ffa78439e08642861caf9fbb9197aaa",
+    "native/catapult_hurt/none/01.png": "a1cabbdd146b50dfef2c652154c42707c411d16b32ec5ffb64b94d76db43fc10",
+    "native/catapult_fire/none/01.png": "1f859f3feafedac9cf7ee8545c81f156317188cb92a3dc51ec6ac5632ca59ad9",
+    "native/catapult_wreck/none/01.png": "164222e0d1713f54925dfdaf969b573ca2d39ed69025868ab04aa3fcda3203e0",
+    "native/catapult_2/none/01.png": "93826ba00301dda6fa4a7ae23028732ac4c78ff44eeed957592750a4f3ba85cc",
+    "native/catapult_2_hurt/none/01.png": "0da512f96caa6a8a9a49a512fe6d82d15b49bab27439f569edc02c2894cb0dd2",
+    "native/catapult_2_fire/none/01.png": "d60e0c5f82e9c9d2e12f0c0e5702b1130495109bd953bf1a79c3fe52c1a24319",
+    "native/catapult_2_wreck/none/01.png": "5604ec6b267893278daacf7787f6f3c4e9a9cee83eeb02fb327ba4b3026108ef",
+    "native/catapult_3/none/01.png": "83ca70576fac6df242a69e4add316107ebd61380be6af474d8eaa42b2ed81439",
+    "native/catapult_3_hurt/none/01.png": "c3a8909df33bb48fe76ff2b5d6e7dff734d8d7cdd0d9798ee42a17ed056ceff2",
+    "native/catapult_3_fire/none/01.png": "965ed3516e042627dba6131a771c0d138a7bfa86443a7e996b8a7f7949354c58",
+    "native/catapult_3_wreck/none/01.png": "fe3004133f323d15ed30512bfc01c56c7038cf7840c7d768408634aaaeb6df2f",
+    "native/pumpkin_shot/none/01.png": "d146fef366dd7b1cab5e8321692da800cf6ca7a2c2dc9b26f382de7f64a8e5aa",
+    "native/pumpkin_shot/none/02.png": "5dcd0ecb2cb11ce6207e4b2facf59f302b698ad9f78b8176801d569f6660aae3",
+    "native/pumpkin_shot/none/03.png": "f14382b53c214dfd92b5615d0c936a30fb685d42a2180fed2f9fd3545636a150",
+    "native/pumpkin_splat/none/01.png": "cdd5d07fa253f17b7d5ae79ae77bf886e2d7ddc2328eb73aaa648b770f41747a",
+    "native/pumpkin_splat/none/02.png": "705cc6b8daea58f487c5c8c1b9d9dcf94650fd0fa393d32971e1f9facb996f3d",
+    "native/pumpkin_splat/none/03.png": "3602d9b1d1a85181df53cb7159d108778e52509cde641764f34de4aa015d051a",
+    "native/pumpkin_splat/none/04.png": "dd3261bf3053329b9cd7261175548b8ff2bb17f2cf968b9059f80989f4c5261d"
+  },
+  "frames": 19,
+  "frames_expected": 19,
+  "accepted_visual_checks": [
+    "catapult_2_stationary_base_exact",
+    "catapult_3_stationary_base_exact",
+    "catapult_3_whole_dimensions",
+    "catapult_3_wreck_inside_whole",
+    "catapult_stationary_base_exact",
+    "catapult_wreck_inside_whole"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

@@ -61958,6 +61958,1428 @@
         2
       ],
       "output_sha256": "41bf9b2877f0a820a53c91717759585fb31beddabb9cd4be38a5a826c6541730"
+    },
+    {
+      "id": "buildings/catapult",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978",
+      "crop_xywh": [
+        158,
+        105,
+        541,
+        397
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 1,
+      "content_scale": 0.04158690176322419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult.png",
+      "muzzle_region_xywh": [
+        5,
+        34,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        7,
+        36
+      ],
+      "muzzles_xy": [
+        [
+          7,
+          36
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.call.json",
+          "sha256": "f651accb364db6c5e66cd2e43385efde3bd3f636d7f753dca1930d0e65a3f05a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult/none/01.png",
+          "sha256": "5a50e3f8a9cf8235e267ca9eb18b7bb67ffa78439e08642861caf9fbb9197aaa",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        11,
+        17
+      ],
+      "output_sha256": "5a50e3f8a9cf8235e267ca9eb18b7bb67ffa78439e08642861caf9fbb9197aaa"
+    },
+    {
+      "id": "buildings/catapult_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978",
+      "crop_xywh": [
+        840,
+        114,
+        565,
+        401
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 1,
+      "variant_of": "buildings/catapult",
+      "content_scale": 0.04158690176322419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_hurt.png",
+      "muzzle_region_xywh": [
+        5,
+        34,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        7,
+        36
+      ],
+      "muzzles_xy": [
+        [
+          7,
+          36
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.call.json",
+          "sha256": "f651accb364db6c5e66cd2e43385efde3bd3f636d7f753dca1930d0e65a3f05a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_hurt/none/01.png",
+          "sha256": "a1cabbdd146b50dfef2c652154c42707c411d16b32ec5ffb64b94d76db43fc10",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        11,
+        17
+      ],
+      "output_sha256": "a1cabbdd146b50dfef2c652154c42707c411d16b32ec5ffb64b94d76db43fc10"
+    },
+    {
+      "id": "buildings/catapult_fire",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978",
+      "crop_xywh": [
+        158,
+        529,
+        542,
+        454
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 1,
+      "variant_of": "buildings/catapult",
+      "content_scale": 0.04158690176322419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_fire.png",
+      "muzzle_region_xywh": [
+        23,
+        24,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        25,
+        26
+      ],
+      "muzzles_xy": [
+        [
+          25,
+          26
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.call.json",
+          "sha256": "f651accb364db6c5e66cd2e43385efde3bd3f636d7f753dca1930d0e65a3f05a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_fire/none/01.png",
+          "sha256": "1f859f3feafedac9cf7ee8545c81f156317188cb92a3dc51ec6ac5632ca59ad9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        11,
+        19
+      ],
+      "output_sha256": "1f859f3feafedac9cf7ee8545c81f156317188cb92a3dc51ec6ac5632ca59ad9"
+    },
+    {
+      "id": "buildings/catapult_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978",
+      "crop_xywh": [
+        846,
+        655,
+        564,
+        305
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 1,
+      "variant_of": "buildings/catapult",
+      "content_scale": 0.04158690176322419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r1.call.json",
+          "sha256": "f651accb364db6c5e66cd2e43385efde3bd3f636d7f753dca1930d0e65a3f05a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_wreck/none/01.png",
+          "sha256": "164222e0d1713f54925dfdaf969b573ca2d39ed69025868ab04aa3fcda3203e0",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        11,
+        13
+      ],
+      "output_sha256": "164222e0d1713f54925dfdaf969b573ca2d39ed69025868ab04aa3fcda3203e0"
+    },
+    {
+      "id": "buildings/catapult_2",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596",
+      "crop_xywh": [
+        22,
+        322,
+        492,
+        430
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 2,
+      "content_scale": 0.04883720930232558,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_2.png",
+      "muzzle_region_xywh": [
+        5,
+        34,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        7,
+        36
+      ],
+      "muzzles_xy": [
+        [
+          7,
+          36
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.call.json",
+          "sha256": "3a8ef7fbde0696ba433aee7b26f5df0e8928e7aabcede513cf9d61c781381455",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_2/none/01.png",
+          "sha256": "93826ba00301dda6fa4a7ae23028732ac4c78ff44eeed957592750a4f3ba85cc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        12,
+        21
+      ],
+      "output_sha256": "93826ba00301dda6fa4a7ae23028732ac4c78ff44eeed957592750a4f3ba85cc"
+    },
+    {
+      "id": "buildings/catapult_2_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596",
+      "crop_xywh": [
+        534,
+        330,
+        474,
+        429
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 2,
+      "variant_of": "buildings/catapult_2",
+      "content_scale": 0.04883720930232558,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_2_hurt.png",
+      "muzzle_region_xywh": [
+        5,
+        34,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        7,
+        36
+      ],
+      "muzzles_xy": [
+        [
+          7,
+          36
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.call.json",
+          "sha256": "3a8ef7fbde0696ba433aee7b26f5df0e8928e7aabcede513cf9d61c781381455",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_2_hurt/none/01.png",
+          "sha256": "0da512f96caa6a8a9a49a512fe6d82d15b49bab27439f569edc02c2894cb0dd2",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        11,
+        21
+      ],
+      "output_sha256": "0da512f96caa6a8a9a49a512fe6d82d15b49bab27439f569edc02c2894cb0dd2"
+    },
+    {
+      "id": "buildings/catapult_2_fire",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596",
+      "crop_xywh": [
+        35,
+        906,
+        484,
+        508
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 2,
+      "variant_of": "buildings/catapult_2",
+      "content_scale": 0.04883720930232558,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_2_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_2_fire.png",
+      "muzzle_region_xywh": [
+        24,
+        20,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        26,
+        22
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          22
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.call.json",
+          "sha256": "3a8ef7fbde0696ba433aee7b26f5df0e8928e7aabcede513cf9d61c781381455",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_2_fire/none/01.png",
+          "sha256": "d60e0c5f82e9c9d2e12f0c0e5702b1130495109bd953bf1a79c3fe52c1a24319",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        12,
+        25
+      ],
+      "output_sha256": "d60e0c5f82e9c9d2e12f0c0e5702b1130495109bd953bf1a79c3fe52c1a24319"
+    },
+    {
+      "id": "buildings/catapult_2_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596",
+      "crop_xywh": [
+        549,
+        1098,
+        448,
+        311
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 2,
+      "variant_of": "buildings/catapult_2",
+      "content_scale": 0.04883720930232558,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_2_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_2_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l2-r1.call.json",
+          "sha256": "3a8ef7fbde0696ba433aee7b26f5df0e8928e7aabcede513cf9d61c781381455",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_2_wreck/none/01.png",
+          "sha256": "5604ec6b267893278daacf7787f6f3c4e9a9cee83eeb02fb327ba4b3026108ef",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        11,
+        15
+      ],
+      "output_sha256": "5604ec6b267893278daacf7787f6f3c4e9a9cee83eeb02fb327ba4b3026108ef"
+    },
+    {
+      "id": "buildings/catapult_3",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698",
+      "crop_xywh": [
+        209,
+        88,
+        494,
+        405
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 3,
+      "content_scale": 0.057283950617283946,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_3.png",
+      "muzzle_region_xywh": [
+        4,
+        31,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        6,
+        33
+      ],
+      "muzzles_xy": [
+        [
+          6,
+          33
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.call.json",
+          "sha256": "efba6603d0059cee62f9def624687667d737b44d3d9721bf66bd220b48d38039",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_3/none/01.png",
+          "sha256": "83ca70576fac6df242a69e4add316107ebd61380be6af474d8eaa42b2ed81439",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        14,
+        23
+      ],
+      "output_sha256": "83ca70576fac6df242a69e4add316107ebd61380be6af474d8eaa42b2ed81439"
+    },
+    {
+      "id": "buildings/catapult_3_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698",
+      "crop_xywh": [
+        880,
+        84,
+        504,
+        407
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 3,
+      "variant_of": "buildings/catapult_3",
+      "content_scale": 0.057283950617283946,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_3_hurt.png",
+      "muzzle_region_xywh": [
+        4,
+        31,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        6,
+        33
+      ],
+      "muzzles_xy": [
+        [
+          6,
+          33
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.call.json",
+          "sha256": "efba6603d0059cee62f9def624687667d737b44d3d9721bf66bd220b48d38039",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_3_hurt/none/01.png",
+          "sha256": "c3a8909df33bb48fe76ff2b5d6e7dff734d8d7cdd0d9798ee42a17ed056ceff2",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        14,
+        23
+      ],
+      "output_sha256": "c3a8909df33bb48fe76ff2b5d6e7dff734d8d7cdd0d9798ee42a17ed056ceff2"
+    },
+    {
+      "id": "buildings/catapult_3_fire",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698",
+      "crop_xywh": [
+        204,
+        542,
+        490,
+        455
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 3,
+      "variant_of": "buildings/catapult_3",
+      "content_scale": 0.057283950617283946,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_3_fire",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_3_fire.png",
+      "muzzle_region_xywh": [
+        24,
+        18,
+        5,
+        5
+      ],
+      "muzzle_xy": [
+        26,
+        20
+      ],
+      "muzzles_xy": [
+        [
+          26,
+          20
+        ]
+      ],
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.call.json",
+          "sha256": "efba6603d0059cee62f9def624687667d737b44d3d9721bf66bd220b48d38039",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_3_fire/none/01.png",
+          "sha256": "965ed3516e042627dba6131a771c0d138a7bfa86443a7e996b8a7f7949354c58",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        14,
+        26
+      ],
+      "output_sha256": "965ed3516e042627dba6131a771c0d138a7bfa86443a7e996b8a7f7949354c58"
+    },
+    {
+      "id": "buildings/catapult_3_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/catapult/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698",
+      "crop_xywh": [
+        876,
+        678,
+        523,
+        302
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "tower_family": "catapult",
+      "tower_level": 3,
+      "variant_of": "buildings/catapult_3",
+      "content_scale": 0.057283950617283946,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/catapult_3_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/catapult_3_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/catapult-l3-r3.call.json",
+          "sha256": "efba6603d0059cee62f9def624687667d737b44d3d9721bf66bd220b48d38039",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/catapult_3_wreck/none/01.png",
+          "sha256": "fe3004133f323d15ed30512bfc01c56c7038cf7840c7d768408634aaaeb6df2f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        15,
+        17
+      ],
+      "output_sha256": "fe3004133f323d15ed30512bfc01c56c7038cf7840c7d768408634aaaeb6df2f"
+    },
+    {
+      "id": "effects/pumpkin_shot_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/pumpkin/pumpkin-shot-r1.png",
+      "source_sha256": "e3b8b1a455dfd5bf9c44d056a4a2fbb08ec29ccb9a756920c2ddc1ea8d285bd4",
+      "crop_xywh": [
+        212,
+        207,
+        377,
+        344
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.015915119363395226,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/pumpkin_shot",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "pumpkin_shot",
+      "fx_origin": "center",
+      "output": "sprites/effects/pumpkin_shot_0.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-shot-r1.prompt.txt",
+      "prompt_sha256": "1f64b9538eaedf2fcaf2928cf4657b577c61fa5ec1bb0a01a9d5e229ad7a2a9a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-shot-r1.call.json",
+          "sha256": "36065a1d30e10e514af48c0d55e62f531e0755bbdfff033c3f8b53d8800513c2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/pumpkin_shot/none/01.png",
+          "sha256": "d146fef366dd7b1cab5e8321692da800cf6ca7a2c2dc9b26f382de7f64a8e5aa",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "output_sha256": "d146fef366dd7b1cab5e8321692da800cf6ca7a2c2dc9b26f382de7f64a8e5aa"
+    },
+    {
+      "id": "effects/pumpkin_shot_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/pumpkin/pumpkin-shot-r1.png",
+      "source_sha256": "e3b8b1a455dfd5bf9c44d056a4a2fbb08ec29ccb9a756920c2ddc1ea8d285bd4",
+      "crop_xywh": [
+        915,
+        227,
+        350,
+        338
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.015915119363395226,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/pumpkin_shot",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "pumpkin_shot",
+      "fx_origin": "center",
+      "variant_of": "effects/pumpkin_shot_0",
+      "output": "sprites/effects/pumpkin_shot_1.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-shot-r1.prompt.txt",
+      "prompt_sha256": "1f64b9538eaedf2fcaf2928cf4657b577c61fa5ec1bb0a01a9d5e229ad7a2a9a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-shot-r1.call.json",
+          "sha256": "36065a1d30e10e514af48c0d55e62f531e0755bbdfff033c3f8b53d8800513c2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/pumpkin_shot/none/02.png",
+          "sha256": "5dcd0ecb2cb11ce6207e4b2facf59f302b698ad9f78b8176801d569f6660aae3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        3,
+        2
+      ],
+      "output_sha256": "5dcd0ecb2cb11ce6207e4b2facf59f302b698ad9f78b8176801d569f6660aae3"
+    },
+    {
+      "id": "effects/pumpkin_shot_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/pumpkin/pumpkin-shot-r1.png",
+      "source_sha256": "e3b8b1a455dfd5bf9c44d056a4a2fbb08ec29ccb9a756920c2ddc1ea8d285bd4",
+      "crop_xywh": [
+        1623,
+        215,
+        357,
+        352
+      ],
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "content_scale": 0.015915119363395226,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/pumpkin_shot",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "fx_family": "pumpkin_shot",
+      "fx_origin": "center",
+      "variant_of": "effects/pumpkin_shot_0",
+      "output": "sprites/effects/pumpkin_shot_2.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-shot-r1.prompt.txt",
+      "prompt_sha256": "1f64b9538eaedf2fcaf2928cf4657b577c61fa5ec1bb0a01a9d5e229ad7a2a9a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-shot-r1.call.json",
+          "sha256": "36065a1d30e10e514af48c0d55e62f531e0755bbdfff033c3f8b53d8800513c2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/pumpkin_shot/none/03.png",
+          "sha256": "f14382b53c214dfd92b5615d0c936a30fb685d42a2180fed2f9fd3545636a150",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        3,
+        3
+      ],
+      "output_sha256": "f14382b53c214dfd92b5615d0c936a30fb685d42a2180fed2f9fd3545636a150"
+    },
+    {
+      "id": "effects/pumpkin_splat_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/pumpkin/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162",
+      "crop_xywh": [
+        73,
+        493,
+        391,
+        195
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.025522041763341066,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/pumpkin_splat",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "pumpkin_splat",
+      "fx_origin": "base",
+      "output": "sprites/effects/pumpkin_splat_0.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.call.json",
+          "sha256": "609c108002516cf67785bc7c2dc529c1f09f468f26aae8dea25de742a47de5fb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/pumpkin_splat/none/01.png",
+          "sha256": "cdd5d07fa253f17b7d5ae79ae77bf886e2d7ddc2328eb73aaa648b770f41747a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        5,
+        5
+      ],
+      "output_sha256": "cdd5d07fa253f17b7d5ae79ae77bf886e2d7ddc2328eb73aaa648b770f41747a"
+    },
+    {
+      "id": "effects/pumpkin_splat_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/pumpkin/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162",
+      "crop_xywh": [
+        533,
+        262,
+        460,
+        431
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.025522041763341066,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/pumpkin_splat",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "pumpkin_splat",
+      "fx_origin": "base",
+      "variant_of": "effects/pumpkin_splat_0",
+      "output": "sprites/effects/pumpkin_splat_1.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.call.json",
+          "sha256": "609c108002516cf67785bc7c2dc529c1f09f468f26aae8dea25de742a47de5fb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/pumpkin_splat/none/02.png",
+          "sha256": "705cc6b8daea58f487c5c8c1b9d9dcf94650fd0fa393d32971e1f9facb996f3d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        6,
+        11
+      ],
+      "output_sha256": "705cc6b8daea58f487c5c8c1b9d9dcf94650fd0fa393d32971e1f9facb996f3d"
+    },
+    {
+      "id": "effects/pumpkin_splat_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/pumpkin/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162",
+      "crop_xywh": [
+        1054,
+        425,
+        407,
+        277
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.025522041763341066,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/pumpkin_splat",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "pumpkin_splat",
+      "fx_origin": "base",
+      "variant_of": "effects/pumpkin_splat_0",
+      "output": "sprites/effects/pumpkin_splat_2.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.call.json",
+          "sha256": "609c108002516cf67785bc7c2dc529c1f09f468f26aae8dea25de742a47de5fb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/pumpkin_splat/none/03.png",
+          "sha256": "3602d9b1d1a85181df53cb7159d108778e52509cde641764f34de4aa015d051a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        5,
+        7
+      ],
+      "output_sha256": "3602d9b1d1a85181df53cb7159d108778e52509cde641764f34de4aa015d051a"
+    },
+    {
+      "id": "effects/pumpkin_splat_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/pumpkin/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162",
+      "crop_xywh": [
+        1558,
+        575,
+        349,
+        118
+      ],
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "content_scale": 0.025522041763341066,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/pumpkin_splat",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "pumpkin_splat",
+      "fx_origin": "base",
+      "variant_of": "effects/pumpkin_splat_0",
+      "output": "sprites/effects/pumpkin_splat_3.png",
+      "prompt": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/raw/pumpkin-splat-r1.call.json",
+          "sha256": "609c108002516cf67785bc7c2dc529c1f09f468f26aae8dea25de742a47de5fb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/native/pumpkin_splat/none/04.png",
+          "sha256": "dd3261bf3053329b9cd7261175548b8ff2bb17f2cf968b9059f80989f4c5261d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/contract.json",
+          "sha256": "89f1b9a457e08b2a8b0e7a16c4c1dd9289957d1a352fd2926f2db8a27b8dae96",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A039-catapult/APPROVAL.json",
+          "sha256": "16f86255cceabc192b8f4758acca3c93e9cfdbf10c72de72439a871e649dca52",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A039",
+      "integration_task": "0238",
+      "revision": 1,
+      "approval": "A039 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0238",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "dd3261bf3053329b9cd7261175548b8ff2bb17f2cf968b9059f80989f4c5261d"
     }
   ]
 }

@@ -1,0 +1,1 @@
+Whole24x17 is too wide; base pixels change during fire.

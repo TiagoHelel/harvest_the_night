@@ -31718,3 +31718,87 @@ delivery's `APPROVAL.json`). 0226's stand-ins are gone.
   swarm test, a multi-line `x = x and ...` without parentheses, as in 0236.
   That crash left a breadcrumb that failed two `input_check` cases. Both
   passed once the test was fixed.
+
+## 0238 - Art: the pumpkin catapult - done 2026-10-14
+
+A039 is integrated. The catapult at its three levels (whole, hurt, throwing
+and wrecked), the pumpkin tumbling in the air and its splat where it lands
+are the owner-approved art now. They were approved on 2026-10-14 in the
+batch review, recorded by Codex in the delivery's `APPROVAL.json`. 0227's
+stand-ins are gone.
+
+- **Promotion**: the 19 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their five raw sources were copied byte for byte: one sheet a level into
+    `assets/art_source/defences/catapult/`, the shot and the splat into
+    `assets/art_source/effects/pumpkin/`.
+  - Each output has a manifest entry with its prompt, call, native,
+    contract and approval provenance, and an `ownership.json` row. Then
+    `tools/import_art.py` ran.
+  - 0236's scratch promoter solved each `content_anchor_xy`, so every
+    render decodes to the approved pixels exactly.
+  - The contract's points are on every state but the wreck. Resting,
+    `muzzle_xy` is where the pumpkin sits in the cup. Throwing, it is the
+    arm's raised end, so a pumpkin leaves from there.
+  - Metadata: `tower_family` `catapult` and `tower_level` 1-3 on each
+    state, with `variant_of` on all but the master. The effects carry
+    `fx_family` `pumpkin_shot` (origin `center`) or `pumpkin_splat` (origin
+    `base`, as the splash's), with `variant_of` on all but frame 0.
+- **The catapult is an authored tower**, through 0237's rule in
+  `import_art.py` (any entry with a `tower_family`). It is drawn by the
+  gun's resolver: level, then `_fire` as it throws, then `_hurt`. The
+  stand-in's per-level `stand_in_scale` is gone with it.
+- **The stand-ins retired**:
+  - A039's 14 `PlaceholderArt` entries and the
+    `CATAPULT`/`PUMPKIN_SHOT`/`PUMPKIN_SPLAT` geometry are gone.
+    `placeholders.py --check` passes, with 350 stand-ins left over 36
+    packs.
+  - `CatapultArt` loses its drawing and loads A039's frames.
+  - The splat's orange tint over the splash is gone too.
+- **Found on the way, and fixed: a raster texture drawn with
+  `draw_texture` has to be held.**
+  - The view draws the pumpkin in `_draw_shots` with `draw_texture`, which
+    keeps no reference. A texture `load()`ed there and dropped when `_draw`
+    returns is freed before the frame renders, and draws as a plain white
+    square. The first takes showed exactly that; a two-line probe drew
+    A038's swarm the same way.
+  - `CatapultArt` now holds its three frames (`_shots`).
+  - `_task_0227_catapult` asserts the frame outlives the call
+    (`_held`, a new helper).
+  - `SpitterArt`'s glob is drawn the same way and will need the same at
+    0260 (A046).
+- **Checks**:
+  - `check_tower_art.py` adds the catapult to `FAMILIES` at three levels:
+    6 families, 17 levels, 68 states, 54 outlets.
+  - `check_effect_art.py` puts the packs' effects in one table
+    (`PACK_EFFECTS`), each its own block, leaving 0017's 25 frames alone.
+    The swarm and the pumpkin are loops that neither grow nor fade. The
+    splat is a one-shot that bursts and fades.
+  - The tower showcase has the catapult as a sixth column: 1,908 checks.
+    `_mixed_night`'s walkers moved east of it, each on its own cell.
+  - The effect showcase gains `_throwing`, with 3,214 checks. Real
+    catapults at each level throw at real tanks, and the pumpkin tumbles
+    through its three frames in the air. Where one lands, the splat plays
+    its four frames once, on its base, untinted, and is gone.
+- **Tests**: `_task_0227_catapult`'s view half now checks the art: the
+  twelve states as authored towers on (16,44), with the point on all but
+  the wreck; the resolver's throw, hurt and whole; the shot's looping
+  frames, held; and the splat's four frames, then none.
+- **Shots** (`implementation/shots/0238/`, FHD 1920x1080, looked at):
+  - `catapult`, the scene of 0227 at night: three catapults, one a level,
+    with a splat bursting, pumpkins in the air and level three's volley.
+  - `catapult_day`, its new twin. It is the morning after, with the tarps
+    and build mode off. The night's crowd is set down again and the
+    catapults are ticked by hand, so every level is throwing and four
+    pumpkins are in the air.
+  - A pumpkin bursts only by night (`_refresh_splats`), so the day picture
+    has no splat.
+  - At native size the approved catapult reads busy: timber, rope and
+    iron in many small pixels. That is the art as approved, unchanged.
+- **The delivery folder** `implementation/backlog/deliveries/A039-catapult/` is
+  committed, as A038's was.
+- `python implementation/backlog/assets.py set A039 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (61 of 61). The first run
+  failed to compile `headless_v1.gd`: `var weak := weakref(...)` infers from
+  a Variant, a warning this project treats as an error. It is typed now.

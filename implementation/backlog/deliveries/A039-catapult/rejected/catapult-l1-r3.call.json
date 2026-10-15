@@ -1,0 +1,49 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nPrimary request: A039 identity master, ONE level1 pumpkin catapult, whole/idle.\nInput images: Image1 docs/reference-sheet.png is style and materials only; Image2 mortar.png is the native tower scale and family camera reference, not the mechanism to copy; Image3 farmer is scale only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters, colored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular grid; match the approved family camera and scale. Final native canvas 32x48 with ground pivot (16,44), final visible target 21 wide x18 tall. Keep source forms simple enough to survive reduction.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; runtime supplies night lighting.\nColor palette: warm timber, twisted beige rope, dark metal touches, a loaded orange pumpkin with dark brown stem, muted violet shadows; limited ramps.\nScene/backdrop: true transparent background; NO ground shadow, grass, soil platform, labels, text, watermark or UI.\nFamily contract: one2x2 four-state sheet of level1 PUMPKIN CATAPULT. The identity master Image4 is the accepted geometry and mechanism. Target WHOLE visible22wide x17tall on32x48, pivot16,44. Small timber torsion catapult on sled base, arm cocked back toward west, bucket low at west end loaded withONEorange pumpkin.\nFour-state sheet contract: FOUR isolated machines in2rows2columns with enormous transparent crossgutters, identical camera and scale. Top-left WHOLE loaded withpumpkin. Top-right HURT sameframe/base, crackedarm, frayedrope, splitsledrunner, pumpkinstillloaded. Bottom-left FIRE: identical frame/base toWHOLE, ONLY arm rotates up andforward againststopbar towardupper-right, emptybucket nearupper-right,2\u20133nativepx orangefleck atlip; noflyingpumpkin/motionstreak. Bottom-right WRECK lowsnappedarm acrossbrokenbase, no pumpkin, insidewholewidth. No permanentfireonWHOLE. Do not redraw/reposition base between wholeandfire, COPY thosepixelsunchanged. Clearbucketlip visibleforpoint.\nLAYOUT CLEARANCE: every complete machine SMALL atmost55percentofvirtualcellwidth/height; transparentcrossguttersatleast25percentcell. Complete unclipped objects including raisedarm. No text/grid/checkerboard/ground/shadow/glow. Keep level1lowandbroad notacannon.\nCORRECTION: Image5 is the edit target. Fix overall WHOLE aspect ratio, currently622:436 (24x17 native), target whole silhouette21:18 (1.167), NOT1.43. Shorten the throwing arm's low westward projection and tuck the bucket against sled. All four state copies use that same compact machine at exactly the same scale. Wreck remains narrower than whole. Whole and fire share exact stationary support frame pixels; only arm/bucket/load change. Make the SOURCE background absolutely alpha0 immediately outside object edges. No gradient, glow or halo even faintly. Use bold simple broad shapes, fewer details, readable at21x18 native.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/mortar.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-master-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/mortar.png",
+      "sha256": "be87c0ec7487b14ade3c06ca9be29946030c87f00040bb42b912b16860d4ea18",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-master-r2.png",
+      "sha256": "0b44eb04b3d42d846e24dca05369da981a2707dd5e36d788bccc726da49adbfc",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-l1-r2.png",
+      "sha256": "e9866beb30aa637e9635c3c4d51c8d7ffd3bb0805ce01b3f87e1e35a69018d05",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\rejected\\catapult-l1-r2.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e8d64433-22a5-4cd8-8932-d32e9a5e21bf.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-l1-r3.png",
+  "sha256": "e5ccd6096cf00171fa264d9fa148a4f673d3b06cb2156a1447e7cab1f530be23",
+  "revision": 3,
+  "decision": "rejected: No empty row gutter at alpha128, and proportions remain incorrect.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\rejected\\catapult-l1-r3.png"
+}

@@ -33,6 +33,7 @@ func _run() -> void:
 	await _forms_gallery(true)
 	await _firing()
 	await _stinging()
+	await _throwing()
 	await _chimney()
 	await _working()
 	await _crowd()
@@ -291,6 +292,61 @@ func _stinging() -> void:
 		left += int(sprite.visible)
 	expect(left == 0, "No swarm outlives its sting")
 	expect(var_to_bytes(_state) != bytes, "The fixture really cleared the stings")
+
+
+## **A pumpkin tumbles and bursts** (task 0238): A039's loop and one-shot.
+## Real catapults at each level throw at real tanks; the view tumbles the
+## pumpkin through its three frames while one is in the air and, where one
+## lands, plays the splat's four frames once on its base, then nothing.
+func _throwing() -> void:
+	_state = _blank(true)
+	_state["phase"] = Phases.PREPARATION  # where defences go up since task 0119
+	_state["tech_owned"] = [&"true sights", &"oiled works"]
+	Resources.gain(_state, {GameData.PUMPKIN: 30})
+	for level in [1, 2, 3]:
+		var cell := Vector2i(8, 2 + level * 3)
+		expect(Building.place(_state, &"catapult", cell), "A real catapult can be placed")
+		for _l in level - 1:
+			expect(Building.upgrade(_state, cell), "A real catapult's step")
+		Entities.spawn(_state, &"tank", cell + Vector2i(5, 0))
+	_state["phase"] = Phases.NIGHT
+	await _settle()
+	var flew := 0
+	var tumbled := {}
+	var burst: Sprite2D = null
+	for tick in 120:
+		_core_tick(true)
+		var flying := 0
+		for shot in (_state["projectiles"] as Array):
+			if WorldView.throws_pumpkins(StringName(shot.get("from", &""))) and bool(shot.get("armed", true)):
+				flying += 1
+		flew = maxi(flew, flying)
+		if flying > 0:
+			var pumpkin := CatapultArt.shot(CatapultArt.frame_at(_world._ambient_time))
+			tumbled[pumpkin.resource_path if pumpkin != null else ""] = true
+			_world._process(0.05)
+		for splat in _world._splats:
+			if burst == null and not bool(splat.get("spit", false)):
+				burst = splat["sprite"]
+		if burst != null:
+			break
+	expect(flew >= 3, "All three real catapults throw a pumpkin: %d in the air at once" % flew)
+	expect(tumbled.size() == CatapultArt.SHOT_FRAMES and not tumbled.has(""), "The pumpkin tumbles through A039's three frames in the air: " + str(tumbled.keys()))
+	expect(burst != null, "A pumpkin that lands bursts")
+	if burst == null:
+		return
+	expect(burst.texture.resource_path == CatapultArt.SPLAT_PATH % 0 and burst.offset == -Vector2(10, 14) and burst.self_modulate == Color.WHITE,
+		"The splat starts on A039's first frame, on its base, untinted")
+	await _shoot("pumpkin_splat", "A039's pumpkin in the air and its splat / catapults L1-L3")
+	var played: Array = [burst.texture.resource_path]
+	for step in 6:
+		_world._process(CatapultArt.splat_seconds())
+		if not is_instance_valid(burst) or not _world._splats.any(func(s: Dictionary) -> bool: return s["sprite"] == burst):
+			played.append("")
+			break
+		played.append(burst.texture.resource_path)
+	expect(played == [CatapultArt.SPLAT_PATH % 0, CatapultArt.SPLAT_PATH % 1, CatapultArt.SPLAT_PATH % 2, CatapultArt.SPLAT_PATH % 3, ""],
+		"The splat plays its four frames once, then goes: " + str(played))
 
 
 func _chimney() -> void:

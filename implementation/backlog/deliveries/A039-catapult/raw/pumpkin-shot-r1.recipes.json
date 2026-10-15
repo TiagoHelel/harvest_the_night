@@ -1,0 +1,131 @@
+[
+  {
+    "recipe": {
+      "id": "pumpkin-shot-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\pumpkin-shot-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        751,
+        724
+      ],
+      "crop_xywh": [
+        212,
+        207,
+        377,
+        344
+      ],
+      "content_scale": 0.015915119363395226,
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        3,
+        2
+      ]
+    },
+    "native_bounds": [
+      1,
+      2,
+      7,
+      7
+    ],
+    "unclipped_scaled_wh": [
+      6,
+      5
+    ]
+  },
+  {
+    "recipe": {
+      "id": "pumpkin-shot-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\pumpkin-shot-r1.png",
+      "sheet_cell_xywh": [
+        751,
+        0,
+        692,
+        724
+      ],
+      "crop_xywh": [
+        915,
+        227,
+        350,
+        338
+      ],
+      "content_scale": 0.015915119363395226,
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        3,
+        2
+      ]
+    },
+    "native_bounds": [
+      1,
+      2,
+      7,
+      7
+    ],
+    "unclipped_scaled_wh": [
+      6,
+      5
+    ]
+  },
+  {
+    "recipe": {
+      "id": "pumpkin-shot-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\pumpkin-shot-r1.png",
+      "sheet_cell_xywh": [
+        1443,
+        0,
+        729,
+        724
+      ],
+      "crop_xywh": [
+        1623,
+        215,
+        357,
+        352
+      ],
+      "content_scale": 0.015915119363395226,
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        3,
+        3
+      ]
+    },
+    "native_bounds": [
+      1,
+      1,
+      7,
+      7
+    ],
+    "unclipped_scaled_wh": [
+      6,
+      6
+    ]
+  }
+]

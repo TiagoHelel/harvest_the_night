@@ -1,0 +1,1886 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "catapult",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult-none-0-night.png",
+          "path": "preview/candidates/catapult/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              5,
+              34,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              7,
+              36
+            ],
+            "muzzles_xy": [
+              [
+                7,
+                36
+              ]
+            ]
+          },
+          "pose": "whole"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "poses": [
+        "whole"
+      ]
+    },
+    {
+      "anim": "catapult_2",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_2-none-0-night.png",
+          "path": "preview/candidates/catapult_2/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              5,
+              34,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              7,
+              36
+            ],
+            "muzzles_xy": [
+              [
+                7,
+                36
+              ]
+            ]
+          },
+          "pose": "whole"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "poses": [
+        "whole"
+      ]
+    },
+    {
+      "anim": "catapult_2_fire",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_2_fire-none-0-night.png",
+          "path": "preview/candidates/catapult_2_fire/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              24,
+              20,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              26,
+              22
+            ],
+            "muzzles_xy": [
+              [
+                26,
+                22
+              ]
+            ]
+          },
+          "pose": "fire"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          24,
+          20,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          26,
+          22
+        ],
+        "muzzles_xy": [
+          [
+            26,
+            22
+          ]
+        ]
+      },
+      "poses": [
+        "fire"
+      ]
+    },
+    {
+      "anim": "catapult_2_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_2_hurt-none-0-night.png",
+          "path": "preview/candidates/catapult_2_hurt/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              5,
+              34,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              7,
+              36
+            ],
+            "muzzles_xy": [
+              [
+                7,
+                36
+              ]
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "catapult_2_wreck",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_2_wreck-none-0-night.png",
+          "path": "preview/candidates/catapult_2_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "catapult_3",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_3-none-0-night.png",
+          "path": "preview/candidates/catapult_3/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              4,
+              31,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              6,
+              33
+            ],
+            "muzzles_xy": [
+              [
+                6,
+                33
+              ]
+            ]
+          },
+          "pose": "whole"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          4,
+          31,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          6,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            6,
+            33
+          ]
+        ]
+      },
+      "poses": [
+        "whole"
+      ]
+    },
+    {
+      "anim": "catapult_3_fire",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_3_fire-none-0-night.png",
+          "path": "preview/candidates/catapult_3_fire/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              24,
+              18,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              26,
+              20
+            ],
+            "muzzles_xy": [
+              [
+                26,
+                20
+              ]
+            ]
+          },
+          "pose": "fire"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          24,
+          18,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          26,
+          20
+        ],
+        "muzzles_xy": [
+          [
+            26,
+            20
+          ]
+        ]
+      },
+      "poses": [
+        "fire"
+      ]
+    },
+    {
+      "anim": "catapult_3_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_3_hurt-none-0-night.png",
+          "path": "preview/candidates/catapult_3_hurt/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              4,
+              31,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              6,
+              33
+            ],
+            "muzzles_xy": [
+              [
+                6,
+                33
+              ]
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          4,
+          31,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          6,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            6,
+            33
+          ]
+        ]
+      },
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "catapult_3_wreck",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_3_wreck-none-0-night.png",
+          "path": "preview/candidates/catapult_3_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "catapult_fire",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_fire-none-0-night.png",
+          "path": "preview/candidates/catapult_fire/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              23,
+              24,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              25,
+              26
+            ],
+            "muzzles_xy": [
+              [
+                25,
+                26
+              ]
+            ]
+          },
+          "pose": "fire"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          23,
+          24,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          25,
+          26
+        ],
+        "muzzles_xy": [
+          [
+            25,
+            26
+          ]
+        ]
+      },
+      "poses": [
+        "fire"
+      ]
+    },
+    {
+      "anim": "catapult_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_hurt-none-0-night.png",
+          "path": "preview/candidates/catapult_hurt/none/01.png",
+          "points": {
+            "muzzle_region_xywh": [
+              5,
+              34,
+              5,
+              5
+            ],
+            "muzzle_xy": [
+              7,
+              36
+            ],
+            "muzzles_xy": [
+              [
+                7,
+                36
+              ]
+            ]
+          },
+          "pose": "hurt"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "poses": [
+        "hurt"
+      ]
+    },
+    {
+      "anim": "catapult_wreck",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+          "night": "preview/catapult_wreck-none-0-night.png",
+          "path": "preview/candidates/catapult_wreck/none/01.png",
+          "points": {},
+          "pose": "wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "wreck"
+      ]
+    },
+    {
+      "anim": "pumpkin_shot",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pumpkin_shot-none-0-night.png",
+          "path": "preview/candidates/pumpkin_shot/none/01.png",
+          "points": {},
+          "pose": "stem12"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin_shot-none-1-night.png",
+          "path": "preview/candidates/pumpkin_shot/none/02.png",
+          "points": {},
+          "pose": "stem4"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin_shot-none-2-night.png",
+          "path": "preview/candidates/pumpkin_shot/none/03.png",
+          "points": {},
+          "pose": "stem8"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": true,
+      "mirror": "none",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "poses": [
+        "stem12",
+        "stem4",
+        "stem8"
+      ]
+    },
+    {
+      "anim": "pumpkin_splat",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pumpkin_splat-none-0-night.png",
+          "path": "preview/candidates/pumpkin_splat/none/01.png",
+          "points": {},
+          "pose": "squash"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin_splat-none-1-night.png",
+          "path": "preview/candidates/pumpkin_splat/none/02.png",
+          "points": {},
+          "pose": "burst"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin_splat-none-2-night.png",
+          "path": "preview/candidates/pumpkin_splat/none/03.png",
+          "points": {},
+          "pose": "fall"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin_splat-none-3-night.png",
+          "path": "preview/candidates/pumpkin_splat/none/04.png",
+          "points": {},
+          "pose": "bits"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "points": {},
+      "poses": [
+        "squash",
+        "burst",
+        "fall",
+        "bits"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/mortar.png",
+      "pivot_xy": [
+        16,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "catapult",
+      "call": "raw/catapult-l1-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "pose": "whole",
+      "prompt": "raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04158690176322419,
+        "crop_xywh": [
+          158,
+          105,
+          541,
+          397
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          769,
+          521
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult.png",
+      "seconds": 0.55,
+      "sha256": "5a50e3f8a9cf8235e267ca9eb18b7bb67ffa78439e08642861caf9fbb9197aaa",
+      "source": "raw/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978"
+    },
+    {
+      "anim": "catapult_hurt",
+      "call": "raw/catapult-l1-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04158690176322419,
+        "crop_xywh": [
+          840,
+          114,
+          565,
+          401
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          769,
+          0,
+          767,
+          521
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_hurt.png",
+      "seconds": 0.55,
+      "sha256": "a1cabbdd146b50dfef2c652154c42707c411d16b32ec5ffb64b94d76db43fc10",
+      "source": "raw/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978"
+    },
+    {
+      "anim": "catapult_fire",
+      "call": "raw/catapult-l1-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_fire/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          23,
+          24,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          25,
+          26
+        ],
+        "muzzles_xy": [
+          [
+            25,
+            26
+          ]
+        ]
+      },
+      "pose": "fire",
+      "prompt": "raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04158690176322419,
+        "crop_xywh": [
+          158,
+          529,
+          542,
+          454
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          521,
+          769,
+          503
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_fire.png",
+      "seconds": 0.55,
+      "sha256": "1f859f3feafedac9cf7ee8545c81f156317188cb92a3dc51ec6ac5632ca59ad9",
+      "source": "raw/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978"
+    },
+    {
+      "anim": "catapult_wreck",
+      "call": "raw/catapult-l1-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_wreck/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/catapult-l1-r1.prompt.txt",
+      "prompt_sha256": "5e231b3ac600a2d20ad6d985c65960be381bbe72ef9f88d7a5fccf18cde1c7ab",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04158690176322419,
+        "crop_xywh": [
+          846,
+          655,
+          564,
+          305
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          769,
+          521,
+          767,
+          503
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_wreck.png",
+      "seconds": 0.55,
+      "sha256": "164222e0d1713f54925dfdaf969b573ca2d39ed69025868ab04aa3fcda3203e0",
+      "source": "raw/catapult-l1-r1.png",
+      "source_sha256": "99ea81b67e6995882a95307600622a2c72c634253ba7993b2f797d3e6e305978"
+    },
+    {
+      "anim": "catapult_2",
+      "call": "raw/catapult-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_2/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "pose": "whole",
+      "prompt": "raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04883720930232558,
+        "crop_xywh": [
+          22,
+          322,
+          492,
+          430
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          526,
+          832
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_2.png",
+      "seconds": 0.55,
+      "sha256": "93826ba00301dda6fa4a7ae23028732ac4c78ff44eeed957592750a4f3ba85cc",
+      "source": "raw/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596"
+    },
+    {
+      "anim": "catapult_2_hurt",
+      "call": "raw/catapult-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_2_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          5,
+          34,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          7,
+          36
+        ],
+        "muzzles_xy": [
+          [
+            7,
+            36
+          ]
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04883720930232558,
+        "crop_xywh": [
+          534,
+          330,
+          474,
+          429
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          526,
+          0,
+          498,
+          832
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_2_hurt.png",
+      "seconds": 0.55,
+      "sha256": "0da512f96caa6a8a9a49a512fe6d82d15b49bab27439f569edc02c2894cb0dd2",
+      "source": "raw/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596"
+    },
+    {
+      "anim": "catapult_2_fire",
+      "call": "raw/catapult-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_2_fire/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          24,
+          20,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          26,
+          22
+        ],
+        "muzzles_xy": [
+          [
+            26,
+            22
+          ]
+        ]
+      },
+      "pose": "fire",
+      "prompt": "raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04883720930232558,
+        "crop_xywh": [
+          35,
+          906,
+          484,
+          508
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          832,
+          526,
+          704
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_2_fire.png",
+      "seconds": 0.55,
+      "sha256": "d60e0c5f82e9c9d2e12f0c0e5702b1130495109bd953bf1a79c3fe52c1a24319",
+      "source": "raw/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596"
+    },
+    {
+      "anim": "catapult_2_wreck",
+      "call": "raw/catapult-l2-r1.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_2_wreck/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/catapult-l2-r1.prompt.txt",
+      "prompt_sha256": "be67861d4b18e63b8f5027bf14adcf7775b71b974e83ed6cad4a40793910e88d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04883720930232558,
+        "crop_xywh": [
+          549,
+          1098,
+          448,
+          311
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          526,
+          832,
+          498,
+          704
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_2_wreck.png",
+      "seconds": 0.55,
+      "sha256": "5604ec6b267893278daacf7787f6f3c4e9a9cee83eeb02fb327ba4b3026108ef",
+      "source": "raw/catapult-l2-r1.png",
+      "source_sha256": "5c62a9a2e8fae76e21f8d31c35a01841c8a4dd3284869d61f74ecfd652547596"
+    },
+    {
+      "anim": "catapult_3",
+      "call": "raw/catapult-l3-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_3/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          4,
+          31,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          6,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            6,
+            33
+          ]
+        ]
+      },
+      "pose": "whole",
+      "prompt": "raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.057283950617283946,
+        "crop_xywh": [
+          209,
+          88,
+          494,
+          405
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          789,
+          517
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_3.png",
+      "seconds": 0.55,
+      "sha256": "83ca70576fac6df242a69e4add316107ebd61380be6af474d8eaa42b2ed81439",
+      "source": "raw/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698"
+    },
+    {
+      "anim": "catapult_3_hurt",
+      "call": "raw/catapult-l3-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_3_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          4,
+          31,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          6,
+          33
+        ],
+        "muzzles_xy": [
+          [
+            6,
+            33
+          ]
+        ]
+      },
+      "pose": "hurt",
+      "prompt": "raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.057283950617283946,
+        "crop_xywh": [
+          880,
+          84,
+          504,
+          407
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          789,
+          0,
+          747,
+          517
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_3_hurt.png",
+      "seconds": 0.55,
+      "sha256": "c3a8909df33bb48fe76ff2b5d6e7dff734d8d7cdd0d9798ee42a17ed056ceff2",
+      "source": "raw/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698"
+    },
+    {
+      "anim": "catapult_3_fire",
+      "call": "raw/catapult-l3-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_3_fire/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {
+        "muzzle_region_xywh": [
+          24,
+          18,
+          5,
+          5
+        ],
+        "muzzle_xy": [
+          26,
+          20
+        ],
+        "muzzles_xy": [
+          [
+            26,
+            20
+          ]
+        ]
+      },
+      "pose": "fire",
+      "prompt": "raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.057283950617283946,
+        "crop_xywh": [
+          204,
+          542,
+          490,
+          455
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          517,
+          789,
+          507
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_3_fire.png",
+      "seconds": 0.55,
+      "sha256": "965ed3516e042627dba6131a771c0d138a7bfa86443a7e996b8a7f7949354c58",
+      "source": "raw/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698"
+    },
+    {
+      "anim": "catapult_3_wreck",
+      "call": "raw/catapult-l3-r3.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/catapult_3_wreck/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "wreck",
+      "prompt": "raw/catapult-l3-r3.prompt.txt",
+      "prompt_sha256": "42b73ffe02bc2da1fbf189a334d18d5300635fc12c0186dc205a57b4bc2be0d3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.057283950617283946,
+        "crop_xywh": [
+          876,
+          678,
+          523,
+          302
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          789,
+          517,
+          747,
+          507
+        ]
+      },
+      "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+      "runtime_name": "sprites/buildings/catapult_3_wreck.png",
+      "seconds": 0.55,
+      "sha256": "fe3004133f323d15ed30512bfc01c56c7038cf7840c7d768408634aaaeb6df2f",
+      "source": "raw/catapult-l3-r3.png",
+      "source_sha256": "1c860d2a787459dc6e715a9f151e8cfdeb9f72e3cb99585cfd48989dd9ec8698"
+    },
+    {
+      "anim": "pumpkin_shot",
+      "call": "raw/pumpkin-shot-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/pumpkin_shot/none/01.png",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "stem12",
+      "prompt": "raw/pumpkin-shot-r1.prompt.txt",
+      "prompt_sha256": "1f64b9538eaedf2fcaf2928cf4657b577c61fa5ec1bb0a01a9d5e229ad7a2a9a",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "content_scale": 0.015915119363395226,
+        "crop_xywh": [
+          212,
+          207,
+          377,
+          344
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          751,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/pumpkin_shot_0.png",
+      "seconds": 0.1,
+      "sha256": "d146fef366dd7b1cab5e8321692da800cf6ca7a2c2dc9b26f382de7f64a8e5aa",
+      "source": "raw/pumpkin-shot-r1.png",
+      "source_sha256": "e3b8b1a455dfd5bf9c44d056a4a2fbb08ec29ccb9a756920c2ddc1ea8d285bd4"
+    },
+    {
+      "anim": "pumpkin_shot",
+      "call": "raw/pumpkin-shot-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/pumpkin_shot/none/02.png",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "stem4",
+      "prompt": "raw/pumpkin-shot-r1.prompt.txt",
+      "prompt_sha256": "1f64b9538eaedf2fcaf2928cf4657b577c61fa5ec1bb0a01a9d5e229ad7a2a9a",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          2
+        ],
+        "content_scale": 0.015915119363395226,
+        "crop_xywh": [
+          915,
+          227,
+          350,
+          338
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          751,
+          0,
+          692,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/pumpkin_shot_1.png",
+      "seconds": 0.1,
+      "sha256": "5dcd0ecb2cb11ce6207e4b2facf59f302b698ad9f78b8176801d569f6660aae3",
+      "source": "raw/pumpkin-shot-r1.png",
+      "source_sha256": "e3b8b1a455dfd5bf9c44d056a4a2fbb08ec29ccb9a756920c2ddc1ea8d285bd4"
+    },
+    {
+      "anim": "pumpkin_shot",
+      "call": "raw/pumpkin-shot-r1.call.json",
+      "canvas_wh": [
+        8,
+        8
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": true,
+      "mirror": "none",
+      "output": "preview/candidates/pumpkin_shot/none/03.png",
+      "pivot_xy": [
+        4,
+        4
+      ],
+      "points": {},
+      "pose": "stem8",
+      "prompt": "raw/pumpkin-shot-r1.prompt.txt",
+      "prompt_sha256": "1f64b9538eaedf2fcaf2928cf4657b577c61fa5ec1bb0a01a9d5e229ad7a2a9a",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          3,
+          3
+        ],
+        "content_scale": 0.015915119363395226,
+        "crop_xywh": [
+          1623,
+          215,
+          357,
+          352
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1443,
+          0,
+          729,
+          724
+        ]
+      },
+      "runtime_name": "sprites/effects/pumpkin_shot_2.png",
+      "seconds": 0.1,
+      "sha256": "f14382b53c214dfd92b5615d0c936a30fb685d42a2180fed2f9fd3545636a150",
+      "source": "raw/pumpkin-shot-r1.png",
+      "source_sha256": "e3b8b1a455dfd5bf9c44d056a4a2fbb08ec29ccb9a756920c2ddc1ea8d285bd4"
+    },
+    {
+      "anim": "pumpkin_splat",
+      "call": "raw/pumpkin-splat-r1.call.json",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/pumpkin_splat/none/01.png",
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "points": {},
+      "pose": "squash",
+      "prompt": "raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.025522041763341066,
+        "crop_xywh": [
+          73,
+          493,
+          391,
+          195
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          498,
+          793
+        ]
+      },
+      "runtime_name": "sprites/effects/pumpkin_splat_0.png",
+      "seconds": 0.1,
+      "sha256": "cdd5d07fa253f17b7d5ae79ae77bf886e2d7ddc2328eb73aaa648b770f41747a",
+      "source": "raw/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162"
+    },
+    {
+      "anim": "pumpkin_splat",
+      "call": "raw/pumpkin-splat-r1.call.json",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/pumpkin_splat/none/02.png",
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "points": {},
+      "pose": "burst",
+      "prompt": "raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.025522041763341066,
+        "crop_xywh": [
+          533,
+          262,
+          460,
+          431
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          498,
+          0,
+          525,
+          793
+        ]
+      },
+      "runtime_name": "sprites/effects/pumpkin_splat_1.png",
+      "seconds": 0.1,
+      "sha256": "705cc6b8daea58f487c5c8c1b9d9dcf94650fd0fa393d32971e1f9facb996f3d",
+      "source": "raw/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162"
+    },
+    {
+      "anim": "pumpkin_splat",
+      "call": "raw/pumpkin-splat-r1.call.json",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/pumpkin_splat/none/03.png",
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "points": {},
+      "pose": "fall",
+      "prompt": "raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.025522041763341066,
+        "crop_xywh": [
+          1054,
+          425,
+          407,
+          277
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1023,
+          0,
+          486,
+          793
+        ]
+      },
+      "runtime_name": "sprites/effects/pumpkin_splat_2.png",
+      "seconds": 0.1,
+      "sha256": "3602d9b1d1a85181df53cb7159d108778e52509cde641764f34de4aa015d051a",
+      "source": "raw/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162"
+    },
+    {
+      "anim": "pumpkin_splat",
+      "call": "raw/pumpkin-splat-r1.call.json",
+      "canvas_wh": [
+        20,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/pumpkin_splat/none/04.png",
+      "pivot_xy": [
+        10,
+        14
+      ],
+      "points": {},
+      "pose": "bits",
+      "prompt": "raw/pumpkin-splat-r1.prompt.txt",
+      "prompt_sha256": "a74b509af3c4bbca8291c05d8ae19d06d12e8969b25947985cfbc29129c27211",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.025522041763341066,
+        "crop_xywh": [
+          1558,
+          575,
+          349,
+          118
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1509,
+          0,
+          474,
+          793
+        ]
+      },
+      "runtime_name": "sprites/effects/pumpkin_splat_3.png",
+      "seconds": 0.1,
+      "sha256": "dd3261bf3053329b9cd7261175548b8ff2bb17f2cf968b9059f80989f4c5261d",
+      "source": "raw/pumpkin-splat-r1.png",
+      "source_sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A039",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\mortar.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "be87c0ec7487b14ade3c06ca9be29946030c87f00040bb42b912b16860d4ea18"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-master-r2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "0b44eb04b3d42d846e24dca05369da981a2707dd5e36d788bccc726da49adbfc"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\mortar_2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "0c3a32f4a1e739a5c42094b4048ee54d5ab7557a0ac997807207878b16656b5c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\mortar_3.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "77be5d3c2deeef082c127fc25c57c41cbe25539ee46d032d354f50d8cacbf843"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\effects\\splash_1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "61498ad8b7f37c6ca394703d329ebf3ef2b77def65eef486c1240d70a5131c5d"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A039-catapult",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "The pumpkin catapult",
+  "tool": "built-in ImageGen"
+}

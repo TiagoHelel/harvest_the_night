@@ -5,9 +5,10 @@ import import_art
 import gen_sprites
 
 # Each family's levels and the task whose art it is. The four legacy towers
-# are 0013's, three levels each; A038's hive (task 0237) has one step.
+# are 0013's, three levels each; A038's hive (task 0237) has one step and
+# A039's catapult (task 0238) two.
 FAMILIES = {'gun_tower': (3, '0013'), 'flame_tower': (3, '0013'), 'mortar': (3, '0013'),
-            'auto_crossbow': (3, '0013'), 'beehive': (2, 'A038')}
+            'auto_crossbow': (3, '0013'), 'beehive': (2, 'A038'), 'catapult': (3, 'A039')}
 LEGACY = ('gun_tower', 'flame_tower', 'mortar', 'auto_crossbow')
 STATES = ('', '_hurt', '_fire', '_wreck')
 

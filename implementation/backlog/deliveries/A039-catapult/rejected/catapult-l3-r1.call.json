@@ -1,0 +1,36 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nPrimary request: A039 identity master, ONE level1 pumpkin catapult, whole/idle.\nInput images: Image1 docs/reference-sheet.png is style and materials only; Image2 mortar.png is the native tower scale and family camera reference, not the mechanism to copy; Image3 farmer is scale only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters, colored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular grid; match the approved family camera and scale. Final native canvas32x48 with ground pivot16,44, final visible target21wide x18tall. Keep source forms simple enough to survive reduction.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; runtime supplies night lighting.\nColor palette: warm timber, twisted beige rope, dark metal touches, a loaded orange pumpkin with dark brown stem, muted violet shadows; limited ramps.\nScene/backdrop: true transparent background; NO ground shadow, grass, soil platform, labels, text, watermark or UI.\n\nFamily contract: ONE compact 2x2 four-state sheet, LEVEL 3 pumpkin catapult. Master reference shows identity; Heavier timber frame on stone footing, stone counterweight box and iron-shod bucket. Whole visible target 27x25 native, canvas32x48, base pivot16,44. Compact near-square low mechanism; SHORT arm and wooden bucket, NOT cannon. Whole arm cocked back west, loaded bucket low at west end. FIRE arm raised toward upper-right, empty bucket with only2\u20133px orange pulp fleck at lip. FOUR isolated objects: top-left whole, top-right hurt, bottom-left fire, bottom-right wreck. Hurt shows split boards, frayed rope and local damage, pumpkin remains loaded. Wreck a low collapsed version inside whole's width, no pumpkin. Whole and fire COPY exact base/frame pixels; only arm/bucket/load move.\nLAYOUT CLEARANCE: large SQUARE sheet, each complete machine AT MOST50percent virtualcell height/width. Leave HUGE transparent cross-shaped gutters at least30percent cell; all opaque pixels confined to their cells, no overlap including raised bucket. Equal magnification, camera, base centre and ground baseline. No glow, haze, gradients, ground shadows, text or grid. True alpha0 around objects. Larger levels change construction rather than stacking copies.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-master-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/mortar_3.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-master-r2.png",
+      "sha256": "0b44eb04b3d42d846e24dca05369da981a2707dd5e36d788bccc726da49adbfc",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/mortar_3.png",
+      "sha256": "77be5d3c2deeef082c127fc25c57c41cbe25539ee46d032d354f50d8cacbf843",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7314a958-c966-4d09-920d-1d7bb7ae1b49.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-l3-r1.png",
+  "sha256": "ef096a310fec8337cd9d9cfc980463d77aaf7864e7529a1d2a587a4423c7314c",
+  "revision": 1,
+  "decision": "rejected: No safe empty row gaps for measured cuts.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\rejected\\catapult-l3-r1.png"
+}

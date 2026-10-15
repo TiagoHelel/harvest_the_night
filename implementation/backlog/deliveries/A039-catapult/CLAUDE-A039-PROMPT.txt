@@ -1,0 +1,43 @@
+A039-catapult: owner-approved artwork
+
+Approval date: 2026-10-14
+Owner words (verbatim): meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Authoritative delivery: implementation/backlog/deliveries/A039-catapult
+Game integration task: 0238
+
+Scope: Complete reviewed delivery approved for integration.
+Review-log.txt and APPROVAL.json preserve the owner acceptance of documented visual differences. Measured QA booleans remain unchanged; accepted visual checks are listed separately.
+No older delivery is superseded. The batch review HTML is an index, not an art source.
+Mode A: use the original raw ImageGen sources and the exact per-file crop, scale, pivot, alpha threshold and palette_keys in the contract; tools/palette.py:COLOURS is the palette. Preserve exact approved PNG hashes.
+01.png is frame 0. All per-file timing, canvas, pivot, points, aliases and mirror behavior are included below. A runtime mirror means east is obtained by flipping west in the game. Bind baked mirrors directly and do not flip them again.
+Use contract.json for complete deliveries. For partial deliveries, use candidate-contract.json only to locate the explicitly approved hashes in APPROVAL.json; it does not claim the missing frames exist.
+Never use raw rejected cells, screenshots, GIFs, or unlisted PNGs. Never regenerate, repaint, recolor, resample or retime these approved images.
+
+Exact mappings:
+native/catapult/none/01.png -> sprites/buildings/catapult.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [5, 34, 5, 5], "muzzle_xy": [7, 36], "muzzles_xy": [[7, 36]]}
+native/catapult_hurt/none/01.png -> sprites/buildings/catapult_hurt.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [5, 34, 5, 5], "muzzle_xy": [7, 36], "muzzles_xy": [[7, 36]]}
+native/catapult_fire/none/01.png -> sprites/buildings/catapult_fire.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [23, 24, 5, 5], "muzzle_xy": [25, 26], "muzzles_xy": [[25, 26]]}
+native/catapult_wreck/none/01.png -> sprites/buildings/catapult_wreck.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {}
+native/catapult_2/none/01.png -> sprites/buildings/catapult_2.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [5, 34, 5, 5], "muzzle_xy": [7, 36], "muzzles_xy": [[7, 36]]}
+native/catapult_2_hurt/none/01.png -> sprites/buildings/catapult_2_hurt.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [5, 34, 5, 5], "muzzle_xy": [7, 36], "muzzles_xy": [[7, 36]]}
+native/catapult_2_fire/none/01.png -> sprites/buildings/catapult_2_fire.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [24, 20, 5, 5], "muzzle_xy": [26, 22], "muzzles_xy": [[26, 22]]}
+native/catapult_2_wreck/none/01.png -> sprites/buildings/catapult_2_wreck.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {}
+native/catapult_3/none/01.png -> sprites/buildings/catapult_3.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [4, 31, 5, 5], "muzzle_xy": [6, 33], "muzzles_xy": [[6, 33]]}
+native/catapult_3_hurt/none/01.png -> sprites/buildings/catapult_3_hurt.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [4, 31, 5, 5], "muzzle_xy": [6, 33], "muzzles_xy": [[6, 33]]}
+native/catapult_3_fire/none/01.png -> sprites/buildings/catapult_3_fire.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {"muzzle_region_xywh": [24, 18, 5, 5], "muzzle_xy": [26, 20], "muzzles_xy": [[26, 20]]}
+native/catapult_3_wreck/none/01.png -> sprites/buildings/catapult_3_wreck.png | [32, 48] pivot [16, 44] draw 1 | frame 0 | 0.55 seconds | loop False | mirror none | points {}
+native/pumpkin_shot/none/01.png -> sprites/effects/pumpkin_shot_0.png | [8, 8] pivot [4, 4] draw 1 | frame 0 | 0.1 seconds | loop True | mirror none | points {}
+native/pumpkin_shot/none/02.png -> sprites/effects/pumpkin_shot_1.png | [8, 8] pivot [4, 4] draw 1 | frame 1 | 0.1 seconds | loop True | mirror none | points {}
+native/pumpkin_shot/none/03.png -> sprites/effects/pumpkin_shot_2.png | [8, 8] pivot [4, 4] draw 1 | frame 2 | 0.1 seconds | loop True | mirror none | points {}
+native/pumpkin_splat/none/01.png -> sprites/effects/pumpkin_splat_0.png | [20, 16] pivot [10, 14] draw 1 | frame 0 | 0.1 seconds | loop False | mirror none | points {}
+native/pumpkin_splat/none/02.png -> sprites/effects/pumpkin_splat_1.png | [20, 16] pivot [10, 14] draw 1 | frame 1 | 0.1 seconds | loop False | mirror none | points {}
+native/pumpkin_splat/none/03.png -> sprites/effects/pumpkin_splat_2.png | [20, 16] pivot [10, 14] draw 1 | frame 2 | 0.1 seconds | loop False | mirror none | points {}
+native/pumpkin_splat/none/04.png -> sprites/effects/pumpkin_splat_3.png | [20, 16] pivot [10, 14] draw 1 | frame 3 | 0.1 seconds | loop False | mirror none | points {}
+
+Integration procedure for complete deliveries:
+1. Verify APPROVAL.json and contract.json SHA-256 values before promotion.
+2. Promote versioned raw sources through assets/art_source/<family>/, the raster manifest, ownership.json and tools/import_art.py, with prompt/reference/approval provenance. Metadata points are native coordinates.
+3. Extend the relevant hard-coded family validation lists. Any changes to code, aliases and manifest bindings belong to the named game task.
+4. Run python tools/verify.py and inspect day/night FHD captures.
+5. Only after integration succeeds, run python implementation/backlog/assets.py set A039 integrated.
+6. Claude owns assets.py unblock and game-task state changes. Codex did not run them.

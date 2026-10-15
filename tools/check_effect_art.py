@@ -2,6 +2,11 @@
 import json
 import import_art
 
+# The packs' effects: family, task, frames, canvas, pivot, origin, loop.
+PACK_EFFECTS=[('bee_swarm','A038',3,[8,8],[4,4],'center',True),
+              ('pumpkin_shot','A039',3,[8,8],[4,4],'center',True),
+              ('pumpkin_splat','A039',4,[20,16],[10,14],'base',False)]
+
 
 def main():
     data=import_art.load_manifest();files,images=import_art.build(data)
@@ -28,26 +33,31 @@ def main():
             if family=='splash':assert sum(p[2]-p[0] for p in visible)>0, 'Water lost blue ramp'
             assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']], 'Runtime cut mismatch'
         assert areas[1]>areas[0] and areas[-1]<areas[1], 'No expansion/dissipation: '+family
-    # Task 0237: A038's bee swarm, the one looping effect - hung on the stung
-    # for as long as the sting lasts, so it neither grows nor dies away: three
-    # distinct frames of one cloud, one strip and one scale, round its centre.
-    swarm=sorted((e for e in data['assets'] if e.get('fx_family')=='bee_swarm'),key=lambda e:e['frame'])
-    assert [e['frame'] for e in swarm]==[0,1,2] and all(e.get('generation_task')=='A038' for e in swarm),'The swarm owns its three frames'
-    assert len({e['source'] for e in swarm})==len({e['content_scale'] for e in swarm})==1,'One swarm strip, one scale'
-    shapes=[];areas=[]
-    for e in swarm:
-        assert e['source']=='assets/art_source/effects/bee_swarm/bee-swarm-r1.png' and e['output']=='sprites/effects/bee_swarm_%d.png'%e['frame']
-        assert e['canvas_wh']==[8,8] and e['pivot_xy']==[4,4] and e['seconds']==0.1 and e['loop'] is True and e['fx_origin']=='center'
-        art=images[e['id']];box=art.getbbox();w,h=art.size
-        assert box and box[0]>=0 and box[1]>=0 and box[2]<=w and box[3]<=h, 'Clipped swarm: '+e['id']
-        assert art.tobytes() not in shapes, 'Repeated swarm pose: '+e['id']
-        shapes.append(art.tobytes())
-        samples=list(import_art.samples(art));visible=[p for p in samples if p[3]]
-        assert all(p[3] in (0,255) for p in samples), 'Alpha fringe: '+e['id']
-        areas.append(len(visible))
-        assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']], 'Runtime cut mismatch'
-    assert min(areas)*2>=max(areas), 'A loop that grows or dies away: %s'%areas
-    print('OK: seven FX families / 25 distinct one-shot frames / shared strip scales / palette alpha / unclipped origins / exact outputs; the bee swarm loops on 3 distinct frames')
+    # The packs' own effects, each its own block, 0017's 25 frames untouched.
+    # A loop (A038's swarm, task 0237; A039's pumpkin in the air, 0238) hangs
+    # on as long as what it shows lasts, so it neither grows nor dies away; a
+    # one-shot (A039's splat, 0238) bursts and fades as 0017's do.
+    for family,task,count,canvas,pivot,origin,loop in PACK_EFFECTS:
+        frames=sorted((e for e in data['assets'] if e.get('fx_family')==family),key=lambda e:e['frame'])
+        assert [e['frame'] for e in frames]==list(range(count)) and all(e.get('generation_task')==task for e in frames),'%s owns its %d frames'%(family,count)
+        assert len({e['source'] for e in frames})==len({e['content_scale'] for e in frames})==1,'One strip, one scale: '+family
+        shapes=[];areas=[]
+        for e in frames:
+            assert e['output']=='sprites/effects/%s_%d.png'%(family,e['frame']),e['id']
+            assert e['canvas_wh']==canvas and e['pivot_xy']==pivot and e['seconds']==0.1 and e['loop'] is loop and e['fx_origin']==origin,e['id']
+            art=images[e['id']];box=art.getbbox();w,h=art.size
+            assert box and box[0]>=0 and box[1]>=0 and box[2]<=w and box[3]<=h, 'Clipped FX: '+e['id']
+            assert art.tobytes() not in shapes, 'Repeated effect pose: '+e['id']
+            shapes.append(art.tobytes())
+            samples=list(import_art.samples(art));visible=[p for p in samples if p[3]]
+            assert all(p[3] in (0,255) for p in samples), 'Alpha fringe: '+e['id']
+            areas.append(len(visible))
+            assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']], 'Runtime cut mismatch'
+        if loop:
+            assert min(areas)*2>=max(areas), 'A loop that grows or dies away: %s %s'%(family,areas)
+        else:
+            assert max(areas)>areas[0] and areas[-1]<max(areas), 'No expansion/dissipation: %s %s'%(family,areas)
+    print('OK: seven FX families / 25 distinct one-shot frames / shared strip scales / palette alpha / unclipped origins / exact outputs; %d pack effects (%s)'%(len(PACK_EFFECTS),', '.join(f[0] for f in PACK_EFFECTS)))
 
 
 if __name__=='__main__':main()

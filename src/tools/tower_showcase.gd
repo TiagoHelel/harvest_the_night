@@ -6,8 +6,9 @@ class LampProbe extends Lighting:
 	func _glow_at(at: Vector2, _radius: float, _colour: Color, _strength: float) -> void:
 		outlets.append(at)
 
-# A038's hive since task 0237: an authored tower of two levels.
-const FAMILIES: Array[StringName] = [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow", &"beehive"]
+# A038's hive since task 0237: an authored tower of two levels; A039's
+# catapult since 0238, of three.
+const FAMILIES: Array[StringName] = [&"gun_tower", &"flame_tower", &"mortar", &"auto_crossbow", &"beehive", &"catapult"]
 var _world: WorldView
 var _view: PlayerView
 var _lighting: Lighting
@@ -71,7 +72,7 @@ func _run() -> void:
 		_fixture(material_light)
 		await _settle()
 		_check_standing("")
-		await _shoot("levels_%d_whole" % material_light, "Gun / flame / mortar / crossbow / hive - rows L1 / L2 / L3")
+		await _shoot("levels_%d_whole" % material_light, "Gun / flame / mortar / crossbow / hive / catapult - rows L1 / L2 / L3")
 		for cell in _cells:
 			var on := Farm.occupant(_state, cell)
 			Farm.damage(_state, cell, int(on["hp"]) / 2 + 1)
@@ -435,8 +436,10 @@ func _mixed_night() -> void:
 	for y in 3:
 		for x in 3:
 			Farm.place(_state, house + Vector2i(x, y), {"id": &"house", "anchor": [house.x, house.y]})
+	# East of the last column (task 0238's catapults on x 32), each on its
+	# own cell.
 	for i in 4:
-		Entities.spawn(_state, &"walker", Vector2i(31 + i, 8 + i))
+		Entities.spawn(_state, &"walker", Vector2i(34 + i % 2, 7 + i * 2))
 	for i in _cells.size():
 		var on := Farm.occupant(_state, _cells[i])
 		if i % 3 == 0:

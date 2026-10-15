@@ -1,0 +1,20 @@
+{
+  "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-master-r2.png",
+  "crop_xywh": [
+    219,
+    259,
+    1070,
+    836
+  ],
+  "content_scale": 0.02033492822966507,
+  "canvas_wh": [
+    32,
+    48
+  ],
+  "pivot_xy": [
+    16,
+    44
+  ],
+  "palette": "tools/palette.py:COLOURS",
+  "alpha_threshold": 128
+}

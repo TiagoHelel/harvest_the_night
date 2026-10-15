@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nPrimary request: A039 identity master, ONE level1 pumpkin catapult, whole/idle.\nInput images: Image1 docs/reference-sheet.png is style and materials only; Image2 mortar.png is the native tower scale and family camera reference, not the mechanism to copy; Image3 farmer is scale only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters, colored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular grid; match the approved family camera and scale. Final native canvas and pivot are specified below. Keep source forms simple enough to survive reduction.\nLighting/mood: neutral warm daytime, upper-left highlights, darker underside; runtime supplies night lighting.\nColor palette: warm timber, twisted beige rope, dark metal touches, a loaded orange pumpkin with dark brown stem, muted violet shadows; limited ramps.\nScene/backdrop: true transparent background; NO ground shadow, grass, soil platform, labels, text, watermark or UI.\n\nFX family: Orange pumpkin pulp chunks and pale seeds, NOT red/blood. Origin fixed at10,14. Inside canvas with1px clear. No puddle, stain or full pumpkin remaining; last frame dissipates into a few bits. Native 20x16, pivot(10,14), one common scale across strip, same origin. Generate exactly4 sequential frames of pumpkin-splat, ONE horizontal strip with equal cells, huge transparent gutters. Ordered poses: squash(small low); burst(largest area and8\u201313px high); fall(chunks lower, spreading); bits(few small bits, smallest area). Clear localized origin, clustered forms, expansion then dissipation for splat; shot loops frame3toframe1. Do not enlarge small particles to fill cells; all frames same scale. No text, separator, backdrop, bloom, shadow or antialiasing. Input Image1 style; Image2 splash source geometry/cluster style only; Image3 accepted catapult identity for orange materials.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/splash_1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-master-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/splash_1.png",
+      "sha256": "61498ad8b7f37c6ca394703d329ebf3ef2b77def65eef486c1240d70a5131c5d",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A039-catapult/raw/catapult-master-r2.png",
+      "sha256": "0b44eb04b3d42d846e24dca05369da981a2707dd5e36d788bccc726da49adbfc",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7c4a613b-a33a-4bb0-abe6-87d72ca507e4.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A039-catapult\\raw\\pumpkin-splat-r1.png",
+  "sha256": "1316f6b3c5a57b1401bab2d6f9df179c5ef640a4092fb3eff21a640dcf35a162",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

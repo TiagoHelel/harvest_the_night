@@ -8030,41 +8030,49 @@ func _task_0227_catapult() -> void:
 		and (said["pt_BR"] as String).contains("CATAPULTA DE ABÓBORA") and (said["pt_BR"] as String).contains("1 abóbora por tiro")
 		and Describe.defence(&"mortar").contains("1 gunpowder a shot"),
 		"its name, its pumpkin a shot and its splash, in both languages - and the mortar says what it spends too", str(said))
+	# **A039's art since task 0238**: an authored tower at every level and
+	# state, on the family's canvas, with its throwing arm's point on all but
+	# the wreck.
 	var road: Array = []
 	for level in ["", "_2", "_3"]:
 		for state_name in ["", "_hurt", "_fire", "_wreck"]:
 			var name := StringName("catapult%s%s" % [level, state_name])
-			var path := PlaceholderArt.art_path(name, 0)
-			var frame := PlaceholderArt.frame(path)
-			var file := PlaceholderArt.texture_path(path)
+			var path := WorldView.BUILDING_DIR + str(name) + ".png"
+			var frame: Dictionary = RasterArt.FRAMES.get(path, {})
 			if frame.get("canvas") != Vector2i(32, 48) or frame.get("pivot") != Vector2i(16, 44) \
-					or not file.begins_with("res://sprites/buildings/auto_crossbow") or not ResourceLoader.exists(file) \
-					or PlaceholderArt.art_tint(name) == Color.WHITE or str(PlaceholderArt.art(name).get("pack", "")) != "A039":
+					or not bool(frame.get("tower", false)) or frame.has("muzzle") == (state_name == "_wreck") \
+					or not ResourceLoader.exists(path) or PlaceholderArt.is_drawn(path) or not PlaceholderArt.art(name).is_empty():
 				road.append(name)
-	expect(road.is_empty() and WorldView.stand_in_tower(&"catapult") and WorldView.throws_pumpkins(&"catapult")
-		and not WorldView.throws_pumpkins(&"mortar"),
-		"drawn through 0120's road: the auto crossbow in pumpkin orange at A039's 32x48 on (16,44), every level and state",
-		str(road))
+	var view := WorldView.new()
+	var states := [view._worn(&"catapult", {"id": &"catapult", "level": 3, "hp": 10, "reload": WorldView.levelled_stat({"id": &"catapult", "level": 3}, "reload_ticks")}),
+		view._worn(&"catapult", {"id": &"catapult", "level": 2, "hp": 10, "reload": 0}),
+		view._worn(&"catapult", {"id": &"catapult", "level": 1, "hp": int(row["hp"]), "reload": 0})]
+	view.free()
+	expect(road.is_empty() and WorldView.authored_tower(&"catapult") and not WorldView.stand_in_tower(&"catapult")
+		and WorldView.throws_pumpkins(&"catapult") and not WorldView.throws_pumpkins(&"mortar")
+		and states == [&"catapult_3_fire", &"catapult_2_hurt", &"catapult"],
+		"A039's art: an authored tower at 32x48 on (16,44), every level and state, the arm's point on all but the wreck, thrown, hurt and whole",
+		"%s %s" % [str(road), str(states)])
 	var frames: Array = []
-	var inside := true
+	var shot_art := true
 	for i in CatapultArt.SHOT_FRAMES:
-		var image := CatapultArt.drawing(i)
-		frames.append(image.get_data())
-		for y in image.get_height():
-			for x in image.get_width():
-				if image.get_pixel(x, y).a > 0.0:
-					inside = inside and x >= 1 and x <= 6 and y >= 1 and y <= 6
-		inside = inside and image.get_size() == Vector2i(8, 8)
+		var texture := CatapultArt.shot(i)
+		var frame := PlaceholderArt.frame(CatapultArt.SHOT_PATH % i)
+		shot_art = (shot_art and texture != null and texture.resource_path == CatapultArt.SHOT_PATH % i
+			and frame.get("canvas") == Vector2i(8, 8) and frame.get("pivot") == Vector2i(4, 4) and bool(frame.get("loop", false)))
+		if texture != null:
+			frames.append(texture.get_image().get_data())
 	var splats: Array = []
 	for i in CatapultArt.SPLAT_FRAMES + 1:
 		var splat := CatapultArt.splat(i)
 		splats.append(splat.resource_path if splat != null else "")
-	expect(inside and frames[0] != frames[1] and frames[1] != frames[2] and frames[0] != frames[2]
-		and PlaceholderArt.is_drawn(CatapultArt.SHOT_PATH % 0)
-		and splats == ["res://sprites/effects/splash_0.png", "res://sprites/effects/splash_1.png",
-			"res://sprites/effects/splash_2.png", "res://sprites/effects/splash_3.png", ""]
-		and CatapultArt.splat_pivot() == Vector2i(10, 14) and CatapultArt.splat_tint() != Color.WHITE,
-		"the shot: three 8x8 frames of a tumbling pumpkin, drawn in code; the splat: four frames of the splash in pumpkin on (10,14), then gone",
+	expect(shot_art and frames.size() == 3 and frames[0] != frames[1] and frames[1] != frames[2] and frames[0] != frames[2]
+		and PlaceholderArt.art(&"pumpkin_shot").is_empty() and PlaceholderArt.art(&"pumpkin_splat").is_empty()
+		and CatapultArt.shot(3) == CatapultArt.shot(0) and _held(func() -> Object: return CatapultArt.shot(1))
+		and splats == [CatapultArt.SPLAT_PATH % 0, CatapultArt.SPLAT_PATH % 1, CatapultArt.SPLAT_PATH % 2, CatapultArt.SPLAT_PATH % 3, ""]
+		and not bool(PlaceholderArt.frame(CatapultArt.SPLAT_PATH % 0).get("loop", true))
+		and CatapultArt.splat_pivot() == Vector2i(10, 14) and is_equal_approx(CatapultArt.splat_seconds(), 0.1),
+		"the shot: A039's three 8x8 frames of a tumbling pumpkin, round and round; the splat: its four frames on (10,14), once, then gone",
 		str(splats))
 	var flight := int(row["flight_ticks"])
 	expect(WorldView.arc_lift({"from": &"catapult", "left": flight}) == 0.0
@@ -13735,6 +13743,14 @@ func _open_square(state: Dictionary, radius: int, id: StringName = &"decoy") -> 
 					_decoy_ground = cell
 					return cell
 	return Vector2i(-1, -1)
+
+
+## Whether what `make` returns outlives the call that made it (task 0238): a
+## texture drawn with `draw_texture` must be held by someone, or it is freed
+## before the frame renders and draws as a white square.
+func _held(make: Callable) -> bool:
+	var weak: WeakRef = weakref(make.call())
+	return weak.get_ref() != null
 
 
 ## Where a season's defences start in a hotbar order (task 0234).

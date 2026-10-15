@@ -1,0 +1,13 @@
+2026-10-14 / A039 started after assets.py next and task0227 done verification.
+Owner authorized generating21newpacks and final combined HTML. No intermediate art approval or integration approval inferred. Only ImageGen source art, measured native exports.
+
+2026-10-14 / Measured native export
+L1 third revision still failed layout/proportions; best diagnostic whole22x17, wreck23px exceeds whole22px. L3 third revision remains too wide: safe common scale gives whole28x23 instead of26–28x24–27 and wreck30px exceeds whole28px.
+Whole/fire support pixels change in independently authored sheets; stationary base requirement is not satisfied. All19frames are diagnostics, zero production exports.
+Splat is orange/roof/pale seed clusters with no blood palette pixels. Shot and splat remain independently usable candidates pending owner review.
+No art approval inferred. 19 of 19 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+19/19 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: catapult_2_stationary_base_exact, catapult_3_stationary_base_exact, catapult_3_whole_dimensions, catapult_3_wreck_inside_whole, catapult_stationary_base_exact, catapult_wreck_inside_whole. Complete delivery released for Claude integration.

@@ -1649,9 +1649,9 @@ func _stand_in_prop(id: StringName, idx: int, cell: Vector2i, anchor: Vector2i) 
 		art = _worn_stand_in(id, Farm.occupant(_state, anchor))
 	if Crafting.is_station(id):
 		art = _stand_in_station_art(id, Farm.occupant(_state, anchor), anchor)
-	# **A stand-in tower** (task 0226's hive until 0237 brought A038's art;
-	# 0229's searchlight): its level's stand-in, lit as it fires and hurt
-	# past the wear threshold.
+	# **A stand-in tower** (task 0226's hive and 0227's catapult until 0237
+	# and 0238 brought their art; 0229's searchlight): its level's stand-in,
+	# lit as it fires and hurt past the wear threshold.
 	if stand_in_tower(id):
 		art = _stand_in_tower_art(Farm.occupant(_state, anchor))
 	if art != id:
@@ -2434,7 +2434,6 @@ func _splat_at(cell: Vector2i, spit: bool = false) -> void:
 	sprite.position = (Vector2(cell) + Vector2(0.5, 0.75)) * float(GameData.TILE_SIZE)
 	if spit:
 		sprite.position.y -= SPIT_HIT_LIFT
-	sprite.self_modulate = Color.WHITE if spit else CatapultArt.splat_tint()
 	(_spit if spit else _shots).add_child(sprite)
 	_splats.append({"sprite": sprite, "age": 0.0, "spit": spit})
 

@@ -196,13 +196,6 @@ const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dra
 const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
-## A039's catapult (task 0227): the tower family's 32x48 on (16,44), the
-## pumpkin shot's 8x8 round (4,4), and the splat's 20x16 on (10,14) - the
-## splash's - all drawn at 1.0.
-const CATAPULT := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
-const PUMPKIN_SHOT := {"canvas": Vector2i(8, 8), "pivot": Vector2i(4, 4), "draw_scale": 1.0}
-const PUMPKIN_SPLAT := {"canvas": Vector2i(20, 16), "pivot": Vector2i(10, 14), "draw_scale": 1.0}
-
 ## A041's searchlight (task 0229): the tower family's 32x48 on (16,44), drawn
 ## at 1.0; its lens - `light_xy`, where the beam leaves - on the stand-in's
 ## turret, level by level.
@@ -466,22 +459,6 @@ const ART := {
 	# The Blood Moon's (task 0257): a red disc with a drip, drawn in code.
 	&"icon_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A039's catapult (task 0227): the auto crossbow - timber, bow and rope,
-	# the nearest thing to a throwing arm - burnt to pumpkin orange and drawn
-	# low, growing with each level, until 0238; the pumpkin in the air drawn
-	# in code (`CatapultArt`), and its splat the water's splash in pumpkin.
-	&"catapult": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_hurt": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_hurt", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_fire": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_fire", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_wreck": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_wreck", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.7, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_2": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_2_hurt": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2_hurt", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_2_fire": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2_fire", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_2_wreck": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_2_wreck", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.8, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_3": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_3_hurt": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_hurt", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_3_fire": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_fire", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
-	&"catapult_3_wreck": {"pack": "A039", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/auto_crossbow_3_wreck", "tint": Color(1.35, 0.8, 0.45), "stand_in_scale": 0.9, "geometry": CATAPULT, "final": CATAPULT, "bare": true},
 	# A041's searchlight (task 0229): the gun tower - a post with a head on it -
 	# in a cold lamp white, at each level and state, its lens on the turret,
 	# until 0240; the beam and the pool of light are code (`Lighting`).
@@ -606,8 +583,6 @@ const ART := {
 	&"garlic_braid": {"pack": "A040", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": GARLIC, "final": GARLIC, "bare": true},
 	&"garlic_braid_wilted": {"pack": "A040", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": GARLIC, "final": GARLIC, "bare": true},
 	&"garlic_braid_spent": {"pack": "A040", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": GARLIC, "final": GARLIC, "bare": true},
-	&"pumpkin_shot": {"pack": "A039", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": PUMPKIN_SHOT, "final": PUMPKIN_SHOT},
-	&"pumpkin_splat": {"pack": "A039", "dir": "res://sprites/effects/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"effects/splash", "stand_in_frames": 4, "tint": Color(1.6, 0.85, 0.3), "geometry": PUMPKIN_SPLAT, "final": PUMPKIN_SPLAT},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "catapult-l1-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-l1-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        769,
+        521
+      ],
+      "crop_xywh": [
+        158,
+        105,
+        541,
+        397
+      ],
+      "content_scale": 0.04158690176322419,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      27,
+      27,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      22,
+      17
+    ]
+  },
+  {
+    "recipe": {
+      "id": "catapult-l1-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-l1-r1.png",
+      "sheet_cell_xywh": [
+        769,
+        0,
+        767,
+        521
+      ],
+      "crop_xywh": [
+        840,
+        114,
+        565,
+        401
+      ],
+      "content_scale": 0.04158690176322419,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      27,
+      28,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      17
+    ]
+  },
+  {
+    "recipe": {
+      "id": "catapult-l1-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-l1-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        521,
+        769,
+        503
+      ],
+      "crop_xywh": [
+        158,
+        529,
+        542,
+        454
+      ],
+      "content_scale": 0.04158690176322419,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      25,
+      28,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      19
+    ]
+  },
+  {
+    "recipe": {
+      "id": "catapult-l1-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A039-catapult\\raw\\catapult-l1-r1.png",
+      "sheet_cell_xywh": [
+        769,
+        521,
+        767,
+        503
+      ],
+      "crop_xywh": [
+        846,
+        655,
+        564,
+        305
+      ],
+      "content_scale": 0.04158690176322419,
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      31,
+      28,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      13
+    ]
+  }
+]

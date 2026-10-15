@@ -1,0 +1,323 @@
+{
+  "status": "blocked",
+  "issues": [
+    "L1 third revision still failed layout/proportions; best diagnostic whole22x17, wreck23px exceeds whole22px. L3 third revision remains too wide: safe common scale gives whole28x23 instead of26\u201328x24\u201327 and wreck30px exceeds whole28px.",
+    "Whole/fire support pixels change in independently authored sheets; stationary base requirement is not satisfied. All19frames are diagnostics, zero production exports.",
+    "Splat is orange/roof/pale seed clusters with no blood palette pixels. Shot and splat remain independently usable candidates pending owner review."
+  ],
+  "files": {
+    "catapult/none/0": {
+      "stem": "catapult-l1-r1",
+      "index": 0,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            7,
+            36
+          ],
+          "muzzles_xy": [
+            [
+              7,
+              36
+            ]
+          ],
+          "muzzle_region_xywh": [
+            5,
+            34,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_hurt/none/0": {
+      "stem": "catapult-l1-r1",
+      "index": 1,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            7,
+            36
+          ],
+          "muzzles_xy": [
+            [
+              7,
+              36
+            ]
+          ],
+          "muzzle_region_xywh": [
+            5,
+            34,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_fire/none/0": {
+      "stem": "catapult-l1-r1",
+      "index": 2,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            25,
+            26
+          ],
+          "muzzles_xy": [
+            [
+              25,
+              26
+            ]
+          ],
+          "muzzle_region_xywh": [
+            23,
+            24,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_wreck/none/0": {
+      "stem": "catapult-l1-r1",
+      "index": 3,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics."
+      }
+    },
+    "catapult_2/none/0": {
+      "stem": "catapult-l2-r1",
+      "index": 0,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            7,
+            36
+          ],
+          "muzzles_xy": [
+            [
+              7,
+              36
+            ]
+          ],
+          "muzzle_region_xywh": [
+            5,
+            34,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_2_hurt/none/0": {
+      "stem": "catapult-l2-r1",
+      "index": 1,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            7,
+            36
+          ],
+          "muzzles_xy": [
+            [
+              7,
+              36
+            ]
+          ],
+          "muzzle_region_xywh": [
+            5,
+            34,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_2_fire/none/0": {
+      "stem": "catapult-l2-r1",
+      "index": 2,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            26,
+            22
+          ],
+          "muzzles_xy": [
+            [
+              26,
+              22
+            ]
+          ],
+          "muzzle_region_xywh": [
+            24,
+            20,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_2_wreck/none/0": {
+      "stem": "catapult-l2-r1",
+      "index": 3,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics."
+      }
+    },
+    "catapult_3/none/0": {
+      "stem": "catapult-l3-r3",
+      "index": 0,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            6,
+            33
+          ],
+          "muzzles_xy": [
+            [
+              6,
+              33
+            ]
+          ],
+          "muzzle_region_xywh": [
+            4,
+            31,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_3_hurt/none/0": {
+      "stem": "catapult-l3-r3",
+      "index": 1,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            6,
+            33
+          ],
+          "muzzles_xy": [
+            [
+              6,
+              33
+            ]
+          ],
+          "muzzle_region_xywh": [
+            4,
+            31,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_3_fire/none/0": {
+      "stem": "catapult-l3-r3",
+      "index": 2,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics.",
+        "points": {
+          "muzzle_xy": [
+            26,
+            20
+          ],
+          "muzzles_xy": [
+            [
+              26,
+              20
+            ]
+          ],
+          "muzzle_region_xywh": [
+            24,
+            18,
+            5,
+            5
+          ]
+        }
+      }
+    },
+    "catapult_3_wreck/none/0": {
+      "stem": "catapult-l3-r3",
+      "index": 3,
+      "fields": {
+        "review_issue": "Stationary support body changes; see checks. Geometry failures retained as diagnostics."
+      }
+    },
+    "pumpkin_shot/none/0": {
+      "stem": "pumpkin-shot-r1",
+      "index": 0
+    },
+    "pumpkin_shot/none/1": {
+      "stem": "pumpkin-shot-r1",
+      "index": 1
+    },
+    "pumpkin_shot/none/2": {
+      "stem": "pumpkin-shot-r1",
+      "index": 2
+    },
+    "pumpkin_splat/none/0": {
+      "stem": "pumpkin-splat-r1",
+      "index": 0
+    },
+    "pumpkin_splat/none/1": {
+      "stem": "pumpkin-splat-r1",
+      "index": 1
+    },
+    "pumpkin_splat/none/2": {
+      "stem": "pumpkin-splat-r1",
+      "index": 2
+    },
+    "pumpkin_splat/none/3": {
+      "stem": "pumpkin-splat-r1",
+      "index": 3
+    }
+  },
+  "rejected": {
+    "catapult-master-r1": "Whole ratio1067:693 gives28x18, too wide; diffuse background haze.",
+    "catapult-l1-r2": "Whole24x17 is too wide; base pixels change during fire.",
+    "catapult-l1-r3": "No empty row gutter at alpha128, and proportions remain incorrect.",
+    "catapult-l3-r1": "No safe empty row gaps for measured cuts.",
+    "catapult-l3-r2": "Wreck wider than whole, level3 whole too wide for24\u201327px height."
+  },
+  "decisions": {
+    "catapult-l1-r1": {
+      "decision": "diagnostic only: incorrect stationary body/proportions; no cells accepted for production",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "catapult-l2-r1": {
+      "decision": "diagnostic only: incorrect stationary body/proportions; no cells accepted for production",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "catapult-l3-r3": {
+      "decision": "diagnostic only: incorrect stationary body/proportions; no cells accepted for production",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  }
+}

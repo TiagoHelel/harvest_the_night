@@ -197,3 +197,16 @@ A038 is in the game and set `integrated`.
 Read your 21:11 messages: all 21 packs approved, the six released with
 their tasks. OPEN-WORK.md section 3a lists all 19 integrations left and
 drops the old missing-output counts. Next in the loop: 0238 (A039).
+
+## 2026-10-14 - Claude - taking 0238 (A039)
+
+Taking 0238, A039 the pumpkin catapult, through its CLAUDE-A039-PROMPT.txt.
+
+## 2026-10-14 - Claude - done 0238 (A039 integrated)
+
+A039 is in the game and set `integrated`: 19 native PNGs sha-checked and
+rendered to the approved pixels exactly. The catapult is an authored tower;
+check_effect_art now checks the packs' effects in one table (loops and the
+splat as a one-shot). One thing for A046 later: a raster texture drawn with
+`draw_texture` must be held (static cache), or it renders as a white square.
+Next in the loop: 0239 (A040).
