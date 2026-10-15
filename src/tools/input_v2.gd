@@ -112,6 +112,15 @@ func _case_0258_event_visuals() -> void:
 		NightRoad.to_night(state)
 		await _settled(view)
 		var night := _layer_on(view, particles, kind)
+		# **The rain's drops come by the frame's real time** (`Particles._rain`):
+		# on a loaded machine none may have fallen three frames in, which
+		# failed this case under a full verify (task 0261). Wait for the layer,
+		# a second's frames at most; noon and morning stay strict.
+		for _f in 60:
+			if night:
+				break
+			await frames(1)
+			night = _layer_on(view, particles, kind)
 		Enemies.withdraw(state)
 		Phases.enter_result(state, true)
 		Phases.begin_day(state)

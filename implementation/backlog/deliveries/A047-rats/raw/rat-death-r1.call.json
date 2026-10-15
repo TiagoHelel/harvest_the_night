@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A047 production RAT death sprite source for HARVEST THE NIGHT.\nPrimary request: ONE horizontal strip, exactly3 sequential frames ofsame accepted rat, facing WEST/LEFT.\nInputimage1 accepted ratmaster is identity. Handcrafted coarsepixelart, same grey-BROWN matted fur, rotpatches, smallbarepink-grey ear/tail, boneeye, sharpnose, exposedribs; fourlegs, no extra limbs/accessories. NOT greyrocks/cutepet. Sameorthographic three-quarter camera, neutral upper-left daylight andcolouredoutlines.\nCanvas24x16 each, pivot(12,14), contact/feet/bodycentre excludingtail fixed, lowestrow13. One commonphysicalscale acrossstrip; standingbody7\u20139high, fullbodywithtail<=20long, ALL pixels inside1pxborder.\nENEMY_STRIP + STRIP orderedposes jolt, rollside, liebacklegsup. Jolt, rollontoside, lieonback with legsup. Visibleheight monotonically decreases, nevergrow, finalatmost6high. Samefur/bodymass, no enlargingcorpse tofillcell, no bloodpuddle. One-shot ends grounded. Anatomical limbs stayattached andneverteleport; no colour/injury swaps. Nativeeye/snoutear/tail remainvisible, broad simpleclusters, nofinedetail.\nEachobject SMALL in equalvirtualcell: atmost50percentcellwidth/height, huge true transparentgutters, generousoutermargins, completeunclippedtail/feet. Samegroundbaseline/centres; neverindividuallyenlarge smallposes.\nTruealpha0outside opaqueart. No targets, scenery, groundshadow, grasspatch, glow, halos, haze, motionlines, text/labels/UI. No blur/gradient/3D/vector orrandomspeckle.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.png",
+      "sha256": "462571ee71814e7aa52195a60c2d2de2cc2c6d2292fd2a3be46614b82f7e8d72",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-566e4cd3-8ef1-4d18-88cf-97d96e515a8e.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A047-rats\\raw\\rat-death-r1.png",
+  "sha256": "06fcbc165cdea31c1091b2a7bcf210e28d641e93ae10479d5d989ecd13f1c8ee",
+  "revision": 1,
+  "decision": "internallyusable candidate for finalownerreview; not approved forintegration"
+}

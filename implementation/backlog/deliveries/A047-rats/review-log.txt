@@ -1,0 +1,14 @@
+2026-10-14 / Task0248 verified done; A047 queue-selected. Allpriornewpackagescompleted orblocked; pendingownerquestions unchanged. Ratpalette/scale/layout references inspected. Nointerimownerapproval.
+
+2026-10-14 / Measured native export
+
+No art approval inferred. 12 of 12 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Measured native export
+Native attack anticipation contact has half-pixel tie. Anchor8 selectsfootspan centre12.5 (inside12+-1), rather than11.5, preserving a1pxwestward nose lunge. This is measured placement only, same source/scale and untouchedpixels.
+No art approval inferred. 12 of 12 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+12/12 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: none. Complete delivery released for Claude integration.

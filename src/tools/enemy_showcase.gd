@@ -148,9 +148,12 @@ func _settle() -> void:
 	for i in ids.size():
 		var one := Entities.get_one(_state, int(ids[i]))
 		var sprite: Sprite2D = _world._actor_sprites[i]
-		expect(sprite.position == ArtPlacement.contact(one["pos"]), "Ground contact uses unchanged core subtile position")
+		# A swarm's body is spread for the eye by its id (task 0248's rat).
+		expect(sprite.position == ArtPlacement.contact(one["pos"]) + WorldView.crowd_offset(one), "Ground contact uses unchanged core subtile position")
 		if EnemyMotion.FAMILIES.has(one["kind"]):
-			expect(sprite.offset == Vector2(-32, -44), "Common authored pose pivot, including lunges")
+			# Each family on its own canvas's pivot (task 0261's rat at 24x16).
+			var pivot: Vector2i = PlaceholderArt.frame(WorldView.ENEMY_DIR + str(one["kind"]) + ".png").get("pivot", Vector2i(32, 44))
+			expect(sprite.offset == -Vector2(pivot), "Common authored pose pivot, including lunges")
 			expect(sprite.texture != null and RasterArt.FRAMES.has(sprite.texture.resource_path), "Actual source-owned pose is rendered")
 			expect(sprite.get_parent().y_sort_enabled, "Actor depth uses feet, including mirrored poses")
 
@@ -402,11 +405,14 @@ func _death_sources() -> void:
 	var layer := Node2D.new()
 	root.add_child(layer)
 	for i in EnemyMotion.FAMILIES.size():
-		for frame in 4:
+		# Each family's own death frames on its own pivot (task 0261's rat).
+		var kind: StringName = EnemyMotion.FAMILIES[i]
+		var pivot: Vector2i = PlaceholderArt.frame(WorldView.ENEMY_DIR + str(kind) + ".png").get("pivot", Vector2i(32, 44))
+		for frame in EnemyDeaths.death_frames(kind):
 			var sprite := Sprite2D.new()
 			sprite.centered = false
-			sprite.texture = load(WorldView.ENEMY_DIR+str(EnemyMotion.FAMILIES[i])+"_death_%d.png" % frame)
-			sprite.offset = Vector2(-32,-44)
+			sprite.texture = load(WorldView.ENEMY_DIR+str(kind)+"_death_%d.png" % frame)
+			sprite.offset = -Vector2(pivot)
 			sprite.position = Vector2(110+frame*80,65+i*58)
 			layer.add_child(sprite)
 	await _shoot("death_sources", "Prepared one-shot collapse sources / playback follows in task 0016")

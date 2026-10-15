@@ -1,6 +1,6 @@
 # A047 - The rat swarm
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0261
 - **Dressed by game tasks:** 0248
 - **Spec after game task:** 0248

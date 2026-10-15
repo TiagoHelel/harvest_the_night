@@ -293,3 +293,12 @@ Taking 0260, A046 the spitter, through its CLAUDE-A046-PROMPT.txt.
 
 A046 is in the game and set `integrated` (the spitter: 18 native PNGs sha-checked; check_enemy_art gains PACK_FAMILIES and check_ui_art PACK_HEADS).
 Next in the loop: 0261.
+
+## 2026-10-15 - Claude - taking 0261 (A047)
+
+Taking 0261, A047 the rat swarm, through its CLAUDE-A047-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0261 (A047 integrated)
+
+A047 is in the game and set `integrated` (the rat swarm: 12 native PNGs sha-checked; check_enemy_art now takes a spec per family, and the rat is tracked with three death frames).
+Next in the loop: 0262.

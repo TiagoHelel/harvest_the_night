@@ -9,7 +9,9 @@ extends RefCounted
 ## its art has them (`posed_boss`). A boss with none drawn yet falls back to
 ## the ordinary path, as any family this does not track; the Giant draws
 ## exactly as before.
-const FAMILIES: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker"]
+## The rat since task 0261 (A047): its scurry by the distance it runs, its
+## bite off the rules' own hit, its death played on.
+const FAMILIES: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker", &"rat"]
 ## The ticks a boss's slam shows, its three frames.
 const SLAM_TICKS := 9
 var _before: Dictionary = {}

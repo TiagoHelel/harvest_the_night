@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A047 production RAT walk sprite source for HARVEST THE NIGHT.\nPrimary request: ONE horizontal strip, exactly4 sequential frames ofsame accepted rat, facing WEST/LEFT.\nInputimage1 accepted ratmaster is identity. Handcrafted coarsepixelart, same grey-BROWN matted fur, rotpatches, smallbarepink-grey ear/tail, boneeye, sharpnose, exposedribs; fourlegs, no extra limbs/accessories. NOT greyrocks/cutepet. Sameorthographic three-quarter camera, neutral upper-left daylight andcolouredoutlines.\nCanvas24x16 each, pivot(12,14), contact/feet/bodycentre excludingtail fixed, lowestrow13. One commonphysicalscale acrossstrip; standingbody7\u20139high, fullbodywithtail<=20long, ALL pixels inside1pxborder.\nENEMY_STRIP + STRIP orderedposes frontreach, gatherfront, backpush, gatherback. A scurry: frontlegs reach west, gather under body, backlegs push, gather. Four legs move coherently, front/rear pairs alternate, tail swings gently. Body8pxhigh, fullbody/tail atmost20long. Loopcloses. Not simple verticalshifts; samebodymass/snout/ear everyframe. Anatomical limbs stayattached andneverteleport; no colour/injury swaps. Nativeeye/snoutear/tail remainvisible, broad simpleclusters, nofinedetail.\nEachobject SMALL in equalvirtualcell: atmost50percentcellwidth/height, huge true transparentgutters, generousoutermargins, completeunclippedtail/feet. Samegroundbaseline/centres; neverindividuallyenlarge smallposes.\nTruealpha0outside opaqueart. No targets, scenery, groundshadow, grasspatch, glow, halos, haze, motionlines, text/labels/UI. No blur/gradient/3D/vector orrandomspeckle.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.png",
+      "sha256": "462571ee71814e7aa52195a60c2d2de2cc2c6d2292fd2a3be46614b82f7e8d72",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-3eb7cba1-fd65-4fcc-b245-41a528e5a102.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A047-rats\\raw\\rat-walk-r1.png",
+  "sha256": "5bf4fed5d9846ad949a3871de93ad0ed8cb34d9aaee4356830c5f0ce3ccdc058",
+  "revision": 1,
+  "decision": "internallyusable candidate for finalownerreview; not approved forintegration"
+}

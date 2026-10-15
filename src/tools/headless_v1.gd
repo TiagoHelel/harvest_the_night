@@ -9574,7 +9574,8 @@ func _task_0246_bosses() -> void:
 			by_name.append(file)
 	var voices := SuiteKit.code_lines_of("res://src/ui/sfx.gd").count("&\"giant\"")
 	expect(EnemyMotion.posed_boss(&"giant") and not EnemyMotion.posed_boss(&"walker")
-		and EnemyMotion.tracks(&"giant") and EnemyMotion.tracked() == [&"walker", &"runner", &"tank", &"breaker", &"giant"]
+		and EnemyMotion.tracks(&"giant") and EnemyMotion.tracked() == EnemyMotion.FAMILIES + [&"giant"]
+		and EnemyMotion.FAMILIES.slice(0, 4) == [&"walker", &"runner", &"tank", &"breaker"]
 		and EnemyMotion.TRACKED == EnemyMotion.tracked()
 		and Sfx.voice_of(&"giant") == &"sfx/roar_giant" and Sfx.voice_of(&"walker") == &"sfx/groan_walker"
 		and by_name.is_empty() and voices == 1,
@@ -9909,12 +9910,17 @@ func _task_0248_rats() -> void:
 	standing = standing and int(heights.get("rat_attack_1 long", 99)) <= int(heights.get("rat long", 0)) + 3
 	var head := WorldView.drawn_enemy("res://sprites/ui/head_rat.png")
 	var head_used := head.get_image().get_used_rect() if head != null else Rect2i()
+	# A047's own, nothing of 0120's road; tracked, so its three death frames
+	# play (task 0261).
+	standing = (standing and PlaceholderArt.art(&"rat_walk").is_empty() and PlaceholderArt.art(&"head_rat").is_empty()
+		and head != null and head.resource_path == "res://sprites/ui/head_rat.png"
+		and EnemyMotion.tracks(&"rat") and EnemyDeaths.death_frames(&"rat") == 3 and EnemyDeaths.death_frames(&"walker") == 4)
 	expect(wrong.is_empty() and shapes.size() == frames.size() and standing
 		and int(heights.get(&"rat_death_1", 99)) <= int(heights.get(&"rat_death_0", 0))
 		and int(heights.get(&"rat_death_2", 99)) <= int(heights.get(&"rat_death_1", 0)) and int(heights.get(&"rat_death_2", 99)) <= 6
 		and head != null and head.get_size() == Vector2(16, 16) and head_used.end.y == 15 and head_used.size.x <= 13
 		and head_used.size.y >= 12 and head_used.size.y <= 13,
-		"the rat is drawn on A047's canvas: feet on row 13, a pixel clear, every frame its own, 7-9 tall and 20 long standing, the lunge 3 further, dying lower to 6, its head on A011's box",
+		"the rat is A047's art (task 0261): feet on row 13, a pixel clear, every frame its own, 7-9 tall and 20 long standing, the lunge 3 further, dying lower to 6, its head on A011's box",
 		"%s %s head %s" % [str(wrong), str(heights), str(head_used)])
 	_completed += 1
 

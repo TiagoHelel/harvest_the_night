@@ -1,0 +1,41 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production forecast head icon, A047 head_rat for HARVEST THE NIGHT.\nPrimary request: ONE undead rat HEAD-and-shoulders bust with ears, sharp snout and frontpaws, turned three-quarter LEFT, cutflatbottom. Same character as identity master, not fullratbody.\nInputs: Image1 accepted ratmaster is identity; Image2 nativewalk0 NEAREST4x is in-game colour/identity; Image3 woodraw is icon outline/framing style only, notsubject/material; Image4 integrated head_walker is16x16HUD framing/baseline only.\nHandcrafted coarsepixelart with broad simpleclusters andcolouredoutline, sameorthographic farmcamera and upper-left neutral daytime light. Grey-BROWN matted fur, largebarepink-grey ears, rotpatches, palecloudy bone/cream eye, nasty sharpsnout, exposedteeth. Not cute/notstonegrey.\nNative16x16 pivot8,8, visiblebust12\u201313high andatmost13wide, centredx8, lowestopaquerow14, row15empty,1pxclearleft/right/top. Includefrontpaws/neck belowhead to give uprightbust proportions, NOT longhorizontalratbody or tail. Flat bottomchestcut.\nOne clear BOLD pale mattebone eye, largeenough tosurvive as1\u20132nativepixels (a simplecream square roughly10percentportraitheight). Dark socketoutline, noemission. Eye mustremain visible at13pxheight; no tinywhite sliver. Samecoat/ear colours asbody.\nTrue alpha0outside sharpopaque pixels. No frame/panel/text/UI, shadow, ground, glow, halo, haze, softalpha, gradient, blur, vector/3D orspeckle. One completeunclipped bust. Palette will be restricted tobodycolours.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/preview/walk0-head-reference-4x.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/ui/head_walker.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.png",
+      "sha256": "462571ee71814e7aa52195a60c2d2de2cc2c6d2292fd2a3be46614b82f7e8d72",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/preview/walk0-head-reference-4x.png",
+      "sha256": "8eb1187c76dfc70ee3b2fd52b411da1f47d76256c591511b23b09b74134a7c3b",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/ui/head_walker.png",
+      "sha256": "7b2cdf912e308ee429a413b609af7c029275d369d8f6af6c00e18b1534a7d512",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-adbcf4a8-eb33-4fc3-a93e-84be1216c7f3.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A047-rats\\raw\\head-rat-r1.png",
+  "sha256": "1102bb86cf009acc3834db40cfb6bde584361ebc46dc5a69e394384e7796bd3d",
+  "revision": 1,
+  "decision": "internallyusable candidate for finalownerreview; not approved forintegration"
+}

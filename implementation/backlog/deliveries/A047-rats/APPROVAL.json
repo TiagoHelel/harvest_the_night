@@ -1,0 +1,29 @@
+{
+  "pack": "A047",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A047-rats",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/rat/west/01.png": "4bcb9be42e0b967bbe51ef29730c6f0aef16d782e4a6cff3505435cd818479a5",
+    "native/rat_walk/west/01.png": "2018ff05f26f6290dd539570676c742349f40abf5540c628e88350e65da770e8",
+    "native/rat_walk/west/02.png": "cb9be2e0f5f8b7717b67444bcd0acc48dab3cfaf0ab4c2f5df0e5448323a415b",
+    "native/rat_walk/west/03.png": "85b19f0ef685753bd9d38fd00a55a05c9e9eb3793f75a455090dabdd2eb6cf6d",
+    "native/rat_walk/west/04.png": "8fc84175d094b59aa53c00e149f0a77d5ab3df4e8ced356fa95b28f003306f4e",
+    "native/rat_attack/west/01.png": "bb6c71c24a6b1a2acd3e7d743f6b2bcfcd8ed66da1786691425baac55f83ee67",
+    "native/rat_attack/west/02.png": "db2ad4eaa498ee4caa1b46724b05e5bd950fce1555e43219f6a6f7104863c5eb",
+    "native/rat_attack/west/03.png": "d2eab80c4fd96149ecd14db7a45ffa0c15f28ee3ba5dd4b03a5839611c552dba",
+    "native/rat_death/west/01.png": "9a6ac61c8b80ea4bb132a8b8d8035a52830395960e3d04b8ec92dc3b2543231f",
+    "native/rat_death/west/02.png": "60eea7a34150faa096a95ca3965d4ed6658dc64a4000efce2af889dcc40f3dba",
+    "native/rat_death/west/03.png": "20a97e085c412ee5beb9d91dd467543d8a8e456f8fdc2560af042a30f9921341",
+    "native/head_rat/none/01.png": "e5c4a0c2269fbda79a921e18504e5dc53520672545638b6b4970b2a7fc1c20db"
+  },
+  "frames": 12,
+  "frames_expected": 12,
+  "accepted_visual_checks": [],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

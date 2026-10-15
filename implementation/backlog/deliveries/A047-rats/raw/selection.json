@@ -1,0 +1,104 @@
+{
+  "status": "review",
+  "issues": [
+    "Native attack anticipation contact has half-pixel tie. Anchor8 selectsfootspan centre12.5 (inside12+-1), rather than11.5, preserving a1pxwestward nose lunge. This is measured placement only, same source/scale and untouchedpixels."
+  ],
+  "files": {
+    "rat/west/0": {
+      "stem": "rat-master-r3",
+      "index": 0,
+      "fields": {}
+    },
+    "rat_walk/west/0": {
+      "stem": "rat-walk-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "rat_walk/west/1": {
+      "stem": "rat-walk-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "rat_walk/west/2": {
+      "stem": "rat-walk-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "rat_walk/west/3": {
+      "stem": "rat-walk-r1",
+      "index": 3,
+      "fields": {}
+    },
+    "rat_attack/west/0": {
+      "stem": "rat-attack-r1",
+      "index": 0,
+      "fields": {},
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          8
+        ]
+      }
+    },
+    "rat_attack/west/1": {
+      "stem": "rat-attack-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "rat_attack/west/2": {
+      "stem": "rat-attack-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "rat_death/west/0": {
+      "stem": "rat-death-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "rat_death/west/1": {
+      "stem": "rat-death-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "rat_death/west/2": {
+      "stem": "rat-death-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "head_rat/none/0": {
+      "stem": "head-rat-r1",
+      "index": 0,
+      "fields": {
+        "inspection_eye_xy": [
+          7,
+          7
+        ]
+      }
+    }
+  },
+  "rejected": {
+    "rat-master-r1": "Tail too long to centre mainbody inside24pxframe; targetedshort-tail correction selected.",
+    "rat-master-r2": "Visible22x8 exceeds20pxlength limit."
+  },
+  "decisions": {
+    "rat-master-r3": {
+      "decision": "internallyaccepted master18x8 and centredcontact; finalownerreview pending",
+      "accepted_cells": [
+        0
+      ],
+      "rejected_cells": []
+    },
+    "rat-walk-r1": {
+      "decision": "internallyusable candidate for finalownerreview; not approved forintegration"
+    },
+    "rat-attack-r1": {
+      "decision": "internallyusable candidate for finalownerreview; not approved forintegration"
+    },
+    "rat-death-r1": {
+      "decision": "internallyusable candidate for finalownerreview; not approved forintegration"
+    },
+    "head-rat-r1": {
+      "decision": "internallyusable candidate for finalownerreview; not approved forintegration"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+[
+  {
+    "recipe": {
+      "id": "rat-death-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A047-rats\\raw\\rat-death-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        806,
+        724
+      ],
+      "crop_xywh": [
+        225,
+        254,
+        562,
+        306
+      ],
+      "content_scale": 0.026143790849673203,
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        8,
+        8
+      ]
+    },
+    "native_bounds": [
+      4,
+      6,
+      19,
+      14
+    ],
+    "unclipped_scaled_wh": [
+      15,
+      8
+    ],
+    "measured_contact_band_raw_xywh": [
+      225,
+      484,
+      562,
+      76
+    ],
+    "contact_centre_raw_x": 543.0,
+    "native_grid_registration_dx": 0
+  },
+  {
+    "recipe": {
+      "id": "rat-death-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A047-rats\\raw\\rat-death-r1.png",
+      "sheet_cell_xywh": [
+        806,
+        0,
+        577,
+        724
+      ],
+      "crop_xywh": [
+        827,
+        330,
+        517,
+        230
+      ],
+      "content_scale": 0.026143790849673203,
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        6,
+        6
+      ]
+    },
+    "native_bounds": [
+      6,
+      8,
+      20,
+      14
+    ],
+    "unclipped_scaled_wh": [
+      14,
+      6
+    ],
+    "measured_contact_band_raw_xywh": [
+      827,
+      484,
+      517,
+      76
+    ],
+    "contact_centre_raw_x": 1050.5,
+    "native_grid_registration_dx": 0
+  },
+  {
+    "recipe": {
+      "id": "rat-death-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A047-rats\\raw\\rat-death-r1.png",
+      "sheet_cell_xywh": [
+        1383,
+        0,
+        789,
+        724
+      ],
+      "crop_xywh": [
+        1423,
+        353,
+        543,
+        207
+      ],
+      "content_scale": 0.026143790849673203,
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        7,
+        5
+      ]
+    },
+    "native_bounds": [
+      5,
+      9,
+      19,
+      14
+    ],
+    "unclipped_scaled_wh": [
+      14,
+      5
+    ],
+    "measured_contact_band_raw_xywh": [
+      1423,
+      484,
+      543,
+      76
+    ],
+    "contact_centre_raw_x": 1694.5,
+    "native_grid_registration_dx": 0
+  }
+]

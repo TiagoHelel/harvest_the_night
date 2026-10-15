@@ -1,0 +1,8 @@
+Use case: stylized-concept
+Asset type: A047 production RAT attack sprite source for HARVEST THE NIGHT.
+Primary request: ONE horizontal strip, exactly3 sequential frames ofsame accepted rat, facing WEST/LEFT.
+Inputimage1 accepted ratmaster is identity. Handcrafted coarsepixelart, same grey-BROWN matted fur, rotpatches, smallbarepink-grey ear/tail, boneeye, sharpnose, exposedribs; fourlegs, no extra limbs/accessories. NOT greyrocks/cutepet. Sameorthographic three-quarter camera, neutral upper-left daylight andcolouredoutlines.
+Canvas24x16 each, pivot(12,14), contact/feet/bodycentre excludingtail fixed, lowestrow13. One commonphysicalscale acrossstrip; standingbody7–9high, fullbodywithtail<=20long, ALL pixels inside1pxborder.
+ENEMY_STRIP + STRIP orderedposes crouchback, lungejawsopen, recovery. Bite towest: crouchback, lungewest with jawsopen andsnout atmost3pxfurtherwest, recovery to8pxstandingheight. Samebodymass, noswallowedtarget, noprojectile. One-shot, no extra limbs. Anatomical limbs stayattached andneverteleport; no colour/injury swaps. Nativeeye/snoutear/tail remainvisible, broad simpleclusters, nofinedetail.
+Eachobject SMALL in equalvirtualcell: atmost50percentcellwidth/height, huge true transparentgutters, generousoutermargins, completeunclippedtail/feet. Samegroundbaseline/centres; neverindividuallyenlarge smallposes.
+Truealpha0outside opaqueart. No targets, scenery, groundshadow, grasspatch, glow, halos, haze, motionlines, text/labels/UI. No blur/gradient/3D/vector orrandomspeckle.

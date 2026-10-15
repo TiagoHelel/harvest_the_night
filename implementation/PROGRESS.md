@@ -32304,3 +32304,76 @@ gone.
     counts raindrops three frames after nightfall, and a loaded machine can
     show none yet. It passed alone and on the next full run. A separate fix
     is suggested.
+
+## 0261 - Art: the rat swarm - done 2026-10-15
+
+A047 is integrated. The rat is the owner-approved art now: standing, its
+four-frame scurry, its three-frame bite, its three-frame death and its head
+in the forecast. The owner approved it on 2026-10-14 in the batch review, as
+recorded in the delivery's `APPROVAL.json`. 0248's code drawing is gone.
+
+- **Promotion**: the 12 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their five raw sources were copied byte for byte into
+    `assets/art_source/enemies/rat/` and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - **Not 64x48**: the rat is 24x16 standing on (12,14). Its cell offset is
+    [-4,2], the contact minus the pivot, as the zombies' [-24,-28] is.
+  - `enemy_family`/`enemy_motion` are set, with three aliases: `_walk_b`
+    (walk 2), `_attack` (attack 1) and `_death` (death 2, the last of its
+    three). Each carries the frame's prompt and references.
+- **Tracked, so its bite and its death play**: `EnemyMotion.FAMILIES` takes
+  `rat`, which gives the rat its scurry by the distance it runs and its bite
+  off the rules' own hit.
+  - `EnemyDeaths.death_frames(kind)` counts a kind's death frames off its
+    art: four for the zombies, three for the rat. It was a fixed four.
+  - Until now the rat was posed off the rules on the clock and had no death
+    pose at all.
+- **`RatArt` loads A047's frames** for the callers that ask by path
+  (`WorldView.drawn_enemy`). Its drawing is gone.
+- **The stand-ins retired**: A047's five `PlaceholderArt` entries and the
+  `RAT` geometry are gone. `placeholders.py --check` passes, with 196
+  stand-ins left over 27 packs.
+- **Checks**:
+  - `check_enemy_art.py` is rewritten round a spec per family: canvas,
+    pivot, cell offset, its motions and their counts, and how low a death
+    ends. The four and the spitter keep 64x48 at (32,44), [-24,-28],
+    1/4/3/4 and 16. The rat takes 24x16 at (12,14), [-4,2], 1/4/3/3 and 6.
+    The `_death` alias names each family's last death frame. Result: 71
+    poses and 18 aliases, every silhouette apart.
+  - `check_ui_art.py`'s `PACK_HEADS` takes the rat's head.
+  - The enemy showcase reads each family's own pivot, its death frames and a
+    swarm's spread (`WorldView.crowd_offset`). It assumed 64x48, four deaths
+    and no spread, and failed 56 checks on the rat until then; it now
+    passes with 2,204.
+- **Tests**:
+  - 0248's view check now asks for A047's art, with nothing of 0120's road
+    left, the rat tracked, and three death frames to the zombies' four.
+  - The approved art meets the rules 0248 set for its drawing: feet on row
+    13, 7-9 tall and 20 long standing, the lunge 3 further, dying lower to
+    6, the head on A011's box.
+  - 0246's boss check compared `EnemyMotion.tracked()` with a list of the
+    four and the Giant. It now asks for the families then the Giant, the
+    four first.
+- **Shots** (`implementation/shots/0261/`, FHD 1920x1080, looked at):
+  - `rats`, 0248's scene at night: three clusters of six over open ground.
+    Under the night's relight a cluster reads as one dark mass more than as
+    six bodies; that is the approved art at native size.
+  - `forecast_summer`, 0260's scene, with the rat's head among the night's
+    kinds.
+- **Found on the way, fixed**:
+  - The Giant showcase's lineup, "the ordinary four and the boss", was
+    `EnemyMotion.FAMILIES` plus the boss. With the rat tracked it counted
+    six deaths and the rat's 24x16 pivot, and failed 8 checks. It now takes
+    the first four, as it meant to.
+  - `input_v2`'s weather case failed twice in three full runs: "rain on 8:
+    night false". It counted raindrops three frames after nightfall, and the
+    drops come by the frame's real time, so a loaded machine had shown none
+    yet. It passed alone each time. The case now waits for the layer, a
+    second's frames at most, and noon and morning stay strict.
+- **The delivery folder** `implementation/backlog/deliveries/A047-rats/` is
+  committed, as A046's was.
+- `python implementation/backlog/assets.py set A047 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (62 of 62) on the second run, after the two fixes above.

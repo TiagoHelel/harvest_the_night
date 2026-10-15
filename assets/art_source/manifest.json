@@ -79811,6 +79811,1012 @@
       "operation": "copy",
       "alias_of": "enemies/spitter_death_3",
       "output_sha256": "7b5e96ff5a088d7f697a009519ccea90f6eda537e4453e5b9cfac8a2a9a5cc85"
+    },
+    {
+      "id": "enemies/rat",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-master-r3.png",
+      "source_sha256": "462571ee71814e7aa52195a60c2d2de2cc2c6d2292fd2a3be46614b82f7e8d72",
+      "crop_xywh": [
+        304,
+        243,
+        1087,
+        495
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "master",
+      "content_scale": 0.01616161616161616,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.prompt.txt",
+      "prompt_sha256": "4e77210c2e2135393273fe52ff1c484117cef77f06234d251345540b6421b00d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.call.json",
+          "sha256": "70c74480d20c986055310cca12a8f99b61beb1d49516b91765ca0c7f9091b4c4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat/west/01.png",
+          "sha256": "4bcb9be42e0b967bbe51ef29730c6f0aef16d782e4a6cff3505435cd818479a5",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        9,
+        8
+      ],
+      "output_sha256": "4bcb9be42e0b967bbe51ef29730c6f0aef16d782e4a6cff3505435cd818479a5"
+    },
+    {
+      "id": "enemies/rat_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-walk-r1.png",
+      "source_sha256": "5bf4fed5d9846ad949a3871de93ad0ed8cb34d9aaee4356830c5f0ce3ccdc058",
+      "crop_xywh": [
+        47,
+        272,
+        507,
+        245
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "walk",
+      "content_scale": 0.0326530612244898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_walk",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/rat_walk_0.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.prompt.txt",
+      "prompt_sha256": "14b797c3ad64effe093b5b224a51c053e0848c07ba6915aee876f6fc9f07416a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.call.json",
+          "sha256": "19a2e0e4eae60fa0449771819a78f8b2895d7f959f4f2ffd441b972e58ac0d99",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_walk/west/01.png",
+          "sha256": "2018ff05f26f6290dd539570676c742349f40abf5540c628e88350e65da770e8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        8,
+        8
+      ],
+      "output_sha256": "2018ff05f26f6290dd539570676c742349f40abf5540c628e88350e65da770e8"
+    },
+    {
+      "id": "enemies/rat_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-walk-r1.png",
+      "source_sha256": "5bf4fed5d9846ad949a3871de93ad0ed8cb34d9aaee4356830c5f0ce3ccdc058",
+      "crop_xywh": [
+        588,
+        272,
+        485,
+        245
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "walk",
+      "content_scale": 0.0326530612244898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_walk",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/rat_walk_1.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.prompt.txt",
+      "prompt_sha256": "14b797c3ad64effe093b5b224a51c053e0848c07ba6915aee876f6fc9f07416a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.call.json",
+          "sha256": "19a2e0e4eae60fa0449771819a78f8b2895d7f959f4f2ffd441b972e58ac0d99",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_walk/west/02.png",
+          "sha256": "cb9be2e0f5f8b7717b67444bcd0acc48dab3cfaf0ab4c2f5df0e5448323a415b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        8,
+        8
+      ],
+      "output_sha256": "cb9be2e0f5f8b7717b67444bcd0acc48dab3cfaf0ab4c2f5df0e5448323a415b"
+    },
+    {
+      "id": "enemies/rat_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-walk-r1.png",
+      "source_sha256": "5bf4fed5d9846ad949a3871de93ad0ed8cb34d9aaee4356830c5f0ce3ccdc058",
+      "crop_xywh": [
+        1099,
+        272,
+        533,
+        249
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "walk",
+      "content_scale": 0.0326530612244898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_walk",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/rat_walk_2.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.prompt.txt",
+      "prompt_sha256": "14b797c3ad64effe093b5b224a51c053e0848c07ba6915aee876f6fc9f07416a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.call.json",
+          "sha256": "19a2e0e4eae60fa0449771819a78f8b2895d7f959f4f2ffd441b972e58ac0d99",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_walk/west/03.png",
+          "sha256": "85b19f0ef685753bd9d38fd00a55a05c9e9eb3793f75a455090dabdd2eb6cf6d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        9,
+        8
+      ],
+      "output_sha256": "85b19f0ef685753bd9d38fd00a55a05c9e9eb3793f75a455090dabdd2eb6cf6d"
+    },
+    {
+      "id": "enemies/rat_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-walk-r1.png",
+      "source_sha256": "5bf4fed5d9846ad949a3871de93ad0ed8cb34d9aaee4356830c5f0ce3ccdc058",
+      "crop_xywh": [
+        1662,
+        272,
+        463,
+        244
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "walk",
+      "content_scale": 0.0326530612244898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_walk",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/rat_walk_3.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.prompt.txt",
+      "prompt_sha256": "14b797c3ad64effe093b5b224a51c053e0848c07ba6915aee876f6fc9f07416a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.call.json",
+          "sha256": "19a2e0e4eae60fa0449771819a78f8b2895d7f959f4f2ffd441b972e58ac0d99",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_walk/west/04.png",
+          "sha256": "8fc84175d094b59aa53c00e149f0a77d5ab3df4e8ced356fa95b28f003306f4e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        8,
+        8
+      ],
+      "output_sha256": "8fc84175d094b59aa53c00e149f0a77d5ab3df4e8ced356fa95b28f003306f4e"
+    },
+    {
+      "id": "enemies/rat_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-attack-r1.png",
+      "source_sha256": "1c5516573d66c7384a4a0edf3f677650eede0e6ac364032017fa185febaaf078",
+      "crop_xywh": [
+        101,
+        269,
+        622,
+        299
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "attack",
+      "content_scale": 0.02564102564102564,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_attack_0.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.prompt.txt",
+      "prompt_sha256": "f26f37daf12d7a96ad773e1a8413d2db53ff6771006a5292570e62e2ead8f70e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.call.json",
+          "sha256": "f95830eb2dd5493ace6b803332eb2f6fd612179925f0b47b084853bcec7120b4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_attack/west/01.png",
+          "sha256": "bb6c71c24a6b1a2acd3e7d743f6b2bcfcd8ed66da1786691425baac55f83ee67",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        8,
+        8
+      ],
+      "output_sha256": "bb6c71c24a6b1a2acd3e7d743f6b2bcfcd8ed66da1786691425baac55f83ee67"
+    },
+    {
+      "id": "enemies/rat_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-attack-r1.png",
+      "source_sha256": "1c5516573d66c7384a4a0edf3f677650eede0e6ac364032017fa185febaaf078",
+      "crop_xywh": [
+        755,
+        256,
+        692,
+        312
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "attack",
+      "content_scale": 0.02564102564102564,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_attack_1.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.prompt.txt",
+      "prompt_sha256": "f26f37daf12d7a96ad773e1a8413d2db53ff6771006a5292570e62e2ead8f70e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.call.json",
+          "sha256": "f95830eb2dd5493ace6b803332eb2f6fd612179925f0b47b084853bcec7120b4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_attack/west/02.png",
+          "sha256": "db2ad4eaa498ee4caa1b46724b05e5bd950fce1555e43219f6a6f7104863c5eb",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        9,
+        8
+      ],
+      "output_sha256": "db2ad4eaa498ee4caa1b46724b05e5bd950fce1555e43219f6a6f7104863c5eb"
+    },
+    {
+      "id": "enemies/rat_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-attack-r1.png",
+      "source_sha256": "1c5516573d66c7384a4a0edf3f677650eede0e6ac364032017fa185febaaf078",
+      "crop_xywh": [
+        1470,
+        256,
+        646,
+        312
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "attack",
+      "content_scale": 0.02564102564102564,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_attack_2.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.prompt.txt",
+      "prompt_sha256": "f26f37daf12d7a96ad773e1a8413d2db53ff6771006a5292570e62e2ead8f70e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.call.json",
+          "sha256": "f95830eb2dd5493ace6b803332eb2f6fd612179925f0b47b084853bcec7120b4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_attack/west/03.png",
+          "sha256": "d2eab80c4fd96149ecd14db7a45ffa0c15f28ee3ba5dd4b03a5839611c552dba",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        9,
+        8
+      ],
+      "output_sha256": "d2eab80c4fd96149ecd14db7a45ffa0c15f28ee3ba5dd4b03a5839611c552dba"
+    },
+    {
+      "id": "enemies/rat_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-death-r1.png",
+      "source_sha256": "06fcbc165cdea31c1091b2a7bcf210e28d641e93ae10479d5d989ecd13f1c8ee",
+      "crop_xywh": [
+        225,
+        254,
+        562,
+        306
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "death",
+      "content_scale": 0.026143790849673203,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.prompt.txt",
+      "prompt_sha256": "20e94ba8a0a0b97f4448ffd54471dd2d86f10dc55beef54f78d7f72e2c7881e0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.call.json",
+          "sha256": "e739654148285f018b7fafa42afaaa54eb255b703c21779c1368251c74f33cf2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_death/west/01.png",
+          "sha256": "9a6ac61c8b80ea4bb132a8b8d8035a52830395960e3d04b8ec92dc3b2543231f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        8,
+        8
+      ],
+      "output_sha256": "9a6ac61c8b80ea4bb132a8b8d8035a52830395960e3d04b8ec92dc3b2543231f"
+    },
+    {
+      "id": "enemies/rat_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-death-r1.png",
+      "source_sha256": "06fcbc165cdea31c1091b2a7bcf210e28d641e93ae10479d5d989ecd13f1c8ee",
+      "crop_xywh": [
+        827,
+        330,
+        517,
+        230
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "death",
+      "content_scale": 0.026143790849673203,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.prompt.txt",
+      "prompt_sha256": "20e94ba8a0a0b97f4448ffd54471dd2d86f10dc55beef54f78d7f72e2c7881e0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.call.json",
+          "sha256": "e739654148285f018b7fafa42afaaa54eb255b703c21779c1368251c74f33cf2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_death/west/02.png",
+          "sha256": "60eea7a34150faa096a95ca3965d4ed6658dc64a4000efce2af889dcc40f3dba",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "output_sha256": "60eea7a34150faa096a95ca3965d4ed6658dc64a4000efce2af889dcc40f3dba"
+    },
+    {
+      "id": "enemies/rat_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/rat/rat-death-r1.png",
+      "source_sha256": "06fcbc165cdea31c1091b2a7bcf210e28d641e93ae10479d5d989ecd13f1c8ee",
+      "crop_xywh": [
+        1423,
+        353,
+        543,
+        207
+      ],
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "enemy_family": "rat",
+      "enemy_motion": "death",
+      "content_scale": 0.026143790849673203,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.prompt.txt",
+      "prompt_sha256": "20e94ba8a0a0b97f4448ffd54471dd2d86f10dc55beef54f78d7f72e2c7881e0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.call.json",
+          "sha256": "e739654148285f018b7fafa42afaaa54eb255b703c21779c1368251c74f33cf2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_death/west/03.png",
+          "sha256": "20a97e085c412ee5beb9d91dd467543d8a8e456f8fdc2560af042a30f9921341",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        7,
+        5
+      ],
+      "output_sha256": "20a97e085c412ee5beb9d91dd467543d8a8e456f8fdc2560af042a30f9921341"
+    },
+    {
+      "id": "ui/head_rat",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/head-rat-r1.png",
+      "source_sha256": "1102bb86cf009acc3834db40cfb6bde584361ebc46dc5a69e394384e7796bd3d",
+      "crop_xywh": [
+        159,
+        190,
+        940,
+        938
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.013859275053304905,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "roof_dark",
+        "roof",
+        "gold_dark",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin_light",
+        "night",
+        "rot_dark",
+        "rot",
+        "blood"
+      ],
+      "animation": "ui/head_rat",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/head_rat.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/head-rat-r1.prompt.txt",
+      "prompt_sha256": "a6243ed03a85495ff6c0596b316b7be55e2de5bb624af5fbce706bda676be087",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/head-rat-r1.call.json",
+          "sha256": "5135b8a73b46523687c700df15510a75ecc001841e23e3bf185079776c30332e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/head_rat/none/01.png",
+          "sha256": "e5c4a0c2269fbda79a921e18504e5dc53520672545638b6b4970b2a7fc1c20db",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "approval": "A047 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0261",
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "output_sha256": "e5c4a0c2269fbda79a921e18504e5dc53520672545638b6b4970b2a7fc1c20db"
+    },
+    {
+      "id": "enemies/rat_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.prompt.txt",
+      "prompt_sha256": "14b797c3ad64effe093b5b224a51c053e0848c07ba6915aee876f6fc9f07416a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-walk-r1.call.json",
+          "sha256": "19a2e0e4eae60fa0449771819a78f8b2895d7f959f4f2ffd441b972e58ac0d99",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_walk/west/03.png",
+          "sha256": "85b19f0ef685753bd9d38fd00a55a05c9e9eb3793f75a455090dabdd2eb6cf6d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "enemy_family": "rat",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/rat",
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "input": "enemies/rat_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/rat_walk_2",
+      "output_sha256": "85b19f0ef685753bd9d38fd00a55a05c9e9eb3793f75a455090dabdd2eb6cf6d"
+    },
+    {
+      "id": "enemies/rat_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_attack.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.prompt.txt",
+      "prompt_sha256": "f26f37daf12d7a96ad773e1a8413d2db53ff6771006a5292570e62e2ead8f70e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-attack-r1.call.json",
+          "sha256": "f95830eb2dd5493ace6b803332eb2f6fd612179925f0b47b084853bcec7120b4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_attack/west/02.png",
+          "sha256": "db2ad4eaa498ee4caa1b46724b05e5bd950fce1555e43219f6a6f7104863c5eb",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "enemy_family": "rat",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/rat",
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "input": "enemies/rat_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/rat_attack_1",
+      "output_sha256": "db2ad4eaa498ee4caa1b46724b05e5bd950fce1555e43219f6a6f7104863c5eb"
+    },
+    {
+      "id": "enemies/rat_death",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        16
+      ],
+      "pivot_xy": [
+        12,
+        14
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/rat_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/rat_death.png",
+      "prompt": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.prompt.txt",
+      "prompt_sha256": "20e94ba8a0a0b97f4448ffd54471dd2d86f10dc55beef54f78d7f72e2c7881e0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/raw/rat-death-r1.call.json",
+          "sha256": "e739654148285f018b7fafa42afaaa54eb255b703c21779c1368251c74f33cf2",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/native/rat_death/west/03.png",
+          "sha256": "20a97e085c412ee5beb9d91dd467543d8a8e456f8fdc2560af042a30f9921341",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/contract.json",
+          "sha256": "2c2e6813937ee39f660cefafe92c4c1b311b8ee11d92699bc7381f2c09ba800e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A047-rats/APPROVAL.json",
+          "sha256": "9daf376e503fdad8f32988cd54fc3494825ce3f79ddf124e18b1d639d2d134e7",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A047",
+      "integration_task": "0261",
+      "revision": 1,
+      "enemy_family": "rat",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/rat",
+      "cell_offset_xy": [
+        -4,
+        2
+      ],
+      "input": "enemies/rat_death_2",
+      "operation": "copy",
+      "alias_of": "enemies/rat_death_2",
+      "output_sha256": "20a97e085c412ee5beb9d91dd467543d8a8e456f8fdc2560af042a30f9921341"
     }
   ]
 }

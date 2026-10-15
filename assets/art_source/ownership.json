@@ -2510,6 +2510,62 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/enemies/rat.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_attack_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/rat_walk_b.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/enemies/runner.png",
       "owner": "raster"
     },
@@ -3319,6 +3375,10 @@
     },
     {
       "output": "sprites/ui/head_giant.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_rat.png",
       "owner": "raster"
     },
     {

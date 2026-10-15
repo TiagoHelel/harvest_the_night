@@ -1,0 +1,9 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, A047 rat identity candidate2.
+Primary request: ONE undead rat, standing on FOUR legs, side view WEST/LEFT.
+Input images: Image1 farm reference-sheet is style/camera. Image2 walker master is rotpalette/outline reference only, NOT humanoid anatomy. Image3 chicken is native density of smallcreature, NOT shape/colour.
+Handcrafted coarsepixelart with bold simple clusters and coloured outline. Orthographic three-quarter top-down rectangulargrid; neutral daytime upper-left light. Finalnative24x16, pivot(12,14), visible rat16–18long INCLUDINGtail and8tall; body centre excludingtail atx12, lowestrow13. Aboutquarterheight of32pxfarmer.
+Identity: nasty zombie RAT with grey-BROWN matted fur, bald rotgreen patches, few exposed ribs onflank, barepink-grey ears/tail, sharp snout, palecloudy boneeye. Longlow ratbody, large readable ear/snout, thin taperingtail pointing east/right. Not cute, not a grey rock. Four smalllegs underbody, no extra limbs/accessories.
+Tail bends down behind rump, lean low body with large readableear and pointedwest nose.
+Design on16x8logicalpixel bodygrid, no extra finepixel detail. Eye is a broad pale cream dot withdarkoutline, must survive as1nativepixel. Fur warmsoilbrown so rat reads on nightgrass, coolgrey onlybaretail/ears, not fullstonegreybody.
+True alpha0 outside sharpopaque art. No groundshadow, grass, groundpatch, glow, halos, labels, text, blur, gradients, vector/3D, thickblackboxes orrandomspeckle. Completeunclipped entiretail/body/feet, generousclearspace. Oneobject, no swarm sheet.

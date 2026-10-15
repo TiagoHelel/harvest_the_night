@@ -1,0 +1,46 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, A047 rat identity candidate1.\nPrimary request: ONE undead rat, standing on FOUR legs, side view WEST/LEFT.\nInput images: Image1 farm reference-sheet is style/camera. Image2 walker master is rotpalette/outline reference only, NOT humanoid anatomy. Image3 chicken is native density of smallcreature, NOT shape/colour.\nHandcrafted coarsepixelart with bold simple clusters and coloured outline. Orthographic three-quarter top-down rectangulargrid; neutral daytime upper-left light. Finalnative24x16, pivot(12,14), visible rat16\u201318long INCLUDINGtail and8tall; body centre excludingtail atx12, lowestrow13. Aboutquarterheight of32pxfarmer.\nIdentity: nasty zombie RAT with grey-BROWN matted fur, bald rotgreen patches, few exposed ribs onflank, barepink-grey ears/tail, sharp snout, palecloudy boneeye. Longlow ratbody, large readable ear/snout, thin taperingtail pointing east/right. Not cute, not a grey rock. Four smalllegs underbody, no extra limbs/accessories.\nTail modestly curved up behind rear, distinct largeear and long sharpsnout.\nDesign on16x8logicalpixel bodygrid, no extra finepixel detail. Eye is a broad pale cream dot withdarkoutline, must survive as1nativepixel. Fur warmsoilbrown so rat reads on nightgrass, coolgrey onlybaretail/ears, not fullstonegreybody.\nTrue alpha0 outside sharpopaque art. No groundshadow, grass, groundpatch, glow, halos, labels, text, blur, gradients, vector/3D, thickblackboxes orrandomspeckle. Completeunclipped entiretail/body/feet, generousclearspace. Oneobject, no swarm sheet.\nCORRECTION: Image4 is edit target. Change ONLY tail length. Current complete1210x478source silhouette produces20x8native, but tail extends so far east that centring bodyexcludingtail onpivot12 clips24pxcanvas. Shorten only baretail by40\u201350percent, preserving its curve and tip, ratbody/legs/head/ears/eye/clothing/fur unchanged. Target full silhouette16\u201318long x8high. Keep sourcebodyheight unchanged; do not lengthenallrat. No shadow/glow, truealpha0margin. Compact clear tail stillvisible atnative1x.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/chicken.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/chicken.png",
+      "sha256": "54ca6dc6b42be5bfdbb195f2c47d78bf2c4ef6d6722788fbf4ae02355b4480e8",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r1.png",
+      "sha256": "4ec254ef64d2ef2440069ef8d29ef52de509a731c15509afc6af777f9864b443",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A047-rats\\rejected\\rat-master-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d8a09aec-c057-49f9-9a3e-975f56aea11f.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A047-rats\\raw\\rat-master-r3.png",
+  "sha256": "462571ee71814e7aa52195a60c2d2de2cc2c6d2292fd2a3be46614b82f7e8d72",
+  "revision": 3,
+  "decision": "internallyaccepted master18x8 and centredcontact; finalownerreview pending",
+  "accepted_cells": [
+    0
+  ],
+  "rejected_cells": []
+}

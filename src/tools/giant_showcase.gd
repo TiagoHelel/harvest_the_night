@@ -32,9 +32,12 @@ func _run() -> void:
 	quit(1 if _failed > 0 else 0)
 
 
-## The ordinary four and the boss, as the Giant's five identities were.
+## The ordinary four and the boss, as the Giant's five identities were - the
+## first four of the tracked families, not the packs' later ones (task 0261's
+## rat on its own canvas).
 func _lineup() -> Array[StringName]:
-	var out: Array[StringName] = EnemyMotion.FAMILIES.duplicate()
+	var out: Array[StringName] = []
+	out.assign(EnemyMotion.FAMILIES.slice(0, 4))
 	out.append(_family)
 	return out
 

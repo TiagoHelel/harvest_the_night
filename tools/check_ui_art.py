@@ -81,6 +81,7 @@ HEADS = {
 ## palette rather than an exact crop.
 PACK_HEADS = {
     'A046': ['spitter'],
+    'A047': ['rat'],
 }
 
 

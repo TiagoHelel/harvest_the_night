@@ -53,10 +53,20 @@ func advance(delta: float) -> void:
 	for i in range(_cues.size() - 1, -1, -1):
 		var cue: Dictionary = _cues[i]
 		cue["age"] = float(cue["age"]) + maxf(delta, 0.0)
-		# Five for a boss in the Giant's poses (task 0246), four otherwise.
-		var frames := 5 if EnemyMotion.posed_boss(cue["kind"]) else 4
+		# Five for a boss in the Giant's poses (task 0246), and otherwise as
+		# many as its art draws - four, the rat's three (task 0261).
+		var frames := 5 if EnemyMotion.posed_boss(cue["kind"]) else death_frames(cue["kind"])
 		if float(cue["age"]) >= frames * FRAME_SECONDS:
 			_cues.remove_at(i)
+
+
+## How many death frames a kind's art draws (task 0261): counted off the
+## art, four when it says nothing.
+static func death_frames(kind: StringName) -> int:
+	var count := 0
+	while not PlaceholderArt.frame(WorldView.ENEMY_DIR + "%s_death_%d.png" % [kind, count]).is_empty():
+		count += 1
+	return count if count > 0 else 4
 
 
 static func pose(cue: Dictionary) -> StringName:

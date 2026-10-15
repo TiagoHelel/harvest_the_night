@@ -5,10 +5,18 @@ import import_art
 import gen_sprites
 
 FAMILIES = ('walker','runner','tank','breaker')
-# The packs' ordinary enemies (task 0260 on): the same canvas, contact and
-# motion as the four, each its own pack.
-PACK_FAMILIES = {'spitter':'A046'}
 COUNTS = {'master':1,'walk':4,'attack':3,'death':4}
+# The ordinary enemies' frame: the canvas, the pivot, the cell offset that
+# stands the pivot on the cell's contact, and how low a death ends.
+ORDINARY = {'canvas':[64,48],'pivot':[32,44],'offset':[-24,-28],'counts':COUNTS,'dead':16}
+# The packs' ordinary enemies (task 0260 on), each its own pack and frame:
+# the spitter on the four's; the rat (task 0261) on its own 24x16 at
+# (12,14), three death frames lying no taller than 6.
+PACK_FAMILIES = {
+    'spitter':dict(ORDINARY,task='A046'),
+    'rat':{'task':'A047','canvas':[24,16],'pivot':[12,14],'offset':[-4,2],
+           'counts':{'master':1,'walk':4,'attack':3,'death':3},'dead':6},
+}
 
 def silhouette(image):
     alpha=image.getchannel('A'); box=alpha.getbbox()
@@ -22,16 +30,19 @@ def silhouette(image):
             mask.append(crop.crop((x0,y0,x1,y1)).getbbox() is not None)
     return mask
 
+def spec_of(family):
+    return PACK_FAMILIES.get(family,dict(ORDINARY,task='0015'))
+
 def main():
     data=import_art.load_manifest(); files,images=import_art.build(data)
     entries={e['id']:e for e in data['assets']}
     if not {'enemies/'+f for f in FAMILIES}.issubset(gen_sprites.migrated_enemies()):
         raise ValueError('Incomplete authored enemy ownership')
     old=gen_sprites.everything(dispatch=False)
-    signatures={}
+    signatures={};poses=0;aliases=0
     for family in FAMILIES+tuple(PACK_FAMILIES):
-        task=PACK_FAMILIES.get(family,'0015')
-        for motion,count in COUNTS.items():
+        spec=spec_of(family);task=spec['task'];canvas=spec['canvas'];pivot=spec['pivot']
+        for motion,count in spec['counts'].items():
             frames=[e for e in data['assets'] if e.get('enemy_family')==family and e.get('enemy_motion')==motion and 'source' in e]
             if len(frames)!=count or sorted(e['frame'] for e in frames)!=list(range(count)):
                 raise ValueError('Missing authored frames: '+family+'/'+motion)
@@ -42,10 +53,10 @@ def main():
             for e in sorted(frames,key=lambda x:x['frame']):
                 if e.get('generation_task')!=task or not e['source'].startswith('assets/art_source/enemies/'+family+'/'):
                     raise ValueError('Another identity or provisional recipe owns '+e['id'])
-                if e['canvas_wh']!=[64,48] or e['pivot_xy']!=[32,44] or e['cell_offset_xy']!=[-24,-28]:
+                if e['canvas_wh']!=canvas or e['pivot_xy']!=pivot or e['cell_offset_xy']!=spec['offset']:
                     raise ValueError('Enemy ground/contact drift: '+e['id'])
                 image=images[e['id']]; box=image.getbbox()
-                if not box or box[0]<1 or box[1]<1 or box[2]>=64 or box[3]!=44:
+                if not box or box[0]<1 or box[1]<1 or box[2]>=canvas[0] or box[3]!=pivot[1]:
                     raise ValueError('Floating or clipped pose: '+e['id'])
                 if any(p[3] not in (0,255) for p in import_art.samples(image)):
                     raise ValueError('Enemy alpha halo: '+e['id'])
@@ -56,7 +67,8 @@ def main():
                     raise ValueError('Runtime enemy diverges from source: '+e['id'])
                 if e['output'].removeprefix('sprites/') in old:
                     raise ValueError('Old procedural drawing still produced: '+e['id'])
-            if motion=='death' and (heights[-1]>16 or any(a<b for a,b in zip(heights,heights[1:]))):
+                poses+=1
+            if motion=='death' and (heights[-1]>spec['dead'] or any(a<b for a,b in zip(heights,heights[1:]))):
                 raise ValueError('Collapse enlarges/stands back up: '+family)
             if motion=='walk':
                 # A row shift must never stand in for articulation.
@@ -66,15 +78,16 @@ def main():
                         if ImageChops.difference(ImageChops.offset(ia,0,dy),ib).getbbox() is None:
                             raise ValueError('Translated walk clone: '+family)
         signatures[family]=silhouette(images['enemies/'+family])
-        for alias,target in (('walk_b','walk_2'),('attack','attack_1'),('death','death_3')):
+        last='death_%d'%(spec['counts']['death']-1)
+        for alias,target in (('walk_b','walk_2'),('attack','attack_1'),('death',last)):
             e=entries['enemies/'+family+'_'+alias]
             if e.get('alias_of')!='enemies/'+family+'_'+target or e.get('operation')!='copy' or e['input']!=e['alias_of']:
                 raise ValueError('Stale legacy compatibility alias: '+e['id'])
             if files[e['output']]!=files[entries[e['input']]['output']]:
                 raise ValueError('Compatibility alias changes source pixels: '+e['id'])
+            aliases+=1
     distances={a+'/'+b:sum(x!=y for x,y in zip(signatures[a],signatures[b])) for a,b in itertools.combinations(FAMILIES+tuple(PACK_FAMILIES),2)}
     if min(distances.values())<16:raise ValueError('Ambiguous black enemy silhouettes: '+str(distances))
-    families=len(FAMILIES)+len(PACK_FAMILIES)
-    print('OK: %d authored enemy poses, %d exact aliases, fixed contacts, 4/3/4 motion; silhouette differences %s'%(12*families,3*families,distances))
+    print('OK: %d authored enemy poses, %d exact aliases, fixed contacts, each family its own frame and motion; silhouette differences %s'%(poses,aliases,distances))
 
 if __name__=='__main__':main()

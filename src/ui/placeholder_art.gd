@@ -190,10 +190,6 @@ const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_s
 const GROUND_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "draw_scale": 1.0}
 const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "draw_scale": 1.0}
 
-## A047's rat (task 0248): 24x16 standing on (12,14), drawn at 1.0 - not the
-## 64x48 of the zombies: a rat is a quarter of the farmer's height.
-const RAT := {"canvas": Vector2i(24, 16), "pivot": Vector2i(12, 14), "draw_scale": 1.0}
-
 ## A048's crow (task 0249): 32x24 standing on (16,22), drawn at 1.0. In
 ## flight the view lifts it and draws the shadow under it.
 const CROW := {"canvas": Vector2i(32, 24), "pivot": Vector2i(16, 22), "draw_scale": 1.0}
@@ -289,13 +285,6 @@ const ART := {
 	&"hud_moon_stone": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_stone", "tint": Color(0.95, 1.12, 1.45), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"bone_pile": {"pack": "A036", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE, "bare": true},
 	&"moon_stone": {"pack": "A036", "dir": "res://sprites/props/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": NODE_TILE, "final": NODE_TILE},
-	# A047's rat (task 0248), drawn in code by `RatArt` until 0261: the
-	# master, the scurry, the bite and the death, and its forecast head.
-	&"rat": {"pack": "A047", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": RAT, "final": RAT, "bare": true},
-	&"rat_walk": {"pack": "A047", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": true, "stand_in": &"", "geometry": RAT, "final": RAT},
-	&"rat_attack": {"pack": "A047", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": RAT, "final": RAT},
-	&"rat_death": {"pack": "A047", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": RAT, "final": RAT},
-	&"head_rat": {"pack": "A047", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	# A048's crow (task 0249), drawn in code by `CrowArt` until 0262: the
 	# master, the flight, the touchdown, the peck, the fall and its head.
 	&"crow": {"pack": "A048", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": CROW, "final": CROW, "bare": true},

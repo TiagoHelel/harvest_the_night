@@ -1,0 +1,10 @@
+{
+  "prompt": "Use case: stylized-concept\nAsset type: production forecast head icon, A047 head_rat for HARVEST THE NIGHT.\nPrimary request: ONE undead rat HEAD-and-shoulders bust with ears, sharp snout and frontpaws, turned three-quarter LEFT, cutflatbottom. Same character as identity master, not fullratbody.\nInputs: Image1 accepted ratmaster is identity; Image2 nativewalk0 NEAREST4x is in-game colour/identity; Image3 woodraw is icon outline/framing style only, notsubject/material; Image4 integrated head_walker is16x16HUD framing/baseline only.\nHandcrafted coarsepixelart with broad simpleclusters andcolouredoutline, sameorthographic farmcamera and upper-left neutral daytime light. Grey-BROWN matted fur, largebarepink-grey ears, rotpatches, palecloudy bone/cream eye, nasty sharpsnout, exposedteeth. Not cute/notstonegrey.\nNative16x16 pivot8,8, visiblebust12–13high andatmost13wide, centredx8, lowestopaquerow14, row15empty,1pxclearleft/right/top. Includefrontpaws/neck belowhead to give uprightbust proportions, NOT longhorizontalratbody or tail. Flat bottomchestcut.\nOne clear BOLD pale mattebone eye, largeenough tosurvive as1–2nativepixels (a simplecream square roughly10percentportraitheight). Dark socketoutline, noemission. Eye mustremain visible at13pxheight; no tinywhite sliver. Samecoat/ear colours asbody.\nTrue alpha0outside sharpopaque pixels. No frame/panel/text/UI, shadow, ground, glow, halo, haze, softalpha, gradient, blur, vector/3D orspeckle. One completeunclipped bust. Palette will be restricted tobodycolours.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/raw/rat-master-r3.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A047-rats/preview/walk0-head-reference-4x.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/ui/head_walker.png"
+  ]
+}
