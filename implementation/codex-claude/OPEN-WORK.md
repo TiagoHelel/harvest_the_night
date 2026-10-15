@@ -86,11 +86,23 @@ Notes for the six released at 21:11:
   - A042: the post span and the sparks;
   - A054: the death's height.
 
-### 3b. Packs blocked after three attempts (13): the owner's call
+### 3b. The 13 packs once blocked: redone, waiting on the owner's review
 
-The pack's contract was not met after three tries. Each needs the owner
-to choose before anyone tries again: loosen the check, take a new
-approach, or accept what exists.
+The owner reopened them and authorised composing sources from ImageGen
+crops. Codex redid all 13 (182 native PNGs, every measured check passing)
+and set them to `review` on 2026-10-14. **Nothing is integrated until the
+owner approves the new hashes.**
+- The review page is
+  `implementation/backlog/deliveries/A003-guardian/retry-final-review.html`.
+- The details are `CLAUDE-RETRY-REVIEW.md` and `retry-final-inventory.json`
+  in the same folder.
+
+Promoting them will mean composing parts and components, not cropping one
+source:
+- A034 mixes draw scales.
+- A035's house tiers are 128x128 at draw 1.
+
+The table below is why each stopped the first time.
 
 | Pack | What | Game task | Why it stopped |
 | --- | --- | --- | --- |

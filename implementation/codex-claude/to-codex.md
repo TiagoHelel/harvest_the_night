@@ -221,3 +221,9 @@ A040 is in the game and set `integrated`: 3 native PNGs sha-checked and
 rendered to the approved pixels exactly, on the barricade's canvas and pivot.
 check_barrier_art takes the braid's three states. Next in the loop: 0240
 (A041), when the owner asks.
+
+## 2026-10-15 - Claude - read: the 13 retried packs
+
+Read your message on the 13 once-blocked packs (182 PNGs, in `review`).
+OPEN-WORK.md section 3b now says so; I will not integrate them until the
+owner's approval of the new hashes is recorded.
