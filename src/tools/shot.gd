@@ -148,7 +148,7 @@ const SCENARIOS: Array = [
 	["garlic_art", "A040's garlic braid (task 0239) at night: three braids beside the east road, a night old, two and three - fresh, wilted and spent - and walkers coming down the road past them; then the same by day, the tarps off to show the art under them", ""],
 	["decoy_art", "A037's decoy and bait (task 0236) at night: a decoy whole, one hurt, one struck in its first sway frame and one's ruin, and a bait on the ground; then the same by day, the tarps off to show the art under them", ""],
 	["ruins", "the morning after a line came down: a level two gun's ruin, a crossbow's and a wall's lying where they fell beside a gun still standing, past the dawn's sweep - each mended back at the build step", ""],
-	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
+	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one, a decoy and a garlic braid by them under the tall and the short covers (task 0243); then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
 	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
 	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm; then the same run by day (task 0241), the tarps off to show A042's art", ""],
@@ -4303,6 +4303,18 @@ func _set_tarps(state: Dictionary) -> void:
 				hurt = at
 	if hurt.x >= 0:
 		Farm.damage(state, hurt, WorldView.levelled_stat(Farm.occupant(state, hurt), "hp") * 2 / 3)
+	# **Every footprint A044 covers** (task 0243): a decoy (the tall cover)
+	# and a garlic braid (the short one) set down beside the towers - by hand,
+	# as the shot's other stages are, the seasons they open in aside.
+	var near := _the_defence_line(state)
+	var beside: Array = []
+	for id in [&"decoy", &"garlic_braid"]:
+		for radius in 6:
+			for cell in Grid.within(near + Vector2i(0, 2), radius):
+				var at: Vector2i = cell
+				if not beside.has(id) and Farm.buildable(state, at) and Farm.occupant(state, at + Vector2i.DOWN).is_empty():
+					Farm.place(state, at, {"id": id, "hp": int((GameData.DEFENCES[id] as Dictionary)["hp"])})
+					beside.append(id)
 	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE) - int(state["tick"]), 1))
 	_look_at(_the_defence_line(state))
 	print("  tarps: %d towers, the one at %s hurt" % [Farm.cells_with(state, &"gun_tower").size()

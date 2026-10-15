@@ -1,0 +1,174 @@
+[
+  {
+    "recipe": {
+      "id": "tarp-tower-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A044-tarps\\raw\\tarp-tower-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        516,
+        768
+      ],
+      "crop_xywh": [
+        22,
+        279,
+        476,
+        455
+      ],
+      "content_scale": 0.05054945054945055,
+      "content_anchor_xy": [
+        12,
+        23
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      4,
+      21,
+      28,
+      44
+    ],
+    "measured_covered_local_ground": [
+      260.0,
+      734
+    ]
+  },
+  {
+    "recipe": {
+      "id": "tarp-tower-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A044-tarps\\raw\\tarp-tower-r2.png",
+      "sheet_cell_xywh": [
+        516,
+        0,
+        560,
+        768
+      ],
+      "crop_xywh": [
+        536,
+        279,
+        492,
+        449
+      ],
+      "content_scale": 0.05054945054945055,
+      "content_anchor_xy": [
+        12,
+        23
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      4,
+      21,
+      29,
+      44
+    ],
+    "measured_covered_local_ground": [
+      260.0,
+      734
+    ]
+  },
+  {
+    "recipe": {
+      "id": "tarp-tower-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A044-tarps\\raw\\tarp-tower-r2.png",
+      "sheet_cell_xywh": [
+        1076,
+        0,
+        538,
+        768
+      ],
+      "crop_xywh": [
+        1125,
+        135,
+        417,
+        290
+      ],
+      "content_scale": 0.05054945054945055,
+      "content_anchor_xy": [
+        11,
+        30
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      14,
+      26,
+      29
+    ],
+    "measured_covered_local_ground": [
+      260.0,
+      734
+    ]
+  },
+  {
+    "recipe": {
+      "id": "tarp-tower-r2-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A044-tarps\\raw\\tarp-tower-r2.png",
+      "sheet_cell_xywh": [
+        1614,
+        0,
+        434,
+        768
+      ],
+      "crop_xywh": [
+        1687,
+        68,
+        230,
+        230
+      ],
+      "content_scale": 0.05054945054945055,
+      "content_anchor_xy": [
+        9,
+        34
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      7,
+      10,
+      19,
+      22
+    ],
+    "measured_covered_local_ground": [
+      260.0,
+      734
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "pack": "A044",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A044-tarps",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/tarp_tower/none/01.png": "0564655ce84d69555febd9ed972dd714dcf068ea985520086f695916513670b9",
+    "native/tarp_tower_hurt/none/01.png": "1ad788f4d69948117b1edb445a42b0583c8e30b9c0fb75fa942a2d9a7a7d9769",
+    "native/tarp_tower_unveil/none/01.png": "311f81ed6a27d7d6df48f0771305ec73ba42178ae53fe143989397ce491004ed",
+    "native/tarp_tower_unveil/none/02.png": "f1d1e3528417b0937e9753793636dbe77a0cd32d6dea6ea07ae47f5e840322db",
+    "native/tarp_tall/none/01.png": "6eedef0435010b3be8628ccdd2aa6dae500d63ed585ece7c444038d904d9992c",
+    "native/tarp_tall_hurt/none/01.png": "e4849fd6b3f3af1457e7f4dd0cf90003f60cd13e53d1ea09562b24dc0517bf63",
+    "native/tarp_tall_unveil/none/01.png": "68c2660f4bffef5511fa244ae02e779c00134a015daceb0d12a55d4b49314e1c",
+    "native/tarp_tall_unveil/none/02.png": "33f50bf797ec2de5c152ef5c39d20d96fd8df7f46d7af0b0baa0d6aacde094b5",
+    "native/tarp_short/none/01.png": "56e2d49349c20b84888f9223880842e719d8a2991d775bf0116d3e2a340d1a52",
+    "native/tarp_short_hurt/none/01.png": "075704b3769b48d206b04acdf25fd3f1f59eb75dbab383981067d78ffb5bd5fd",
+    "native/tarp_short_unveil/none/01.png": "0d19282aff88450bc83e8bd8370366ebed65f743be068e6066f5be3a0ddf9df4",
+    "native/tarp_short_unveil/none/02.png": "a26f7e2508db93f9cb28586368f326758fcd14b9f815a9d915ef8d670455c352"
+  },
+  "frames": 12,
+  "frames_expected": 12,
+  "accepted_visual_checks": [
+    "tarp_tall_covered_dimensions",
+    "tarp_tall_lower_half_revealed"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

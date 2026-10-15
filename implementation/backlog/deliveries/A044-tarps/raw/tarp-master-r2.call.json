@@ -1,0 +1,42 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT.\nPrimary request: A044 ONE tarp_tower identity master: weathered khaki canvas draped over a squat unreadable machine.\nInput images: Image1 reference-sheet is farm style/camera; Image2 gun_tower is native scale/height to hide, NOT its visible outline; Image3 shop is canvas-cloth folds/rope reference only.\nStyle/medium: coherent handcrafted pixel art, deliberate LARGE clusters, coloured outlines, restrained texture, readable clothplanes and cleanforms. Object reads on a23columns x24rows coarseartgrid, source enlarged NEAREST; no extra fine texture/subpixels.\nComposition/framing: orthographic three-quarter top-down rectangulargrid. Native32x48 pivot(16,44), visible23wide x24high, lowestrow43. Compactnear-square lumpy coveredshape, centrebase16. Calm lowercontrast thanfarmer/house.\nLighting: neutral warmday, upper-left highlights/darkundersides; no nightversion.\nPalette: khaki canvas bone_dark/wood_light/soil_light/soil_dark shade, gold_dark rope, wood_dark pegs. NOTgreen orblue. No brightwhiteglow.\nFamily: ONE weatheredkhaki canvas cover, clustered folds, ropetied aroundmiddle, twowoodenpegs atbase; completely hides squatsmallmachine, no discernibletower/weapon/lens/hive features, no separatebuilding. No holes inwholecover.\nBackground TRUEtransparency, alpha0 immediatelyoutside object, no grass/ground/shadow/haze/glow/text/watermark/UI.\nConstraints completeunclipped object, samefarmcamera/scale, stablebase, generousclearance. Avoidpainting/vector/3D/blur/gradients/antialiasing/randomspeckle/thickblackboxes/diamondbase.\nCORRECTION: Image4 is edit target. Fix only overall silhouette width. Current1037x869 gives29x24, required22\u201324x22\u201326. Bring both pegs and flared lower cloth edges inward; shorten horizontal footprint to about840sourcepixels at unchanged height869. Keep the lumpy khaki cover tall, source width:height about0.96. No extra folds/details, same rope, materials, camera and base contact. Alpha0 immediately outside object, no glow.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/shop.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A044-tarps/raw/tarp-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/gun_tower.png",
+      "sha256": "8bb08e6ffbf0ed0f209d19035c0e904df8c93266ebf099542d1bbf080c1d6a8d",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/shop.png",
+      "sha256": "f1e2d58430171a9e2168df5cafc3f954e3954c9618bcf72c7b2cc485cdd4e1cb",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A044-tarps/raw/tarp-master-r1.png",
+      "sha256": "785a4b360aaed545554a0f386c8dac66f4ebc72468d5374ea3c797659f3ccb1f",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A044-tarps\\rejected\\tarp-master-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-5e237efb-3208-4f77-a8e6-3c473c94c11c.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A044-tarps\\raw\\tarp-master-r2.png",
+  "sha256": "1ffd59b1071b584f6601a83661cad1cd85ec4049cd3ad986d6a2f11d8856c1ab",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

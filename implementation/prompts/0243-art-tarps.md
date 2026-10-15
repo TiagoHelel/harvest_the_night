@@ -1,7 +1,7 @@
 # 0243 - Art: the day tarps
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0223, 0234
 - **Likely files:** assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py
 - **Art packs:** A044

@@ -1,0 +1,942 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "tarp_short",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tarp_short-none-0-night.png",
+          "path": "preview/candidates/tarp_short/none/01.png",
+          "points": {},
+          "pose": "covered"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "poses": [
+        "covered"
+      ]
+    },
+    {
+      "anim": "tarp_short_hurt",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tarp_short_hurt-none-0-night.png",
+          "path": "preview/candidates/tarp_short_hurt/none/01.png",
+          "points": {},
+          "pose": "torn"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "poses": [
+        "torn"
+      ]
+    },
+    {
+      "anim": "tarp_short_unveil",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tarp_short_unveil-none-0-night.png",
+          "path": "preview/candidates/tarp_short_unveil/none/01.png",
+          "points": {},
+          "pose": "yank"
+        },
+        {
+          "issue": "",
+          "night": "preview/tarp_short_unveil-none-1-night.png",
+          "path": "preview/candidates/tarp_short_unveil/none/02.png",
+          "points": {},
+          "pose": "away"
+        }
+      ],
+      "frame_seconds": 0.12,
+      "frames": 2,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "poses": [
+        "yank",
+        "away"
+      ]
+    },
+    {
+      "anim": "tarp_tall",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+          "night": "preview/tarp_tall-none-0-night.png",
+          "path": "preview/candidates/tarp_tall/none/01.png",
+          "points": {},
+          "pose": "covered"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "covered"
+      ]
+    },
+    {
+      "anim": "tarp_tall_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+          "night": "preview/tarp_tall_hurt-none-0-night.png",
+          "path": "preview/candidates/tarp_tall_hurt/none/01.png",
+          "points": {},
+          "pose": "torn"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "torn"
+      ]
+    },
+    {
+      "anim": "tarp_tall_unveil",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+          "night": "preview/tarp_tall_unveil-none-0-night.png",
+          "path": "preview/candidates/tarp_tall_unveil/none/01.png",
+          "points": {},
+          "pose": "yank"
+        },
+        {
+          "issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+          "night": "preview/tarp_tall_unveil-none-1-night.png",
+          "path": "preview/candidates/tarp_tall_unveil/none/02.png",
+          "points": {},
+          "pose": "away"
+        }
+      ],
+      "frame_seconds": 0.12,
+      "frames": 2,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "yank",
+        "away"
+      ]
+    },
+    {
+      "anim": "tarp_tower",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tarp_tower-none-0-night.png",
+          "path": "preview/candidates/tarp_tower/none/01.png",
+          "points": {},
+          "pose": "covered"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "covered"
+      ]
+    },
+    {
+      "anim": "tarp_tower_hurt",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tarp_tower_hurt-none-0-night.png",
+          "path": "preview/candidates/tarp_tower_hurt/none/01.png",
+          "points": {},
+          "pose": "torn"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "torn"
+      ]
+    },
+    {
+      "anim": "tarp_tower_unveil",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/tarp_tower_unveil-none-0-night.png",
+          "path": "preview/candidates/tarp_tower_unveil/none/01.png",
+          "points": {},
+          "pose": "yank"
+        },
+        {
+          "issue": "",
+          "night": "preview/tarp_tower_unveil-none-1-night.png",
+          "path": "preview/candidates/tarp_tower_unveil/none/02.png",
+          "points": {},
+          "pose": "away"
+        }
+      ],
+      "frame_seconds": 0.12,
+      "frames": 2,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "yank",
+        "away"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/gun_tower.png",
+      "pivot_xy": [
+        16,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "tarp_tower",
+      "call": "raw/tarp-tower-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tower/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "covered",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          12,
+          23
+        ],
+        "content_scale": 0.05054945054945055,
+        "crop_xywh": [
+          22,
+          279,
+          476,
+          455
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          516,
+          768
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_tower.png",
+      "seconds": 0.55,
+      "sha256": "0564655ce84d69555febd9ed972dd714dcf068ea985520086f695916513670b9",
+      "source": "raw/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df"
+    },
+    {
+      "anim": "tarp_tower_hurt",
+      "call": "raw/tarp-tower-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tower_hurt/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "torn",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          12,
+          23
+        ],
+        "content_scale": 0.05054945054945055,
+        "crop_xywh": [
+          536,
+          279,
+          492,
+          449
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          516,
+          0,
+          560,
+          768
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_tower_hurt.png",
+      "seconds": 0.55,
+      "sha256": "1ad788f4d69948117b1edb445a42b0583c8e30b9c0fb75fa942a2d9a7a7d9769",
+      "source": "raw/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df"
+    },
+    {
+      "anim": "tarp_tower_unveil",
+      "call": "raw/tarp-tower-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tower_unveil/none/01.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "yank",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          11,
+          30
+        ],
+        "content_scale": 0.05054945054945055,
+        "crop_xywh": [
+          1125,
+          135,
+          417,
+          290
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1076,
+          0,
+          538,
+          768
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_tower_unveil_0.png",
+      "seconds": 0.12,
+      "sha256": "311f81ed6a27d7d6df48f0771305ec73ba42178ae53fe143989397ce491004ed",
+      "source": "raw/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df"
+    },
+    {
+      "anim": "tarp_tower_unveil",
+      "call": "raw/tarp-tower-r2.call.json",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tower_unveil/none/02.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "points": {},
+      "pose": "away",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          9,
+          34
+        ],
+        "content_scale": 0.05054945054945055,
+        "crop_xywh": [
+          1687,
+          68,
+          230,
+          230
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1614,
+          0,
+          434,
+          768
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_tower_unveil_1.png",
+      "seconds": 0.12,
+      "sha256": "f1d1e3528417b0937e9753793636dbe77a0cd32d6dea6ea07ae47f5e840322db",
+      "source": "raw/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df"
+    },
+    {
+      "anim": "tarp_tall",
+      "call": "raw/tarp-tall-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tall/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "covered",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          16
+        ],
+        "content_scale": 0.03360488798370672,
+        "crop_xywh": [
+          81,
+          278,
+          337,
+          491
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          488,
+          793
+        ]
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+      "runtime_name": "sprites/buildings/tarp_tall.png",
+      "seconds": 0.55,
+      "sha256": "6eedef0435010b3be8628ccdd2aa6dae500d63ed585ece7c444038d904d9992c",
+      "source": "raw/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5"
+    },
+    {
+      "anim": "tarp_tall_hurt",
+      "call": "raw/tarp-tall-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tall_hurt/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "torn",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          16
+        ],
+        "content_scale": 0.03360488798370672,
+        "crop_xywh": [
+          559,
+          284,
+          358,
+          490
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          488,
+          0,
+          503,
+          793
+        ]
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+      "runtime_name": "sprites/buildings/tarp_tall_hurt.png",
+      "seconds": 0.55,
+      "sha256": "e4849fd6b3f3af1457e7f4dd0cf90003f60cd13e53d1ea09562b24dc0517bf63",
+      "source": "raw/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5"
+    },
+    {
+      "anim": "tarp_tall_unveil",
+      "call": "raw/tarp-tall-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tall_unveil/none/01.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "yank",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          18
+        ],
+        "content_scale": 0.03360488798370672,
+        "crop_xywh": [
+          1066,
+          223,
+          401,
+          347
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          991,
+          0,
+          547,
+          793
+        ]
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+      "runtime_name": "sprites/buildings/tarp_tall_unveil_0.png",
+      "seconds": 0.12,
+      "sha256": "68c2660f4bffef5511fa244ae02e779c00134a015daceb0d12a55d4b49314e1c",
+      "source": "raw/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5"
+    },
+    {
+      "anim": "tarp_tall_unveil",
+      "call": "raw/tarp-tall-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_tall_unveil/none/02.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "away",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          19
+        ],
+        "content_scale": 0.03360488798370672,
+        "crop_xywh": [
+          1610,
+          194,
+          222,
+          155
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1538,
+          0,
+          445,
+          793
+        ]
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate.",
+      "runtime_name": "sprites/buildings/tarp_tall_unveil_1.png",
+      "seconds": 0.12,
+      "sha256": "33f50bf797ec2de5c152ef5c39d20d96fd8df7f46d7af0b0baa0d6aacde094b5",
+      "source": "raw/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5"
+    },
+    {
+      "anim": "tarp_short",
+      "call": "raw/tarp-short-r3.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_short/none/01.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "covered",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          15
+        ],
+        "content_scale": 0.040983606557377046,
+        "crop_xywh": [
+          150,
+          291,
+          275,
+          366
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          532,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_short.png",
+      "seconds": 0.55,
+      "sha256": "56e2d49349c20b84888f9223880842e719d8a2991d775bf0116d3e2a340d1a52",
+      "source": "raw/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372"
+    },
+    {
+      "anim": "tarp_short_hurt",
+      "call": "raw/tarp-short-r3.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_short_hurt/none/01.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "torn",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          15
+        ],
+        "content_scale": 0.040983606557377046,
+        "crop_xywh": [
+          640,
+          292,
+          315,
+          365
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          532,
+          0,
+          564,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_short_hurt.png",
+      "seconds": 0.55,
+      "sha256": "075704b3769b48d206b04acdf25fd3f1f59eb75dbab383981067d78ffb5bd5fd",
+      "source": "raw/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372"
+    },
+    {
+      "anim": "tarp_short_unveil",
+      "call": "raw/tarp-short-r3.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_short_unveil/none/01.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "yank",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          18
+        ],
+        "content_scale": 0.040983606557377046,
+        "crop_xywh": [
+          1238,
+          228,
+          313,
+          268
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1096,
+          0,
+          591,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_short_unveil_0.png",
+      "seconds": 0.12,
+      "sha256": "0d19282aff88450bc83e8bd8370366ebed65f743be068e6066f5be3a0ddf9df4",
+      "source": "raw/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372"
+    },
+    {
+      "anim": "tarp_short_unveil",
+      "call": "raw/tarp-short-r3.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/tarp_short_unveil/none/02.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "away",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          6,
+          15
+        ],
+        "content_scale": 0.040983606557377046,
+        "crop_xywh": [
+          1825,
+          288,
+          174,
+          124
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1687,
+          0,
+          485,
+          724
+        ]
+      },
+      "runtime_name": "sprites/buildings/tarp_short_unveil_1.png",
+      "seconds": 0.12,
+      "sha256": "a26f7e2508db93f9cb28586368f326758fcd14b9f815a9d915ef8d670455c352",
+      "source": "raw/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A044",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A044-tarps\\raw\\tarp-master-r2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "1ffd59b1071b584f6601a83661cad1cd85ec4049cd3ad986d6a2f11d8856c1ab"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A044-tarps",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "Day tarps over the defences",
+  "tool": "built-in ImageGen"
+}

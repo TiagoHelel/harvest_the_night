@@ -1,0 +1,12 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT.
+Primary request: A044 ONE tarp_tower identity master: weathered khaki canvas draped over a squat unreadable machine.
+Input images: Image1 reference-sheet is farm style/camera; Image2 gun_tower is native scale/height to hide, NOT its visible outline; Image3 shop is canvas-cloth folds/rope reference only.
+Style/medium: coherent handcrafted pixel art, deliberate LARGE clusters, coloured outlines, restrained texture, readable clothplanes and cleanforms. Object reads on a23columns x24rows coarseartgrid, source enlarged NEAREST; no extra fine texture/subpixels.
+Composition/framing: orthographic three-quarter top-down rectangulargrid. Native32x48 pivot(16,44), visible23wide x24high, lowestrow43. Compactnear-square lumpy coveredshape, centrebase16. Calm lowercontrast thanfarmer/house.
+Lighting: neutral warmday, upper-left highlights/darkundersides; no nightversion.
+Palette: khaki canvas bone_dark/wood_light/soil_light/soil_dark shade, gold_dark rope, wood_dark pegs. NOTgreen orblue. No brightwhiteglow.
+Family: ONE weatheredkhaki canvas cover, clustered folds, ropetied aroundmiddle, twowoodenpegs atbase; completely hides squatsmallmachine, no discernibletower/weapon/lens/hive features, no separatebuilding. No holes inwholecover.
+Background TRUEtransparency, alpha0 immediatelyoutside object, no grass/ground/shadow/haze/glow/text/watermark/UI.
+Constraints completeunclipped object, samefarmcamera/scale, stablebase, generousclearance. Avoidpainting/vector/3D/blur/gradients/antialiasing/randomspeckle/thickblackboxes/diamondbase.
+CORRECTION: Image4 is edit target. Fix only overall silhouette width. Current1037x869 gives29x24, required22–24x22–26. Bring both pegs and flared lower cloth edges inward; shorten horizontal footprint to about840sourcepixels at unchanged height869. Keep the lumpy khaki cover tall, source width:height about0.96. No extra folds/details, same rope, materials, camera and base contact. Alpha0 immediately outside object, no glow.

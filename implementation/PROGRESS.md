@@ -32067,3 +32067,57 @@ falta mais?"), and Codex recorded it in the delivery's `APPROVAL.json`.
 - `python implementation/backlog/assets.py set A043 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (61 of 61).
+
+## 0243 - Art: the day tarps - done 2026-10-15
+
+A044 is integrated. The covers the defences sleep under by day are the
+owner-approved art now, at the three footprints 0234 settled: a tower's
+32x48, the tall one-cell defences' 16x32 and the short ones' 16x24. Each
+has its cover, a torn one over a hurt defence, and the two unveil frames
+the wake plays at nightfall. They were approved on 2026-10-14 in the batch
+review, recorded by Codex in the delivery's `APPROVAL.json`. 0223's drawing
+is gone.
+
+- **Promotion**: the 12 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their three raw sources were copied byte for byte into
+    `assets/art_source/defences/tarps/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row.
+  - Each one decodes to the approved pixels exactly. The cell offsets are
+    the tower's, the decoy's and the barricade's.
+- **No view change**: `Transition.tarp_stage` still picks covered, yanked,
+  away or off, and `WorldView` still lays a footprint's cover over a
+  sleeping defence. A hurt one still wears the torn cover, as 0223
+  decided. `TarpArt` now names A044's files and loads them, and its
+  drawing is gone.
+- **The stand-ins retired**: A044's nine `PlaceholderArt` entries and the
+  `TARP_*` geometry are gone. `placeholders.py --check` passes, with 230
+  stand-ins left over 31 packs.
+- **A new family check**, `tools/check_tarp_art.py`, wired into
+  `tools/verify.py` as "tarp covers/unveils". For each footprint it checks:
+  - the four files on their canvas and pivot, with exact outputs and no
+    alpha halos;
+  - the cover and the torn cover standing on the pivot's row, the torn one
+    its own picture;
+  - the unveil lifting off the ground and then flying higher, two frames
+    of 0.12 s played once.
+  - The tower and barrier showcases pass unchanged (1,940 and 5,777
+    checks).
+- **Tests**: `_task_0223_tarps`'s art half now reads A044's pixels. Each
+  footprint's cover is raster art on its pivot's row, the torn one differs,
+  the yank lifts more than four pixels off the ground and the bundle flies
+  above it. Nothing of 0120's road is left.
+- **Shots** (`implementation/shots/0243/`, FHD 1920x1080, looked at):
+  - 0223's `tarps` scene now has every footprint: the defended farm's
+    towers under the tower's cover, the one hurt last night under a torn
+    one, and a decoy and a garlic braid set down by them under the tall and
+    the short covers. The two are set down by hand, as the shot's other
+    stages are, whatever season they open in.
+  - `tarps` at noon, `tarps_dusk` still covered, `tarps_unveil` on the
+    wake's yank frame, and `tarps_night` with every defence bare.
+- **The delivery folder** `implementation/backlog/deliveries/A044-tarps/` is
+  committed, as A043's was.
+- `python implementation/backlog/assets.py set A044 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (62 of 62, the new tarp check among them).

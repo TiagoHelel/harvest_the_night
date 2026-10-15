@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#####################...`  **253 / 296 done**
+`#####################...`  **254 / 296 done**
 
-0 doing / 43 todo / 0 blocked across 18 phases.
+0 doing / 42 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-43 task(s) left, the ready ones first, then what they
+42 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -373,25 +373,6 @@ The approved bones, moon stones, fertilised soil and night-loot icons go into th
   - done when: FHD (1920x1080) captures by day and by night of bone piles, a moon stone, a fertilised plot and the essence counter in the real game, opened and looked at, in `implementation/shots/0235/`
   - done when: The sim and data hashes are unchanged (art never moves them)
 
-### 0243 - Art: the day tarps
-
-Ready to pick up.  Likely files: `assets/art_source/defences/, assets/art_source/manifest.json, src/ui/world_view.gd, tools/verify.py`.
-
-The approved tarps cover the defences by day and unveil at nightfall, in place of the code-drawn covers 0223 left.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A044` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A044-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/defences/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (a tarp checker such as `tools/check_tarp_art.py` wired into `tools/verify.py`, or the tower and barrier checkers, `ArtPlacement` if needed).
-- One cover per footprint 0234 settled (32x48 towers, 16x32, 16x24) plus its 2 unveil frames; the family list comes from the pack's Deliverables table, and the unveil plays in the transition's wake pass
-- A hurt or wrecked defence still reads by day the way 0223 decided
-- Retire 0223's code-drawn covers from 0120's placeholder registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A044 integrated`.
-
-  - done when: The family checks (the tarp checks - the new checker, or the tower and barrier checkers that took them) and the showcase (`python tools/show_art.py --towers --check` and `python tools/show_art.py --barriers --check`) pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of covered defences of every footprint and their unveil at nightfall in the real game, opened and looked at, in `implementation/shots/0243/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
 ### 0244 - Art: power and new weapon icons
 
 Ready to pick up.  Likely files: `assets/art_source/ui/, assets/art_source/manifest.json, tools/check_ui_art.py`.
@@ -708,7 +689,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -1080,7 +1061,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0216** [Art: the peddler](prompts/0216-art-peddler.md)
 - [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md)
 
-## 13 - Weapons of the night  (24/28)
+## 13 - Weapons of the night  (25/28)
 
 - [x] **0218** [Room for more fields and more bodies](prompts/0218-perf-groundwork.md)
 - [x] **0219** [Essence](prompts/0219-essence.md)
@@ -1107,7 +1088,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0240** [Art: the searchlight](prompts/0240-art-searchlight.md)
 - [x] **0241** [Art: the electric fence](prompts/0241-art-electric-fence.md)
 - [x] **0242** [Art: hardwood walls and sandbags](prompts/0242-art-strong-walls.md)
-- [ ] **0243** [Art: the day tarps](prompts/0243-art-tarps.md)
+- [x] **0243** [Art: the day tarps](prompts/0243-art-tarps.md)
 - [ ] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md)
 - [ ] **0245** [Art: the dog](prompts/0245-art-dog.md)
 
@@ -1163,7 +1144,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0243, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0145, 0146, 0200, 0201, 0206, 0207, 0208, 0209, 0210, 0212, 0215, 0216, 0217, 0235, 0244, 0245, 0260, 0261, 0262, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (2/7)
 

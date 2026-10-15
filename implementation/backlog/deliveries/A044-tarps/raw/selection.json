@@ -1,0 +1,118 @@
+{
+  "status": "blocked",
+  "issues": [
+    "TALL sheet reached r3 limit. At required24pxheight, covered/torn remain too wide and airborne cloth clips16x32. One safe diagnostic common scale gives only11x16 covered, below required11\u201313x22\u201325; no production approval.",
+    "Tower and short states are geometrically usable diagnostic candidates. All12frames shown; complete pack remains blocked by tall footprint. No source repaint or per-frame scale changes.",
+    "TALL yank also occupies part of lowerhalf instead of revealing it. SHORT common scale selects15pxcovered height, within14\u201317 target, tofit cover11x15 and reveal lowerhalf; one scale across allfourstates, no pixelpatching."
+  ],
+  "files": {
+    "tarp_tower/none/0": {
+      "stem": "tarp-tower-r2",
+      "index": 0,
+      "fields": {}
+    },
+    "tarp_tower_hurt/none/0": {
+      "stem": "tarp-tower-r2",
+      "index": 1,
+      "fields": {}
+    },
+    "tarp_tower_unveil/none/0": {
+      "stem": "tarp-tower-r2",
+      "index": 2,
+      "fields": {}
+    },
+    "tarp_tower_unveil/none/1": {
+      "stem": "tarp-tower-r2",
+      "index": 3,
+      "fields": {}
+    },
+    "tarp_tall/none/0": {
+      "stem": "tarp-tall-r3",
+      "index": 0,
+      "fields": {
+        "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate."
+      }
+    },
+    "tarp_tall_hurt/none/0": {
+      "stem": "tarp-tall-r3",
+      "index": 1,
+      "fields": {
+        "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate."
+      }
+    },
+    "tarp_tall_unveil/none/0": {
+      "stem": "tarp-tall-r3",
+      "index": 2,
+      "fields": {
+        "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate."
+      }
+    },
+    "tarp_tall_unveil/none/1": {
+      "stem": "tarp-tall-r3",
+      "index": 3,
+      "fields": {
+        "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22\u201325. Never integrate."
+      }
+    },
+    "tarp_short/none/0": {
+      "stem": "tarp-short-r3",
+      "index": 0,
+      "fields": {}
+    },
+    "tarp_short_hurt/none/0": {
+      "stem": "tarp-short-r3",
+      "index": 1,
+      "fields": {}
+    },
+    "tarp_short_unveil/none/0": {
+      "stem": "tarp-short-r3",
+      "index": 2,
+      "fields": {}
+    },
+    "tarp_short_unveil/none/1": {
+      "stem": "tarp-short-r3",
+      "index": 3,
+      "fields": {}
+    }
+  },
+  "rejected": {
+    "tarp-master-r1": "Visible29x24 too wide for22\u201324px towercover.",
+    "tarp-tower-r1": "YANK hangs down into lower half instead of being bunched above.",
+    "tarp-tall-r1": "Tower-like24x24 copy clips16pxwide tallcanvas.",
+    "tarp-tall-r2": "Covered17x24 and largeairbornecloth clip16x32.",
+    "tarp-short-r1": "Rope overlaps nextcellcolumns; no measurable fullgutter.",
+    "tarp-short-r2": "Torn and giantairbornecloth clip16x24."
+  },
+  "decisions": {
+    "tarp-tower-r2": {
+      "decision": "geometrically usable candidates; final owner review pending, fullpack blocked",
+      "accepted_cells": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "rejected_cells": []
+    },
+    "tarp-tall-r3": {
+      "decision": "diagnostic only, required tall height cannot fit width; cap reached",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "tarp-short-r3": {
+      "decision": "geometrically usable candidates; final owner review pending, fullpack blocked",
+      "accepted_cells": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "rejected_cells": []
+    }
+  }
+}

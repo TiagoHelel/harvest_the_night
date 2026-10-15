@@ -7146,29 +7146,35 @@ func _task_0223_tarps() -> void:
 			mentions.append(file_name)
 	expect(mentions.is_empty(), "nothing in src/core/ mentions a tarp", str(mentions))
 
-	# **A044's three footprints**, drawn by code at their canvases: a cover
-	# standing on the pivot's row, a torn one that differs, unveil frames up
-	# in the air.
+	# **A044's three footprints**, its art since task 0243: a cover standing
+	# on the pivot's row, a torn one that differs, unveil frames lifting off
+	# the ground and then higher, nothing of 0120's road left.
 	var footprints := [&"tarp_tower", &"tarp_tall", &"tarp_short"]
 	var wrong: Array = []
 	for footprint in footprints:
 		var foot := TarpArt.pivot(footprint)
-		var whole := TarpArt.drawing(footprint, TarpArt.COVERED)
-		var torn := TarpArt.drawing(footprint, TarpArt.COVERED, true)
-		var yank := TarpArt.drawing(footprint, TarpArt.YANK)
-		var away := TarpArt.drawing(footprint, TarpArt.AWAY)
-		if not (PlaceholderArt.is_drawn(TarpArt.path_of(footprint, TarpArt.COVERED))
-				and PlaceholderArt.is_drawn(TarpArt.path_of(footprint, TarpArt.YANK))
+		var whole := _art_image(TarpArt.path_of(footprint, TarpArt.COVERED))
+		var torn := _art_image(TarpArt.path_of(footprint, TarpArt.COVERED, true))
+		var yank := _art_image(TarpArt.path_of(footprint, TarpArt.YANK))
+		var away := _art_image(TarpArt.path_of(footprint, TarpArt.AWAY))
+		var worn := true
+		for stage in [TarpArt.COVERED, TarpArt.YANK, TarpArt.AWAY]:
+			var path := TarpArt.path_of(footprint, stage)
+			var texture := TarpArt.texture(footprint, stage)
+			worn = (worn and RasterArt.FRAMES.has(path) and not PlaceholderArt.is_drawn(path)
+				and texture != null and texture.resource_path == path)
+		if not (worn and PlaceholderArt.art(footprint).is_empty()
 				and Vector2i(whole.get_size()) == TarpArt.canvas(footprint)
 				and _lowest_row(whole) == foot.y - 1 and _lowest_row(torn) == foot.y - 1
 				and torn.get_data() != whole.get_data()
-				and _lowest_row(yank) < foot.y / 2 and _lowest_row(away) < foot.y / 2):
+				and _lowest_row(yank) < foot.y - 5 and _lowest_row(away) < _lowest_row(yank)
+				and TarpArt.texture(footprint, TarpArt.OFF) == null):
 			wrong.append(footprint)
 	var covers := true
 	for id in ids:
 		covers = covers and footprints.has(Transition.TARPS[id])
 	expect(wrong.is_empty() and covers,
-		"each footprint's cover stands on its pivot's row, the torn one differs, the unveil flies; every listed defence wears one",
+		"each footprint's cover is A044's art standing on its pivot's row, the torn one differs, the unveil lifts and flies; every listed defence wears one",
 		str(wrong))
 
 	# **The change**: covered in daylight, off in the dark, and at the wake

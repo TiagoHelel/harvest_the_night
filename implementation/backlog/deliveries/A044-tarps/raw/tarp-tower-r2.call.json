@@ -1,0 +1,43 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT.\nPrimary request: A044 tarp_tower, EXACTLY FOUR states of the same khaki cover in one horizontal strip.\nInput images: Image1 accepted tarp identity master for cloth/rope/pegs; Image2 reference sheet for camera/materials only, no objects to draw.\nStyle: hand-crafted pixel art, LARGE coherent clusters, coloured outlines, restrained texture, clear cloth planes, neutral daytime upper-left light.\nFamily: weathered khaki canvas draped over an unreadable defence, rope round middle, two small wooden pegs. Same cloth colours: bone_dark/wood_light/soil_light/soil_dark shading, gold_dark rope, wood_dark pegs. No green or blue.\nExact native canvas 32x48, pivot (16,44). COVERED visible 23x24, ground base centred. ONE common scale for ALL four cells; smaller airborne bundle stays naturally smaller.\nSTRIP ordered poses: (1) COVERED whole lumpy canvas, lowest row 43; (2) TORN same cover with ripped hanging flap, dark hole revealing shadow only, one rope snapped; alpha shape changes, same base; (3) YANK cloth whipped up toward west/left, lower half gone, bunched ABOVE the cover's old top; (4) AWAY small crumpled bundle flying at UPPER LEFT, smaller area, NOT centred on ground. Nothing of a defence is drawn underneath or into any cell.\nEqual virtual cells, huge transparent gutters, no labels/separators. Keep common COVERED ground point in every virtual cell as a blank registration reference; airborne poses visibly lifted above it, never moved back onto ground just to fit a bounding box. Whole and torn share baseline. Upper-left bundle remains within native canvas with clear edge. Lay out with plenty of empty TOP space for YANK/AWAY. Final flight object edges inside frame.\nTrue alpha0 outside cloth/rope/pegs. No ground/grass/tower/shadow/glow/haze/blur/gradient/text/UI or fine speckle. Camera fixed; do not enlarge small poses or stretch cloth across cells.\nCORRECTION: Image3 is edit target, current source2048x768. Fix ONLY thirdcell YANK. Its cloth is currently437pxhigh and reachesy580, still covering lowerhalf of machine. BUNCH it into a small clothmass at most210sourcepixels high, entirely ABOVE y281 (oldcover's top), so its lowestopaque pixel isy260 orless. Keepthirdcell xposition towardwest, sourceoverallscale identical. No machine drawn. Otherthreecells pixelidentical, especially coveredandtorngroundbaseliney733 andawayupperleft. True transparency; no glows.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A044-tarps/raw/tarp-master-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A044-tarps/raw/tarp-master-r2.png",
+      "sha256": "1ffd59b1071b584f6601a83661cad1cd85ec4049cd3ad986d6a2f11d8856c1ab",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r1.png",
+      "sha256": "6d7fd8f110dcfcd285ec4e603d43289c59eda0b0d370a7ca98b2b7145c713ee3",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A044-tarps\\rejected\\tarp-tower-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0b29b22a-470e-417a-a0c8-6d647ddd7353.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A044-tarps\\raw\\tarp-tower-r2.png",
+  "sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df",
+  "revision": 2,
+  "decision": "geometrically usable candidates; final owner review pending, fullpack blocked",
+  "accepted_cells": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "rejected_cells": []
+}

@@ -1,0 +1,1 @@
+YANK hangs down into lower half instead of being bunched above.

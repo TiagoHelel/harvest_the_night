@@ -1666,6 +1666,54 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/tarp_short.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_short_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_short_unveil_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_short_unveil_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tall_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tall_unveil_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tall_unveil_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tower.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tower_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tower_unveil_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/tarp_tower_unveil_1.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/wall.png",
       "owner": "raster"
     },

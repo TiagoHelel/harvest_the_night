@@ -1,0 +1,595 @@
+{
+  "title": "Day tarps over the defences",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "palette_mode": "A",
+  "expected_files": 12,
+  "files": [
+    {
+      "anim": "tarp_tower",
+      "dir": "none",
+      "frame": 0,
+      "pose": "covered",
+      "output": "native/tarp_tower/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tower.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/tarp-tower-r2.png",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "call": "raw/tarp-tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          22,
+          279,
+          476,
+          455
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          516,
+          768
+        ],
+        "content_scale": 0.05054945054945055,
+        "content_anchor_xy": [
+          12,
+          23
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "tarp_tower_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "torn",
+      "output": "native/tarp_tower_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tower_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/tarp-tower-r2.png",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "call": "raw/tarp-tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          536,
+          279,
+          492,
+          449
+        ],
+        "sheet_cell_xywh": [
+          516,
+          0,
+          560,
+          768
+        ],
+        "content_scale": 0.05054945054945055,
+        "content_anchor_xy": [
+          12,
+          23
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "tarp_tower_unveil",
+      "dir": "none",
+      "frame": 0,
+      "pose": "yank",
+      "output": "native/tarp_tower_unveil/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tower_unveil_0.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/tarp-tower-r2.png",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "call": "raw/tarp-tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1125,
+          135,
+          417,
+          290
+        ],
+        "sheet_cell_xywh": [
+          1076,
+          0,
+          538,
+          768
+        ],
+        "content_scale": 0.05054945054945055,
+        "content_anchor_xy": [
+          11,
+          30
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "tarp_tower_unveil",
+      "dir": "none",
+      "frame": 1,
+      "pose": "away",
+      "output": "native/tarp_tower_unveil/none/02.png",
+      "runtime_name": "sprites/buildings/tarp_tower_unveil_1.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/tarp-tower-r2.png",
+      "prompt": "raw/tarp-tower-r2.prompt.txt",
+      "call": "raw/tarp-tower-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1687,
+          68,
+          230,
+          230
+        ],
+        "sheet_cell_xywh": [
+          1614,
+          0,
+          434,
+          768
+        ],
+        "content_scale": 0.05054945054945055,
+        "content_anchor_xy": [
+          9,
+          34
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "tarp_tall",
+      "dir": "none",
+      "frame": 0,
+      "pose": "covered",
+      "output": "native/tarp_tall/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tall.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/tarp-tall-r3.png",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "call": "raw/tarp-tall-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          81,
+          278,
+          337,
+          491
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          488,
+          793
+        ],
+        "content_scale": 0.03360488798370672,
+        "content_anchor_xy": [
+          5,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22–25. Never integrate."
+    },
+    {
+      "anim": "tarp_tall_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "torn",
+      "output": "native/tarp_tall_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tall_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/tarp-tall-r3.png",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "call": "raw/tarp-tall-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          559,
+          284,
+          358,
+          490
+        ],
+        "sheet_cell_xywh": [
+          488,
+          0,
+          503,
+          793
+        ],
+        "content_scale": 0.03360488798370672,
+        "content_anchor_xy": [
+          6,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22–25. Never integrate."
+    },
+    {
+      "anim": "tarp_tall_unveil",
+      "dir": "none",
+      "frame": 0,
+      "pose": "yank",
+      "output": "native/tarp_tall_unveil/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tall_unveil_0.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/tarp-tall-r3.png",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "call": "raw/tarp-tall-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1066,
+          223,
+          401,
+          347
+        ],
+        "sheet_cell_xywh": [
+          991,
+          0,
+          547,
+          793
+        ],
+        "content_scale": 0.03360488798370672,
+        "content_anchor_xy": [
+          6,
+          18
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22–25. Never integrate."
+    },
+    {
+      "anim": "tarp_tall_unveil",
+      "dir": "none",
+      "frame": 1,
+      "pose": "away",
+      "output": "native/tarp_tall_unveil/none/02.png",
+      "runtime_name": "sprites/buildings/tarp_tall_unveil_1.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/tarp-tall-r3.png",
+      "prompt": "raw/tarp-tall-r3.prompt.txt",
+      "call": "raw/tarp-tall-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1610,
+          194,
+          222,
+          155
+        ],
+        "sheet_cell_xywh": [
+          1538,
+          0,
+          445,
+          793
+        ],
+        "content_scale": 0.03360488798370672,
+        "content_anchor_xy": [
+          6,
+          19
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "review_issue": "Safe diagnostic common scale reduces coverheight to16; target22–25. Never integrate."
+    },
+    {
+      "anim": "tarp_short",
+      "dir": "none",
+      "frame": 0,
+      "pose": "covered",
+      "output": "native/tarp_short/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_short.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/tarp-short-r3.png",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "call": "raw/tarp-short-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          150,
+          291,
+          275,
+          366
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          532,
+          724
+        ],
+        "content_scale": 0.040983606557377046,
+        "content_anchor_xy": [
+          5,
+          15
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "tarp_short_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "torn",
+      "output": "native/tarp_short_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_short_hurt.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/tarp-short-r3.png",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "call": "raw/tarp-short-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          640,
+          292,
+          315,
+          365
+        ],
+        "sheet_cell_xywh": [
+          532,
+          0,
+          564,
+          724
+        ],
+        "content_scale": 0.040983606557377046,
+        "content_anchor_xy": [
+          6,
+          15
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "tarp_short_unveil",
+      "dir": "none",
+      "frame": 0,
+      "pose": "yank",
+      "output": "native/tarp_short_unveil/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_short_unveil_0.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/tarp-short-r3.png",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "call": "raw/tarp-short-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1238,
+          228,
+          313,
+          268
+        ],
+        "sheet_cell_xywh": [
+          1096,
+          0,
+          591,
+          724
+        ],
+        "content_scale": 0.040983606557377046,
+        "content_anchor_xy": [
+          6,
+          18
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "tarp_short_unveil",
+      "dir": "none",
+      "frame": 1,
+      "pose": "away",
+      "output": "native/tarp_short_unveil/none/02.png",
+      "runtime_name": "sprites/buildings/tarp_short_unveil_1.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/tarp-short-r3.png",
+      "prompt": "raw/tarp-short-r3.prompt.txt",
+      "call": "raw/tarp-short-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1825,
+          288,
+          174,
+          124
+        ],
+        "sheet_cell_xywh": [
+          1687,
+          0,
+          485,
+          724
+        ],
+        "content_scale": 0.040983606557377046,
+        "content_anchor_xy": [
+          6,
+          15
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "quality_issues": [
+    "TALL sheet reached r3 limit. At required24pxheight, covered/torn remain too wide and airborne cloth clips16x32. One safe diagnostic common scale gives only11x16 covered, below required11–13x22–25; no production approval.",
+    "Tower and short states are geometrically usable diagnostic candidates. All12frames shown; complete pack remains blocked by tall footprint. No source repaint or per-frame scale changes.",
+    "TALL yank also occupies part of lowerhalf instead of revealing it. SHORT common scale selects15pxcovered height, within14–17 target, tofit cover11x15 and reveal lowerhalf; one scale across allfourstates, no pixelpatching."
+  ]
+}

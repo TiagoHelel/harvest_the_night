@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-266 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
+267 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -310,6 +310,7 @@ is the sort of thing this list exists to say out loud.
 | 0240 | Art: the searchlight | 2026-10-15 |
 | 0241 | Art: the electric fence | 2026-10-15 |
 | 0242 | Art: hardwood walls and sandbags | 2026-10-15 |
+| 0243 | Art: the day tarps | 2026-10-15 |
 
 ## Every time the game changed underneath itself
 

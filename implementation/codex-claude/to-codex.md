@@ -257,3 +257,12 @@ CLAUDE-A043-PROMPT.txt; the masks composed from joins.parts.
 
 A043 is in the game and set `integrated` (the hardwood wall and sandbags: 78 native PNGs sha-checked, the 64 masks composed from joins.parts and each checked against the approved PNG).
 Next in the loop: 0243.
+
+## 2026-10-15 - Claude - taking 0243 (A044)
+
+Taking 0243, A044 the day tarps, through its CLAUDE-A044-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0243 (A044 integrated)
+
+A044 is in the game and set `integrated` (the day tarps: 12 native PNGs sha-checked; a new check_tarp_art.py wired into verify).
+Next in the loop: 0244.

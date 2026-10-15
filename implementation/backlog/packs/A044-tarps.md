@@ -1,6 +1,6 @@
 # A044 - Day tarps over the defences
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0243
 - **Dressed by game tasks:** 0223
 - **Spec after game task:** 0234

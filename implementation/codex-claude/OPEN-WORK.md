@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0242's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0243's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 253 done, 43 todo, 0 blocked (85%).**
+**The game backlog: 296 tasks, 254 done, 42 todo, 0 blocked (86%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0243). Only the farmer packs the owner deferred (3c) still wait on
+says 0244). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -61,7 +61,7 @@ The owner approved 15 at 16:56 and the other six's additions at 21:11
 | A041 | The searchlight (**integrated** by 0240, 2026-10-15) | 0240 |
 | A042 | The electric fence (**integrated** by 0241, 2026-10-15) | 0241 |
 | A043 | Hardwood walls and sandbags (**integrated** by 0242, 2026-10-15) | 0242 |
-| A044 | Day tarps over the defences | 0243 |
+| A044 | Day tarps over the defences (**integrated** by 0243, 2026-10-15) | 0243 |
 | A045 | The power and weapon icons | 0244 |
 | A028 | The dog | 0245 |
 | A046 | The spitter | 0260 |

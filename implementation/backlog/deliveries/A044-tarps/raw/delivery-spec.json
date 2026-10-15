@@ -1,0 +1,286 @@
+{
+  "title": "Day tarps over the defences",
+  "date": "2026-10-14",
+  "status": "generating",
+  "palette_mode": "A",
+  "expected_files": 12,
+  "files": [
+    {
+      "anim": "tarp_tower",
+      "dir": "none",
+      "frame": 0,
+      "pose": "covered",
+      "output": "native/tarp_tower/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tower.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "tarp_tower_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "torn",
+      "output": "native/tarp_tower_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tower_hurt.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "tarp_tower_unveil",
+      "dir": "none",
+      "frame": 0,
+      "pose": "yank",
+      "output": "native/tarp_tower_unveil/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tower_unveil_0.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "tarp_tower_unveil",
+      "dir": "none",
+      "frame": 1,
+      "pose": "away",
+      "output": "native/tarp_tower_unveil/none/02.png",
+      "runtime_name": "sprites/buildings/tarp_tower_unveil_1.png",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "tarp_tall",
+      "dir": "none",
+      "frame": 0,
+      "pose": "covered",
+      "output": "native/tarp_tall/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tall.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "tarp_tall_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "torn",
+      "output": "native/tarp_tall_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tall_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "tarp_tall_unveil",
+      "dir": "none",
+      "frame": 0,
+      "pose": "yank",
+      "output": "native/tarp_tall_unveil/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_tall_unveil_0.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "tarp_tall_unveil",
+      "dir": "none",
+      "frame": 1,
+      "pose": "away",
+      "output": "native/tarp_tall_unveil/none/02.png",
+      "runtime_name": "sprites/buildings/tarp_tall_unveil_1.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "tarp_short",
+      "dir": "none",
+      "frame": 0,
+      "pose": "covered",
+      "output": "native/tarp_short/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_short.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "tarp_short_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "torn",
+      "output": "native/tarp_short_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_short_hurt.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "tarp_short_unveil",
+      "dir": "none",
+      "frame": 0,
+      "pose": "yank",
+      "output": "native/tarp_short_unveil/none/01.png",
+      "runtime_name": "sprites/buildings/tarp_short_unveil_0.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "tarp_short_unveil",
+      "dir": "none",
+      "frame": 1,
+      "pose": "away",
+      "output": "native/tarp_short_unveil/none/02.png",
+      "runtime_name": "sprites/buildings/tarp_short_unveil_1.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/buildings/gun_tower.png",
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

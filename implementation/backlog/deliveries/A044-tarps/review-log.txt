@@ -1,0 +1,17 @@
+2026-10-14 / Task0234 done verified. Owner-authorized21packbatch. No interimartapproval.
+
+2026-10-14 / Measured native export
+TALL sheet reached r3 limit. At required24pxheight, covered/torn remain too wide and airborne cloth clips16x32. One safe diagnostic common scale gives only11x16 covered, below required11–13x22–25; no production approval.
+Tower and short states are geometrically usable diagnostic candidates. All12frames shown; complete pack remains blocked by tall footprint. No source repaint or per-frame scale changes.
+No art approval inferred. 12 of 12 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Measured native export
+TALL sheet reached r3 limit. At required24pxheight, covered/torn remain too wide and airborne cloth clips16x32. One safe diagnostic common scale gives only11x16 covered, below required11–13x22–25; no production approval.
+Tower and short states are geometrically usable diagnostic candidates. All12frames shown; complete pack remains blocked by tall footprint. No source repaint or per-frame scale changes.
+TALL yank also occupies part of lowerhalf instead of revealing it. SHORT common scale selects15pxcovered height, within14–17 target, tofit cover11x15 and reveal lowerhalf; one scale across allfourstates, no pixelpatching.
+No art approval inferred. 12 of 12 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+12/12 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: tarp_tall_covered_dimensions, tarp_tall_lower_half_revealed. Complete delivery released for Claude integration.

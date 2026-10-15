@@ -74702,6 +74702,798 @@
       "revision": 1,
       "approval": "A043 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0242",
       "output_sha256": "632d5baddc0633b66cce45be67d44819cf66f893d6e519681ee5c4f1bc015dde"
+    },
+    {
+      "id": "buildings/tarp_tower",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df",
+      "crop_xywh": [
+        22,
+        279,
+        476,
+        455
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "content_scale": 0.05054945054945055,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tower",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tower.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.call.json",
+          "sha256": "f10a855b5674b38cfec5e8ac2a4466c6ab93c5ef4f2581882bb57a8a926e80c3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tower/none/01.png",
+          "sha256": "0564655ce84d69555febd9ed972dd714dcf068ea985520086f695916513670b9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        12,
+        23
+      ],
+      "output_sha256": "0564655ce84d69555febd9ed972dd714dcf068ea985520086f695916513670b9"
+    },
+    {
+      "id": "buildings/tarp_tower_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df",
+      "crop_xywh": [
+        536,
+        279,
+        492,
+        449
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "content_scale": 0.05054945054945055,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tower_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tower_hurt.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.call.json",
+          "sha256": "f10a855b5674b38cfec5e8ac2a4466c6ab93c5ef4f2581882bb57a8a926e80c3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tower_hurt/none/01.png",
+          "sha256": "1ad788f4d69948117b1edb445a42b0583c8e30b9c0fb75fa942a2d9a7a7d9769",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        12,
+        23
+      ],
+      "output_sha256": "1ad788f4d69948117b1edb445a42b0583c8e30b9c0fb75fa942a2d9a7a7d9769"
+    },
+    {
+      "id": "buildings/tarp_tower_unveil_0",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df",
+      "crop_xywh": [
+        1125,
+        135,
+        417,
+        290
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "content_scale": 0.05054945054945055,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tower_unveil",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tower_unveil_0.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.call.json",
+          "sha256": "f10a855b5674b38cfec5e8ac2a4466c6ab93c5ef4f2581882bb57a8a926e80c3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tower_unveil/none/01.png",
+          "sha256": "311f81ed6a27d7d6df48f0771305ec73ba42178ae53fe143989397ce491004ed",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        11,
+        30
+      ],
+      "output_sha256": "311f81ed6a27d7d6df48f0771305ec73ba42178ae53fe143989397ce491004ed"
+    },
+    {
+      "id": "buildings/tarp_tower_unveil_1",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tower-r2.png",
+      "source_sha256": "ed2e6960d4f9773a98eb847ff34e36955c9847a4827761a25ad7486a735835df",
+      "crop_xywh": [
+        1687,
+        68,
+        230,
+        230
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "content_scale": 0.05054945054945055,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tower_unveil",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tower_unveil_1.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.prompt.txt",
+      "prompt_sha256": "a9ff97f93443290918f7736b4657ee601071bcfdcca496114f2c9db7b68bd117",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tower-r2.call.json",
+          "sha256": "f10a855b5674b38cfec5e8ac2a4466c6ab93c5ef4f2581882bb57a8a926e80c3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tower_unveil/none/02.png",
+          "sha256": "f1d1e3528417b0937e9753793636dbe77a0cd32d6dea6ea07ae47f5e840322db",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        9,
+        34
+      ],
+      "output_sha256": "f1d1e3528417b0937e9753793636dbe77a0cd32d6dea6ea07ae47f5e840322db"
+    },
+    {
+      "id": "buildings/tarp_tall",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5",
+      "crop_xywh": [
+        81,
+        278,
+        337,
+        491
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.03360488798370672,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tall",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tall.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.call.json",
+          "sha256": "b0cfce1b80cbf9ed164a32b8e7c9ed4e563c9f2870a557284cd7beafd8de6f08",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tall/none/01.png",
+          "sha256": "6eedef0435010b3be8628ccdd2aa6dae500d63ed585ece7c444038d904d9992c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        5,
+        16
+      ],
+      "output_sha256": "6eedef0435010b3be8628ccdd2aa6dae500d63ed585ece7c444038d904d9992c"
+    },
+    {
+      "id": "buildings/tarp_tall_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5",
+      "crop_xywh": [
+        559,
+        284,
+        358,
+        490
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.03360488798370672,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tall_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tall_hurt.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.call.json",
+          "sha256": "b0cfce1b80cbf9ed164a32b8e7c9ed4e563c9f2870a557284cd7beafd8de6f08",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tall_hurt/none/01.png",
+          "sha256": "e4849fd6b3f3af1457e7f4dd0cf90003f60cd13e53d1ea09562b24dc0517bf63",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        6,
+        16
+      ],
+      "output_sha256": "e4849fd6b3f3af1457e7f4dd0cf90003f60cd13e53d1ea09562b24dc0517bf63"
+    },
+    {
+      "id": "buildings/tarp_tall_unveil_0",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5",
+      "crop_xywh": [
+        1066,
+        223,
+        401,
+        347
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.03360488798370672,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tall_unveil",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tall_unveil_0.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.call.json",
+          "sha256": "b0cfce1b80cbf9ed164a32b8e7c9ed4e563c9f2870a557284cd7beafd8de6f08",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tall_unveil/none/01.png",
+          "sha256": "68c2660f4bffef5511fa244ae02e779c00134a015daceb0d12a55d4b49314e1c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        6,
+        18
+      ],
+      "output_sha256": "68c2660f4bffef5511fa244ae02e779c00134a015daceb0d12a55d4b49314e1c"
+    },
+    {
+      "id": "buildings/tarp_tall_unveil_1",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-tall-r3.png",
+      "source_sha256": "04e881a6dd8e4ee7ba82ec4498a79e2cf019af90c9fbb82b1ed3b6fab3444ef5",
+      "crop_xywh": [
+        1610,
+        194,
+        222,
+        155
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.03360488798370672,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_tall_unveil",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/buildings/tarp_tall_unveil_1.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.prompt.txt",
+      "prompt_sha256": "d3cc788a27a7d6eb81fed0345a37c0c39e2c5e48786271611584038c4681f2c3",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-tall-r3.call.json",
+          "sha256": "b0cfce1b80cbf9ed164a32b8e7c9ed4e563c9f2870a557284cd7beafd8de6f08",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_tall_unveil/none/02.png",
+          "sha256": "33f50bf797ec2de5c152ef5c39d20d96fd8df7f46d7af0b0baa0d6aacde094b5",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        6,
+        19
+      ],
+      "output_sha256": "33f50bf797ec2de5c152ef5c39d20d96fd8df7f46d7af0b0baa0d6aacde094b5"
+    },
+    {
+      "id": "buildings/tarp_short",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372",
+      "crop_xywh": [
+        150,
+        291,
+        275,
+        366
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        -4
+      ],
+      "content_scale": 0.040983606557377046,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_short",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/tarp_short.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.call.json",
+          "sha256": "ef1d6c855e93c13e01ca77ca9d71b34690a92e67c29db68accbaa11b203223c5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_short/none/01.png",
+          "sha256": "56e2d49349c20b84888f9223880842e719d8a2991d775bf0116d3e2a340d1a52",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        5,
+        15
+      ],
+      "output_sha256": "56e2d49349c20b84888f9223880842e719d8a2991d775bf0116d3e2a340d1a52"
+    },
+    {
+      "id": "buildings/tarp_short_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372",
+      "crop_xywh": [
+        640,
+        292,
+        315,
+        365
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        -4
+      ],
+      "content_scale": 0.040983606557377046,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_short_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/tarp_short_hurt.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.call.json",
+          "sha256": "ef1d6c855e93c13e01ca77ca9d71b34690a92e67c29db68accbaa11b203223c5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_short_hurt/none/01.png",
+          "sha256": "075704b3769b48d206b04acdf25fd3f1f59eb75dbab383981067d78ffb5bd5fd",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        6,
+        15
+      ],
+      "output_sha256": "075704b3769b48d206b04acdf25fd3f1f59eb75dbab383981067d78ffb5bd5fd"
+    },
+    {
+      "id": "buildings/tarp_short_unveil_0",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372",
+      "crop_xywh": [
+        1238,
+        228,
+        313,
+        268
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        -4
+      ],
+      "content_scale": 0.040983606557377046,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_short_unveil",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/buildings/tarp_short_unveil_0.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.call.json",
+          "sha256": "ef1d6c855e93c13e01ca77ca9d71b34690a92e67c29db68accbaa11b203223c5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_short_unveil/none/01.png",
+          "sha256": "0d19282aff88450bc83e8bd8370366ebed65f743be068e6066f5be3a0ddf9df4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        6,
+        18
+      ],
+      "output_sha256": "0d19282aff88450bc83e8bd8370366ebed65f743be068e6066f5be3a0ddf9df4"
+    },
+    {
+      "id": "buildings/tarp_short_unveil_1",
+      "owner": "raster",
+      "source": "assets/art_source/defences/tarps/tarp-short-r3.png",
+      "source_sha256": "983d4ae9b880163a0c1821b8baf15afb6ad20b1850b5916192ab257d0e156372",
+      "crop_xywh": [
+        1825,
+        288,
+        174,
+        124
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        -4
+      ],
+      "content_scale": 0.040983606557377046,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/tarp_short_unveil",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/buildings/tarp_short_unveil_1.png",
+      "prompt": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.prompt.txt",
+      "prompt_sha256": "1eb365f52006043b3055fd312bf7c88b7295b00555654b63179c6503eb1978fa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/raw/tarp-short-r3.call.json",
+          "sha256": "ef1d6c855e93c13e01ca77ca9d71b34690a92e67c29db68accbaa11b203223c5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/native/tarp_short_unveil/none/02.png",
+          "sha256": "a26f7e2508db93f9cb28586368f326758fcd14b9f815a9d915ef8d670455c352",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/contract.json",
+          "sha256": "55c98f658aa14d0429d39390a122d6824f1235f0bb8495bc68c4a6855f6f0902",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A044-tarps/APPROVAL.json",
+          "sha256": "83e2343f0eec7ed86e6324b75442dfce40fcf20766e80855706f6ef41fb0571c",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A044",
+      "integration_task": "0243",
+      "revision": 1,
+      "approval": "A044 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0243",
+      "content_anchor_xy": [
+        6,
+        15
+      ],
+      "output_sha256": "a26f7e2508db93f9cb28586368f326758fcd14b9f815a9d915ef8d670455c352"
     }
   ]
 }

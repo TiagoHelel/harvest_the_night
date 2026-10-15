@@ -303,6 +303,13 @@ def check_barrier_art():
     return check("barrier joins/sources", code == 0, tail(out, 4))
 
 
+def check_tarp_art():
+    """A044's day tarps (task 0243): every footprint's cover, torn cover and
+    unveil, exact and grounded."""
+    code, out = run([sys.executable, "tools/check_tarp_art.py"])
+    return check("tarp covers/unveils", code == 0, tail(out, 4))
+
+
 def check_barrier_showcase():
     code, out = run([sys.executable, "tools/show_art.py", "--barriers", "--check"])
     return check("barrier damage/mines", code == 0, next((s for s in out.splitlines() if s.startswith("BARRIER SHOWCASE:")), tail(out, 4)))
@@ -771,6 +778,7 @@ def main():
     check_tower_art()
     check_tower_showcase()
     check_barrier_art()
+    check_tarp_art()
     check_barrier_showcase()
     check_enemy_art()
     check_enemy_showcase()
