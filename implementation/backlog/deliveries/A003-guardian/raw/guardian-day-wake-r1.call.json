@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A003 guardian day and waking animation strip for HARVEST THE NIGHT.\nUse Image1 as exact identity master: same flat straw hat and brown band, simple burlap sack face with stitched smile, blue work shirt, terracotta patch, straw cuffs, high crossbar, ONE centered wooden post. Image2 is its native-scale approved-for-production identity preview; keep these proportions rather than adding fine texture. This is an animation of the SAME object, not five redesigns.\nGenerate EXACTLY FIVE sequential frames, one horizontal strip of five equal cells with generous fully transparent gutters (at least25% of cell width). Each cell final target32x48,pivot16,44. Visible22-26wide x38tall; hat top near6, arm/crossbar line15-17, post foot43. Source art pixels large enough to survive reduction. Keep post, hat dimensions, body height and camera identical in every cell, only the described pose changes. All post feet have EXACT same baseline.\nOrdered cells:\n1 DAY: identity day rest, two DARK horizontal closed-eye slits, each2pixelswide, shirt tails at rest.\n2 WAKE0: same day pose, ONLY straw collar/cuffs lifting slightly; eyes remain dark and shut.\n3 WAKE1: head lifts ONE native pixel; two tiny separated warm yellow eyes open.\n4 WAKE2: shoulders square; sleeve arms rise to the horizontal crossbar; two warm eyes.\n5 WAKE3: settled awake night stance, sleeves out along crossbar, two warm eyes, shirt tails settled.\nBurlap face is muted dusty tan/brown, never yellow or ivory. ONLY the two eye slits in cells3-5 are pale flame yellow, one or two coarse native pixels each, with no surrounding glow or halo. Hat straw stays ochre/gold, blue cloth restrained. No extra pale yellow pixels anywhere else. Keep stitched smile visible. No giant head.\nStyle: coherent hand-crafted coarse pixel art, colored outlines, warm upper-left neutral daylight; orthographic three-quarter front. No smooth painting, 3D, gradients or noisy texture.\nTransparent background with real alpha. No ground, base, grass, drop shadow, vignette, glow, labels, text, cell separators, numbers, props, human legs or accessories. Full isolated complete sprite in every cell with transparent margins; nothing clipped.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/preview/guardian-master-r6-final8x.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.png",
+      "sha256": "319a3165f8f9c422340e6e9008b4347c2a12a8e1527f4a7b867bd5a27c1e54b6",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/preview/guardian-master-r6-final8x.png",
+      "sha256": "d958e75a0de92b325d6a70b5df3dc745efd7521ddd78bb6c85e223441aa2d2b1",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-309b9be0-8c31-4793-b223-3d5f1cb8352b.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A003-guardian\\raw\\guardian-day-wake-r1.png",
+  "sha256": "05ee3dadefe2f978ef094f7cb62ffc901c2bbeb4fbb006e87b3c0deb72be0693",
+  "date": "2026-10-14",
+  "revision": 1,
+  "decision": "pending native-scale inspection"
+}

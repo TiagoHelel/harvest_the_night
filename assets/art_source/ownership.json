@@ -2010,6 +2010,74 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A003-guardian/guardian-body-and-fixed-post.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-clear-face-source.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-day-body-source.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-day-head.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-eye-core-source.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-lit-head.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-point-arm-source-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-point-arm-source-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-point-arm-source-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-point-body-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-point-body-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-point-body-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-raised-both.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-raised-left.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-tail-wind-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-tail-wind-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A003-guardian/guardian-wake-straw-lift.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/carrot_0.png",
       "owner": "raster"
     },
@@ -3047,6 +3115,54 @@
     },
     {
       "output": "sprites/props/gold_ore_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_day_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_night_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_night_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_night_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_night_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_point_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_point_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_point_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_wake_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_wake_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_wake_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/guardian_wake_3.png",
       "owner": "raster"
     },
     {

@@ -1371,16 +1371,41 @@ func _task_0131_guardian() -> void:
 	expect(eyes.size() == 2 and eyes[0].x < eyes[1].x
 		and eyes[0].y < feet.y and eyes[0].distance_to(feet) < 48.0,
 		"at night two lit eyes, in its head", "%s, feet %s" % [str(eyes), feet])
+	# **On the frame that is up** (task 0145): A003 measured them on each, and
+	# they move with its head - none on the wake's first, still unlit.
+	var nodding := GuardianView.eyes(watch, GuardianView.path_of(&"guardian_night", 1))
+	var unlit := GuardianView.eyes(watch, GuardianView.path_of(&"guardian_wake", 0))
+	var lifted := GuardianView.eyes(watch, GuardianView.path_of(&"guardian_wake", 1))
+	expect(nodding.size() == 2 and nodding != eyes and nodding[0] - eyes[0] == Vector2(-1, 0)
+		and unlit.is_empty() and lifted.size() == 2 and lifted[0] - eyes[0] == Vector2(0, -1),
+		"its eyes follow the frame that is up: a pixel west on the idle's second, none on the wake's first, a pixel up on its second",
+		"%s / %s / %s against %s" % [str(nodding), str(unlit), str(lifted), str(eyes)])
 
-	# **The registry** (0120's road): the four guardian states and the seven
-	# cursor looks, drawn by code in their packs' boxes; lit frames carry the
-	# emission points and the unlit ones do not.
+	# **The registry** (0120's road): the seven cursor looks, drawn by code in
+	# their pack's box. The guardian's four states left it for A003's art in
+	# task 0145: twelve frames, the lit ones carrying the emission points and
+	# the unlit ones not.
 	var wrong: Array = []
 	var mine := 0
+	for name in [&"guardian_day", &"guardian_wake", &"guardian_night", &"guardian_point"]:
+		var count := GuardianView.frames_of(name)
+		mine += count
+		for i in count:
+			var path := GuardianView.path_of(name, i)
+			var answer := PlaceholderArt.frame(path)
+			var awake: bool = name != &"guardian_day" and not (name == &"guardian_wake" and i == 0)
+			if not RasterArt.FRAMES.has(path) or PlaceholderArt.is_drawn(path) or PlaceholderArt.art(name).size() > 0 \
+					or answer.get("canvas") != Vector2i(32, 48) or answer.get("pivot") != Vector2i(16, 44) \
+					or answer.has("lights") != awake or not ResourceLoader.exists(path):
+				wrong.append(path)
+	expect(mine == 12 and wrong.is_empty(),
+		"the guardian's four states are A003's twelve frames, lit where the eyes are",
+		"%d frames, wrong: %s" % [mine, str(wrong.slice(0, 4))])
+	mine = 0
 	for name in GameData.sorted_names(PlaceholderArt.ART.keys()):
 		var entry: Dictionary = PlaceholderArt.ART[name]
-		if not ["A003", "A004"].has(entry["pack"]):
-			continue       # the guardian's and the cursor's packs only
+		if entry["pack"] != "A004":
+			continue       # the cursor's pack only
 		mine += 1
 		var shape: Dictionary = entry["geometry"]
 		for i in int(entry["frames"]):
@@ -1392,15 +1417,15 @@ func _task_0131_guardian() -> void:
 					or answer.get("pivot") != shape["pivot"] \
 					or answer.has("lights") != lit:
 				wrong.append(path)
-	expect(mine == 11 and wrong.is_empty(),
-		"the guardian's four states and the cursor's seven looks are registered",
+	expect(mine == 7 and wrong.is_empty(),
+		"the cursor's seven looks are registered",
 		"%d entries, wrong: %s" % [mine, str(wrong.slice(0, 4))])
 	for look in GuardianCursor.LOOKS:
 		expect(PlaceholderArt.ART.has(StringName("cursor_%s" % look)),
 			"the cursor's '%s' look is registered" % look)
-	expect(PlaceholderArt.frame(PlaceholderArt.art_path(&"guardian_day", 0)).get("lights", []).is_empty()
-		and not PlaceholderArt.frame(PlaceholderArt.art_path(&"guardian_wake", 0)).has("lights")
-		and PlaceholderArt.frame(PlaceholderArt.art_path(&"guardian_wake", 1)).has("lights"),
+	expect(PlaceholderArt.frame(GuardianView.path_of(&"guardian_day", 0)).get("lights", []).is_empty()
+		and not PlaceholderArt.frame(GuardianView.path_of(&"guardian_wake", 0)).has("lights")
+		and PlaceholderArt.frame(GuardianView.path_of(&"guardian_wake", 1)).has("lights"),
 		"the eyes light on the second frame of the wake, not before")
 	expect(GameData.CURSOR_REPEAT_RATE > 0.0
 		and GameData.CURSOR_REPEAT_RATE < GameData.CURSOR_REPEAT_DELAY,

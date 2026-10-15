@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-15",
+  "status": "approved for integration",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+  "packs": [
+    "A003",
+    "A004",
+    "A017",
+    "A018",
+    "A023",
+    "A026",
+    "A027",
+    "A030",
+    "A033",
+    "A034",
+    "A035",
+    "A036",
+    "A057"
+  ],
+  "frames": 182,
+  "approved_inventory": "retry-final-inventory.json",
+  "runtime_integrated": false,
+  "approval_files": {
+    "A003": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+    "A004": "implementation/backlog/deliveries/A004-cursor/APPROVAL.json",
+    "A017": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+    "A018": "implementation/backlog/deliveries/A018-sprinklers/APPROVAL.json",
+    "A023": "implementation/backlog/deliveries/A023-fishing-gear/APPROVAL.json",
+    "A026": "implementation/backlog/deliveries/A026-farm-animals/APPROVAL.json",
+    "A027": "implementation/backlog/deliveries/A027-cow-chicken/APPROVAL.json",
+    "A030": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+    "A033": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+    "A034": "implementation/backlog/deliveries/A034-peddler/APPROVAL.json",
+    "A035": "implementation/backlog/deliveries/A035-house-tiers/APPROVAL.json",
+    "A036": "implementation/backlog/deliveries/A036-night-loot/APPROVAL.json",
+    "A057": "implementation/backlog/deliveries/A057-morning-report/APPROVAL.json"
+  }
+}

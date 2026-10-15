@@ -253,6 +253,19 @@ def check_prop_showcase():
     return check("prop overlap/gathering", code == 0, verdict)
 
 
+def check_guardian_art():
+    """A003's porch guardian (task 0145): its four states, fixed post and
+    measured eyes, every frame its approved composition."""
+    code, out = run([sys.executable, "tools/check_guardian_art.py"])
+    return check("guardian states/eyes", code == 0, tail(out, 4))
+
+
+def check_guardian_showcase():
+    code, out = run([sys.executable, "tools/show_art.py", "--guardian", "--check"])
+    verdict = next((line for line in out.splitlines() if line.startswith("GUARDIAN SHOWCASE:")), tail(out, 4))
+    return check("guardian frames/lamp", code == 0, verdict)
+
+
 def check_crop_art():
     code, out = run([sys.executable, "tools/check_crop_art.py"])
     return check("crop sources/moisture", code == 0, next((s for s in out.splitlines() if s.startswith("OK:")), tail(out, 4)))
@@ -768,6 +781,8 @@ def main():
     check_water_showcase()
     check_prop_art()
     check_prop_showcase()
+    check_guardian_art()
+    check_guardian_showcase()
     check_crop_art()
     check_crop_showcase()
     check_house_art()

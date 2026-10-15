@@ -32437,3 +32437,95 @@ drawing is gone.
 - `python implementation/backlog/assets.py set A048 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (62 of 62).
+
+## 0145 - Art: the porch guardian - done 2026-10-15
+
+A003 is integrated. The porch scarecrow is the owner-approved art now: still
+by day, its four-frame wake at the reality switch, its four-frame night idle
+with the eyes lit, and its three-frame point when a defence goes down. The
+owner approved the corrected pack on 2026-10-15 with the retried batch ("tudo
+aprovado"), as recorded in the delivery's `APPROVAL.json`. 0131's code drawing
+is gone.
+
+- **The first layered pack**: each of the twelve frames is a composition the
+  owner authorised ("Sim, autorizar composição com recortes do ImageGen"). It
+  is cut from three ImageGen sources and assembled through 17 components:
+  - 6 `render` leaves, each with its recorded crop, scale, anchor and palette
+    keys;
+  - 11 `compose` nodes of at most five parts.
+- **Promoted as a DAG, not as crops**:
+  - Every component is a manifest entry. Its derived entries have no
+    `source` and its compose entries take their first part as `input`, as
+    `CLAUDE-RETRY-APPROVED.md` asks.
+  - Each frame is a compose entry over the components, carrying its points.
+  - The importer writes every manifest entry, so the components get outputs
+    too. They live under `sprites/components/A003-guardian/`, apart from the
+    runtime families, and are marked `assembly_component_of: "A003"`.
+  - `sprites/components/` is a new folder under `sprites/` for these
+    supporting nodes. The retried packs to come put theirs there too.
+- **Checked before writing**: every native and component PNG was
+  sha-checked against `contract.json` and `APPROVAL.json`. The canonical
+  importer then rendered the whole promoted set from the copied sources, and
+  all 29 nodes decode to their approved RGBA exactly.
+  - The three raw sources are in `assets/art_source/guardian/`, byte for
+    byte.
+  - A scratch promoter, `integrate_dag.py`, did the work. It handles the
+    other retried packs' `rotate`, `reference` and baked-mirror nodes too, as
+    exact-source leaves.
+- **The eyes are per frame**: A003 measured them on every lit frame, and
+  they move with the head - a pixel up on the wake's second, a pixel west on
+  the idle's second.
+  - `import_art.py` now writes a frame's `lights_xy` into `RasterArt` as
+    `lights`, and refuses one outside the canvas or whose first is not the
+    frame's `light_xy`.
+  - `GuardianView.eyes(state, shown)` reads the points of the frame that is
+    up. `lighting.gd` finds the guardian by its group and passes it that
+    frame, so the glow and its one-pixel cores sit on the art's two
+    `flame_hot` pixels. Nothing else on the scarecrow emits.
+- **`GuardianView` plays A003's frames**: counted off the art, timed by
+  each state's own seconds and loop, and drawn from a held texture. The
+  stand-in drawing is gone.
+- **The stand-ins retired**: A003's four `PlaceholderArt` entries,
+  `SCARECROW` and `GUARDIAN_EYES` are gone. `placeholders.py --check`
+  passes, with 186 stand-ins left over 25 packs.
+- **A new family check and showcase**:
+  - **`tools/check_guardian_art.py`**, wired into verify:
+    - the twelve frames on 32x48 at (16,44), drawn at 1.0, with their
+      seconds and loops;
+    - each promoted as its composition from A003's own components;
+    - the post's foot on the pivot row and the post under the shirt
+      identical on every frame;
+    - the eyes lit from the wake's second frame on, exactly two `flame_hot`
+      pixels on each lit frame's `lights_xy`, and none on the unlit ones.
+  - **`show_art.py --guardian`** (`art_showcase.gd`), wired into verify,
+    runs the real view on a new farm's porch: day, the switch, the wake,
+    the idle round, the point and back.
+    - At every step it checks the frame shown, its texture, its eye points,
+      the lamp's core count, and that the state never moves. 84 checks.
+    - It found that a one-shot holds its last frame to its full length and
+      the idle takes over on the step after; the showcase steps through
+      that.
+- **Tests**:
+  - 0131's guardian check now asks for A003's twelve frames, lit where the
+    eyes are, and nothing of 0120's road.
+  - The eyes follow the frame that is up.
+  - The cursor's seven looks are still its own registry.
+- **Shots** (`implementation/shots/0145/`, FHD 1920x1080, looked at):
+  - `noon`: by day, still, the eyes stitched shut.
+  - `guardian` (new scene, Spring 1's build step on the porch): the night
+    idle, the two eyes lit amber with their glow.
+  - `guardian_point`: a wall put down below the porch and the guardian's
+    arm raised at it.
+  - The scene first showed the idle where the point should be. A scene set
+    down at the shutter had given the view's defence watcher no first look,
+    and its first look only learns what is there. The shot now gives it one
+    before the wall goes down, as a night's first frame does in the game.
+  - `headless_check` counts 128 scenes.
+- **The delivery's provenance** is committed: the 47 files the manifest
+  cites - prompts, call records, native and component exports,
+  `contract.json`, `APPROVAL.json` - and the handoff notes. A003's folder
+  also holds Codex's shared batch tooling and reviews, which stay Codex's
+  and are not committed.
+- `python implementation/backlog/assets.py set A003 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).

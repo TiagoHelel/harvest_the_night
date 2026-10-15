@@ -32,7 +32,7 @@ func _run() -> void:
 		if arg.begins_with("--out="):
 			_folder = "res://" + arg.substr(6).trim_suffix("/") + "/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_folder))
-	if args.has("--terrain") or args.has("--water") or args.has("--props") or args.has("--crops") or args.has("--house") or args.has("--stations"):
+	if args.has("--terrain") or args.has("--water") or args.has("--props") or args.has("--crops") or args.has("--house") or args.has("--stations") or args.has("--guardian"):
 		# Use Main's real relighting pipeline for all three material light states.
 		var relight := Relight.new()
 		relight.name = "Relight"
@@ -78,6 +78,11 @@ func _run() -> void:
 		else:
 			await _house_family()
 			print("HOUSE SHOWCASE: %d checks, %d failed" % [_checks, _failed])
+		quit(1 if _failed > 0 else 0)
+		return
+	if args.has("--guardian"):
+		await _guardian_family()
+		print("GUARDIAN SHOWCASE: %d checks, %d failed" % [_checks, _failed])
 		quit(1 if _failed > 0 else 0)
 		return
 	if args.has("--crops"):
@@ -1452,6 +1457,78 @@ func _water_automatic(view: PlayerView, production: TileSet) -> void:
 	expect(var_to_bytes(_state) == before, "Automatic pond motion cannot modify simulation/save fields")
 	var file := FileAccess.open(_folder + "automatic-loop.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify({"unique_rendered_phases":seen.size(),"phase_trace":trace,"elapsed_seconds":float(Time.get_ticks_msec()-started)/1000.0,"render_frames":render_frames,"timeout_seconds":12,"serialized_state_unchanged":var_to_bytes(_state)==before}, "\t"))
+
+
+## **The porch guardian** (task 0145): A003's frames in the real view on a
+## new farm's porch - still by day; at the switch the wake once, then the
+## night idle round; the point once and back - each frame drawn from its own
+## texture, and the lamp's two eye cores on that frame's measured points,
+## none on an unlit one. Nothing of it moves the state.
+func _guardian_family() -> void:
+	_state = State.create(1450)
+	var lamps := CanvasLayer.new()
+	lamps.layer = 2
+	root.add_child(lamps)
+	var lighting := Lighting.new()
+	lamps.add_child(lighting)
+	lighting.set_quality(Lighting.STEADY)
+	lighting.set_process(false)
+	var guardian := _world.guardian()
+	guardian.set_process(false)
+	_world.set_process(false)
+	_world.look_at_cell(GuardianView.cell_of(_state))
+	await _settle()
+	var by_day := State.hash_of(_state)
+	expect(guardian.is_in_group(GuardianView.GROUP), "The lamp finds the guardian by its group")
+	await _guardian_step(guardian, lighting, 0.0, &"guardian_day", 0, "day")
+	expect(State.hash_of(_state) == by_day, "The guardian by day changes nothing in the state")
+	NightRoad.into_build(_state)
+	_world.show_state(_state)
+	var by_night := State.hash_of(_state)
+	await _guardian_step(guardian, lighting, 0.0, &"guardian_wake", 0, "wake_0")
+	for i in range(1, 4):
+		await _guardian_step(guardian, lighting, 0.12, &"guardian_wake", i, "wake_%d" % i)
+	# A one-shot holds its last frame to its full length, and the idle takes
+	# over on the step after.
+	await _guardian_step(guardian, lighting, 0.12, &"guardian_wake", 3, "wake_held")
+	await _guardian_step(guardian, lighting, 0.0, &"guardian_night", 0, "night_0")
+	for i in range(1, 5):
+		await _guardian_step(guardian, lighting, 0.25, &"guardian_night", i % 4, "night_%d" % i)
+	guardian.point()
+	await _guardian_step(guardian, lighting, 0.0, &"guardian_point", 0, "point_0")
+	for i in range(1, 3):
+		await _guardian_step(guardian, lighting, 0.1, &"guardian_point", i, "point_%d" % i)
+	await _guardian_step(guardian, lighting, 0.1, &"guardian_point", 2, "point_held")
+	await _guardian_step(guardian, lighting, 0.0, &"guardian_night", 0, "point_back")
+	expect(State.hash_of(_state) == by_night, "The guardian and its eyes change nothing in the state")
+
+
+## One step of the guardian's own clock, then what it shows: `name`'s frame
+## `index`, its texture that frame's PNG, and its eyes - in the world and as
+## the lamp's cores - that frame's points or none.
+func _guardian_step(guardian: GuardianView, lighting: Lighting, seconds: float, name: StringName, index: int, label: String) -> void:
+	guardian._process(seconds)
+	var path := GuardianView.path_of(name, index)
+	expect(guardian.playing() == name and guardian.shown() == path, "The guardian shows %s, not %s" % [path, guardian.shown()])
+	guardian.queue_redraw()
+	lighting.show_state(_state)
+	lighting.queue_redraw()
+	await process_frame
+	await process_frame
+	var texture: Texture2D = guardian._textures.get(path)
+	expect(texture != null and texture.resource_path == path, "Drawn from its own frame: " + path)
+	var shape := PlaceholderArt.frame(path)
+	var points: Array = shape.get("lights", [])
+	var lit := name != &"guardian_day" and not (name == &"guardian_wake" and index == 0)
+	expect(lit == (points.size() == 2), "Eyes lit exactly on the lit frames: " + path)
+	var eyes := GuardianView.eyes(_state, guardian.shown())
+	var want: Array[Vector2] = []
+	if int(_state["phase"]) != Phases.DAY:
+		for point in points:
+			want.append(GuardianView.feet_of(_state) + Vector2(point) - Vector2(shape["pivot"]) + Vector2(0.5, 0.5))
+	expect(eyes == want, "The eyes are this frame's measured points: %s" % path)
+	expect(lighting.eye_cores().size() == want.size(), "The lamp lights %d eye cores on %s, not %d" % [want.size(), path, lighting.eye_cores().size()])
+	await _shoot("guardian_" + label, "Porch guardian / %s / %d eye cores" % [path.get_file(), lighting.eye_cores().size()])
 
 
 func _add_house(corner: Vector2i) -> void:

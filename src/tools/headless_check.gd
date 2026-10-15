@@ -14732,9 +14732,10 @@ func _task_0082_shots() -> void:
 	# twenty-four since 0239: A040's garlic braid, by night and by day. A
 	# hundred and twenty-five since 0240: A041's searchlight at both levels.
 	# A hundred and twenty-six since 0260: a summer night's forecast. A
-	# hundred and twenty-seven since 0262: an autumn night's.
-	expect(names.size() == 127,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast and the 1.0 farm",
+	# hundred and twenty-seven since 0262: an autumn night's. A hundred and
+	# twenty-eight since 0145: the porch guardian awake.
+	expect(names.size() == 128,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast, the guardian awake and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",

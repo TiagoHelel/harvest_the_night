@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit\nAsset type: A003 final guardian identity correction, one isolated sprite.\nImage1 is edit target: preserve exactly this friendly scarecrow design, flat straw hat, two horizontal dark stitched eyes, smile, blue shirt, terracotta patch, wooden post, framing and single pose. Keep post foot in exactly the same place and body height.\nChange ONLY arm/crossbar width: shorten both arms and wooden crossbar ends equally so the total visible width is about 68 percent of hat-to-post-foot height (26 wide by38 high at native size). Currently it is75 percent, too wide. The hat brim already fits: arm/cuff ends must be no wider than the hat. Keep arm line high just beneath face, don't lower it. Shorten sleeves and crossbar, don't shrink the whole object or its face.\nRetain two obvious horizontal DARK 2x1-pixel eyes with a tan gap. Preserve mouth. Treat each native pixel as one huge flat square block so facial details survive nearest-neighbour reduction. No fabric grain or blur.\nFinal downstream canvas32x48,pivot16,44. Hat top6,foot43,arm line16-17,allowedcolumns2..29. Same neutral daylight upper-left and orthographic three-quarter view.\nTrue transparent background, no glow or halo or shadow, no ground, base, grass, human limbs, accessories, text, UI, extra frames.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r5.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r5.png",
+      "sha256": "b27fad6c30efabe46f67124e99baf1cceaa914cfa154ead32e522019c2be5f8b",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-4c62e4d7-6bb0-4265-a9f2-5827c8c2585a.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A003-guardian\\raw\\guardian-master-r6.png",
+  "sha256": "319a3165f8f9c422340e6e9008b4347c2a12a8e1527f4a7b867bd5a27c1e54b6",
+  "date": "2026-10-14",
+  "revision": 6,
+  "decision": "pending native-scale inspection"
+}

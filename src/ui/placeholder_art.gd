@@ -38,7 +38,8 @@ extends RefCounted
 ## move when it arrives. **Keep each entry on one line**: `tools/placeholders.py`
 ## reads them line by line.
 ##
-## Art that is not the farmer's - A003's guardian, A004's cursor (task 0131) -
+## Art that is not the farmer's - A004's cursor (task 0131), A003's guardian
+## until task 0145 -
 ## goes in `ART` instead, with the folder its pack delivers to; an empty
 ## `stand_in` there means the view draws it in code (`is_drawn`).
 ##
@@ -113,9 +114,6 @@ const POSES := {
 	&"bed_sleep": {"pack": "A001", "frames": 2, "seconds": 0.8, "loop": true, "stand_in": &"idle_south", "geometry": WALK_FRAME, "final": WALK_FRAME, "tint": Color(0.72, 0.78, 1.0)},
 	&"react_zzz": {"pack": "A002", "frames": 3, "seconds": 0.4, "loop": true, "stand_in": &"react_note", "geometry": LEGACY_STRIP, "final": WORK_FRAME},
 }
-
-## A003's porch guardian: 32x48 at (16,44), drawn at 1.0 (task 0131).
-const SCARECROW := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "draw_scale": 1.0}
 
 ## A004's cell cursor: one 16x16 cell at its centre, drawn at 1.0 (task 0131).
 ## A hotbar icon is the same box (task 0133). A005's eight are raster art since
@@ -233,10 +231,6 @@ const COLLECTION_COVER := {"canvas": Vector2i(48, 64), "pivot": Vector2i(24, 32)
 const TROPHY := {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "draw_scale": 1.0}
 const BADGE := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 12), "draw_scale": 1.0}
 const ORNAMENT := {"canvas": Vector2i(64, 12), "pivot": Vector2i(32, 6), "draw_scale": 1.0}
-
-## The guardian's eyes in every lit frame, native pixels: the viewer-left eye
-## first. What `lighting.gd` puts a glow on (A003's `light_xy` / `lights_xy`).
-const GUARDIAN_EYES := [Vector2i(13, 12), Vector2i(18, 12)]
 
 ## **Stand-ins outside the farmer's folder** (task 0131), by runtime name, with
 ## the folder the pack delivers to (`dir`). `"stand_in": &""` is **drawn by
@@ -396,10 +390,6 @@ const ART := {
 	&"hud_worm": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_carrot", "tint": Color(1.15, 0.7, 0.8), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"icon_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/icon_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_bait": {"pack": "A023", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_meat", "tint": Color(1.25, 1.0, 1.0), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	&"guardian_day": {"pack": "A003", "dir": "res://sprites/props/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW},
-	&"guardian_wake": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.12, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 1},
-	&"guardian_night": {"pack": "A003", "dir": "res://sprites/props/", "frames": 4, "seconds": 0.25, "loop": true, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 0},
-	&"guardian_point": {"pack": "A003", "dir": "res://sprites/props/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"", "geometry": SCARECROW, "final": SCARECROW, "lights": GUARDIAN_EYES, "lit_from": 0},
 	&"cursor_neutral": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
 	&"cursor_place": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
 	&"cursor_blocked": {"pack": "A004", "dir": "res://sprites/ui/", "frames": 2, "seconds": 0.4, "loop": true, "stand_in": &"", "geometry": CELL_CURSOR, "final": CELL_CURSOR},
@@ -488,8 +478,9 @@ static func frame(path: String) -> Dictionary:
 		"draw_scale": shape["draw_scale"],
 		"stand_in": entry["pack"],
 	}
-	# The emission points the real frames will carry (A003's `light_xy` and
-	# `lights_xy`), on the frames that are lit.
+	# The emission points the real frames will carry (`light_xy` and
+	# `lights_xy`, as A003's guardian did until task 0145), on the frames that
+	# are lit.
 	var lights: Array = entry.get("lights", [])
 	if not lights.is_empty() and int(at[1]) >= int(entry.get("lit_from", 0)):
 		answer["light"] = lights[0]

@@ -1,0 +1,756 @@
+{
+  "pack": "A003",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/guardian-day-wake-r1.png",
+      "source_sha256": "05ee3dadefe2f978ef094f7cb62ffc901c2bbeb4fbb006e87b3c0deb72be0693",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/guardian_day/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-body-and-fixed-post",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-day-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_wake/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-wake-straw-lift",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-day-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_wake/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-body-and-fixed-post",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                1,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_wake/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-raised-both",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_wake/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-raised-both",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_night/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-raised-both",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_night/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-tail-wind-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                1,
+                0,
+                31,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_night/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-raised-both",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                1
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_night/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-tail-wind-3",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_point/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-point-body-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_point/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-point-body-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/guardian_point/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          },
+          "parts": [
+            {
+              "input": "guardian-point-body-2",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                48
+              ]
+            },
+            {
+              "input": "guardian-lit-head",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                32,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "component": "guardian-day-body-source",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              38
+            ],
+            "content_scale": 0.05855161787365177,
+            "crop_xywh": [
+              21,
+              92,
+              368,
+              649
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              405,
+              793
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/guardian-master-r6.png",
+      "source_sha256": "319a3165f8f9c422340e6e9008b4347c2a12a8e1527f4a7b867bd5a27c1e54b6",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "guardian-clear-face-source",
+          "recipe": {
+            "content_anchor_xy": [
+              11,
+              39
+            ],
+            "content_scale": 0.03228476821192053,
+            "crop_xywh": [
+              155,
+              202,
+              695,
+              1208
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/guardian-point-r1.png",
+      "source_sha256": "85928a71922b6d60d07450fb2d806895032d2ab17599c7ed2f91fec4a7891599",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "guardian-eye-core-source",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              38
+            ],
+            "content_scale": 0.055232558139534885,
+            "crop_xywh": [
+              186,
+              59,
+              446,
+              692
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              692,
+              793
+            ]
+          }
+        },
+        {
+          "component": "guardian-point-arm-source-0",
+          "recipe": {
+            "content_anchor_xy": [
+              12,
+              38
+            ],
+            "content_scale": 0.055232558139534885,
+            "crop_xywh": [
+              186,
+              59,
+              446,
+              692
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              692,
+              793
+            ]
+          }
+        },
+        {
+          "component": "guardian-point-arm-source-1",
+          "recipe": {
+            "content_anchor_xy": [
+              13,
+              38
+            ],
+            "content_scale": 0.055232558139534885,
+            "crop_xywh": [
+              753,
+              59,
+              471,
+              692
+            ],
+            "sheet_cell_xywh": [
+              692,
+              0,
+              596,
+              793
+            ]
+          }
+        },
+        {
+          "component": "guardian-point-arm-source-2",
+          "recipe": {
+            "content_anchor_xy": [
+              13,
+              38
+            ],
+            "content_scale": 0.055232558139534885,
+            "crop_xywh": [
+              1353,
+              59,
+              462,
+              692
+            ],
+            "sheet_cell_xywh": [
+              1288,
+              0,
+              695,
+              793
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

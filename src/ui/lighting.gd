@@ -251,8 +251,11 @@ func _draw() -> void:
 
 	# **The porch guardian's eyes** (task 0131): a glow on each emission point
 	# its lit frames carry, and a one-pixel core so they read through the
-	# night's ramp the way the windows do.
-	for eye in GuardianView.eyes(_state):
+	# night's ramp the way the windows do. On the frame that is up since task
+	# 0145 - A003 measured the eyes on each, and they move with the head.
+	var guardian := get_tree().get_first_node_in_group(GuardianView.GROUP) as GuardianView \
+		if is_inside_tree() else null
+	for eye in GuardianView.eyes(_state, guardian.shown() if guardian != null else ""):
 		_eye_cores.append(get_viewport().get_canvas_transform() * eye)
 		_glow_at(eye, EYE_RADIUS * tile, EYE_COLOUR, 0.30)
 

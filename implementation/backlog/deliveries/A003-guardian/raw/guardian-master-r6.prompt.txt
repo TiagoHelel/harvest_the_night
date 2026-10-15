@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Asset type: A003 final guardian identity correction, one isolated sprite.
+Image1 is edit target: preserve exactly this friendly scarecrow design, flat straw hat, two horizontal dark stitched eyes, smile, blue shirt, terracotta patch, wooden post, framing and single pose. Keep post foot in exactly the same place and body height.
+Change ONLY arm/crossbar width: shorten both arms and wooden crossbar ends equally so the total visible width is about 68 percent of hat-to-post-foot height (26 wide by38 high at native size). Currently it is75 percent, too wide. The hat brim already fits: arm/cuff ends must be no wider than the hat. Keep arm line high just beneath face, don't lower it. Shorten sleeves and crossbar, don't shrink the whole object or its face.
+Retain two obvious horizontal DARK 2x1-pixel eyes with a tan gap. Preserve mouth. Treat each native pixel as one huge flat square block so facial details survive nearest-neighbour reduction. No fabric grain or blur.
+Final downstream canvas32x48,pivot16,44. Hat top6,foot43,arm line16-17,allowedcolumns2..29. Same neutral daylight upper-left and orthographic three-quarter view.
+True transparent background, no glow or halo or shadow, no ground, base, grass, human limbs, accessories, text, UI, extra frames.

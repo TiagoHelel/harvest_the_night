@@ -1,0 +1,1080 @@
+{
+  "date": "2026-10-14",
+  "scope": [
+    "A003",
+    "A004",
+    "A017",
+    "A018",
+    "A023",
+    "A026",
+    "A027",
+    "A030",
+    "A033",
+    "A034",
+    "A035",
+    "A036",
+    "A057"
+  ],
+  "packs": [
+    {
+      "id": "A003",
+      "folder": "A003-guardian",
+      "title": "The porch guardian",
+      "status": "approved for integration",
+      "native_outputs": 12,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/guardian_day/none/01.png",
+          "sha256": "8e581107825a9cd12a7108804fa385554226734a732fc58dfc61c0c6896a97e7",
+          "runtime_name": "sprites/props/guardian_day_0.png"
+        },
+        {
+          "output": "native/guardian_wake/none/01.png",
+          "sha256": "ebdbe46941b34b81c4bb1ec73e17730ee6c32b3b91bb1f7ccdf822e091ffc8a8",
+          "runtime_name": "sprites/props/guardian_wake_0.png"
+        },
+        {
+          "output": "native/guardian_wake/none/02.png",
+          "sha256": "4628e06ec966a4aa7fd0ed483b9008a10800cc4682d2507686616cd0db04d361",
+          "runtime_name": "sprites/props/guardian_wake_1.png"
+        },
+        {
+          "output": "native/guardian_wake/none/03.png",
+          "sha256": "faffd1af2f3c89d777d734536411f836d008e2d239c8db7bd2aa5311d9f84942",
+          "runtime_name": "sprites/props/guardian_wake_2.png"
+        },
+        {
+          "output": "native/guardian_wake/none/04.png",
+          "sha256": "faffd1af2f3c89d777d734536411f836d008e2d239c8db7bd2aa5311d9f84942",
+          "runtime_name": "sprites/props/guardian_wake_3.png"
+        },
+        {
+          "output": "native/guardian_night/none/01.png",
+          "sha256": "faffd1af2f3c89d777d734536411f836d008e2d239c8db7bd2aa5311d9f84942",
+          "runtime_name": "sprites/props/guardian_night_0.png"
+        },
+        {
+          "output": "native/guardian_night/none/02.png",
+          "sha256": "e59b945f5626e17cf717e649b02d1d20bc4fd7737a0a1459c7beec20e2a9d4cf",
+          "runtime_name": "sprites/props/guardian_night_1.png"
+        },
+        {
+          "output": "native/guardian_night/none/03.png",
+          "sha256": "6078170f3b65a03bbac17494addcb5013263bc4009606fce4337ae82774d7662",
+          "runtime_name": "sprites/props/guardian_night_2.png"
+        },
+        {
+          "output": "native/guardian_night/none/04.png",
+          "sha256": "1274503c0140ae9c206088b21b46b4c6d398691f9391e122ed76338a3fc3212b",
+          "runtime_name": "sprites/props/guardian_night_3.png"
+        },
+        {
+          "output": "native/guardian_point/none/01.png",
+          "sha256": "7ce614ddbf2720f9c4fe473a87210ffd60fa9867825b8331bb3a4d3969f7013b",
+          "runtime_name": "sprites/props/guardian_point_0.png"
+        },
+        {
+          "output": "native/guardian_point/none/02.png",
+          "sha256": "c5a8fa20b4d1b4cbe629333f4a0bc1d4181d85af866b088f233fe17419b26790",
+          "runtime_name": "sprites/props/guardian_point_1.png"
+        },
+        {
+          "output": "native/guardian_point/none/03.png",
+          "sha256": "f84d0b7fd362f275eba35db0ad427607600ccc4d2874a6bedc64429d20a3c6e7",
+          "runtime_name": "sprites/props/guardian_point_2.png"
+        }
+      ]
+    },
+    {
+      "id": "A004",
+      "folder": "A004-cursor",
+      "title": "The guardian's cursor",
+      "status": "approved for integration",
+      "native_outputs": 14,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/cursor_neutral/none/01.png",
+          "sha256": "a892d7521598982691c9e5bd773365c3c856eb51e7b4f9811ac1c854c6f6623e",
+          "runtime_name": "sprites/ui/cursor_neutral_0.png"
+        },
+        {
+          "output": "native/cursor_neutral/none/02.png",
+          "sha256": "56f7251e594422c917c966e2131e40de915d42646f474a5a7b05a0707ef67701",
+          "runtime_name": "sprites/ui/cursor_neutral_1.png"
+        },
+        {
+          "output": "native/cursor_place/none/01.png",
+          "sha256": "5a1bc4a67cbce24842e95582c2cc8154844b7ed2a941bb4e39bb4bcc907e997d",
+          "runtime_name": "sprites/ui/cursor_place_0.png"
+        },
+        {
+          "output": "native/cursor_place/none/02.png",
+          "sha256": "01575ab544205bf4378425be8679ca422766b377e896f2b1fd94a160875b8bde",
+          "runtime_name": "sprites/ui/cursor_place_1.png"
+        },
+        {
+          "output": "native/cursor_blocked/none/01.png",
+          "sha256": "26eaa89dbfd158ef78a5c726f9807b44ba21f214350fb849c2f5249481bcfcb6",
+          "runtime_name": "sprites/ui/cursor_blocked_0.png"
+        },
+        {
+          "output": "native/cursor_blocked/none/02.png",
+          "sha256": "7670808709e5bec6a5190821b1956aed3c3fe6c3391528fec4841f2007100636",
+          "runtime_name": "sprites/ui/cursor_blocked_1.png"
+        },
+        {
+          "output": "native/cursor_upgrade/none/01.png",
+          "sha256": "0aa7aed9de877e0c6ed65444c173e4f19c33ac93e0f0dc97cbbce956fc4674a7",
+          "runtime_name": "sprites/ui/cursor_upgrade_0.png"
+        },
+        {
+          "output": "native/cursor_upgrade/none/02.png",
+          "sha256": "fc591ab0e715210e7895a54130d24fb0c166fef095fbc409f328c9ca49668a8f",
+          "runtime_name": "sprites/ui/cursor_upgrade_1.png"
+        },
+        {
+          "output": "native/cursor_sell/none/01.png",
+          "sha256": "d87a7f9e952aa4d4f94904ca7f4fdb9f02e8afb726ac304455eb75802bf27020",
+          "runtime_name": "sprites/ui/cursor_sell_0.png"
+        },
+        {
+          "output": "native/cursor_sell/none/02.png",
+          "sha256": "b45c12ac2415c6e78b909d7584043a4eab07ee340096c80a4c4c504e8f727c08",
+          "runtime_name": "sprites/ui/cursor_sell_1.png"
+        },
+        {
+          "output": "native/cursor_repair/none/01.png",
+          "sha256": "003b28e1a7ec51b95ad2d90f471c94d19e6adb49495b97ec88ac477a7ba87cf2",
+          "runtime_name": "sprites/ui/cursor_repair_0.png"
+        },
+        {
+          "output": "native/cursor_repair/none/02.png",
+          "sha256": "989eeaafeb25d13082f710a7068c8623e9cca37df77d3c86ae5617afaf0a09c5",
+          "runtime_name": "sprites/ui/cursor_repair_1.png"
+        },
+        {
+          "output": "native/cursor_aim/none/01.png",
+          "sha256": "1a849d27f09cba9b71c451f789dcf5744c581ead2f6920e7a3978de69d3748be",
+          "runtime_name": "sprites/ui/cursor_aim_0.png"
+        },
+        {
+          "output": "native/cursor_aim/none/02.png",
+          "sha256": "a2ad3c5aafb223e5aac1fc6fc251df4c7e01540483b924c9a688a4c005631fab",
+          "runtime_name": "sprites/ui/cursor_aim_1.png"
+        }
+      ]
+    },
+    {
+      "id": "A017",
+      "folder": "A017-autumn-crops",
+      "title": "Autumn crops",
+      "status": "approved for integration",
+      "native_outputs": 27,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/pumpkin/none/01.png",
+          "sha256": "e40cc2c1b203831df82367565a7a6ddaf4def9a01cefcb03c4fbb12b506522a9",
+          "runtime_name": "sprites/crops/pumpkin_0.png"
+        },
+        {
+          "output": "native/pumpkin/none/02.png",
+          "sha256": "616e1bb85a22bd58d36c17ede65348d607294e9ed1708870dfb945e3d7ce79d9",
+          "runtime_name": "sprites/crops/pumpkin_1.png"
+        },
+        {
+          "output": "native/pumpkin/none/03.png",
+          "sha256": "2bedb0b36e9fc91e63e06b86da6499cdd55ec51102ea34957759b7d335d4813c",
+          "runtime_name": "sprites/crops/pumpkin_2.png"
+        },
+        {
+          "output": "native/pumpkin/none/04.png",
+          "sha256": "994dcb8c3832fbbfa994076cd11fee158046ce3e28e1874e0fc352734ea91cf1",
+          "runtime_name": "sprites/crops/pumpkin_3.png"
+        },
+        {
+          "output": "native/grape/none/01.png",
+          "sha256": "817c5b9b27bcaa00a9f892ad5fd709411fb26ff2ebc09e676cb76ef63d641974",
+          "runtime_name": "sprites/crops/grape_0.png"
+        },
+        {
+          "output": "native/grape/none/02.png",
+          "sha256": "bfcacb60ed9d86b64d163ca53b966957cd533924022cd5785243a708298594df",
+          "runtime_name": "sprites/crops/grape_1.png"
+        },
+        {
+          "output": "native/grape/none/03.png",
+          "sha256": "f0b96e53a3f2e6c7aa41b5b432589d386d057f02465a25b1f101e14c34a3a511",
+          "runtime_name": "sprites/crops/grape_2.png"
+        },
+        {
+          "output": "native/grape/none/04.png",
+          "sha256": "7f6acabe04df56f52dc8fee5f8d638e6c3ee225f12d9f30d6942228cccb5c66d",
+          "runtime_name": "sprites/crops/grape_3.png"
+        },
+        {
+          "output": "native/grape_regrow/none/01.png",
+          "sha256": "dfbcadff54de5439a95d74fda96a00b86fc0166eacd11a0262b4436c79b9c117",
+          "runtime_name": "sprites/crops/grape_regrow.png"
+        },
+        {
+          "output": "native/beet/none/01.png",
+          "sha256": "fa638ce43f277291936efc00e5cabd73d17d0b9bb4791c2415d9f2610d3fceb4",
+          "runtime_name": "sprites/crops/beet_0.png"
+        },
+        {
+          "output": "native/beet/none/02.png",
+          "sha256": "e4e33698c8532be175f16db6c0711ff329040687058df81e029466d6f093f539",
+          "runtime_name": "sprites/crops/beet_1.png"
+        },
+        {
+          "output": "native/beet/none/03.png",
+          "sha256": "3d91ab53dbca225d8d3840381ced1009b7b5ed1c937ab025aa34d93dcc149e8e",
+          "runtime_name": "sprites/crops/beet_2.png"
+        },
+        {
+          "output": "native/beet/none/04.png",
+          "sha256": "338a5810f3bd46e82642345d83879f4508db8f28dd2d3b848a15aceb57533712",
+          "runtime_name": "sprites/crops/beet_3.png"
+        },
+        {
+          "output": "native/icon_beet/none/01.png",
+          "sha256": "da0787c23184fa2c639e5d369816d748ec4566927371c3ace1a7e34c973b43a9",
+          "runtime_name": "sprites/ui/icon_beet.png"
+        },
+        {
+          "output": "native/hud_beet/none/01.png",
+          "sha256": "853eee759a5aa550a97729f3d6fa620ba6b00b338dbd5ee0ca1551092e0ce010",
+          "runtime_name": "sprites/ui/hud_beet.png"
+        },
+        {
+          "output": "native/icon_grape/none/01.png",
+          "sha256": "87ce2c67b2b24b97c7c9be3de3cf3f4c5dd6baaa4bf118f4ca70b36f8ad9db34",
+          "runtime_name": "sprites/ui/icon_grape.png"
+        },
+        {
+          "output": "native/hud_grape/none/01.png",
+          "sha256": "6e4c44bc1222081a2202d6330bc449afe7e42db5536a9436e5190611e0b57eff",
+          "runtime_name": "sprites/ui/hud_grape.png"
+        },
+        {
+          "output": "native/icon_pumpkin/none/01.png",
+          "sha256": "1a808b26fb06add109b1070d04768b06e2ed35d13e43e5fdc7ecff3f51bb699a",
+          "runtime_name": "sprites/ui/icon_pumpkin.png"
+        },
+        {
+          "output": "native/hud_pumpkin/none/01.png",
+          "sha256": "13ce1e81d2cdf5dbbecec853798d057aeda2da4917468992a6cbc8f2ebca1256",
+          "runtime_name": "sprites/ui/hud_pumpkin.png"
+        },
+        {
+          "output": "native/icon_beet_seed/none/01.png",
+          "sha256": "5d2f145e2360d3af2118ccda8635fad69a1d59299723adef83bc0bcc6d3bfc1e",
+          "runtime_name": "sprites/ui/icon_beet_seed.png"
+        },
+        {
+          "output": "native/hud_beet_seed/none/01.png",
+          "sha256": "4dc84210da5e30f5f0b730982c4ec4851170782726982a301bd79edaf18574a2",
+          "runtime_name": "sprites/ui/hud_beet_seed.png"
+        },
+        {
+          "output": "native/icon_grape_seed/none/01.png",
+          "sha256": "d4a107d6b503d6e42c0ead61516aed009e7094c6ab440f03f112ca10114c98d1",
+          "runtime_name": "sprites/ui/icon_grape_seed.png"
+        },
+        {
+          "output": "native/hud_grape_seed/none/01.png",
+          "sha256": "401a029c489bdd1c730818863fd98e19a6959ec4f65d5567e11ecff4c334ec24",
+          "runtime_name": "sprites/ui/hud_grape_seed.png"
+        },
+        {
+          "output": "native/icon_pumpkin_seed/none/01.png",
+          "sha256": "9a12d9091b517caef672968e43a6c6898df8928046ecb74388c5a4d58bdb65c1",
+          "runtime_name": "sprites/ui/icon_pumpkin_seed.png"
+        },
+        {
+          "output": "native/hud_pumpkin_seed/none/01.png",
+          "sha256": "c4bc89349912d451546c160990f07da8471cc795a1116e5ebfeee4e8c5328a7e",
+          "runtime_name": "sprites/ui/hud_pumpkin_seed.png"
+        },
+        {
+          "output": "native/icon_wheat_seed/none/01.png",
+          "sha256": "2e9840010e3de86690c5ddaaaf8d78db7fadb7886ff2de2e6411b30f2ea68858",
+          "runtime_name": "sprites/ui/icon_wheat_seed.png"
+        },
+        {
+          "output": "native/hud_wheat_seed/none/01.png",
+          "sha256": "3cd35e9a85e9b323d1921bbe026c01ed28e7e8203b1969185549f91709077e16",
+          "runtime_name": "sprites/ui/hud_wheat_seed.png"
+        }
+      ]
+    },
+    {
+      "id": "A018",
+      "folder": "A018-sprinklers",
+      "title": "Sprinklers",
+      "status": "approved for integration",
+      "native_outputs": 21,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/copper_sprinkler/none/01.png",
+          "sha256": "eb538602e6cd522eb291a024311bd23084ca2a7ad34ea131bc9eaf9ec2ecc0e8",
+          "runtime_name": "sprites/props/copper_sprinkler.png"
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/01.png",
+          "sha256": "580a918c7d6bf0e09e091625298a0e99f1715ef1b4b92acceaf225078f0b19d5",
+          "runtime_name": "sprites/props/copper_sprinkler_spray_0.png"
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/02.png",
+          "sha256": "40ae65ada6b539b37b989daff30973d4010cb763ba4a1b6ca34f66834750f9ee",
+          "runtime_name": "sprites/props/copper_sprinkler_spray_1.png"
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/03.png",
+          "sha256": "6e16e6f3d43d70cb40a942a09814f144bd53782fb899de31cfeab0b112e1a7be",
+          "runtime_name": "sprites/props/copper_sprinkler_spray_2.png"
+        },
+        {
+          "output": "native/copper_sprinkler_spray/none/04.png",
+          "sha256": "ab2a55956c4a770388caa1e88b9217f441b9d2b9213b4df985fc86542c40bf94",
+          "runtime_name": "sprites/props/copper_sprinkler_spray_3.png"
+        },
+        {
+          "output": "native/icon_copper_sprinkler/none/01.png",
+          "sha256": "75f755ac9c5d0120a440a5155867cd04f0bea9fba201c601071f4a0bd5f17f95",
+          "runtime_name": "sprites/ui/icon_copper_sprinkler.png"
+        },
+        {
+          "output": "native/hud_copper_sprinkler/none/01.png",
+          "sha256": "a71a971e2a7647011db450b21d2f5d4723cab932936909ff846c21eb5781a144",
+          "runtime_name": "sprites/ui/hud_copper_sprinkler.png"
+        },
+        {
+          "output": "native/iron_sprinkler/none/01.png",
+          "sha256": "d0a822a8f830993827aaf70a978c28dedbba9881f5132532b45233ba7997212b",
+          "runtime_name": "sprites/props/iron_sprinkler.png"
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/01.png",
+          "sha256": "250d7a644192d20356c9c3d8bc6dd24560aa09a32dddedd27ef5a78cc22c236c",
+          "runtime_name": "sprites/props/iron_sprinkler_spray_0.png"
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/02.png",
+          "sha256": "d56b8bbfaf9974f0b1e0b06ad4c4b65edf800bd6664cb4c41030b9829fa1e4f8",
+          "runtime_name": "sprites/props/iron_sprinkler_spray_1.png"
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/03.png",
+          "sha256": "1ca15ed0e1ac207261627f9763cfda9b95667319f651811594901f08c6445c90",
+          "runtime_name": "sprites/props/iron_sprinkler_spray_2.png"
+        },
+        {
+          "output": "native/iron_sprinkler_spray/none/04.png",
+          "sha256": "7054cf5b4e83dac1d9749567ae996270c34284c21d9cb0319a52f62d3d2719bb",
+          "runtime_name": "sprites/props/iron_sprinkler_spray_3.png"
+        },
+        {
+          "output": "native/icon_iron_sprinkler/none/01.png",
+          "sha256": "98b4a1dd110941a3a7d3f19c7f3df50fca3228e7d08a5131eeabeb5e9f932112",
+          "runtime_name": "sprites/ui/icon_iron_sprinkler.png"
+        },
+        {
+          "output": "native/hud_iron_sprinkler/none/01.png",
+          "sha256": "37e51c7ad3234f8df7849b346849715dc4b8542ee1c4a329724afdf5d82f8bd4",
+          "runtime_name": "sprites/ui/hud_iron_sprinkler.png"
+        },
+        {
+          "output": "native/gold_sprinkler/none/01.png",
+          "sha256": "ea414dd323371f0da1a3888e3c79edbbacdf02581a8cc17370b62ff44f18d22f",
+          "runtime_name": "sprites/props/gold_sprinkler.png"
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/01.png",
+          "sha256": "4dba1ca242029e96423e246ac44df88b15aa43b5e3edd50cdbf07c879cef00cf",
+          "runtime_name": "sprites/props/gold_sprinkler_spray_0.png"
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/02.png",
+          "sha256": "e29b0d381e9509b0524cc92d2698807a4bffe059b60cbc7e4f99dabbd4441783",
+          "runtime_name": "sprites/props/gold_sprinkler_spray_1.png"
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/03.png",
+          "sha256": "cd449a37bf8d6114cb0534ee838df59a14a4df9266f6c35f1397f717cea07eec",
+          "runtime_name": "sprites/props/gold_sprinkler_spray_2.png"
+        },
+        {
+          "output": "native/gold_sprinkler_spray/none/04.png",
+          "sha256": "cb78351a8d45a859ae9adb8ed2a68ff989be2d89b0d41e5caae5cf5b123f3ca9",
+          "runtime_name": "sprites/props/gold_sprinkler_spray_3.png"
+        },
+        {
+          "output": "native/icon_gold_sprinkler/none/01.png",
+          "sha256": "50d5b64e540fe539caba09ca14e810297dd2532850efefbefc6b66ffbd246b16",
+          "runtime_name": "sprites/ui/icon_gold_sprinkler.png"
+        },
+        {
+          "output": "native/hud_gold_sprinkler/none/01.png",
+          "sha256": "a4c2ef4f516966ae664a357106cdbd438e2ac99088b48b9cd8c51229983d922c",
+          "runtime_name": "sprites/ui/hud_gold_sprinkler.png"
+        }
+      ]
+    },
+    {
+      "id": "A023",
+      "folder": "A023-fishing-gear",
+      "title": "Fishing gear and the minigame",
+      "status": "approved for integration",
+      "native_outputs": 20,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/icon_worm/none/01.png",
+          "sha256": "035bdfb23b0027d0604e2c94908746e64232056ff110c374424ea3f9c1cdfb24",
+          "runtime_name": "sprites/ui/icon_worm.png"
+        },
+        {
+          "output": "native/hud_worm/none/01.png",
+          "sha256": "2eabf4514d717c61857288af8b496a52f17f156be92822488cb5ffec5766ad3d",
+          "runtime_name": "sprites/ui/hud_worm.png"
+        },
+        {
+          "output": "native/icon_bait/none/01.png",
+          "sha256": "3c4114f1fe44f34f839f89dc297d50682000ce86b1e954b030d19740300cf55d",
+          "runtime_name": "sprites/ui/icon_bait.png"
+        },
+        {
+          "output": "native/hud_bait/none/01.png",
+          "sha256": "c4317164ce0b0b36060b11eed6cfbf26ea07cd0b610e707b203c1e1c5ca6e678",
+          "runtime_name": "sprites/ui/hud_bait.png"
+        },
+        {
+          "output": "native/icon_book_fish/none/01.png",
+          "sha256": "72c37fc097a3f21278d16abb8948d10d3f4a93985249d582e8a6903f38a2ba50",
+          "runtime_name": "sprites/ui/icon_book_fish.png"
+        },
+        {
+          "output": "native/hud_book_fish/none/01.png",
+          "sha256": "c4643f110db96b77fbe4f66c587af1508509fcc615e4a47be092a53d1e52dcff",
+          "runtime_name": "sprites/ui/hud_book_fish.png"
+        },
+        {
+          "output": "native/bobber_float/none/01.png",
+          "sha256": "834c2431d71eff711c626d788b7d8453671e91de2992e8b06467611b1aae7cf2",
+          "runtime_name": "sprites/effects/bobber_float_0.png"
+        },
+        {
+          "output": "native/bobber_float/none/02.png",
+          "sha256": "ea3e4eb0f8537ab9775234a05d1084c2e72ceadd61625060c9238aeebe9229c7",
+          "runtime_name": "sprites/effects/bobber_float_1.png"
+        },
+        {
+          "output": "native/bobber_bite/none/01.png",
+          "sha256": "639c24a2009104a23065fb5236d3937d86f7a0ebb6856cbf23798f395aa7b341",
+          "runtime_name": "sprites/effects/bobber_bite_0.png"
+        },
+        {
+          "output": "native/bobber_bite/none/02.png",
+          "sha256": "87619a5d4b44a2cc6c4b4705be81b39927bbb32578b3205f0ee106d1aed0e0fa",
+          "runtime_name": "sprites/effects/bobber_bite_1.png"
+        },
+        {
+          "output": "native/bobber_bite/none/03.png",
+          "sha256": "fe92cce8819cf1f460b7172a1861265b1560f852d796dcbab076248d89554e16",
+          "runtime_name": "sprites/effects/bobber_bite_2.png"
+        },
+        {
+          "output": "native/fishbar_frame/none/01.png",
+          "sha256": "e5b92dcce700fbefd3e8a096ce7312397a7a9fed43323623d6154359fb7efc1f",
+          "runtime_name": "sprites/ui/fishbar_frame.png"
+        },
+        {
+          "output": "native/fishbar_zone/none/01.png",
+          "sha256": "8b8386b0a3586a13075bec427ea62d34a08ef0cd00e757e18d1b995ba93a62c7",
+          "runtime_name": "sprites/ui/fishbar_zone.png"
+        },
+        {
+          "output": "native/fishbar_marker/none/01.png",
+          "sha256": "9840da3a0f262c830d82b6cc9cdda672491e8fbe3ed3648a90c7aacb3e594ad2",
+          "runtime_name": "sprites/ui/fishbar_marker.png"
+        },
+        {
+          "output": "native/fishbar_hit/none/01.png",
+          "sha256": "872d5a326a74e2e7ca040abbe2ebbf96f4d7d75afc8109e174b082631b222c3e",
+          "runtime_name": "sprites/ui/fishbar_hit_0.png"
+        },
+        {
+          "output": "native/fishbar_hit/none/02.png",
+          "sha256": "0e5efd9728214406f2f4ad40ee84f2a5b6f24bc13dd79ba49f1f08de1acce1a5",
+          "runtime_name": "sprites/ui/fishbar_hit_1.png"
+        },
+        {
+          "output": "native/fishbar_hit/none/03.png",
+          "sha256": "ac199f4108ddfa849baecf4b45e8066ca6983a7a4e207f5b93ab0cbcb2c351a5",
+          "runtime_name": "sprites/ui/fishbar_hit_2.png"
+        },
+        {
+          "output": "native/fishbar_miss/none/01.png",
+          "sha256": "b3dbb147d3829c027ef136f51431bc64c92b25c4bc9f1a93e783405e8ff0dd12",
+          "runtime_name": "sprites/ui/fishbar_miss_0.png"
+        },
+        {
+          "output": "native/fishbar_miss/none/02.png",
+          "sha256": "c7784c29812b7807154163e147a309a98053e1d798885eff5e0aac043953c952",
+          "runtime_name": "sprites/ui/fishbar_miss_1.png"
+        },
+        {
+          "output": "native/fishbar_miss/none/03.png",
+          "sha256": "66145f19ddbea650624e13af5ed75156063eaabe473236abdbc9aef9d82b1f72",
+          "runtime_name": "sprites/ui/fishbar_miss_2.png"
+        }
+      ]
+    },
+    {
+      "id": "A026",
+      "folder": "A026-farm-animals",
+      "title": "Sheep and pigs",
+      "status": "approved for integration",
+      "native_outputs": 23,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/sheep_idle/west/01.png",
+          "sha256": "44e90b0bac144f6c2e183046f7dda667adf23f126ef3cfffdaece5459521c921",
+          "runtime_name": "sprites/props/sheep_idle_0.png"
+        },
+        {
+          "output": "native/sheep_idle/west/02.png",
+          "sha256": "e838157a072bc552aeb126e44f12572a3fbabbc4f3a6b09dc3fc30abaaeaa0e2",
+          "runtime_name": "sprites/props/sheep_idle_1.png"
+        },
+        {
+          "output": "native/sheep_eat/west/01.png",
+          "sha256": "5770ec9996204c3b4cdc05a1286d643e7920c944ba7051d76d6eaede299f03fe",
+          "runtime_name": "sprites/props/sheep_eat_0.png"
+        },
+        {
+          "output": "native/sheep_eat/west/02.png",
+          "sha256": "0865b28582be0ce4d71d6c7118c280926dc0882a209e1f2bb5ff785409f58425",
+          "runtime_name": "sprites/props/sheep_eat_1.png"
+        },
+        {
+          "output": "native/sheep_sleep/west/01.png",
+          "sha256": "1c7c329a159367f534b0a8a521179e8682fda56997b48dcfc0d54d2b00007375",
+          "runtime_name": "sprites/props/sheep_sleep_0.png"
+        },
+        {
+          "output": "native/sheep_sleep/west/02.png",
+          "sha256": "7deb4092f8711976260d4819b9baf9aff1d308065696223f426ee9f3aa9e5d4e",
+          "runtime_name": "sprites/props/sheep_sleep_1.png"
+        },
+        {
+          "output": "native/sheep_walk/west/01.png",
+          "sha256": "1d62848963d6715795d3a29fb3e42508ed5836dde830a62dd756ce0579c23ecb",
+          "runtime_name": "sprites/props/sheep_walk_0.png"
+        },
+        {
+          "output": "native/sheep_walk/west/02.png",
+          "sha256": "5275922e7e51a4017425207311b781730b6edb9820de6b94dc730416770aac89",
+          "runtime_name": "sprites/props/sheep_walk_1.png"
+        },
+        {
+          "output": "native/sheep_walk/west/03.png",
+          "sha256": "af7f609102b9ec9e96a868ed4b894daddb8f147cf5e9f455b91b075f02cab485",
+          "runtime_name": "sprites/props/sheep_walk_2.png"
+        },
+        {
+          "output": "native/sheep_walk/west/04.png",
+          "sha256": "ad39a405398d8cb8b162ed72c45ad3e3c01625b1a4aa60633b511ca6466ff05f",
+          "runtime_name": "sprites/props/sheep_walk_3.png"
+        },
+        {
+          "output": "native/pig_idle/west/01.png",
+          "sha256": "a48e5d3dbb8132def3c243499f28cf83294561b057d1e42fbc7c83ef4b639bc2",
+          "runtime_name": "sprites/props/pig_idle_0.png"
+        },
+        {
+          "output": "native/pig_idle/west/02.png",
+          "sha256": "8a47c33b8f17c244c5d243f73c2d864b4cdca02428ae070a392b20dffe5405ad",
+          "runtime_name": "sprites/props/pig_idle_1.png"
+        },
+        {
+          "output": "native/pig_eat/west/01.png",
+          "sha256": "7de3a2e99eb50581bd97203c92a3ce15fdf7fc8833447ffbc311ea83e5bce0f4",
+          "runtime_name": "sprites/props/pig_eat_0.png"
+        },
+        {
+          "output": "native/pig_eat/west/02.png",
+          "sha256": "fe22d8976afdac08e7dfbc1531ab73d7b763dd01eb0d1b45b81f53a1d2bb5465",
+          "runtime_name": "sprites/props/pig_eat_1.png"
+        },
+        {
+          "output": "native/pig_sleep/west/01.png",
+          "sha256": "d35110bd885e207db452f87b180e4c20efa261f93f1d48444df119207423c9b9",
+          "runtime_name": "sprites/props/pig_sleep_0.png"
+        },
+        {
+          "output": "native/pig_sleep/west/02.png",
+          "sha256": "5cf158de03aa0102f6151a3976e17b1203b52ea4eedb3fafbf3b578b7dbfd5bd",
+          "runtime_name": "sprites/props/pig_sleep_1.png"
+        },
+        {
+          "output": "native/pig_walk/west/01.png",
+          "sha256": "0da13798de46d85f0bf841c0caaaa282c054408901b58595fd76a7e1abb665ef",
+          "runtime_name": "sprites/props/pig_walk_0.png"
+        },
+        {
+          "output": "native/pig_walk/west/02.png",
+          "sha256": "16670ddd099b049b0067a5097fc5958e67b297d87b40ce7ca258b1faaa57ce05",
+          "runtime_name": "sprites/props/pig_walk_1.png"
+        },
+        {
+          "output": "native/pig_walk/west/03.png",
+          "sha256": "7bd2e2bb38a642e680b7e9c2933c6d6374844f69d8547ac50ba8c2ae8ce8caab",
+          "runtime_name": "sprites/props/pig_walk_2.png"
+        },
+        {
+          "output": "native/pig_walk/west/04.png",
+          "sha256": "d348dc8eef4f01ac4326d1c7488a896b4944a0a2b17ee0ccfda2d1b6cf415876",
+          "runtime_name": "sprites/props/pig_walk_3.png"
+        },
+        {
+          "output": "native/pig_dig/west/01.png",
+          "sha256": "b96514237c87f87e0a627c348e27c685c0ce424def888f29977d8e368f63212c",
+          "runtime_name": "sprites/props/pig_dig_0.png"
+        },
+        {
+          "output": "native/pig_dig/west/02.png",
+          "sha256": "96c1680abe1b6c6094baf161d5299ca3110a8c91d378632117f51af81b6c7c62",
+          "runtime_name": "sprites/props/pig_dig_1.png"
+        },
+        {
+          "output": "native/pig_dig/west/03.png",
+          "sha256": "a6a59a9a05705b3880ca7b234f60cf2cabee69f7b0a99f66d34ab185821d984b",
+          "runtime_name": "sprites/props/pig_dig_2.png"
+        }
+      ]
+    },
+    {
+      "id": "A027",
+      "folder": "A027-cow-chicken",
+      "title": "The cow and the chicken redrawn",
+      "status": "approved for integration",
+      "native_outputs": 20,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/cow_idle/west/01.png",
+          "sha256": "80090c1f4aa41b4ff4f8e9d7b934720d2d175f8278a0b1681f00effb4a6e07d6",
+          "runtime_name": "sprites/props/cow_idle_0.png"
+        },
+        {
+          "output": "native/cow_idle/west/02.png",
+          "sha256": "7e8662eaefc82c509bf7ee59662a57908cc77f59dcc5379fff36d86e62e112ef",
+          "runtime_name": "sprites/props/cow_idle_1.png"
+        },
+        {
+          "output": "native/cow_eat/west/01.png",
+          "sha256": "dc162c31f07a3f9bd43182d62064cf4c212468a8d4e4456418880f5b50c03ca0",
+          "runtime_name": "sprites/props/cow_eat_0.png"
+        },
+        {
+          "output": "native/cow_eat/west/02.png",
+          "sha256": "d958be7a6ff9350ffbb57d925c57e8d8bb56d14be243b11ccf02782994eda9fa",
+          "runtime_name": "sprites/props/cow_eat_1.png"
+        },
+        {
+          "output": "native/cow_sleep/west/01.png",
+          "sha256": "741cf32e8e7050428c8d16cfa6797c2de4be286d7a35361d9ea9b6c6fa95d54d",
+          "runtime_name": "sprites/props/cow_sleep_0.png"
+        },
+        {
+          "output": "native/cow_sleep/west/02.png",
+          "sha256": "06ee05a431be973ade5ef69353ea4c65eba2b8d8592f9bfc4f8b1fc2ee3d6c8d",
+          "runtime_name": "sprites/props/cow_sleep_1.png"
+        },
+        {
+          "output": "native/cow_walk/west/01.png",
+          "sha256": "1b888c96aa8ffa2abcd5368b90cea9e20e786107fe3fadd712c07b0b959d41ee",
+          "runtime_name": "sprites/props/cow_walk_0.png"
+        },
+        {
+          "output": "native/cow_walk/west/02.png",
+          "sha256": "30791af4b243a240aa2f9549a625a9205b3729f850744aa8cddb5404b3fe2a56",
+          "runtime_name": "sprites/props/cow_walk_1.png"
+        },
+        {
+          "output": "native/cow_walk/west/03.png",
+          "sha256": "2e724325784e57bf0fed9d1c63e879cf1b51bf34d704ffdd44db523cb9ae724a",
+          "runtime_name": "sprites/props/cow_walk_2.png"
+        },
+        {
+          "output": "native/cow_walk/west/04.png",
+          "sha256": "a37bb80ffc20c17f3d43c0a757937b1d625a602ab01afe21d7f0d378eedfce46",
+          "runtime_name": "sprites/props/cow_walk_3.png"
+        },
+        {
+          "output": "native/chicken_idle/west/01.png",
+          "sha256": "39ef1911fa9c7d7231f7941de9c1c07bfc4b0c2c26926e2aad083d69626a04cc",
+          "runtime_name": "sprites/props/chicken_idle_0.png"
+        },
+        {
+          "output": "native/chicken_idle/west/02.png",
+          "sha256": "dab45faa1d0f21188989cc2ca453c34b874ec3e3a0746010845e2718d0e4389d",
+          "runtime_name": "sprites/props/chicken_idle_1.png"
+        },
+        {
+          "output": "native/chicken_eat/west/01.png",
+          "sha256": "20f66024adc1b6074d99e7dfd54e1344f524520c7988d3a7c93dc613fde36d00",
+          "runtime_name": "sprites/props/chicken_eat_0.png"
+        },
+        {
+          "output": "native/chicken_eat/west/02.png",
+          "sha256": "9980b0f788041fabde092c72379b158b26fe8229bf47b83b34c7a61fa52e67d1",
+          "runtime_name": "sprites/props/chicken_eat_1.png"
+        },
+        {
+          "output": "native/chicken_sleep/west/01.png",
+          "sha256": "3dac2d311ba6206b4ddae95fab2dfb50fdd65d7456c58d8dbe85bda0b6594df1",
+          "runtime_name": "sprites/props/chicken_sleep_0.png"
+        },
+        {
+          "output": "native/chicken_sleep/west/02.png",
+          "sha256": "a3ef47b06edd3b0cf691933708c53263049df69f78bd75e7150953fce9c90244",
+          "runtime_name": "sprites/props/chicken_sleep_1.png"
+        },
+        {
+          "output": "native/chicken_walk/west/01.png",
+          "sha256": "ab47c9bb0368341701654b8ba5bf4af7d9ecf01df58daf464972204f90a8bbeb",
+          "runtime_name": "sprites/props/chicken_walk_0.png"
+        },
+        {
+          "output": "native/chicken_walk/west/02.png",
+          "sha256": "b11df41fcd6f6e35c2b8cd48c47cf6344b5069f5400fc1d53291b58353c275b4",
+          "runtime_name": "sprites/props/chicken_walk_1.png"
+        },
+        {
+          "output": "native/chicken_walk/west/03.png",
+          "sha256": "6b8a94c26248d36230a1f5bd9364b47416d3e0737e2f812d4cff0ebeac833f67",
+          "runtime_name": "sprites/props/chicken_walk_2.png"
+        },
+        {
+          "output": "native/chicken_walk/west/04.png",
+          "sha256": "95a525d6c23a74205033ed12089dcd620af523620a86833f3e7b49c3f8d033fc",
+          "runtime_name": "sprites/props/chicken_walk_3.png"
+        }
+      ]
+    },
+    {
+      "id": "A030",
+      "folder": "A030-coop-barn",
+      "title": "The coop and the barn",
+      "status": "approved for integration",
+      "native_outputs": 6,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/coop/none/01.png",
+          "sha256": "0cc40b3b8dd4e4d219ccdf7ed3755db2fdd1705383fe89aaedbf9c8a820cfa63",
+          "runtime_name": "sprites/buildings/coop.png"
+        },
+        {
+          "output": "native/coop_hurt/none/01.png",
+          "sha256": "d316c3185e6213fb2860d5539c0d876387afd561800445641e74743271d86d8a",
+          "runtime_name": "sprites/buildings/coop_hurt.png"
+        },
+        {
+          "output": "native/coop_wreck/none/01.png",
+          "sha256": "c5e0207d846471f228835789df1da50764dd8b5b6abb6e8702fb6a6e0f10eea1",
+          "runtime_name": "sprites/buildings/coop_wreck.png"
+        },
+        {
+          "output": "native/barn/none/01.png",
+          "sha256": "3f7aac3d59af7a7f61fa9b3de43bc67245f288364cd7dca3d804f245185dcda7",
+          "runtime_name": "sprites/buildings/barn.png"
+        },
+        {
+          "output": "native/barn_hurt/none/01.png",
+          "sha256": "f8f735cd700c915e093a3baa45a9c187a631ec3262716a28ccccf7d0c6dd2b19",
+          "runtime_name": "sprites/buildings/barn_hurt.png"
+        },
+        {
+          "output": "native/barn_wreck/none/01.png",
+          "sha256": "3659797f24cd39b13f5a829fec3bd9971c3fd117ca29e63799d9704c5a3c9ca7",
+          "runtime_name": "sprites/buildings/barn_wreck.png"
+        }
+      ]
+    },
+    {
+      "id": "A033",
+      "folder": "A033-shipping-bin",
+      "title": "The shipping bin",
+      "status": "approved for integration",
+      "native_outputs": 4,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/shipping_bin/none/01.png",
+          "sha256": "8a0a874fc55c58165ea8077daad302c202303a051130325fb98f3756b7e249af",
+          "runtime_name": "sprites/props/shipping_bin.png"
+        },
+        {
+          "output": "native/shipping_bin_open/none/01.png",
+          "sha256": "10550a26cdf1c3110e2f8e1337d98afd32c59baca00394aa01ee0872e1f57f62",
+          "runtime_name": "sprites/props/shipping_bin_open_0.png"
+        },
+        {
+          "output": "native/shipping_bin_open/none/02.png",
+          "sha256": "70215872f0ef97581ae762757d2f87baba041be2b9dd53bc01dc16c1bb510df5",
+          "runtime_name": "sprites/props/shipping_bin_open_1.png"
+        },
+        {
+          "output": "native/shipping_bin_open/none/03.png",
+          "sha256": "a55ff57c0965492f9a0dd4194ff2f6c866b30b313676020ee7e752d01b39f964",
+          "runtime_name": "sprites/props/shipping_bin_open_2.png"
+        }
+      ]
+    },
+    {
+      "id": "A034",
+      "folder": "A034-peddler",
+      "title": "The peddler at the stall",
+      "status": "approved for integration",
+      "native_outputs": 15,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/peddler_idle/south/01.png",
+          "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+          "runtime_name": "sprites/actors/peddler_idle_0.png"
+        },
+        {
+          "output": "native/peddler_idle/south/02.png",
+          "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+          "runtime_name": "sprites/actors/peddler_idle_1.png"
+        },
+        {
+          "output": "native/peddler_idle/south/03.png",
+          "sha256": "d8c29c7ff2b868e33f0263922df1a148a66e95c5fa71969a0c8491d05a51cbe7",
+          "runtime_name": "sprites/actors/peddler_idle_2.png"
+        },
+        {
+          "output": "native/peddler_idle/south/04.png",
+          "sha256": "0cb8d791994f9cc53baa863168d2136ba5763aa86d85fb0b9b67362c5b0aab45",
+          "runtime_name": "sprites/actors/peddler_idle_3.png"
+        },
+        {
+          "output": "native/peddler_talk/south/01.png",
+          "sha256": "51d013f92da00ed5e2034c021ec259fa9fe75281f2237ebcb13c19265f80dbd2",
+          "runtime_name": "sprites/actors/peddler_talk_0.png"
+        },
+        {
+          "output": "native/peddler_talk/south/02.png",
+          "sha256": "3b44307aed71002da62edae2077206aca25a02472d97d26bf14adcfe0ab90e37",
+          "runtime_name": "sprites/actors/peddler_talk_1.png"
+        },
+        {
+          "output": "native/peddler_talk/south/03.png",
+          "sha256": "1cfa30f165cc07409af379ede968702b3aab43e82ce457d8ba9fccfb0c46c41b",
+          "runtime_name": "sprites/actors/peddler_talk_2.png"
+        },
+        {
+          "output": "native/peddler_talk/south/04.png",
+          "sha256": "2e7c7bd68bca59b0025fe50e0062cc0dbbd3bfb7c3b9d9d3b93b1cb0757b8e7a",
+          "runtime_name": "sprites/actors/peddler_talk_3.png"
+        },
+        {
+          "output": "native/peddler_walk/west/01.png",
+          "sha256": "9fbb3a094acedf3840577f921110399d35149c5698eee3aea4ed6e1eadc7c47d",
+          "runtime_name": "sprites/actors/peddler_walk_0.png"
+        },
+        {
+          "output": "native/peddler_walk/west/02.png",
+          "sha256": "b40671adc4b908db60f4d018e6950fff7d91ab4725c33e60b1683cb221baccaa",
+          "runtime_name": "sprites/actors/peddler_walk_1.png"
+        },
+        {
+          "output": "native/peddler_walk/west/03.png",
+          "sha256": "9a7b2e3675295628dbaa410a8a04253025aa3659e0f96763876ec2a58c866fea",
+          "runtime_name": "sprites/actors/peddler_walk_2.png"
+        },
+        {
+          "output": "native/peddler_walk/west/04.png",
+          "sha256": "48256eeab38a5b287de177214fb2557996eadcd75006053552de9ccc51d6b6a4",
+          "runtime_name": "sprites/actors/peddler_walk_3.png"
+        },
+        {
+          "output": "native/peddler_walk/west/05.png",
+          "sha256": "4c9023eb88bbe7d325537bfd81e41d7641480584bb91155d125f283d0c5de425",
+          "runtime_name": "sprites/actors/peddler_walk_4.png"
+        },
+        {
+          "output": "native/peddler_walk/west/06.png",
+          "sha256": "074832b4418f9448ab562c245f2e3402597f95ed38f19422c4d954a2ff9b61e6",
+          "runtime_name": "sprites/actors/peddler_walk_5.png"
+        },
+        {
+          "output": "native/shop_closed/none/01.png",
+          "sha256": "3f9236e529d8d7751fa267db8f13e6e0b977dea8c51cb71d5e46b9ef6a80f1b9",
+          "runtime_name": "sprites/props/shop_closed.png"
+        }
+      ]
+    },
+    {
+      "id": "A035",
+      "folder": "A035-house-tiers",
+      "title": "The house in three tiers",
+      "status": "approved for integration",
+      "native_outputs": 6,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/house/none/01.png",
+          "sha256": "895c892dca00760fb276a51bf184dbe41f0e1e3acd65e41a855a4b959dfa4524",
+          "runtime_name": "sprites/buildings/house.png"
+        },
+        {
+          "output": "native/house_hurt/none/01.png",
+          "sha256": "af15237916ae790b0149604395da4d9ff53c9ba1364046b0a1b40a856680601c",
+          "runtime_name": "sprites/buildings/house_hurt.png"
+        },
+        {
+          "output": "native/house_2/none/01.png",
+          "sha256": "04c558a065c7245743eba31e50a27281f8a5f5c623679c23112333e876060509",
+          "runtime_name": "sprites/buildings/house_2.png"
+        },
+        {
+          "output": "native/house_2_hurt/none/01.png",
+          "sha256": "c1c3beca01de3f5a4b748ed99d8ea77b1029e9cc5aaf42667ddd6a7730b7003b",
+          "runtime_name": "sprites/buildings/house_2_hurt.png"
+        },
+        {
+          "output": "native/house_3/none/01.png",
+          "sha256": "1ab2fea37253c4d7d8c5a67f1be6e72ebc368b11a1176d5ed1b999a8062205ed",
+          "runtime_name": "sprites/buildings/house_3.png"
+        },
+        {
+          "output": "native/house_3_hurt/none/01.png",
+          "sha256": "99fa52b582479a2402c234b0b0c5cba35e92dc8331c7d44c62b3c0dc35a8a656",
+          "runtime_name": "sprites/buildings/house_3_hurt.png"
+        }
+      ]
+    },
+    {
+      "id": "A036",
+      "folder": "A036-night-loot",
+      "title": "Bones, moon stones and essence",
+      "status": "approved for integration",
+      "native_outputs": 13,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/icon_bone_meal/none/01.png",
+          "sha256": "a548e72259ae00a54059b78ed73ad89504e2e553280a5ac6438f4a8d0c0e019b",
+          "runtime_name": "sprites/ui/icon_bone_meal.png"
+        },
+        {
+          "output": "native/hud_bone_meal/none/01.png",
+          "sha256": "3dc5a419eba389157a8fa56d13c584a0bc29c7484b691402aa8d4245f3626154",
+          "runtime_name": "sprites/ui/hud_bone_meal.png"
+        },
+        {
+          "output": "native/icon_tech/none/01.png",
+          "sha256": "3f3605fce24f2fceb959b7729df6a9b5e11518f21d5e79a8f1f518302e7335fa",
+          "runtime_name": "sprites/ui/icon_tech.png"
+        },
+        {
+          "output": "native/hud_tech/none/01.png",
+          "sha256": "ab35d7628e1ad48f757792202d5fbad598d9b62917cdb3b2ebcfc72e931de866",
+          "runtime_name": "sprites/ui/hud_tech.png"
+        },
+        {
+          "output": "native/icon_bones/none/01.png",
+          "sha256": "a6142d8ed831c3eae472f4ccb1b41acee200c118d340936e2b330ce4f7d75830",
+          "runtime_name": "sprites/ui/icon_bones.png"
+        },
+        {
+          "output": "native/hud_bones/none/01.png",
+          "sha256": "0b56724c02fb2c0ccae3059b2b0cea96d411e48a95d7ab7ab7bee4b3d108cf02",
+          "runtime_name": "sprites/ui/hud_bones.png"
+        },
+        {
+          "output": "native/icon_moon_stone/none/01.png",
+          "sha256": "1b19fbce676392011469a519c1591750e3e53e8c90c08f934518b5eb98c0f146",
+          "runtime_name": "sprites/ui/icon_moon_stone.png"
+        },
+        {
+          "output": "native/hud_moon_stone/none/01.png",
+          "sha256": "0a29ca35a79669777a2e8e44df37ad93f5b761b36af236c256e8d719bac9bdeb",
+          "runtime_name": "sprites/ui/hud_moon_stone.png"
+        },
+        {
+          "output": "native/bone_pile/none/01.png",
+          "sha256": "0e10870953df38fa7725414b1f5be573faffc7b6e43030c809627d9db0703751",
+          "runtime_name": "sprites/props/bone_pile.png"
+        },
+        {
+          "output": "native/moon_stone/none/01.png",
+          "sha256": "0bedcd9537713038cc1b0b56dfccfccdee9296cdc9d3e91f9767706cb6d9b8d5",
+          "runtime_name": "sprites/props/moon_stone_0.png"
+        },
+        {
+          "output": "native/moon_stone/none/02.png",
+          "sha256": "d3737b00862e941d2cc3457f4be4f8aca7b9e43a83efde873868dda0c3a7ca70",
+          "runtime_name": "sprites/props/moon_stone_1.png"
+        },
+        {
+          "output": "native/tilled_fertilised/none/01.png",
+          "sha256": "aeaa104928127b0b371d650f275e268a33f7ba20b5c59fff5a3819ef25777d29",
+          "runtime_name": "sprites/props/tilled_fertilised.png"
+        },
+        {
+          "output": "native/tilled_fertilised_wet/none/01.png",
+          "sha256": "40b08cc3436c8e697e99d344a7cfadf984be74cd15ee0c77b3af94dcb7086404",
+          "runtime_name": "sprites/props/tilled_fertilised_wet.png"
+        }
+      ]
+    },
+    {
+      "id": "A057",
+      "folder": "A057-morning-report",
+      "title": "The morning report header (optional)",
+      "status": "approved for integration",
+      "native_outputs": 1,
+      "known_failed_checks": [],
+      "pipeline_replay_passed": true,
+      "files": [
+        {
+          "output": "native/report_header/none/01.png",
+          "sha256": "76304255b93cb786bf1d6b0a9883cf13a6e7c83e1b4d767207c13517d766b517",
+          "runtime_name": "sprites/ui/report_header.png"
+        }
+      ]
+    }
+  ],
+  "native_outputs": 182,
+  "status": "approved for integration",
+  "art_approval": "approved for integration",
+  "runtime_integrated": false,
+  "owner_method_words": "Sim, autorizar composição com recortes do ImageGen",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

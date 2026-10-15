@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production guardian animation strip for HARVEST THE NIGHT, final native32x48 contactpivot16,44.\nInput1: exact scarecrow identity master. Input2: accepted day/wake identity and layout reference, use its FINAL awake stance as the neutral stance. Same friendly old porch scarecrow: flat straw hat/brown band, tan burlap sack face and smile, blue shirt/terracotta patch, straw cuffs, single wooden crossbar and ONE centered wooden post. NOT human legs. Same object, not redesigns.\nHand-crafted coarse pixel art, colored outlines, upper-left neutral daylight, orthographic three-quarter front. Readable at only38nativepixels from hat to foot; visiblewidth24±2. Short high crossbar immediately beneath face, near nativey16. Keep hat, face, body dimensions, crossbar and post contact baseline IDENTICAL in each equal cell. Post foot on same row in every cell; no root/base. Two tiny separated warm yellow eyes ONLY, each1or2nativepixels, with a dark border and tan gap, no glow. Muted dusty tan face, goldenochre hat (not pale yellow), blue cloth with no bright warm specks. No baked night tint.\nTransparent background with realalpha, generous gaps between cells (atleastquartercellwidth), no labels/separators/numbering. No grass, ground, shadow, halo, glow, UI, accessories or extra poses. Complete object with transparent margins. No smooth texture, blur, gradients or fine grain.\nSTRIP: Exactly THREE frames in ONE horizontal row, eyes lit in all. Frame1 anticipation: ONLY viewer-LEFT sleeve arm draws downward and inward a little. Frame2 gesture: that sleeve arm lifts up and out toward upperLEFT at about45degrees, straw cuffopen, headhatbodypost unchanged. Frame3 hold/recovery: that arm1nativepixel lower, ready to return to neutral night rest. VIEWER-RIGHT sleeve stays along the crossbar. Do not add a second arm or second crossbar. Every pose inside nativecolumns2..29, samehat-to-footheight within1pixel. This is a0.1second/frame one-shot.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.png",
+      "sha256": "319a3165f8f9c422340e6e9008b4347c2a12a8e1527f4a7b867bd5a27c1e54b6",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.png",
+      "sha256": "05ee3dadefe2f978ef094f7cb62ffc901c2bbeb4fbb006e87b3c0deb72be0693",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-711022cd-0b58-402b-9581-23336d8ed834.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A003-guardian\\raw\\guardian-point-r1.png",
+  "sha256": "85928a71922b6d60d07450fb2d806895032d2ab17599c7ed2f91fec4a7891599",
+  "date": "2026-10-14",
+  "revision": 1,
+  "decision": "pending native-scale inspection"
+}

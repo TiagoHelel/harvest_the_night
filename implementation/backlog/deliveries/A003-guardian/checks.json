@@ -1,0 +1,193 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 12,
+  "frames_found": 12,
+  "grounded_on_pivot": true,
+  "guardian_height_38_plus_minus1": true,
+  "guardian_inside_columns2_to29": true,
+  "guardian_lights_on_eye_colour": true,
+  "guardian_measured_visible_wh": [
+    [
+      22,
+      38
+    ],
+    [
+      22,
+      38
+    ],
+    [
+      22,
+      39
+    ],
+    [
+      22,
+      38
+    ],
+    [
+      22,
+      38
+    ],
+    [
+      22,
+      38
+    ],
+    [
+      22,
+      38
+    ],
+    [
+      22,
+      37
+    ],
+    [
+      22,
+      38
+    ],
+    [
+      23,
+      38
+    ],
+    [
+      24,
+      38
+    ],
+    [
+      24,
+      38
+    ]
+  ],
+  "guardian_post_grounded": true,
+  "guardian_post_pixels_fixed": true,
+  "guardian_twelve_frames": true,
+  "guardian_two_eye_points": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/guardian_day/none/01.png": {
+      "bounds": [
+        5,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 334
+    },
+    "native/guardian_night/none/01.png": {
+      "bounds": [
+        5,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 336
+    },
+    "native/guardian_night/none/02.png": {
+      "bounds": [
+        5,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 336
+    },
+    "native/guardian_night/none/03.png": {
+      "bounds": [
+        5,
+        7,
+        27,
+        44
+      ],
+      "opaque_pixels": 327
+    },
+    "native/guardian_night/none/04.png": {
+      "bounds": [
+        5,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 336
+    },
+    "native/guardian_point/none/01.png": {
+      "bounds": [
+        4,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 350
+    },
+    "native/guardian_point/none/02.png": {
+      "bounds": [
+        3,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 355
+    },
+    "native/guardian_point/none/03.png": {
+      "bounds": [
+        3,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 360
+    },
+    "native/guardian_wake/none/01.png": {
+      "bounds": [
+        5,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 334
+    },
+    "native/guardian_wake/none/02.png": {
+      "bounds": [
+        5,
+        5,
+        27,
+        44
+      ],
+      "opaque_pixels": 340
+    },
+    "native/guardian_wake/none/03.png": {
+      "bounds": [
+        5,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 336
+    },
+    "native/guardian_wake/none/04.png": {
+      "bounds": [
+        5,
+        6,
+        27,
+        44
+      ],
+      "opaque_pixels": 336
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "only_two_warm_eye_cores": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "wake_joins_night_idle": true
+}

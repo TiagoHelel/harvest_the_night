@@ -385,6 +385,17 @@ def metadata(data):
         if "muzzles_xy" in entry:
             points = ", ".join("Vector2i(%d, %d)" % tuple(p) for p in entry["muzzles_xy"])
             lines[-1] = lines[-1][:-2] + ', "muzzles": [%s]},' % points
+        # **Several lights on one frame** (task 0145, A003's two eyes): each
+        # inside the canvas, the first of them the frame's `light_xy`.
+        if "lights_xy" in entry:
+            for point in entry["lights_xy"]:
+                point = integers(point, 2, "light point")
+                if any(point[i] >= entry["canvas_wh"][i] for i in range(2)):
+                    raise ValueError("Emission point outside canvas")
+            if entry.get("light_xy") != entry["lights_xy"][0]:
+                raise ValueError("A frame's light is not the first of its lights")
+            points = ", ".join("Vector2i(%d, %d)" % tuple(p) for p in entry["lights_xy"])
+            lines[-1] = lines[-1][:-2] + ', "lights": [%s]},' % points
         if entry.get("generation_task") == "0013" or "tower_family" in entry:
             lines[-1] = lines[-1][:-2] + ', "tower": true},'
         if "join_mask" in entry:

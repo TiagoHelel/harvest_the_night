@@ -82129,6 +82129,2702 @@
       "operation": "copy",
       "alias_of": "enemies/crow_death_3",
       "output_sha256": "ac99567dfc2c33c49fbfe6ec5350fdf02e80bd032fd57f959bea5473f5f95f15"
+    },
+    {
+      "id": "components/A003-guardian/guardian-body-and-fixed-post",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-body-and-fixed-post",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-body-and-fixed-post.png",
+      "input": "components/A003-guardian/guardian-day-body-source",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-day-body-source",
+          "slice_xywh": [
+            0,
+            16,
+            32,
+            17
+          ],
+          "paste_xy": [
+            0,
+            15
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-day-body-source",
+          "slice_xywh": [
+            0,
+            31,
+            32,
+            13
+          ],
+          "paste_xy": [
+            0,
+            31
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-body-and-fixed-post.png",
+          "sha256": "4f814bc239e5f182252ed599026684101d95d20a63dfae4edebae5e7f179e3a4",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "765c080ed565a49a559c4bfbeb8beed441ec65f828acbb996196a5a9e53cc861"
+    },
+    {
+      "id": "components/A003-guardian/guardian-clear-face-source",
+      "owner": "raster",
+      "source": "assets/art_source/guardian/guardian-master-r6.png",
+      "source_sha256": "319a3165f8f9c422340e6e9008b4347c2a12a8e1527f4a7b867bd5a27c1e54b6",
+      "crop_xywh": [
+        155,
+        202,
+        695,
+        1208
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.03228476821192053,
+      "content_anchor_xy": [
+        11,
+        39
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "bone_dark",
+        "bone",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "roof_dark",
+        "roof"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-clear-face-source",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-clear-face-source.png",
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.prompt.txt",
+      "prompt_sha256": "d9f616c561468a38f8dbc1da6c056b0b3d4492dd1707f968fea1c6c13dfe2231",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.call.json",
+          "sha256": "8b24fc3949c3cb8d43140584453ff8ca5ebad53f85c42e3573a96763e776d15d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-clear-face-source.png",
+          "sha256": "0e2edadf50ba435b96864510f7238ee1a72006818e932dd323159c42125d24b4",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "e4393d2ed25a75d80af918fe6cb319b26ac6a5e340e2c7ffa8174db0d0e21820"
+    },
+    {
+      "id": "components/A003-guardian/guardian-day-body-source",
+      "owner": "raster",
+      "source": "assets/art_source/guardian/guardian-day-wake-r1.png",
+      "source_sha256": "05ee3dadefe2f978ef094f7cb62ffc901c2bbeb4fbb006e87b3c0deb72be0693",
+      "crop_xywh": [
+        21,
+        92,
+        368,
+        649
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.05855161787365177,
+      "content_anchor_xy": [
+        11,
+        38
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "bone_dark",
+        "bone",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "roof_dark",
+        "roof"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-day-body-source",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-day-body-source.png",
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-day-body-source.png",
+          "sha256": "9649a143f678d9c970fab83bcc842c72032d54c72125dfb86d7916959809fcf2",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "2b69c9d1b7bdf5e2da9c50f23e8288a65741e4f121811a7716f52cd082939a0f"
+    },
+    {
+      "id": "components/A003-guardian/guardian-day-head",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-day-head",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-day-head.png",
+      "input": "components/A003-guardian/guardian-clear-face-source",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-clear-face-source",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.prompt.txt",
+      "prompt_sha256": "d9f616c561468a38f8dbc1da6c056b0b3d4492dd1707f968fea1c6c13dfe2231",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-day-head.png",
+          "sha256": "002d7eb377a3c2f160515b118aaad5cfd6a5eba928d4e4bf41350fe30c2fad31",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "2ab772e4a61a0b8d5476c611cc06fc2c486bc52c09d975a16d88da764d9fdce5"
+    },
+    {
+      "id": "components/A003-guardian/guardian-eye-core-source",
+      "owner": "raster",
+      "source": "assets/art_source/guardian/guardian-point-r1.png",
+      "source_sha256": "85928a71922b6d60d07450fb2d806895032d2ab17599c7ed2f91fec4a7891599",
+      "crop_xywh": [
+        186,
+        59,
+        446,
+        692
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.055232558139534885,
+      "content_anchor_xy": [
+        12,
+        38
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "bone_dark",
+        "bone",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "roof_dark",
+        "roof",
+        "flame_hot",
+        "flame"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-eye-core-source",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-eye-core-source.png",
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.prompt.txt",
+      "prompt_sha256": "37e6e8cd35965e4d7045382e179b7c3abe5da997b0f919eda36ee4feffec0662",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.call.json",
+          "sha256": "8e36da56d6e3cbb6e593e486627ced982237e6672496cd9f014cc877ebdcc606",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-eye-core-source.png",
+          "sha256": "a1c0d5173c36a32d7c21d004351184a922de5a2c512265c6533641c9ab2c6d7f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "514a8a94c23772c422d4a3c1fb58e9e5ef82dd7433814deb468a29c64132ebfd"
+    },
+    {
+      "id": "components/A003-guardian/guardian-lit-head",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-lit-head",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-lit-head.png",
+      "input": "components/A003-guardian/guardian-day-head",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-day-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-eye-core-source",
+          "slice_xywh": [
+            13,
+            13,
+            1,
+            1
+          ],
+          "paste_xy": [
+            14,
+            12
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-eye-core-source",
+          "slice_xywh": [
+            17,
+            13,
+            1,
+            1
+          ],
+          "paste_xy": [
+            17,
+            12
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-master-r6.prompt.txt",
+      "prompt_sha256": "d9f616c561468a38f8dbc1da6c056b0b3d4492dd1707f968fea1c6c13dfe2231",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-lit-head.png",
+          "sha256": "d0434b7347f7fb5552f158d213fe845b8b3d02148f1fbf81d5ead17385aaf745",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "abfaeefa1a5180015e157f36667f9df917d4329e3c636c273764229a349777e7"
+    },
+    {
+      "id": "components/A003-guardian/guardian-point-arm-source-0",
+      "owner": "raster",
+      "source": "assets/art_source/guardian/guardian-point-r1.png",
+      "source_sha256": "85928a71922b6d60d07450fb2d806895032d2ab17599c7ed2f91fec4a7891599",
+      "crop_xywh": [
+        186,
+        59,
+        446,
+        692
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.055232558139534885,
+      "content_anchor_xy": [
+        12,
+        38
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "bone_dark",
+        "bone",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "roof_dark",
+        "roof"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-point-arm-source-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-point-arm-source-0.png",
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.prompt.txt",
+      "prompt_sha256": "37e6e8cd35965e4d7045382e179b7c3abe5da997b0f919eda36ee4feffec0662",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.call.json",
+          "sha256": "8e36da56d6e3cbb6e593e486627ced982237e6672496cd9f014cc877ebdcc606",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-point-arm-source-0.png",
+          "sha256": "58ef9c0a1497703f60f4b865f791d6311b4fa713db5ebf8e476a8253a43c3c11",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "a2e3775b98aaf53609f6b7244713b8a07c369bc297f49db42b8283f2d760105f"
+    },
+    {
+      "id": "components/A003-guardian/guardian-point-arm-source-1",
+      "owner": "raster",
+      "source": "assets/art_source/guardian/guardian-point-r1.png",
+      "source_sha256": "85928a71922b6d60d07450fb2d806895032d2ab17599c7ed2f91fec4a7891599",
+      "crop_xywh": [
+        753,
+        59,
+        471,
+        692
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.055232558139534885,
+      "content_anchor_xy": [
+        13,
+        38
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "bone_dark",
+        "bone",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "roof_dark",
+        "roof"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-point-arm-source-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-point-arm-source-1.png",
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.prompt.txt",
+      "prompt_sha256": "37e6e8cd35965e4d7045382e179b7c3abe5da997b0f919eda36ee4feffec0662",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.call.json",
+          "sha256": "8e36da56d6e3cbb6e593e486627ced982237e6672496cd9f014cc877ebdcc606",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-point-arm-source-1.png",
+          "sha256": "173f72e4afdb9da45138bbf1d32abb543946e4f9387b81a60332f164e05dd37d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "e67daf7e0c35fb635b02393218c75048e0ef91e198c91430d918e44bb4c19f85"
+    },
+    {
+      "id": "components/A003-guardian/guardian-point-arm-source-2",
+      "owner": "raster",
+      "source": "assets/art_source/guardian/guardian-point-r1.png",
+      "source_sha256": "85928a71922b6d60d07450fb2d806895032d2ab17599c7ed2f91fec4a7891599",
+      "crop_xywh": [
+        1353,
+        59,
+        462,
+        692
+      ],
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "content_scale": 0.055232558139534885,
+      "content_anchor_xy": [
+        13,
+        38
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "bone_dark",
+        "bone",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "roof_dark",
+        "roof"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-point-arm-source-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-point-arm-source-2.png",
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.prompt.txt",
+      "prompt_sha256": "37e6e8cd35965e4d7045382e179b7c3abe5da997b0f919eda36ee4feffec0662",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-point-r1.call.json",
+          "sha256": "8e36da56d6e3cbb6e593e486627ced982237e6672496cd9f014cc877ebdcc606",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-point-arm-source-2.png",
+          "sha256": "8d0c06b1a90343054f1f19cc882d252dfde958387ecddee71e4364581f3ebfd8",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "687d82a2ba9f4b39b514b66d9474732bb9ae064c79f564c476052d4ee5c153be"
+    },
+    {
+      "id": "components/A003-guardian/guardian-point-body-0",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-point-body-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-point-body-0.png",
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            11
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            24,
+            32,
+            24
+          ],
+          "paste_xy": [
+            0,
+            24
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            11,
+            2,
+            13
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            12,
+            11,
+            20,
+            13
+          ],
+          "paste_xy": [
+            12,
+            11
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-point-arm-source-0",
+          "slice_xywh": [
+            2,
+            14,
+            10,
+            13
+          ],
+          "paste_xy": [
+            2,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-point-body-0.png",
+          "sha256": "649424abdc017281d336e83f7e968d311ada29f3cce184d7205b79e72aee1cca",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "808020b78c97dd913db4a9b269513e44322d5c03f5c62a6065453b5f635e1a2a"
+    },
+    {
+      "id": "components/A003-guardian/guardian-point-body-1",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-point-body-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-point-body-1.png",
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            11
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            24,
+            32,
+            24
+          ],
+          "paste_xy": [
+            0,
+            24
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            11,
+            2,
+            13
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            12,
+            11,
+            20,
+            13
+          ],
+          "paste_xy": [
+            12,
+            11
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-point-arm-source-1",
+          "slice_xywh": [
+            2,
+            14,
+            10,
+            13
+          ],
+          "paste_xy": [
+            2,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-point-body-1.png",
+          "sha256": "d7b001a962773fa4de767a56715642361996a27b2304261cc36044c27d0f11d0",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "cf3952db947d03020c62bdfe69b720aa28611ca108b5f92b9710801e78d34ee5"
+    },
+    {
+      "id": "components/A003-guardian/guardian-point-body-2",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-point-body-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-point-body-2.png",
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            11
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            24,
+            32,
+            24
+          ],
+          "paste_xy": [
+            0,
+            24
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            11,
+            2,
+            13
+          ],
+          "paste_xy": [
+            0,
+            11
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            12,
+            11,
+            20,
+            13
+          ],
+          "paste_xy": [
+            12,
+            11
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-point-arm-source-2",
+          "slice_xywh": [
+            2,
+            14,
+            10,
+            13
+          ],
+          "paste_xy": [
+            2,
+            11
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-point-body-2.png",
+          "sha256": "2b88628bd95434ee5eb1ab7459cd48aa1486e179847177fc1aff7c8ad2bdf226",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "001d7029e6596d5967926a293284defe7572391417c7d93de511be21e755a17b"
+    },
+    {
+      "id": "components/A003-guardian/guardian-raised-both",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-raised-both",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-raised-both.png",
+      "input": "components/A003-guardian/guardian-raised-left",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-left",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            14
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-left",
+          "slice_xywh": [
+            0,
+            23,
+            32,
+            25
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-left",
+          "slice_xywh": [
+            0,
+            14,
+            20,
+            9
+          ],
+          "paste_xy": [
+            0,
+            14
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-left",
+          "slice_xywh": [
+            30,
+            14,
+            2,
+            9
+          ],
+          "paste_xy": [
+            30,
+            14
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            20,
+            15,
+            10,
+            9
+          ],
+          "paste_xy": [
+            20,
+            14
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-raised-both.png",
+          "sha256": "680be4577b4e88d65ba9b9e5f8e9ad1e09270d809ad7cd518892e4add30bc2dd",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "455fecf86eae99366b0125c922ce460c48acc6e9c0324692250241579956b73c"
+    },
+    {
+      "id": "components/A003-guardian/guardian-raised-left",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-raised-left",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-raised-left.png",
+      "input": "components/A003-guardian/guardian-body-and-fixed-post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            14
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            23,
+            32,
+            25
+          ],
+          "paste_xy": [
+            0,
+            23
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            14,
+            3,
+            9
+          ],
+          "paste_xy": [
+            0,
+            14
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            14,
+            14,
+            18,
+            9
+          ],
+          "paste_xy": [
+            14,
+            14
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            3,
+            15,
+            11,
+            9
+          ],
+          "paste_xy": [
+            3,
+            14
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-raised-left.png",
+          "sha256": "a9448effbbc4337c8f9fdc352ea7d0af72da424548643beafe43c011af771749",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "ad3266a76a7d0ed841f9cb41f0ddbf25f3bfbf81d41bc11a41d85a8a48efce76"
+    },
+    {
+      "id": "components/A003-guardian/guardian-tail-wind-1",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-tail-wind-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-tail-wind-1.png",
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            26
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            32,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            32
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            26,
+            10,
+            6
+          ],
+          "paste_xy": [
+            0,
+            26
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            24,
+            26,
+            8,
+            6
+          ],
+          "paste_xy": [
+            24,
+            26
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            10,
+            26,
+            14,
+            6
+          ],
+          "paste_xy": [
+            9,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-tail-wind-1.png",
+          "sha256": "fb2d19cdaddf70938d2661549d5cceed1ff7b7339fab5665126c667f37a7df98",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "18818413907d70f32442ac0aee42ecc940fe7f55ce8fcbf6ab95828fdf32e895"
+    },
+    {
+      "id": "components/A003-guardian/guardian-tail-wind-3",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-tail-wind-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-tail-wind-3.png",
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            26
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            32,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            32
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            26,
+            10,
+            6
+          ],
+          "paste_xy": [
+            0,
+            26
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            24,
+            26,
+            8,
+            6
+          ],
+          "paste_xy": [
+            24,
+            26
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            10,
+            26,
+            14,
+            6
+          ],
+          "paste_xy": [
+            11,
+            26
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-tail-wind-3.png",
+          "sha256": "c9b3020725bec5100457769084b9ca848acae55e5a7aa44e222f5905cd49a94f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "8bbfd5ecd091c1bdaa0181968bb4d8e65e63e7ca8b588170dde6462adda2cd86"
+    },
+    {
+      "id": "components/A003-guardian/guardian-wake-straw-lift",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A003-guardian/guardian-wake-straw-lift",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A003-guardian/guardian-wake-straw-lift.png",
+      "input": "components/A003-guardian/guardian-body-and-fixed-post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            15
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            21,
+            32,
+            27
+          ],
+          "paste_xy": [
+            0,
+            21
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            15,
+            7,
+            6
+          ],
+          "paste_xy": [
+            0,
+            15
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            8,
+            15,
+            24,
+            6
+          ],
+          "paste_xy": [
+            8,
+            15
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            7,
+            15,
+            1,
+            6
+          ],
+          "paste_xy": [
+            7,
+            14
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/components/guardian-wake-straw-lift.png",
+          "sha256": "4189a453165a8778e5c1c0d911d427e9de5cca5dd12d7b6e6e421f9897bcd925",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "assembly_component_of": "A003",
+      "output_sha256": "33376597d5441e499b63250af1e8068a4cdbea1aa3d74ef6bb3865c4871ad624"
+    },
+    {
+      "id": "props/guardian_day_0",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_day_0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/props/guardian_day_0.png",
+      "input": "components/A003-guardian/guardian-body-and-fixed-post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-day-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_day/none/01.png",
+          "sha256": "8e581107825a9cd12a7108804fa385554226734a732fc58dfc61c0c6896a97e7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "489d087a321d7db152980ba59e3321d7f65bed375405d4702f1664f13b1316d6"
+    },
+    {
+      "id": "props/guardian_wake_0",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_wake",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/props/guardian_wake_0.png",
+      "input": "components/A003-guardian/guardian-wake-straw-lift",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-wake-straw-lift",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-day-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_wake/none/01.png",
+          "sha256": "ebdbe46941b34b81c4bb1ec73e17730ee6c32b3b91bb1f7ccdf822e091ffc8a8",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "b788785f90d461140bbaf8789a33555b0a40433fb09ae836dc7d660ba20237b5"
+    },
+    {
+      "id": "props/guardian_wake_1",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_wake",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/props/guardian_wake_1.png",
+      "light_xy": [
+        14,
+        11
+      ],
+      "lights_xy": [
+        [
+          14,
+          11
+        ],
+        [
+          17,
+          11
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-body-and-fixed-post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-body-and-fixed-post",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            1,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_wake/none/02.png",
+          "sha256": "4628e06ec966a4aa7fd0ed483b9008a10800cc4682d2507686616cd0db04d361",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "3a2ba1df9c1c5d1c82799d6483d0072c03b026609dc11dc5572d8c1d40141c25"
+    },
+    {
+      "id": "props/guardian_wake_2",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_wake",
+      "frame": 2,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/props/guardian_wake_2.png",
+      "light_xy": [
+        14,
+        12
+      ],
+      "lights_xy": [
+        [
+          14,
+          12
+        ],
+        [
+          17,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_wake/none/03.png",
+          "sha256": "faffd1af2f3c89d777d734536411f836d008e2d239c8db7bd2aa5311d9f84942",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "89b1c117a4a28af6f6d35b66cdddbb41889f0a808ab3da4cb09870375d2ccec1"
+    },
+    {
+      "id": "props/guardian_wake_3",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_wake",
+      "frame": 3,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/props/guardian_wake_3.png",
+      "light_xy": [
+        14,
+        12
+      ],
+      "lights_xy": [
+        [
+          14,
+          12
+        ],
+        [
+          17,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_wake/none/04.png",
+          "sha256": "faffd1af2f3c89d777d734536411f836d008e2d239c8db7bd2aa5311d9f84942",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "89b1c117a4a28af6f6d35b66cdddbb41889f0a808ab3da4cb09870375d2ccec1"
+    },
+    {
+      "id": "props/guardian_night_0",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_night",
+      "frame": 0,
+      "seconds": 0.25,
+      "loop": true,
+      "output": "sprites/props/guardian_night_0.png",
+      "light_xy": [
+        14,
+        12
+      ],
+      "lights_xy": [
+        [
+          14,
+          12
+        ],
+        [
+          17,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_night/none/01.png",
+          "sha256": "faffd1af2f3c89d777d734536411f836d008e2d239c8db7bd2aa5311d9f84942",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "89b1c117a4a28af6f6d35b66cdddbb41889f0a808ab3da4cb09870375d2ccec1"
+    },
+    {
+      "id": "props/guardian_night_1",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_night",
+      "frame": 1,
+      "seconds": 0.25,
+      "loop": true,
+      "output": "sprites/props/guardian_night_1.png",
+      "light_xy": [
+        13,
+        12
+      ],
+      "lights_xy": [
+        [
+          13,
+          12
+        ],
+        [
+          16,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-tail-wind-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-tail-wind-1",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            1,
+            0,
+            31,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_night/none/02.png",
+          "sha256": "e59b945f5626e17cf717e649b02d1d20bc4fd7737a0a1459c7beec20e2a9d4cf",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "1a7dde87b3c842a4dbaaaebed7bf7b95ff62f2d370ed451c0affd558ea49be16"
+    },
+    {
+      "id": "props/guardian_night_2",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_night",
+      "frame": 2,
+      "seconds": 0.25,
+      "loop": true,
+      "output": "sprites/props/guardian_night_2.png",
+      "light_xy": [
+        14,
+        13
+      ],
+      "lights_xy": [
+        [
+          14,
+          13
+        ],
+        [
+          17,
+          13
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-raised-both",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-raised-both",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            1
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_night/none/03.png",
+          "sha256": "6078170f3b65a03bbac17494addcb5013263bc4009606fce4337ae82774d7662",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "71b1a968ca64bf21819cf73c35cc1b3ada2cd2370bdd35e7f764096bfb5099cc"
+    },
+    {
+      "id": "props/guardian_night_3",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_night",
+      "frame": 3,
+      "seconds": 0.25,
+      "loop": true,
+      "output": "sprites/props/guardian_night_3.png",
+      "light_xy": [
+        14,
+        12
+      ],
+      "lights_xy": [
+        [
+          14,
+          12
+        ],
+        [
+          17,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-tail-wind-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-tail-wind-3",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_night/none/04.png",
+          "sha256": "1274503c0140ae9c206088b21b46b4c6d398691f9391e122ed76338a3fc3212b",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "37b3a7c7848f07431c88490fb0d4357f8c49349ffbdf431332be52227ad80609"
+    },
+    {
+      "id": "props/guardian_point_0",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_point",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/guardian_point_0.png",
+      "light_xy": [
+        14,
+        12
+      ],
+      "lights_xy": [
+        [
+          14,
+          12
+        ],
+        [
+          17,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-point-body-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-point-body-0",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_point/none/01.png",
+          "sha256": "7ce614ddbf2720f9c4fe473a87210ffd60fa9867825b8331bb3a4d3969f7013b",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "d0fda2fef7a5fbd2b8494a921cce0063e252c98ae33f35c2c596b8dda8c724e2"
+    },
+    {
+      "id": "props/guardian_point_1",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_point",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/guardian_point_1.png",
+      "light_xy": [
+        14,
+        12
+      ],
+      "lights_xy": [
+        [
+          14,
+          12
+        ],
+        [
+          17,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-point-body-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-point-body-1",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_point/none/02.png",
+          "sha256": "c5a8fa20b4d1b4cbe629333f4a0bc1d4181d85af866b088f233fe17419b26790",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "9dcdd2ab5261903c3670db1a021054fbe2e48879b22c82c2f3ea886597c246b4"
+    },
+    {
+      "id": "props/guardian_point_2",
+      "owner": "raster",
+      "canvas_wh": [
+        32,
+        48
+      ],
+      "pivot_xy": [
+        16,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/guardian_point",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/guardian_point_2.png",
+      "light_xy": [
+        14,
+        12
+      ],
+      "lights_xy": [
+        [
+          14,
+          12
+        ],
+        [
+          17,
+          12
+        ]
+      ],
+      "input": "components/A003-guardian/guardian-point-body-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A003-guardian/guardian-point-body-2",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            48
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A003-guardian/guardian-lit-head",
+          "slice_xywh": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.prompt.txt",
+      "prompt_sha256": "cade6fad55c04f49997be4502ce50180037340a985ca21dbab0ba2cbfecdcf0e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/raw/guardian-day-wake-r1.call.json",
+          "sha256": "578175432137d8b80ba6603ef4da57b9c596e23e3386b93bf3f17885ae99751c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/native/guardian_point/none/03.png",
+          "sha256": "f84d0b7fd362f275eba35db0ad427607600ccc4d2874a6bedc64429d20a3c6e7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/contract.json",
+          "sha256": "44416ed0d44c522af2edaba5d042427c0fce3c49b799af87126e8d86fab3b7b0",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A003-guardian/APPROVAL.json",
+          "sha256": "51bfd626c21ed9a12b7953f1bb6cfa4076e25ff2f2ba7a4bf2970990a1b358a0",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A003",
+      "integration_task": "0145",
+      "revision": 1,
+      "approval": "A003 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0145",
+      "output_sha256": "76bfa7ee405fa3e131b7c928b601f17a38636d6ace78229ae6f9d3ec7f047d62"
     }
   ]
 }

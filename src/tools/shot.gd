@@ -180,6 +180,7 @@ const SCENARIOS: Array = [
 	["forecast_dusk", "Spring 14 at 18:30: the boss night's forecast, every kind's head on it", ""],
 	["forecast_summer", "Summer 10 at 18:30: a summer night's forecast, the spitter's and the rat's heads among the kinds coming (task 0260)", ""],
 	["forecast_autumn", "Autumn 10 at 18:30: an autumn night's forecast, the crow's head among the kinds coming (task 0262)", ""],
+	["guardian", "the porch guardian awake (task 0145): the first night's build step, the camera on the porch - A003's night idle with its eyes lit; then guardian_point, a wall put down below the porch and the guardian pointing at it", ""],
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
 	["forecast_calm", "Summer 1 at 18:30: the forecast of a calm night", ""],
 	["forecast_fog", "a foggy night's forecast at 18:30: the first night of the shots' run that Weather makes foggy, found and never forced - its mark beside the night's own and FOG in words", ""],
@@ -878,6 +879,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_summer": _set_forecast_summer(state)
 		"forecast_autumn": _set_forecast_autumn(state)
+		"guardian": _set_guardian(state)
 		"forecast_build": _set_forecast_build(state)
 		"forecast_calm": _set_forecast_calm(state)
 		"forecast_fog": _set_forecast_fog(state)
@@ -1041,6 +1043,14 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "days":
 		await _shoot("days_spring_morning", folder)
 		await _take_days(main, state, folder)
+		return
+	if name == "guardian":
+		# Past the wake, into the night idle.
+		for _i in 30:
+			await process_frame
+		print("  guardian: showing %s" % (main.get_node("%WorldView") as WorldView).guardian().shown().get_file())
+		await _shoot("guardian", folder)
+		await _take_guardian_point(main, state, folder)
 		return
 	if name == "harvester":
 		await _shoot("harvester", folder)
@@ -2856,6 +2866,34 @@ func _set_forecast_autumn(state: Dictionary) -> void:
 	_a_sown_field(state)
 	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
 		- int(state["day_tick"]), 1))
+
+
+## **The porch guardian awake** (task 0145): the first night's build step,
+## the means to build, the camera on the porch - A003's night idle, its eyes
+## lit; `guardian_point` is it pointing at a wall put down below the porch
+## (`_take_guardian_point`).
+func _set_guardian(state: Dictionary) -> void:
+	Resources.gain(state, {GameData.WOOD: 200, GameData.STONE: 200})
+	NightRoad.into_build(state)
+	_look_at(GuardianView.cell_of(state) + Vector2i(1, 2))
+
+
+## **The point** (task 0145): a wall put down below the porch; the view spots
+## it on its next frame and the guardian points - its second frame by the
+## shutter.
+func _take_guardian_point(main: Node, state: Dictionary, folder: String) -> void:
+	var world := main.get_node("%WorldView") as WorldView
+	var spot := _open_ground_near(state, GuardianView.cell_of(state) + Vector2i(-1, 3))
+	# The watcher's first look only learns what is there, and a scene set
+	# down at the shutter has had none: it takes it now, as a night's first
+	# frame has in the game.
+	world._watch_defences()
+	var placed := Building.place(state, &"wall", spot)
+	for _i in 9:
+		await process_frame
+	print("  guardian_point: a wall at %s put down %s, the guardian showing %s" % [str(spot), placed,
+		world.guardian().shown().get_file()])
+	await _shoot("guardian_point", folder)
 
 
 ## **The forecast in the build step** (task 0158): Winter 14, the year's last

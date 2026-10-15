@@ -1,6 +1,6 @@
 # A003 - The porch guardian
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0145
 - **Dressed by game tasks:** 0131
 - **Spec after game task:** 0131
