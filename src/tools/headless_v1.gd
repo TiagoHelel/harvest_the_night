@@ -206,6 +206,7 @@ func _run() -> void:
 	_task_0212_coop_barn()
 	_task_0215_shipping_bin()
 	_task_0216_peddler()
+	_task_0217_house_tiers()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14545,6 +14546,39 @@ func _task_0216_peddler() -> void:
 	expect(wrong.is_empty(),
 		"A034's peddler is raster art - four idle, four talking and six walking frames - and the shut stall the shop's box at 2.0",
 		str(wrong))
+	_completed += 1
+
+
+## **A035's farmhouse tiers** (task 0217): tier I, II and III, whole and
+## hurt, raster art at full density - 128x128 on (64,120) at 1.0, out of
+## `ArtPlacement.visual_scale`'s 2.0 list - over the 6x4 footprint, with their
+## nine slices each; the windows and the chimney land on the drawing's own
+## points over that footprint, and no tier is on 0120's road.
+func _task_0217_house_tiers() -> void:
+	var wrong: Array = []
+	for tier in ["house", "house_2", "house_3"]:
+		for suffix in ["", "_hurt"]:
+			var path: String = WorldView.BUILDING_DIR + str(tier) + str(suffix) + ".png"
+			var frame := PlaceholderArt.frame(path)
+			if frame.get("canvas") != Vector2i(128, 128) or frame.get("pivot") != Vector2i(64, 120) \
+					or frame.get("cell_offset") != Vector2i(-16, -56) or frame.has("stand_in") \
+					or ArtPlacement.visual_scale(path) != 1.0 or (frame.get("windows", []) as Array).size() != 5 \
+					or not PlaceholderArt.art(StringName(str(tier) + str(suffix))).is_empty():
+				wrong.append(str(tier) + str(suffix))
+			for c in 3:
+				for r in 3:
+					var piece: String = WorldView.BUILDING_DIR + "%s_%d_%d%s.png" % [tier, c, r, suffix]
+					if not ResourceLoader.exists(piece):
+						wrong.append(piece.get_file())
+	var corner := Vector2(10, 10) * float(GameData.TILE_SIZE)
+	var contact := corner + Vector2(GameData.HOUSE_SIZE.x * 8, GameData.HOUSE_SIZE.y * 16)
+	var shape := PlaceholderArt.frame(WorldView.BUILDING_DIR + "house.png")
+	var smoke := ArtPlacement.emission(&"house", corner, &"smoke", Vector2.ZERO, GameData.HOUSE_SIZE)
+	var panes := ArtPlacement.emissions(&"house", corner, &"windows", Vector2.ZERO, &"light", GameData.HOUSE_SIZE)
+	expect(wrong.is_empty() and smoke == contact - Vector2(shape["pivot"]) + Vector2(shape["smoke"])
+		and panes.size() == 5 and panes[0] == contact - Vector2(shape["pivot"]) + Vector2((shape["windows"] as Array)[0]),
+		"A035's three house tiers, whole and hurt, are raster art at full density over the 6x4 footprint, sliced, their glass and chimney on the drawing's own points",
+		"%s; smoke %s, panes %s" % [str(wrong), smoke, str(panes)])
 	_completed += 1
 
 

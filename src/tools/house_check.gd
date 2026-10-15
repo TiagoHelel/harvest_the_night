@@ -186,11 +186,11 @@ func _run() -> void:
 	await _shoot("exterior", false)
 	var house_sprite: Sprite2D = _world.get_node("Occupants").get_children().filter(
 		func(node): return node is Sprite2D and node.texture != null and node.texture.resource_path.ends_with("/house.png"))[0]
-	expect(house_sprite.scale == Vector2(2, 2), "Exterior house reuses the source drawing at twice the native scale")
+	expect(house_sprite.scale == Vector2.ONE, "Exterior house is A035's full-density drawing at 1.0 (task 0217)")
 	var corner := Farm.house_bounds(_state).position
 	var metadata: Dictionary = RasterArt.FRAMES[house_sprite.texture.resource_path]
 	expect(ArtPlacement.emission(&"house", Vector2(corner) * 16, &"smoke", Vector2.ZERO, GameData.HOUSE_SIZE)
-		== house_sprite.position + (Vector2(metadata["smoke"]) - Vector2(metadata["pivot"])) * 2,
+		== house_sprite.position + (Vector2(metadata["smoke"]) - Vector2(metadata["pivot"])),
 		"Scaled chimney particles remain aligned to the actual sprite")
 	House.enter(_state)
 	await _shoot("interior_entry", true)

@@ -1,0 +1,5908 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "house",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/house-none-0-night.png",
+          "path": "native/house/none/01.png",
+          "points": {
+            "light_xy": [
+              35,
+              86
+            ],
+            "smoke_xy": [
+              98,
+              20
+            ],
+            "window_rects_xywh": [
+              [
+                61,
+                60,
+                7,
+                6
+              ],
+              [
+                34,
+                85,
+                8,
+                7
+              ],
+              [
+                78,
+                87,
+                7,
+                6
+              ],
+              [
+                60,
+                87,
+                5,
+                5
+              ],
+              [
+                104,
+                89,
+                2,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                62,
+                61
+              ],
+              [
+                35,
+                86
+              ],
+              [
+                79,
+                88
+              ],
+              [
+                61,
+                88
+              ],
+              [
+                105,
+                90
+              ]
+            ]
+          },
+          "pose": "house whole/hurt tier"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "poses": [
+        "house whole/hurt tier"
+      ]
+    },
+    {
+      "anim": "house_2",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/house_2-none-0-night.png",
+          "path": "native/house_2/none/01.png",
+          "points": {
+            "light_xy": [
+              35,
+              86
+            ],
+            "smoke_xy": [
+              98,
+              20
+            ],
+            "window_rects_xywh": [
+              [
+                61,
+                56,
+                8,
+                7
+              ],
+              [
+                34,
+                85,
+                8,
+                7
+              ],
+              [
+                84,
+                85,
+                7,
+                7
+              ],
+              [
+                60,
+                87,
+                5,
+                5
+              ],
+              [
+                105,
+                88,
+                2,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                62,
+                57
+              ],
+              [
+                35,
+                86
+              ],
+              [
+                85,
+                86
+              ],
+              [
+                61,
+                88
+              ],
+              [
+                106,
+                89
+              ]
+            ]
+          },
+          "pose": "house_2 whole/hurt tier"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "poses": [
+        "house_2 whole/hurt tier"
+      ]
+    },
+    {
+      "anim": "house_2_hurt",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/house_2_hurt-none-0-night.png",
+          "path": "native/house_2_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              35,
+              86
+            ],
+            "smoke_xy": [
+              98,
+              20
+            ],
+            "window_rects_xywh": [
+              [
+                61,
+                56,
+                8,
+                7
+              ],
+              [
+                34,
+                85,
+                8,
+                7
+              ],
+              [
+                84,
+                85,
+                7,
+                7
+              ],
+              [
+                60,
+                87,
+                5,
+                5
+              ],
+              [
+                105,
+                88,
+                2,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                62,
+                57
+              ],
+              [
+                35,
+                86
+              ],
+              [
+                85,
+                86
+              ],
+              [
+                61,
+                88
+              ],
+              [
+                106,
+                89
+              ]
+            ]
+          },
+          "pose": "house_2_hurt whole/hurt tier"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "poses": [
+        "house_2_hurt whole/hurt tier"
+      ]
+    },
+    {
+      "anim": "house_3",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/house_3-none-0-night.png",
+          "path": "native/house_3/none/01.png",
+          "points": {
+            "light_xy": [
+              35,
+              86
+            ],
+            "smoke_xy": [
+              98,
+              20
+            ],
+            "window_rects_xywh": [
+              [
+                61,
+                56,
+                8,
+                7
+              ],
+              [
+                34,
+                85,
+                8,
+                7
+              ],
+              [
+                84,
+                85,
+                7,
+                7
+              ],
+              [
+                60,
+                87,
+                5,
+                5
+              ],
+              [
+                107,
+                89,
+                2,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                62,
+                57
+              ],
+              [
+                35,
+                86
+              ],
+              [
+                85,
+                86
+              ],
+              [
+                61,
+                88
+              ],
+              [
+                108,
+                90
+              ]
+            ]
+          },
+          "pose": "house_3 whole/hurt tier"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "poses": [
+        "house_3 whole/hurt tier"
+      ]
+    },
+    {
+      "anim": "house_3_hurt",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/house_3_hurt-none-0-night.png",
+          "path": "native/house_3_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              35,
+              86
+            ],
+            "smoke_xy": [
+              98,
+              20
+            ],
+            "window_rects_xywh": [
+              [
+                61,
+                56,
+                8,
+                7
+              ],
+              [
+                34,
+                85,
+                8,
+                7
+              ],
+              [
+                84,
+                85,
+                7,
+                7
+              ],
+              [
+                60,
+                87,
+                5,
+                5
+              ],
+              [
+                107,
+                89,
+                2,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                62,
+                57
+              ],
+              [
+                35,
+                86
+              ],
+              [
+                85,
+                86
+              ],
+              [
+                61,
+                88
+              ],
+              [
+                108,
+                90
+              ]
+            ]
+          },
+          "pose": "house_3_hurt whole/hurt tier"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "poses": [
+        "house_3_hurt whole/hurt tier"
+      ]
+    },
+    {
+      "anim": "house_hurt",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/house_hurt-none-0-night.png",
+          "path": "native/house_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              35,
+              86
+            ],
+            "smoke_xy": [
+              98,
+              20
+            ],
+            "window_rects_xywh": [
+              [
+                61,
+                60,
+                7,
+                6
+              ],
+              [
+                34,
+                85,
+                8,
+                7
+              ],
+              [
+                78,
+                87,
+                7,
+                6
+              ],
+              [
+                60,
+                87,
+                5,
+                5
+              ],
+              [
+                104,
+                89,
+                2,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                62,
+                61
+              ],
+              [
+                35,
+                86
+              ],
+              [
+                79,
+                88
+              ],
+              [
+                61,
+                88
+              ],
+              [
+                105,
+                90
+              ]
+            ]
+          },
+          "pose": "house_hurt whole/hurt tier"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "poses": [
+        "house_hurt whole/hurt tier"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 2,
+      "path": "sprites/buildings/house.png",
+      "pivot_xy": [
+        32,
+        60
+      ]
+    }
+  ],
+  "components": {
+    "common-house-stoop-unit": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/common-house-stoop-unit.png",
+      "parts": [
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            48,
+            108
+          ],
+          "slice_xywh": [
+            52,
+            108,
+            6,
+            12
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            54,
+            108
+          ],
+          "slice_xywh": [
+            57,
+            108,
+            12,
+            12
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            66,
+            108
+          ],
+          "slice_xywh": [
+            66,
+            108,
+            6,
+            12
+          ]
+        }
+      ],
+      "sha256": "bb9033ba59729898bf6eb18039002b42871dd9fde364a888aa57acaca7bd3b45"
+    },
+    "glass-pane-core": {
+      "canvas_wh": [
+        8,
+        7
+      ],
+      "operation": "compose",
+      "output": "components/glass-pane-core.png",
+      "parts": [
+        {
+          "input": "house-cool-glass-source",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            34,
+            85,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "29c4e1eb567688ed3778f32d4ca1aaeaa5cd27f6128a981cdd275004164826bd"
+    },
+    "house-cool-glass-source": {
+      "call": "raw/house2-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "render",
+      "output": "components/house-cool-glass-source.png",
+      "palette_keys": [
+        "ink_soft",
+        "night_light",
+        "water_dark",
+        "bone",
+        "moon"
+      ],
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "prompt": "raw/house2-r1.prompt.txt",
+      "prompt_sha256": "dc79ad02d9595159cf3a911ecbd430bf704e6b4f0cdceabb8123262f8de04d04",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "sha256": "0dbf855e807aacb339c68141451036e2251068abce6e216e0b50ff3d504f2221",
+      "source": "raw/house2-r1.png",
+      "source_sha256": "98be802889957dbfc9f33ad080d22cbb7dcee4698f0d5dfe656b63a8692d87e2"
+    },
+    "house-fixed-chimney": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-fixed-chimney.png",
+      "parts": [
+        {
+          "input": "house-fixed-stoop",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "house-fixed-stoop",
+          "paste_xy": [
+            0,
+            46
+          ],
+          "slice_xywh": [
+            0,
+            46,
+            128,
+            82
+          ]
+        },
+        {
+          "input": "house-fixed-stoop",
+          "paste_xy": [
+            0,
+            20
+          ],
+          "slice_xywh": [
+            0,
+            20,
+            94,
+            26
+          ]
+        },
+        {
+          "input": "house-fixed-stoop",
+          "paste_xy": [
+            109,
+            20
+          ],
+          "slice_xywh": [
+            109,
+            20,
+            19,
+            26
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            94,
+            20
+          ],
+          "slice_xywh": [
+            94,
+            20,
+            15,
+            26
+          ]
+        }
+      ],
+      "sha256": "3cea5409b0d2e432ce8949c0cd46e3bba87d0da333f929789285d7c05c5c4b25"
+    },
+    "house-fixed-door": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-fixed-door.png",
+      "parts": [
+        {
+          "input": "source-house",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            80
+          ]
+        },
+        {
+          "input": "source-house",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "source-house",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house",
+          "paste_xy": [
+            72,
+            80
+          ],
+          "slice_xywh": [
+            72,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            56,
+            80
+          ],
+          "slice_xywh": [
+            56,
+            80,
+            16,
+            28
+          ]
+        }
+      ],
+      "sha256": "0f5b3dc6fb37a7ad4dd5bada791052f90436e20a360a6745c6b45278939cca63"
+    },
+    "house-fixed-left-pane": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-fixed-left-pane.png",
+      "parts": [
+        {
+          "input": "house-fixed-chimney",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house-fixed-chimney",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house-fixed-chimney",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house-fixed-chimney",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "house-cool-glass-source",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            34,
+            85,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "a7799cf9dd9f5bd02d2d236b14eee68a31918ba1fe9aa036d4599b52fc52bc4f"
+    },
+    "house-fixed-stoop": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-fixed-stoop.png",
+      "parts": [
+        {
+          "input": "house-fixed-door",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            108
+          ]
+        },
+        {
+          "input": "house-fixed-door",
+          "paste_xy": [
+            0,
+            120
+          ],
+          "slice_xywh": [
+            0,
+            120,
+            128,
+            8
+          ]
+        },
+        {
+          "input": "house-fixed-door",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            48,
+            12
+          ]
+        },
+        {
+          "input": "house-fixed-door",
+          "paste_xy": [
+            72,
+            108
+          ],
+          "slice_xywh": [
+            72,
+            108,
+            56,
+            12
+          ]
+        },
+        {
+          "input": "common-house-stoop-unit",
+          "paste_xy": [
+            48,
+            108
+          ],
+          "slice_xywh": [
+            48,
+            108,
+            24,
+            12
+          ]
+        }
+      ],
+      "sha256": "b9080d74d7d58451135c5e46f2b88babebcf864d2203d148d8550f72241ebbb5"
+    },
+    "house-pane-0": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-pane-0.png",
+      "parts": [
+        {
+          "input": "house-fixed-left-pane",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            60
+          ]
+        },
+        {
+          "input": "house-fixed-left-pane",
+          "paste_xy": [
+            0,
+            66
+          ],
+          "slice_xywh": [
+            0,
+            66,
+            128,
+            62
+          ]
+        },
+        {
+          "input": "house-fixed-left-pane",
+          "paste_xy": [
+            0,
+            60
+          ],
+          "slice_xywh": [
+            0,
+            60,
+            61,
+            6
+          ]
+        },
+        {
+          "input": "house-fixed-left-pane",
+          "paste_xy": [
+            68,
+            60
+          ],
+          "slice_xywh": [
+            68,
+            60,
+            60,
+            6
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            61,
+            60
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            6
+          ]
+        }
+      ],
+      "sha256": "f9ee520c58d518897a3c4e49d00dc20ce8e1d195f1eb0edd7946ec92f06dabd5"
+    },
+    "house-pane-1": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-pane-1.png",
+      "parts": [
+        {
+          "input": "house-pane-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house-pane-0",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house-pane-0",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house-pane-0",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "f9ee520c58d518897a3c4e49d00dc20ce8e1d195f1eb0edd7946ec92f06dabd5"
+    },
+    "house-pane-2": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-pane-2.png",
+      "parts": [
+        {
+          "input": "house-pane-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house-pane-1",
+          "paste_xy": [
+            0,
+            93
+          ],
+          "slice_xywh": [
+            0,
+            93,
+            128,
+            35
+          ]
+        },
+        {
+          "input": "house-pane-1",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            78,
+            6
+          ]
+        },
+        {
+          "input": "house-pane-1",
+          "paste_xy": [
+            85,
+            87
+          ],
+          "slice_xywh": [
+            85,
+            87,
+            43,
+            6
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            78,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            6
+          ]
+        }
+      ],
+      "sha256": "3b4438b93bb98d4c1ff45540eba0056246323036a08e7d4bfa3b5a272252437b"
+    },
+    "house-pane-3": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-pane-3.png",
+      "parts": [
+        {
+          "input": "house-pane-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house-pane-2",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house-pane-2",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            60,
+            5
+          ]
+        },
+        {
+          "input": "house-pane-2",
+          "paste_xy": [
+            65,
+            87
+          ],
+          "slice_xywh": [
+            65,
+            87,
+            63,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            60,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "sha256": "84f046c927eb0208cd2225434f574b26ccaa7e5bd5b9ee942017f8ece03e66eb"
+    },
+    "house-pane-4": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house-pane-4.png",
+      "parts": [
+        {
+          "input": "house-pane-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            89
+          ]
+        },
+        {
+          "input": "house-pane-3",
+          "paste_xy": [
+            0,
+            94
+          ],
+          "slice_xywh": [
+            0,
+            94,
+            128,
+            34
+          ]
+        },
+        {
+          "input": "house-pane-3",
+          "paste_xy": [
+            0,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            89,
+            104,
+            5
+          ]
+        },
+        {
+          "input": "house-pane-3",
+          "paste_xy": [
+            106,
+            89
+          ],
+          "slice_xywh": [
+            106,
+            89,
+            22,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            104,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "895c892dca00760fb276a51bf184dbe41f0e1e3acd65e41a855a4b959dfa4524"
+    },
+    "house_2-fixed-chimney": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-fixed-chimney.png",
+      "parts": [
+        {
+          "input": "house_2-fixed-stoop",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "house_2-fixed-stoop",
+          "paste_xy": [
+            0,
+            46
+          ],
+          "slice_xywh": [
+            0,
+            46,
+            128,
+            82
+          ]
+        },
+        {
+          "input": "house_2-fixed-stoop",
+          "paste_xy": [
+            0,
+            20
+          ],
+          "slice_xywh": [
+            0,
+            20,
+            94,
+            26
+          ]
+        },
+        {
+          "input": "house_2-fixed-stoop",
+          "paste_xy": [
+            109,
+            20
+          ],
+          "slice_xywh": [
+            109,
+            20,
+            19,
+            26
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            94,
+            20
+          ],
+          "slice_xywh": [
+            94,
+            20,
+            15,
+            26
+          ]
+        }
+      ],
+      "sha256": "48fd8283ad586775e4d10d3b00213b0b44a0a454c74d54dad66c600826ffb694"
+    },
+    "house_2-fixed-door": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-fixed-door.png",
+      "parts": [
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            80
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            72,
+            80
+          ],
+          "slice_xywh": [
+            72,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            56,
+            80
+          ],
+          "slice_xywh": [
+            56,
+            80,
+            16,
+            28
+          ]
+        }
+      ],
+      "sha256": "5ea4d5034d4c55dbe166d64dd4888e3bfbdd248b5055378c031bcf1b23a75af4"
+    },
+    "house_2-fixed-left-pane": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-fixed-left-pane.png",
+      "parts": [
+        {
+          "input": "house_2-fixed-chimney",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_2-fixed-chimney",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2-fixed-chimney",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_2-fixed-chimney",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "house-cool-glass-source",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            34,
+            85,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "e4d95e9dbad069c49cd22f483afab0553a418d3984bb14aac2c9ab3a9ed33675"
+    },
+    "house_2-fixed-stoop": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-fixed-stoop.png",
+      "parts": [
+        {
+          "input": "house_2-fixed-door",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            108
+          ]
+        },
+        {
+          "input": "house_2-fixed-door",
+          "paste_xy": [
+            0,
+            120
+          ],
+          "slice_xywh": [
+            0,
+            120,
+            128,
+            8
+          ]
+        },
+        {
+          "input": "house_2-fixed-door",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            48,
+            12
+          ]
+        },
+        {
+          "input": "house_2-fixed-door",
+          "paste_xy": [
+            72,
+            108
+          ],
+          "slice_xywh": [
+            72,
+            108,
+            56,
+            12
+          ]
+        },
+        {
+          "input": "common-house-stoop-unit",
+          "paste_xy": [
+            48,
+            108
+          ],
+          "slice_xywh": [
+            48,
+            108,
+            24,
+            12
+          ]
+        }
+      ],
+      "sha256": "48fd8283ad586775e4d10d3b00213b0b44a0a454c74d54dad66c600826ffb694"
+    },
+    "house_2-pane-0": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-pane-0.png",
+      "parts": [
+        {
+          "input": "house_2-fixed-left-pane",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            56
+          ]
+        },
+        {
+          "input": "house_2-fixed-left-pane",
+          "paste_xy": [
+            0,
+            63
+          ],
+          "slice_xywh": [
+            0,
+            63,
+            128,
+            65
+          ]
+        },
+        {
+          "input": "house_2-fixed-left-pane",
+          "paste_xy": [
+            0,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            56,
+            61,
+            7
+          ]
+        },
+        {
+          "input": "house_2-fixed-left-pane",
+          "paste_xy": [
+            69,
+            56
+          ],
+          "slice_xywh": [
+            69,
+            56,
+            59,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            61,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "5502028769b0468ac853fd398f6365f4a9473f723bd298584640a8cd8e2a7ba6"
+    },
+    "house_2-pane-1": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-pane-1.png",
+      "parts": [
+        {
+          "input": "house_2-pane-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_2-pane-0",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2-pane-0",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_2-pane-0",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "5502028769b0468ac853fd398f6365f4a9473f723bd298584640a8cd8e2a7ba6"
+    },
+    "house_2-pane-2": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-pane-2.png",
+      "parts": [
+        {
+          "input": "house_2-pane-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_2-pane-1",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2-pane-1",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            84,
+            7
+          ]
+        },
+        {
+          "input": "house_2-pane-1",
+          "paste_xy": [
+            91,
+            85
+          ],
+          "slice_xywh": [
+            91,
+            85,
+            37,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            84,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            7
+          ]
+        }
+      ],
+      "sha256": "741d3e2ab1b1d83b0b85ed9f52f9962b26af0ccb93898ffe29141062422e9879"
+    },
+    "house_2-pane-3": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-pane-3.png",
+      "parts": [
+        {
+          "input": "house_2-pane-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house_2-pane-2",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2-pane-2",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            60,
+            5
+          ]
+        },
+        {
+          "input": "house_2-pane-2",
+          "paste_xy": [
+            65,
+            87
+          ],
+          "slice_xywh": [
+            65,
+            87,
+            63,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            60,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "sha256": "d53c1f6ce8e0329f0b6c887f856cacaa30c09a572a2525febdef44a8f50bf717"
+    },
+    "house_2-pane-4": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2-pane-4.png",
+      "parts": [
+        {
+          "input": "house_2-pane-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            88
+          ]
+        },
+        {
+          "input": "house_2-pane-3",
+          "paste_xy": [
+            0,
+            93
+          ],
+          "slice_xywh": [
+            0,
+            93,
+            128,
+            35
+          ]
+        },
+        {
+          "input": "house_2-pane-3",
+          "paste_xy": [
+            0,
+            88
+          ],
+          "slice_xywh": [
+            0,
+            88,
+            105,
+            5
+          ]
+        },
+        {
+          "input": "house_2-pane-3",
+          "paste_xy": [
+            107,
+            88
+          ],
+          "slice_xywh": [
+            107,
+            88,
+            21,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            105,
+            88
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "04c558a065c7245743eba31e50a27281f8a5f5c623679c23112333e876060509"
+    },
+    "house_2_hurt-fixed-chimney": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-fixed-chimney.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            46
+          ],
+          "slice_xywh": [
+            0,
+            46,
+            128,
+            82
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            20
+          ],
+          "slice_xywh": [
+            0,
+            20,
+            94,
+            26
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-stoop",
+          "paste_xy": [
+            109,
+            20
+          ],
+          "slice_xywh": [
+            109,
+            20,
+            19,
+            26
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            94,
+            20
+          ],
+          "slice_xywh": [
+            94,
+            20,
+            15,
+            26
+          ]
+        }
+      ],
+      "sha256": "1a16ad78a96abab0a639d96893f109018a1f02ce207c887648605bdf66464c26"
+    },
+    "house_2_hurt-fixed-door": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-fixed-door.png",
+      "parts": [
+        {
+          "input": "source-house_2_hurt",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            80
+          ]
+        },
+        {
+          "input": "source-house_2_hurt",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "source-house_2_hurt",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2_hurt",
+          "paste_xy": [
+            72,
+            80
+          ],
+          "slice_xywh": [
+            72,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            56,
+            80
+          ],
+          "slice_xywh": [
+            56,
+            80,
+            16,
+            28
+          ]
+        }
+      ],
+      "sha256": "4f2a746bfa39bf0b7a0429d09aa048909588e9fd3b777d374b1a73a73153101b"
+    },
+    "house_2_hurt-fixed-left-pane": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-fixed-left-pane.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-chimney",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "house-cool-glass-source",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            34,
+            85,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "500d0b09b647b124a6bf7286243fb965988d26b87e07ee0765a21dabfe91bc50"
+    },
+    "house_2_hurt-fixed-stoop": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-fixed-stoop.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            108
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            120
+          ],
+          "slice_xywh": [
+            0,
+            120,
+            128,
+            8
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            48,
+            12
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-door",
+          "paste_xy": [
+            72,
+            108
+          ],
+          "slice_xywh": [
+            72,
+            108,
+            56,
+            12
+          ]
+        },
+        {
+          "input": "common-house-stoop-unit",
+          "paste_xy": [
+            48,
+            108
+          ],
+          "slice_xywh": [
+            48,
+            108,
+            24,
+            12
+          ]
+        }
+      ],
+      "sha256": "44896b3771f442a095e04dd98aa98a83d402dc40f6fe2411ae83c699f08c3c98"
+    },
+    "house_2_hurt-pane-0": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-pane-0.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            56
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            63
+          ],
+          "slice_xywh": [
+            0,
+            63,
+            128,
+            65
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            56,
+            61,
+            7
+          ]
+        },
+        {
+          "input": "house_2_hurt-fixed-left-pane",
+          "paste_xy": [
+            69,
+            56
+          ],
+          "slice_xywh": [
+            69,
+            56,
+            59,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            61,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "d6cb454f529a17270c0b0668e39d42416be98b3d867de4ed55f469010f5ada50"
+    },
+    "house_2_hurt-pane-1": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-pane-1.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-pane-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-0",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-0",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-0",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "d6cb454f529a17270c0b0668e39d42416be98b3d867de4ed55f469010f5ada50"
+    },
+    "house_2_hurt-pane-2": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-pane-2.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-pane-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-1",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-1",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            84,
+            7
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-1",
+          "paste_xy": [
+            91,
+            85
+          ],
+          "slice_xywh": [
+            91,
+            85,
+            37,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            84,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            7
+          ]
+        }
+      ],
+      "sha256": "a3e33c2cf653b75b6386113ef05cfa3473be1b53231b11702319111f1b13bc2e"
+    },
+    "house_2_hurt-pane-3": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-pane-3.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-pane-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-2",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-2",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            60,
+            5
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-2",
+          "paste_xy": [
+            65,
+            87
+          ],
+          "slice_xywh": [
+            65,
+            87,
+            63,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            60,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "sha256": "b789ba0a9c1a57e44eb3d5b74944375be852878d2b8f31acaa2cb9bb30f39eb9"
+    },
+    "house_2_hurt-pane-4": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_2_hurt-pane-4.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-pane-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            88
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-3",
+          "paste_xy": [
+            0,
+            93
+          ],
+          "slice_xywh": [
+            0,
+            93,
+            128,
+            35
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-3",
+          "paste_xy": [
+            0,
+            88
+          ],
+          "slice_xywh": [
+            0,
+            88,
+            105,
+            5
+          ]
+        },
+        {
+          "input": "house_2_hurt-pane-3",
+          "paste_xy": [
+            107,
+            88
+          ],
+          "slice_xywh": [
+            107,
+            88,
+            21,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            105,
+            88
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "c1c3beca01de3f5a4b748ed99d8ea77b1029e9cc5aaf42667ddd6a7730b7003b"
+    },
+    "house_3-fixed-chimney": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-fixed-chimney.png",
+      "parts": [
+        {
+          "input": "house_3-fixed-stoop",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "house_3-fixed-stoop",
+          "paste_xy": [
+            0,
+            46
+          ],
+          "slice_xywh": [
+            0,
+            46,
+            128,
+            82
+          ]
+        },
+        {
+          "input": "house_3-fixed-stoop",
+          "paste_xy": [
+            0,
+            20
+          ],
+          "slice_xywh": [
+            0,
+            20,
+            94,
+            26
+          ]
+        },
+        {
+          "input": "house_3-fixed-stoop",
+          "paste_xy": [
+            109,
+            20
+          ],
+          "slice_xywh": [
+            109,
+            20,
+            19,
+            26
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            94,
+            20
+          ],
+          "slice_xywh": [
+            94,
+            20,
+            15,
+            26
+          ]
+        }
+      ],
+      "sha256": "9b9cca1750f2e860b0b3ad8ad3278a73e431129329ceab419e5aadb4a76e8fe5"
+    },
+    "house_3-fixed-door": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-fixed-door.png",
+      "parts": [
+        {
+          "input": "source-house_3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            80
+          ]
+        },
+        {
+          "input": "source-house_3",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "source-house_3",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_3",
+          "paste_xy": [
+            72,
+            80
+          ],
+          "slice_xywh": [
+            72,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            56,
+            80
+          ],
+          "slice_xywh": [
+            56,
+            80,
+            16,
+            28
+          ]
+        }
+      ],
+      "sha256": "a223764dd61cb77188551666e4c69f9205564b60ca1c2f2cedd2593a9caf8fff"
+    },
+    "house_3-fixed-left-pane": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-fixed-left-pane.png",
+      "parts": [
+        {
+          "input": "house_3-fixed-chimney",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_3-fixed-chimney",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3-fixed-chimney",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_3-fixed-chimney",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "house-cool-glass-source",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            34,
+            85,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "3299fb12b16d75e136bd7ca3cca44d98125513ae26eeade34d20aba7e5986351"
+    },
+    "house_3-fixed-stoop": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-fixed-stoop.png",
+      "parts": [
+        {
+          "input": "house_3-fixed-door",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            108
+          ]
+        },
+        {
+          "input": "house_3-fixed-door",
+          "paste_xy": [
+            0,
+            120
+          ],
+          "slice_xywh": [
+            0,
+            120,
+            128,
+            8
+          ]
+        },
+        {
+          "input": "house_3-fixed-door",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            48,
+            12
+          ]
+        },
+        {
+          "input": "house_3-fixed-door",
+          "paste_xy": [
+            72,
+            108
+          ],
+          "slice_xywh": [
+            72,
+            108,
+            56,
+            12
+          ]
+        },
+        {
+          "input": "common-house-stoop-unit",
+          "paste_xy": [
+            48,
+            108
+          ],
+          "slice_xywh": [
+            48,
+            108,
+            24,
+            12
+          ]
+        }
+      ],
+      "sha256": "62e16da517429df33349a39f3b1d676ce75329b47ad468096ab966d343f1f49d"
+    },
+    "house_3-pane-0": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-pane-0.png",
+      "parts": [
+        {
+          "input": "house_3-fixed-left-pane",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            56
+          ]
+        },
+        {
+          "input": "house_3-fixed-left-pane",
+          "paste_xy": [
+            0,
+            63
+          ],
+          "slice_xywh": [
+            0,
+            63,
+            128,
+            65
+          ]
+        },
+        {
+          "input": "house_3-fixed-left-pane",
+          "paste_xy": [
+            0,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            56,
+            61,
+            7
+          ]
+        },
+        {
+          "input": "house_3-fixed-left-pane",
+          "paste_xy": [
+            69,
+            56
+          ],
+          "slice_xywh": [
+            69,
+            56,
+            59,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            61,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "3a45aedf16f7783abca42c727f9563887125cd5bfb69688b61ecd10942df166e"
+    },
+    "house_3-pane-1": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-pane-1.png",
+      "parts": [
+        {
+          "input": "house_3-pane-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_3-pane-0",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3-pane-0",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_3-pane-0",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "3a45aedf16f7783abca42c727f9563887125cd5bfb69688b61ecd10942df166e"
+    },
+    "house_3-pane-2": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-pane-2.png",
+      "parts": [
+        {
+          "input": "house_3-pane-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_3-pane-1",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3-pane-1",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            84,
+            7
+          ]
+        },
+        {
+          "input": "house_3-pane-1",
+          "paste_xy": [
+            91,
+            85
+          ],
+          "slice_xywh": [
+            91,
+            85,
+            37,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            84,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            7
+          ]
+        }
+      ],
+      "sha256": "aa8df4f7cfbaea7b06a7c775834b3f47d4b9c302fb67df7c5debf526e685cfab"
+    },
+    "house_3-pane-3": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-pane-3.png",
+      "parts": [
+        {
+          "input": "house_3-pane-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house_3-pane-2",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3-pane-2",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            60,
+            5
+          ]
+        },
+        {
+          "input": "house_3-pane-2",
+          "paste_xy": [
+            65,
+            87
+          ],
+          "slice_xywh": [
+            65,
+            87,
+            63,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            60,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "sha256": "c5e68a8a9880dbcbd44fef8f2d6e447d153ffda63c03ff260b4145dc8eaa4efb"
+    },
+    "house_3-pane-4": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3-pane-4.png",
+      "parts": [
+        {
+          "input": "house_3-pane-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            89
+          ]
+        },
+        {
+          "input": "house_3-pane-3",
+          "paste_xy": [
+            0,
+            94
+          ],
+          "slice_xywh": [
+            0,
+            94,
+            128,
+            34
+          ]
+        },
+        {
+          "input": "house_3-pane-3",
+          "paste_xy": [
+            0,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            89,
+            107,
+            5
+          ]
+        },
+        {
+          "input": "house_3-pane-3",
+          "paste_xy": [
+            109,
+            89
+          ],
+          "slice_xywh": [
+            109,
+            89,
+            19,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            107,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "1ab2fea37253c4d7d8c5a67f1be6e72ebc368b11a1176d5ed1b999a8062205ed"
+    },
+    "house_3_hurt-fixed-chimney": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-fixed-chimney.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            46
+          ],
+          "slice_xywh": [
+            0,
+            46,
+            128,
+            82
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            20
+          ],
+          "slice_xywh": [
+            0,
+            20,
+            94,
+            26
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-stoop",
+          "paste_xy": [
+            109,
+            20
+          ],
+          "slice_xywh": [
+            109,
+            20,
+            19,
+            26
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            94,
+            20
+          ],
+          "slice_xywh": [
+            94,
+            20,
+            15,
+            26
+          ]
+        }
+      ],
+      "sha256": "63b04e4f8c850ba5bc7216805dee726767b93061dd97b432f961f936fe668663"
+    },
+    "house_3_hurt-fixed-door": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-fixed-door.png",
+      "parts": [
+        {
+          "input": "source-house_3_hurt",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            80
+          ]
+        },
+        {
+          "input": "source-house_3_hurt",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "source-house_3_hurt",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_3_hurt",
+          "paste_xy": [
+            72,
+            80
+          ],
+          "slice_xywh": [
+            72,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            56,
+            80
+          ],
+          "slice_xywh": [
+            56,
+            80,
+            16,
+            28
+          ]
+        }
+      ],
+      "sha256": "9240817ee1405a3484b23fff563c690f1034858c7de1ed62ad1ab5398beda19d"
+    },
+    "house_3_hurt-fixed-left-pane": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-fixed-left-pane.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-chimney",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "house-cool-glass-source",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            34,
+            85,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "e658c88ab68e4575d5fef64fd68ed210d9eebc18fb0b25e16b2a271a24bb792f"
+    },
+    "house_3_hurt-fixed-stoop": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-fixed-stoop.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            108
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            120
+          ],
+          "slice_xywh": [
+            0,
+            120,
+            128,
+            8
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            48,
+            12
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-door",
+          "paste_xy": [
+            72,
+            108
+          ],
+          "slice_xywh": [
+            72,
+            108,
+            56,
+            12
+          ]
+        },
+        {
+          "input": "common-house-stoop-unit",
+          "paste_xy": [
+            48,
+            108
+          ],
+          "slice_xywh": [
+            48,
+            108,
+            24,
+            12
+          ]
+        }
+      ],
+      "sha256": "5e468e5063c45cdf3e3950c72f4bb841f23795de9e41cc7a2d24f485cda3760e"
+    },
+    "house_3_hurt-pane-0": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-pane-0.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            56
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            63
+          ],
+          "slice_xywh": [
+            0,
+            63,
+            128,
+            65
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            56,
+            61,
+            7
+          ]
+        },
+        {
+          "input": "house_3_hurt-fixed-left-pane",
+          "paste_xy": [
+            69,
+            56
+          ],
+          "slice_xywh": [
+            69,
+            56,
+            59,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            61,
+            56
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "7731cf6dd6fc6cbe881cf27dd0e56fe008d9f5ab086fdf094072adb8cc96e0a0"
+    },
+    "house_3_hurt-pane-1": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-pane-1.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-pane-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-0",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-0",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-0",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "7731cf6dd6fc6cbe881cf27dd0e56fe008d9f5ab086fdf094072adb8cc96e0a0"
+    },
+    "house_3_hurt-pane-2": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-pane-2.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-pane-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-1",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-1",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            84,
+            7
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-1",
+          "paste_xy": [
+            91,
+            85
+          ],
+          "slice_xywh": [
+            91,
+            85,
+            37,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            84,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            7
+          ]
+        }
+      ],
+      "sha256": "59ada91f0d4d0be34781ebea57ecd60b194e42a1f9fd4bb70b4633d708445368"
+    },
+    "house_3_hurt-pane-3": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-pane-3.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-pane-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-2",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-2",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            60,
+            5
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-2",
+          "paste_xy": [
+            65,
+            87
+          ],
+          "slice_xywh": [
+            65,
+            87,
+            63,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            60,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "sha256": "3820ec167af90519e79648039332c439edf05d0a826c0fc15c79974635e2e450"
+    },
+    "house_3_hurt-pane-4": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_3_hurt-pane-4.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-pane-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            89
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-3",
+          "paste_xy": [
+            0,
+            94
+          ],
+          "slice_xywh": [
+            0,
+            94,
+            128,
+            34
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-3",
+          "paste_xy": [
+            0,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            89,
+            107,
+            5
+          ]
+        },
+        {
+          "input": "house_3_hurt-pane-3",
+          "paste_xy": [
+            109,
+            89
+          ],
+          "slice_xywh": [
+            109,
+            89,
+            19,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            107,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "99fa52b582479a2402c234b0b0c5cba35e92dc8331c7d44c62b3c0dc35a8a656"
+    },
+    "house_hurt-fixed-chimney": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-fixed-chimney.png",
+      "parts": [
+        {
+          "input": "house_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            46
+          ],
+          "slice_xywh": [
+            0,
+            46,
+            128,
+            82
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-stoop",
+          "paste_xy": [
+            0,
+            20
+          ],
+          "slice_xywh": [
+            0,
+            20,
+            94,
+            26
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-stoop",
+          "paste_xy": [
+            109,
+            20
+          ],
+          "slice_xywh": [
+            109,
+            20,
+            19,
+            26
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            94,
+            20
+          ],
+          "slice_xywh": [
+            94,
+            20,
+            15,
+            26
+          ]
+        }
+      ],
+      "sha256": "f0dbfaa3d1c3ac3cb7a1dda42959e462d90d788e2ec4e9bf7d48f52c067e063c"
+    },
+    "house_hurt-fixed-door": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-fixed-door.png",
+      "parts": [
+        {
+          "input": "source-house_hurt",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            80
+          ]
+        },
+        {
+          "input": "source-house_hurt",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            128,
+            20
+          ]
+        },
+        {
+          "input": "source-house_hurt",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_hurt",
+          "paste_xy": [
+            72,
+            80
+          ],
+          "slice_xywh": [
+            72,
+            80,
+            56,
+            28
+          ]
+        },
+        {
+          "input": "source-house_2",
+          "paste_xy": [
+            56,
+            80
+          ],
+          "slice_xywh": [
+            56,
+            80,
+            16,
+            28
+          ]
+        }
+      ],
+      "sha256": "30b91b4c88ff0cdf6b6c7772d1394bc36adee94af70399666b3e7d287a578526"
+    },
+    "house_hurt-fixed-left-pane": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-fixed-left-pane.png",
+      "parts": [
+        {
+          "input": "house_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-chimney",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-chimney",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "house-cool-glass-source",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            34,
+            85,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "0f905bd87cf294a1a6cc1fb7928ac6e653c777b6a1904de4fba746f0f2bf884c"
+    },
+    "house_hurt-fixed-stoop": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-fixed-stoop.png",
+      "parts": [
+        {
+          "input": "house_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            108
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            120
+          ],
+          "slice_xywh": [
+            0,
+            120,
+            128,
+            8
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-door",
+          "paste_xy": [
+            0,
+            108
+          ],
+          "slice_xywh": [
+            0,
+            108,
+            48,
+            12
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-door",
+          "paste_xy": [
+            72,
+            108
+          ],
+          "slice_xywh": [
+            72,
+            108,
+            56,
+            12
+          ]
+        },
+        {
+          "input": "common-house-stoop-unit",
+          "paste_xy": [
+            48,
+            108
+          ],
+          "slice_xywh": [
+            48,
+            108,
+            24,
+            12
+          ]
+        }
+      ],
+      "sha256": "606470ec34dd08092f0c6a19a2863c79931b5513d3e0398a990a440a396279e7"
+    },
+    "house_hurt-pane-0": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-pane-0.png",
+      "parts": [
+        {
+          "input": "house_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            60
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            66
+          ],
+          "slice_xywh": [
+            0,
+            66,
+            128,
+            62
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-left-pane",
+          "paste_xy": [
+            0,
+            60
+          ],
+          "slice_xywh": [
+            0,
+            60,
+            61,
+            6
+          ]
+        },
+        {
+          "input": "house_hurt-fixed-left-pane",
+          "paste_xy": [
+            68,
+            60
+          ],
+          "slice_xywh": [
+            68,
+            60,
+            60,
+            6
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            61,
+            60
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            6
+          ]
+        }
+      ],
+      "sha256": "e686c1a1c853c991c859740a8ee95ef73eeba7c53a446ff32ed7de8e8285782e"
+    },
+    "house_hurt-pane-1": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-pane-1.png",
+      "parts": [
+        {
+          "input": "house_hurt-pane-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            85
+          ]
+        },
+        {
+          "input": "house_hurt-pane-0",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_hurt-pane-0",
+          "paste_xy": [
+            0,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            85,
+            34,
+            7
+          ]
+        },
+        {
+          "input": "house_hurt-pane-0",
+          "paste_xy": [
+            42,
+            85
+          ],
+          "slice_xywh": [
+            42,
+            85,
+            86,
+            7
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            34,
+            85
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            7
+          ]
+        }
+      ],
+      "sha256": "e686c1a1c853c991c859740a8ee95ef73eeba7c53a446ff32ed7de8e8285782e"
+    },
+    "house_hurt-pane-2": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-pane-2.png",
+      "parts": [
+        {
+          "input": "house_hurt-pane-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house_hurt-pane-1",
+          "paste_xy": [
+            0,
+            93
+          ],
+          "slice_xywh": [
+            0,
+            93,
+            128,
+            35
+          ]
+        },
+        {
+          "input": "house_hurt-pane-1",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            78,
+            6
+          ]
+        },
+        {
+          "input": "house_hurt-pane-1",
+          "paste_xy": [
+            85,
+            87
+          ],
+          "slice_xywh": [
+            85,
+            87,
+            43,
+            6
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            78,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            7,
+            6
+          ]
+        }
+      ],
+      "sha256": "8feef8f15b700c94f0a2a931974aff814d6b4ef0989fa80da9213de5c817b200"
+    },
+    "house_hurt-pane-3": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-pane-3.png",
+      "parts": [
+        {
+          "input": "house_hurt-pane-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            87
+          ]
+        },
+        {
+          "input": "house_hurt-pane-2",
+          "paste_xy": [
+            0,
+            92
+          ],
+          "slice_xywh": [
+            0,
+            92,
+            128,
+            36
+          ]
+        },
+        {
+          "input": "house_hurt-pane-2",
+          "paste_xy": [
+            0,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            87,
+            60,
+            5
+          ]
+        },
+        {
+          "input": "house_hurt-pane-2",
+          "paste_xy": [
+            65,
+            87
+          ],
+          "slice_xywh": [
+            65,
+            87,
+            63,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            60,
+            87
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            5,
+            5
+          ]
+        }
+      ],
+      "sha256": "7b6e87ed34470eeb6a7b8706b20b2a42e610644c8402cc6d73e3d126603becfe"
+    },
+    "house_hurt-pane-4": {
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "compose",
+      "output": "components/house_hurt-pane-4.png",
+      "parts": [
+        {
+          "input": "house_hurt-pane-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            89
+          ]
+        },
+        {
+          "input": "house_hurt-pane-3",
+          "paste_xy": [
+            0,
+            94
+          ],
+          "slice_xywh": [
+            0,
+            94,
+            128,
+            34
+          ]
+        },
+        {
+          "input": "house_hurt-pane-3",
+          "paste_xy": [
+            0,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            89,
+            104,
+            5
+          ]
+        },
+        {
+          "input": "house_hurt-pane-3",
+          "paste_xy": [
+            106,
+            89
+          ],
+          "slice_xywh": [
+            106,
+            89,
+            22,
+            5
+          ]
+        },
+        {
+          "input": "glass-pane-core",
+          "paste_xy": [
+            104,
+            89
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            2,
+            5
+          ]
+        }
+      ],
+      "sha256": "af15237916ae790b0149604395da4d9ff53c9ba1364046b0a1b40a856680601c"
+    },
+    "source-house": {
+      "call": "raw/recovered-house-r3.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "render",
+      "output": "components/source-house.png",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "prompt": "raw/recovered-house-r3.prompt.txt",
+      "prompt_sha256": "19155dada9e2751f8e3ee25de5e04e657a7309a28b02f17af9ecb57752773a08",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "sha256": "a86528eb09503e10a3cf6ffb6509604d7c34103198aceae47c9a5191af793160",
+      "source": "raw/recovered-house-r3.png",
+      "source_sha256": "d5dc6dedc0fe99aed45028f760f180aefa218fd1785f715571fb4ad580829a89"
+    },
+    "source-house_2": {
+      "call": "raw/house2-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "render",
+      "output": "components/source-house_2.png",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "prompt": "raw/house2-r1.prompt.txt",
+      "prompt_sha256": "dc79ad02d9595159cf3a911ecbd430bf704e6b4f0cdceabb8123262f8de04d04",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "sha256": "5ea4d5034d4c55dbe166d64dd4888e3bfbdd248b5055378c031bcf1b23a75af4",
+      "source": "raw/house2-r1.png",
+      "source_sha256": "98be802889957dbfc9f33ad080d22cbb7dcee4698f0d5dfe656b63a8692d87e2"
+    },
+    "source-house_2_hurt": {
+      "call": "raw/house2_hurt-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "render",
+      "output": "components/source-house_2_hurt.png",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "prompt": "raw/house2_hurt-r1.prompt.txt",
+      "prompt_sha256": "cb85d9281ef9cc3ce51826884dca2abc47e8fd1a42f81e2f51ead5c71fb695bb",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "sha256": "4a461e65349815659d85c0b6a90dff22b60ced3563e539fa26d3ef2f2ea983a9",
+      "source": "raw/house2_hurt-r1.png",
+      "source_sha256": "f5ae420ad61b2e03f2bf8323075965d4758e94fc245d6c6d75e8b81957619123"
+    },
+    "source-house_3": {
+      "call": "raw/house3-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "render",
+      "output": "components/source-house_3.png",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "prompt": "raw/house3-r1.prompt.txt",
+      "prompt_sha256": "6efc0a44215062a37322a8a63546c587d9213fb81d499a9fe1ba171220ee27ac",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "sha256": "e59d5cf1be2fefec1373291f1e9fc96750e4dd123adb58593909deb2add1a590",
+      "source": "raw/house3-r1.png",
+      "source_sha256": "7436a8656890d5b4cb15c4e292bfb12252ceaa754451976edc3da517a3da8105"
+    },
+    "source-house_3_hurt": {
+      "call": "raw/house3_hurt-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "render",
+      "output": "components/source-house_3_hurt.png",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "prompt": "raw/house3_hurt-r1.prompt.txt",
+      "prompt_sha256": "55820a48acbd80eefd4903dbe2f05e7ce3f70d0856bbb1aebe7c67e539e1edb6",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "sha256": "9feda8421851fb07f06888b46bc51dca561bc0a9cd49b87aa087686a7b2c7992",
+      "source": "raw/house3_hurt-r1.png",
+      "source_sha256": "f279b3a841d728002fece4d6db5a8ecfc4c46627657d83c2afe46240e81c5e27"
+    },
+    "source-house_hurt": {
+      "call": "raw/recovered-house_hurt-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "operation": "render",
+      "output": "components/source-house_hurt.png",
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "prompt": "raw/recovered-house_hurt-r1.prompt.txt",
+      "prompt_sha256": "17bd78fce5f2e3ce555899ebfad71be9770f47a0ad9a7fbad0a824292a885c8a",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "sha256": "9eeb2c667572fc8ecda7468f1ae4e0bb36cc0689c03292fd6dafffe5a08054ee",
+      "source": "raw/recovered-house_hurt-r1.png",
+      "source_sha256": "d1db110711166adc100fc559578769c1e1f1d0eba19606db827cf36bdd34cb8c"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "house",
+      "call": "raw/recovered-house-r3.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "chimney_rect_xywh": [
+        94,
+        20,
+        15,
+        26
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/house/none/01.png",
+      "parts": [
+        {
+          "input": "house-pane-4",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            128
+          ]
+        }
+      ],
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            60,
+            7,
+            6
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            78,
+            87,
+            7,
+            6
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            104,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            61
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            79,
+            88
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            105,
+            90
+          ]
+        ]
+      },
+      "pose": "house whole/hurt tier",
+      "prompt": "raw/recovered-house-r3.prompt.txt",
+      "prompt_sha256": "19155dada9e2751f8e3ee25de5e04e657a7309a28b02f17af9ecb57752773a08",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "runtime_name": "sprites/buildings/house.png",
+      "seconds": 0.55,
+      "sha256": "895c892dca00760fb276a51bf184dbe41f0e1e3acd65e41a855a4b959dfa4524",
+      "source": "raw/recovered-house-r3.png",
+      "source_sha256": "d5dc6dedc0fe99aed45028f760f180aefa218fd1785f715571fb4ad580829a89",
+      "stoop_rect_xywh": [
+        48,
+        108,
+        24,
+        12
+      ],
+      "visible_limits_wh": [
+        [
+          1,
+          112
+        ],
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "anim": "house_hurt",
+      "call": "raw/recovered-house_hurt-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "chimney_rect_xywh": [
+        94,
+        20,
+        15,
+        26
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/house_hurt/none/01.png",
+      "parts": [
+        {
+          "input": "house_hurt-pane-4",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            128
+          ]
+        }
+      ],
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            60,
+            7,
+            6
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            78,
+            87,
+            7,
+            6
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            104,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            61
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            79,
+            88
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            105,
+            90
+          ]
+        ]
+      },
+      "pose": "house_hurt whole/hurt tier",
+      "prompt": "raw/recovered-house_hurt-r1.prompt.txt",
+      "prompt_sha256": "17bd78fce5f2e3ce555899ebfad71be9770f47a0ad9a7fbad0a824292a885c8a",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "runtime_name": "sprites/buildings/house_hurt.png",
+      "seconds": 0.55,
+      "sha256": "af15237916ae790b0149604395da4d9ff53c9ba1364046b0a1b40a856680601c",
+      "source": "raw/recovered-house_hurt-r1.png",
+      "source_sha256": "d1db110711166adc100fc559578769c1e1f1d0eba19606db827cf36bdd34cb8c",
+      "stoop_rect_xywh": [
+        48,
+        108,
+        24,
+        12
+      ],
+      "visible_limits_wh": [
+        [
+          1,
+          112
+        ],
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "anim": "house_2",
+      "call": "raw/house2-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "chimney_rect_xywh": [
+        94,
+        20,
+        15,
+        26
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/house_2/none/01.png",
+      "parts": [
+        {
+          "input": "house_2-pane-4",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            128
+          ]
+        }
+      ],
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            105,
+            88,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            106,
+            89
+          ]
+        ]
+      },
+      "pose": "house_2 whole/hurt tier",
+      "prompt": "raw/house2-r1.prompt.txt",
+      "prompt_sha256": "dc79ad02d9595159cf3a911ecbd430bf704e6b4f0cdceabb8123262f8de04d04",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "runtime_name": "sprites/buildings/house_2.png",
+      "seconds": 0.55,
+      "sha256": "04c558a065c7245743eba31e50a27281f8a5f5c623679c23112333e876060509",
+      "source": "raw/house2-r1.png",
+      "source_sha256": "98be802889957dbfc9f33ad080d22cbb7dcee4698f0d5dfe656b63a8692d87e2",
+      "stoop_rect_xywh": [
+        48,
+        108,
+        24,
+        12
+      ],
+      "visible_limits_wh": [
+        [
+          1,
+          112
+        ],
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "anim": "house_2_hurt",
+      "call": "raw/house2_hurt-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "chimney_rect_xywh": [
+        94,
+        20,
+        15,
+        26
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/house_2_hurt/none/01.png",
+      "parts": [
+        {
+          "input": "house_2_hurt-pane-4",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            128
+          ]
+        }
+      ],
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            105,
+            88,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            106,
+            89
+          ]
+        ]
+      },
+      "pose": "house_2_hurt whole/hurt tier",
+      "prompt": "raw/house2_hurt-r1.prompt.txt",
+      "prompt_sha256": "cb85d9281ef9cc3ce51826884dca2abc47e8fd1a42f81e2f51ead5c71fb695bb",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "runtime_name": "sprites/buildings/house_2_hurt.png",
+      "seconds": 0.55,
+      "sha256": "c1c3beca01de3f5a4b748ed99d8ea77b1029e9cc5aaf42667ddd6a7730b7003b",
+      "source": "raw/house2_hurt-r1.png",
+      "source_sha256": "f5ae420ad61b2e03f2bf8323075965d4758e94fc245d6c6d75e8b81957619123",
+      "stoop_rect_xywh": [
+        48,
+        108,
+        24,
+        12
+      ],
+      "visible_limits_wh": [
+        [
+          1,
+          112
+        ],
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "anim": "house_3",
+      "call": "raw/house3-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "chimney_rect_xywh": [
+        94,
+        20,
+        15,
+        26
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/house_3/none/01.png",
+      "parts": [
+        {
+          "input": "house_3-pane-4",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            128
+          ]
+        }
+      ],
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            107,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            108,
+            90
+          ]
+        ]
+      },
+      "pose": "house_3 whole/hurt tier",
+      "prompt": "raw/house3-r1.prompt.txt",
+      "prompt_sha256": "6efc0a44215062a37322a8a63546c587d9213fb81d499a9fe1ba171220ee27ac",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "runtime_name": "sprites/buildings/house_3.png",
+      "seconds": 0.55,
+      "sha256": "1ab2fea37253c4d7d8c5a67f1be6e72ebc368b11a1176d5ed1b999a8062205ed",
+      "source": "raw/house3-r1.png",
+      "source_sha256": "7436a8656890d5b4cb15c4e292bfb12252ceaa754451976edc3da517a3da8105",
+      "stoop_rect_xywh": [
+        48,
+        108,
+        24,
+        12
+      ],
+      "visible_limits_wh": [
+        [
+          1,
+          112
+        ],
+        [
+          1,
+          120
+        ]
+      ]
+    },
+    {
+      "anim": "house_3_hurt",
+      "call": "raw/house3_hurt-r1.call.json",
+      "canvas_wh": [
+        128,
+        128
+      ],
+      "chimney_rect_xywh": [
+        94,
+        20,
+        15,
+        26
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/house_3_hurt/none/01.png",
+      "parts": [
+        {
+          "input": "house_3_hurt-pane-4",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            128,
+            128
+          ]
+        }
+      ],
+      "pivot_xy": [
+        64,
+        120
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            107,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            108,
+            90
+          ]
+        ]
+      },
+      "pose": "house_3_hurt whole/hurt tier",
+      "prompt": "raw/house3_hurt-r1.prompt.txt",
+      "prompt_sha256": "55820a48acbd80eefd4903dbe2f05e7ce3f70d0856bbb1aebe7c67e539e1edb6",
+      "recipe": {
+        "content_anchor_xy": [
+          56,
+          119
+        ],
+        "content_scale": 0.0979020979020979,
+        "crop_xywh": [
+          80,
+          2,
+          1144,
+          1212
+        ]
+      },
+      "runtime_name": "sprites/buildings/house_3_hurt.png",
+      "seconds": 0.55,
+      "sha256": "99fa52b582479a2402c234b0b0c5cba35e92dc8331c7d44c62b3c0dc35a8a656",
+      "source": "raw/house3_hurt-r1.png",
+      "source_sha256": "f279b3a841d728002fece4d6db5a8ecfc4c46627657d83c2afe46240e81c5e27",
+      "stoop_rect_xywh": [
+        48,
+        108,
+        24,
+        12
+      ],
+      "visible_limits_wh": [
+        [
+          1,
+          112
+        ],
+        [
+          1,
+          120
+        ]
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A035",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\raw\\house2-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "98be802889957dbfc9f33ad080d22cbb7dcee4698f0d5dfe656b63a8692d87e2"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\raw\\house3-r1.png",
+      "role": "candidate edit target; owner approval pending",
+      "sha256": "7436a8656890d5b4cb15c4e292bfb12252ceaa754451976edc3da517a3da8105"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A035-house-tiers",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The house in three tiers",
+  "tool": "built-in ImageGen"
+}

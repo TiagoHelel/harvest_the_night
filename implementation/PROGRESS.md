@@ -33076,3 +33076,83 @@ the farmer's frames in a waistcoat's tint, and the stall dimmed.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second
   run.
+
+## 0217 - Art: the house in three tiers - done 2026-10-15
+
+A035 is integrated. The farmhouse is the owner-approved art now, in its
+three tiers - I, II and III - whole and hurt. Each is drawn at full density:
+128x128 standing on (64,120) at 1.0, where today's house was 64x64 at 2.0.
+The owner approved the corrected pack on 2026-10-15 with the retried batch
+("tudo aprovado"), as recorded in the delivery's `APPROVAL.json`. Tier I
+replaces task 0011's house, and tiers II and III replace 0191's stand-ins:
+today's house with a plaque of studs over the door.
+
+- **Promotion**:
+  - The six states are compositions over 63 assembly components (7
+    `render`, 56 `compose`), under `sprites/components/A035-house-tiers/`.
+  - The six raw sources are byte for byte in
+    `assets/art_source/buildings/house_tiers/`.
+  - Every node and file was sha-checked, and decodes to its approved RGBA.
+  - The canvas offset is the 6x4 footprint's: (-16,-56).
+- **The slices cut afresh**: each state's nine compatibility slices are cut
+  from its own whole drawing at A035's columns 48/32/48 and rows 56/32/40,
+  where the old ones were 24/16/24 by 28/16/20 of the 64x64 house. That is
+  54 slices:
+  - the base names `house_<c>_<r>` and `house_<c>_<r>_hurt`;
+  - `house_2_<c>_<r>(_hurt)` and `house_3_<c>_<r>(_hurt)` for the tiers.
+
+  The 18 old slice entries are gone.
+- **Out of the 2.0 list**: `ArtPlacement.visual_scale` no longer names
+  `house`. That covered every `house_` file, the tiers too.
+- **The lights off the footprint**: `ArtPlacement.emission` and
+  `emissions` place a measured point off the drawing's bottom middle on the
+  footprint they are given, as `place` puts the drawing.
+  - They used the canvas offset at 1.0, which is right only for the
+    footprint the art was cut for. The showcases' fixture house is 3x3, and
+    its glass glows were off by the difference.
+  - For the coop, the barn and the machines, whose offsets are their
+    footprints', it is the same point.
+- **The glass is cool by day**: A035 draws its panes in moonlit blue and
+  leaves the warmth to the night's lamps, which put a core on each pane's
+  measured point.
+- **The stand-ins retired**: A035's four `PlaceholderArt` entries and
+  `HOUSE_TIER`. The plaque of studs (`_draw_house_mark`) draws only for a
+  tier still on 0120's road, so it draws nothing now. `placeholders.py
+  --check` passes, with 115 stand-ins left over 15 packs.
+  - On the way, the scratch patch's search for the entries' comment matched
+    far more of the registry than the two lines it meant to.
+  - The file was restored from the last commit before anything ran, and only
+    A035's ten lines were taken out.
+- **Checks**: `check_house_art.py` is rewritten for the tiers. It checks
+  each state for:
+  - its full-density box and the footprint's offset;
+  - A035's composition from its own components;
+  - grounded, the entrance meeting the ground on columns 49-69 in every
+    state;
+  - five panes of glass with each point on its light;
+  - the left glass unmoved;
+  - the points equal whole and hurt within a tier;
+  - the hurt state its own drawing;
+  - the nine slices putting the whole back exactly.
+
+  It used to want warm panes and 64x64 numbers.
+- **Tests and showcases**:
+  - `_task_0217_house_tiers` (headless_v1) checks every state at its box
+    and offset at 1.0 with five panes, all 54 slices on disk, and the
+    chimney and first pane landing on the drawing's own points over the
+    6x4 footprint.
+  - The art and house showcases and the house visit wanted the old
+    drawing's numbers: 2.0, a (32,60) pivot, its panes, lantern and
+    chimney. They take A035's now.
+- **Shots** (`implementation/shots/0217/`, FHD 1920x1080, looked at):
+  - `house_tiers`, `house_tiers_2`, `house_tiers_3`: tier I timbered, II
+    with its porch roof and bigger windows, III on a stone base with its
+    bell turret.
+  - `house_tiers_panel`: the workshop's tab offering tier III.
+  - `noon`, `dusk`: the farm about it.
+  - `house_night`: the build step's night, a warm core on each pane.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A035 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

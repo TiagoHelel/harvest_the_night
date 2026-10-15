@@ -23,11 +23,13 @@ static func place(sprite: Sprite2D, cell: Vector2i, footprint := Vector2i.ONE) -
 
 
 ## Doors and furniture-sized production buildings now match the 30px farmer.
-## Integer scaling preserves the already accepted exterior raster sheets.
+## Integer scaling preserves the already accepted exterior raster sheets. The
+## house left the list in task 0217: A035 draws it, every tier, at full
+## density - 128x128 at 1.0, today's 64x64 at 2.0.
 static func visual_scale(path: String) -> float:
 	if (path.begins_with("res://sprites/buildings/") or path.begins_with("res://sprites/props/")) \
 		and path.get_file().split("_")[0].get_basename() \
-			in ["house", "shop", "workshop", "kitchen", "press", "generator"]:
+			in ["shop", "workshop", "kitchen", "press", "generator"]:
 		return 2.0
 	return 1.0
 
@@ -45,7 +47,9 @@ static func emission(id: StringName, corner: Vector2, field: StringName,
 		var metadata: Dictionary = PlaceholderArt.frame(str(folder) + str(id) + ".png")
 		if metadata.has(field):
 			var scale := visual_scale(str(folder) + str(id) + ".png")
-			if scale == 1.0:
+			# **Off the footprint it stands on** when one is given (task 0217):
+			# the drawing's bottom middle there, as `place` puts it.
+			if scale == 1.0 and footprint == Vector2i.ZERO:
 				return corner + Vector2(metadata["cell_offset"]) + Vector2(metadata[field])
 			var size := Building.size_of(id) if footprint == Vector2i.ZERO else footprint
 			var contact := Vector2(float(size.x) * GameData.TILE_SIZE * 0.5, size.y * GameData.TILE_SIZE)
@@ -60,7 +64,8 @@ static func emissions(id: StringName, corner: Vector2, field: StringName,
 	var points: Array[Vector2] = []
 	for point in metadata.get(field, []):
 		var scale := visual_scale(WorldView.BUILDING_DIR + str(id) + ".png")
-		if scale == 1.0:
+		# Off the footprint it stands on when one is given (task 0217).
+		if scale == 1.0 and footprint == Vector2i.ZERO:
 			points.append(corner + Vector2(metadata["cell_offset"]) + Vector2(point))
 		else:
 			var size := Building.size_of(id) if footprint == Vector2i.ZERO else footprint

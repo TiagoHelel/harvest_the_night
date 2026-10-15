@@ -138,8 +138,9 @@ func _run() -> void:
 	_world.show_ghost(Vector2i(14, 10), &"house", true)
 	await _settle()
 	var ghost: Sprite2D = _world.find_child("Ghost", true, false)
-	expect(ghost.position == Vector2(272, 224) and ghost.scale == Vector2(2, 2), "House ghost sorts at the enlarged ground contact")
-	expect(ghost.offset == Vector2(-32, -60), "House ghost uses source-owned pivot")
+	# A035's house at full density since task 0217: 128x128 at 1.0.
+	expect(ghost.position == Vector2(272, 224) and ghost.scale == Vector2.ONE, "House ghost sorts at the ground contact")
+	expect(ghost.offset == Vector2(-64, -120), "House ghost uses source-owned pivot")
 	expect(_world.ghost_footprint() == GameData.HOUSE_SIZE, "House preview frame covers its enlarged blocked cells")
 	await _shoot("ghost_house", "House preview: 6x4 footprint / enlarged existing roof")
 	_world.show_ghost(Vector2i(14, 10), &"gun_tower", true)
@@ -552,7 +553,7 @@ func _house_check(corner: Vector2i = Vector2i(20, 6)) -> void:
 		return
 	var wanted := "house_hurt" if float(_state["house_hp"]) / Phases.house_full(_state) < 0.75 else "house"
 	expect(sprite.texture.resource_path == WorldView.BUILDING_DIR + wanted + ".png", "House art reads the separate HP field, including upgrades")
-	expect(sprite.position == Vector2(corner * 16 + Vector2i(24, 48)) and sprite.offset == Vector2(-32, -60), "Damage preserves roof, entrance and source ground anchor")
+	expect(sprite.position == Vector2(corner * 16 + Vector2i(24, 48)) and sprite.offset == Vector2(-64, -120), "Damage preserves roof, entrance and source ground anchor")
 	expect(sprite.modulate == Color.WHITE, "Authored damaged facade retains readable source colors")
 	var found := 0
 	for node in _world.get_node("Occupants").get_children():
@@ -567,12 +568,12 @@ func _house_check(corner: Vector2i = Vector2i(20, 6)) -> void:
 	var size := Farm.house_bounds(_state).size
 	var windows := ArtPlacement.emissions(&"house", Vector2(corner * 16), &"windows", Vector2.ZERO, &"light", size)
 	expect(windows.size() == 5, "One grouped house emits exactly five physical window lights")
-	var local := [Vector2(32, 33), Vector2(19, 45), Vector2(41, 45), Vector2(30, 45), Vector2(52, 46)]
+	var local := [Vector2(62, 61), Vector2(35, 86), Vector2(79, 88), Vector2(61, 88), Vector2(105, 90)]
 	for i in windows.size():
 		expect(windows[i] == sprite.position + (local[i] + sprite.offset) * sprite.scale,
 			"Each glow uses the measured glass plane of the actual enlarged drawing")
 	expect(ArtPlacement.emission(&"house", Vector2(corner * 16), &"smoke", Vector2.ZERO, size)
-		== sprite.position + (Vector2(51,12) + sprite.offset) * sprite.scale,
+		== sprite.position + (Vector2(98, 20) + sprite.offset) * sprite.scale,
 		"Chimney smoke shares the authored whole/hurt roof opening")
 
 
@@ -689,7 +690,7 @@ func _house_family() -> void:
 		await _house_settle(view)
 		_world.show_ghost(Vector2i(14, 10), &"house", true)
 		var ghost: Sprite2D = _world.find_child("Ghost", true, false)
-		expect(ghost.position == Vector2(272, 224) and ghost.offset == Vector2(-32, -60) and ghost.scale == Vector2(2,2)
+		expect(ghost.position == Vector2(272, 224) and ghost.offset == Vector2(-64, -120) and ghost.scale == Vector2.ONE
 			and _world.ghost_footprint() == GameData.HOUSE_SIZE, "House preview covers its enlarged collision footprint")
 		await _shoot("ghost_light%d" % lighting, "Full farmhouse preview; unchanged 3x3 footprint; light %d" % lighting)
 		_world.hide_ghost()
@@ -2303,7 +2304,7 @@ func _check_placement() -> void:
 			if node.texture.resource_path.ends_with("/house.png"):
 				house_count += 1
 				expect(node.position == Vector2(344, 144), "House node sorts at facade ground contact")
-				expect(node.offset == Vector2(-32, -60), "House roof overhang retains its accepted source pivot")
+				expect(node.offset == Vector2(-64, -120), "House roof overhang retains its accepted source pivot")
 			if node.texture.resource_path.get_file() in ["tree.png", "tree_b.png"]:
 				expect(node.position == Vector2(200, 160), "Tree sorts by trunk contact, not canopy top")
 				expect(node.offset == Vector2(-20, -44), "Tree uses source-owned pivot")
@@ -2319,7 +2320,9 @@ func _check_placement() -> void:
 	expect(_body_contact_is_valid(body), "Farmer retains its accepted source geometry and ground pivot")
 	var light := ArtPlacement.emission(&"house", Vector2(320, 96), &"light", Vector2.ZERO, Vector2i(3,3))
 	var smoke := ArtPlacement.emission(&"house", Vector2(320, 96), &"smoke", Vector2.ZERO, Vector2i(3,3))
-	expect(light == Vector2(318, 114) and smoke == Vector2(382, 48), "Lamp/chimney anchor follows the enlarged legacy fixture drawing")
+	# A035's full-density house since task 0217: its lantern (35,86) and
+	# chimney (98,20) off its pivot (64,120), at the fixture's contact.
+	expect(light == Vector2(315, 110) and smoke == Vector2(378, 44), "Lamp/chimney anchor follows the fixture drawing")
 
 
 func _shoot(name: String, caption: String) -> void:

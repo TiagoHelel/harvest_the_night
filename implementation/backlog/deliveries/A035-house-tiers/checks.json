@@ -1,0 +1,602 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "body_centered": true,
+  "building_measurements": {
+    "house": {
+      "bounds_xyxy": [
+        10,
+        13,
+        118,
+        120
+      ],
+      "door_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "pane_glint_pixels": [
+        11,
+        11,
+        11,
+        7,
+        2
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            60,
+            7,
+            6
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            78,
+            87,
+            7,
+            6
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            104,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            61
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            79,
+            88
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            105,
+            90
+          ]
+        ]
+      }
+    },
+    "house_2": {
+      "bounds_xyxy": [
+        8,
+        10,
+        120,
+        120
+      ],
+      "door_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "pane_glint_pixels": [
+        11,
+        11,
+        11,
+        7,
+        2
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            105,
+            88,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            106,
+            89
+          ]
+        ]
+      }
+    },
+    "house_2_hurt": {
+      "bounds_xyxy": [
+        8,
+        9,
+        120,
+        120
+      ],
+      "door_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "pane_glint_pixels": [
+        11,
+        11,
+        11,
+        7,
+        2
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            105,
+            88,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            106,
+            89
+          ]
+        ]
+      }
+    },
+    "house_3": {
+      "bounds_xyxy": [
+        8,
+        1,
+        120,
+        120
+      ],
+      "door_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "pane_glint_pixels": [
+        11,
+        11,
+        11,
+        7,
+        2
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            107,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            108,
+            90
+          ]
+        ]
+      }
+    },
+    "house_3_hurt": {
+      "bounds_xyxy": [
+        8,
+        1,
+        120,
+        120
+      ],
+      "door_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "pane_glint_pixels": [
+        11,
+        11,
+        11,
+        7,
+        2
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            56,
+            8,
+            7
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            84,
+            85,
+            7,
+            7
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            107,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            57
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            85,
+            86
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            108,
+            90
+          ]
+        ]
+      }
+    },
+    "house_hurt": {
+      "bounds_xyxy": [
+        11,
+        14,
+        117,
+        120
+      ],
+      "door_xywh": [
+        56,
+        80,
+        16,
+        28
+      ],
+      "pane_glint_pixels": [
+        11,
+        11,
+        11,
+        7,
+        2
+      ],
+      "points": {
+        "light_xy": [
+          35,
+          86
+        ],
+        "smoke_xy": [
+          98,
+          20
+        ],
+        "window_rects_xywh": [
+          [
+            61,
+            60,
+            7,
+            6
+          ],
+          [
+            34,
+            85,
+            8,
+            7
+          ],
+          [
+            78,
+            87,
+            7,
+            6
+          ],
+          [
+            60,
+            87,
+            5,
+            5
+          ],
+          [
+            104,
+            89,
+            2,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            62,
+            61
+          ],
+          [
+            35,
+            86
+          ],
+          [
+            79,
+            88
+          ],
+          [
+            61,
+            88
+          ],
+          [
+            105,
+            90
+          ]
+        ]
+      }
+    }
+  },
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "door_dimensions_measured": true,
+  "family_checks_complete": true,
+  "fixed_entrance_chimney_window": true,
+  "frame_count_matches": true,
+  "frames_expected": 6,
+  "frames_found": 6,
+  "glass_unlit": true,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/house/none/01.png": {
+      "bounds": [
+        10,
+        13,
+        118,
+        120
+      ],
+      "opaque_pixels": 8722
+    },
+    "native/house_2/none/01.png": {
+      "bounds": [
+        8,
+        10,
+        120,
+        120
+      ],
+      "opaque_pixels": 9206
+    },
+    "native/house_2_hurt/none/01.png": {
+      "bounds": [
+        8,
+        9,
+        120,
+        120
+      ],
+      "opaque_pixels": 9283
+    },
+    "native/house_3/none/01.png": {
+      "bounds": [
+        8,
+        1,
+        120,
+        120
+      ],
+      "opaque_pixels": 9452
+    },
+    "native/house_3_hurt/none/01.png": {
+      "bounds": [
+        8,
+        1,
+        120,
+        120
+      ],
+      "opaque_pixels": 9465
+    },
+    "native/house_hurt/none/01.png": {
+      "bounds": [
+        11,
+        14,
+        117,
+        120
+      ],
+      "opaque_pixels": 8561
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "one_shared_source_recipe": true,
+  "paired_state_points_identical": true,
+  "panes_have_two_glints": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "smoke_on_chimney_top": true,
+  "visible_targets": true,
+  "window_points_measured": true
+}

@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######################..`  **269 / 296 done**
+`######################..`  **270 / 296 done**
 
-0 doing / 27 todo / 0 blocked across 18 phases.
+0 doing / 26 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-27 task(s) left, the ready ones first, then what they
+26 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -156,24 +156,6 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
   - done when: `python tools/show_art.py --work --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0208/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0217 - Art: the house in three tiers
-
-Ready to pick up.  Likely files: `assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd`.
-
-House tiers I, II and III get their approved exteriors, whole and hurt; tier III reads as a small fortified farmhouse.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A035` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A035-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/buildings/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_house_art.py`, which hard-codes `house`/`house_hurt` and their window points today - extend it per tier).
-- Runtime names: `house`, `house_hurt`, `house_2`, `house_2_hurt`, `house_3`, `house_3_hurt` with their slices (`house_<c>_<r>`, `house_2_<c>_<r>`...), `windows_xy`, `window_rects_xywh`, `light_xy` and `smoke_xy` on the same 6x4 footprint as today's house. The pack draws them at full density (128x128, pivot (64,120): today's 64x64 at 2.0), so take `house` out of `ArtPlacement.visual_scale`'s 2.0 list - it matches every file whose name starts `house_`, the tiers too - unless 0191 wrote a different density into the pack
-- Replace 0191's code-marked stand-ins and flip A035's placeholder-registry entries to raster
-- Set the pack to integrated: `python implementation/backlog/assets.py set A035 integrated`.
-
-  - done when: `python tools/check_house_art.py` and `python tools/show_art.py --house --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0217/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0235 - Art: bones, moon stones and essence
@@ -420,7 +402,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -736,7 +718,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0163** [Art: winter ground](prompts/0163-art-winter-ground.md)
 - [x] **0164** [Art: trees through the seasons](prompts/0164-art-seasonal-trees.md)
 
-## 12 - The day that pays  (50/53)
+## 12 - The day that pays  (51/53)
 
 - [x] **0165** [Crops grow by days](prompts/0165-crops-by-days.md)
 - [x] **0166** [A day of eight to ten minutes](prompts/0166-longer-day.md)
@@ -790,7 +772,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0214** [Art: artisan goods](prompts/0214-art-artisan-goods.md)
 - [x] **0215** [Art: the shipping bin](prompts/0215-art-shipping-bin.md)
 - [x] **0216** [Art: the peddler](prompts/0216-art-peddler.md)
-- [ ] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md)
+- [x] **0217** [Art: the house in three tiers](prompts/0217-art-house-tiers.md)
 
 ## 13 - Weapons of the night  (27/28)
 
@@ -875,7 +857,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0217, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0235, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (2/7)
 

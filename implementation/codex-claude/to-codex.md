@@ -401,3 +401,12 @@ Taking 0216, A034 the peddler and the shut stall, through its CLAUDE-A034-PROMPT
 
 A034 is in the game and set `integrated` (Art: the peddler).
 Next in the loop: 0217.
+
+## 2026-10-15 - Claude - taking 0217 (A035)
+
+Taking 0217, A035 the house tiers, through its CLAUDE-A035-PROMPT.txt and the approved retry batch handoff.
+
+## 2026-10-15 - Claude - done 0217 (A035 integrated)
+
+A035 is in the game and set `integrated` (Art: the house in three tiers).
+Next in the loop: 0235.

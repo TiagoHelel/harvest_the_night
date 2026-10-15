@@ -1,0 +1,39 @@
+A035 - The house in three tiers
+Approval date: 2026-10-15
+Owner words, verbatim: "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+Status: approved for integration; runtime not yet integrated.
+
+Authoritative folder: implementation/backlog/deliveries/A035-house-tiers/
+All 6 native output PNGs and the recorded source/component assembly are owner-approved.
+Integration game task: 0217.
+House tiers use native 128x128 pivot (64,120), draw 1.0. Remove house from legacy ArtPlacement.visual_scale 2.0. Cut existing 3x3 slices from these whole frames, columns48/32/48 rows56/32/40. Tier I replaces old half-density house entries. Door/stoop/chimney/left glass remain fixed; points match whole/hurt within tiers. Extend check_house_art.py hardcoded geometry and points. No wreck.
+
+Read APPROVAL.json, contract.json, checks.json, source-selection.json and the shared detailed correction notes:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-REVIEW.md
+That file is the historical correction/assembly explanation. The approved batch handoff below supersedes its old pending-review instructions:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-APPROVED.md
+No older delivery folder is superseded unless listed in contract.supersedes; prior candidate sources in rejected/, preview/ and retry-before-20261014/ are never integration inputs.
+
+Palette mode A: preserve every per-file override, palette_keys, alpha_threshold128, colour_ramp and draw scale.
+Mode A: promote raw sources with the recorded importer crop/nearest scale/anchor/palette recipe. Mode B: final native pixels are exact-source; do not re-quantize.
+Layered outputs: parts/components are authoritative. The primary source/recipe also records provenance; do NOT treat it as a direct crop for a composed file.
+Promote the DAG recursively, maximum5parts per compose node. Derived compose entries must omit source (otherwise the importer bypasses composition), use input=first part input and preserve part order.
+Exact reference, mode-B and baked mirror component PNGs are hashed exact-source leaves. Quarter-turns use the existing rotate operation. Preserve source recipes and approval provenance.
+Canonical importer replay already reproduces all outputs pixel-exact; see pipeline-replay-check.json and the shared check_pipeline_replay.py.
+
+Native -> runtime mapping (01.png is frame0):
+native/house/none/01.png -> sprites/buildings/house.png | 128x128 pivot (64, 120) draw 1 | house none frame0 0.55s loop=false mirror=none | points={"light_xy": [35, 86], "smoke_xy": [98, 20], "window_rects_xywh": [[61, 60, 7, 6], [34, 85, 8, 7], [78, 87, 7, 6], [60, 87, 5, 5], [104, 89, 2, 5]], "windows_xy": [[62, 61], [35, 86], [79, 88], [61, 88], [105, 90]]}
+native/house_hurt/none/01.png -> sprites/buildings/house_hurt.png | 128x128 pivot (64, 120) draw 1 | house_hurt none frame0 0.55s loop=false mirror=none | points={"light_xy": [35, 86], "smoke_xy": [98, 20], "window_rects_xywh": [[61, 60, 7, 6], [34, 85, 8, 7], [78, 87, 7, 6], [60, 87, 5, 5], [104, 89, 2, 5]], "windows_xy": [[62, 61], [35, 86], [79, 88], [61, 88], [105, 90]]}
+native/house_2/none/01.png -> sprites/buildings/house_2.png | 128x128 pivot (64, 120) draw 1 | house_2 none frame0 0.55s loop=false mirror=none | points={"light_xy": [35, 86], "smoke_xy": [98, 20], "window_rects_xywh": [[61, 56, 8, 7], [34, 85, 8, 7], [84, 85, 7, 7], [60, 87, 5, 5], [105, 88, 2, 5]], "windows_xy": [[62, 57], [35, 86], [85, 86], [61, 88], [106, 89]]}
+native/house_2_hurt/none/01.png -> sprites/buildings/house_2_hurt.png | 128x128 pivot (64, 120) draw 1 | house_2_hurt none frame0 0.55s loop=false mirror=none | points={"light_xy": [35, 86], "smoke_xy": [98, 20], "window_rects_xywh": [[61, 56, 8, 7], [34, 85, 8, 7], [84, 85, 7, 7], [60, 87, 5, 5], [105, 88, 2, 5]], "windows_xy": [[62, 57], [35, 86], [85, 86], [61, 88], [106, 89]]}
+native/house_3/none/01.png -> sprites/buildings/house_3.png | 128x128 pivot (64, 120) draw 1 | house_3 none frame0 0.55s loop=false mirror=none | points={"light_xy": [35, 86], "smoke_xy": [98, 20], "window_rects_xywh": [[61, 56, 8, 7], [34, 85, 8, 7], [84, 85, 7, 7], [60, 87, 5, 5], [107, 89, 2, 5]], "windows_xy": [[62, 57], [35, 86], [85, 86], [61, 88], [108, 90]]}
+native/house_3_hurt/none/01.png -> sprites/buildings/house_3_hurt.png | 128x128 pivot (64, 120) draw 1 | house_3_hurt none frame0 0.55s loop=false mirror=none | points={"light_xy": [35, 86], "smoke_xy": [98, 20], "window_rects_xywh": [[61, 56, 8, 7], [34, 85, 8, 7], [84, 85, 7, 7], [60, 87, 5, 5], [107, 89, 2, 5]], "windows_xy": [[62, 57], [35, 86], [85, 86], [61, 88], [108, 90]]}
+
+Aliases: bind listed runtime names directly, replace the named game task's placeholders and retain any existing required aliases to the appropriate approved first frames. Do not invent additional raster frames.
+Mirrors: runtime east mirroring applies only to the authored west-facing animal/NPC cycles identified above. All UI, crop, guardian and static building files bind with no flip. Preserve any per-file mirror field.
+Metadata coordinates are native pixels. Component files are supporting assembly nodes, not extra runtime animations.
+Deviations and owner authorization: [{"change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.", "owner_words": "Sim, autorizar composição com recortes do ImageGen", "rule": "ART-CONTRACT 9.4 barrier-only composition"}]
+
+Never regenerate, repaint, recolour, resample or retime approved art; never cut sprites out of previews, GIFs or screenshots; never add a second flip. Do not use unlisted candidates.
+Next: verify approved output and component hashes; promote versioned sources/assembly via the raster manifest and ownership records; extend hard-coded family checks; run tools/verify.py; inspect actual FHD day/night behavior; set this pack integrated only after successful integration. Claude owns game-task state and assets.py unblock.
+No new commit/push is authorized by this art approval.

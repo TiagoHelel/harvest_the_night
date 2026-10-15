@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-282 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
+283 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -326,6 +326,7 @@ is the sort of thing this list exists to say out loud.
 | 0212 | Art: the coop and the barn | 2026-10-15 |
 | 0215 | Art: the shipping bin | 2026-10-15 |
 | 0216 | Art: the peddler | 2026-10-15 |
+| 0217 | Art: the house in three tiers | 2026-10-15 |
 
 ## Every time the game changed underneath itself
 

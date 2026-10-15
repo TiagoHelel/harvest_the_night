@@ -1,7 +1,7 @@
 # 0217 - Art: the house in three tiers
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0191
 - **Likely files:** assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_house_art.py, src/ui/art_placement.gd, src/ui/house_view.gd
 - **Art packs:** A035

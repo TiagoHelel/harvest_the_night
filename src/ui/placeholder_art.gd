@@ -137,10 +137,6 @@ const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_s
 const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
 
 
-## A035's houses (task 0191): 128x128 at (64,120) over the 6x4 footprint,
-## drawn at 1.0 - today's 64x64 house at (32,60) drawn at 2.0, at full density.
-const HOUSE_TIER := {"canvas": Vector2i(128, 128), "pivot": Vector2i(64, 120), "draw_scale": 1.0}
-
 
 ## A forecast head's box (task 0158): 16x16 at (8,8), drawn at 1.0. A011's
 ## five are raster art since task 0162 - exact crops of each enemy's walk frame
@@ -299,12 +295,6 @@ const ART := {
 	&"hud_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"tilled_fertilised": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	&"tilled_fertilised_wet": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	# A035's sturdier houses (task 0191): today's house, whole or hurt, with
-	# a code-drawn plaque of studs over the door (`WorldView`), until 0217.
-	&"house_2": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
-	&"house_2_hurt": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house_hurt", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
-	&"house_3": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
-	&"house_3_hurt": {"pack": "A035", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/house_hurt", "tint": Color(1, 1, 1), "geometry": HOUSE_TIER, "final": HOUSE_TIER, "bare": true},
 	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 	# A056's collection book (task 0287), until 0288 integrates it: the
 	# cover, the ornament and every badge drawn by code (`CollectionArt`);

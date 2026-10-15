@@ -1,0 +1,349 @@
+{
+  "pack": "A035",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/recovered-house-r3.png",
+      "source_sha256": "d5dc6dedc0fe99aed45028f760f180aefa218fd1785f715571fb4ad580829a89",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/house/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          },
+          "parts": [
+            {
+              "input": "house-pane-4",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                128,
+                128
+              ]
+            }
+          ]
+        },
+        {
+          "component": "source-house",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-house_hurt-r1.png",
+      "source_sha256": "d1db110711166adc100fc559578769c1e1f1d0eba19606db827cf36bdd34cb8c",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/house_hurt/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          },
+          "parts": [
+            {
+              "input": "house_hurt-pane-4",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                128,
+                128
+              ]
+            }
+          ]
+        },
+        {
+          "component": "source-house_hurt",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/house2-r1.png",
+      "source_sha256": "98be802889957dbfc9f33ad080d22cbb7dcee4698f0d5dfe656b63a8692d87e2",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/house_2/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          },
+          "parts": [
+            {
+              "input": "house_2-pane-4",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                128,
+                128
+              ]
+            }
+          ]
+        },
+        {
+          "component": "house-cool-glass-source",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          }
+        },
+        {
+          "component": "source-house_2",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/house2_hurt-r1.png",
+      "source_sha256": "f5ae420ad61b2e03f2bf8323075965d4758e94fc245d6c6d75e8b81957619123",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/house_2_hurt/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          },
+          "parts": [
+            {
+              "input": "house_2_hurt-pane-4",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                128,
+                128
+              ]
+            }
+          ]
+        },
+        {
+          "component": "source-house_2_hurt",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/house3-r1.png",
+      "source_sha256": "7436a8656890d5b4cb15c4e292bfb12252ceaa754451976edc3da517a3da8105",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/house_3/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          },
+          "parts": [
+            {
+              "input": "house_3-pane-4",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                128,
+                128
+              ]
+            }
+          ]
+        },
+        {
+          "component": "source-house_3",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/house3_hurt-r1.png",
+      "source_sha256": "f279b3a841d728002fece4d6db5a8ecfc4c46627657d83c2afe46240e81c5e27",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/house_3_hurt/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          },
+          "parts": [
+            {
+              "input": "house_3_hurt-pane-4",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                128,
+                128
+              ]
+            }
+          ]
+        },
+        {
+          "component": "source-house_3_hurt",
+          "recipe": {
+            "content_anchor_xy": [
+              56,
+              119
+            ],
+            "content_scale": 0.0979020979020979,
+            "crop_xywh": [
+              80,
+              2,
+              1144,
+              1212
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

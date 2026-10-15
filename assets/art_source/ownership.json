@@ -1282,7 +1282,35 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_2.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_2_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_0_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_0_0_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_0_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_0_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_0_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_0_2_hurt.png",
       "owner": "raster"
     },
     {
@@ -1294,6 +1322,30 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_2_1_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_1_0_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_1_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_1_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_1_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_1_2_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_2_1_hurt.png",
       "owner": "raster"
     },
@@ -1302,7 +1354,115 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/house_2_2_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_2_0_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_2_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_2_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_2_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_2_2_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/house_2_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_0_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_0_0_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_0_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_0_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_0_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_0_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_1_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_1_0_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_1_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_1_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_1_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_1_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_2_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_2_0_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_2_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_2_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_2_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_2_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/house_3_hurt.png",
       "owner": "raster"
     },
     {
@@ -2935,6 +3095,258 @@
     },
     {
       "output": "sprites/components/A034-peddler/stall-original.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/common-house-stoop-unit.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/glass-pane-core.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-cool-glass-source.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-fixed-chimney.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-fixed-door.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-fixed-left-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-fixed-stoop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-pane-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-pane-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-pane-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-pane-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house-pane-4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-fixed-chimney.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-fixed-door.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-fixed-left-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-fixed-stoop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-pane-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-pane-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-pane-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-pane-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2-pane-4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-fixed-chimney.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-fixed-door.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-fixed-left-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-fixed-stoop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-pane-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-pane-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-pane-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-pane-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_2_hurt-pane-4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-fixed-chimney.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-fixed-door.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-fixed-left-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-fixed-stoop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-pane-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-pane-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-pane-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-pane-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3-pane-4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-fixed-chimney.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-fixed-door.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-fixed-left-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-fixed-stoop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-pane-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-pane-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-pane-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-pane-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_3_hurt-pane-4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-fixed-chimney.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-fixed-door.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-fixed-left-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-fixed-stoop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-pane-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-pane-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-pane-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-pane-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/house_hurt-pane-4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/source-house.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/source-house_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/source-house_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/source-house_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/source-house_3_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A035-house-tiers/source-house_hurt.png",
       "owner": "raster"
     },
     {

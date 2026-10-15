@@ -1,6 +1,6 @@
 # A035 - The house in three tiers
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0217
 - **Dressed by game tasks:** 0191
 - **Spec after game task:** 0191

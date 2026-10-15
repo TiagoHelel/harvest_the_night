@@ -1,0 +1,44 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "HARVEST THE NIGHT isolated production pixel-art farmhouse. Real transparent alpha, same orthographic topdown camera, neutral upperleft light, no ground/castshadow/smoke/text/glow. CORRECTION third attempt: the person doorway is TOO SHORT relative to32px farmer. Redraw tier1 groundstorey with native persondoor14-16px wide and28-34px tall. Increase timberwall height and reduce roof height accordingly; retainfullbuilding width112native and same doorcentre/chimney/window positions. Finalnative128x128 pivot64,120. Preserve ORIGINAL1254x1254 sourcecanvas. Raw wholebuildingbox x80..1224, y89..1214 and bottomrawrow1213. Targetsource doorway about153wide306tall, centrex652, sillaroundy1166; source3/4perspective walltop/higherwindows frommakingstoreytaller. Door/stoop/chimney/groundleftwindow remain within1nativepixel ofsecondtier reference. Windowglassdarknavywith2coolglints, no warmemissivepanes. Tier1 timberhouse identity, no porchfortification/castle. Image1 currenttier1 edit target; Image2tier2 scale/framing reference; Image3scene style; Image4farmer height reference. Onebuildingonly, no copies/otherstates.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\raw\\house-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\raw\\house2-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\raw\\house-r2.png",
+      "sha256": "b4503b2d24a23a9f01a43106ef0123afe105ec73773632954f468e84d89b8a66",
+      "role": "candidate edit target; owner approval pending",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\rejected\\house-r2.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\raw\\house2-r1.png",
+      "sha256": "98be802889957dbfc9f33ad080d22cbb7dcee4698f0d5dfe656b63a8692d87e2",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "global scene/style reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "approved farmer scale/camera reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1cd2b698-5207-46af-9d5b-5785f24acd2c.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\raw\\recovered-house-r3.png",
+  "sha256": "d5dc6dedc0fe99aed45028f760f180aefa218fd1785f715571fb4ad580829a89",
+  "date": "2026-10-10",
+  "revision": 3,
+  "decision": "Requalified for a new measured conversion recipe; owner review pending.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\rejected\\house-r3.png",
+  "recovered_from": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A035-house-tiers\\rejected\\house-r3.png"
+}
