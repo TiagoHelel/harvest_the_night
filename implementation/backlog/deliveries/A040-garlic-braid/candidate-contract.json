@@ -1,0 +1,136 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "garlic_braid",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Master8px wide, target10\u201312. Diagnostic only.",
+          "night": "preview/garlic_braid-none-0-night.png",
+          "path": "preview/candidates/garlic_braid/none/01.png",
+          "points": {},
+          "pose": "fresh"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "poses": [
+        "fresh"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/barricade.png",
+      "pivot_xy": [
+        8,
+        20
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "delivery_type": "owner-approved reviewed artwork; partial delivery",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "garlic_braid",
+      "call": "raw/garlic-master-r3.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/garlic_braid/none/01.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "fresh",
+      "prompt": "raw/garlic-master-r3.prompt.txt",
+      "prompt_sha256": "8890aff572d0af925e2235ec4b2a6ab75c42842eabe6dfa2bc5e2b0397e7c77d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.012211668928086838,
+        "crop_xywh": [
+          154,
+          67,
+          688,
+          1474
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          980,
+          1605
+        ]
+      },
+      "review_issue": "Master8px wide, target10\u201312. Diagnostic only.",
+      "runtime_name": "sprites/buildings/garlic_braid.png",
+      "seconds": 0.55,
+      "sha256": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119",
+      "source": "raw/garlic-master-r3.png",
+      "source_sha256": "f7e444ca56b04191454ce9a0726f644522ba6446da9570bdacc0703bea0988fc"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+    "scope": "available_reviewed_files_only"
+  },
+  "pack": "A040",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\barricade.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "e99ee6cb46d0f0ac182a1eace7703c5f04e0d8fd25f44dc8901261707b0a8839"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\crops\\garlic_3.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "5bb1ca7fc16afc2162c281c3b3a9955198a25e380d0dcd77b74e9a49efd1c577"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A040-garlic-braid",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "The garlic braid",
+  "tool": "built-in ImageGen"
+}

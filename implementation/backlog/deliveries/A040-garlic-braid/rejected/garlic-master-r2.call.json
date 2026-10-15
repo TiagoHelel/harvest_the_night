@@ -1,0 +1,49 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nPrimary request: A040 identity master, ONE fresh garlic braid hanging from a short wooden stake with small crosspiece.\nInput images: Image1 reference-sheet is style/materials; Image2 barricade is canvas/density/ground scale; Image3 ripegarlic is bulb colours/material only; Image4 farmer scale only.\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters, colored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on rectangular grid; match farm camera. Native16x24, pivot(8,20), lowest opaque row19. Visible11wide x18tall. One short thin timber stake with crosspiece, not a large structure.\nLighting/mood: neutral warm daytime, upper-left highlights, dark undersides; runtime provides night.\nColor palette: warm wood, gold dried plaited stems, bone/bone_dark pale garlic bulbs with faint violet streaks; NOTblue glowing bulbs.\nFamily WALL_TRAP adapted: small walkable garlic braid on a stake, six plump bulbs in a hanging plait. Each bulb is a broad2\u20133nativepixel pale cluster, few large bulbs rather than many tiny. Stake centred, no fence/wall, no pot or ground patch, no aura.\nScene/backdrop: TRUE transparent outside sharp solid object pixels, alpha0, NO glow/haze or ground shadow.\nConstraints: complete unclipped single object, stable ground contact, no labels/text/watermark/UI/other objects. No blur/gradient/anti-aliasing/vector/3D/randomspeckle/blackboxes/diamondbase; simple enough to remain readable at11x18.\nCORRECTION: Image5 is edit target. Measured visible398x1194 reduces to6x18, too narrow. Required complete silhouette11x18, ratio0.61. Make crosspiece and each plump bulb about TWICE as wide, broad garlic shapes, same overall height and same thin centred stake. Six large bulbs in a shorter compact braid; bare stake remains below. Preserve all style/colour/camera. No glow/gradient/haze outside object; absolute transparent background.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/barricade.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/crops/garlic_3.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/barricade.png",
+      "sha256": "e99ee6cb46d0f0ac182a1eace7703c5f04e0d8fd25f44dc8901261707b0a8839",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/crops/garlic_3.png",
+      "sha256": "5bb1ca7fc16afc2162c281c3b3a9955198a25e380d0dcd77b74e9a49efd1c577",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-master-r1.png",
+      "sha256": "48bc03cf035385199d209a4b0fe0aa8862f67680fb6012c1ad46845c4aa8d58e",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A040-garlic-braid\\rejected\\garlic-master-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-cc41bc96-7bce-4d3c-8886-f37e60096b35.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A040-garlic-braid\\raw\\garlic-master-r2.png",
+  "sha256": "55caaea055e0a7fa607870b3cb7079176424e9840ddff7255d3cbdd8764d2d5b",
+  "revision": 2,
+  "decision": "rejected: Visible6x18, ratio unchanged after correction.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A040-garlic-braid\\rejected\\garlic-master-r2.png"
+}

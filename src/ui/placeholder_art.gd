@@ -203,10 +203,6 @@ const SEARCHLIGHT := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dr
 const LENS := [Vector2i(16, 23)]
 const LENS_2 := [Vector2i(15, 22)]
 
-## A040's garlic braid (task 0228): 16x24 standing on (8,20), the barricade's
-## canvas, drawn at 1.0.
-const GARLIC := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
-
 ## A042's electric fence (task 0230): the wooden fence's 16x32 standing on
 ## (8,28), drawn at 1.0; and its zap, 12x12 round (6,6), an impact's box.
 const ELECTRIC_FENCE := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
@@ -578,11 +574,6 @@ const ART := {
 	&"sandbag_wall_join_14_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
 	&"sandbag_wall_join_15_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
 	&"sandbag_wall_wreck": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true},
-	# A040's garlic braid (task 0228), drawn in code by `GarlicArt` until 0239:
-	# fresh, wilted and spent.
-	&"garlic_braid": {"pack": "A040", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": GARLIC, "final": GARLIC, "bare": true},
-	&"garlic_braid_wilted": {"pack": "A040", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": GARLIC, "final": GARLIC, "bare": true},
-	&"garlic_braid_spent": {"pack": "A040", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": GARLIC, "final": GARLIC, "bare": true},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

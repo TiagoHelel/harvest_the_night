@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-14**, with task 0238's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0239's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 249 done, 47 todo, 0 blocked (84%).**
-18 art integrations are ready, one a run as the owner asks (`task.py next`
-says 0239). 20 more wait on art that is blocked or deferred (3b, 3c), and
+**The game backlog: 296 tasks, 250 done, 46 todo, 0 blocked (84%).**
+17 art integrations are ready, one a run as the owner asks (`task.py next`
+says 0240). 20 more wait on art that is blocked or deferred (3b, 3c), and
 the rest of the backlog on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -35,7 +35,7 @@ What is left goes to 0278 and 0280. Every call and trial is in
 | 0296 | The store page and trailer for 1.0 | 0290, 0294 |
 | 0297 | Releasing 1.0 | 0290, 0291, 0294, 0295, 0296 |
 
-## 3. The art: 38 game tasks left, one pack each
+## 3. The art: 37 game tasks left, one pack each
 
 Each game task integrates one Codex pack. The game already plays every
 one of these with a placeholder (task 0120's road). The pack's state is
@@ -57,7 +57,7 @@ The owner approved 15 at 16:56 and the other six's additions at 21:11
 | A037 | The scarecrow decoy and zombie bait (**integrated** by 0236, 2026-10-14) | 0236 |
 | A038 | The beehive (**integrated** by 0237, 2026-10-14) | 0237 |
 | A039 | The pumpkin catapult (**integrated** by 0238, 2026-10-14) | 0238 |
-| A040 | The garlic braid | 0239 |
+| A040 | The garlic braid (**integrated** by 0239, 2026-10-15) | 0239 |
 | A041 | The searchlight | 0240 |
 | A042 | The electric fence | 0241 |
 | A043 | Hardwood walls and sandbags | 0242 |

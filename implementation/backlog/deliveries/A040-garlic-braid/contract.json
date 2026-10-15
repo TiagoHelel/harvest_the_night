@@ -1,0 +1,320 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "garlic_braid",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Owner-approved fresh image, preserved byte-for-byte.",
+          "night": "preview/garlic_braid-none-0-night.png",
+          "path": "native/garlic_braid/none/01.png",
+          "points": {},
+          "pose": "fresh"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "poses": [
+        "fresh"
+      ]
+    },
+    {
+      "anim": "garlic_braid_spent",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "New state awaiting review; approved fresh retained.",
+          "night": "preview/garlic_braid_spent-none-0-night.png",
+          "path": "native/garlic_braid_spent/none/01.png",
+          "points": {},
+          "pose": "spent"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "poses": [
+        "spent"
+      ]
+    },
+    {
+      "anim": "garlic_braid_wilted",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "New state awaiting review; approved fresh retained.",
+          "night": "preview/garlic_braid_wilted-none-0-night.png",
+          "path": "native/garlic_braid_wilted/none/01.png",
+          "points": {},
+          "pose": "wilted"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "poses": [
+        "wilted"
+      ]
+    }
+  ],
+  "approved_existing_files": {
+    "native/garlic_braid/none/01.png": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119",
+    "native/garlic_braid_spent/none/01.png": "707f14928903e0beaad2679142fbc16ce169764ff9a0ddd252362fac28c6de64",
+    "native/garlic_braid_wilted/none/01.png": "4c764ede0a1b5700e58bd5c1c26a9341ef5bc71276fcb27e6356688b0f7a1301"
+  },
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/barricade.png",
+      "pivot_xy": [
+        8,
+        20
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Retain the owner-approved 8px-wide fresh image with its exact source crop and SHA-256.",
+      "owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+      "rule": "Fresh braid width target"
+    },
+    {
+      "change": "Preserve the approved fresh source; missing states are separate ImageGen edits at the exact same family content_scale.",
+      "interpretation": "Necessary continuation layout to preserve prior approved pixels; no density or artistic pixel edits changed.",
+      "owner_words": "entao bora continuar essa poha",
+      "rule": "Single source sheet for all three states"
+    },
+    {
+      "accepted_checks": [
+        "fresh_braid_dimensions"
+      ],
+      "change": "Owner accepted the exact displayed artwork and the documented visual differences; measurements remain unchanged.",
+      "owner_words": "tudo aprovado, falta mais?",
+      "rule": "Reviewed visual measurements"
+    }
+  ],
+  "files": [
+    {
+      "anim": "garlic_braid",
+      "call": "raw/garlic-master-r3.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/garlic_braid/none/01.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "fresh",
+      "prompt": "raw/garlic-master-r3.prompt.txt",
+      "prompt_sha256": "8890aff572d0af925e2235ec4b2a6ab75c42842eabe6dfa2bc5e2b0397e7c77d",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.012211668928086838,
+        "crop_xywh": [
+          154,
+          67,
+          688,
+          1474
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          980,
+          1605
+        ]
+      },
+      "review_issue": "Owner-approved fresh image, preserved byte-for-byte.",
+      "runtime_name": "sprites/buildings/garlic_braid.png",
+      "seconds": 0.55,
+      "sha256": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119",
+      "source": "raw/garlic-master-r3.png",
+      "source_sha256": "f7e444ca56b04191454ce9a0726f644522ba6446da9570bdacc0703bea0988fc"
+    },
+    {
+      "anim": "garlic_braid_wilted",
+      "call": "raw/garlic-wilted-r1.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/garlic_braid_wilted/none/01.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "wilted",
+      "prompt": "raw/garlic-wilted-r1.prompt.txt",
+      "prompt_sha256": "6461171cc5aeebff761f29087ddd6044438061d2a9aef17b72e362681fea9f40",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.012211668928086838,
+        "crop_xywh": [
+          154,
+          66,
+          689,
+          1446
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          980,
+          1605
+        ]
+      },
+      "review_issue": "New state awaiting review; approved fresh retained.",
+      "runtime_name": "sprites/buildings/garlic_braid_wilted.png",
+      "seconds": 0.55,
+      "sha256": "4c764ede0a1b5700e58bd5c1c26a9341ef5bc71276fcb27e6356688b0f7a1301",
+      "source": "raw/garlic-wilted-r1.png",
+      "source_sha256": "d85a1d1474941a56ad4e6bcd08a33aecd7260e66c7a3e6df29706afe434f0119"
+    },
+    {
+      "anim": "garlic_braid_spent",
+      "call": "raw/garlic-spent-r1.call.json",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/garlic_braid_spent/none/01.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "points": {},
+      "pose": "spent",
+      "prompt": "raw/garlic-spent-r1.prompt.txt",
+      "prompt_sha256": "6f5287ef89a2bdd7747f1a402da7397bed5fb4b468df0ab8a3c2cbdcd90fd86f",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.012211668928086838,
+        "crop_xywh": [
+          154,
+          66,
+          689,
+          1446
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          980,
+          1605
+        ]
+      },
+      "review_issue": "New state awaiting review; approved fresh retained.",
+      "runtime_name": "sprites/buildings/garlic_braid_spent.png",
+      "seconds": 0.55,
+      "sha256": "707f14928903e0beaad2679142fbc16ce169764ff9a0ddd252362fac28c6de64",
+      "source": "raw/garlic-spent-r1.png",
+      "source_sha256": "6ce97ee4b77074ce933360ffe12b056cd8b07492bf5114a7aada2e0f1c46d3d6"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "tudo aprovado, falta mais?",
+    "scope": "complete_reviewed_delivery"
+  },
+  "pack": "A040",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "pending_review_files": [],
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "project style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\barricade.png",
+      "role": "barricade camera and material reference only",
+      "sha256": "e99ee6cb46d0f0ac182a1eace7703c5f04e0d8fd25f44dc8901261707b0a8839"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\crops\\garlic_3.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "5bb1ca7fc16afc2162c281c3b3a9955198a25e380d0dcd77b74e9a49efd1c577"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A040-garlic-braid\\raw\\garlic-master-r3.png",
+      "role": "approved fresh identity and exact edit target",
+      "sha256": "f7e444ca56b04191454ce9a0726f644522ba6446da9570bdacc0703bea0988fc"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A040-garlic-braid",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The garlic braid",
+  "tool": "built-in ImageGen"
+}

@@ -210,3 +210,14 @@ check_effect_art now checks the packs' effects in one table (loops and the
 splat as a one-shot). One thing for A046 later: a raster texture drawn with
 `draw_texture` must be held (static cache), or it renders as a white square.
 Next in the loop: 0239 (A040).
+
+## 2026-10-14 - Claude - taking 0239 (A040)
+
+Taking 0239, A040 the garlic braid, through its CLAUDE-A040-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0239 (A040 integrated)
+
+A040 is in the game and set `integrated`: 3 native PNGs sha-checked and
+rendered to the approved pixels exactly, on the barricade's canvas and pivot.
+check_barrier_art takes the braid's three states. Next in the loop: 0240
+(A041), when the owner asks.

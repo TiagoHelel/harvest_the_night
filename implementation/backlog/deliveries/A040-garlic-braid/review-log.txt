@@ -1,0 +1,20 @@
+2026-10-14 / Task0228 verified done; owner-authorized21packbatch, review only at end.
+
+2026-10-14 / Measured native export
+Identity master reached r3 correction limit: visible8x18 versus required10–12x17–19. Fresh diagnostic only; wilted/spent not generated because identity geometry is not accepted.
+No production export; owner review is deferred to final21packHTML.
+No art approval inferred. 1 of 3 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+1/3 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: all_three_alpha_shapes_distinct, fresh_braid_dimensions. Approval applies only to displayed images. Missing outputs remain a delivery blocker, not a rejection of approved art.
+
+2026-10-14 / Owner resumed pending art: “entao bora continuar essa poha”. Reopening A040 for its two missing states only. Existing fresh pixels and source recipe remain approved and unchanged. New states are separate ImageGen edit sources at the same family content_scale; final review will cover only the additions.
+
+2026-10-14 / Completed the two missing ImageGen states: garlic-wilted-r1 and garlic-spent-r1, both 980x1605 with true alpha. The approved fresh source, recipe and PNG hash remain unchanged. All states share content_scale 0.012211668928086838; the new crops are registered to the same source grid and stake contact. Only the two additions await review; no approval inferred from continuation authorization.
+
+2026-10-14 / Complete continuation owner approval
+Owner words: tudo aprovado, falta mais?
+Review: implementation/backlog/deliveries/A028-dog/continuation-final-review.html
+All 3 native outputs approved, including 2 new PNGs. Original approved PNGs remain byte-identical. Accepted measured visual differences: fresh_braid_dimensions. No art, motion, palette, timing or runtime files changed.

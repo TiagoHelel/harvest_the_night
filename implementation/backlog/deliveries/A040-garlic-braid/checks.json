@@ -1,0 +1,61 @@
+{
+  "all_three_alpha_shapes_distinct": true,
+  "all_three_states_complete": true,
+  "approved_art_hashes_match": true,
+  "approved_sitting_unchanged": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "clear_canvas_margins": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 3,
+  "frames_found": 3,
+  "fresh_braid_dimensions": false,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/garlic_braid/none/01.png": {
+      "bounds": [
+        4,
+        2,
+        12,
+        20
+      ],
+      "opaque_pixels": 89
+    },
+    "native/garlic_braid_spent/none/01.png": {
+      "bounds": [
+        5,
+        2,
+        12,
+        20
+      ],
+      "opaque_pixels": 53
+    },
+    "native/garlic_braid_wilted/none/01.png": {
+      "bounds": [
+        4,
+        2,
+        12,
+        20
+      ],
+      "opaque_pixels": 79
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "one_scale_per_family": true,
+  "owner_accepted_visual_checks": [
+    "fresh_braid_dimensions"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "stake_contact_aligned": true,
+  "stake_top_aligned": true
+}

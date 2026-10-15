@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-14",
+  "owner_words": "entao bora continuar essa poha",
+  "scope": "Resume missing outputs in the 6 incomplete current-batch packs, then audit the 13 earlier active deliveries. Preserve all already-approved PNGs and deferred farmer scope.",
+  "working_pack": "A040",
+  "new_outputs": [
+    "sprites/buildings/garlic_braid_wilted.png",
+    "sprites/buildings/garlic_braid_spent.png"
+  ],
+  "preserved_approval_hashes": {
+    "preview/candidates/garlic_braid/none/01.png": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119"
+  },
+  "new_art_approval": "New outputs require review; the existing fresh approval is preserved.",
+  "source_layout": "Keep the approved fresh source unchanged; create separate edited source files for missing states at the same content_scale. This continuation layout preserves the owner-approved image instead of regenerating the fresh sheet."
+}

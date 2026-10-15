@@ -8294,17 +8294,25 @@ func _task_0228_garlic() -> void:
 		and (said["en"] as String).contains("to %d%%" % wilted)
 		and (said["pt_BR"] as String).contains("RÉSTIA DE ALHO") and (said["pt_BR"] as String).contains("%d ladrilhos" % reach),
 		"its name, its area, its slow and its wear, in both languages", str(said))
+	# **A040's art since task 0239**: three states on the barricade's canvas
+	# and pivot, each its own picture, picked by the nights the braid has seen.
 	var drawn: Array = []
-	var fresh := GarlicArt.drawing(&"garlic_braid")
-	for name in GarlicArt.DRAWN:
-		var image := GarlicArt.drawing(name)
-		var used := image.get_used_rect()
-		if image.get_size() != Vector2i(16, 24) or used.end.y != 20 or used.position.x < 2 or used.end.x > 14 \
-				or not PlaceholderArt.is_drawn(GarlicArt.path_of(name)) \
-				or str(PlaceholderArt.art(name).get("pack", "")) != "A040" \
-				or image.get_pixel(7, 19) != PaletteData.COLOURS[&"wood"] or image.get_pixel(8, 19) != PaletteData.COLOURS[&"wood_dark"] \
-				or (name != &"garlic_braid" and image.get_data() == fresh.get_data()):
+	var pictures := {}
+	for name in GarlicArt.STATES:
+		var path := GarlicArt.path_of(name)
+		var frame := PlaceholderArt.frame(path)
+		var texture := GarlicArt.texture(name)
+		if texture == null or texture.resource_path != path or not RasterArt.FRAMES.has(path) \
+				or PlaceholderArt.is_drawn(path) or not PlaceholderArt.art(name).is_empty() \
+				or frame.get("canvas") != Vector2i(16, 24) or frame.get("pivot") != Vector2i(8, 20):
 			drawn.append(name)
+		elif texture != null:
+			pictures[texture.get_image().get_data()] = true
+	var aged: Array = []
+	for nights in [1, 2, 3]:
+		aged.append(WorldView.garlic_art({"id": &"garlic_braid", "nights": nights}))
+	if pictures.size() != 3 or aged != GarlicArt.STATES:
+		drawn.append("%d pictures, aged %s" % [pictures.size(), str(aged)])
 	var bar := Hotbar.new()
 	var icon := bar._icon_of(&"garlic_braid")
 	bar.free()
@@ -8313,7 +8321,7 @@ func _task_0228_garlic() -> void:
 	mode.free()
 	expect(drawn.is_empty() and icon == GarlicArt.texture(&"garlic_braid") and previews
 		and not WorldView.lies_flat(&"garlic_braid") and WorldView.lies_flat(&"zombie_bait"),
-		"drawn in code for A040 at 16x24 on its stake, fresh, wilted and spent apart; standing among the feet that pass, not under them; the hotbar's icon; and a braid in hand draws the route as a wall does",
+		"A040's art at 16x24 on (8,20), fresh, wilted and spent apart by its nights; standing among the feet that pass, not under them; the hotbar's icon; and a braid in hand draws the route as a wall does",
 		str(drawn))
 	var perf_tool := FileAccess.get_file_as_string("res://tools/perf.py")
 	var perf_check := FileAccess.get_file_as_string("res://src/tools/perf_check.gd")

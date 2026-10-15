@@ -1,0 +1,3 @@
+def check(images,p):
+ ims=list(images.values());b=ims[0].getbbox()
+ return {'fresh_braid_dimensions':10<=b[2]-b[0]<=12 and 17<=b[3]-b[1]<=19,'all_three_states_complete':len(ims)==3,'all_three_alpha_shapes_distinct':len({im.getchannel('A').tobytes() for im in ims})==3,'one_scale_per_family':len({f['recipe']['content_scale'] for f in p['files']})==1,'stake_contact_aligned':all([x for x in range(16) if im.getpixel((x,19))[3]]==[8] for im in ims),'stake_top_aligned':max(im.getbbox()[1] for im in ims)-min(im.getbbox()[1] for im in ims)<=1,'clear_canvas_margins':all(im.getbbox()[0]>=1 and im.getbbox()[2]<=15 and im.getbbox()[1]>=1 for im in ims)}

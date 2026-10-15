@@ -63380,6 +63380,204 @@
         3
       ],
       "output_sha256": "dd3261bf3053329b9cd7261175548b8ff2bb17f2cf968b9059f80989f4c5261d"
+    },
+    {
+      "id": "buildings/garlic_braid",
+      "owner": "raster",
+      "source": "assets/art_source/defences/garlic_braid/garlic-master-r3.png",
+      "source_sha256": "f7e444ca56b04191454ce9a0726f644522ba6446da9570bdacc0703bea0988fc",
+      "crop_xywh": [
+        154,
+        67,
+        688,
+        1474
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        -4
+      ],
+      "content_scale": 0.012211668928086838,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/garlic_braid",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/garlic_braid.png",
+      "prompt": "implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-master-r3.prompt.txt",
+      "prompt_sha256": "8890aff572d0af925e2235ec4b2a6ab75c42842eabe6dfa2bc5e2b0397e7c77d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-master-r3.call.json",
+          "sha256": "007e101b6f4df2134c532b9a064eb0299f69ac30011effc93b3794ede798f9d8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/native/garlic_braid/none/01.png",
+          "sha256": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/contract.json",
+          "sha256": "c607cc66cc5a1352821827d5c76ddaa1ecda32c245d378b445c7bd73d74c03a2",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/APPROVAL.json",
+          "sha256": "10b9689e617c55bf6c5ebe2c22b4955e526b3955a46e54711b85eece6b01de57",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A040",
+      "integration_task": "0239",
+      "revision": 1,
+      "approval": "A040 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0239",
+      "content_anchor_xy": [
+        4,
+        18
+      ],
+      "output_sha256": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119"
+    },
+    {
+      "id": "buildings/garlic_braid_wilted",
+      "owner": "raster",
+      "source": "assets/art_source/defences/garlic_braid/garlic-wilted-r1.png",
+      "source_sha256": "d85a1d1474941a56ad4e6bcd08a33aecd7260e66c7a3e6df29706afe434f0119",
+      "crop_xywh": [
+        154,
+        66,
+        689,
+        1446
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        -4
+      ],
+      "content_scale": 0.012211668928086838,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/garlic_braid_wilted",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/garlic_braid_wilted.png",
+      "prompt": "implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-wilted-r1.prompt.txt",
+      "prompt_sha256": "6461171cc5aeebff761f29087ddd6044438061d2a9aef17b72e362681fea9f40",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-wilted-r1.call.json",
+          "sha256": "6b62d47e2d1421a050c6e1651cc8359608ec5e58f34f4979c712cb59c87e742f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/native/garlic_braid_wilted/none/01.png",
+          "sha256": "4c764ede0a1b5700e58bd5c1c26a9341ef5bc71276fcb27e6356688b0f7a1301",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/contract.json",
+          "sha256": "c607cc66cc5a1352821827d5c76ddaa1ecda32c245d378b445c7bd73d74c03a2",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/APPROVAL.json",
+          "sha256": "10b9689e617c55bf6c5ebe2c22b4955e526b3955a46e54711b85eece6b01de57",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A040",
+      "integration_task": "0239",
+      "revision": 1,
+      "approval": "A040 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0239",
+      "content_anchor_xy": [
+        4,
+        18
+      ],
+      "output_sha256": "4c764ede0a1b5700e58bd5c1c26a9341ef5bc71276fcb27e6356688b0f7a1301"
+    },
+    {
+      "id": "buildings/garlic_braid_spent",
+      "owner": "raster",
+      "source": "assets/art_source/defences/garlic_braid/garlic-spent-r1.png",
+      "source_sha256": "6ce97ee4b77074ce933360ffe12b056cd8b07492bf5114a7aada2e0f1c46d3d6",
+      "crop_xywh": [
+        154,
+        66,
+        689,
+        1446
+      ],
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "cell_offset_xy": [
+        0,
+        -4
+      ],
+      "content_scale": 0.012211668928086838,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/garlic_braid_spent",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/garlic_braid_spent.png",
+      "prompt": "implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-spent-r1.prompt.txt",
+      "prompt_sha256": "6f5287ef89a2bdd7747f1a402da7397bed5fb4b468df0ab8a3c2cbdcd90fd86f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/raw/garlic-spent-r1.call.json",
+          "sha256": "4588317cf6390b4d44ed978f6b24ff150026ec2b23a77625fd8066f4e5079540",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/native/garlic_braid_spent/none/01.png",
+          "sha256": "707f14928903e0beaad2679142fbc16ce169764ff9a0ddd252362fac28c6de64",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/contract.json",
+          "sha256": "c607cc66cc5a1352821827d5c76ddaa1ecda32c245d378b445c7bd73d74c03a2",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A040-garlic-braid/APPROVAL.json",
+          "sha256": "10b9689e617c55bf6c5ebe2c22b4955e526b3955a46e54711b85eece6b01de57",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A040",
+      "integration_task": "0239",
+      "revision": 1,
+      "approval": "A040 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0239",
+      "content_anchor_xy": [
+        4,
+        18
+      ],
+      "output_sha256": "707f14928903e0beaad2679142fbc16ce169764ff9a0ddd252362fac28c6de64"
     }
   ]
 }

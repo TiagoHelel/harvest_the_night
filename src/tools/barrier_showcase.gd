@@ -99,6 +99,7 @@ func _run() -> void:
 	await _masks_and_borders()
 	await _ghosts_and_route()
 	await _barricades()
+	await _garlic_braids()
 	await _mine_states()
 	await _mine_exclusions()
 	await _mine_batch()
@@ -282,6 +283,29 @@ func _barricades() -> void:
 	await _settle()
 	expect(not _world._wreck_sprites.is_empty(), "Loaded barrier ruins need no invented saved view fields")
 	await _shoot("loaded_ruins", "Reloaded actual barrier ruins / unchanged save data")
+
+
+## **A040's garlic braid** (task 0239), out from under its day tarp: three
+## braids by a route, a night old, two and three - fresh, wilted and spent,
+## as `Garlic.state_of` reads them - standing on the barricade's contact, by
+## day, at dusk and by night.
+func _garlic_braids() -> void:
+	_world.tarps = false
+	for light in 3:
+		_state = _blank(light)
+		var cells: Array[Vector2i] = [Vector2i(9, 8), Vector2i(13, 8), Vector2i(17, 8)]
+		for i in cells.size():
+			_place(&"garlic_braid", cells[i])
+			Farm.occupant(_state, cells[i])["nights"] = i + 1
+		await _settle()
+		for i in cells.size():
+			var sprite := _sprite(cells[i])
+			var name := (GarlicArt.STATES[i] as StringName)
+			expect(sprite != null and sprite.texture.resource_path == GarlicArt.path_of(name), "A braid %d nights old wears %s" % [i + 1, name])
+			if sprite != null:
+				expect(sprite.offset == -Vector2(8, 20) and sprite.position == Vector2(cells[i]) * 16 + Vector2(8, 16), "A braid stands on the barricade's one-cell contact")
+		await _shoot("garlic_%d" % light, "Fresh / wilted / spent garlic, the nights it has seen")
+	_world.tarps = true
 
 
 func _mine_states() -> void:

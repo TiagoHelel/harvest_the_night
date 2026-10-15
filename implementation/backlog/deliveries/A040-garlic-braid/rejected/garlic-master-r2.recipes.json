@@ -1,0 +1,41 @@
+[
+  {
+    "recipe": {
+      "id": "garlic-master-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A040-garlic-braid\\raw\\garlic-master-r2.png",
+      "crop_xywh": [
+        278,
+        28,
+        516,
+        1481
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "content_scale": 0.012153950033760972,
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      2,
+      11,
+      20
+    ],
+    "unclipped_scaled_wh": [
+      6,
+      18
+    ]
+  }
+]

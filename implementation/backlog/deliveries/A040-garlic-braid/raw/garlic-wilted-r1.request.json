@@ -1,0 +1,20 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit / stylized-concept\nAsset type: production pixel-art sprite source for HARVEST THE NIGHT.\nInput images: Image 1 is the owner-approved fresh garlic braid, the exact edit target and identity/framing master. Image 2 is the project's farm pixel-art style reference only. Image 3 is the existing barricade, a material/camera reference only; never include the barricade.\nStyle: preserve Image 1's deliberate square pixel clusters, warm timber, colored outlines and upper-left daylight. Orthographic three-quarter top-down game camera; no diamond isometric base.\nFinal game canvas: 16x24 logical pixels, pivot (8,20), draw scale 1.0, static state. The approved fresh source is reduced with one fixed content_scale 0.012211668928086838; the new state must use that same reduction, not an independently fitted scale.\nComposition: exactly ONE isolated sprite. Preserve the existing wooden stake, crosspiece, camera, source size and positioning. Keep the same 980x1605 portrait composition and transparent margins as Image 1; the stake starts and ends at the same image coordinates and has the same pixel dimensions. Do not enlarge the smaller garlic clusters to fill the frame.\nThe changes apply only to the hanging garlic bulbs and their stems; the post and crosspiece remain intact. Every colored shape must stay connected to the braid or post; no loose ground litter.\nTrue transparent background. Complete object, no clipping, no labels, text, watermark, UI, ground, shadow, halo, aura, glow, gradients, blur, smooth painting, 3D, antialiasing or extra objects.\nPrimary request: create ONLY garlic_braid_wilted, the SECOND-NIGHT state. The same approved braid is aging: use FOUR garlic bulbs, visibly smaller than Image 1's five fresh bulbs. Their skins are dull tan/brown-grey rather than bright white, with a little muted violet retained. The gold braided stems sag lower, and one or two short stems hang loose. Change the outer alpha silhouette slightly where the bulbs shrink and the stems sag. Keep the exact timber stake and crosspiece unchanged and the stake bottom at its original contact. The state must clearly read as wilted garlic that is still partly usable. Do not show damage, wreckage, green leaves, mold, scent lines or emission.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A040-garlic-braid\\raw\\garlic-master-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\barricade.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-26901964-c9c3-4be5-b96a-994031a73c0b.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "approved fresh identity and exact edit target",
+    "project style reference",
+    "barricade camera and material reference only"
+  ]
+}

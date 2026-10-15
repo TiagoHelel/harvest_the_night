@@ -958,6 +958,18 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/garlic_braid.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/garlic_braid_spent.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/garlic_braid_wilted.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/gun_tower.png",
       "owner": "raster"
     },

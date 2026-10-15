@@ -14069,11 +14069,8 @@ func _building_art(name: StringName) -> Image:
 		var path := PlaceholderArt.texture_path("%s%s.png" % [folder, name])
 		if not path.is_empty() and ResourceLoader.exists(path):
 			return Image.load_from_file(ProjectSettings.globalize_path(path))
-		# **Or drawn in code** until its pack lands (task 0224's decoy, 0228's
-		# garlic braid): the drawing the view puts there.
-		if path.is_empty() and GarlicArt.texture(name) != null:
-			return GarlicArt.drawing(name)
-		# And task 0230's electric fence, every mask and its wreck.
+		# **Or drawn in code** until its pack lands (task 0230's electric
+		# fence, every mask and its wreck): the drawing the view puts there.
 		if path.is_empty() and ElectricFenceArt.texture(name) != null:
 			return ElectricFenceArt.drawing(name)
 		# And task 0231's hardwood wall and sandbags.
@@ -14738,9 +14735,10 @@ func _task_0082_shots() -> void:
 	# under a Blood Moon. A hundred and twenty-one since 0293: the first
 	# week's bed, cursor and forecast lines. A hundred and twenty-two since
 	# 0277: a line's ruins the morning after. A hundred and twenty-three since
-	# 0236: A037's decoy and bait, by night and by day.
-	expect(names.size() == 123,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art and the 1.0 farm",
+	# 0236: A037's decoy and bait, by night and by day. A hundred and
+	# twenty-four since 0239: A040's garlic braid, by night and by day.
+	expect(names.size() == 124,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",

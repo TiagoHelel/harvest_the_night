@@ -31802,3 +31802,67 @@ stand-ins are gone.
 - **Checks**: `python tools/verify.py` - PASS (61 of 61). The first run
   failed to compile `headless_v1.gd`: `var weak := weakref(...)` infers from
   a Variant, a warning this project treats as an error. It is typed now.
+
+## 0239 - Art: the garlic braid - done 2026-10-15
+
+A040 is integrated: the braid fresh, wilted and spent is the owner-approved
+art now. The owner approved it on 2026-10-14 ("tudo aprovado, falta mais?",
+the continuation review), as Codex recorded in the delivery's
+`APPROVAL.json`. The owner accepted `fresh_braid_dimensions` as measured.
+0228's drawing is gone.
+
+- **Promotion**: the 3 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - Their three raw sources were copied byte for byte into
+    `assets/art_source/defences/garlic_braid/`.
+  - Each output has a manifest entry with its prompt, call, native,
+    contract and approval provenance, and an `ownership.json` row. Then
+    `tools/import_art.py` ran.
+  - 0236's scratch promoter solved each `content_anchor_xy`: every render
+    decodes to the approved pixels exactly, at one scale for all three.
+  - The cell offset is the barricade's [0,-4], on the same 16x24 canvas and
+    (8,20) pivot.
+- **The state picks the picture**, as 0228 left it: `WorldView.garlic_art`
+  reads `Garlic.state_of` (one night fresh, two wilted, three or more spent),
+  and the view finds A040's file by its runtime name as it does any
+  building's.
+- **The stand-ins retired**:
+  - A040's three `PlaceholderArt` entries and the `GARLIC` geometry are
+    gone. `placeholders.py --check` passes, with 347 stand-ins left over
+    35 packs.
+  - `GarlicArt` loses its drawing. It loads the three states, which the
+    hotbar's icon asks for.
+  - `WorldView` loses its branch to the drawing, and `headless_check` its
+    branch to the old image.
+- **Checks**:
+  - `check_barrier_art.py` takes A040's three entries, each on the
+    barricade's canvas and pivot, at one scale and distinct. The stake
+    stands on the pivot's row in every state.
+  - The barrier showcase gains `_garlic_braids`, with 3,317 checks. Three
+    real braids, one, two and three nights old, wear fresh, wilted and
+    spent on the barricade's contact, by day, at dusk and by night, with
+    the day tarp off.
+- **Tests**: `_task_0228_garlic`'s view half now checks the art. Each state
+  is A040's raster on (8,20), with nothing left of 0120's road. The three
+  are distinct pictures, picked by one, two and three nights.
+- **Shots** (`implementation/shots/0239/`, FHD 1920x1080, looked at):
+  - `garlic_art`, a new scene. On Autumn 2, three braids hang beside the
+    east road, a night old, two and three, with walkers coming down the
+    road past them at night.
+  - `garlic_art_day`, the same by day, with the tarps off.
+  - Each braid stands where nothing south of it covers it. The first
+    takes had them behind trees.
+  - `garlic`, 0228's scene: the route preview bending round a hung braid,
+    with the braid in hand on the hotbar.
+  - The scene count is 124.
+- **Found on the way**: the new test's `worn` clashed with a variable of the
+  same name in that test. Running the suite alone before verify, after
+  0238's two failed runs, caught it in a minute rather than a full run.
+- **The delivery folder** `implementation/backlog/deliveries/A040-garlic-braid/` is
+  committed, as A039's was.
+- `python implementation/backlog/assets.py set A040 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (61 of 61). The first run
+  failed only `perf`: `path_refresh` 35221 us against its 33333 budget, and
+  six more, all core timings this task does not touch. `perf.py` alone
+  passed at once (24924 us), and the second full run passed.

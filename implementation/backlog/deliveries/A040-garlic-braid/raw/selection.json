@@ -1,0 +1,29 @@
+{
+  "status": "blocked",
+  "issues": [
+    "Identity master reached r3 correction limit: visible8x18 versus required10–12x17–19. Fresh diagnostic only; wilted/spent not generated because identity geometry is not accepted.",
+    "No production export; owner review is deferred to final21packHTML."
+  ],
+  "files": {
+    "garlic_braid/none/0": {
+      "stem": "garlic-master-r3",
+      "index": 0,
+      "fields": {
+        "review_issue": "Master8px wide, target10–12. Diagnostic only."
+      }
+    }
+  },
+  "rejected": {
+    "garlic-master-r1": "Visible6x18 too narrow for required10–12px width.",
+    "garlic-master-r2": "Visible6x18, ratio unchanged after correction."
+  },
+  "decisions": {
+    "garlic-master-r3": {
+      "decision": "rejected for production: visible8x18, insufficient width; retained for diagnosis",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0
+      ]
+    }
+  }
+}

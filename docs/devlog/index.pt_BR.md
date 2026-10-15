@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-262 tarefas em 12 dias, de  a 2026-10-14. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+263 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -305,6 +305,7 @@ voz alta.
 | 0236 | Art: the scarecrow decoy and zombie bait | 2026-10-14 |
 | 0237 | Art: the beehive | 2026-10-14 |
 | 0238 | Art: the pumpkin catapult | 2026-10-14 |
+| 0239 | Art: the garlic braid | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

@@ -1,0 +1,32 @@
+{
+  "pack": "A040",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "tudo aprovado, falta mais?",
+  "approved_folder": "implementation/backlog/deliveries/A040-garlic-braid",
+  "review_page": "implementation/backlog/deliveries/A028-dog/continuation-final-review.html",
+  "review_url": "http://127.0.0.1:8765/implementation/backlog/deliveries/A028-dog/continuation-final-review.html?v=continuation-20261014",
+  "approved_sha256": {
+    "native/garlic_braid/none/01.png": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119",
+    "native/garlic_braid_wilted/none/01.png": "4c764ede0a1b5700e58bd5c1c26a9341ef5bc71276fcb27e6356688b0f7a1301",
+    "native/garlic_braid_spent/none/01.png": "707f14928903e0beaad2679142fbc16ce169764ff9a0ddd252362fac28c6de64"
+  },
+  "frames": 3,
+  "frames_expected": 3,
+  "accepted_visual_checks": [
+    "fresh_braid_dimensions"
+  ],
+  "missing_outputs": [],
+  "pending_review_outputs": [],
+  "delivery_complete": true,
+  "runtime_integrated": false,
+  "newly_approved_files": [
+    "native/garlic_braid_wilted/none/01.png",
+    "native/garlic_braid_spent/none/01.png"
+  ],
+  "previously_approved_sha256": {
+    "native/garlic_braid/none/01.png": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119"
+  },
+  "prior_approval_record": "APPROVAL-before-continuation.json"
+}

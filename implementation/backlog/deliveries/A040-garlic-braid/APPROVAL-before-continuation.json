@@ -1,0 +1,26 @@
+{
+  "pack": "A040",
+  "date": "2026-10-14",
+  "status": "fresh approved; two new states awaiting review",
+  "scope": "available_reviewed_files_only",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A040-garlic-braid",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "preview/candidates/garlic_braid/none/01.png": "9f942544dc44e7349888f8c56f4979a9c20278e2aa5588cc945dee07f7f94119"
+  },
+  "frames": 1,
+  "frames_expected": 3,
+  "accepted_visual_checks": [
+    "all_three_alpha_shapes_distinct",
+    "fresh_braid_dimensions"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false,
+  "delivery_complete": true,
+  "pending_review_outputs": [
+    "native/garlic_braid_wilted/none/01.png",
+    "native/garlic_braid_spent/none/01.png"
+  ]
+}

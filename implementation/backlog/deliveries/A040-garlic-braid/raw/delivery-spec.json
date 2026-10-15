@@ -1,0 +1,88 @@
+{
+  "title": "The garlic braid",
+  "date": "2026-10-14",
+  "status": "generating",
+  "palette_mode": "A",
+  "expected_files": 3,
+  "files": [
+    {
+      "anim": "garlic_braid",
+      "dir": "none",
+      "frame": 0,
+      "pose": "fresh",
+      "output": "native/garlic_braid/none/01.png",
+      "runtime_name": "sprites/buildings/garlic_braid.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "garlic_braid_wilted",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wilted",
+      "output": "native/garlic_braid_wilted/none/01.png",
+      "runtime_name": "sprites/buildings/garlic_braid_wilted.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "garlic_braid_spent",
+      "dir": "none",
+      "frame": 0,
+      "pose": "spent",
+      "output": "native/garlic_braid_spent/none/01.png",
+      "runtime_name": "sprites/buildings/garlic_braid_spent.png",
+      "canvas_wh": [
+        16,
+        24
+      ],
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    }
+  ],
+  "mirror_pairs": {},
+  "deviations": [],
+  "supersedes": [],
+  "comparison": [
+    {
+      "path": "sprites/buildings/barricade.png",
+      "pivot_xy": [
+        8,
+        20
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

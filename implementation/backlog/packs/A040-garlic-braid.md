@@ -1,6 +1,6 @@
 # A040 - The garlic braid
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0239
 - **Dressed by game tasks:** 0228
 - **Spec after game task:** 0228

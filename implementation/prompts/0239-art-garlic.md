@@ -1,7 +1,7 @@
 # 0239 - Art: the garlic braid
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0228
 - **Likely files:** assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/verify.py
 - **Art packs:** A040

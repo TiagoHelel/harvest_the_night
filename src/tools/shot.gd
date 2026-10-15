@@ -144,6 +144,7 @@ const SCENARIOS: Array = [
 	["year_credits", "the credits before the year ending", "ResultScreen"],
 	["calm_morning", "the morning after Summer 1's calm night", "ResultScreen"],
 	["trampled", "the morning after a loss, by the trampled crops", ""],
+	["garlic_art", "A040's garlic braid (task 0239) at night: three braids beside the east road, a night old, two and three - fresh, wilted and spent - and walkers coming down the road past them; then the same by day, the tarps off to show the art under them", ""],
 	["decoy_art", "A037's decoy and bait (task 0236) at night: a decoy whole, one hurt, one struck in its first sway frame and one's ruin, and a bait on the ground; then the same by day, the tarps off to show the art under them", ""],
 	["ruins", "the morning after a line came down: a level two gun's ruin, a crossbow's and a wall's lying where they fell beside a gun still standing, past the dawn's sweep - each mended back at the build step", ""],
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
@@ -818,6 +819,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"trampled": _set_trampled(state)
 		"ruins": _set_ruins(state)
 		"decoy_art": _set_decoy_art(state)
+		"garlic_art": _set_garlic_art(state)
 		"night_loot": _set_night_loot(state)
 		"bone_meal": _set_bone_meal(state)
 		"tarps": _set_tarps(state)
@@ -984,6 +986,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "beehive":
 		await _shoot("beehive", folder)
 		await _take_beehive_day(main, state, folder)
+		return
+	if name == "garlic_art":
+		await _shoot("garlic_art", folder)
+		await _take_garlic_day(main, state, folder)
 		return
 	if name == "decoy_art":
 		await _strike_decoy(state)
@@ -3882,6 +3888,90 @@ func _set_garlic(state: Dictionary) -> void:
 	_camera_at = _garlic_hung + Vector2i(-2, -2)
 	print("  garlic: hung at %s on a road of %d, in hand at %s" % [str(_garlic_hung), road.size(),
 		str(_garlic_in_hand)])
+
+
+## **A040's garlic braid** (task 0239): Autumn 2, three braids hung beside the
+## east road in the build step, then the night: set a night old, two and
+## three - fresh, wilted and spent, as `Garlic.state_of` reads them - with
+## walkers coming down the road past them, parked so nothing eats them.
+func _set_garlic_art(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 2)
+	Resources.gain(state, {GameData.GARLIC: 20, GameData.WOOD: 20, GameData.MONEY: 100})
+	NightRoad.into_build(state)
+	Pathing.refresh(state)
+	var road := _east_road(state)
+	_garlic_braids = []
+	# Along the road from its eighth cell, each braid four cells or more from
+	# the last, beside the road - south first - where nothing stands just
+	# south of it to cover it.
+	for along in range(8, road.size()):
+		var on_road: Vector2i = road[along]
+		var far := _garlic_braids.is_empty() or Grid.chebyshev(on_road, _garlic_braids.back()) >= 4
+		if _garlic_braids.size() >= 3 or not far:
+			continue
+		for beside in [Vector2i(0, 1), Vector2i(0, -1)]:
+			var at: Vector2i = on_road + (beside as Vector2i)
+			var open := true
+			for dy in [1, 2]:
+				for dx in [-1, 0, 1]:
+					open = open and Farm.occupant(state, at + Vector2i(dx, dy)).is_empty()
+			if open and (_garlic_braids.is_empty() or Grid.chebyshev(on_road, _garlic_braids.back()) >= 4) \
+					and Building.place(state, &"garlic_braid", at):
+				_garlic_braids.append(at)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Enemies.withdraw(state)
+	# Their ages, set after the night's own wear: one, two and three nights.
+	for i in _garlic_braids.size():
+		Farm.occupant(state, _garlic_braids[i])["nights"] = i + 1
+	Farm.touch(state)
+	for along in [6, 10, 14]:
+		Entities.spawn(state, &"walker", road[mini(along, road.size() - 1)])
+	# The middle braid in the middle of the picture, the cursor on open
+	# ground two cells south of it.
+	_camera_at = (_garlic_braids[1] as Vector2i) + Vector2i(0, 2) if _garlic_braids.size() > 1 \
+		else road[mini(12, road.size() - 1)]
+	_look_at(_camera_at)
+	print("  garlic_art: braids at %s, states %s; road of %d" % [str(_garlic_braids),
+		str(_garlic_braids.map(func(c: Vector2i) -> StringName: return Garlic.state_of(Farm.occupant(state, c)))),
+		road.size()])
+
+
+## The braids of `_set_garlic_art`, youngest first.
+var _garlic_braids: Array = []
+
+
+## **The same by day** (task 0239): the night ended, him out by the braids,
+## and the tarps off so the art under them shows - as the tower showcase does.
+func _take_garlic_day(main: Node, state: Dictionary, folder: String) -> void:
+	if _garlic_braids.size() < 3:
+		return
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	Building.set_active(state, false)
+	# Below the middle braid, facing it: the day's camera follows him.
+	_stand(state, (_garlic_braids[1] as Vector2i) + Vector2i(-1, 3))
+	state["player"]["facing"] = Player.NORTH
+	var view := main.get_node("%WorldView") as WorldView
+	view.tarps = false
+	_only_showing(main, "")
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	await _shoot("garlic_art_day", folder)
+	print("  garlic_art by day, %s: states %s" % [Phases.name_of(int(state["phase"])),
+		str(_garlic_braids.map(func(c: Vector2i) -> StringName: return Garlic.state_of(Farm.occupant(state, c))))])
+	view.tarps = true
 
 
 ## Where `_set_garlic` hung its braid and holds the other (task 0228).

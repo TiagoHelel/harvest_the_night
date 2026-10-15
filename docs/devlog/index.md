@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-262 tasks over 12 days,  to 2026-10-14. One at a time, each one finished and checked before the next was started.
+263 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -306,6 +306,7 @@ is the sort of thing this list exists to say out loud.
 | 0236 | Art: the scarecrow decoy and zombie bait | 2026-10-14 |
 | 0237 | Art: the beehive | 2026-10-14 |
 | 0238 | Art: the pumpkin catapult | 2026-10-14 |
+| 0239 | Art: the garlic braid | 2026-10-15 |
 
 ## Every time the game changed underneath itself
 

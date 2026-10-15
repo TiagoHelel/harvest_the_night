@@ -14,8 +14,11 @@ def main():
     # Task 0236: A037's decoy and bait, on the ground beside the barriers.
     decoy=[e for e in data['assets'] if e.get('generation_task')=='A037' and e['id'].startswith('buildings/')]
     assert len(decoy)==10,('Decoy contract incomplete',len(decoy))
-    by_id={e['id']:e for e in entries+decoy}
-    for e in entries+decoy:
+    # Task 0239: A040's garlic braid, fresh, wilted and spent.
+    garlic=[e for e in data['assets'] if e.get('generation_task')=='A040']
+    assert len(garlic)==3,('Garlic braid contract incomplete',len(garlic))
+    by_id={e['id']:e for e in entries+decoy+garlic}
+    for e in entries+decoy+garlic:
         assert (ROOT/e['output']).read_bytes()==files[e['output']],e['id']
         assert all(p[3] in (0,255) for p in import_art.samples(images[e['id']])),e['id']
     for family in ('wall','fence'):
@@ -60,11 +63,14 @@ def main():
         wreck=images[f'buildings/{family}_wreck']
         assert wreck.getchannel('A').getbbox()[3]-wreck.getchannel('A').getbbox()[1]<=8,('Standing wreck',family)
     # Task 0236: A037's decoy stands on the walls' one-cell canvas.
-    for family,suffixes,canvas,pivot in [('barricade',('','_hurt','_wreck'),[16,24],[8,20]),('mine',('','_triggered','_spent'),[16,16],[8,14]),('decoy',('','_hurt','_wreck'),[16,32],[8,28])]:
+    for family,suffixes,canvas,pivot in [('barricade',('','_hurt','_wreck'),[16,24],[8,20]),('mine',('','_triggered','_spent'),[16,16],[8,14]),('decoy',('','_hurt','_wreck'),[16,32],[8,28]),('garlic_braid',('','_wilted','_spent'),[16,24],[8,20])]:
         frames=[by_id['buildings/'+family+s] for s in suffixes]
         assert len({e['content_scale'] for e in frames})==1,family
         assert len({files[e['output']] for e in frames})==3,('Duplicate states',family)
         for e in frames:assert e['canvas_wh']==canvas and e['pivot_xy']==pivot,e['id']
+        # Task 0239: the braid's stake stands on its pivot's row in every state.
+        if family=='garlic_braid':
+            for e in frames:assert images[e['id']].getbbox()[3]==pivot[1],('Floats or sinks',e['id'],images[e['id']].getbbox())
     # Task 0236: the decoy's two sways, three frames each on its canvas and
     # pivot, one scale a strip, and the bait lying on the mine's.
     for sway in ('decoy_sway','decoy_hurt_sway'):
@@ -74,6 +80,6 @@ def main():
         for i,e in enumerate(frames):assert e['canvas_wh']==[16,32] and e['pivot_xy']==[8,28] and e['frame']==i and not e['loop'],e['id']
     bait=by_id['buildings/zombie_bait'];assert bait['canvas_wh']==[16,16] and bait['pivot_xy']==[8,14],'Bait off the ground'
     assert gen_sprites.migrated_barriers()=={'buildings/'+f for f in ('wall','fence','barricade','mine')},'Incomplete legacy migration'
-    print('OK: 84 exact source-owned outputs and A037 decoy/bait 10, all 64 occupancy masks/wear states, physical scale and mixed material seams')
+    print('OK: 84 exact source-owned outputs, A037 decoy/bait 10 and A040 garlic braid 3, all 64 occupancy masks/wear states, physical scale and mixed material seams')
 
 if __name__=='__main__':main()
