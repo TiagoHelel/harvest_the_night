@@ -1,0 +1,167 @@
+[
+  {
+    "recipe": {
+      "id": "digger-burrow-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-burrow-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        468,
+        756
+      ],
+      "crop_xywh": [
+        67,
+        223,
+        368,
+        425
+      ],
+      "content_scale": 0.0423728813559322,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      24,
+      26,
+      40,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      16,
+      18
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-burrow-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-burrow-r1.png",
+      "sheet_cell_xywh": [
+        468,
+        0,
+        609,
+        756
+      ],
+      "crop_xywh": [
+        502,
+        330,
+        561,
+        326
+      ],
+      "content_scale": 0.0423728813559322,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      20,
+      30,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      24,
+      14
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-burrow-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-burrow-r1.png",
+      "sheet_cell_xywh": [
+        1077,
+        0,
+        506,
+        756
+      ],
+      "crop_xywh": [
+        1092,
+        394,
+        463,
+        263
+      ],
+      "content_scale": 0.0423728813559322,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      22,
+      33,
+      42,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      20,
+      11
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-burrow-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-burrow-r1.png",
+      "sheet_cell_xywh": [
+        1583,
+        0,
+        496,
+        756
+      ],
+      "crop_xywh": [
+        1613,
+        511,
+        413,
+        145
+      ],
+      "content_scale": 0.0423728813559322,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "wood_dark",
+        "stone_dark"
+      ]
+    },
+    "native_bounds": [
+      23,
+      38,
+      41,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      18,
+      6
+    ]
+  }
+]

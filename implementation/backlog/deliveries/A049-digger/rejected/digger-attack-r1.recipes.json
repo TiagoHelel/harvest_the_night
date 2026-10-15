@@ -1,0 +1,119 @@
+[
+  {
+    "recipe": {
+      "id": "digger-attack-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-attack-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        693,
+        724
+      ],
+      "crop_xywh": [
+        164,
+        100,
+        493,
+        547
+      ],
+      "content_scale": 0.0466786355475763,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      18,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      26
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-attack-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-attack-r1.png",
+      "sheet_cell_xywh": [
+        693,
+        0,
+        831,
+        724
+      ],
+      "crop_xywh": [
+        731,
+        149,
+        704,
+        497
+      ],
+      "content_scale": 0.0466786355475763,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      16,
+      21,
+      49,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      33,
+      23
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-attack-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-attack-r1.png",
+      "sheet_cell_xywh": [
+        1524,
+        0,
+        648,
+        724
+      ],
+      "crop_xywh": [
+        1614,
+        95,
+        467,
+        557
+      ],
+      "content_scale": 0.0466786355475763,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      18,
+      43,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      22,
+      26
+    ]
+  }
+]

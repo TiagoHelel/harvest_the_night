@@ -1,0 +1,285 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "body_border_and_centre": true,
+  "burrow_meets_mound": false,
+  "burrow_mound_bounds": [
+    [
+      23,
+      38,
+      41,
+      44
+    ],
+    [
+      23,
+      38,
+      39,
+      44
+    ]
+  ],
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "death_heights": [
+    26,
+    20,
+    14,
+    11
+  ],
+  "death_settles": true,
+  "emerge_matches_walk_pose": false,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_distinct": true,
+  "frames_expected": 24,
+  "frames_found": 24,
+  "grounded_on_pivot": true,
+  "head_eye_bone": true,
+  "icon_bounds_ok": true,
+  "importer_recipe_matches": true,
+  "master_size_ok": true,
+  "measurements": {
+    "native/digger/west/01.png": {
+      "bounds": [
+        22,
+        18,
+        42,
+        44
+      ],
+      "opaque_pixels": 279
+    },
+    "native/digger_attack/west/01.png": {
+      "bounds": [
+        21,
+        18,
+        44,
+        44
+      ],
+      "opaque_pixels": 321
+    },
+    "native/digger_attack/west/02.png": {
+      "bounds": [
+        17,
+        21,
+        47,
+        44
+      ],
+      "opaque_pixels": 322
+    },
+    "native/digger_attack/west/03.png": {
+      "bounds": [
+        21,
+        18,
+        43,
+        44
+      ],
+      "opaque_pixels": 296
+    },
+    "native/digger_burrow/west/01.png": {
+      "bounds": [
+        24,
+        26,
+        40,
+        44
+      ],
+      "opaque_pixels": 179
+    },
+    "native/digger_burrow/west/02.png": {
+      "bounds": [
+        20,
+        30,
+        44,
+        44
+      ],
+      "opaque_pixels": 180
+    },
+    "native/digger_burrow/west/03.png": {
+      "bounds": [
+        22,
+        33,
+        42,
+        44
+      ],
+      "opaque_pixels": 129
+    },
+    "native/digger_burrow/west/04.png": {
+      "bounds": [
+        23,
+        38,
+        41,
+        44
+      ],
+      "opaque_pixels": 59
+    },
+    "native/digger_death/west/01.png": {
+      "bounds": [
+        22,
+        18,
+        42,
+        44
+      ],
+      "opaque_pixels": 290
+    },
+    "native/digger_death/west/02.png": {
+      "bounds": [
+        21,
+        24,
+        43,
+        44
+      ],
+      "opaque_pixels": 269
+    },
+    "native/digger_death/west/03.png": {
+      "bounds": [
+        18,
+        30,
+        46,
+        44
+      ],
+      "opaque_pixels": 238
+    },
+    "native/digger_death/west/04.png": {
+      "bounds": [
+        14,
+        33,
+        50,
+        44
+      ],
+      "opaque_pixels": 222
+    },
+    "native/digger_emerge/west/01.png": {
+      "bounds": [
+        21,
+        33,
+        43,
+        44
+      ],
+      "opaque_pixels": 108
+    },
+    "native/digger_emerge/west/02.png": {
+      "bounds": [
+        21,
+        29,
+        44,
+        44
+      ],
+      "opaque_pixels": 170
+    },
+    "native/digger_emerge/west/03.png": {
+      "bounds": [
+        20,
+        23,
+        44,
+        44
+      ],
+      "opaque_pixels": 290
+    },
+    "native/digger_emerge/west/04.png": {
+      "bounds": [
+        22,
+        18,
+        42,
+        44
+      ],
+      "opaque_pixels": 281
+    },
+    "native/digger_mound/west/01.png": {
+      "bounds": [
+        23,
+        38,
+        39,
+        44
+      ],
+      "opaque_pixels": 53
+    },
+    "native/digger_mound/west/02.png": {
+      "bounds": [
+        23,
+        37,
+        42,
+        44
+      ],
+      "opaque_pixels": 66
+    },
+    "native/digger_mound/west/03.png": {
+      "bounds": [
+        23,
+        38,
+        40,
+        44
+      ],
+      "opaque_pixels": 56
+    },
+    "native/digger_walk/west/01.png": {
+      "bounds": [
+        22,
+        18,
+        42,
+        44
+      ],
+      "opaque_pixels": 271
+    },
+    "native/digger_walk/west/02.png": {
+      "bounds": [
+        23,
+        18,
+        42,
+        44
+      ],
+      "opaque_pixels": 252
+    },
+    "native/digger_walk/west/03.png": {
+      "bounds": [
+        22,
+        19,
+        43,
+        44
+      ],
+      "opaque_pixels": 267
+    },
+    "native/digger_walk/west/04.png": {
+      "bounds": [
+        23,
+        18,
+        42,
+        44
+      ],
+      "opaque_pixels": 265
+    },
+    "native/head_digger/none/01.png": {
+      "bounds": [
+        3,
+        2,
+        14,
+        15
+      ],
+      "opaque_pixels": 85
+    }
+  },
+  "mirror_pairs_exact": true,
+  "mixed_body_clod_palette_verified": false,
+  "mound_height_ok": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "burrow_meets_mound",
+    "emerge_matches_walk_pose",
+    "mixed_body_clod_palette_verified",
+    "walk_leg_alternation_review"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "silhouette_distances": {
+    "breaker": 80,
+    "runner": 67,
+    "tank": 68,
+    "walker": 65
+  },
+  "silhouette_distinct": true,
+  "standing_scale_ok": true,
+  "walk_leg_alternation_review": false,
+  "walk_mound_not_vertical_shift": true
+}

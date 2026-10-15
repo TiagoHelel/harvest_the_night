@@ -1,0 +1,200 @@
+{
+  "status": "blocked",
+  "issues": [
+    "Walk exhausted3attempts: r1 has overlapping columns, r2 has diffusehalo, r3 still puts the same near leg forward in both contacts. No fourthattempt and no production export.",
+    "Emerge final stands26px but has neutral master stance rather than walk0 stride. Mixed-body soil clod mapping remains unverified.",
+    "Alpha audit corrected the r2halo interpretation; gait failure stillblocks pack. No newgeneration or pixelchanges."
+  ],
+  "files": {
+    "digger/west/0": {
+      "stem": "digger-master-r2",
+      "index": 0,
+      "fields": {}
+    },
+    "digger_walk/west/0": {
+      "stem": "digger-walk-r3",
+      "index": 0,
+      "fields": {}
+    },
+    "digger_walk/west/1": {
+      "stem": "digger-walk-r3",
+      "index": 1,
+      "fields": {}
+    },
+    "digger_walk/west/2": {
+      "stem": "digger-walk-r3",
+      "index": 2,
+      "fields": {}
+    },
+    "digger_walk/west/3": {
+      "stem": "digger-walk-r3",
+      "index": 3,
+      "fields": {}
+    },
+    "digger_burrow/west/0": {
+      "stem": "digger-burrow-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "digger_burrow/west/1": {
+      "stem": "digger-burrow-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "digger_burrow/west/2": {
+      "stem": "digger-burrow-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "digger_burrow/west/3": {
+      "stem": "digger-burrow-r1",
+      "index": 3,
+      "fields": {}
+    },
+    "digger_mound/west/0": {
+      "stem": "digger-mound-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "digger_mound/west/1": {
+      "stem": "digger-mound-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "digger_mound/west/2": {
+      "stem": "digger-mound-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "digger_emerge/west/0": {
+      "stem": "digger-emerge-r1",
+      "index": 0,
+      "fields": {}
+    },
+    "digger_emerge/west/1": {
+      "stem": "digger-emerge-r1",
+      "index": 1,
+      "fields": {}
+    },
+    "digger_emerge/west/2": {
+      "stem": "digger-emerge-r1",
+      "index": 2,
+      "fields": {}
+    },
+    "digger_emerge/west/3": {
+      "stem": "digger-emerge-r1",
+      "index": 3,
+      "fields": {}
+    },
+    "digger_attack/west/0": {
+      "stem": "digger-attack-r2",
+      "index": 0,
+      "fields": {}
+    },
+    "digger_attack/west/1": {
+      "stem": "digger-attack-r2",
+      "index": 1,
+      "fields": {}
+    },
+    "digger_attack/west/2": {
+      "stem": "digger-attack-r2",
+      "index": 2,
+      "fields": {}
+    },
+    "digger_death/west/0": {
+      "stem": "digger-death-r2",
+      "index": 0,
+      "fields": {}
+    },
+    "digger_death/west/1": {
+      "stem": "digger-death-r2",
+      "index": 1,
+      "fields": {}
+    },
+    "digger_death/west/2": {
+      "stem": "digger-death-r2",
+      "index": 2,
+      "fields": {}
+    },
+    "digger_death/west/3": {
+      "stem": "digger-death-r2",
+      "index": 3,
+      "fields": {}
+    },
+    "head_digger/none/0": {
+      "stem": "head-digger-r1",
+      "index": 0,
+      "fields": {
+        "inspection_eye_xy": [
+          7,
+          8
+        ],
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "roof_dark",
+          "roof",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "flame",
+          "bone",
+          "bone_dark",
+          "skin_dark",
+          "skin",
+          "skin_light",
+          "night",
+          "night_light",
+          "rot_dark",
+          "rot",
+          "blood"
+        ]
+      }
+    }
+  },
+  "rejected": {
+    "digger-master-r1": "32pxwide at26pxhigh; r2 meets20x26 and farther frombreaker.",
+    "digger-walk-r1": "Overlapping column space prevents safe rectangular extraction.",
+    "digger-walk-r2": "Same near leg remains forward in contacts. Earlierhalo diagnosis withdrawn: correct RGBA composite shows clean transparency, hiddenzeroalphaRGB caused misleading display.",
+    "digger-death-r1": "Overlapping corpse/precedingcell.",
+    "digger-attack-r1": "Unrequestedsoil debris in attack, corrected byr2."
+  },
+  "decisions": {
+    "digger-master-r2": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    },
+    "digger-walk-r3": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    },
+    "digger-burrow-r1": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    },
+    "digger-mound-r1": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    },
+    "digger-emerge-r1": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    },
+    "digger-attack-r2": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    },
+    "digger-death-r2": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    },
+    "head-digger-r1": {
+      "decision": "diagnostic candidate only; pack gait rejected, no approval"
+    }
+  }
+}

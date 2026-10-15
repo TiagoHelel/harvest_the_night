@@ -3946,6 +3946,110 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/enemies/digger.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_attack_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_burrow_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_burrow_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_burrow_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_burrow_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_emerge_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_emerge_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_emerge_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_emerge_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_mound_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_mound_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_mound_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/digger_walk_b.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/enemies/giant.png",
       "owner": "raster"
     },
@@ -5295,6 +5399,10 @@
     },
     {
       "output": "sprites/ui/head_crow.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_digger.png",
       "owner": "raster"
     },
     {

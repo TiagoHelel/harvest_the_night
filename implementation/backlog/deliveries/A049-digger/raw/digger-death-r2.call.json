@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A049 digger enemy animation source for HARVEST THE NIGHT.\nInput1 is accepted digger identity. Same compact hunched miner, broken orange-brown helmet with no lamp, mud-covered torn overalls, green dead skin, two long narrow bone shovel-claws, pale cloudy bone eyes. Side view facing WEST/LEFT, orthographic three-quarter top-down camera and neutral upper-left daylight. Handcrafted coarse pixelart, broad clean clusters, coloured dark outline, no fine stipple. Keep SAME body proportions and physical scale in every frame; standing body26 logical pixels tall,20\u201326 wide on64x48/pivot32,44. Lowest opaque row43, body/mound centred32. One shared source scale per strip; DO NOT enlarge small fallen or dirt-only poses to fill their cells. Complete objects SMALL within evenly spaced virtualcells, at most50% each cell size, large FULL HEIGHT transparent gutters and outer margins.\nTrue alpha0 outside opaque sharp pixels. No glow/halo/haze/shadow/blur/gradient/text/labels/UI/scenery/grass or ground patch. Pale eyes matte, not emission. Soil clods are loose spoils only, warm brownsoil, not rock or green skin.\nCreate ONE horizontal strip with EXACTLY 4 distinct sequential frames.\nFour poses: buckles; drops to knees; falls forward WEST; liesflat. Heights monotonicallydecrease, last at most16px tall at standing26px physicalscale. Corpse same bodyvolume, helmet/longboneclaws visible. No duplicatedstanding cells. Ground baselinefixed, no shrinkfallenpose.\nSpacing correction: four previous poses overlap. Render each at only25percent virtualcell width, even the widestcorpse. Huge completely empty verticalgaps separatingcells. All4 uncut bodies, not touching. Samebody/head scale, groundedbaseline, no shrink corpse relative tostanding. These are enemy fallposes, not decorative huge figures.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/raw/digger-master-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/raw/digger-master-r2.png",
+      "sha256": "3bbede4a3d673f417145ee4875776f965e335891eb541cd5d234b29542e6fb35",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-58f9e9bb-b41a-4c9a-af3e-b5e5287a1bc5.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-death-r2.png",
+  "sha256": "94d418309e88913ff5f4306519ccd0cb1a5452d6691be4a5dfe39f9348d06e3c",
+  "revision": 2,
+  "decision": "diagnostic candidate only; pack gait rejected, no approval"
+}

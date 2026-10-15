@@ -1,6 +1,6 @@
 # A049 - The digger
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0263
 - **Dressed by game tasks:** 0250
 - **Spec after game task:** 0250

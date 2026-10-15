@@ -1,0 +1,9 @@
+{
+  "prompt": "Create ONE head-and-shoulders bust of this same digger: broken miner helmet WITHOUT lamp, rot-green zombie face, torn brown shirt/bluegrey overalls shoulders and tip of ONE long boneclaw by shoulder. Three-quarter facing LEFT, flat bottom cut, upright tall bust12–13pxhigh and≤13wide on16x16, centred8 baselineopaque14. Bold matte BONE paleeye at least12percentportraitheight to survive as1pixel, no glow. Image1 identity, image2 nativewalkcolour reference, image3 icon style ONLY. Coarse handcrafted pixelart, broad clusters, colouredoutline, neutral upper-left light, same paletteasbody. Truealpha0 outsidecrispopaque pixels. No frame, label, text, shadow, halo, haze, blur, background. Helmet notextra huge: leavesroomface/shoulders, samebody proportions.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/raw/digger-master-r2.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/preview/walk0-head-reference-4x.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+  ]
+}

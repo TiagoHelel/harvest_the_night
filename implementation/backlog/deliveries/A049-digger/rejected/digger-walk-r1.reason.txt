@@ -1,0 +1,1 @@
+Overlapping column space prevents safe rectangular extraction.

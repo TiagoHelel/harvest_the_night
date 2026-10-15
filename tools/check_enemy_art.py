@@ -23,6 +23,9 @@ PACK_FAMILIES = {
     'crow':{'task':'A048','canvas':[32,24],'pivot':[16,22],'offset':[-8,-6],
             'counts':{'master':1,'fly':4,'land':1,'peck':3,'death':4},'dead':8,
             'aloft':('fly','death'),'aliases':(('walk_b','fly_2'),('attack','peck_1'),('death','death_3'))},
+    # The digger (task 0263): the four's frame and motion, and its burrow,
+    # its mound under a fence and its emerging, every frame on the ground.
+    'digger':dict(ORDINARY,task='A049',counts={'master':1,'walk':4,'burrow':4,'mound':3,'emerge':4,'attack':3,'death':4}),
 }
 
 def bodies(image):

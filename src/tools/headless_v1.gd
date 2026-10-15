@@ -10266,8 +10266,10 @@ func _task_0250_digger() -> void:
 		"it has its name, a tooltip line that it digs, and since 0284 a voice of its own")
 
 	# **The view**: under a fence its mound, on open ground its walk; the
-	# mound drawn in code on A049's canvas - feet on row 43, centred, 14-18
-	# wide and 5-7 tall with a trail of at most 8 behind, every frame its own.
+	# mound on A049's canvas - feet on row 43, centred within 2 (A049's own
+	# heap sits a pixel and a half west of the pivot; 0250's code drawing was
+	# held to 1), 14-18 wide and 5-7 tall with a trail of at most 8 behind,
+	# every frame its own.
 	var down := WorldView.posed_off_the_rules(hidden, Entities.get_one(hidden, mole))
 	var up := WorldView.posed_off_the_rules(hidden, {"id": 99, "kind": &"digger", "pos": [0, 0]})
 	var mounds := {}
@@ -10287,12 +10289,24 @@ func _task_0250_digger() -> void:
 					heap = heap.expand(Vector2i(x, y)) if heap.has_area() or heap.position != Vector2i.ZERO else Rect2i(x, y, 1, 1)
 		var used := image.get_used_rect()
 		if image.get_size() != Vector2i(64, 48) or used.end.y != 44 or used.end.x - 41 > 8 \
-				or absi((heap.position.x + heap.end.x) / 2 - 32) > 1 or heap.size.x + 1 < 14 or heap.size.x + 1 > 18 \
+				or absi((heap.position.x + heap.end.x) / 2 - 32) > 2 or heap.size.x + 1 < 14 or heap.size.x + 1 > 18 \
 				or heap.size.y + 1 < 5 or heap.size.y + 1 > 7:
 			off.append("%s heap %s used %s" % [path, heap, used])
+	# A049's art since task 0263, and the digger tracked: its burrow when it
+	# goes under, its emergence when it comes up.
+	var motion := EnemyMotion.new()
+	var mole_one := Entities.get_one(hidden, mole)
+	var turned := {"tick": int(hidden["tick"]), "pos": Vector2i(int(mole_one["pos"][0]), int(mole_one["pos"][1])),
+		"moving": false, "travel": 0, "right": false, "strike": -1000, "under": true, "turned": int(hidden["tick"])}
+	var burrow := motion._burrow_pose(mole_one, hidden, turned)
+	turned["turned"] = int(hidden["tick"]) - 100
+	var mound := motion._burrow_pose(mole_one, hidden, turned)
+	var mole_art := (PlaceholderArt.art(&"digger_mound").is_empty() and PlaceholderArt.art(&"head_digger").is_empty()
+		and EnemyMotion.tracks(&"digger") and burrow == &"digger_burrow_0" and String(mound).begins_with("digger_mound_")
+		and ResourceLoader.exists(WorldView.ENEMY_DIR + "digger_emerge_3.png"))
 	expect(String(down).begins_with("digger_mound_") and String(up).begins_with("digger_walk_")
-		and off.is_empty() and mounds.size() == 3,
-		"under a fence it is drawn as its mound and on open ground walking; the mound sits on A049's canvas, every frame its own",
+		and off.is_empty() and mounds.size() == 3 and mole_art,
+		"under a fence it is drawn as its mound and on open ground walking - A049's art since 0263, its burrow played as it goes under; the mound sits on its canvas, every frame its own",
 		"%s %s %s" % [down, up, str(off)])
 	_completed += 1
 

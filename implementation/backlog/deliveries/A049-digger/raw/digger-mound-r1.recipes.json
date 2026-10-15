@@ -1,0 +1,146 @@
+[
+  {
+    "recipe": {
+      "id": "digger-mound-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-mound-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        719,
+        756
+      ],
+      "crop_xywh": [
+        128,
+        397,
+        525,
+        167
+      ],
+      "content_scale": 0.03485714285714286,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "wood_dark",
+        "stone_dark"
+      ]
+    },
+    "native_bounds": [
+      23,
+      38,
+      39,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      18,
+      6
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-mound-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-mound-r1.png",
+      "sheet_cell_xywh": [
+        719,
+        0,
+        673,
+        756
+      ],
+      "crop_xywh": [
+        787,
+        375,
+        549,
+        194
+      ],
+      "content_scale": 0.03485714285714286,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "wood_dark",
+        "stone_dark"
+      ]
+    },
+    "native_bounds": [
+      23,
+      37,
+      42,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      19,
+      7
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-mound-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-mound-r1.png",
+      "sheet_cell_xywh": [
+        1392,
+        0,
+        687,
+        756
+      ],
+      "crop_xywh": [
+        1449,
+        399,
+        525,
+        164
+      ],
+      "content_scale": 0.03485714285714286,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "wood_dark",
+        "stone_dark"
+      ]
+    },
+    "native_bounds": [
+      23,
+      38,
+      40,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      18,
+      6
+    ]
+  }
+]

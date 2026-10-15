@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`######################..`  **271 / 296 done**
+`######################..`  **272 / 296 done**
 
-0 doing / 25 todo / 0 blocked across 18 phases.
+0 doing / 24 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-25 task(s) left, the ready ones first, then what they
+24 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -156,24 +156,6 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
   - done when: `python tools/show_art.py --work --check` pass
   - done when: `python tools/import_art.py --check` passes
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0208/`
-  - done when: the sim and data hashes are unchanged (art never moves them)
-
-### 0263 - Art: the digger
-
-Ready to pick up.  Likely files: `assets/art_source/enemies/digger/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd`.
-
-The digger as Codex drew it, in place of 0250's stand-in: going down, the mound moving under the fence, coming up.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A049` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A049-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/enemies/digger/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`gen_sprites.migrated_enemies()`, `check_enemy_art.FAMILIES` with its extra motions, `EnemyMotion.FAMILIES`/`TRACKED`).
-- At 64x48 pivot (32,44): `digger_walk_0..3`, `digger_burrow_0..3` (one-shot), `digger_mound_0..N` (loop, 2-3 frames), `digger_emerge_0..3`, `digger_attack_0..2`, `digger_death_0..3` with the usual aliases, and the forecast head
-- `EnemyMotion` plays burrow on the tick 0250 puts it underground, the mound while it stays there and emerge when it surfaces; replace 0250's placeholders in 0120's registry
-- Set the pack to integrated: `python implementation/backlog/assets.py set A049 integrated`.
-
-  - done when: `python tools/check_enemy_art.py` and `python tools/show_art.py --enemies --check` pass
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures in the real game by day (the head in the dusk forecast) and by night (a mound under a fence line), opened and looked at, in `implementation/shots/0263/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
 ### 0264 - Art: the frost zombie
@@ -383,7 +365,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0264, 0265, 0266, 0267, 0268, 0269, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -786,7 +768,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0244** [Art: power and new weapon icons](prompts/0244-art-power-icons.md)
 - [x] **0245** [Art: the dog](prompts/0245-art-dog.md)
 
-## 14 - Enemies and bosses  (17/24)
+## 14 - Enemies and bosses  (18/24)
 
 - [x] **0246** [Bosses in general](prompts/0246-bosses-general.md)
 - [x] **0247** [The spitter](prompts/0247-spitter.md)
@@ -805,7 +787,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0260** [Art: the spitter](prompts/0260-art-spitter.md)
 - [x] **0261** [Art: the rat swarm](prompts/0261-art-rats.md)
 - [x] **0262** [Art: the crow](prompts/0262-art-crow.md)
-- [ ] **0263** [Art: the digger](prompts/0263-art-digger.md)
+- [x] **0263** [Art: the digger](prompts/0263-art-digger.md)
 - [ ] **0264** [Art: the frost zombie](prompts/0264-art-frost-zombie.md)
 - [ ] **0265** [Art: the wraith](prompts/0265-art-wraith.md)
 - [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md)
@@ -838,7 +820,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0263, 0264, 0265, 0266, 0267, 0268, 0269, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0264, 0265, 0266, 0267, 0268, 0269, 0288
 
 ## 17 - Ship 1.0  (2/7)
 

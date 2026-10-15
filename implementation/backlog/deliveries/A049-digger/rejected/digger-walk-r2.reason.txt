@@ -1,0 +1,1 @@
+Same near leg remains forward in contacts. Earlierhalo diagnosis withdrawn: correct RGBA composite shows clean transparency, hiddenzeroalphaRGB caused misleading display.

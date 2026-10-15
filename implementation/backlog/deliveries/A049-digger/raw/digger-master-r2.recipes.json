@@ -1,0 +1,41 @@
+[
+  {
+    "recipe": {
+      "id": "digger-master-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-master-r2.png",
+      "crop_xywh": [
+        239,
+        224,
+        715,
+        945
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1194,
+        1317
+      ],
+      "content_scale": 0.027513227513227514,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      22,
+      18,
+      42,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      20,
+      26
+    ]
+  }
+]

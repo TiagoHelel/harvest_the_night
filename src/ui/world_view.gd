@@ -2190,10 +2190,10 @@ static func _enemy_frame(pose: StringName, texture: Texture2D) -> Dictionary:
 ## checks - and 0249-0252 add theirs.
 static func drawn_enemy(path: String) -> Texture2D:
 	var drawn := RatArt.texture_at(path)
-	# And task 0249's crow, until A048.
+	# And task 0249's crow, A048's art since task 0262.
 	if drawn == null:
 		drawn = CrowArt.texture_at(path)
-	# And task 0250's digger's mound, until A049.
+	# And task 0250's digger's mound, A049's art since task 0263.
 	if drawn == null:
 		drawn = DiggerArt.texture_at(path)
 	return drawn

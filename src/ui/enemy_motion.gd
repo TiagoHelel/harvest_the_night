@@ -11,7 +11,9 @@ extends RefCounted
 ## exactly as before.
 ## The rat since task 0261 (A047): its scurry by the distance it runs, its
 ## bite off the rules' own hit, its death played on.
-const FAMILIES: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker", &"rat"]
+## The digger since task 0263 (A049): its burrow on the tick the rules put it
+## under, its mound while it stays there, its emergence when it comes up.
+const FAMILIES: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker", &"rat", &"digger"]
 ## The ticks a boss's slam shows, its three frames.
 const SLAM_TICKS := 9
 var _before: Dictionary = {}
@@ -78,7 +80,13 @@ func after_tick(state: Dictionary) -> void:
 		var posed := posed_boss(one["kind"])
 		var key := int(id)
 		alive[key] = true
-		var memo: Dictionary = _actors.get(key, {"travel": 0, "right": false, "strike": -1000, "moving": false})
+		var memo: Dictionary = _actors.get(key, {"travel": 0, "right": false, "strike": -1000, "moving": false,
+			"under": false, "turned": -1000})
+		# **Going under or coming up** (task 0263): the tick it turned.
+		var under := Enemies.underground(state, key)
+		if bool(memo.get("under", false)) != under:
+			memo["turned"] = tick
+		memo["under"] = under
 		var pos := Vector2i(int(one["pos"][0]), int(one["pos"][1]))
 		var previous: Dictionary = _before.get(key, {})
 		if not previous.is_empty() and tick <= int(previous["tick"]):
@@ -123,6 +131,9 @@ func pose(one: Dictionary, state: Dictionary) -> StringName:
 	var tick := int(state["tick"])
 	if posed_boss(family):
 		return _boss_pose(one, state, memo)
+	var burrowing := _burrow_pose(one, state, memo)
+	if burrowing != &"":
+		return burrowing
 	if memo.is_empty() or tick != int(memo["tick"]):
 		return family
 	if memo["pos"] != Vector2i(int(one["pos"][0]), int(one["pos"][1])):
@@ -143,6 +154,29 @@ func pose(one: Dictionary, state: Dictionary) -> StringName:
 			# Anticipation uses the final three ticks of an existing core wait.
 			return StringName("%s_attack_0" % family)
 	return family
+
+
+## **A burrower's turn** (task 0263, A049's digger): under ground, its burrow
+## for the four frames after it went under and then its mound, round and
+## round on its frame's seconds; just up, its emergence; `&""` otherwise, or
+## for a kind with no burrow drawn.
+func _burrow_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> StringName:
+	var kind: StringName = one["kind"]
+	if not PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_burrow_0.png" % kind):
+		return &""
+	var tick := int(state["tick"])
+	var age := tick - int(memo.get("turned", -1000))
+	var each := maxi(roundi(float(PlaceholderArt.frame(WorldView.ENEMY_DIR + "%s_burrow_0.png" % kind)
+		.get("seconds", 0.1)) * float(GameData.TICK_HZ)), 1)
+	if Enemies.underground(state, int(one["id"])):
+		if age >= 0 and age < each * 4:
+			return StringName("%s_burrow_%d" % [kind, age / each])
+		var mound := maxi(roundi(float(PlaceholderArt.frame(WorldView.ENEMY_DIR + "%s_mound_0.png" % kind)
+			.get("seconds", 0.125)) * float(GameData.TICK_HZ)), 1)
+		return StringName("%s_mound_%d" % [kind, (tick / mound + int(one["id"])) % 3])
+	if age >= 0 and age < each * 4 and not memo.is_empty() and not bool(memo.get("under", false)):
+		return StringName("%s_emerge_%d" % [kind, age / each])
+	return &""
 
 
 ## A boss in the Giant's pose names (task 0246): its slam for `SLAM_TICKS`

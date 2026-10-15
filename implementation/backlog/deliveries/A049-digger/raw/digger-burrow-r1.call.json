@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A049 digger enemy animation source for HARVEST THE NIGHT.\nInput1 is accepted digger identity. Same compact hunched miner, broken orange-brown helmet with no lamp, mud-covered torn overalls, green dead skin, two long narrow bone shovel-claws, pale cloudy bone eyes. Side view facing WEST/LEFT, orthographic three-quarter top-down camera and neutral upper-left daylight. Handcrafted coarse pixelart, broad clean clusters, coloured dark outline, no fine stipple. Keep SAME body proportions and physical scale in every frame; standing body26 logical pixels tall,20\u201326 wide on64x48/pivot32,44. Lowest opaque row43, body/mound centred32. One shared source scale per strip; DO NOT enlarge small fallen or dirt-only poses to fill their cells. Complete objects SMALL within evenly spaced virtualcells, at most50% each cell size, large FULL HEIGHT transparent gutters and outer margins.\nTrue alpha0 outside opaque sharp pixels. No glow/halo/haze/shadow/blur/gradient/text/labels/UI/scenery/grass or ground patch. Pale eyes matte, not emission. Soil clods are loose spoils only, warm brownsoil, not rock or green skin.\nCreate ONE horizontal strip with EXACTLY 4 distinct sequential frames.\nOrdered poses: 0 crouches and raises claws;1 dives HEAD FIRST west into soil with looseclods;2 only curved back and legs above soilheap;3 ONLY a low brown soilheap, NO creature. Soilheap14\u201318wide x5\u20137high at SAME physicalscale as26px standing body. Lastcell not enlarged. Soilcrest bright brown under darkoutline, no grey rock. Ground baseline fixed across all cells.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/raw/digger-master-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/raw/digger-master-r2.png",
+      "sha256": "3bbede4a3d673f417145ee4875776f965e335891eb541cd5d234b29542e6fb35",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c315c332-7f22-40e8-a268-b52d604c85bd.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-burrow-r1.png",
+  "sha256": "e180376d418747883ecb7b822fe36b585cd95e25df35c994a1918ed04676927b",
+  "revision": 1,
+  "decision": "diagnostic candidate only; pack gait rejected, no approval"
+}

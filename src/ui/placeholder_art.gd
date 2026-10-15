@@ -152,12 +152,6 @@ const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_s
 const GROUND_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "draw_scale": 1.0}
 const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "draw_scale": 1.0}
 
-## A049's digger (task 0250): the families' 64x48 standing on (32,44), drawn
-## at 1.0, its mound on the same canvas; the walker it stands in as is caked
-## in soil.
-const DIGGER := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
-const DIGGER_TINT := Color(1.25, 0.92, 0.62)
-
 ## A050's frost zombie (task 0251): the families' 64x48 standing on (32,44),
 ## drawn at 1.0, the walker it stands in as gone cold; and its ice burst,
 ## the flare's 24x24 round (12,12) - a whole body's worth of shards.
@@ -207,15 +201,6 @@ const ORNAMENT := {"canvas": Vector2i(64, 12), "pivot": Vector2i(32, 6), "draw_s
 ## `bare` is a static file with no frame number (`hud_bait.png`). One line
 ## each, like `POSES`.
 const ART := {
-	# A049's digger (task 0250): the walker caked in soil, every pose its own,
-	# until 0263; its mound while it is under a fence drawn in code
-	# (`DiggerArt`), and its forecast head the box over the walker's head.
-	&"digger": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker", "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER, "bare": true},
-	&"digger_walk": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.125, "loop": true, "stand_in": &"enemies/walker_walk", "stand_in_frames": 4, "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER},
-	&"digger_attack": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER},
-	&"digger_death": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": DIGGER_TINT, "geometry": DIGGER, "final": DIGGER},
-	&"digger_mound": {"pack": "A049", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.125, "loop": true, "stand_in": &"", "geometry": DIGGER, "final": DIGGER},
-	&"head_digger": {"pack": "A049", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": DIGGER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A050's frost zombie (task 0251): the walker gone cold, every pose its
 	# own, until 0264; its ice burst drawn in code (`FrostArt`), and its
 	# forecast head the box over the walker's head.

@@ -33223,3 +33223,60 @@ They replace the stand-ins of 0219, 0221 and 0222.
 - `python implementation/backlog/assets.py set A036 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0263 - Art: the digger - done 2026-10-15
+
+A049 is integrated. The digger is the owner-approved art now: standing, its
+four-frame walk, its four-frame burrow, its three-frame mound, its
+four-frame emergence, its three-frame bite, its four-frame death and its
+head in the forecast. The owner approved it on 2026-10-14 in the batch
+review, as recorded in the delivery's `APPROVAL.json`. 0250's code-drawn
+mound and the walker caked in soil are gone.
+
+- **Promotion**:
+  - The 24 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their raw sources were copied byte for byte into
+    `assets/art_source/enemies/digger/` and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - It is on the families' 64x48 at (32,44), [-24,-28], with
+    `enemy_family`/`enemy_motion` and the three aliases, each carrying its
+    frame's prompt and references.
+- **Tracked, and it burrows** (`EnemyMotion`):
+  - The digger joins `FAMILIES`.
+  - It plays its burrow on the tick the rules put it under (the memo marks
+    the tick it turned), then its mound round and round on the mound's
+    seconds while it stays under, and its emergence when it comes up -
+    `_burrow_pose`.
+  - On open ground it walks and bites as the families do, and its death
+    plays.
+- **`DiggerArt` loads the mound** for the callers that ask by path. Its
+  drawing is gone.
+- **The stand-ins retired**: A049's six `PlaceholderArt` entries, `DIGGER`
+  and `DIGGER_TINT`. `placeholders.py --check` passes, with 99 stand-ins
+  left over 13 packs.
+- **Checks**: `check_enemy_art.py` takes the digger at the families' frame
+  with its burrow (4), mound (3) and emergence (4), every frame on the
+  ground. `check_ui_art.py` takes its head.
+- **Tests**: 0250's view check asks for A049's art and the digger tracked:
+  its burrow on the tick it goes under, its mound after, its emergence on
+  disk.
+  - Its rule for the mound - feet on row 43, 14-18 wide, 5-7 tall, a trail
+    of at most 8 - was written for 0250's code drawing, centred within a
+    pixel.
+  - A049's approved heap sits a pixel and a half west of the pivot on its
+    first frame, so the centring is held to 2 now; the rest it meets as
+    drawn.
+- **The view's comments**: `WorldView.drawn_enemy`'s notes say the crow's
+  and the digger's art are A048's and A049's since 0262 and 0263.
+- **Shots** (`implementation/shots/0263/`, FHD 1920x1080, looked at):
+  - `digger`: Autumn 2's night, the digger under the fence laid across its
+    road - a soil mound with its trail beside the rails, no body above, the
+    fence untouched.
+  - `forecast_autumn`: the digger's head among the night's kinds.
+- **The delivery folder** `implementation/backlog/deliveries/A049-digger/`
+  is committed, as A048's was.
+- `python implementation/backlog/assets.py set A049 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

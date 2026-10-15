@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "digger-death-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-death-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        483,
+        724
+      ],
+      "crop_xywh": [
+        82,
+        209,
+        325,
+        420
+      ],
+      "content_scale": 0.06190476190476191,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      22,
+      18,
+      42,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      20,
+      26
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-death-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-death-r2.png",
+      "sheet_cell_xywh": [
+        483,
+        0,
+        472,
+        724
+      ],
+      "crop_xywh": [
+        560,
+        314,
+        360,
+        320
+      ],
+      "content_scale": 0.06190476190476191,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      24,
+      43,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      22,
+      20
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-death-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-death-r2.png",
+      "sheet_cell_xywh": [
+        955,
+        0,
+        515,
+        724
+      ],
+      "crop_xywh": [
+        992,
+        401,
+        445,
+        233
+      ],
+      "content_scale": 0.06190476190476191,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      18,
+      30,
+      46,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      28,
+      14
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-death-r2-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-death-r2.png",
+      "sheet_cell_xywh": [
+        1470,
+        0,
+        702,
+        724
+      ],
+      "crop_xywh": [
+        1504,
+        464,
+        587,
+        181
+      ],
+      "content_scale": 0.06190476190476191,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      14,
+      33,
+      50,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      36,
+      11
+    ]
+  }
+]

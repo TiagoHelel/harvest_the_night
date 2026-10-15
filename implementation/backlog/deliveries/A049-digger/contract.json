@@ -1,0 +1,1670 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "digger",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/digger-west-0-night.png",
+          "path": "native/digger/west/01.png",
+          "points": {},
+          "pose": "digger_0"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "digger_0"
+      ]
+    },
+    {
+      "anim": "digger_attack",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/digger_attack-west-0-night.png",
+          "path": "native/digger_attack/west/01.png",
+          "points": {},
+          "pose": "digger_attack_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_attack-west-1-night.png",
+          "path": "native/digger_attack/west/02.png",
+          "points": {},
+          "pose": "digger_attack_1"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_attack-west-2-night.png",
+          "path": "native/digger_attack/west/03.png",
+          "points": {},
+          "pose": "digger_attack_2"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "digger_attack_0",
+        "digger_attack_1",
+        "digger_attack_2"
+      ]
+    },
+    {
+      "anim": "digger_burrow",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/digger_burrow-west-0-night.png",
+          "path": "native/digger_burrow/west/01.png",
+          "points": {},
+          "pose": "digger_burrow_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_burrow-west-1-night.png",
+          "path": "native/digger_burrow/west/02.png",
+          "points": {},
+          "pose": "digger_burrow_1"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_burrow-west-2-night.png",
+          "path": "native/digger_burrow/west/03.png",
+          "points": {},
+          "pose": "digger_burrow_2"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_burrow-west-3-night.png",
+          "path": "native/digger_burrow/west/04.png",
+          "points": {},
+          "pose": "digger_burrow_3"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "digger_burrow_0",
+        "digger_burrow_1",
+        "digger_burrow_2",
+        "digger_burrow_3"
+      ]
+    },
+    {
+      "anim": "digger_death",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/digger_death-west-0-night.png",
+          "path": "native/digger_death/west/01.png",
+          "points": {},
+          "pose": "digger_death_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_death-west-1-night.png",
+          "path": "native/digger_death/west/02.png",
+          "points": {},
+          "pose": "digger_death_1"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_death-west-2-night.png",
+          "path": "native/digger_death/west/03.png",
+          "points": {},
+          "pose": "digger_death_2"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_death-west-3-night.png",
+          "path": "native/digger_death/west/04.png",
+          "points": {},
+          "pose": "digger_death_3"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "digger_death_0",
+        "digger_death_1",
+        "digger_death_2",
+        "digger_death_3"
+      ]
+    },
+    {
+      "anim": "digger_emerge",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/digger_emerge-west-0-night.png",
+          "path": "native/digger_emerge/west/01.png",
+          "points": {},
+          "pose": "digger_emerge_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_emerge-west-1-night.png",
+          "path": "native/digger_emerge/west/02.png",
+          "points": {},
+          "pose": "digger_emerge_1"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_emerge-west-2-night.png",
+          "path": "native/digger_emerge/west/03.png",
+          "points": {},
+          "pose": "digger_emerge_2"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_emerge-west-3-night.png",
+          "path": "native/digger_emerge/west/04.png",
+          "points": {},
+          "pose": "digger_emerge_3"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 4,
+      "loop": false,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "digger_emerge_0",
+        "digger_emerge_1",
+        "digger_emerge_2",
+        "digger_emerge_3"
+      ]
+    },
+    {
+      "anim": "digger_mound",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/digger_mound-west-0-night.png",
+          "path": "native/digger_mound/west/01.png",
+          "points": {},
+          "pose": "digger_mound_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_mound-west-1-night.png",
+          "path": "native/digger_mound/west/02.png",
+          "points": {},
+          "pose": "digger_mound_1"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_mound-west-2-night.png",
+          "path": "native/digger_mound/west/03.png",
+          "points": {},
+          "pose": "digger_mound_2"
+        }
+      ],
+      "frame_seconds": 0.125,
+      "frames": 3,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "digger_mound_0",
+        "digger_mound_1",
+        "digger_mound_2"
+      ]
+    },
+    {
+      "anim": "digger_walk",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/digger_walk-west-0-night.png",
+          "path": "native/digger_walk/west/01.png",
+          "points": {},
+          "pose": "digger_walk_0"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_walk-west-1-night.png",
+          "path": "native/digger_walk/west/02.png",
+          "points": {},
+          "pose": "digger_walk_1"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_walk-west-2-night.png",
+          "path": "native/digger_walk/west/03.png",
+          "points": {},
+          "pose": "digger_walk_2"
+        },
+        {
+          "issue": "",
+          "night": "preview/digger_walk-west-3-night.png",
+          "path": "native/digger_walk/west/04.png",
+          "points": {},
+          "pose": "digger_walk_3"
+        }
+      ],
+      "frame_seconds": 0.125,
+      "frames": 4,
+      "loop": true,
+      "mirror": "runtime",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "poses": [
+        "digger_walk_0",
+        "digger_walk_1",
+        "digger_walk_2",
+        "digger_walk_3"
+      ]
+    },
+    {
+      "anim": "head_digger",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/head_digger-none-0-night.png",
+          "path": "native/head_digger/none/01.png",
+          "points": {},
+          "pose": "head_digger_0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "poses": [
+        "head_digger_0"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/enemies/walker.png",
+      "pivot_xy": [
+        32,
+        44
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "accepted_checks": [
+        "burrow_meets_mound",
+        "emerge_matches_walk_pose",
+        "mixed_body_clod_palette_verified",
+        "walk_leg_alternation_review"
+      ],
+      "change": "The owner accepted the exact displayed artwork, including the documented visual QA differences. Missing outputs are not approved or invented.",
+      "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+      "rule": "Reviewed visual constraints"
+    }
+  ],
+  "files": [
+    {
+      "anim": "digger",
+      "call": "raw/digger-master-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_0",
+      "prompt": "raw/digger-master-r2.prompt.txt",
+      "prompt_sha256": "97e6882fe517c8096fd30851421cca2f7964c93788657767db5240d4d1fa140f",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.027513227513227514,
+        "crop_xywh": [
+          239,
+          224,
+          715,
+          945
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1194,
+          1317
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger.png",
+      "seconds": 0.1,
+      "sha256": "4de6aef329a57ae02dda76e9b506f40729918ae916087c55b2e7285ba4cc8e6b",
+      "source": "raw/digger-master-r2.png",
+      "source_sha256": "3bbede4a3d673f417145ee4875776f965e335891eb541cd5d234b29542e6fb35"
+    },
+    {
+      "anim": "digger_walk",
+      "call": "raw/digger-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/digger_walk/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_walk_0",
+      "prompt": "raw/digger-walk-r3.prompt.txt",
+      "prompt_sha256": "90ac62b9ff6b6f0457f02ddcb90c182b70a0bbde7adca56d0c17cb431841c8fc",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06896551724137931,
+        "crop_xywh": [
+          110,
+          284,
+          296,
+          377
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          503,
+          836
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_walk_0.png",
+      "seconds": 0.125,
+      "sha256": "09a8b81fcf25ff2b3d5df69b2163ea8242e83fbfd341dfbb1be385db777d9f39",
+      "source": "raw/digger-walk-r3.png",
+      "source_sha256": "8aa6249f91da9dabfb351340d6bc3b82c8bdc7ad57a249ef4645c31cd6d6cb9a"
+    },
+    {
+      "anim": "digger_walk",
+      "call": "raw/digger-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/digger_walk/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_walk_1",
+      "prompt": "raw/digger-walk-r3.prompt.txt",
+      "prompt_sha256": "90ac62b9ff6b6f0457f02ddcb90c182b70a0bbde7adca56d0c17cb431841c8fc",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06896551724137931,
+        "crop_xywh": [
+          601,
+          288,
+          280,
+          375
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          503,
+          0,
+          458,
+          836
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_walk_1.png",
+      "seconds": 0.125,
+      "sha256": "df858130a13e40e00ce0ff70642911f519f6aae0d40b8eed267fa2f7cf19b852",
+      "source": "raw/digger-walk-r3.png",
+      "source_sha256": "8aa6249f91da9dabfb351340d6bc3b82c8bdc7ad57a249ef4645c31cd6d6cb9a"
+    },
+    {
+      "anim": "digger_walk",
+      "call": "raw/digger-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/digger_walk/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_walk_2",
+      "prompt": "raw/digger-walk-r3.prompt.txt",
+      "prompt_sha256": "90ac62b9ff6b6f0457f02ddcb90c182b70a0bbde7adca56d0c17cb431841c8fc",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06896551724137931,
+        "crop_xywh": [
+          1043,
+          288,
+          311,
+          368
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          961,
+          0,
+          480,
+          836
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_walk_2.png",
+      "seconds": 0.125,
+      "sha256": "03fb26ea1ad0b0904b352572650d3d247b674e5c043836f9890cc4191af44978",
+      "source": "raw/digger-walk-r3.png",
+      "source_sha256": "8aa6249f91da9dabfb351340d6bc3b82c8bdc7ad57a249ef4645c31cd6d6cb9a"
+    },
+    {
+      "anim": "digger_walk",
+      "call": "raw/digger-walk-r3.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/digger_walk/west/04.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_walk_3",
+      "prompt": "raw/digger-walk-r3.prompt.txt",
+      "prompt_sha256": "90ac62b9ff6b6f0457f02ddcb90c182b70a0bbde7adca56d0c17cb431841c8fc",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06896551724137931,
+        "crop_xywh": [
+          1530,
+          284,
+          271,
+          379
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1441,
+          0,
+          440,
+          836
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_walk_3.png",
+      "seconds": 0.125,
+      "sha256": "ca0b9fb20f08ca2235d2c1800453e551b9c3ed114346ffddf93d2d6ae153127d",
+      "source": "raw/digger-walk-r3.png",
+      "source_sha256": "8aa6249f91da9dabfb351340d6bc3b82c8bdc7ad57a249ef4645c31cd6d6cb9a"
+    },
+    {
+      "anim": "digger_burrow",
+      "call": "raw/digger-burrow-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_burrow/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_burrow_0",
+      "prompt": "raw/digger-burrow-r1.prompt.txt",
+      "prompt_sha256": "f44be352e507bfea0e4effc34d63009b3c87da443257eeaaaca867374b636c98",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0423728813559322,
+        "crop_xywh": [
+          67,
+          223,
+          368,
+          425
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          468,
+          756
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_burrow_0.png",
+      "seconds": 0.1,
+      "sha256": "9282736e7e1876a01a6ff7c69731b1f2c26387de4f918daf1f87b5330f868104",
+      "source": "raw/digger-burrow-r1.png",
+      "source_sha256": "e180376d418747883ecb7b822fe36b585cd95e25df35c994a1918ed04676927b"
+    },
+    {
+      "anim": "digger_burrow",
+      "call": "raw/digger-burrow-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_burrow/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_burrow_1",
+      "prompt": "raw/digger-burrow-r1.prompt.txt",
+      "prompt_sha256": "f44be352e507bfea0e4effc34d63009b3c87da443257eeaaaca867374b636c98",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0423728813559322,
+        "crop_xywh": [
+          502,
+          330,
+          561,
+          326
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          468,
+          0,
+          609,
+          756
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_burrow_1.png",
+      "seconds": 0.1,
+      "sha256": "9bde3f19d8462b0829a717f61c11c19b3f9f6f56f201b1b4250107d25247672b",
+      "source": "raw/digger-burrow-r1.png",
+      "source_sha256": "e180376d418747883ecb7b822fe36b585cd95e25df35c994a1918ed04676927b"
+    },
+    {
+      "anim": "digger_burrow",
+      "call": "raw/digger-burrow-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_burrow/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_burrow_2",
+      "prompt": "raw/digger-burrow-r1.prompt.txt",
+      "prompt_sha256": "f44be352e507bfea0e4effc34d63009b3c87da443257eeaaaca867374b636c98",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0423728813559322,
+        "crop_xywh": [
+          1092,
+          394,
+          463,
+          263
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1077,
+          0,
+          506,
+          756
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_burrow_2.png",
+      "seconds": 0.1,
+      "sha256": "e8766cc3e3948b327e9fe29132471570684c273aaa50ee7c3954f9be61a2d8d7",
+      "source": "raw/digger-burrow-r1.png",
+      "source_sha256": "e180376d418747883ecb7b822fe36b585cd95e25df35c994a1918ed04676927b"
+    },
+    {
+      "anim": "digger_burrow",
+      "call": "raw/digger-burrow-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_burrow/west/04.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_burrow_3",
+      "prompt": "raw/digger-burrow-r1.prompt.txt",
+      "prompt_sha256": "f44be352e507bfea0e4effc34d63009b3c87da443257eeaaaca867374b636c98",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.0423728813559322,
+        "crop_xywh": [
+          1613,
+          511,
+          413,
+          145
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "wood_dark",
+          "stone_dark"
+        ],
+        "sheet_cell_xywh": [
+          1583,
+          0,
+          496,
+          756
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_burrow_3.png",
+      "seconds": 0.1,
+      "sha256": "2fbbbca77ced5214ea604dc003e9d4559d1bee1ea79ccbab0ecf1db307b8e4e7",
+      "source": "raw/digger-burrow-r1.png",
+      "source_sha256": "e180376d418747883ecb7b822fe36b585cd95e25df35c994a1918ed04676927b"
+    },
+    {
+      "anim": "digger_mound",
+      "call": "raw/digger-mound-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/digger_mound/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_mound_0",
+      "prompt": "raw/digger-mound-r1.prompt.txt",
+      "prompt_sha256": "f82e233bed46d4f9f18ffe0675dd887251239254fa82fb7df5e760d54abd6c84",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03485714285714286,
+        "crop_xywh": [
+          128,
+          397,
+          525,
+          167
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "wood_dark",
+          "stone_dark"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          719,
+          756
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_mound_0.png",
+      "seconds": 0.125,
+      "sha256": "000dd58698c43e93f7e13dccc7687aea8a4127ef13c968af90ace76b729e629e",
+      "source": "raw/digger-mound-r1.png",
+      "source_sha256": "a76d066f78014361d75b5d4c26662223328064ed916557ae4d86e004628c049b"
+    },
+    {
+      "anim": "digger_mound",
+      "call": "raw/digger-mound-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/digger_mound/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_mound_1",
+      "prompt": "raw/digger-mound-r1.prompt.txt",
+      "prompt_sha256": "f82e233bed46d4f9f18ffe0675dd887251239254fa82fb7df5e760d54abd6c84",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03485714285714286,
+        "crop_xywh": [
+          787,
+          375,
+          549,
+          194
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "wood_dark",
+          "stone_dark"
+        ],
+        "sheet_cell_xywh": [
+          719,
+          0,
+          673,
+          756
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_mound_1.png",
+      "seconds": 0.125,
+      "sha256": "8d4b371e3f5432c699c4a5f38cfc1c346aa605193131c218a166d80b1321875c",
+      "source": "raw/digger-mound-r1.png",
+      "source_sha256": "a76d066f78014361d75b5d4c26662223328064ed916557ae4d86e004628c049b"
+    },
+    {
+      "anim": "digger_mound",
+      "call": "raw/digger-mound-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": true,
+      "mirror": "runtime",
+      "output": "native/digger_mound/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_mound_2",
+      "prompt": "raw/digger-mound-r1.prompt.txt",
+      "prompt_sha256": "f82e233bed46d4f9f18ffe0675dd887251239254fa82fb7df5e760d54abd6c84",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.03485714285714286,
+        "crop_xywh": [
+          1449,
+          399,
+          525,
+          164
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "wood_dark",
+          "stone_dark"
+        ],
+        "sheet_cell_xywh": [
+          1392,
+          0,
+          687,
+          756
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_mound_2.png",
+      "seconds": 0.125,
+      "sha256": "8a2f4a4f5b8d7f4927378b9897b857ba7ef16a5a1e6232aea9dfccc97f5a4902",
+      "source": "raw/digger-mound-r1.png",
+      "source_sha256": "a76d066f78014361d75b5d4c26662223328064ed916557ae4d86e004628c049b"
+    },
+    {
+      "anim": "digger_emerge",
+      "call": "raw/digger-emerge-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_emerge/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_emerge_0",
+      "prompt": "raw/digger-emerge-r1.prompt.txt",
+      "prompt_sha256": "a67e3e1ef6f48da015aef0fa13889335373d31f395da41bd25b284c0c93c38be",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.052313883299798795,
+        "crop_xywh": [
+          44,
+          512,
+          418,
+          211
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          494,
+          793
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_emerge_0.png",
+      "seconds": 0.1,
+      "sha256": "656796ab1ff63087e8d6eefbd15df9649486ce416efecdad6bfc23be2e4e6ceb",
+      "source": "raw/digger-emerge-r1.png",
+      "source_sha256": "9a40f41bc2259742e0b48840fa9ac63875e425f8c49f6c3923ae888597d4daec"
+    },
+    {
+      "anim": "digger_emerge",
+      "call": "raw/digger-emerge-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_emerge/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_emerge_1",
+      "prompt": "raw/digger-emerge-r1.prompt.txt",
+      "prompt_sha256": "a67e3e1ef6f48da015aef0fa13889335373d31f395da41bd25b284c0c93c38be",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.052313883299798795,
+        "crop_xywh": [
+          527,
+          437,
+          441,
+          293
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          494,
+          0,
+          495,
+          793
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_emerge_1.png",
+      "seconds": 0.1,
+      "sha256": "edcb9e84d73be27c040cbe4d988985d20dba9aad36057c0d439f015dc8397a78",
+      "source": "raw/digger-emerge-r1.png",
+      "source_sha256": "9a40f41bc2259742e0b48840fa9ac63875e425f8c49f6c3923ae888597d4daec"
+    },
+    {
+      "anim": "digger_emerge",
+      "call": "raw/digger-emerge-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_emerge/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_emerge_2",
+      "prompt": "raw/digger-emerge-r1.prompt.txt",
+      "prompt_sha256": "a67e3e1ef6f48da015aef0fa13889335373d31f395da41bd25b284c0c93c38be",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.052313883299798795,
+        "crop_xywh": [
+          1012,
+          295,
+          458,
+          425
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          989,
+          0,
+          525,
+          793
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_emerge_2.png",
+      "seconds": 0.1,
+      "sha256": "17d3da1287c8b6b60623981255093e29f4b755b5a0e0d795b1492c9200096f3f",
+      "source": "raw/digger-emerge-r1.png",
+      "source_sha256": "9a40f41bc2259742e0b48840fa9ac63875e425f8c49f6c3923ae888597d4daec"
+    },
+    {
+      "anim": "digger_emerge",
+      "call": "raw/digger-emerge-r1.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_emerge/west/04.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_emerge_3",
+      "prompt": "raw/digger-emerge-r1.prompt.txt",
+      "prompt_sha256": "a67e3e1ef6f48da015aef0fa13889335373d31f395da41bd25b284c0c93c38be",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.052313883299798795,
+        "crop_xywh": [
+          1559,
+          184,
+          384,
+          497
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1514,
+          0,
+          469,
+          793
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_emerge_3.png",
+      "seconds": 0.1,
+      "sha256": "e0b0a8e8ff47ea392f4480dc75868514c8b7f06509a457fef997ac48e1714f3e",
+      "source": "raw/digger-emerge-r1.png",
+      "source_sha256": "9a40f41bc2259742e0b48840fa9ac63875e425f8c49f6c3923ae888597d4daec"
+    },
+    {
+      "anim": "digger_attack",
+      "call": "raw/digger-attack-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_attack/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_attack_0",
+      "prompt": "raw/digger-attack-r2.prompt.txt",
+      "prompt_sha256": "df1bdef5e9062f02d2fba87d7e25a36321757a90e3b326333d7fed7255895de3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04701627486437613,
+        "crop_xywh": [
+          164,
+          101,
+          493,
+          547
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          724,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_attack_0.png",
+      "seconds": 0.1,
+      "sha256": "2b29162528826312be2f49416904fe4c18bfc996d8ccafb3cff859ef965deabd",
+      "source": "raw/digger-attack-r2.png",
+      "source_sha256": "875c77dd7b127517131a22f7cb3a1cf704b61be475b73bbd782654b9db1b7cf6"
+    },
+    {
+      "anim": "digger_attack",
+      "call": "raw/digger-attack-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_attack/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_attack_1",
+      "prompt": "raw/digger-attack-r2.prompt.txt",
+      "prompt_sha256": "df1bdef5e9062f02d2fba87d7e25a36321757a90e3b326333d7fed7255895de3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04701627486437613,
+        "crop_xywh": [
+          792,
+          149,
+          644,
+          496
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          724,
+          0,
+          800,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_attack_1.png",
+      "seconds": 0.1,
+      "sha256": "4440469f711443cbb71d11eb56e2f513dd263d9e046b0f0115832ae51d2e6b8c",
+      "source": "raw/digger-attack-r2.png",
+      "source_sha256": "875c77dd7b127517131a22f7cb3a1cf704b61be475b73bbd782654b9db1b7cf6"
+    },
+    {
+      "anim": "digger_attack",
+      "call": "raw/digger-attack-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_attack/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_attack_2",
+      "prompt": "raw/digger-attack-r2.prompt.txt",
+      "prompt_sha256": "df1bdef5e9062f02d2fba87d7e25a36321757a90e3b326333d7fed7255895de3",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.04701627486437613,
+        "crop_xywh": [
+          1614,
+          98,
+          467,
+          553
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1524,
+          0,
+          648,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_attack_2.png",
+      "seconds": 0.1,
+      "sha256": "dfd915e420d21d115691ac90edeb2fb2ef8b21313780388ccfa72456c813a3dc",
+      "source": "raw/digger-attack-r2.png",
+      "source_sha256": "875c77dd7b127517131a22f7cb3a1cf704b61be475b73bbd782654b9db1b7cf6"
+    },
+    {
+      "anim": "digger_death",
+      "call": "raw/digger-death-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_death/west/01.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_death_0",
+      "prompt": "raw/digger-death-r2.prompt.txt",
+      "prompt_sha256": "ff86e95a2c99e5feb9e2b669fa7d2e35d5e8c2ac6bb8820769c6e5a347cbca3b",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06190476190476191,
+        "crop_xywh": [
+          82,
+          209,
+          325,
+          420
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          483,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_death_0.png",
+      "seconds": 0.1,
+      "sha256": "10c2fa0b0cb818b5afbe0915ab3de489275ffcbdf8ff2fb02550de36d5fcd010",
+      "source": "raw/digger-death-r2.png",
+      "source_sha256": "94d418309e88913ff5f4306519ccd0cb1a5452d6691be4a5dfe39f9348d06e3c"
+    },
+    {
+      "anim": "digger_death",
+      "call": "raw/digger-death-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_death/west/02.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_death_1",
+      "prompt": "raw/digger-death-r2.prompt.txt",
+      "prompt_sha256": "ff86e95a2c99e5feb9e2b669fa7d2e35d5e8c2ac6bb8820769c6e5a347cbca3b",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06190476190476191,
+        "crop_xywh": [
+          560,
+          314,
+          360,
+          320
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          483,
+          0,
+          472,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_death_1.png",
+      "seconds": 0.1,
+      "sha256": "458514ec1c4e64117313e2a8a7a4b68a0b68cfcf881795252af86da03736f0b5",
+      "source": "raw/digger-death-r2.png",
+      "source_sha256": "94d418309e88913ff5f4306519ccd0cb1a5452d6691be4a5dfe39f9348d06e3c"
+    },
+    {
+      "anim": "digger_death",
+      "call": "raw/digger-death-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_death/west/03.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_death_2",
+      "prompt": "raw/digger-death-r2.prompt.txt",
+      "prompt_sha256": "ff86e95a2c99e5feb9e2b669fa7d2e35d5e8c2ac6bb8820769c6e5a347cbca3b",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06190476190476191,
+        "crop_xywh": [
+          992,
+          401,
+          445,
+          233
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          955,
+          0,
+          515,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_death_2.png",
+      "seconds": 0.1,
+      "sha256": "948c1c18d147cc4cfbd3cf191697d20ae3ed6b947695c51bca80a48995f93627",
+      "source": "raw/digger-death-r2.png",
+      "source_sha256": "94d418309e88913ff5f4306519ccd0cb1a5452d6691be4a5dfe39f9348d06e3c"
+    },
+    {
+      "anim": "digger_death",
+      "call": "raw/digger-death-r2.call.json",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "dir": "west",
+      "draw_scale": 1,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "mirror": "runtime",
+      "output": "native/digger_death/west/04.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "points": {},
+      "pose": "digger_death_3",
+      "prompt": "raw/digger-death-r2.prompt.txt",
+      "prompt_sha256": "ff86e95a2c99e5feb9e2b669fa7d2e35d5e8c2ac6bb8820769c6e5a347cbca3b",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_scale": 0.06190476190476191,
+        "crop_xywh": [
+          1504,
+          464,
+          587,
+          181
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1470,
+          0,
+          702,
+          724
+        ]
+      },
+      "runtime_name": "sprites/enemies/digger_death_3.png",
+      "seconds": 0.1,
+      "sha256": "0b66cbe7d37a4064cf1d4b3b73e7bc36e209fcfa47b25eab2eac756ae9ae397f",
+      "source": "raw/digger-death-r2.png",
+      "source_sha256": "94d418309e88913ff5f4306519ccd0cb1a5452d6691be4a5dfe39f9348d06e3c"
+    },
+    {
+      "anim": "head_digger",
+      "call": "raw/head-digger-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "inspection_eye_xy": [
+        7,
+        8
+      ],
+      "loop": false,
+      "mirror": "none",
+      "output": "native/head_digger/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "roof_dark",
+        "roof",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "night",
+        "night_light",
+        "rot_dark",
+        "rot",
+        "blood"
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "head_digger_0",
+      "prompt": "raw/head-digger-r1.prompt.txt",
+      "prompt_sha256": "e2d43e55228917e45bbc3ac4788f0171c3a3de0bdc9b3f5d631ce90439352a51",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          6
+        ],
+        "content_scale": 0.01478953356086462,
+        "crop_xywh": [
+          282,
+          234,
+          753,
+          879
+        ],
+        "mirrored_from": null,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "roof_dark",
+          "roof",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "flame",
+          "bone",
+          "bone_dark",
+          "skin_dark",
+          "skin",
+          "skin_light",
+          "night",
+          "night_light",
+          "rot_dark",
+          "rot",
+          "blood"
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      },
+      "runtime_name": "sprites/ui/head_digger.png",
+      "seconds": 1,
+      "sha256": "8086c3244455f209f4c94db9a0044e237a1e9a68ab556ab94358a26a7186cbf3",
+      "source": "raw/head-digger-r1.png",
+      "source_sha256": "7143c340ff7591a6e1652b347c55ffcf8a2ffd670ab999593d973d42ae03b758"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+    "scope": "complete_reviewed_delivery"
+  },
+  "pack": "A049",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\walker\\master.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\breaker\\master.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-master-r2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "3bbede4a3d673f417145ee4875776f965e335891eb541cd5d234b29542e6fb35"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\enemies\\walker\\walk-v2.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "58a56d3e7189e61fe2e57ec812f6f3fa27a2bc3a95d894673cf16f806ee12c5d"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-burrow-r1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "e180376d418747883ecb7b822fe36b585cd95e25df35c994a1918ed04676927b"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\terrain\\soil.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "7f2a394dee9d4801c32da75bc1ddec0522c035936d450a48bff2f3894cc79d4e"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\preview\\walk0-head-reference-4x.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "15b14e0ff944d51bceb48a5332c87bfdb853b4d53ceab738a0d5967eaab02e6e"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A049-digger",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The digger",
+  "tool": "built-in ImageGen"
+}

@@ -1,7 +1,7 @@
 # 0263 - Art: the digger
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0250, 0246
 - **Likely files:** assets/art_source/enemies/digger/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd
 - **Art packs:** A049

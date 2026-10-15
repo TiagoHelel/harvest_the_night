@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Edit this THREE-frame digger claw attack strip. Keep same figure, same poses, same scale, same size, same body pixels and truealpha0 spacing. Remove ALL loose soil clods/debris from middle contact frame. The contact is a horizontal two-claw rake toward WEST into an unseen wall, not digging a soilheap. Two long boneclaws swingforward, no target, slashFX or particles. Only the creature holds pixels. Same coarse pixelart, no halos, lightingcloud, shadow, ground. Preserve standing recovery26px scale, figures safelyseparated.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/raw/digger-attack-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A049-digger/raw/digger-attack-r1.png",
+      "sha256": "c1960e64b748905beb118d660ac96f110b4db869767490864dac183208df7108",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\rejected\\digger-attack-r1.png"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9ed60b0b-5e61-4b92-a572-32a79d04bfe0.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-attack-r2.png",
+  "sha256": "875c77dd7b127517131a22f7cb3a1cf704b61be475b73bbd782654b9db1b7cf6",
+  "revision": 2,
+  "decision": "diagnostic candidate only; pack gait rejected, no approval"
+}

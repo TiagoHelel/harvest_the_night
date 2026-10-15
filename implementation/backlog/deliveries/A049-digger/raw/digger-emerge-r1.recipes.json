@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "digger-emerge-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-emerge-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        494,
+        793
+      ],
+      "crop_xywh": [
+        44,
+        512,
+        418,
+        211
+      ],
+      "content_scale": 0.052313883299798795,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      33,
+      43,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      22,
+      11
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-emerge-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-emerge-r1.png",
+      "sheet_cell_xywh": [
+        494,
+        0,
+        495,
+        793
+      ],
+      "crop_xywh": [
+        527,
+        437,
+        441,
+        293
+      ],
+      "content_scale": 0.052313883299798795,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      29,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      15
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-emerge-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-emerge-r1.png",
+      "sheet_cell_xywh": [
+        989,
+        0,
+        525,
+        793
+      ],
+      "crop_xywh": [
+        1012,
+        295,
+        458,
+        425
+      ],
+      "content_scale": 0.052313883299798795,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      20,
+      23,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      24,
+      22
+    ]
+  },
+  {
+    "recipe": {
+      "id": "digger-emerge-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-emerge-r1.png",
+      "sheet_cell_xywh": [
+        1514,
+        0,
+        469,
+        793
+      ],
+      "crop_xywh": [
+        1559,
+        184,
+        384,
+        497
+      ],
+      "content_scale": 0.052313883299798795,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      22,
+      18,
+      42,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      20,
+      26
+    ]
+  }
+]

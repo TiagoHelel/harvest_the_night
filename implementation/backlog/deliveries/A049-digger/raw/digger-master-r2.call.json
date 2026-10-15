@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production enemy identity master A049, HARVEST THE NIGHT.\nCreate ONE hunched zombie miner, side view facing WEST/LEFT, low and long with its back bent nearly level. Broken miner helmet WITHOUT lamp, soil-caked torn overalls, rot-green skin, two long shovel-like claws made of bone and broken nails. Thin forearms ending in long claws, not the blocky huge arms of the breaker. The claws and low hunched back are its unmistakable identity. Complete standing body 20\u201326 pixels wide and25\u201327 tall on logical64x48 canvas, pivot32,44, body centred32, feet on row43. It is shorter than the29px walker. Handcrafted coarse pixel art, broad simple clusters, coloured dark outline, orthographic three-quarter top-down farm camera, upper-left neutral daylight. Same-world decayed zombie palette and contrast. Image1 is world style, image2 walker is same-world enemy, image3 breaker is a silhouette to AVOID. Native pixels large and decisive, no microdetail. Pale matte bone eyes, never glowing. True alpha0 outside sharp opaque pixel edges. No ground, shadow, glow, halo, haze, particles, scenery, text, labels, gradient, blur or3D. One complete unclipped figure SMALL inside ample transparent margins. Both feet and both long claws clearly identifiable.\nSecond independent candidate: strengthen the low horizontal hunch, helmet silhouette and long narrow bone claws. Keep20\u201326 wide by26high, thin body and forearms, not huge breaker arms.\nGeometry correction from first candidate: it became32wide at26high, too wide. Body width MUST be less than its height: silhouette ratio24wide to26high, not a long horizontal32wide figure. Bring both elbows/claws inward so claws hang nearly vertically under the chest; helmet/face may project slightly west. Keep long narrow fingerclaws but no outstretched arms. Feet together beneath hips, compact low shoulderhunch rather than horizontal stretch. Portrait-like compact body, same length limbs.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/breaker/master.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/breaker/master.png",
+      "sha256": "6b014e232b44c98f74ef1e8884f1c31cc3bcd9bba5b789224ad08b207913eda8",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e9ec222e-35d2-4ae9-981a-36fb6a06c4f6.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A049-digger\\raw\\digger-master-r2.png",
+  "sha256": "3bbede4a3d673f417145ee4875776f965e335891eb541cd5d234b29542e6fb35",
+  "revision": 2,
+  "decision": "diagnostic candidate only; pack gait rejected, no approval"
+}
