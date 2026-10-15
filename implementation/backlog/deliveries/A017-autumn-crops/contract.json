@@ -1,0 +1,1839 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "beet",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/beet-none-0-night.png",
+          "path": "native/beet/none/01.png",
+          "points": {},
+          "pose": "seed mound"
+        },
+        {
+          "issue": "",
+          "night": "preview/beet-none-1-night.png",
+          "path": "native/beet/none/02.png",
+          "points": {},
+          "pose": "two leaves"
+        },
+        {
+          "issue": "",
+          "night": "preview/beet-none-2-night.png",
+          "path": "native/beet/none/03.png",
+          "points": {},
+          "pose": "leafy rosette with red stems"
+        },
+        {
+          "issue": "",
+          "night": "preview/beet-none-3-night.png",
+          "path": "native/beet/none/04.png",
+          "points": {},
+          "pose": "tall red-veined leaves, round DARK RED root shoulder at soil line"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 4,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "seed mound",
+        "two leaves",
+        "leafy rosette with red stems",
+        "tall red-veined leaves, round DARK RED root shoulder at soil line"
+      ]
+    },
+    {
+      "anim": "grape",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/grape-none-0-night.png",
+          "path": "native/grape/none/01.png",
+          "points": {},
+          "pose": "planted cutting in mound"
+        },
+        {
+          "issue": "",
+          "night": "preview/grape-none-1-night.png",
+          "path": "native/grape/none/02.png",
+          "points": {},
+          "pose": "young vine tied to SHORT stake"
+        },
+        {
+          "issue": "",
+          "night": "preview/grape-none-2-night.png",
+          "path": "native/grape/none/03.png",
+          "points": {},
+          "pose": "full wooden trellis TWO posts and crossbar, vine leaves NO fruit"
+        },
+        {
+          "issue": "",
+          "night": "preview/grape-none-3-night.png",
+          "path": "native/grape/none/04.png",
+          "points": {},
+          "pose": "SAME trellis posts and crossbar position as cell3, full vine leaves1-3pixels ABOVE crossbar,3-4 DARK BLUE VIOLET grape bunches two-colour shaded each"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 4,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "poses": [
+        "planted cutting in mound",
+        "young vine tied to SHORT stake",
+        "full wooden trellis TWO posts and crossbar, vine leaves NO fruit",
+        "SAME trellis posts and crossbar position as cell3, full vine leaves1-3pixels ABOVE crossbar,3-4 DARK BLUE VIOLET grape bunches two-colour shaded each"
+      ]
+    },
+    {
+      "anim": "grape_regrow",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/grape_regrow-none-0-night.png",
+          "path": "native/grape_regrow/none/01.png",
+          "points": {},
+          "pose": "SAME trellis and foliage as cell4, SMALL GREEN clusters, NO ripe grapes"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "poses": [
+        "SAME trellis and foliage as cell4, SMALL GREEN clusters, NO ripe grapes"
+      ]
+    },
+    {
+      "anim": "hud_beet",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_beet-none-0-night.png",
+          "path": "native/hud_beet/none/01.png",
+          "points": {},
+          "pose": "single produce icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "hud_beet_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_beet_seed-none-0-night.png",
+          "path": "native/hud_beet_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "hud_grape",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_grape-none-0-night.png",
+          "path": "native/hud_grape/none/01.png",
+          "points": {},
+          "pose": "single produce icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "hud_grape_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_grape_seed-none-0-night.png",
+          "path": "native/hud_grape_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "hud_pumpkin",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_pumpkin-none-0-night.png",
+          "path": "native/hud_pumpkin/none/01.png",
+          "points": {},
+          "pose": "single produce icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "hud_pumpkin_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_pumpkin_seed-none-0-night.png",
+          "path": "native/hud_pumpkin_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "hud_wheat_seed",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/hud_wheat_seed-none-0-night.png",
+          "path": "native/hud_wheat_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_beet",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_beet-none-0-night.png",
+          "path": "native/icon_beet/none/01.png",
+          "points": {},
+          "pose": "single produce icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "icon_beet_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_beet_seed-none-0-night.png",
+          "path": "native/icon_beet_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_grape",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_grape-none-0-night.png",
+          "path": "native/icon_grape/none/01.png",
+          "points": {},
+          "pose": "single produce icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "icon_grape_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_grape_seed-none-0-night.png",
+          "path": "native/icon_grape_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_pumpkin",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_pumpkin-none-0-night.png",
+          "path": "native/icon_pumpkin/none/01.png",
+          "points": {},
+          "pose": "single produce icon"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "single produce icon"
+      ]
+    },
+    {
+      "anim": "icon_pumpkin_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_pumpkin_seed-none-0-night.png",
+          "path": "native/icon_pumpkin_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "icon_wheat_seed",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/icon_wheat_seed-none-0-night.png",
+          "path": "native/icon_wheat_seed/none/01.png",
+          "points": {},
+          "pose": "common paper packet with seasonal band and crop picture"
+        }
+      ],
+      "frame_seconds": 1.0,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "poses": [
+        "common paper packet with seasonal band and crop picture"
+      ]
+    },
+    {
+      "anim": "pumpkin",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/pumpkin-none-0-night.png",
+          "path": "native/pumpkin/none/01.png",
+          "points": {},
+          "pose": "seed mound"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin-none-1-night.png",
+          "path": "native/pumpkin/none/02.png",
+          "points": {},
+          "pose": "two leaves"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin-none-2-night.png",
+          "path": "native/pumpkin/none/03.png",
+          "points": {},
+          "pose": "vine, small GREEN pumpkin"
+        },
+        {
+          "issue": "",
+          "night": "preview/pumpkin-none-3-night.png",
+          "path": "native/pumpkin/none/04.png",
+          "points": {},
+          "pose": "one big ribbed ORANGE pumpkin, green stem, one leaf, width10-13"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 4,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "poses": [
+        "seed mound",
+        "two leaves",
+        "vine, small GREEN pumpkin",
+        "one big ribbed ORANGE pumpkin, green stem, one leaf, width10-13"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/crops/corn_3.png",
+      "pivot_xy": [
+        8,
+        22
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "pumpkin",
+      "call": "raw/pumpkin-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "output": "native/pumpkin/none/01.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "seed mound",
+      "prompt": "raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.018742103235747303,
+        "crop_xywh": [
+          65,
+          611,
+          253,
+          117
+        ]
+      },
+      "runtime_name": "sprites/crops/pumpkin_0.png",
+      "seconds": 0.55,
+      "sha256": "e40cc2c1b203831df82367565a7a6ddaf4def9a01cefcb03c4fbb12b506522a9",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        384,
+        793
+      ],
+      "source": "raw/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314"
+    },
+    {
+      "anim": "pumpkin",
+      "call": "raw/pumpkin-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "output": "native/pumpkin/none/02.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "two leaves",
+      "prompt": "raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.018742103235747303,
+        "crop_xywh": [
+          451,
+          507,
+          329,
+          206
+        ]
+      },
+      "runtime_name": "sprites/crops/pumpkin_1.png",
+      "seconds": 0.55,
+      "sha256": "616e1bb85a22bd58d36c17ede65348d607294e9ed1708870dfb945e3d7ce79d9",
+      "sheet_cell_xywh": [
+        384,
+        0,
+        441,
+        793
+      ],
+      "source": "raw/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314"
+    },
+    {
+      "anim": "pumpkin",
+      "call": "raw/pumpkin-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "output": "native/pumpkin/none/03.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "vine, small GREEN pumpkin",
+      "prompt": "raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          7
+        ],
+        "content_scale": 0.018742103235747303,
+        "crop_xywh": [
+          871,
+          342,
+          471,
+          385
+        ]
+      },
+      "runtime_name": "sprites/crops/pumpkin_2.png",
+      "seconds": 0.55,
+      "sha256": "2bedb0b36e9fc91e63e06b86da6499cdd55ec51102ea34957759b7d335d4813c",
+      "sheet_cell_xywh": [
+        825,
+        0,
+        530,
+        793
+      ],
+      "source": "raw/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314"
+    },
+    {
+      "anim": "pumpkin",
+      "call": "raw/pumpkin-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "output": "native/pumpkin/none/04.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "one big ribbed ORANGE pumpkin, green stem, one leaf, width10-13",
+      "prompt": "raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          9
+        ],
+        "content_scale": 0.018742103235747303,
+        "crop_xywh": [
+          1369,
+          255,
+          600,
+          472
+        ]
+      },
+      "runtime_name": "sprites/crops/pumpkin_3.png",
+      "seconds": 0.55,
+      "sha256": "994dcb8c3832fbbfa994076cd11fee158046ce3e28e1874e0fc352734ea91cf1",
+      "sheet_cell_xywh": [
+        1355,
+        0,
+        628,
+        793
+      ],
+      "source": "raw/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314"
+    },
+    {
+      "anim": "grape",
+      "call": "raw/grape-r4.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "output": "native/grape/none/01.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "planted cutting in mound",
+      "prompt": "raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "recipe": {
+        "content_anchor_xy": [
+          1,
+          2
+        ],
+        "content_scale": 0.04058,
+        "crop_xywh": [
+          186,
+          659,
+          68,
+          61
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          360,
+          793
+        ]
+      },
+      "runtime_name": "sprites/crops/grape_0.png",
+      "seconds": 0.55,
+      "sha256": "817c5b9b27bcaa00a9f892ad5fd709411fb26ff2ebc09e676cb76ef63d641974",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        348,
+        793
+      ],
+      "source": "raw/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83"
+    },
+    {
+      "anim": "grape",
+      "call": "raw/grape-r4.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "output": "native/grape/none/02.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "young vine tied to SHORT stake",
+      "prompt": "raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          12
+        ],
+        "content_scale": 0.04058,
+        "crop_xywh": [
+          468,
+          421,
+          205,
+          297
+        ],
+        "sheet_cell_xywh": [
+          360,
+          0,
+          371,
+          793
+        ]
+      },
+      "runtime_name": "sprites/crops/grape_1.png",
+      "seconds": 0.55,
+      "sha256": "bfcacb60ed9d86b64d163ca53b966957cd533924022cd5785243a708298594df",
+      "sheet_cell_xywh": [
+        348,
+        0,
+        375,
+        793
+      ],
+      "source": "raw/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83"
+    },
+    {
+      "anim": "grape",
+      "call": "raw/grape-r4.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "output": "native/grape/none/03.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "full wooden trellis TWO posts and crossbar, vine leaves NO fruit",
+      "prompt": "raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          23
+        ],
+        "content_scale": 0.04058,
+        "crop_xywh": [
+          791,
+          152,
+          312,
+          565
+        ],
+        "sheet_cell_xywh": [
+          731,
+          0,
+          411,
+          793
+        ]
+      },
+      "runtime_name": "sprites/crops/grape_2.png",
+      "seconds": 0.55,
+      "sha256": "f0b96e53a3f2e6c7aa41b5b432589d386d057f02465a25b1f101e14c34a3a511",
+      "sheet_cell_xywh": [
+        723,
+        0,
+        407,
+        793
+      ],
+      "source": "raw/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83"
+    },
+    {
+      "anim": "grape",
+      "call": "raw/grape-r4.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "output": "native/grape/none/04.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "SAME trellis posts and crossbar position as cell3, full vine leaves1-3pixels ABOVE crossbar,3-4 DARK BLUE VIOLET grape bunches two-colour shaded each",
+      "prompt": "raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          25
+        ],
+        "content_scale": 0.04058,
+        "crop_xywh": [
+          1183,
+          114,
+          324,
+          604
+        ],
+        "sheet_cell_xywh": [
+          1142,
+          0,
+          408,
+          793
+        ]
+      },
+      "runtime_name": "sprites/crops/grape_3.png",
+      "seconds": 0.55,
+      "sha256": "7f6acabe04df56f52dc8fee5f8d638e6c3ee225f12d9f30d6942228cccb5c66d",
+      "sheet_cell_xywh": [
+        1130,
+        0,
+        404,
+        793
+      ],
+      "source": "raw/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83"
+    },
+    {
+      "anim": "grape_regrow",
+      "call": "raw/grape-r4.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "output": "native/grape_regrow/none/01.png",
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "points": {},
+      "pose": "SAME trellis and foliage as cell4, SMALL GREEN clusters, NO ripe grapes",
+      "prompt": "raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          24
+        ],
+        "content_scale": 0.04058,
+        "crop_xywh": [
+          1594,
+          124,
+          317,
+          594
+        ],
+        "sheet_cell_xywh": [
+          1550,
+          0,
+          433,
+          793
+        ]
+      },
+      "runtime_name": "sprites/crops/grape_regrow.png",
+      "seconds": 0.55,
+      "sha256": "dfbcadff54de5439a95d74fda96a00b86fc0166eacd11a0262b4436c79b9c117",
+      "sheet_cell_xywh": [
+        1534,
+        0,
+        449,
+        793
+      ],
+      "source": "raw/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83"
+    },
+    {
+      "anim": "beet",
+      "call": "raw/beet-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "output": "native/beet/none/01.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "seed mound",
+      "prompt": "raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.019195544554455445,
+        "crop_xywh": [
+          99,
+          610,
+          240,
+          106
+        ]
+      },
+      "runtime_name": "sprites/crops/beet_0.png",
+      "seconds": 0.55,
+      "sha256": "fa638ce43f277291936efc00e5cabd73d17d0b9bb4791c2415d9f2610d3fceb4",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        429,
+        793
+      ],
+      "source": "raw/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff"
+    },
+    {
+      "anim": "beet",
+      "call": "raw/beet-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "output": "native/beet/none/02.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "two leaves",
+      "prompt": "raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.019195544554455445,
+        "crop_xywh": [
+          521,
+          514,
+          338,
+          202
+        ]
+      },
+      "runtime_name": "sprites/crops/beet_1.png",
+      "seconds": 0.55,
+      "sha256": "e4e33698c8532be175f16db6c0711ff329040687058df81e029466d6f093f539",
+      "sheet_cell_xywh": [
+        429,
+        0,
+        467,
+        793
+      ],
+      "source": "raw/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff"
+    },
+    {
+      "anim": "beet",
+      "call": "raw/beet-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "output": "native/beet/none/03.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "leafy rosette with red stems",
+      "prompt": "raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          8
+        ],
+        "content_scale": 0.019195544554455445,
+        "crop_xywh": [
+          934,
+          312,
+          451,
+          404
+        ]
+      },
+      "runtime_name": "sprites/crops/beet_2.png",
+      "seconds": 0.55,
+      "sha256": "3d91ab53dbca225d8d3840381ced1009b7b5ed1c937ab025aa34d93dcc149e8e",
+      "sheet_cell_xywh": [
+        896,
+        0,
+        525,
+        793
+      ],
+      "source": "raw/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff"
+    },
+    {
+      "anim": "beet",
+      "call": "raw/beet-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 3,
+      "grounded": true,
+      "loop": false,
+      "output": "native/beet/none/04.png",
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "points": {},
+      "pose": "tall red-veined leaves, round DARK RED root shoulder at soil line",
+      "prompt": "raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          11
+        ],
+        "content_scale": 0.019195544554455445,
+        "crop_xywh": [
+          1458,
+          143,
+          502,
+          573
+        ]
+      },
+      "runtime_name": "sprites/crops/beet_3.png",
+      "seconds": 0.55,
+      "sha256": "338a5810f3bd46e82642345d83879f4508db8f28dd2d3b848a15aceb57533712",
+      "sheet_cell_xywh": [
+        1421,
+        0,
+        562,
+        793
+      ],
+      "source": "raw/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff"
+    },
+    {
+      "anim": "icon_beet",
+      "call": "raw\\icon_beet-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_beet/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_beet-r1.prompt.txt",
+      "prompt_sha256": "dc689f5d7aa5e5181f1f13ad4fb00a9b1cdf85c244bc8f2f96254ca8ab04a58e",
+      "recipe": {
+        "content_anchor_xy": [
+          5,
+          7
+        ],
+        "content_scale": 0.019151846785225718,
+        "crop_xywh": [
+          406,
+          309,
+          580,
+          731
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_beet.png",
+      "seconds": 1.0,
+      "sha256": "da0787c23184fa2c639e5d369816d748ec4566927371c3ace1a7e34c973b43a9",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_beet-r1.png",
+      "source_sha256": "b4a1c14ba90eba40a187c8fee01b5d8e2e16333478003d516333a9e5efca7524"
+    },
+    {
+      "anim": "hud_beet",
+      "call": "raw\\icon_beet-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_beet/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_beet-r1.prompt.txt",
+      "prompt_sha256": "dc689f5d7aa5e5181f1f13ad4fb00a9b1cdf85c244bc8f2f96254ca8ab04a58e",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.01094391244870041,
+        "crop_xywh": [
+          406,
+          309,
+          580,
+          731
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_beet.png",
+      "seconds": 1.0,
+      "sha256": "853eee759a5aa550a97729f3d6fa620ba6b00b338dbd5ee0ca1551092e0ce010",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_beet-r1.png",
+      "source_sha256": "b4a1c14ba90eba40a187c8fee01b5d8e2e16333478003d516333a9e5efca7524"
+    },
+    {
+      "anim": "icon_grape",
+      "call": "raw\\icon_grape-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_grape/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_grape-r1.prompt.txt",
+      "prompt_sha256": "9f8190dd166316589c342f6a1a6c275a677b21c7ab898b75aa7a3d818e3af6bf",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.0218408736349454,
+        "crop_xywh": [
+          393,
+          362,
+          564,
+          641
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_grape.png",
+      "seconds": 1.0,
+      "sha256": "87ce2c67b2b24b97c7c9be3de3cf3f4c5dd6baaa4bf118f4ca70b36f8ad9db34",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_grape-r1.png",
+      "source_sha256": "ce8035e353bba07b538061652f9dc9c988d99e525ed212697ed64471ee57df70"
+    },
+    {
+      "anim": "hud_grape",
+      "call": "raw\\icon_grape-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_grape/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_grape-r1.prompt.txt",
+      "prompt_sha256": "9f8190dd166316589c342f6a1a6c275a677b21c7ab898b75aa7a3d818e3af6bf",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0124804992199688,
+        "crop_xywh": [
+          393,
+          362,
+          564,
+          641
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_grape.png",
+      "seconds": 1.0,
+      "sha256": "6e4c44bc1222081a2202d6330bc449afe7e42db5536a9436e5190611e0b57eff",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_grape-r1.png",
+      "source_sha256": "ce8035e353bba07b538061652f9dc9c988d99e525ed212697ed64471ee57df70"
+    },
+    {
+      "anim": "icon_pumpkin",
+      "call": "raw\\icon_pumpkin-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_pumpkin/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_pumpkin-r1.prompt.txt",
+      "prompt_sha256": "8f9c025384c7ccf05a59705023305a4788c4f5beefb621ace9bbc9e43246ac57",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          7
+        ],
+        "content_scale": 0.02321724709784411,
+        "crop_xywh": [
+          328,
+          344,
+          603,
+          593
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_pumpkin.png",
+      "seconds": 1.0,
+      "sha256": "1a808b26fb06add109b1070d04768b06e2ed35d13e43e5fdc7ecff3f51bb699a",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_pumpkin-r1.png",
+      "source_sha256": "40d978e5240750904104256f5a669716ab19165dec75d8aa6d7bebd772aca41d"
+    },
+    {
+      "anim": "hud_pumpkin",
+      "call": "raw\\icon_pumpkin-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_pumpkin/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "single produce icon",
+      "prompt": "raw\\icon_pumpkin-r1.prompt.txt",
+      "prompt_sha256": "8f9c025384c7ccf05a59705023305a4788c4f5beefb621ace9bbc9e43246ac57",
+      "recipe": {
+        "content_anchor_xy": [
+          4,
+          4
+        ],
+        "content_scale": 0.013266998341625208,
+        "crop_xywh": [
+          328,
+          344,
+          603,
+          593
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_pumpkin.png",
+      "seconds": 1.0,
+      "sha256": "13ce1e81d2cdf5dbbecec853798d057aeda2da4917468992a6cbc8f2ebca1256",
+      "sheet_cell_xywh": null,
+      "source": "raw\\icon_pumpkin-r1.png",
+      "source_sha256": "40d978e5240750904104256f5a669716ab19165dec75d8aa6d7bebd772aca41d"
+    },
+    {
+      "anim": "icon_beet_seed",
+      "call": "raw\\beet_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_beet_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\beet_seed-r1.prompt.txt",
+      "prompt_sha256": "5d46ebc139921acf229749830eb2b45529cb919b4d810cdaa7c4b24fd0c9bd01",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_beet_seed.png",
+      "seconds": 1.0,
+      "sha256": "5d2f145e2360d3af2118ccda8635fad69a1d59299723adef83bc0bcc6d3bfc1e",
+      "sheet_cell_xywh": null,
+      "source": "raw\\beet_seed-r1.png",
+      "source_sha256": "32e28f9b3b9d3e9b19b8dc92c6e2f0337ef07d8e5f40fbc1ca27a9e29f3fc91d"
+    },
+    {
+      "anim": "hud_beet_seed",
+      "call": "raw\\beet_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_beet_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\beet_seed-r1.prompt.txt",
+      "prompt_sha256": "5d46ebc139921acf229749830eb2b45529cb919b4d810cdaa7c4b24fd0c9bd01",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_beet_seed.png",
+      "seconds": 1.0,
+      "sha256": "4dc84210da5e30f5f0b730982c4ec4851170782726982a301bd79edaf18574a2",
+      "sheet_cell_xywh": null,
+      "source": "raw\\beet_seed-r1.png",
+      "source_sha256": "32e28f9b3b9d3e9b19b8dc92c6e2f0337ef07d8e5f40fbc1ca27a9e29f3fc91d"
+    },
+    {
+      "anim": "icon_grape_seed",
+      "call": "raw\\grape_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_grape_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\grape_seed-r1.prompt.txt",
+      "prompt_sha256": "4d6ced53f7e5d75d76e06f029db767ba293a8b2dafd6e9017f670888dd00bf99",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_grape_seed.png",
+      "seconds": 1.0,
+      "sha256": "d4a107d6b503d6e42c0ead61516aed009e7094c6ab440f03f112ca10114c98d1",
+      "sheet_cell_xywh": null,
+      "source": "raw\\grape_seed-r1.png",
+      "source_sha256": "1acb4780be35d822fa9752c8cfffd75b8518c52847220f33cbde4ea52eb858a9"
+    },
+    {
+      "anim": "hud_grape_seed",
+      "call": "raw\\grape_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_grape_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\grape_seed-r1.prompt.txt",
+      "prompt_sha256": "4d6ced53f7e5d75d76e06f029db767ba293a8b2dafd6e9017f670888dd00bf99",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_grape_seed.png",
+      "seconds": 1.0,
+      "sha256": "401a029c489bdd1c730818863fd98e19a6959ec4f65d5567e11ecff4c334ec24",
+      "sheet_cell_xywh": null,
+      "source": "raw\\grape_seed-r1.png",
+      "source_sha256": "1acb4780be35d822fa9752c8cfffd75b8518c52847220f33cbde4ea52eb858a9"
+    },
+    {
+      "anim": "icon_pumpkin_seed",
+      "call": "raw\\pumpkin_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_pumpkin_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\pumpkin_seed-r1.prompt.txt",
+      "prompt_sha256": "19396395b3db8ddbd72fc19cce61206aa99beb46c22400790213c43373c9d682",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_pumpkin_seed.png",
+      "seconds": 1.0,
+      "sha256": "9a12d9091b517caef672968e43a6c6898df8928046ecb74388c5a4d58bdb65c1",
+      "sheet_cell_xywh": null,
+      "source": "raw\\pumpkin_seed-r1.png",
+      "source_sha256": "7618ba0a3cbcb682063c78621098238618c38b80397b95f0a0dc8581fe392873"
+    },
+    {
+      "anim": "hud_pumpkin_seed",
+      "call": "raw\\pumpkin_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_pumpkin_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\pumpkin_seed-r1.prompt.txt",
+      "prompt_sha256": "19396395b3db8ddbd72fc19cce61206aa99beb46c22400790213c43373c9d682",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_pumpkin_seed.png",
+      "seconds": 1.0,
+      "sha256": "c4bc89349912d451546c160990f07da8471cc795a1116e5ebfeee4e8c5328a7e",
+      "sheet_cell_xywh": null,
+      "source": "raw\\pumpkin_seed-r1.png",
+      "source_sha256": "7618ba0a3cbcb682063c78621098238618c38b80397b95f0a0dc8581fe392873"
+    },
+    {
+      "anim": "icon_wheat_seed",
+      "call": "raw\\wheat_seed-r1.call.json",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/icon_wheat_seed/none/01.png",
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\wheat_seed-r1.prompt.txt",
+      "prompt_sha256": "ba6a070a1239ed82e305d1170f0a830517f42939de9c9b41e9e95bbee5099a9d",
+      "recipe": {
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "content_scale": 0.019553072625698324,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/icon_wheat_seed.png",
+      "seconds": 1.0,
+      "sha256": "2e9840010e3de86690c5ddaaaf8d78db7fadb7886ff2de2e6411b30f2ea68858",
+      "sheet_cell_xywh": null,
+      "source": "raw\\wheat_seed-r1.png",
+      "source_sha256": "49e9935d0ea399de926cacd65c431e5186c46dd78a0e912c4f59b7dd07abd4fa"
+    },
+    {
+      "anim": "hud_wheat_seed",
+      "call": "raw\\wheat_seed-r1.call.json",
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "dir": "none",
+      "draw_scale": 1.0,
+      "frame": 0,
+      "loop": false,
+      "output": "native/hud_wheat_seed/none/01.png",
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "points": {},
+      "pose": "common paper packet with seasonal band and crop picture",
+      "prompt": "raw\\wheat_seed-r1.prompt.txt",
+      "prompt_sha256": "ba6a070a1239ed82e305d1170f0a830517f42939de9c9b41e9e95bbee5099a9d",
+      "recipe": {
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "content_scale": 0.0111731843575419,
+        "crop_xywh": [
+          320,
+          300,
+          615,
+          716
+        ]
+      },
+      "runtime_name": "sprites/ui/hud_wheat_seed.png",
+      "seconds": 1.0,
+      "sha256": "3cd35e9a85e9b323d1921bbe026c01ed28e7e8203b1969185549f91709077e16",
+      "sheet_cell_xywh": null,
+      "source": "raw\\wheat_seed-r1.png",
+      "source_sha256": "49e9935d0ea399de926cacd65c431e5186c46dd78a0e912c4f59b7dd07abd4fa"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A017",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\crops\\wheat.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "fe1ecbccbcd3c078942fc3ea6fefcc87ecacbf4c40b99422702903a4961751b0"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wheat.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "dbf57c9b0f45fb61d798eacbaeff67382e6adac344d329f7457dadccb077aaa4"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "f2e9c39135b929b0ccb963f3486a06b86ed37900c8dd77f55d302bc2575a3b88"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A017-autumn-crops",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "Autumn crops",
+  "tool": "built-in ImageGen"
+}

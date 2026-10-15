@@ -1,0 +1,415 @@
+{
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "crop_margins": true,
+  "crop_measurements": {
+    "native/beet/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        11,
+        14
+      ],
+      "height": 2,
+      "plot_opaque": 6,
+      "width": 5
+    },
+    "native/beet/none/02.png": {
+      "bounds": [
+        5,
+        10,
+        11,
+        14
+      ],
+      "height": 4,
+      "plot_opaque": 15,
+      "width": 6
+    },
+    "native/beet/none/03.png": {
+      "bounds": [
+        4,
+        6,
+        13,
+        14
+      ],
+      "height": 8,
+      "plot_opaque": 38,
+      "width": 9
+    },
+    "native/beet/none/04.png": {
+      "bounds": [
+        3,
+        3,
+        13,
+        14
+      ],
+      "height": 11,
+      "plot_opaque": 67,
+      "width": 10
+    },
+    "native/grape/none/01.png": {
+      "bounds": [
+        7,
+        28,
+        10,
+        30
+      ],
+      "height": 2,
+      "plot_opaque": 6,
+      "width": 3
+    },
+    "native/grape/none/02.png": {
+      "bounds": [
+        4,
+        18,
+        12,
+        30
+      ],
+      "height": 12,
+      "plot_opaque": 48,
+      "width": 8
+    },
+    "native/grape/none/03.png": {
+      "bounds": [
+        2,
+        7,
+        15,
+        30
+      ],
+      "height": 23,
+      "plot_opaque": 117,
+      "width": 13
+    },
+    "native/grape/none/04.png": {
+      "bounds": [
+        2,
+        5,
+        15,
+        30
+      ],
+      "height": 25,
+      "plot_opaque": 138,
+      "width": 13
+    },
+    "native/grape_regrow/none/01.png": {
+      "bounds": [
+        2,
+        6,
+        15,
+        30
+      ],
+      "height": 24,
+      "plot_opaque": 139,
+      "width": 13
+    },
+    "native/pumpkin/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        11,
+        14
+      ],
+      "height": 2,
+      "plot_opaque": 6,
+      "width": 5
+    },
+    "native/pumpkin/none/02.png": {
+      "bounds": [
+        5,
+        10,
+        11,
+        14
+      ],
+      "height": 4,
+      "plot_opaque": 13,
+      "width": 6
+    },
+    "native/pumpkin/none/03.png": {
+      "bounds": [
+        4,
+        7,
+        13,
+        14
+      ],
+      "height": 7,
+      "plot_opaque": 41,
+      "width": 9
+    },
+    "native/pumpkin/none/04.png": {
+      "bounds": [
+        3,
+        5,
+        14,
+        14
+      ],
+      "height": 9,
+      "plot_opaque": 65,
+      "width": 11
+    }
+  },
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 27,
+  "frames_found": 27,
+  "grounded_on_pivot": true,
+  "icon_bounds_ok": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/beet/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        11,
+        14
+      ],
+      "opaque_pixels": 6
+    },
+    "native/beet/none/02.png": {
+      "bounds": [
+        5,
+        10,
+        11,
+        14
+      ],
+      "opaque_pixels": 15
+    },
+    "native/beet/none/03.png": {
+      "bounds": [
+        4,
+        6,
+        13,
+        14
+      ],
+      "opaque_pixels": 38
+    },
+    "native/beet/none/04.png": {
+      "bounds": [
+        3,
+        3,
+        13,
+        14
+      ],
+      "opaque_pixels": 67
+    },
+    "native/grape/none/01.png": {
+      "bounds": [
+        7,
+        28,
+        10,
+        30
+      ],
+      "opaque_pixels": 6
+    },
+    "native/grape/none/02.png": {
+      "bounds": [
+        4,
+        18,
+        12,
+        30
+      ],
+      "opaque_pixels": 48
+    },
+    "native/grape/none/03.png": {
+      "bounds": [
+        2,
+        7,
+        15,
+        30
+      ],
+      "opaque_pixels": 168
+    },
+    "native/grape/none/04.png": {
+      "bounds": [
+        2,
+        5,
+        15,
+        30
+      ],
+      "opaque_pixels": 209
+    },
+    "native/grape_regrow/none/01.png": {
+      "bounds": [
+        2,
+        6,
+        15,
+        30
+      ],
+      "opaque_pixels": 205
+    },
+    "native/hud_beet/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        8,
+        8
+      ],
+      "opaque_pixels": 23
+    },
+    "native/hud_beet_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/hud_grape/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 34
+    },
+    "native/hud_grape_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/hud_pumpkin/none/01.png": {
+      "bounds": [
+        1,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 45
+    },
+    "native/hud_pumpkin_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/hud_wheat_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "opaque_pixels": 56
+    },
+    "native/icon_beet/none/01.png": {
+      "bounds": [
+        3,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 80
+    },
+    "native/icon_beet_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/icon_grape/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 102
+    },
+    "native/icon_grape_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/icon_pumpkin/none/01.png": {
+      "bounds": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "opaque_pixels": 144
+    },
+    "native/icon_pumpkin_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/icon_wheat_seed/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 168
+    },
+    "native/pumpkin/none/01.png": {
+      "bounds": [
+        6,
+        12,
+        11,
+        14
+      ],
+      "opaque_pixels": 6
+    },
+    "native/pumpkin/none/02.png": {
+      "bounds": [
+        5,
+        10,
+        11,
+        14
+      ],
+      "opaque_pixels": 13
+    },
+    "native/pumpkin/none/03.png": {
+      "bounds": [
+        4,
+        7,
+        13,
+        14
+      ],
+      "opaque_pixels": 41
+    },
+    "native/pumpkin/none/04.png": {
+      "bounds": [
+        3,
+        5,
+        14,
+        14
+      ],
+      "opaque_pixels": 65
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "packets_same_box": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "stage_targets": true,
+  "stages_rise": true,
+  "wet_cue_exposed": true
+}

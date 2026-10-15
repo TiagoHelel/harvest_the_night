@@ -198,6 +198,7 @@ func _run() -> void:
 	_task_0197_crop_ground()
 	_task_0198_spring_crops()
 	_task_0199_summer_crops()
+	_task_0200_autumn_crops()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14310,6 +14311,45 @@ func _task_0199_summer_crops() -> void:
 			wrong.append(crop)
 	expect(frames.size() == 14 and wrong.is_empty(),
 		"A016's 14 crop frames and 14 icon cuts are raster art, untinted, none a stand-in", str(wrong))
+	_completed += 1
+
+
+## **A017's autumn crops** (task 0200): pumpkin and beet at their four
+## stages, 16x16 at (8,14), the grape on its trellis at the tall 16x32 on
+## (8,30) and its regrowing stage, and the produce's and the four autumn
+## packets' icons - wheat's among them - at 16 and at 10: raster art,
+## untinted, none a stand-in. Wheat keeps its own four stages.
+func _task_0200_autumn_crops() -> void:
+	var wrong: Array = []
+	var frames: Array = []
+	for crop in [GameData.PUMPKIN, GameData.BEET]:
+		for stage in 4:
+			frames.append(["%s_%d" % [crop, stage], Vector2i(16, 16), Vector2i(8, 14)])
+	for stage in 4:
+		frames.append(["grape_%d" % stage, Vector2i(16, 32), Vector2i(8, 30)])
+	frames.append(["grape_regrow", Vector2i(16, 32), Vector2i(8, 30)])
+	for art in frames:
+		var path := WorldView.CROP_DIR + str(art[0]) + ".png"
+		var frame := PlaceholderArt.frame(path)
+		if frame.get("canvas") != art[1] or frame.get("pivot") != art[2] \
+				or frame.has("stand_in") or PlaceholderArt.texture_path(path) != path:
+			wrong.append(art[0])
+	for id in [GameData.PUMPKIN, GameData.GRAPE, GameData.BEET, GameData.WHEAT_SEED,
+			GameData.PUMPKIN_SEED, GameData.GRAPE_SEED, GameData.BEET_SEED]:
+		for cut in [["icon", 16, false], ["hud", 10, true]]:
+			var name := StringName("%s_%s" % [cut[0], id])
+			var path := "res://sprites/ui/%s.png" % name
+			var frame := PlaceholderArt.frame(path)
+			var texture := UiKit.icon(id, bool(cut[2]))
+			if frame.get("canvas") != Vector2i(int(cut[1]), int(cut[1])) or frame.has("stand_in") \
+					or not PlaceholderArt.art(name).is_empty() or PlaceholderArt.art_tint(name) != Color.WHITE \
+					or texture == null or texture.resource_path != path:
+				wrong.append(name)
+	for crop in [GameData.PUMPKIN, GameData.GRAPE, GameData.BEET, &"grape_regrow"]:
+		if not PlaceholderArt.art(crop).is_empty() or PlaceholderArt.art_tint(crop) != Color.WHITE:
+			wrong.append(crop)
+	expect(frames.size() == 13 and wrong.is_empty(),
+		"A017's 13 crop frames and 14 icon cuts are raster art, untinted, none a stand-in", str(wrong))
 	_completed += 1
 
 

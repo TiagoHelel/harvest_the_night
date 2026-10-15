@@ -97,6 +97,9 @@ const SCENARIOS: Array = [
 	["summer_field", "summer crops and held seed packets", ""],
 	["summer_field_night", "the same ripe summer field on its night, the waves held off", ""],
 	["summer_regrowing", "summer's field after a pick: peppers and corn regrowing beside the ripe ones", ""],
+	["autumn_field", "autumn crops and held seed packets (task 0200): wheat, pumpkin, grape on its trellis and beet, ripe", ""],
+	["autumn_field_night", "the same ripe autumn field on its night, the waves held off (task 0200)", ""],
+	["autumn_stages", "autumn's field growing (task 0200): each crop's four stages side by side, and the grapes picked from every other ripe trellis regrowing", ""],
 	["inventory_crops", "the crop category in the ledger", "InventoryPanel"],
 	["inventory_full", "every item held, every inventory page", "InventoryPanel"],
 	["inventory_night", "the same ledger opened on Spring 3's night: its materials, crops, seeds, fish, fish book, animal goods, artisan goods and tools pages", "InventoryPanel"],
@@ -777,6 +780,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"summer_field": _set_summer_field(state)
 		"summer_field_night": _set_summer_field_night(state)
 		"summer_regrowing": _set_summer_regrowing(state)
+		"autumn_field": _set_autumn_field(state)
+		"autumn_field_night": _set_autumn_field_night(state)
+		"autumn_stages": _set_autumn_stages(state)
 		"withered": _set_withered(state)
 		"withered_night": _set_withered_night(state)
 		"regrowing": _set_regrowing(state)
@@ -4894,6 +4900,32 @@ func _set_summer_regrowing(state: Dictionary) -> void:
 
 func _set_summer_field(state: Dictionary) -> void:
 	_set_season_field(state, 1)
+
+
+## **Autumn's ripe field** (task 0200), as spring's and summer's.
+func _set_autumn_field(state: Dictionary) -> void:
+	_set_season_field(state, 2)
+
+
+func _set_autumn_field_night(state: Dictionary) -> void:
+	_set_field_night(state, 2)
+
+
+## **Autumn growing** (task 0200): the ripe autumn field, then along each
+## crop's run of plots the four stages in turn - a quarter of the way, half,
+## three quarters and ripe - and every other ripe grape picked, regrowing.
+func _set_autumn_stages(state: Dictionary) -> void:
+	_set_season_field(state, 2)
+	var seen := {}
+	for cell in Farming.field_cells(state):
+		var id := Farming.crop_on(state, cell)
+		var at := int(seen.get(id, 0))
+		seen[id] = at + 1
+		var days := Farming.days_to_grow(id)
+		var stage := at % 4
+		Farming.plot(state, cell)["growth"] = days if stage == 3 else maxi(days * (stage + 1) / 4 - 1, 0)
+		if id == GameData.GRAPE and stage == 3 and (at / 4) % 2 == 0:
+			Farming.act(state, cell)
 
 
 func _set_withered(state: Dictionary) -> void:

@@ -1,7 +1,7 @@
 # 0200 - Art: autumn crops
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0170, 0172
 - **Likely files:** assets/art_source/crops/, assets/art_source/ui/, assets/art_source/manifest.json, tools/check_crop_art.py, tools/check_ui_art.py
 - **Art packs:** A017

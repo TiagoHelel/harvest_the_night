@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0146's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0200's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 261 done, 35 todo, 0 blocked (88%).**
+**The game backlog: 296 tasks, 262 done, 34 todo, 0 blocked (89%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0200). Only the farmer packs the owner deferred (3c) still wait on
+says 0201). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -106,7 +106,7 @@ source:
 | --- | --- | --- |
 | A003 | The porch guardian (**integrated** by 0145, 2026-10-15) | 0145 |
 | A004 | The guardian's cursor (**integrated** by 0146, 2026-10-15) | 0146 |
-| A017 | Autumn crops | 0200 |
+| A017 | Autumn crops (**integrated** by 0200, 2026-10-15) | 0200 |
 | A018 | Sprinklers | 0201 |
 | A023 | Fishing gear and the minigame | 0206 |
 | A026 | Sheep and pigs | 0209 |

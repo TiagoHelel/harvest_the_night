@@ -32588,3 +32588,63 @@ gone.
 - `python implementation/backlog/assets.py set A004 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0200 - Art: autumn crops - done 2026-10-15
+
+A017 is integrated. The owner approved the corrected pack on 2026-10-15 with
+the retried batch ("tudo aprovado"), as recorded in the delivery's
+`APPROVAL.json`. Now in the game:
+
+- pumpkin and beet at their four stages, 16x16 at (8,14);
+- the grape on its trellis at the tall 16x32 on (8,30) that 0168 settled,
+  and its regrowing stage after a pick;
+- the icons of the three produce and of the four autumn seed packets -
+  wheat, pumpkin, grape and beet - at 16x16 and 10x10.
+
+They replace the stand-ins of 0168, 0170 and 0172. Wheat keeps its own four
+stages.
+
+- **Promotion**: A017's 27 files are direct cuts, with no assembly.
+  - All 27 natives and their 10 raw sources were sha-checked against
+    `contract.json` and `APPROVAL.json`.
+  - The three crop strips are byte for byte in
+    `assets/art_source/crops/autumn_crops/`, and the seven icon raws in
+    `assets/art_source/ui/autumn_crops/`.
+  - The icon cuts carry their `display_role`, as A015's and A016's do.
+  - Every runtime file decodes to exactly the approved RGBA pixels.
+- **The game**: `PlaceholderArt` loses A017's 18 entries. The binding was
+  already there:
+  - `_plot_sprite` draws `<crop>_<stage>`, and `grape_regrow` while a
+    picked trellis regrows;
+  - the trellis stands at its own pivot;
+  - the ledger and the stall ask `UiKit.icon`.
+
+  `placeholders.py --check` passes, with 161 stand-ins left over 23 packs.
+- **Checks**:
+  - `check_crop_art.py`'s `KINDS` takes pumpkin, grape and beet, with the
+    grape's tall box in `BOXES` and its regrowth in `REGROW`.
+  - Every stage is progressive, grounded and leaves the wet cue exposed:
+    grape's regrowth 117 wet pixels, pumpkin's ripe 191.
+  - `check_ui_art.py`'s `PAIRS` and the `--ui` showcase take A017's seven
+    icon pairs.
+- **Tests**: `_task_0200_autumn_crops` (headless_v1). The 13 crop frames
+  and 14 icon cuts are raster art at their boxes, untinted, none a stand-in,
+  and the icons are what `UiKit.icon` hands out.
+- **Shots** (`implementation/shots/0200/`, FHD 1920x1080, looked at). Three
+  new scenes:
+  - `autumn_field`: Autumn 2's ripe field, wheat, grape trellises, pumpkins
+    and beets.
+  - `autumn_field_night`: the same field on its night, the waves held off.
+  - `autumn_stages`: each crop's four stages in turn along its plots, and
+    every other ripe trellis picked and regrowing.
+
+  `headless_check` counts 132 scenes.
+
+  The first verify failed two asserts. `headless_check` wants each scene
+  built by its own `_set_<name>`, and the two field scenes had called the
+  shared setters straight from the table. They have their own setters now.
+- **The delivery's provenance** is committed: the 54 files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A017 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64), on the second run.

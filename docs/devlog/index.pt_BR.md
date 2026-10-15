@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-274 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+275 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -317,6 +317,7 @@ voz alta.
 | 0262 | Art: the crow | 2026-10-15 |
 | 0145 | Art: the porch guardian | 2026-10-15 |
 | 0146 | Art: the guardian's cursor | 2026-10-15 |
+| 0200 | Art: autumn crops | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

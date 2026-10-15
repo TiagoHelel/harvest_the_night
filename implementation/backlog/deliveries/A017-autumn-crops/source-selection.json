@@ -1,0 +1,568 @@
+{
+  "pack": "A017",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/pumpkin/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              2
+            ],
+            "content_scale": 0.018742103235747303,
+            "crop_xywh": [
+              65,
+              611,
+              253,
+              117
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/pumpkin/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.018742103235747303,
+            "crop_xywh": [
+              451,
+              507,
+              329,
+              206
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/pumpkin/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              7
+            ],
+            "content_scale": 0.018742103235747303,
+            "crop_xywh": [
+              871,
+              342,
+              471,
+              385
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/pumpkin/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              9
+            ],
+            "content_scale": 0.018742103235747303,
+            "crop_xywh": [
+              1369,
+              255,
+              600,
+              472
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/grape/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              1,
+              2
+            ],
+            "content_scale": 0.04058,
+            "crop_xywh": [
+              186,
+              659,
+              68,
+              61
+            ],
+            "sheet_cell_xywh": [
+              0,
+              0,
+              360,
+              793
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/grape/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              12
+            ],
+            "content_scale": 0.04058,
+            "crop_xywh": [
+              468,
+              421,
+              205,
+              297
+            ],
+            "sheet_cell_xywh": [
+              360,
+              0,
+              371,
+              793
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/grape/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              23
+            ],
+            "content_scale": 0.04058,
+            "crop_xywh": [
+              791,
+              152,
+              312,
+              565
+            ],
+            "sheet_cell_xywh": [
+              731,
+              0,
+              411,
+              793
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/grape/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              25
+            ],
+            "content_scale": 0.04058,
+            "crop_xywh": [
+              1183,
+              114,
+              324,
+              604
+            ],
+            "sheet_cell_xywh": [
+              1142,
+              0,
+              408,
+              793
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/grape_regrow/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              24
+            ],
+            "content_scale": 0.04058,
+            "crop_xywh": [
+              1594,
+              124,
+              317,
+              594
+            ],
+            "sheet_cell_xywh": [
+              1550,
+              0,
+              433,
+              793
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/beet/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              2,
+              2
+            ],
+            "content_scale": 0.019195544554455445,
+            "crop_xywh": [
+              99,
+              610,
+              240,
+              106
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/beet/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.019195544554455445,
+            "crop_xywh": [
+              521,
+              514,
+              338,
+              202
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/beet/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              8
+            ],
+            "content_scale": 0.019195544554455445,
+            "crop_xywh": [
+              934,
+              312,
+              451,
+              404
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/beet/none/04.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              11
+            ],
+            "content_scale": 0.019195544554455445,
+            "crop_xywh": [
+              1458,
+              143,
+              502,
+              573
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw\\icon_beet-r1.png",
+      "source_sha256": "b4a1c14ba90eba40a187c8fee01b5d8e2e16333478003d516333a9e5efca7524",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_beet/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              5,
+              7
+            ],
+            "content_scale": 0.019151846785225718,
+            "crop_xywh": [
+              406,
+              309,
+              580,
+              731
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_beet/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.01094391244870041,
+            "crop_xywh": [
+              406,
+              309,
+              580,
+              731
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw\\icon_grape-r1.png",
+      "source_sha256": "ce8035e353bba07b538061652f9dc9c988d99e525ed212697ed64471ee57df70",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_grape/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.0218408736349454,
+            "crop_xywh": [
+              393,
+              362,
+              564,
+              641
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_grape/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.0124804992199688,
+            "crop_xywh": [
+              393,
+              362,
+              564,
+              641
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw\\icon_pumpkin-r1.png",
+      "source_sha256": "40d978e5240750904104256f5a669716ab19165dec75d8aa6d7bebd772aca41d",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_pumpkin/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              7,
+              7
+            ],
+            "content_scale": 0.02321724709784411,
+            "crop_xywh": [
+              328,
+              344,
+              603,
+              593
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_pumpkin/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              4,
+              4
+            ],
+            "content_scale": 0.013266998341625208,
+            "crop_xywh": [
+              328,
+              344,
+              603,
+              593
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw\\beet_seed-r1.png",
+      "source_sha256": "32e28f9b3b9d3e9b19b8dc92c6e2f0337ef07d8e5f40fbc1ca27a9e29f3fc91d",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_beet_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.019553072625698324,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_beet_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.0111731843575419,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw\\grape_seed-r1.png",
+      "source_sha256": "1acb4780be35d822fa9752c8cfffd75b8518c52847220f33cbde4ea52eb858a9",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_grape_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.019553072625698324,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_grape_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.0111731843575419,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw\\pumpkin_seed-r1.png",
+      "source_sha256": "7618ba0a3cbcb682063c78621098238618c38b80397b95f0a0dc8581fe392873",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_pumpkin_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.019553072625698324,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_pumpkin_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.0111731843575419,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        }
+      ]
+    },
+    {
+      "source": "raw\\wheat_seed-r1.png",
+      "source_sha256": "49e9935d0ea399de926cacd65c431e5186c46dd78a0e912c4f59b7dd07abd4fa",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/icon_wheat_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              6,
+              7
+            ],
+            "content_scale": 0.019553072625698324,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        },
+        {
+          "output": "native/hud_wheat_seed/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              3,
+              4
+            ],
+            "content_scale": 0.0111731843575419,
+            "crop_xywh": [
+              320,
+              300,
+              615,
+              716
+            ]
+          },
+          "parts": []
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

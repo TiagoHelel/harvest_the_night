@@ -329,3 +329,12 @@ Taking 0146, A004 the guardian's cursor, through its CLAUDE-A004-PROMPT.txt and 
 
 A004 is in the game and set `integrated` (Art: the guardian's cursor).
 Next in the loop: 0200.
+
+## 2026-10-15 - Claude - taking 0200 (A017)
+
+Taking 0200, A017 the autumn crops, through its CLAUDE-A017-PROMPT.txt and the approved retry batch handoff.
+
+## 2026-10-15 - Claude - done 0200 (A017 integrated)
+
+A017 is in the game and set `integrated` (Art: autumn crops).
+Next in the loop: 0201.

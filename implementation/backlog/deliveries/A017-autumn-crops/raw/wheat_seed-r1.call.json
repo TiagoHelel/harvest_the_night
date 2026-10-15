@@ -1,0 +1,23 @@
+{
+  "arguments": {
+    "prompt": "Use case: image-edit. Asset type: pixel art seed packet source. Edit Image1 ONLY. Change only the front illustration to golden wheat ear and top band to autumn RED (#ca794c dark #8e433b). Preserve EXACT paper outline, folds, canvas1254x1254, objectcrop x320 y300 width615 height716, every edge and position. Same silhouette. No text, no letters, no digits, transparent background. This yields visible12x14/7x8 packet downstream.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A017-autumn-crops\\raw\\wheat_seed-r1.png",
+  "date": "2026-10-10",
+  "decision": "accepted for owner review; numeric checks recorded separately",
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A015-spring-crops\\raw\\carrot_seed-r3.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "f2e9c39135b929b0ccb963f3486a06b86ed37900c8dd77f55d302bc2575a3b88"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-20c3f901-3ae9-4afd-9e27-6f69b4c64b67.png",
+  "revision": 1,
+  "sha256": "49e9935d0ea399de926cacd65c431e5186c46dd78a0e912c4f59b7dd07abd4fa",
+  "tool": "image_gen.imagegen"
+}

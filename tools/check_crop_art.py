@@ -4,13 +4,16 @@ from PIL import Image
 import art_ownership
 import import_art
 
-KINDS=('wheat','corn','carrot','potato','garlic','strawberry','pepper','melon','sunflower')
+KINDS=('wheat','corn','carrot','potato','garlic','strawberry','pepper','melon','sunflower',
+       'pumpkin','grape','beet')
 # Every crop's box but the one-tile default: corn's 16x24 and the tall
-# crops' 16x32 (0168), A016's sunflower the first of those (task 0199).
-BOXES={'corn':([16,24],[8,22]),'sunflower':([16,32],[8,30])}
+# crops' 16x32 (0168), A016's sunflower the first of those (task 0199) and
+# A017's grape on its trellis the second (task 0200).
+BOXES={'corn':([16,24],[8,22]),'sunflower':([16,32],[8,30]),'grape':([16,32],[8,30])}
 # A crop that regrows after picking (0172) shows its own stage meanwhile, at
-# the crop's box: A015's strawberry (task 0198).
-REGROW={'strawberry':([16,16],[8,14]),'pepper':([16,16],[8,14]),'corn':([16,24],[8,22])}
+# the crop's box: A015's strawberry (task 0198), and A017's grape (task 0200).
+REGROW={'strawberry':([16,16],[8,14]),'pepper':([16,16],[8,14]),'corn':([16,24],[8,22]),
+        'grape':([16,32],[8,30])}
 # A014's overlays (task 0197): what a crop leaves on its tile when the season
 # or the horde ends it, and the turf a bed on the lawn wears, turned at
 # runtime - N, E, S, W are 0-3 quarter-turns clockwise of the north edge, and

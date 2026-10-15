@@ -1,6 +1,6 @@
 # A017 - Autumn crops
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0200
 - **Dressed by game tasks:** 0168
 - **Spec after game task:** 0168
@@ -22,7 +22,7 @@ arrives, 0168, 0170 and 0172 draw tinted stand-ins.
 
 ## Deliverables
 
-The table is provisional: game task 0168 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0168: four static stages at draw scale 1.0; 16x16 at (8,14), except sunflower and grape at 16x32, (8,30). Existing corn remains 16x24 at (8,22). Regrow frames and seed packets are reserved for 0172 and 0170. Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|

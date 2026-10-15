@@ -36,6 +36,9 @@ PAIRS = {
     # Task 0199: summer's produce (0168) and its four seed packets (0170).
     'A016': ['pepper', 'sunflower', 'melon', 'corn_seed', 'pepper_seed', 'sunflower_seed',
              'melon_seed'],
+    # Task 0200: autumn's produce (0168) and its four seed packets (0170).
+    'A017': ['pumpkin', 'grape', 'beet', 'wheat_seed', 'pumpkin_seed', 'grape_seed',
+             'beet_seed'],
     # Task 0214: the machines' goods (0187, 0188) and the kitchen's bread (0192).
     'A032': ['wine', 'juice', 'jelly', 'pickles', 'cheese', 'butter', 'cloth', 'sandbag',
              'flour', 'sugar', 'bread'],

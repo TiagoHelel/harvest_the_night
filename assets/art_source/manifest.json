@@ -89148,6 +89148,1694 @@
       "revision": 1,
       "approval": "A004 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0146",
       "output_sha256": "2b09a95ddff047ad9492f390d6e35170c545e4e2d0759110445260bef82288cb"
+    },
+    {
+      "id": "crops/pumpkin_0",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314",
+      "crop_xywh": [
+        65,
+        611,
+        253,
+        117
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.018742103235747303,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/pumpkin",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/pumpkin_0.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.call.json",
+          "sha256": "2b4f11b2a1afb5bc1b7eef2aefbf34dbb75d5ac0138d0123dd132e52074b98f4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/pumpkin/none/01.png",
+          "sha256": "e40cc2c1b203831df82367565a7a6ddaf4def9a01cefcb03c4fbb12b506522a9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "output_sha256": "de21cb6b7d6ec6585514140d92972a82a1e278530ac7d62a8a185d709b490160"
+    },
+    {
+      "id": "crops/pumpkin_1",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314",
+      "crop_xywh": [
+        451,
+        507,
+        329,
+        206
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.018742103235747303,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/pumpkin",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/pumpkin_1.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.call.json",
+          "sha256": "2b4f11b2a1afb5bc1b7eef2aefbf34dbb75d5ac0138d0123dd132e52074b98f4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/pumpkin/none/02.png",
+          "sha256": "616e1bb85a22bd58d36c17ede65348d607294e9ed1708870dfb945e3d7ce79d9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "14236ee24c0b85aad4f4f898a9468ad79db7f040f9ad35c4105feaf885fc3ade"
+    },
+    {
+      "id": "crops/pumpkin_2",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314",
+      "crop_xywh": [
+        871,
+        342,
+        471,
+        385
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.018742103235747303,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/pumpkin",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/pumpkin_2.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.call.json",
+          "sha256": "2b4f11b2a1afb5bc1b7eef2aefbf34dbb75d5ac0138d0123dd132e52074b98f4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/pumpkin/none/03.png",
+          "sha256": "2bedb0b36e9fc91e63e06b86da6499cdd55ec51102ea34957759b7d335d4813c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        4,
+        7
+      ],
+      "output_sha256": "af108683ab2cbf71237c66f3742552683f8a696b62c1cfbada4eec986f741f04"
+    },
+    {
+      "id": "crops/pumpkin_3",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/pumpkin-r1.png",
+      "source_sha256": "e7ff906d57427598b839b11f6ee6ea45baf7998a5cc4a8630ef1cf55c4e7c314",
+      "crop_xywh": [
+        1369,
+        255,
+        600,
+        472
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.018742103235747303,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/pumpkin",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/pumpkin_3.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.prompt.txt",
+      "prompt_sha256": "0f2b5c822244851477f73d671ec098520b36942ac3968237739e0f8562380e34",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin-r1.call.json",
+          "sha256": "2b4f11b2a1afb5bc1b7eef2aefbf34dbb75d5ac0138d0123dd132e52074b98f4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/pumpkin/none/04.png",
+          "sha256": "994dcb8c3832fbbfa994076cd11fee158046ce3e28e1874e0fc352734ea91cf1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        5,
+        9
+      ],
+      "output_sha256": "d1a081c153ea64f6396fe0828adc79f41b131dbf0692d6e69cad430e8aed2ffc"
+    },
+    {
+      "id": "crops/grape_0",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83",
+      "crop_xywh": [
+        186,
+        659,
+        68,
+        61
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "content_scale": 0.04058,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/grape",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/grape_0.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.call.json",
+          "sha256": "36ef64f80042887d95c6e9fd45208eaf37b75e7736007c2918494d87abdd3ca4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/grape/none/01.png",
+          "sha256": "817c5b9b27bcaa00a9f892ad5fd709411fb26ff2ebc09e676cb76ef63d641974",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        1,
+        2
+      ],
+      "output_sha256": "3d55665f76c96227c9e124d992357324ce55a203bcee19474b32f55214c256cb"
+    },
+    {
+      "id": "crops/grape_1",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83",
+      "crop_xywh": [
+        468,
+        421,
+        205,
+        297
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "content_scale": 0.04058,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/grape",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/grape_1.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.call.json",
+          "sha256": "36ef64f80042887d95c6e9fd45208eaf37b75e7736007c2918494d87abdd3ca4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/grape/none/02.png",
+          "sha256": "bfcacb60ed9d86b64d163ca53b966957cd533924022cd5785243a708298594df",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        4,
+        12
+      ],
+      "output_sha256": "1decc889bc2f87ec07d2a0377ad63826327e27c4388cc68c6427e7d58621b406"
+    },
+    {
+      "id": "crops/grape_2",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83",
+      "crop_xywh": [
+        791,
+        152,
+        312,
+        565
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "content_scale": 0.04058,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/grape",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/grape_2.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.call.json",
+          "sha256": "36ef64f80042887d95c6e9fd45208eaf37b75e7736007c2918494d87abdd3ca4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/grape/none/03.png",
+          "sha256": "f0b96e53a3f2e6c7aa41b5b432589d386d057f02465a25b1f101e14c34a3a511",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        23
+      ],
+      "output_sha256": "1e8cf9484229ff7c8a42ce48fe35c6c730096310bf1030f2b3b8b040516a8e78"
+    },
+    {
+      "id": "crops/grape_3",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83",
+      "crop_xywh": [
+        1183,
+        114,
+        324,
+        604
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "content_scale": 0.04058,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/grape",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/grape_3.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.call.json",
+          "sha256": "36ef64f80042887d95c6e9fd45208eaf37b75e7736007c2918494d87abdd3ca4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/grape/none/04.png",
+          "sha256": "7f6acabe04df56f52dc8fee5f8d638e6c3ee225f12d9f30d6942228cccb5c66d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        25
+      ],
+      "output_sha256": "40b2159db0ece89781ebd95f1b7641e67844c816a5f1ba6a71c9a376c5324e06"
+    },
+    {
+      "id": "crops/grape_regrow",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/grape-r4.png",
+      "source_sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83",
+      "crop_xywh": [
+        1594,
+        124,
+        317,
+        594
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        30
+      ],
+      "content_scale": 0.04058,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/grape_regrow",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/grape_regrow.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.prompt.txt",
+      "prompt_sha256": "59dc9e561540d88b37a53585bc2591d02659bd11dcd357400a34e907a0587730",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape-r4.call.json",
+          "sha256": "36ef64f80042887d95c6e9fd45208eaf37b75e7736007c2918494d87abdd3ca4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/grape_regrow/none/01.png",
+          "sha256": "dfbcadff54de5439a95d74fda96a00b86fc0166eacd11a0262b4436c79b9c117",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        24
+      ],
+      "output_sha256": "0416778b69c7c4bf599d1128f0893d7b19131edc58f239c747df9773c062e5c2"
+    },
+    {
+      "id": "crops/beet_0",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff",
+      "crop_xywh": [
+        99,
+        610,
+        240,
+        106
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019195544554455445,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/beet",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/beet_0.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.call.json",
+          "sha256": "20f4cf105d0002232f2eafdcddc1f221caf2f64d5fd6b415a1f686f439041feb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/beet/none/01.png",
+          "sha256": "fa638ce43f277291936efc00e5cabd73d17d0b9bb4791c2415d9f2610d3fceb4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "output_sha256": "3c6bad0c108f2d94dae625d108ca60445107305d8c8a134e1301f3faf7cd114f"
+    },
+    {
+      "id": "crops/beet_1",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff",
+      "crop_xywh": [
+        521,
+        514,
+        338,
+        202
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019195544554455445,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/beet",
+      "frame": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/beet_1.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.call.json",
+          "sha256": "20f4cf105d0002232f2eafdcddc1f221caf2f64d5fd6b415a1f686f439041feb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/beet/none/02.png",
+          "sha256": "e4e33698c8532be175f16db6c0711ff329040687058df81e029466d6f093f539",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "fd3a7b8f28910423935decda6d75c4ca7d91842b54bd11b5d0d228f218fb2045"
+    },
+    {
+      "id": "crops/beet_2",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff",
+      "crop_xywh": [
+        934,
+        312,
+        451,
+        404
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019195544554455445,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/beet",
+      "frame": 2,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/beet_2.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.call.json",
+          "sha256": "20f4cf105d0002232f2eafdcddc1f221caf2f64d5fd6b415a1f686f439041feb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/beet/none/03.png",
+          "sha256": "3d91ab53dbca225d8d3840381ced1009b7b5ed1c937ab025aa34d93dcc149e8e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        4,
+        8
+      ],
+      "output_sha256": "d7317e8e1011642dcf307ddf5236512d97533f0bc900ee33aea7ccf2450208ec"
+    },
+    {
+      "id": "crops/beet_3",
+      "owner": "raster",
+      "source": "assets/art_source/crops/autumn_crops/beet-r1.png",
+      "source_sha256": "e3f52919676a070ab901b0f10b72a8b0d9589d5d28ac5da27a6e793c785922ff",
+      "crop_xywh": [
+        1458,
+        143,
+        502,
+        573
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        14
+      ],
+      "content_scale": 0.019195544554455445,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "crops/beet",
+      "frame": 3,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/crops/beet_3.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.prompt.txt",
+      "prompt_sha256": "aa33029e00fad20122060a7b4258640b16036fcc0398d64cd936ec3b896b2bdf",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet-r1.call.json",
+          "sha256": "20f4cf105d0002232f2eafdcddc1f221caf2f64d5fd6b415a1f686f439041feb",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/beet/none/04.png",
+          "sha256": "338a5810f3bd46e82642345d83879f4508db8f28dd2d3b848a15aceb57533712",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        5,
+        11
+      ],
+      "output_sha256": "f359219a56978080909af7099fd2686337d54c7fd56c07b898887017fdf7db41"
+    },
+    {
+      "id": "ui/icon_beet",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/icon_beet-r1.png",
+      "source_sha256": "b4a1c14ba90eba40a187c8fee01b5d8e2e16333478003d516333a9e5efca7524",
+      "crop_xywh": [
+        406,
+        309,
+        580,
+        731
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.019151846785225718,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_beet",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_beet.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_beet-r1.prompt.txt",
+      "prompt_sha256": "dc689f5d7aa5e5181f1f13ad4fb00a9b1cdf85c244bc8f2f96254ca8ab04a58e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_beet-r1.call.json",
+          "sha256": "e2da72e6a55b76dfbb5e565b1e24011efcb76ffaa0d546ce39ffd34f07c06696",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/icon_beet/none/01.png",
+          "sha256": "da0787c23184fa2c639e5d369816d748ec4566927371c3ace1a7e34c973b43a9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        5,
+        7
+      ],
+      "output_sha256": "28fd0267c44ad338e64ae03b22f480cf2188ad58c71f98ecab98a104d7bd7adb"
+    },
+    {
+      "id": "ui/hud_beet",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/icon_beet-r1.png",
+      "source_sha256": "b4a1c14ba90eba40a187c8fee01b5d8e2e16333478003d516333a9e5efca7524",
+      "crop_xywh": [
+        406,
+        309,
+        580,
+        731
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.01094391244870041,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_beet",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_beet.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_beet-r1.prompt.txt",
+      "prompt_sha256": "dc689f5d7aa5e5181f1f13ad4fb00a9b1cdf85c244bc8f2f96254ca8ab04a58e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_beet-r1.call.json",
+          "sha256": "e2da72e6a55b76dfbb5e565b1e24011efcb76ffaa0d546ce39ffd34f07c06696",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/hud_beet/none/01.png",
+          "sha256": "853eee759a5aa550a97729f3d6fa620ba6b00b338dbd5ee0ca1551092e0ce010",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "d98c18afbdc6e1b987514f2a03c74e638278de28c602f539f14f3f246f230064"
+    },
+    {
+      "id": "ui/icon_grape",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/icon_grape-r1.png",
+      "source_sha256": "ce8035e353bba07b538061652f9dc9c988d99e525ed212697ed64471ee57df70",
+      "crop_xywh": [
+        393,
+        362,
+        564,
+        641
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.0218408736349454,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_grape",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_grape.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_grape-r1.prompt.txt",
+      "prompt_sha256": "9f8190dd166316589c342f6a1a6c275a677b21c7ab898b75aa7a3d818e3af6bf",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_grape-r1.call.json",
+          "sha256": "76b83645781b6be917d51c499bb929b65441173a030f8b552a0cfc29329c15b7",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/icon_grape/none/01.png",
+          "sha256": "87ce2c67b2b24b97c7c9be3de3cf3f4c5dd6baaa4bf118f4ca70b36f8ad9db34",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "2d86e6216d5b6683cf745240d82b46666497390f8095bf5d42956132e6966907"
+    },
+    {
+      "id": "ui/hud_grape",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/icon_grape-r1.png",
+      "source_sha256": "ce8035e353bba07b538061652f9dc9c988d99e525ed212697ed64471ee57df70",
+      "crop_xywh": [
+        393,
+        362,
+        564,
+        641
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.0124804992199688,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_grape",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_grape.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_grape-r1.prompt.txt",
+      "prompt_sha256": "9f8190dd166316589c342f6a1a6c275a677b21c7ab898b75aa7a3d818e3af6bf",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_grape-r1.call.json",
+          "sha256": "76b83645781b6be917d51c499bb929b65441173a030f8b552a0cfc29329c15b7",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/hud_grape/none/01.png",
+          "sha256": "6e4c44bc1222081a2202d6330bc449afe7e42db5536a9436e5190611e0b57eff",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "3168ad15856b4e40f66c10e6abb1104b20ca2b195a5d98c6b7f7f34f6fbeb43e"
+    },
+    {
+      "id": "ui/icon_pumpkin",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/icon_pumpkin-r1.png",
+      "source_sha256": "40d978e5240750904104256f5a669716ab19165dec75d8aa6d7bebd772aca41d",
+      "crop_xywh": [
+        328,
+        344,
+        603,
+        593
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.02321724709784411,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_pumpkin",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_pumpkin.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_pumpkin-r1.prompt.txt",
+      "prompt_sha256": "8f9c025384c7ccf05a59705023305a4788c4f5beefb621ace9bbc9e43246ac57",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_pumpkin-r1.call.json",
+          "sha256": "3753435aef50ea35951e4ff374777b3fc90b731ce35bbcc5e5d7aacbb023e76e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/icon_pumpkin/none/01.png",
+          "sha256": "1a808b26fb06add109b1070d04768b06e2ed35d13e43e5fdc7ecff3f51bb699a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        7,
+        7
+      ],
+      "output_sha256": "6b265235ae6fcbe3be4e652f0c7e6021ab3e15ae5e9465b3969e4711b367ff43"
+    },
+    {
+      "id": "ui/hud_pumpkin",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/icon_pumpkin-r1.png",
+      "source_sha256": "40d978e5240750904104256f5a669716ab19165dec75d8aa6d7bebd772aca41d",
+      "crop_xywh": [
+        328,
+        344,
+        603,
+        593
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.013266998341625208,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_pumpkin",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_pumpkin.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_pumpkin-r1.prompt.txt",
+      "prompt_sha256": "8f9c025384c7ccf05a59705023305a4788c4f5beefb621ace9bbc9e43246ac57",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/icon_pumpkin-r1.call.json",
+          "sha256": "3753435aef50ea35951e4ff374777b3fc90b731ce35bbcc5e5d7aacbb023e76e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/hud_pumpkin/none/01.png",
+          "sha256": "13ce1e81d2cdf5dbbecec853798d057aeda2da4917468992a6cbc8f2ebca1256",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "output_sha256": "3f39cea8f3e68e7280a4120ec632ee6e65f659ec54db6278f2f8c18cb9e37fbc"
+    },
+    {
+      "id": "ui/icon_beet_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/beet_seed-r1.png",
+      "source_sha256": "32e28f9b3b9d3e9b19b8dc92c6e2f0337ef07d8e5f40fbc1ca27a9e29f3fc91d",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.019553072625698324,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_beet_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_beet_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet_seed-r1.prompt.txt",
+      "prompt_sha256": "5d46ebc139921acf229749830eb2b45529cb919b4d810cdaa7c4b24fd0c9bd01",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet_seed-r1.call.json",
+          "sha256": "28feff4b44f151d434e0ffa1f66687af26be72f6b8eb15327cf4b07fa37558a6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/icon_beet_seed/none/01.png",
+          "sha256": "5d2f145e2360d3af2118ccda8635fad69a1d59299723adef83bc0bcc6d3bfc1e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "2602484553f258c6ef3185e2be578122c08ccfaf722850a47956b0d0b34b1ca2"
+    },
+    {
+      "id": "ui/hud_beet_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/beet_seed-r1.png",
+      "source_sha256": "32e28f9b3b9d3e9b19b8dc92c6e2f0337ef07d8e5f40fbc1ca27a9e29f3fc91d",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.0111731843575419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_beet_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_beet_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet_seed-r1.prompt.txt",
+      "prompt_sha256": "5d46ebc139921acf229749830eb2b45529cb919b4d810cdaa7c4b24fd0c9bd01",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/beet_seed-r1.call.json",
+          "sha256": "28feff4b44f151d434e0ffa1f66687af26be72f6b8eb15327cf4b07fa37558a6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/hud_beet_seed/none/01.png",
+          "sha256": "4dc84210da5e30f5f0b730982c4ec4851170782726982a301bd79edaf18574a2",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "65257b9eb39e995050c0e8da08c4f894156364f1e04411bffecd8eb70b510ca1"
+    },
+    {
+      "id": "ui/icon_grape_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/grape_seed-r1.png",
+      "source_sha256": "1acb4780be35d822fa9752c8cfffd75b8518c52847220f33cbde4ea52eb858a9",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.019553072625698324,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_grape_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_grape_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape_seed-r1.prompt.txt",
+      "prompt_sha256": "4d6ced53f7e5d75d76e06f029db767ba293a8b2dafd6e9017f670888dd00bf99",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape_seed-r1.call.json",
+          "sha256": "88758e91650b3e209b3b58d5e63c8145bcc1d5b28297e4dca97b6ce4bb1472c8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/icon_grape_seed/none/01.png",
+          "sha256": "d4a107d6b503d6e42c0ead61516aed009e7094c6ab440f03f112ca10114c98d1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "56a24d4da2708ab8ab8c29ba32c24cd3c87e8c2f16163a60f734b43f86e74af7"
+    },
+    {
+      "id": "ui/hud_grape_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/grape_seed-r1.png",
+      "source_sha256": "1acb4780be35d822fa9752c8cfffd75b8518c52847220f33cbde4ea52eb858a9",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.0111731843575419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_grape_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_grape_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape_seed-r1.prompt.txt",
+      "prompt_sha256": "4d6ced53f7e5d75d76e06f029db767ba293a8b2dafd6e9017f670888dd00bf99",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/grape_seed-r1.call.json",
+          "sha256": "88758e91650b3e209b3b58d5e63c8145bcc1d5b28297e4dca97b6ce4bb1472c8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/hud_grape_seed/none/01.png",
+          "sha256": "401a029c489bdd1c730818863fd98e19a6959ec4f65d5567e11ecff4c334ec24",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "d2bacb061839383ed1c905768e6e2cf81edb47776cc5e9d1e0fa7763d6791701"
+    },
+    {
+      "id": "ui/icon_pumpkin_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/pumpkin_seed-r1.png",
+      "source_sha256": "7618ba0a3cbcb682063c78621098238618c38b80397b95f0a0dc8581fe392873",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.019553072625698324,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_pumpkin_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_pumpkin_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin_seed-r1.prompt.txt",
+      "prompt_sha256": "19396395b3db8ddbd72fc19cce61206aa99beb46c22400790213c43373c9d682",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin_seed-r1.call.json",
+          "sha256": "9a72e52e8158a66d887ae24f575c7868224244f1310bd205f82105dd3610f5f6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/icon_pumpkin_seed/none/01.png",
+          "sha256": "9a12d9091b517caef672968e43a6c6898df8928046ecb74388c5a4d58bdb65c1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "0d263a2d4a1c73e77cd4f32f51264a7756d64ad720b75101f8aea50b40fc8ed1"
+    },
+    {
+      "id": "ui/hud_pumpkin_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/pumpkin_seed-r1.png",
+      "source_sha256": "7618ba0a3cbcb682063c78621098238618c38b80397b95f0a0dc8581fe392873",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.0111731843575419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_pumpkin_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_pumpkin_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin_seed-r1.prompt.txt",
+      "prompt_sha256": "19396395b3db8ddbd72fc19cce61206aa99beb46c22400790213c43373c9d682",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/pumpkin_seed-r1.call.json",
+          "sha256": "9a72e52e8158a66d887ae24f575c7868224244f1310bd205f82105dd3610f5f6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/hud_pumpkin_seed/none/01.png",
+          "sha256": "c4bc89349912d451546c160990f07da8471cc795a1116e5ebfeee4e8c5328a7e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "81be41505e3f15d979715aeb3feac4353d35a523f001686e58f5cf41268f8dff"
+    },
+    {
+      "id": "ui/icon_wheat_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/wheat_seed-r1.png",
+      "source_sha256": "49e9935d0ea399de926cacd65c431e5186c46dd78a0e912c4f59b7dd07abd4fa",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.019553072625698324,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_wheat_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_wheat_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/wheat_seed-r1.prompt.txt",
+      "prompt_sha256": "ba6a070a1239ed82e305d1170f0a830517f42939de9c9b41e9e95bbee5099a9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/wheat_seed-r1.call.json",
+          "sha256": "8861eb20c27270681c1a6a586a336421d2d33a9ba94ada19964ba210eeb65a1e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/icon_wheat_seed/none/01.png",
+          "sha256": "2e9840010e3de86690c5ddaaaf8d78db7fadb7886ff2de2e6411b30f2ea68858",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "inventory",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "98b737b6774260cd49e3fc8d8bb481d8befe50ca00f8e9c2d10441b638cebf53"
+    },
+    {
+      "id": "ui/hud_wheat_seed",
+      "owner": "raster",
+      "source": "assets/art_source/ui/autumn_crops/wheat_seed-r1.png",
+      "source_sha256": "49e9935d0ea399de926cacd65c431e5186c46dd78a0e912c4f59b7dd07abd4fa",
+      "crop_xywh": [
+        320,
+        300,
+        615,
+        716
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.0111731843575419,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_wheat_seed",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_wheat_seed.png",
+      "prompt": "implementation/backlog/deliveries/A017-autumn-crops/raw/wheat_seed-r1.prompt.txt",
+      "prompt_sha256": "ba6a070a1239ed82e305d1170f0a830517f42939de9c9b41e9e95bbee5099a9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/raw/wheat_seed-r1.call.json",
+          "sha256": "8861eb20c27270681c1a6a586a336421d2d33a9ba94ada19964ba210eeb65a1e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/native/hud_wheat_seed/none/01.png",
+          "sha256": "3cd35e9a85e9b323d1921bbe026c01ed28e7e8203b1969185549f91709077e16",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/contract.json",
+          "sha256": "bac47dba7e33e0b4f473a1d12e94babd483bbb71b705bba3a0114db8f0657854",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A017-autumn-crops/APPROVAL.json",
+          "sha256": "d76ebb3a9a8501fe38e7f711cf2222e8f2d03f525dda45ca11cc30562c5d9883",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A017",
+      "integration_task": "0200",
+      "revision": 1,
+      "display_role": "compact_hud",
+      "approval": "A017 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0200",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "4411429510e3e12e585063196f0df23880bbc20a80ad6877b0bfacd34a79e473"
     }
   ]
 }

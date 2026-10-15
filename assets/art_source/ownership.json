@@ -2262,6 +2262,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/crops/beet_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/beet_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/beet_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/beet_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/carrot_0.png",
       "owner": "raster"
     },
@@ -2314,6 +2330,26 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/crops/grape_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/grape_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/grape_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/grape_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/grape_regrow.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/melon_0.png",
       "owner": "raster"
     },
@@ -2363,6 +2399,22 @@
     },
     {
       "output": "sprites/crops/potato_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pumpkin_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pumpkin_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pumpkin_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/crops/pumpkin_3.png",
       "owner": "raster"
     },
     {
@@ -3850,6 +3902,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_beet.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_beet_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_boss_night.png",
       "owner": "raster"
     },
@@ -4018,6 +4078,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_grape.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_grape_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_gun_tower.png",
       "owner": "raster"
     },
@@ -4142,6 +4210,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_pumpkin.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_pumpkin_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_rod_bamboo.png",
       "owner": "raster"
     },
@@ -4250,6 +4326,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_wheat_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_wine.png",
       "owner": "raster"
     },
@@ -4295,6 +4375,14 @@
     },
     {
       "output": "sprites/ui/icon_beehive.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_beet.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_beet_seed.png",
       "owner": "raster"
     },
     {
@@ -4466,6 +4554,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_grape.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_grape_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_gun_tower.png",
       "owner": "raster"
     },
@@ -4590,6 +4686,14 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_pumpkin.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_pumpkin_seed.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_rod_bamboo.png",
       "owner": "raster"
     },
@@ -4695,6 +4799,10 @@
     },
     {
       "output": "sprites/ui/icon_wheat.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_wheat_seed.png",
       "owner": "raster"
     },
     {

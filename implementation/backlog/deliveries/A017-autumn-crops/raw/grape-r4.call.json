@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit\nAsset type: A017 grape growth strip, source for 16x32 pixel-art crops in HARVEST THE NIGHT.\nImage1 is previous candidate and edit target. Preserve its warm wooden two-post trellis, green grapevine and dark blue-violet bunches, camera and daytime light.\nCorrect ONLY the RELATIVE HEIGHT AND SPARSITY so all five stages fit one shared pixel scale. Generate EXACTLY five equal cells in ONE horizontal strip, transparent gutters, baseline identical, no labels. Final visible heights at that SAME scale: planted3 native pixels, sprout10, growing24, ripe27, regrow26. Full mature width only12nativepixels; early young plant width5. Do NOT enlarge the sprout to fill its cell.\nOrdered cells:\n1 tiny planted cutting in a mound,3px tall, no long stake.\n2 young sparse vine tied to a SHORT stake10px tall.\n3 narrow full wooden trellis, two thin posts and one top crossbar,24px tall; sparse leaves climbing, NO fruit.\n4 SAME trellis posts/crossbar width and height as cell3, sparse leaves arch3px above it for27px total; FOUR small shaded dark BLUE-VIOLET grape bunches (each at least2colors).\n5 SAME trellis/foliage as cell4; smaller green bunches after harvesting,26px tall.\nCrucial: lower HALF of growing/ripe/regrow must be mostly transparent, over55percent transparent. Two narrow one-pixel posts and two thin winding stems, leaves/fruit mostly in the upper half. The previous strip covered154-157 pixels of the bottom16x16 plot and hid wet soil; need at most150. Leave large holes, do not fill the trellis as a dense bush. Never draw soil/grass beneath.\nHand-crafted pixel art, simple coarse square clusters, colored outlines, upper-left daylight; orthographic three-quarter top-down. Native final canvas16x32,pivot8,30, withinx1..14. No individual rescaling: all five source plants drawn at one grid density. No glow, ground shadow, borders, text, extra crops or fruit icons. Real alpha transparent backdrop.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A017-autumn-crops/rejected/grape-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A017-autumn-crops/rejected/grape-r3.png",
+      "sha256": "b95d50a3a3d7d8c2d1f4953845bb816128e1c3d3c296df1f6cc92e3511473e0e",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-70884176-8f22-4f6e-8fab-9b5967a8f980.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A017-autumn-crops\\raw\\grape-r4.png",
+  "sha256": "b84d9d35b60b3426a31c77d6ba26c3b19d64221df8acf41541895e4c5af6ea83",
+  "date": "2026-10-14",
+  "revision": 4,
+  "decision": "pending native-scale inspection"
+}
