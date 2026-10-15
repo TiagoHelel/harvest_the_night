@@ -32900,3 +32900,58 @@ the same picture.
 - `python implementation/backlog/assets.py set A027 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0212 - Art: the coop and the barn - done 2026-10-15
+
+A030 is integrated. The coop and the barn are the owner-approved art now,
+each whole, hurt and wrecked. They are at full density over the footprints
+0183 settled: the coop 64x64 at (32,60) over 3x2 cells, the barn 96x100 at
+(48,96) over 5x4. The owner approved the corrected pack on 2026-10-15 with
+the retried batch ("tudo aprovado"), as recorded in the delivery's
+`APPROVAL.json`. The stand-ins of 0183 and 0186 are gone: the kitchen and
+the workshop, tinted and scaled.
+
+- **Promotion**: each of the six states is a composition over 37 assembly
+  components (9 `render`, 28 `compose`), under
+  `sprites/components/A030-coop-barn/`.
+  - The six raw sources are byte for byte in
+    `assets/art_source/buildings/coop_barn/`.
+  - Every node and file was sha-checked, and decodes to its approved RGBA.
+- **The canvas offset is the footprint's**: the bottom middle of the cells
+  on the pivot - the coop (-8,-28), the barn (-8,-32).
+  - The promoter would have borrowed the house's (-8,-12), the first entry
+    on the same canvas and pivot, which would have put the lantern and the
+    glass a row of cells off. Each home's is set from its footprint.
+- **The view**: nothing new. `_station_art` and `_worn` already pick
+  `<id>_wreck` at 0 HP and `<id>_hurt` past the wear threshold when the art
+  exists. The homes are not in `ArtPlacement.visual_scale`'s 2.0 list.
+  - `lighting.gd` reads the measured lantern (`light_xy`) and panes
+    (`windows_xy`) on the whole and the hurt ones, and lights nothing on a
+    wreck, as 0186 wanted.
+- **The stand-ins retired**: A030's six `PlaceholderArt` entries and the
+  `COOP` and `BARN` geometries. `placeholders.py --check` passes, with 124
+  stand-ins left over 18 packs.
+- **Checks**: `check_station_art.py` takes the homes (`HOMES`). Each state
+  is checked for:
+  - its box and full density;
+  - the footprint's offset;
+  - A030's composition from its own components;
+  - grounded on its pivot, every state its own;
+  - the lantern and glass on the whole and hurt states, with each pane's
+    point on an opaque pixel, and none on a wreck.
+- **Tests**: `_task_0212_coop_barn` (headless_v1) checks:
+  - the six states at their boxes with their offsets, at 1.0, lit where
+    they should be;
+  - the barn's two panes falling on its own 5x4 cells.
+- **Shots** (`implementation/shots/0212/`, FHD 1920x1080, looked at):
+  - `coop_barn`: noon, the timbered barn and the small coop, the cows and
+    hens moved in.
+  - `barn_night`: a wrecked barn, roof broken and dark, beside a hurt one
+    with its lantern and pane lit.
+  - `barn_night_morning`: the morning after.
+  - `barnyard`: the animals about their homes.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A030 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).

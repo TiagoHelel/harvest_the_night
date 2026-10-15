@@ -1,0 +1,137 @@
+Production ImageGen raster source. Coherent deliberate pixel art for HARVEST THE NIGHT. True transparent background; isolated full unclipped object; no cast shadow, ground, text, labels, watermark, glow or halo. Orthographic three-quarter top-down camera, warm upper-left daytime light, restrained project palette. Use the first reference as the actual edit target or identity master, preserve its identity, construction and scale. Other references are style/scale only. Native sizes in the brief are downstream targets; use few clear pixel clusters and broad material planes.
+EDIT first image, preserve exact source size/framing, footprint, doorstep and door alignment. WRECK: collapsed roof and walls, recognizable rubble confined to original footprint. Foundation and entry ground remain fixed; no flame, smoke, lamp points or detached debris outside footprint.
+Full asset brief (apply only the requested asset):
+# A030 - The coop and the barn
+
+- **Status:** generating
+- **For game task:** 0212
+- **Dressed by game tasks:** 0183, 0186
+- **Spec after game task:** 0183
+- **Family:** buildings
+- **Mode:** A - raw ImageGen sources, Claude reduces them to the 42-colour palette
+- **Size of the job:** 2 buildings x 3 states (whole, hurt, wreck) = 6 frames; 2 masters + 4 state edits
+
+## What it is for
+
+Animals get homes (game task 0183): chickens live in the coop, cows, sheep and
+pigs in the barn. The player builds them by day near the workshop, collects
+eggs and milk at their doors, and at night the animals sleep inside while
+breakers go for the buildings (0186). A wrecked barn stays standing, produces
+nothing and keeps its animals until it is repaired by day, so the wreck must
+read as "broken, out of use" without collapsing. At 1080p they are warm timber
+farm buildings at **full density** (1 art px = 1 logical px), clearly smaller
+than the house, which stays the landmark; by night their lantern and windows
+are lit by the runtime.
+
+## Deliverables
+
+Final geometry settled by game task 0183. The rows stand as written: the coop's footprint is **3x2** and it holds **4** chickens, the barn's **5x4** and it holds **4** animals (cows now; sheep and pigs from 0185), each `capacity` a lever in `BUILDINGS`. **The door is the middle cell of the front (south) row** - cell (1,1) of the coop's footprint, (2,3) of the barn's - and the farmer collects standing on the cell below it, facing north; draw the door there, centred on `pivot_x` (±2) as below. The housed animals stand along the front row by day either side of that door, drawn by code, never baked. `light_xy` and the window points stand as written; 0186 lights and wrecks the buildings. **Settled by 0186:** hit points are one count over the whole footprint; `<id>_hurt` is drawn below three quarters of them and `<id>_wreck` at 0, standing, its animals hidden inside. At night the runtime lights `light_xy` (and `windows_xy` once measured) on the whole and hurt states, never on the wreck, and the wreck smokes from one point: the middle of its footprint, three tenths of the way down. Until 0212 the coop is the kitchen and the barn the workshop, tinted and scaled to these footprints through 0120's road. Start only when `python implementation/backlog/assets.py next` offers this pack.
+
+| Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
+|---|---|---|---|---|
+| `coop` | 64x64 | (32,60) | 1 / 0.55 / static | Footprint 3x2 (48x32 px). Small timber hen house on short stone footings, shingle or terracotta roof, a person door and a pop-hole with a little ramp on the front. Visible 52-60 wide x 44-52 tall, lowest row 59. Points: `light_xy`, 1 window. |
+| `coop_hurt` | 64x64 | (32,60) | 1 / 0.55 / static | Deliberate local damage: one missing roof cluster with dark rafters, one split wall board, one cracked pane that stays a pane. Same silhouette; same points. |
+| `coop_wreck` | 64x64 | (32,60) | 1 / 0.55 / static | Wrecked but standing: roof partly caved in, door hanging from one hinge, boards torn off, the pane broken dark, lantern fallen. Walls still standing on the same base; no rubble outside the footprint. No points. |
+| `barn` | 96x100 | (48,96) | 1 / 0.55 / static | Footprint 5x4 (80x64 px). Warm timber barn on a stone footing with a terracotta gambrel roof, big double doors, a hay-loft door with a small window above them, one side window. Visible 84-92 wide x 80-92 tall, lowest row 95; its top stays below the house's height. Points: `light_xy`, 2 windows. |
+| `barn_hurt` | 96x100 | (48,96) | 1 / 0.55 / static | As `coop_hurt`, at barn scale. Same silhouette; same points. |
+| `barn_wreck` | 96x100 | (48,96) | 1 / 0.55 / static | As `coop_wreck`: roof sagging with a hole, one big door off its track, loft door hanging, windows broken dark. Standing; no points. |
+
+- Directions: `none`. No mirrors. Not in `ArtPlacement.visual_scale`'s 2.0 list:
+  drawn at 1.0, never authored at half density (contract 1.4).
+- **Doors.** On the front (south) wall, centred on `pivot_x` (±2), the door's
+  bottom on the lowest wall row: the core puts the collect verb at the
+  bottom-centre cell. Coop person door about 10-12 wide x 16-20 tall; barn
+  doors about 26-30 wide x 28-32 tall (a cow fits through). The farmer is 32
+  tall: the coop door may be lower than him, the barn door is not.
+- **Points** (whole and hurt, the same coordinates in both, on opaque pixels):
+  `light_xy` on the glass of a small iron lantern hung beside the door (coop:
+  left of the door; barn: left of the big doors, at about the farmer's head
+  height); `windows_xy` + `window_rects_xywh` - coop 1 pane, barn 2 panes (loft
+  window and side window); each rect covers glass only. The wreck has no
+  `light_xy` and no windows: the runtime does not light a wrecked building.
+- Glass is **unlit**: a pane is a dark glass shape (`night_light`, `water_dark`)
+  with a pale glint of at least 2 px (`bone` or `moon`); never `flame`,
+  `flame_hot` or `gold_light` fill. The runtime lights them at night.
+- Never baked: animals, eggs, hay bales or tools outside, a fence, ground,
+  grass, a shadow, smoke, glow, text or signs.
+
+## Match these
+
+- `sprites/buildings/house.png` (64x64 at draw 2.0, so 112x110 on screen) and
+  raw `assets/art_source/buildings/house/whole.png`: timber, terracotta and
+  stone ramps, roof-tile clusters, camera, light from the upper left. Match the
+  materials, **not** its half density: these buildings have twice its detail per
+  logical pixel.
+- `sprites/buildings/house_hurt.png` and raw `house/hurt.png`, with
+  `implementation/sprites/generation/0011-house_hurt.prompt.txt`: the damage
+  language (one broad roof hole, one split beam, chipped stones).
+- `sprites/buildings/gun_tower_wreck.png`: a wreck on the same base.
+- `sprites/props/cow.png` (24x24) and `sprites/props/chicken.png`: who uses the
+  doors (A027 redraws them at the farmer's scale).
+- Farmer `implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png`
+  (body 16x32): scale of doors and lantern height.
+- `docs/reference-sheet.png`: barns and sheds on the day farm.
+
+## How to make it
+
+1. Prompt = PROMPTS.md BASE (braces: canvas and pivot from the table) + the
+   PRODUCTION_BUILDING section with `{coop | barn}` and the function cues from
+   the table in place of its station list, + CORRECTION for revisions. Add:
+   "Full-density pixel art: about {56 | 88} art pixels across the whole
+   building; footprint {3x2 | 5x4} cells of 16 px. Front door centred. Window
+   glass unlit and separate. No animals, fence, ground, shadow or text."
+2. Masters `coop` and `barn`, `transparent_background=true`, 2 candidates each,
+   with `assets/art_source/buildings/house/whole.png` attached as "material,
+   camera and lighting style reference". Pick by the native reduction.
+3. Hurt and wreck are ImageGen **edits of the accepted whole raw** (edit
+   target), one state per call, "preserve framing, dimensions, ground baseline,
+   door and window positions; change only the damage", the way task 0011 made
+   `house/hurt.png`.
+4. Export with the mode A recipe: per building one crop box (the union of its
+   three states' opaque bboxes), one `content_scale`, one `content_anchor_xy`,
+   so unchanged walls land on the same pixels in all three states. Lowest
+   opaque row `pivot_y - 1`, centred on `pivot_x`. Measure the points on the
+   exported native frames.
+
+## Review with the owner
+
+`index.html` shows each state at 1x and 4x, by day and in the night preview,
+plus a second night preview with each window rect and a 3x3 block at
+`light_xy` filled with `flame` (preview only, never in `native/`); beside the
+farmer frame and `sprites/buildings/house.png` drawn at 2x (its real on-screen
+size), feet on one ground line; over tiled `sprites/terrain/grass.png` with the
+footprint outlined in 16 px cells; points on an overlay; a whole/hurt/wreck
+blink compare.
+
+Ask the owner:
+- "O galinheiro e o celeiro ficam menores que a casa, que continua sendo o marco da fazenda?"
+- "O estado destruído mas de pé deixa claro que parou de funcionar, sem parecer que desabou?"
+- "A lanterna da porta e as janelas acesas à noite ficam boas?"
+
+## Acceptance
+
+- [ ] 6 frames; 64x64 / (32,60) for the coop and 96x100 / (48,96) for the barn in every state.
+- [ ] Lowest opaque row `pivot_y - 1`, centred on `pivot_x` (±1); visible sizes inside the table's ranges; the barn's top lower than the house's on-screen top.
+- [ ] Full density: no 2x2 pixel blocks; detail matches the farmer, not the 2x house.
+- [ ] Door centred and sized as above; same in all three states except the wreck's damage.
+- [ ] `light_xy` and every `windows_xy` on opaque pixels, inside their rects, identical in whole and hurt; none in the wreck.
+- [ ] No `flame`, `flame_hot` or `gold_light` inside any window rect or the lantern glass.
+- [ ] One crop, scale and anchor per building; binary alpha; no ground, animals, shadow, smoke or text.
+- [ ] `build.py` twice is byte-identical and `--check` passes; checks.json all `true`.
+
+## Delivery
+
+Folder `implementation/backlog/deliveries/A030-coop-barn/` with `raw/`,
+`native/<id>/none/01.png` (`coop`, `coop_hurt`, `coop_wreck`, `barn`,
+`barn_hurt`, `barn_wreck`), `preview/`, `rejected/`, `contract.json`,
+`checks.json`, `build.py`, `index.html`, `review-log.txt`.
+
+`CLAUDE-A030-PROMPT.txt` maps
+`native/coop[_hurt|_wreck]/none/01.png -> sprites/buildings/coop[_hurt|_wreck].png 64x64 pivot (32,60) draw 1.0 static` and
+`native/barn[_hurt|_wreck]/none/01.png -> sprites/buildings/barn[_hurt|_wreck].png 96x100 pivot (48,96) draw 1.0 static`,
+lists `light_xy`, `windows_xy` and `window_rects_xywh` per state, and says the
+two ids stay out of `ArtPlacement.visual_scale`. They replace the stand-ins of
+0183 and 0186 in game task 0212.
+
+Last step, only after the owner approves in words recorded verbatim in
+`APPROVAL.json`: `python implementation/backlog/assets.py set A030 approved`.

@@ -1,0 +1,381 @@
+{
+  "pack": "A030",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/coop/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.0466278101582015,
+            "crop_xywh": [
+              71,
+              89,
+              1201,
+              1022
+            ]
+          },
+          "parts": [
+            {
+              "input": "coop-lantern",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                64,
+                64
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/coop_hurt/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.0466278101582015,
+            "crop_xywh": [
+              71,
+              89,
+              1201,
+              1022
+            ]
+          },
+          "parts": [
+            {
+              "input": "coop-hurt-board",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                64,
+                64
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/coop_wreck/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.0466278101582015,
+            "crop_xywh": [
+              71,
+              89,
+              1201,
+              1022
+            ]
+          },
+          "parts": [
+            {
+              "input": "coop-wreck-fixed-footing",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                64,
+                64
+              ]
+            }
+          ]
+        },
+        {
+          "component": "coop-centered-master",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.0466278101582015,
+            "crop_xywh": [
+              71,
+              89,
+              1201,
+              1022
+            ]
+          }
+        },
+        {
+          "component": "coop-cool-glass",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.0466278101582015,
+            "crop_xywh": [
+              71,
+              89,
+              1201,
+              1022
+            ]
+          }
+        },
+        {
+          "component": "coop-dark-broken-pane",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.0466278101582015,
+            "crop_xywh": [
+              71,
+              89,
+              1201,
+              1022
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-barn-master-c2-r1.png",
+      "source_sha256": "1d79accb9cf15b61d5dd8783be9d8014d20ef68eeefa6ff9dd4bffcee2c558c1",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/barn/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              44,
+              83
+            ],
+            "content_scale": 0.07691660520933252,
+            "crop_xywh": [
+              61,
+              70,
+              1159,
+              1074
+            ]
+          },
+          "parts": [
+            {
+              "input": "barn-side-pane-pale-glint",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                96,
+                100
+              ]
+            }
+          ]
+        },
+        {
+          "component": "barn-cool-glass",
+          "recipe": {
+            "content_anchor_xy": [
+              44,
+              83
+            ],
+            "content_scale": 0.07691660520933252,
+            "crop_xywh": [
+              61,
+              70,
+              1159,
+              1074
+            ]
+          }
+        },
+        {
+          "component": "original-barn",
+          "recipe": {
+            "content_anchor_xy": [
+              44,
+              83
+            ],
+            "content_scale": 0.07691660520933252,
+            "crop_xywh": [
+              61,
+              70,
+              1159,
+              1074
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-barn_hurt-r1.png",
+      "source_sha256": "e8678c8b199c96932f3186bfeb8471287cd7e5c30b5de60e613e9d4d6ff61c28",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/barn_hurt/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              44,
+              83
+            ],
+            "content_scale": 0.07691660520933252,
+            "crop_xywh": [
+              61,
+              70,
+              1159,
+              1074
+            ]
+          },
+          "parts": [
+            {
+              "input": "barn_hurt-side-pane-pale-glint",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                96,
+                100
+              ]
+            }
+          ]
+        },
+        {
+          "component": "original-barn_hurt",
+          "recipe": {
+            "content_anchor_xy": [
+              44,
+              83
+            ],
+            "content_scale": 0.07691660520933252,
+            "crop_xywh": [
+              61,
+              70,
+              1159,
+              1074
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-barn_wreck-r1.png",
+      "source_sha256": "a789fe44fe902768d694c963506b7fc2277e23a6df0f2f13ebc46154367deeb7",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/barn_wreck/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              44,
+              83
+            ],
+            "content_scale": 0.07691660520933252,
+            "crop_xywh": [
+              61,
+              70,
+              1159,
+              1074
+            ]
+          },
+          "parts": [
+            {
+              "input": "barn_wreck-fixed-footing",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                96,
+                100
+              ]
+            }
+          ]
+        },
+        {
+          "component": "original-barn_wreck",
+          "recipe": {
+            "content_anchor_xy": [
+              44,
+              83
+            ],
+            "content_scale": 0.07691660520933252,
+            "crop_xywh": [
+              61,
+              70,
+              1159,
+              1074
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-coop_hurt-r1.png",
+      "source_sha256": "cb30042e878e7dbf6feb2f2560018e32f5abd46b4d377742820cf1ee34bae0df",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "original-coop_hurt",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.048611111111111105,
+            "crop_xywh": [
+              106,
+              104,
+              1152,
+              996
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "source": "raw/recovered-coop_wreck-r1.png",
+      "source_sha256": "0492a630f8bf8e25074b0a0a91b0037240d91e9de8eb739ac67d8ac3459b99e4",
+      "usage": "Source-owned component crops only.",
+      "recipes": [
+        {
+          "component": "original-coop_wreck",
+          "recipe": {
+            "content_anchor_xy": [
+              28,
+              48
+            ],
+            "content_scale": 0.048611111111111105,
+            "crop_xywh": [
+              106,
+              104,
+              1152,
+              996
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

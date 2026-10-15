@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-279 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+280 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -322,6 +322,7 @@ voz alta.
 | 0206 | Art: fishing gear and the minigame | 2026-10-15 |
 | 0209 | Art: sheep and pigs | 2026-10-15 |
 | 0210 | Art: the cow and the chicken redrawn | 2026-10-15 |
+| 0212 | Art: the coop and the barn | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

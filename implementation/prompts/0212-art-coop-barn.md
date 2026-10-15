@@ -1,7 +1,7 @@
 # 0212 - Art: the coop and the barn
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0186
 - **Likely files:** assets/art_source/buildings/, assets/art_source/manifest.json, tools/check_station_art.py, src/ui/art_placement.gd
 - **Art packs:** A030

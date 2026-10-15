@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: A030 coop master correction for HARVEST THE NIGHT.
+Image1 is EDIT TARGET. Preserve this exact hen house, terracotta roof, timber, stone footings, centered human door, right pop-hole/ramp, left lantern, framing, perspective, outline, dimensions, alpha background and baseline. ONE change only: make the LEFT WINDOW's dark cool glass and cool-white reflection large enough to survive reduction to a56pixel-wide building.
+The left window needs a broad, deliberately chunky PALE BLUE-WHITE L-shaped reflection, about3 by2 native art pixels, on its dark blue panes. There must be at least TWO pale reflection pixels after reduction. Increase the reflection's area within the glass; do not enlarge the window opening or turn the glass bright. Reflections use off-white #e8e0cf or pale moon #cfd6ff, NOT warm yellow/gold. Same for door-window glass, keep cool blue with modest white glint.
+Final canvas64x64,pivot32,60, full visible56x48. Coherent crisp pixel clusters, warm daylight upper-left, orthographic three-quarter front. Do not redraw the architecture or add a side annex. No glow or illuminated windows, no ground/shadow/grass/smoke/text/sign/animal. Real transparency.
+This is a native readability correction, not a redesign.

@@ -1,0 +1,8 @@
+{
+  "pack": "A030",
+  "canonical_importer": "tools/import_art.py:build",
+  "all_native_outputs_pixel_exact": true,
+  "native_outputs_checked": 6,
+  "component_nodes": 37,
+  "scope": "Read-only pipeline replay; no manifest, runtime sprite or game source was changed. Exact-source intermediates retain recorded ImageGen source recipes and hashes."
+}

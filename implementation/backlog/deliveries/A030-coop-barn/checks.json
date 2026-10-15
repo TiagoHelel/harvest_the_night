@@ -1,0 +1,293 @@
+{
+  "assembly_source_hashes_match": true,
+  "binary_alpha": true,
+  "body_centered": true,
+  "building_measurements": {
+    "barn": {
+      "bounds_xyxy": [
+        4,
+        13,
+        93,
+        96
+      ],
+      "door_xywh": [
+        35,
+        66,
+        28,
+        29
+      ],
+      "pane_glint_pixels": [
+        3,
+        3
+      ],
+      "points": {
+        "light_xy": [
+          31,
+          76
+        ],
+        "window_rects_xywh": [
+          [
+            47,
+            54,
+            8,
+            6
+          ],
+          [
+            20,
+            74,
+            7,
+            6
+          ]
+        ],
+        "windows_xy": [
+          [
+            48,
+            54
+          ],
+          [
+            22,
+            75
+          ]
+        ]
+      }
+    },
+    "barn_hurt": {
+      "bounds_xyxy": [
+        4,
+        13,
+        93,
+        96
+      ],
+      "door_xywh": [
+        35,
+        66,
+        28,
+        29
+      ],
+      "pane_glint_pixels": [
+        3,
+        3
+      ],
+      "points": {
+        "light_xy": [
+          31,
+          76
+        ],
+        "window_rects_xywh": [
+          [
+            47,
+            54,
+            8,
+            6
+          ],
+          [
+            20,
+            74,
+            7,
+            6
+          ]
+        ],
+        "windows_xy": [
+          [
+            48,
+            54
+          ],
+          [
+            22,
+            75
+          ]
+        ]
+      }
+    },
+    "barn_wreck": {
+      "bounds_xyxy": [
+        4,
+        13,
+        93,
+        96
+      ],
+      "door_xywh": [
+        35,
+        66,
+        28,
+        29
+      ],
+      "pane_glint_pixels": [],
+      "points": {}
+    },
+    "coop": {
+      "bounds_xyxy": [
+        4,
+        12,
+        60,
+        60
+      ],
+      "door_xywh": [
+        26,
+        41,
+        10,
+        18
+      ],
+      "pane_glint_pixels": [
+        2
+      ],
+      "points": {
+        "light_xy": [
+          22,
+          45
+        ],
+        "window_rects_xywh": [
+          [
+            14,
+            44,
+            7,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            15,
+            45
+          ]
+        ]
+      }
+    },
+    "coop_hurt": {
+      "bounds_xyxy": [
+        4,
+        12,
+        60,
+        60
+      ],
+      "door_xywh": [
+        26,
+        41,
+        10,
+        18
+      ],
+      "pane_glint_pixels": [
+        2
+      ],
+      "points": {
+        "light_xy": [
+          22,
+          45
+        ],
+        "window_rects_xywh": [
+          [
+            14,
+            44,
+            7,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            15,
+            45
+          ]
+        ]
+      }
+    },
+    "coop_wreck": {
+      "bounds_xyxy": [
+        4,
+        12,
+        60,
+        60
+      ],
+      "door_xywh": [
+        26,
+        41,
+        10,
+        18
+      ],
+      "pane_glint_pixels": [],
+      "points": {}
+    }
+  },
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "door_dimensions_measured": true,
+  "family_checks_complete": true,
+  "footings_fixed": true,
+  "frame_count_matches": true,
+  "frames_expected": 6,
+  "frames_found": 6,
+  "glass_unlit": true,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/barn/none/01.png": {
+      "bounds": [
+        4,
+        13,
+        93,
+        96
+      ],
+      "opaque_pixels": 5595
+    },
+    "native/barn_hurt/none/01.png": {
+      "bounds": [
+        4,
+        13,
+        93,
+        96
+      ],
+      "opaque_pixels": 5595
+    },
+    "native/barn_wreck/none/01.png": {
+      "bounds": [
+        4,
+        13,
+        93,
+        96
+      ],
+      "opaque_pixels": 5579
+    },
+    "native/coop/none/01.png": {
+      "bounds": [
+        4,
+        12,
+        60,
+        60
+      ],
+      "opaque_pixels": 1931
+    },
+    "native/coop_hurt/none/01.png": {
+      "bounds": [
+        4,
+        12,
+        60,
+        60
+      ],
+      "opaque_pixels": 1925
+    },
+    "native/coop_wreck/none/01.png": {
+      "bounds": [
+        4,
+        12,
+        60,
+        60
+      ],
+      "opaque_pixels": 1917
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "one_shared_source_recipe": true,
+  "paired_state_points_identical": true,
+  "panes_have_two_glints": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "visible_targets": true,
+  "window_points_measured": true
+}

@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: precise-object-edit\nAsset type: A030 coop master correction for HARVEST THE NIGHT.\nImage1 is EDIT TARGET. Preserve this exact hen house, terracotta roof, timber, stone footings, centered human door, right pop-hole/ramp, left lantern, framing, perspective, outline, dimensions, alpha background and baseline. ONE change only: make the LEFT WINDOW's dark cool glass and cool-white reflection large enough to survive reduction to a56pixel-wide building.\nThe left window needs a broad, deliberately chunky PALE BLUE-WHITE L-shaped reflection, about3 by2 native art pixels, on its dark blue panes. There must be at least TWO pale reflection pixels after reduction. Increase the reflection's area within the glass; do not enlarge the window opening or turn the glass bright. Reflections use off-white #e8e0cf or pale moon #cfd6ff, NOT warm yellow/gold. Same for door-window glass, keep cool blue with modest white glint.\nFinal canvas64x64,pivot32,60, full visible56x48. Coherent crisp pixel clusters, warm daylight upper-left, orthographic three-quarter front. Do not redraw the architecture or add a side annex. No glow or illuminated windows, no ground/shadow/grass/smoke/text/sign/animal. Real transparency.\nThis is a native readability correction, not a redesign.",
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A030-coop-barn/rejected/coop-master-c3-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A030-coop-barn/rejected/coop-master-c3-r1.png",
+      "sha256": "2ec7a25ffd5e4bab1f55d0ead7f45fa58ad58bcf29576842a99d7ea5973e76be",
+      "role": "Image reference / edit target, role specified in exact prompt"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-44054b00-7259-41bf-bc02-92a9523617e7.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A030-coop-barn\\raw\\coop-master-r4.png",
+  "sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+  "date": "2026-10-14",
+  "revision": 4,
+  "decision": "pending native-scale inspection"
+}

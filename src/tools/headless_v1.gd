@@ -203,6 +203,7 @@ func _run() -> void:
 	_task_0206_fishing_gear()
 	_task_0209_sheep_pig()
 	_task_0210_cow_chicken()
+	_task_0212_coop_barn()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14471,6 +14472,35 @@ func _task_0210_cow_chicken() -> void:
 	expect(wrong.is_empty() and road.is_empty() and grazing == [0, 1, 1],
 		"A027's cow and hen are raster art at their boxes and no animal is left on 0120's road",
 		"%s; road %s; %s" % [str(wrong), str(road), str(grazing)])
+	_completed += 1
+
+
+## **A030's coop and barn** (task 0212): whole, hurt and wrecked, raster art
+## at full density - not in `ArtPlacement.visual_scale`'s 2.0 list - over
+## the footprint 0183 settled, its canvas offset that footprint's. The lantern
+## and the glass are on the whole and the hurt ones, none on a wreck, and the
+## barn's windows land on its own cells.
+func _task_0212_coop_barn() -> void:
+	var wrong: Array = []
+	for home in [[&"coop", Vector2i(64, 64), Vector2i(32, 60), Vector2i(3, 2)],
+			[&"barn", Vector2i(96, 100), Vector2i(48, 96), Vector2i(5, 4)]]:
+		for suffix in ["", "_hurt", "_wreck"]:
+			var path := WorldView.BUILDING_DIR + "%s%s.png" % [home[0], suffix]
+			var frame := PlaceholderArt.frame(path)
+			var size: Vector2i = home[3]
+			var pivot: Vector2i = home[2]
+			if frame.get("canvas") != home[1] or frame.get("pivot") != pivot or frame.has("stand_in") \
+					or frame.get("cell_offset") != Vector2i(size.x * 8, size.y * 16) - pivot \
+					or ArtPlacement.visual_scale(path) != 1.0 or frame.has("windows") == (suffix == "_wreck"):
+				wrong.append(path)
+	var corner := Vector2(10, 10) * float(GameData.TILE_SIZE)
+	var panes := ArtPlacement.emissions(&"barn", corner, &"windows", corner, &"light", Vector2i(5, 4))
+	var inside := panes.size() == 2
+	for pane in panes:
+		inside = inside and Rect2(corner, Vector2(5, 4) * float(GameData.TILE_SIZE)).has_point(pane)
+	expect(wrong.is_empty() and inside,
+		"A030's coop and barn are raster art at full density over their footprints, lit whole and hurt and dark wrecked, the barn's panes on its own cells",
+		"%s; panes %s" % [str(wrong), str(panes)])
 	_completed += 1
 
 

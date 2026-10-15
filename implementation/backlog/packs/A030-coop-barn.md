@@ -1,6 +1,6 @@
 # A030 - The coop and the barn
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0212
 - **Dressed by game tasks:** 0183, 0186
 - **Spec after game task:** 0183

@@ -1,0 +1,37 @@
+{
+  "tool": "image_gen.imagegen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm\nthat becomes a fortress against zombies at night.\nPrimary request: A030-coop-barn barn-master-c2.\nInput images: Image1: approved crop layout/scale/style reference; Image2: approved farmstyle reference\nStyle/medium: coherent hand-crafted pixel art with deliberate pixel clusters,\ncolored outlines, restrained texture, readable material planes and clean forms.\nComposition/framing: orthographic three-quarter top-down view on a rectangular\ngrid; match the approved master camera and scale. Final native canvas is\n96x100 pixels with contact pivot 48,96; this is a downstream import\ntarget, so the generated source must remain simple enough to survive reduction.\nLighting/mood: neutral warm daytime, highlights from upper left, darker underside;\nruntime supplies dusk/night lighting. Keep emission in separate localized forms.\nColor palette: match the approved project palette and master, warm timber and\nterracotta, layered greens, cool water, violet/blue shadows; limited ramps.\nScene/backdrop: true transparent background, isolated objects only. No baked ground shadow for actors.\nConstraints: complete unclipped object, consistent perspective and scale, clear\nground contact, generous tool/weapon clearance, no labels, text, watermark or UI.\nAvoid: smooth painting, vector look, 3D render, anti-aliased halos, blur, gradients,\nrandom pixel speckle, thick black boxes, diamond isometric tiles, duplicate parts,\nnew gameplay objects, tiny details that disappear at native size.\n\n\nPRODUCTION_BUILDING: Warm timber barn stonefooting, terracotta GAMBREL roof, centred BIG doubledoors28wide30tall, hayloftdoor smallwindow above, ONE sidewindow. IRON lantern LEFT of bigdoors at32pixelsaboveground. TWO windows DARK glass2paleglintclusters; no warmglowingpanes. Native silhouette88wide by86tall, same proportion as farmhouse, FULL DENSITY about88artpixels across not56enlargedblocks. Complete building, frontbottomcentre door, lowestrow95. Glass UNLIT navy/blue with pale glint. No animals, fence, haybales, tools, signs, ground, shadow, smoke, text or glow.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png",
+      "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435",
+      "role": "identity/material/layout reference; generation approval is recorded separately"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "global scene/style reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "approved farmer scale/camera reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1d443763-f6b4-40c5-81a1-987ae484eee9.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A030-coop-barn\\raw\\recovered-barn-master-c2-r1.png",
+  "sha256": "1d79accb9cf15b61d5dd8783be9d8014d20ef68eeefa6ff9dd4bffcee2c558c1",
+  "date": "2026-10-10",
+  "revision": 1,
+  "decision": "Requalified for a new measured conversion recipe; owner review pending.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A030-coop-barn\\rejected\\barn-master-c2-r1.png",
+  "recovered_from": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A030-coop-barn\\rejected\\barn-master-c2-r1.png"
+}

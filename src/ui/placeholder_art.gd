@@ -136,12 +136,6 @@ const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40),
 const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
 
-## A030's coop and barn (task 0183), at the canvases and pivots that task
-## settled: drawn at 1.0, the coop 64x64 at (32,60) over 3x2 cells, the
-## barn 96x100 at (48,96) over 5x4.
-const COOP := {"canvas": Vector2i(64, 64), "pivot": Vector2i(32, 60), "draw_scale": 1.0}
-const BARN := {"canvas": Vector2i(96, 100), "pivot": Vector2i(48, 96), "draw_scale": 1.0}
-
 ## A033's shipping bin (task 0189): 24x24 at (12,22) over one cell by the
 ## porch, drawn at 1.0.
 const PROP_BIN := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_scale": 1.0}
@@ -314,17 +308,6 @@ const ART := {
 	&"hud_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"tilled_fertilised": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	&"tilled_fertilised_wet": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	# A030's coop and barn (task 0183): the kitchen and the workshop, stations
-	# of their kind, scaled to their footprints - the coop small and warm, the
-	# barn barn-red - until 0212.
-	&"coop": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen", "stand_in_scale": 0.6, "tint": Color(1.15, 1.0, 0.82), "geometry": COOP, "final": COOP, "bare": true},
-	&"barn": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop", "stand_in_scale": 0.9, "tint": Color(1.2, 0.78, 0.68), "geometry": BARN, "final": BARN, "bare": true},
-	# A030's hurt and wrecked states (task 0186): the stations' own hurt art,
-	# tinted the same and darker still for a wreck, until 0212.
-	&"coop_hurt": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.6, "tint": Color(1.05, 0.9, 0.75), "geometry": COOP, "final": COOP, "bare": true},
-	&"coop_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/kitchen_hurt", "stand_in_scale": 0.6, "tint": Color(0.55, 0.5, 0.48), "geometry": COOP, "final": COOP, "bare": true},
-	&"barn_hurt": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(1.1, 0.72, 0.62), "geometry": BARN, "final": BARN, "bare": true},
-	&"barn_wreck": {"pack": "A030", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/workshop_hurt", "stand_in_scale": 0.9, "tint": Color(0.55, 0.45, 0.42), "geometry": BARN, "final": BARN, "bare": true},
 	# A033's shipping bin (task 0189): the barricade's planks, warmed and
 	# grown to a bin by the porch, until 0215.
 	&"shipping_bin": {"pack": "A033", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/barricade", "stand_in_scale": 1.35, "tint": Color(1.15, 1.0, 0.8), "geometry": PROP_BIN, "final": PROP_BIN, "bare": true},

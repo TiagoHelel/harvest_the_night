@@ -103807,6 +103807,4041 @@
       "revision": 1,
       "approval": "A027 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0210",
       "output_sha256": "b45d9afc1a7782f06ed91dc5f52029be8ce764ca30b8c198b894b66acb07c449"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-centered-doors",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-centered-doors",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-centered-doors.png",
+      "input": "components/A030-coop-barn/original-barn",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            66
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            5
+          ],
+          "paste_xy": [
+            0,
+            95
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            66,
+            32,
+            29
+          ],
+          "paste_xy": [
+            0,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            66,
+            66,
+            30,
+            29
+          ],
+          "paste_xy": [
+            66,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-door-patch",
+          "slice_xywh": [
+            32,
+            66,
+            34,
+            29
+          ],
+          "paste_xy": [
+            32,
+            66
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-centered-doors.png",
+          "sha256": "7415103c2703a0b4c8148de83738c0f18d613f40b46fbe1355f7fe3bc9a7d695",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "113ea45bf8be406747c6ac3f153cb0d390aae2b876ccb1c44ff5c0b9300d6c0e"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-cool-glass",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/recovered-barn-master-c2-r1.png",
+      "source_sha256": "1d79accb9cf15b61d5dd8783be9d8014d20ef68eeefa6ff9dd4bffcee2c558c1",
+      "crop_xywh": [
+        61,
+        70,
+        1159,
+        1074
+      ],
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "content_scale": 0.07691660520933252,
+      "content_anchor_xy": [
+        44,
+        83
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink_soft",
+        "night_light",
+        "water_dark",
+        "bone",
+        "moon"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-cool-glass",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-cool-glass.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.call.json",
+          "sha256": "23dbba24ae7f1f2df162ad7dc999a37d4a47b4caca0db24da9ea92cc4d8cd68f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-cool-glass.png",
+          "sha256": "210673028931cb106995ec966a2978b22e1fd1aa9f7bdfb165e662f380701004",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "7130954dccfea59a56419bb25c359c6c27b779d623c011154da9d901a472d2dd"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-door-patch",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-door-patch",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-door-patch.png",
+      "input": "components/A030-coop-barn/original-barn",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            34,
+            66,
+            32,
+            29
+          ],
+          "paste_xy": [
+            32,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            66,
+            66,
+            2,
+            29
+          ],
+          "paste_xy": [
+            64,
+            66
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-door-patch.png",
+          "sha256": "00436f8203b12a2e942a454eb800894f49b8457b454b237ec02f6a0245c95b0c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "981e862c7a574b61c8546071692a391937b27eac4cbe2598baa193ff67ece3cf"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-fixed-footing",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-fixed-footing",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-fixed-footing.png",
+      "input": "components/A030-coop-barn/barn-centered-doors",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-centered-doors",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            95
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-centered-doors",
+          "slice_xywh": [
+            0,
+            96,
+            96,
+            4
+          ],
+          "paste_xy": [
+            0,
+            96
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            1
+          ],
+          "paste_xy": [
+            0,
+            95
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-fixed-footing.png",
+          "sha256": "7415103c2703a0b4c8148de83738c0f18d613f40b46fbe1355f7fe3bc9a7d695",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "113ea45bf8be406747c6ac3f153cb0d390aae2b876ccb1c44ff5c0b9300d6c0e"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-glass-0",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-glass-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-glass-0.png",
+      "input": "components/A030-coop-barn/barn-fixed-footing",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-fixed-footing",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            54
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-fixed-footing",
+          "slice_xywh": [
+            0,
+            60,
+            96,
+            40
+          ],
+          "paste_xy": [
+            0,
+            60
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-fixed-footing",
+          "slice_xywh": [
+            0,
+            54,
+            47,
+            6
+          ],
+          "paste_xy": [
+            0,
+            54
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-fixed-footing",
+          "slice_xywh": [
+            55,
+            54,
+            41,
+            6
+          ],
+          "paste_xy": [
+            55,
+            54
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-cool-glass",
+          "slice_xywh": [
+            47,
+            54,
+            8,
+            6
+          ],
+          "paste_xy": [
+            47,
+            54
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-glass-0.png",
+          "sha256": "ac6262645143f8021b963551aa3cd4b05f6422b711a260ccc6a7500decb08935",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "2aea49473415f18fe617841c31b4a3d7a8959b4a96d31e710e238d4bb7efdda3"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-glass-1",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-glass-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-glass-1.png",
+      "input": "components/A030-coop-barn/barn-glass-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-glass-0",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            74
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-0",
+          "slice_xywh": [
+            0,
+            80,
+            96,
+            20
+          ],
+          "paste_xy": [
+            0,
+            80
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-0",
+          "slice_xywh": [
+            0,
+            74,
+            20,
+            6
+          ],
+          "paste_xy": [
+            0,
+            74
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-0",
+          "slice_xywh": [
+            27,
+            74,
+            69,
+            6
+          ],
+          "paste_xy": [
+            27,
+            74
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-cool-glass",
+          "slice_xywh": [
+            20,
+            74,
+            7,
+            6
+          ],
+          "paste_xy": [
+            20,
+            74
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-glass-1.png",
+          "sha256": "cb8b1a9cacf2e8f724cf2e10a4b7b0ebf2f042db8656907ddfda7f7d0dc86140",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "1e26f37e071b9fbf842ca5e0ddc44b015ab9914a405556aaedd3a4749700b8ed"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-glass-2",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-glass-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-glass-2.png",
+      "input": "components/A030-coop-barn/barn-glass-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-glass-1",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            75
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-1",
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ],
+          "paste_xy": [
+            0,
+            78
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-1",
+          "slice_xywh": [
+            0,
+            75,
+            31,
+            3
+          ],
+          "paste_xy": [
+            0,
+            75
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-1",
+          "slice_xywh": [
+            33,
+            75,
+            63,
+            3
+          ],
+          "paste_xy": [
+            33,
+            75
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-cool-glass",
+          "slice_xywh": [
+            31,
+            75,
+            2,
+            3
+          ],
+          "paste_xy": [
+            31,
+            75
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-glass-2.png",
+          "sha256": "37c2a764e09ccc7690bac2c9793a0f38b41b7270ab25904d1deeea3c1956ee1c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "7f31b90b1090b7a8b174178e069c7d69b48a761f330b55695f2952508fb8eed9"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-local-roof-damage",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-local-roof-damage",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-local-roof-damage.png",
+      "input": "components/A030-coop-barn/original-barn",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            29
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            53,
+            96,
+            47
+          ],
+          "paste_xy": [
+            0,
+            53
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            29,
+            20,
+            24
+          ],
+          "paste_xy": [
+            0,
+            29
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            40,
+            29,
+            56,
+            24
+          ],
+          "paste_xy": [
+            40,
+            29
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn_hurt",
+          "slice_xywh": [
+            20,
+            29,
+            20,
+            24
+          ],
+          "paste_xy": [
+            20,
+            29
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-local-roof-damage.png",
+          "sha256": "a90568d5e0bbb98989bebc7cb39cf38b6fd708e826ad6c81eae3507b670442f0",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "790b3a6ffb8724a9f5f3f275a450d21430b67dea8a12d008aca451d271b972a8"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-side-pane-pale-glint",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-side-pane-pale-glint",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-side-pane-pale-glint.png",
+      "input": "components/A030-coop-barn/barn-glass-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-glass-2",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            76
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-2",
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ],
+          "paste_xy": [
+            0,
+            78
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-2",
+          "slice_xywh": [
+            0,
+            76,
+            23,
+            2
+          ],
+          "paste_xy": [
+            0,
+            76
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-glass-2",
+          "slice_xywh": [
+            24,
+            76,
+            72,
+            2
+          ],
+          "paste_xy": [
+            24,
+            76
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-cool-glass",
+          "slice_xywh": [
+            15,
+            45,
+            1,
+            2
+          ],
+          "paste_xy": [
+            23,
+            76
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-side-pane-pale-glint.png",
+          "sha256": "3f7aac3d59af7a7f61fa9b3de43bc67245f288364cd7dca3d804f245185dcda7",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "80d8c7b80a1c33bab69db45f87a76e5736191533aad7da6ab9bb6f6192bd526f"
+    },
+    {
+      "id": "components/A030-coop-barn/barn-split-wall",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn-split-wall",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn-split-wall.png",
+      "input": "components/A030-coop-barn/barn-local-roof-damage",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-local-roof-damage",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            65
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-local-roof-damage",
+          "slice_xywh": [
+            0,
+            86,
+            96,
+            14
+          ],
+          "paste_xy": [
+            0,
+            86
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-local-roof-damage",
+          "slice_xywh": [
+            0,
+            65,
+            27,
+            21
+          ],
+          "paste_xy": [
+            0,
+            65
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-local-roof-damage",
+          "slice_xywh": [
+            32,
+            65,
+            64,
+            21
+          ],
+          "paste_xy": [
+            32,
+            65
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn_hurt",
+          "slice_xywh": [
+            27,
+            65,
+            5,
+            21
+          ],
+          "paste_xy": [
+            27,
+            65
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn-split-wall.png",
+          "sha256": "b05b9b777493046711b406ace1aecce73dbfc5757b0463a3d0cb47e308570172",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "55663d6dbc8d0c5ecb53c22a0e95e40b6eacfc1f734ae07267cdf570aacdddff"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_hurt-centered-doors",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_hurt-centered-doors",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_hurt-centered-doors.png",
+      "input": "components/A030-coop-barn/barn-split-wall",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-split-wall",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            66
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-split-wall",
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            5
+          ],
+          "paste_xy": [
+            0,
+            95
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-split-wall",
+          "slice_xywh": [
+            0,
+            66,
+            32,
+            29
+          ],
+          "paste_xy": [
+            0,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-split-wall",
+          "slice_xywh": [
+            66,
+            66,
+            30,
+            29
+          ],
+          "paste_xy": [
+            66,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-door-patch",
+          "slice_xywh": [
+            32,
+            66,
+            34,
+            29
+          ],
+          "paste_xy": [
+            32,
+            66
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_hurt-centered-doors.png",
+          "sha256": "2ffe9948c9495dbd93f70b965fca0c65edc48b43176c7db47e7664707a774d84",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "e2aab48de922595c9e596253d329cd72d13e32f8b83f23670b95106ea1bd9558"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_hurt-door-patch",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_hurt-door-patch",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_hurt-door-patch.png",
+      "input": "components/A030-coop-barn/barn-split-wall",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-split-wall",
+          "slice_xywh": [
+            34,
+            66,
+            32,
+            29
+          ],
+          "paste_xy": [
+            32,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-split-wall",
+          "slice_xywh": [
+            66,
+            66,
+            2,
+            29
+          ],
+          "paste_xy": [
+            64,
+            66
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_hurt-door-patch.png",
+          "sha256": "00436f8203b12a2e942a454eb800894f49b8457b454b237ec02f6a0245c95b0c",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "981e862c7a574b61c8546071692a391937b27eac4cbe2598baa193ff67ece3cf"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_hurt-fixed-footing",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_hurt-fixed-footing",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_hurt-fixed-footing.png",
+      "input": "components/A030-coop-barn/barn_hurt-centered-doors",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_hurt-centered-doors",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            95
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-centered-doors",
+          "slice_xywh": [
+            0,
+            96,
+            96,
+            4
+          ],
+          "paste_xy": [
+            0,
+            96
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            1
+          ],
+          "paste_xy": [
+            0,
+            95
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_hurt-fixed-footing.png",
+          "sha256": "2ffe9948c9495dbd93f70b965fca0c65edc48b43176c7db47e7664707a774d84",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "e2aab48de922595c9e596253d329cd72d13e32f8b83f23670b95106ea1bd9558"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_hurt-glass-0",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_hurt-glass-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_hurt-glass-0.png",
+      "input": "components/A030-coop-barn/barn_hurt-fixed-footing",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_hurt-fixed-footing",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            54
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-fixed-footing",
+          "slice_xywh": [
+            0,
+            60,
+            96,
+            40
+          ],
+          "paste_xy": [
+            0,
+            60
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-fixed-footing",
+          "slice_xywh": [
+            0,
+            54,
+            47,
+            6
+          ],
+          "paste_xy": [
+            0,
+            54
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-fixed-footing",
+          "slice_xywh": [
+            55,
+            54,
+            41,
+            6
+          ],
+          "paste_xy": [
+            55,
+            54
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-cool-glass",
+          "slice_xywh": [
+            47,
+            54,
+            8,
+            6
+          ],
+          "paste_xy": [
+            47,
+            54
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_hurt-glass-0.png",
+          "sha256": "ea26263cf00ade1aeed0c30de684ec27408cfad65bee99e3465ea9e614321ccc",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "47dfbe19de626fac7d4e5a3b577443f9d6a615521adcd38e4beb5a915d421524"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_hurt-glass-1",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_hurt-glass-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_hurt-glass-1.png",
+      "input": "components/A030-coop-barn/barn_hurt-glass-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-0",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            74
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-0",
+          "slice_xywh": [
+            0,
+            80,
+            96,
+            20
+          ],
+          "paste_xy": [
+            0,
+            80
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-0",
+          "slice_xywh": [
+            0,
+            74,
+            20,
+            6
+          ],
+          "paste_xy": [
+            0,
+            74
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-0",
+          "slice_xywh": [
+            27,
+            74,
+            69,
+            6
+          ],
+          "paste_xy": [
+            27,
+            74
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-cool-glass",
+          "slice_xywh": [
+            20,
+            74,
+            7,
+            6
+          ],
+          "paste_xy": [
+            20,
+            74
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_hurt-glass-1.png",
+          "sha256": "520bbe9dc34785906a9758cc5c5c633737471a536c0331848958b7ac7fabf38e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "b10f5dbe5e02e0ed46a4ed7adc0d5b47bbc9abd6cd636a6304f55301873a2fe1"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_hurt-glass-2",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_hurt-glass-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_hurt-glass-2.png",
+      "input": "components/A030-coop-barn/barn_hurt-glass-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-1",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            75
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-1",
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ],
+          "paste_xy": [
+            0,
+            78
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-1",
+          "slice_xywh": [
+            0,
+            75,
+            31,
+            3
+          ],
+          "paste_xy": [
+            0,
+            75
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-1",
+          "slice_xywh": [
+            33,
+            75,
+            63,
+            3
+          ],
+          "paste_xy": [
+            33,
+            75
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn-cool-glass",
+          "slice_xywh": [
+            31,
+            75,
+            2,
+            3
+          ],
+          "paste_xy": [
+            31,
+            75
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_hurt-glass-2.png",
+          "sha256": "09f32bb030c7bd9825728f74dfcf2f6f9ce17b14a5c1c3799bcbadd63fdf4698",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "90414251bbc62579a1cf4c87dc9089d43fb68453b3c1549b0017b979d8161be4"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_hurt-side-pane-pale-glint",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_hurt-side-pane-pale-glint",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_hurt-side-pane-pale-glint.png",
+      "input": "components/A030-coop-barn/barn_hurt-glass-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-2",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            76
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-2",
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ],
+          "paste_xy": [
+            0,
+            78
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-2",
+          "slice_xywh": [
+            0,
+            76,
+            23,
+            2
+          ],
+          "paste_xy": [
+            0,
+            76
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_hurt-glass-2",
+          "slice_xywh": [
+            24,
+            76,
+            72,
+            2
+          ],
+          "paste_xy": [
+            24,
+            76
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-cool-glass",
+          "slice_xywh": [
+            15,
+            45,
+            1,
+            2
+          ],
+          "paste_xy": [
+            23,
+            76
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_hurt-side-pane-pale-glint.png",
+          "sha256": "f8f735cd700c915e093a3baa45a9c187a631ec3262716a28ccccf7d0c6dd2b19",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "e9d901ddbf350d33ad21f6adb08879243b320657099239d5e2a82a0b923af799"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_wreck-centered-doors",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_wreck-centered-doors",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_wreck-centered-doors.png",
+      "input": "components/A030-coop-barn/original-barn_wreck",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/original-barn_wreck",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            66
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn_wreck",
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            5
+          ],
+          "paste_xy": [
+            0,
+            95
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn_wreck",
+          "slice_xywh": [
+            0,
+            66,
+            32,
+            29
+          ],
+          "paste_xy": [
+            0,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn_wreck",
+          "slice_xywh": [
+            66,
+            66,
+            30,
+            29
+          ],
+          "paste_xy": [
+            66,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_wreck-door-patch",
+          "slice_xywh": [
+            32,
+            66,
+            34,
+            29
+          ],
+          "paste_xy": [
+            32,
+            66
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_wreck-centered-doors.png",
+          "sha256": "4ac3204886af52962e52d110a6b0fb16bfa1ccf5a5fef24fe4a21e8a11f4996d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "b6fab79a76afa9ed2294db092bb57131ff145274b53daf8558bdfe19149f6c31"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_wreck-door-patch",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_wreck-door-patch",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_wreck-door-patch.png",
+      "input": "components/A030-coop-barn/original-barn_wreck",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/original-barn_wreck",
+          "slice_xywh": [
+            34,
+            66,
+            32,
+            29
+          ],
+          "paste_xy": [
+            32,
+            66
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn_wreck",
+          "slice_xywh": [
+            66,
+            66,
+            2,
+            29
+          ],
+          "paste_xy": [
+            64,
+            66
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_wreck-door-patch.png",
+          "sha256": "b2b870d4dd52f2176bd7706690c2d91f39dd42015f5a3ed418e3892c473dccef",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "410b84381cfad3d739c12dce891cd8b23537d10da94b75772e471adeacbb6876"
+    },
+    {
+      "id": "components/A030-coop-barn/barn_wreck-fixed-footing",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/barn_wreck-fixed-footing",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/barn_wreck-fixed-footing.png",
+      "input": "components/A030-coop-barn/barn_wreck-centered-doors",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_wreck-centered-doors",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            95
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/barn_wreck-centered-doors",
+          "slice_xywh": [
+            0,
+            96,
+            96,
+            4
+          ],
+          "paste_xy": [
+            0,
+            96
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-barn",
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            1
+          ],
+          "paste_xy": [
+            0,
+            95
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/barn_wreck-fixed-footing.png",
+          "sha256": "3659797f24cd39b13f5a829fec3bd9971c3fd117ca29e63799d9704c5a3c9ca7",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "f464584e224a19023c6f821342abb9fab224f06fefd908b37c42186fcf1fb38d"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-centered-master",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+      "crop_xywh": [
+        71,
+        89,
+        1201,
+        1022
+      ],
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "content_scale": 0.0466278101582015,
+      "content_anchor_xy": [
+        28,
+        48
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-centered-master",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-centered-master.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.call.json",
+          "sha256": "cb820885a3b718a92c539e5452c79632a367c255bb5eb6e552c81159cb46bcab",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-centered-master.png",
+          "sha256": "368ea0cce97cb39167618a8a7c48927c126b9e34a869a6d60c12fd2504a904c6",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "34fd382feda5617620f7e4f8e59d2c92fbeb5bc4ed96a0d7fc33c7272c3dfc85"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-cool-glass",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+      "crop_xywh": [
+        71,
+        89,
+        1201,
+        1022
+      ],
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "content_scale": 0.0466278101582015,
+      "content_anchor_xy": [
+        28,
+        48
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink_soft",
+        "night_light",
+        "water_dark",
+        "bone",
+        "moon"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-cool-glass",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-cool-glass.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.call.json",
+          "sha256": "cb820885a3b718a92c539e5452c79632a367c255bb5eb6e552c81159cb46bcab",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-cool-glass.png",
+          "sha256": "0a5d88cd88ec579c464e588746ddc661a8d02130334f248e298320140dda1038",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "ac8deb0b77bb6f9930517576b951a1d91d89bb423d9670e248c687c9abbb4418"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-dark-broken-pane",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+      "crop_xywh": [
+        71,
+        89,
+        1201,
+        1022
+      ],
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "content_scale": 0.0466278101582015,
+      "content_anchor_xy": [
+        28,
+        48
+      ],
+      "alpha_threshold": 128,
+      "palette_keys": [
+        "ink_soft",
+        "water_dark",
+        "night_light"
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-dark-broken-pane",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-dark-broken-pane.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.call.json",
+          "sha256": "cb820885a3b718a92c539e5452c79632a367c255bb5eb6e552c81159cb46bcab",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-dark-broken-pane.png",
+          "sha256": "cc18282034a1ee04357536770682111278cbfcb527e1d4d43feec1722a011b51",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "a6d21eb14bc6b9ab3e430eaf488258a0851ca51cbc4c16e5c2f5401cc758f170"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-hurt-board",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-hurt-board",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-hurt-board.png",
+      "input": "components/A030-coop-barn/coop-hurt-roof",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-hurt-roof",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            49
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-hurt-roof",
+          "slice_xywh": [
+            0,
+            55,
+            64,
+            9
+          ],
+          "paste_xy": [
+            0,
+            55
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-hurt-roof",
+          "slice_xywh": [
+            0,
+            49,
+            23,
+            6
+          ],
+          "paste_xy": [
+            0,
+            49
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-hurt-roof",
+          "slice_xywh": [
+            25,
+            49,
+            39,
+            6
+          ],
+          "paste_xy": [
+            25,
+            49
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-coop_hurt",
+          "slice_xywh": [
+            23,
+            49,
+            2,
+            6
+          ],
+          "paste_xy": [
+            23,
+            49
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-hurt-board.png",
+          "sha256": "d316c3185e6213fb2860d5539c0d876387afd561800445641e74743271d86d8a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "2706f902b85f675bf5cead41509f06be2e36a2d615bd241487de0f3b2db4481e"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-hurt-roof",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-hurt-roof",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-hurt-roof.png",
+      "input": "components/A030-coop-barn/coop-lantern",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-lantern",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            22
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-lantern",
+          "slice_xywh": [
+            0,
+            38,
+            64,
+            26
+          ],
+          "paste_xy": [
+            0,
+            38
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-lantern",
+          "slice_xywh": [
+            0,
+            22,
+            37,
+            16
+          ],
+          "paste_xy": [
+            0,
+            22
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-lantern",
+          "slice_xywh": [
+            49,
+            22,
+            15,
+            16
+          ],
+          "paste_xy": [
+            49,
+            22
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-coop_hurt",
+          "slice_xywh": [
+            37,
+            22,
+            12,
+            16
+          ],
+          "paste_xy": [
+            37,
+            22
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-hurt-roof.png",
+          "sha256": "3bd9e059100540b04ecf46bd05df6e79f273ac7631edbc57f88b5a40a54d913b",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "66e03809f72b45928425a42f74aa37c90a89bb97a5315250c2740df2e19aa2c3"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-lantern",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-lantern",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-lantern.png",
+      "input": "components/A030-coop-barn/coop-window",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-window",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-window",
+          "slice_xywh": [
+            0,
+            47,
+            64,
+            17
+          ],
+          "paste_xy": [
+            0,
+            47
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-window",
+          "slice_xywh": [
+            0,
+            44,
+            22,
+            3
+          ],
+          "paste_xy": [
+            0,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-window",
+          "slice_xywh": [
+            24,
+            44,
+            40,
+            3
+          ],
+          "paste_xy": [
+            24,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-cool-glass",
+          "slice_xywh": [
+            22,
+            44,
+            2,
+            3
+          ],
+          "paste_xy": [
+            22,
+            44
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-lantern.png",
+          "sha256": "0cc40b3b8dd4e4d219ccdf7ed3755db2fdd1705383fe89aaedbf9c8a820cfa63",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "6576ad842e122b87d5749c76f168eeb94b6f65885ce1527674452ff68fbba810"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-window",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-window",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-window.png",
+      "input": "components/A030-coop-barn/coop-centered-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            0,
+            49,
+            64,
+            15
+          ],
+          "paste_xy": [
+            0,
+            49
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            0,
+            44,
+            14,
+            5
+          ],
+          "paste_xy": [
+            0,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            21,
+            44,
+            43,
+            5
+          ],
+          "paste_xy": [
+            21,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-cool-glass",
+          "slice_xywh": [
+            14,
+            44,
+            7,
+            5
+          ],
+          "paste_xy": [
+            14,
+            44
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-window.png",
+          "sha256": "216744943b7dc15f8160ff240b41ad96c8a58400704b26db90fed2aa1ac8c18a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "9da7c06f4d66bc6b187afc6153f6f9421fed9846244f4fcb90b259be102c8133"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-wreck-door",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-wreck-door",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-wreck-door.png",
+      "input": "components/A030-coop-barn/coop-wreck-roof",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-wreck-roof",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            41
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-roof",
+          "slice_xywh": [
+            0,
+            59,
+            64,
+            5
+          ],
+          "paste_xy": [
+            0,
+            59
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-roof",
+          "slice_xywh": [
+            0,
+            41,
+            26,
+            18
+          ],
+          "paste_xy": [
+            0,
+            41
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-roof",
+          "slice_xywh": [
+            36,
+            41,
+            28,
+            18
+          ],
+          "paste_xy": [
+            36,
+            41
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-coop_wreck",
+          "slice_xywh": [
+            21,
+            41,
+            10,
+            18
+          ],
+          "paste_xy": [
+            26,
+            41
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-wreck-door.png",
+          "sha256": "3e5e352d1d90721ef2b1cbdc5e846f25ebc69d412503be19ad53222a87d7b823",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "ce63f7ea01818eccb6b1a20111c0d8deeca70a01cc63d23add9102020658585e"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-wreck-fixed-footing",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-wreck-fixed-footing",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-wreck-fixed-footing.png",
+      "input": "components/A030-coop-barn/coop-wreck-lantern",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-wreck-lantern",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            59
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-lantern",
+          "slice_xywh": [
+            0,
+            60,
+            64,
+            4
+          ],
+          "paste_xy": [
+            0,
+            60
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            0,
+            59,
+            64,
+            1
+          ],
+          "paste_xy": [
+            0,
+            59
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-wreck-fixed-footing.png",
+          "sha256": "c5e0207d846471f228835789df1da50764dd8b5b6abb6e8702fb6a6e0f10eea1",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "14845a304068d3f3493ebb2f535afd37ce56415a584f90b8f944f5031b4b6c78"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-wreck-lantern",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-wreck-lantern",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-wreck-lantern.png",
+      "input": "components/A030-coop-barn/coop-wreck-pane",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-wreck-pane",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-pane",
+          "slice_xywh": [
+            0,
+            47,
+            64,
+            17
+          ],
+          "paste_xy": [
+            0,
+            47
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-pane",
+          "slice_xywh": [
+            0,
+            44,
+            22,
+            3
+          ],
+          "paste_xy": [
+            0,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-pane",
+          "slice_xywh": [
+            24,
+            44,
+            40,
+            3
+          ],
+          "paste_xy": [
+            24,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-dark-broken-pane",
+          "slice_xywh": [
+            22,
+            44,
+            2,
+            3
+          ],
+          "paste_xy": [
+            22,
+            44
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-wreck-lantern.png",
+          "sha256": "c5e0207d846471f228835789df1da50764dd8b5b6abb6e8702fb6a6e0f10eea1",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "14845a304068d3f3493ebb2f535afd37ce56415a584f90b8f944f5031b4b6c78"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-wreck-pane",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-wreck-pane",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-wreck-pane.png",
+      "input": "components/A030-coop-barn/coop-wreck-door",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-wreck-door",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-door",
+          "slice_xywh": [
+            0,
+            49,
+            64,
+            15
+          ],
+          "paste_xy": [
+            0,
+            49
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-door",
+          "slice_xywh": [
+            0,
+            44,
+            14,
+            5
+          ],
+          "paste_xy": [
+            0,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-wreck-door",
+          "slice_xywh": [
+            21,
+            44,
+            43,
+            5
+          ],
+          "paste_xy": [
+            21,
+            44
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-dark-broken-pane",
+          "slice_xywh": [
+            14,
+            44,
+            7,
+            5
+          ],
+          "paste_xy": [
+            14,
+            44
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-wreck-pane.png",
+          "sha256": "16c6e7e2ad130220712b1c6483eee3fdd993fad693ae41c126872aa1e2c6f148",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "b9dac4e1b694b4e6b4830ef5d79a7c34f57dc99bc661e55d98e069632feb90f7"
+    },
+    {
+      "id": "components/A030-coop-barn/coop-wreck-roof",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/coop-wreck-roof",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/coop-wreck-roof.png",
+      "input": "components/A030-coop-barn/coop-centered-master",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            22
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            0,
+            39,
+            64,
+            25
+          ],
+          "paste_xy": [
+            0,
+            39
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            0,
+            22,
+            17,
+            17
+          ],
+          "paste_xy": [
+            0,
+            22
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/coop-centered-master",
+          "slice_xywh": [
+            48,
+            22,
+            16,
+            17
+          ],
+          "paste_xy": [
+            48,
+            22
+          ]
+        },
+        {
+          "input": "components/A030-coop-barn/original-coop_wreck",
+          "slice_xywh": [
+            17,
+            22,
+            31,
+            17
+          ],
+          "paste_xy": [
+            17,
+            22
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/coop-wreck-roof.png",
+          "sha256": "e9db36256370071b6d0e9d9cbe100d17fa2ceef58db80ebc26f5ece62dfa421d",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "1c9722a4f0b38bae69f7a600561e8c180b20782ac1cd01e3c30bae59ee9aa890"
+    },
+    {
+      "id": "components/A030-coop-barn/original-barn",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/recovered-barn-master-c2-r1.png",
+      "source_sha256": "1d79accb9cf15b61d5dd8783be9d8014d20ef68eeefa6ff9dd4bffcee2c558c1",
+      "crop_xywh": [
+        61,
+        70,
+        1159,
+        1074
+      ],
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "content_scale": 0.07691660520933252,
+      "content_anchor_xy": [
+        44,
+        83
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/original-barn",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/original-barn.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.call.json",
+          "sha256": "23dbba24ae7f1f2df162ad7dc999a37d4a47b4caca0db24da9ea92cc4d8cd68f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/original-barn.png",
+          "sha256": "d67653712c6840defcdf62f7846252224c44c9dd90ad900f750f8e48a88119f9",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "52ba605c8aa93eacf543e0653d5abc92d621e3263403e48bec22b7441bf4ff90"
+    },
+    {
+      "id": "components/A030-coop-barn/original-barn_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/recovered-barn_hurt-r1.png",
+      "source_sha256": "e8678c8b199c96932f3186bfeb8471287cd7e5c30b5de60e613e9d4d6ff61c28",
+      "crop_xywh": [
+        61,
+        70,
+        1159,
+        1074
+      ],
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "content_scale": 0.07691660520933252,
+      "content_anchor_xy": [
+        44,
+        83
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/original-barn_hurt",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/original-barn_hurt.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_hurt-r1.prompt.txt",
+      "prompt_sha256": "6388f6e20b75214474a321ae5483f2dcc0f4d3d04411b37e1765114856cde83b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_hurt-r1.call.json",
+          "sha256": "66990ee3653b9314ac23595cd7f50bcaffc74afb8a8f64054093afe4abc5f384",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/original-barn_hurt.png",
+          "sha256": "537f59e8e6aabb87efc52acca6a85ff515c3398e2639aaca16b54c7f61920ddc",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "ad6505f13790f051c8554c439e76ead2166503933739ba75ff1779386fd1cc7d"
+    },
+    {
+      "id": "components/A030-coop-barn/original-barn_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/recovered-barn_wreck-r1.png",
+      "source_sha256": "a789fe44fe902768d694c963506b7fc2277e23a6df0f2f13ebc46154367deeb7",
+      "crop_xywh": [
+        61,
+        70,
+        1159,
+        1074
+      ],
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "content_scale": 0.07691660520933252,
+      "content_anchor_xy": [
+        44,
+        83
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/original-barn_wreck",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/original-barn_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_wreck-r1.call.json",
+          "sha256": "d862bd560895b29028baa399ff2657600725ddd4ad96aeb81766f8425bf54113",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/original-barn_wreck.png",
+          "sha256": "495363983fa66be3496f07d7ed40b92710085850a2e10c2758c25290f8bc1127",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "d367b85901ea4efc8c38a1181f009a5f8103dca1c52200e70a5b90e146d6a904"
+    },
+    {
+      "id": "components/A030-coop-barn/original-coop_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/recovered-coop_hurt-r1.png",
+      "source_sha256": "cb30042e878e7dbf6feb2f2560018e32f5abd46b4d377742820cf1ee34bae0df",
+      "crop_xywh": [
+        106,
+        104,
+        1152,
+        996
+      ],
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "content_scale": 0.048611111111111105,
+      "content_anchor_xy": [
+        28,
+        48
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/original-coop_hurt",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/original-coop_hurt.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-coop_hurt-r1.prompt.txt",
+      "prompt_sha256": "6388f6e20b75214474a321ae5483f2dcc0f4d3d04411b37e1765114856cde83b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-coop_hurt-r1.call.json",
+          "sha256": "fbdddca89b09fed5b0eefd5a43289ede82ba6c0b8bd8343ce6a213f29c4b0f05",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/original-coop_hurt.png",
+          "sha256": "c6cb25d88d713cb1a7c731332fd0ef7b9df619559ed32fc00a88da0c41923f41",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "9ad12e0d93ebb210c7d455c3cf2d2571ec8004898ef93a4aea668362f797a822"
+    },
+    {
+      "id": "components/A030-coop-barn/original-coop_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/buildings/coop_barn/recovered-coop_wreck-r1.png",
+      "source_sha256": "0492a630f8bf8e25074b0a0a91b0037240d91e9de8eb739ac67d8ac3459b99e4",
+      "crop_xywh": [
+        106,
+        104,
+        1152,
+        996
+      ],
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "content_scale": 0.048611111111111105,
+      "content_anchor_xy": [
+        28,
+        48
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A030-coop-barn/original-coop_wreck",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A030-coop-barn/original-coop_wreck.png",
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-coop_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-coop_wreck-r1.call.json",
+          "sha256": "68d8034d2d4fe2a8eac0ca87ba2a03b65e79873507c2773d11dbbdad056dbd2c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/components/original-coop_wreck.png",
+          "sha256": "60e85c45d57289109a5622b79314a611c2cb281db1960ec1c7c9284f1672ea4f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "assembly_component_of": "A030",
+      "output_sha256": "1f42324bfaa4ba0a41ba407f846a9a8069a0d7b7ec4bf89e3c1c83b40366e995"
+    },
+    {
+      "id": "buildings/coop",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/coop",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/coop.png",
+      "light_xy": [
+        22,
+        45
+      ],
+      "window_rects_xywh": [
+        [
+          14,
+          44,
+          7,
+          5
+        ]
+      ],
+      "windows_xy": [
+        [
+          15,
+          45
+        ]
+      ],
+      "input": "components/A030-coop-barn/coop-lantern",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-lantern",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.call.json",
+          "sha256": "cb820885a3b718a92c539e5452c79632a367c255bb5eb6e552c81159cb46bcab",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/native/coop/none/01.png",
+          "sha256": "0cc40b3b8dd4e4d219ccdf7ed3755db2fdd1705383fe89aaedbf9c8a820cfa63",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "output_sha256": "6576ad842e122b87d5749c76f168eeb94b6f65885ce1527674452ff68fbba810"
+    },
+    {
+      "id": "buildings/coop_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/coop_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/coop_hurt.png",
+      "light_xy": [
+        22,
+        45
+      ],
+      "window_rects_xywh": [
+        [
+          14,
+          44,
+          7,
+          5
+        ]
+      ],
+      "windows_xy": [
+        [
+          15,
+          45
+        ]
+      ],
+      "input": "components/A030-coop-barn/coop-hurt-board",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-hurt-board",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.call.json",
+          "sha256": "cb820885a3b718a92c539e5452c79632a367c255bb5eb6e552c81159cb46bcab",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/native/coop_hurt/none/01.png",
+          "sha256": "d316c3185e6213fb2860d5539c0d876387afd561800445641e74743271d86d8a",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "output_sha256": "2706f902b85f675bf5cead41509f06be2e36a2d615bd241487de0f3b2db4481e"
+    },
+    {
+      "id": "buildings/coop_wreck",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "cell_offset_xy": [
+        -8,
+        -28
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/coop_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/coop_wreck.png",
+      "input": "components/A030-coop-barn/coop-wreck-fixed-footing",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/coop-wreck-fixed-footing",
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/coop-master-r4.call.json",
+          "sha256": "cb820885a3b718a92c539e5452c79632a367c255bb5eb6e552c81159cb46bcab",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/native/coop_wreck/none/01.png",
+          "sha256": "c5e0207d846471f228835789df1da50764dd8b5b6abb6e8702fb6a6e0f10eea1",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "output_sha256": "14845a304068d3f3493ebb2f535afd37ce56415a584f90b8f944f5031b4b6c78"
+    },
+    {
+      "id": "buildings/barn",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/barn",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/barn.png",
+      "light_xy": [
+        31,
+        76
+      ],
+      "window_rects_xywh": [
+        [
+          47,
+          54,
+          8,
+          6
+        ],
+        [
+          20,
+          74,
+          7,
+          6
+        ]
+      ],
+      "windows_xy": [
+        [
+          48,
+          54
+        ],
+        [
+          22,
+          75
+        ]
+      ],
+      "input": "components/A030-coop-barn/barn-side-pane-pale-glint",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn-side-pane-pale-glint",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            100
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn-master-c2-r1.call.json",
+          "sha256": "23dbba24ae7f1f2df162ad7dc999a37d4a47b4caca0db24da9ea92cc4d8cd68f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/native/barn/none/01.png",
+          "sha256": "3f7aac3d59af7a7f61fa9b3de43bc67245f288364cd7dca3d804f245185dcda7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "output_sha256": "80d8c7b80a1c33bab69db45f87a76e5736191533aad7da6ab9bb6f6192bd526f",
+      "cell_offset_xy": [
+        -8,
+        -32
+      ]
+    },
+    {
+      "id": "buildings/barn_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/barn_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/barn_hurt.png",
+      "light_xy": [
+        31,
+        76
+      ],
+      "window_rects_xywh": [
+        [
+          47,
+          54,
+          8,
+          6
+        ],
+        [
+          20,
+          74,
+          7,
+          6
+        ]
+      ],
+      "windows_xy": [
+        [
+          48,
+          54
+        ],
+        [
+          22,
+          75
+        ]
+      ],
+      "input": "components/A030-coop-barn/barn_hurt-side-pane-pale-glint",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_hurt-side-pane-pale-glint",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            100
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_hurt-r1.prompt.txt",
+      "prompt_sha256": "6388f6e20b75214474a321ae5483f2dcc0f4d3d04411b37e1765114856cde83b",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_hurt-r1.call.json",
+          "sha256": "66990ee3653b9314ac23595cd7f50bcaffc74afb8a8f64054093afe4abc5f384",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/native/barn_hurt/none/01.png",
+          "sha256": "f8f735cd700c915e093a3baa45a9c187a631ec3262716a28ccccf7d0c6dd2b19",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "output_sha256": "e9d901ddbf350d33ad21f6adb08879243b320657099239d5e2a82a0b923af799",
+      "cell_offset_xy": [
+        -8,
+        -32
+      ]
+    },
+    {
+      "id": "buildings/barn_wreck",
+      "owner": "raster",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/barn_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/barn_wreck.png",
+      "input": "components/A030-coop-barn/barn_wreck-fixed-footing",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A030-coop-barn/barn_wreck-fixed-footing",
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            100
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/raw/recovered-barn_wreck-r1.call.json",
+          "sha256": "d862bd560895b29028baa399ff2657600725ddd4ad96aeb81766f8425bf54113",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/native/barn_wreck/none/01.png",
+          "sha256": "3659797f24cd39b13f5a829fec3bd9971c3fd117ca29e63799d9704c5a3c9ca7",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/contract.json",
+          "sha256": "76d7a356ca5d03647a0619af22f46cf5f26b19a247ba7b5e61e51083a05b3395",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A030-coop-barn/APPROVAL.json",
+          "sha256": "e9750c6816bcd5d6158c3d6dcd52200fe543e2e0d2e0fa3f09576b77e37448cc",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A030",
+      "integration_task": "0212",
+      "revision": 1,
+      "approval": "A030 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0212",
+      "output_sha256": "f464584e224a19023c6f821342abb9fab224f06fefd908b37c42186fcf1fb38d",
+      "cell_offset_xy": [
+        -8,
+        -32
+      ]
     }
   ]
 }

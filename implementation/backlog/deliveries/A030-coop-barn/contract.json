@@ -1,0 +1,3070 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "barn",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/barn-none-0-night.png",
+          "path": "native/barn/none/01.png",
+          "points": {
+            "light_xy": [
+              31,
+              76
+            ],
+            "window_rects_xywh": [
+              [
+                47,
+                54,
+                8,
+                6
+              ],
+              [
+                20,
+                74,
+                7,
+                6
+              ]
+            ],
+            "windows_xy": [
+              [
+                48,
+                54
+              ],
+              [
+                22,
+                75
+              ]
+            ]
+          },
+          "pose": "barn 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "poses": [
+        "barn 0"
+      ]
+    },
+    {
+      "anim": "barn_hurt",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/barn_hurt-none-0-night.png",
+          "path": "native/barn_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              31,
+              76
+            ],
+            "window_rects_xywh": [
+              [
+                47,
+                54,
+                8,
+                6
+              ],
+              [
+                20,
+                74,
+                7,
+                6
+              ]
+            ],
+            "windows_xy": [
+              [
+                48,
+                54
+              ],
+              [
+                22,
+                75
+              ]
+            ]
+          },
+          "pose": "barn_hurt 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "poses": [
+        "barn_hurt 0"
+      ]
+    },
+    {
+      "anim": "barn_wreck",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/barn_wreck-none-0-night.png",
+          "path": "native/barn_wreck/none/01.png",
+          "points": {},
+          "pose": "barn_wreck 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "poses": [
+        "barn_wreck 0"
+      ]
+    },
+    {
+      "anim": "coop",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/coop-none-0-night.png",
+          "path": "native/coop/none/01.png",
+          "points": {
+            "light_xy": [
+              22,
+              45
+            ],
+            "window_rects_xywh": [
+              [
+                14,
+                44,
+                7,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                15,
+                45
+              ]
+            ]
+          },
+          "pose": "coop 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "coop 0"
+      ]
+    },
+    {
+      "anim": "coop_hurt",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/coop_hurt-none-0-night.png",
+          "path": "native/coop_hurt/none/01.png",
+          "points": {
+            "light_xy": [
+              22,
+              45
+            ],
+            "window_rects_xywh": [
+              [
+                14,
+                44,
+                7,
+                5
+              ]
+            ],
+            "windows_xy": [
+              [
+                15,
+                45
+              ]
+            ]
+          },
+          "pose": "coop_hurt 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "coop_hurt 0"
+      ]
+    },
+    {
+      "anim": "coop_wreck",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/coop_wreck-none-0-night.png",
+          "path": "native/coop_wreck/none/01.png",
+          "points": {},
+          "pose": "coop_wreck 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "poses": [
+        "coop_wreck 0"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 2,
+      "path": "sprites/buildings/house.png",
+      "pivot_xy": [
+        32,
+        60
+      ]
+    }
+  ],
+  "components": {
+    "barn-centered-doors": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-centered-doors.png",
+      "parts": [
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            66
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            95
+          ],
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            5
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            66
+          ],
+          "slice_xywh": [
+            0,
+            66,
+            32,
+            29
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            66,
+            66
+          ],
+          "slice_xywh": [
+            66,
+            66,
+            30,
+            29
+          ]
+        },
+        {
+          "input": "barn-door-patch",
+          "paste_xy": [
+            32,
+            66
+          ],
+          "slice_xywh": [
+            32,
+            66,
+            34,
+            29
+          ]
+        }
+      ],
+      "sha256": "7415103c2703a0b4c8148de83738c0f18d613f40b46fbe1355f7fe3bc9a7d695"
+    },
+    "barn-cool-glass": {
+      "call": "raw/recovered-barn-master-c2-r1.call.json",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "render",
+      "output": "components/barn-cool-glass.png",
+      "palette_keys": [
+        "ink_soft",
+        "night_light",
+        "water_dark",
+        "bone",
+        "moon"
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "prompt": "raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "recipe": {
+        "content_anchor_xy": [
+          44,
+          83
+        ],
+        "content_scale": 0.07691660520933252,
+        "crop_xywh": [
+          61,
+          70,
+          1159,
+          1074
+        ]
+      },
+      "sha256": "210673028931cb106995ec966a2978b22e1fd1aa9f7bdfb165e662f380701004",
+      "source": "raw/recovered-barn-master-c2-r1.png",
+      "source_sha256": "1d79accb9cf15b61d5dd8783be9d8014d20ef68eeefa6ff9dd4bffcee2c558c1"
+    },
+    "barn-door-patch": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-door-patch.png",
+      "parts": [
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            32,
+            66
+          ],
+          "slice_xywh": [
+            34,
+            66,
+            32,
+            29
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            64,
+            66
+          ],
+          "slice_xywh": [
+            66,
+            66,
+            2,
+            29
+          ]
+        }
+      ],
+      "sha256": "00436f8203b12a2e942a454eb800894f49b8457b454b237ec02f6a0245c95b0c"
+    },
+    "barn-fixed-footing": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-fixed-footing.png",
+      "parts": [
+        {
+          "input": "barn-centered-doors",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            95
+          ]
+        },
+        {
+          "input": "barn-centered-doors",
+          "paste_xy": [
+            0,
+            96
+          ],
+          "slice_xywh": [
+            0,
+            96,
+            96,
+            4
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            95
+          ],
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            1
+          ]
+        }
+      ],
+      "sha256": "7415103c2703a0b4c8148de83738c0f18d613f40b46fbe1355f7fe3bc9a7d695"
+    },
+    "barn-glass-0": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-glass-0.png",
+      "parts": [
+        {
+          "input": "barn-fixed-footing",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            54
+          ]
+        },
+        {
+          "input": "barn-fixed-footing",
+          "paste_xy": [
+            0,
+            60
+          ],
+          "slice_xywh": [
+            0,
+            60,
+            96,
+            40
+          ]
+        },
+        {
+          "input": "barn-fixed-footing",
+          "paste_xy": [
+            0,
+            54
+          ],
+          "slice_xywh": [
+            0,
+            54,
+            47,
+            6
+          ]
+        },
+        {
+          "input": "barn-fixed-footing",
+          "paste_xy": [
+            55,
+            54
+          ],
+          "slice_xywh": [
+            55,
+            54,
+            41,
+            6
+          ]
+        },
+        {
+          "input": "barn-cool-glass",
+          "paste_xy": [
+            47,
+            54
+          ],
+          "slice_xywh": [
+            47,
+            54,
+            8,
+            6
+          ]
+        }
+      ],
+      "sha256": "ac6262645143f8021b963551aa3cd4b05f6422b711a260ccc6a7500decb08935"
+    },
+    "barn-glass-1": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-glass-1.png",
+      "parts": [
+        {
+          "input": "barn-glass-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            74
+          ]
+        },
+        {
+          "input": "barn-glass-0",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            96,
+            20
+          ]
+        },
+        {
+          "input": "barn-glass-0",
+          "paste_xy": [
+            0,
+            74
+          ],
+          "slice_xywh": [
+            0,
+            74,
+            20,
+            6
+          ]
+        },
+        {
+          "input": "barn-glass-0",
+          "paste_xy": [
+            27,
+            74
+          ],
+          "slice_xywh": [
+            27,
+            74,
+            69,
+            6
+          ]
+        },
+        {
+          "input": "barn-cool-glass",
+          "paste_xy": [
+            20,
+            74
+          ],
+          "slice_xywh": [
+            20,
+            74,
+            7,
+            6
+          ]
+        }
+      ],
+      "sha256": "cb8b1a9cacf2e8f724cf2e10a4b7b0ebf2f042db8656907ddfda7f7d0dc86140"
+    },
+    "barn-glass-2": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-glass-2.png",
+      "parts": [
+        {
+          "input": "barn-glass-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            75
+          ]
+        },
+        {
+          "input": "barn-glass-1",
+          "paste_xy": [
+            0,
+            78
+          ],
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ]
+        },
+        {
+          "input": "barn-glass-1",
+          "paste_xy": [
+            0,
+            75
+          ],
+          "slice_xywh": [
+            0,
+            75,
+            31,
+            3
+          ]
+        },
+        {
+          "input": "barn-glass-1",
+          "paste_xy": [
+            33,
+            75
+          ],
+          "slice_xywh": [
+            33,
+            75,
+            63,
+            3
+          ]
+        },
+        {
+          "input": "barn-cool-glass",
+          "paste_xy": [
+            31,
+            75
+          ],
+          "slice_xywh": [
+            31,
+            75,
+            2,
+            3
+          ]
+        }
+      ],
+      "sha256": "37c2a764e09ccc7690bac2c9793a0f38b41b7270ab25904d1deeea3c1956ee1c"
+    },
+    "barn-local-roof-damage": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-local-roof-damage.png",
+      "parts": [
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            29
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            53
+          ],
+          "slice_xywh": [
+            0,
+            53,
+            96,
+            47
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            29
+          ],
+          "slice_xywh": [
+            0,
+            29,
+            20,
+            24
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            40,
+            29
+          ],
+          "slice_xywh": [
+            40,
+            29,
+            56,
+            24
+          ]
+        },
+        {
+          "input": "original-barn_hurt",
+          "paste_xy": [
+            20,
+            29
+          ],
+          "slice_xywh": [
+            20,
+            29,
+            20,
+            24
+          ]
+        }
+      ],
+      "sha256": "a90568d5e0bbb98989bebc7cb39cf38b6fd708e826ad6c81eae3507b670442f0"
+    },
+    "barn-side-pane-pale-glint": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-side-pane-pale-glint.png",
+      "parts": [
+        {
+          "input": "barn-glass-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            76
+          ]
+        },
+        {
+          "input": "barn-glass-2",
+          "paste_xy": [
+            0,
+            78
+          ],
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ]
+        },
+        {
+          "input": "barn-glass-2",
+          "paste_xy": [
+            0,
+            76
+          ],
+          "slice_xywh": [
+            0,
+            76,
+            23,
+            2
+          ]
+        },
+        {
+          "input": "barn-glass-2",
+          "paste_xy": [
+            24,
+            76
+          ],
+          "slice_xywh": [
+            24,
+            76,
+            72,
+            2
+          ]
+        },
+        {
+          "input": "coop-cool-glass",
+          "paste_xy": [
+            23,
+            76
+          ],
+          "slice_xywh": [
+            15,
+            45,
+            1,
+            2
+          ]
+        }
+      ],
+      "sha256": "3f7aac3d59af7a7f61fa9b3de43bc67245f288364cd7dca3d804f245185dcda7"
+    },
+    "barn-split-wall": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn-split-wall.png",
+      "parts": [
+        {
+          "input": "barn-local-roof-damage",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            65
+          ]
+        },
+        {
+          "input": "barn-local-roof-damage",
+          "paste_xy": [
+            0,
+            86
+          ],
+          "slice_xywh": [
+            0,
+            86,
+            96,
+            14
+          ]
+        },
+        {
+          "input": "barn-local-roof-damage",
+          "paste_xy": [
+            0,
+            65
+          ],
+          "slice_xywh": [
+            0,
+            65,
+            27,
+            21
+          ]
+        },
+        {
+          "input": "barn-local-roof-damage",
+          "paste_xy": [
+            32,
+            65
+          ],
+          "slice_xywh": [
+            32,
+            65,
+            64,
+            21
+          ]
+        },
+        {
+          "input": "original-barn_hurt",
+          "paste_xy": [
+            27,
+            65
+          ],
+          "slice_xywh": [
+            27,
+            65,
+            5,
+            21
+          ]
+        }
+      ],
+      "sha256": "b05b9b777493046711b406ace1aecce73dbfc5757b0463a3d0cb47e308570172"
+    },
+    "barn_hurt-centered-doors": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_hurt-centered-doors.png",
+      "parts": [
+        {
+          "input": "barn-split-wall",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            66
+          ]
+        },
+        {
+          "input": "barn-split-wall",
+          "paste_xy": [
+            0,
+            95
+          ],
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            5
+          ]
+        },
+        {
+          "input": "barn-split-wall",
+          "paste_xy": [
+            0,
+            66
+          ],
+          "slice_xywh": [
+            0,
+            66,
+            32,
+            29
+          ]
+        },
+        {
+          "input": "barn-split-wall",
+          "paste_xy": [
+            66,
+            66
+          ],
+          "slice_xywh": [
+            66,
+            66,
+            30,
+            29
+          ]
+        },
+        {
+          "input": "barn_hurt-door-patch",
+          "paste_xy": [
+            32,
+            66
+          ],
+          "slice_xywh": [
+            32,
+            66,
+            34,
+            29
+          ]
+        }
+      ],
+      "sha256": "2ffe9948c9495dbd93f70b965fca0c65edc48b43176c7db47e7664707a774d84"
+    },
+    "barn_hurt-door-patch": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_hurt-door-patch.png",
+      "parts": [
+        {
+          "input": "barn-split-wall",
+          "paste_xy": [
+            32,
+            66
+          ],
+          "slice_xywh": [
+            34,
+            66,
+            32,
+            29
+          ]
+        },
+        {
+          "input": "barn-split-wall",
+          "paste_xy": [
+            64,
+            66
+          ],
+          "slice_xywh": [
+            66,
+            66,
+            2,
+            29
+          ]
+        }
+      ],
+      "sha256": "00436f8203b12a2e942a454eb800894f49b8457b454b237ec02f6a0245c95b0c"
+    },
+    "barn_hurt-fixed-footing": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_hurt-fixed-footing.png",
+      "parts": [
+        {
+          "input": "barn_hurt-centered-doors",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            95
+          ]
+        },
+        {
+          "input": "barn_hurt-centered-doors",
+          "paste_xy": [
+            0,
+            96
+          ],
+          "slice_xywh": [
+            0,
+            96,
+            96,
+            4
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            95
+          ],
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            1
+          ]
+        }
+      ],
+      "sha256": "2ffe9948c9495dbd93f70b965fca0c65edc48b43176c7db47e7664707a774d84"
+    },
+    "barn_hurt-glass-0": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_hurt-glass-0.png",
+      "parts": [
+        {
+          "input": "barn_hurt-fixed-footing",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            54
+          ]
+        },
+        {
+          "input": "barn_hurt-fixed-footing",
+          "paste_xy": [
+            0,
+            60
+          ],
+          "slice_xywh": [
+            0,
+            60,
+            96,
+            40
+          ]
+        },
+        {
+          "input": "barn_hurt-fixed-footing",
+          "paste_xy": [
+            0,
+            54
+          ],
+          "slice_xywh": [
+            0,
+            54,
+            47,
+            6
+          ]
+        },
+        {
+          "input": "barn_hurt-fixed-footing",
+          "paste_xy": [
+            55,
+            54
+          ],
+          "slice_xywh": [
+            55,
+            54,
+            41,
+            6
+          ]
+        },
+        {
+          "input": "barn-cool-glass",
+          "paste_xy": [
+            47,
+            54
+          ],
+          "slice_xywh": [
+            47,
+            54,
+            8,
+            6
+          ]
+        }
+      ],
+      "sha256": "ea26263cf00ade1aeed0c30de684ec27408cfad65bee99e3465ea9e614321ccc"
+    },
+    "barn_hurt-glass-1": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_hurt-glass-1.png",
+      "parts": [
+        {
+          "input": "barn_hurt-glass-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            74
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-0",
+          "paste_xy": [
+            0,
+            80
+          ],
+          "slice_xywh": [
+            0,
+            80,
+            96,
+            20
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-0",
+          "paste_xy": [
+            0,
+            74
+          ],
+          "slice_xywh": [
+            0,
+            74,
+            20,
+            6
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-0",
+          "paste_xy": [
+            27,
+            74
+          ],
+          "slice_xywh": [
+            27,
+            74,
+            69,
+            6
+          ]
+        },
+        {
+          "input": "barn-cool-glass",
+          "paste_xy": [
+            20,
+            74
+          ],
+          "slice_xywh": [
+            20,
+            74,
+            7,
+            6
+          ]
+        }
+      ],
+      "sha256": "520bbe9dc34785906a9758cc5c5c633737471a536c0331848958b7ac7fabf38e"
+    },
+    "barn_hurt-glass-2": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_hurt-glass-2.png",
+      "parts": [
+        {
+          "input": "barn_hurt-glass-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            75
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-1",
+          "paste_xy": [
+            0,
+            78
+          ],
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-1",
+          "paste_xy": [
+            0,
+            75
+          ],
+          "slice_xywh": [
+            0,
+            75,
+            31,
+            3
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-1",
+          "paste_xy": [
+            33,
+            75
+          ],
+          "slice_xywh": [
+            33,
+            75,
+            63,
+            3
+          ]
+        },
+        {
+          "input": "barn-cool-glass",
+          "paste_xy": [
+            31,
+            75
+          ],
+          "slice_xywh": [
+            31,
+            75,
+            2,
+            3
+          ]
+        }
+      ],
+      "sha256": "09f32bb030c7bd9825728f74dfcf2f6f9ce17b14a5c1c3799bcbadd63fdf4698"
+    },
+    "barn_hurt-side-pane-pale-glint": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_hurt-side-pane-pale-glint.png",
+      "parts": [
+        {
+          "input": "barn_hurt-glass-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            76
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-2",
+          "paste_xy": [
+            0,
+            78
+          ],
+          "slice_xywh": [
+            0,
+            78,
+            96,
+            22
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-2",
+          "paste_xy": [
+            0,
+            76
+          ],
+          "slice_xywh": [
+            0,
+            76,
+            23,
+            2
+          ]
+        },
+        {
+          "input": "barn_hurt-glass-2",
+          "paste_xy": [
+            24,
+            76
+          ],
+          "slice_xywh": [
+            24,
+            76,
+            72,
+            2
+          ]
+        },
+        {
+          "input": "coop-cool-glass",
+          "paste_xy": [
+            23,
+            76
+          ],
+          "slice_xywh": [
+            15,
+            45,
+            1,
+            2
+          ]
+        }
+      ],
+      "sha256": "f8f735cd700c915e093a3baa45a9c187a631ec3262716a28ccccf7d0c6dd2b19"
+    },
+    "barn_wreck-centered-doors": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_wreck-centered-doors.png",
+      "parts": [
+        {
+          "input": "original-barn_wreck",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            66
+          ]
+        },
+        {
+          "input": "original-barn_wreck",
+          "paste_xy": [
+            0,
+            95
+          ],
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            5
+          ]
+        },
+        {
+          "input": "original-barn_wreck",
+          "paste_xy": [
+            0,
+            66
+          ],
+          "slice_xywh": [
+            0,
+            66,
+            32,
+            29
+          ]
+        },
+        {
+          "input": "original-barn_wreck",
+          "paste_xy": [
+            66,
+            66
+          ],
+          "slice_xywh": [
+            66,
+            66,
+            30,
+            29
+          ]
+        },
+        {
+          "input": "barn_wreck-door-patch",
+          "paste_xy": [
+            32,
+            66
+          ],
+          "slice_xywh": [
+            32,
+            66,
+            34,
+            29
+          ]
+        }
+      ],
+      "sha256": "4ac3204886af52962e52d110a6b0fb16bfa1ccf5a5fef24fe4a21e8a11f4996d"
+    },
+    "barn_wreck-door-patch": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_wreck-door-patch.png",
+      "parts": [
+        {
+          "input": "original-barn_wreck",
+          "paste_xy": [
+            32,
+            66
+          ],
+          "slice_xywh": [
+            34,
+            66,
+            32,
+            29
+          ]
+        },
+        {
+          "input": "original-barn_wreck",
+          "paste_xy": [
+            64,
+            66
+          ],
+          "slice_xywh": [
+            66,
+            66,
+            2,
+            29
+          ]
+        }
+      ],
+      "sha256": "b2b870d4dd52f2176bd7706690c2d91f39dd42015f5a3ed418e3892c473dccef"
+    },
+    "barn_wreck-fixed-footing": {
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "compose",
+      "output": "components/barn_wreck-fixed-footing.png",
+      "parts": [
+        {
+          "input": "barn_wreck-centered-doors",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            95
+          ]
+        },
+        {
+          "input": "barn_wreck-centered-doors",
+          "paste_xy": [
+            0,
+            96
+          ],
+          "slice_xywh": [
+            0,
+            96,
+            96,
+            4
+          ]
+        },
+        {
+          "input": "original-barn",
+          "paste_xy": [
+            0,
+            95
+          ],
+          "slice_xywh": [
+            0,
+            95,
+            96,
+            1
+          ]
+        }
+      ],
+      "sha256": "3659797f24cd39b13f5a829fec3bd9971c3fd117ca29e63799d9704c5a3c9ca7"
+    },
+    "coop-centered-master": {
+      "call": "raw/coop-master-r4.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "render",
+      "output": "components/coop-centered-master.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "prompt": "raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.0466278101582015,
+        "crop_xywh": [
+          71,
+          89,
+          1201,
+          1022
+        ]
+      },
+      "sha256": "368ea0cce97cb39167618a8a7c48927c126b9e34a869a6d60c12fd2504a904c6",
+      "source": "raw/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd"
+    },
+    "coop-cool-glass": {
+      "call": "raw/coop-master-r4.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "render",
+      "output": "components/coop-cool-glass.png",
+      "palette_keys": [
+        "ink_soft",
+        "night_light",
+        "water_dark",
+        "bone",
+        "moon"
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "prompt": "raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.0466278101582015,
+        "crop_xywh": [
+          71,
+          89,
+          1201,
+          1022
+        ]
+      },
+      "sha256": "0a5d88cd88ec579c464e588746ddc661a8d02130334f248e298320140dda1038",
+      "source": "raw/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd"
+    },
+    "coop-dark-broken-pane": {
+      "call": "raw/coop-master-r4.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "render",
+      "output": "components/coop-dark-broken-pane.png",
+      "palette_keys": [
+        "ink_soft",
+        "water_dark",
+        "night_light"
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "prompt": "raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.0466278101582015,
+        "crop_xywh": [
+          71,
+          89,
+          1201,
+          1022
+        ]
+      },
+      "sha256": "cc18282034a1ee04357536770682111278cbfcb527e1d4d43feec1722a011b51",
+      "source": "raw/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd"
+    },
+    "coop-hurt-board": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-hurt-board.png",
+      "parts": [
+        {
+          "input": "coop-hurt-roof",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            49
+          ]
+        },
+        {
+          "input": "coop-hurt-roof",
+          "paste_xy": [
+            0,
+            55
+          ],
+          "slice_xywh": [
+            0,
+            55,
+            64,
+            9
+          ]
+        },
+        {
+          "input": "coop-hurt-roof",
+          "paste_xy": [
+            0,
+            49
+          ],
+          "slice_xywh": [
+            0,
+            49,
+            23,
+            6
+          ]
+        },
+        {
+          "input": "coop-hurt-roof",
+          "paste_xy": [
+            25,
+            49
+          ],
+          "slice_xywh": [
+            25,
+            49,
+            39,
+            6
+          ]
+        },
+        {
+          "input": "original-coop_hurt",
+          "paste_xy": [
+            23,
+            49
+          ],
+          "slice_xywh": [
+            23,
+            49,
+            2,
+            6
+          ]
+        }
+      ],
+      "sha256": "d316c3185e6213fb2860d5539c0d876387afd561800445641e74743271d86d8a"
+    },
+    "coop-hurt-roof": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-hurt-roof.png",
+      "parts": [
+        {
+          "input": "coop-lantern",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            22
+          ]
+        },
+        {
+          "input": "coop-lantern",
+          "paste_xy": [
+            0,
+            38
+          ],
+          "slice_xywh": [
+            0,
+            38,
+            64,
+            26
+          ]
+        },
+        {
+          "input": "coop-lantern",
+          "paste_xy": [
+            0,
+            22
+          ],
+          "slice_xywh": [
+            0,
+            22,
+            37,
+            16
+          ]
+        },
+        {
+          "input": "coop-lantern",
+          "paste_xy": [
+            49,
+            22
+          ],
+          "slice_xywh": [
+            49,
+            22,
+            15,
+            16
+          ]
+        },
+        {
+          "input": "original-coop_hurt",
+          "paste_xy": [
+            37,
+            22
+          ],
+          "slice_xywh": [
+            37,
+            22,
+            12,
+            16
+          ]
+        }
+      ],
+      "sha256": "3bd9e059100540b04ecf46bd05df6e79f273ac7631edbc57f88b5a40a54d913b"
+    },
+    "coop-lantern": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-lantern.png",
+      "parts": [
+        {
+          "input": "coop-window",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ]
+        },
+        {
+          "input": "coop-window",
+          "paste_xy": [
+            0,
+            47
+          ],
+          "slice_xywh": [
+            0,
+            47,
+            64,
+            17
+          ]
+        },
+        {
+          "input": "coop-window",
+          "paste_xy": [
+            0,
+            44
+          ],
+          "slice_xywh": [
+            0,
+            44,
+            22,
+            3
+          ]
+        },
+        {
+          "input": "coop-window",
+          "paste_xy": [
+            24,
+            44
+          ],
+          "slice_xywh": [
+            24,
+            44,
+            40,
+            3
+          ]
+        },
+        {
+          "input": "coop-cool-glass",
+          "paste_xy": [
+            22,
+            44
+          ],
+          "slice_xywh": [
+            22,
+            44,
+            2,
+            3
+          ]
+        }
+      ],
+      "sha256": "0cc40b3b8dd4e4d219ccdf7ed3755db2fdd1705383fe89aaedbf9c8a820cfa63"
+    },
+    "coop-window": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-window.png",
+      "parts": [
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ]
+        },
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            0,
+            49
+          ],
+          "slice_xywh": [
+            0,
+            49,
+            64,
+            15
+          ]
+        },
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            0,
+            44
+          ],
+          "slice_xywh": [
+            0,
+            44,
+            14,
+            5
+          ]
+        },
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            21,
+            44
+          ],
+          "slice_xywh": [
+            21,
+            44,
+            43,
+            5
+          ]
+        },
+        {
+          "input": "coop-cool-glass",
+          "paste_xy": [
+            14,
+            44
+          ],
+          "slice_xywh": [
+            14,
+            44,
+            7,
+            5
+          ]
+        }
+      ],
+      "sha256": "216744943b7dc15f8160ff240b41ad96c8a58400704b26db90fed2aa1ac8c18a"
+    },
+    "coop-wreck-door": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-wreck-door.png",
+      "parts": [
+        {
+          "input": "coop-wreck-roof",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            41
+          ]
+        },
+        {
+          "input": "coop-wreck-roof",
+          "paste_xy": [
+            0,
+            59
+          ],
+          "slice_xywh": [
+            0,
+            59,
+            64,
+            5
+          ]
+        },
+        {
+          "input": "coop-wreck-roof",
+          "paste_xy": [
+            0,
+            41
+          ],
+          "slice_xywh": [
+            0,
+            41,
+            26,
+            18
+          ]
+        },
+        {
+          "input": "coop-wreck-roof",
+          "paste_xy": [
+            36,
+            41
+          ],
+          "slice_xywh": [
+            36,
+            41,
+            28,
+            18
+          ]
+        },
+        {
+          "input": "original-coop_wreck",
+          "paste_xy": [
+            26,
+            41
+          ],
+          "slice_xywh": [
+            21,
+            41,
+            10,
+            18
+          ]
+        }
+      ],
+      "sha256": "3e5e352d1d90721ef2b1cbdc5e846f25ebc69d412503be19ad53222a87d7b823"
+    },
+    "coop-wreck-fixed-footing": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-wreck-fixed-footing.png",
+      "parts": [
+        {
+          "input": "coop-wreck-lantern",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            59
+          ]
+        },
+        {
+          "input": "coop-wreck-lantern",
+          "paste_xy": [
+            0,
+            60
+          ],
+          "slice_xywh": [
+            0,
+            60,
+            64,
+            4
+          ]
+        },
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            0,
+            59
+          ],
+          "slice_xywh": [
+            0,
+            59,
+            64,
+            1
+          ]
+        }
+      ],
+      "sha256": "c5e0207d846471f228835789df1da50764dd8b5b6abb6e8702fb6a6e0f10eea1"
+    },
+    "coop-wreck-lantern": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-wreck-lantern.png",
+      "parts": [
+        {
+          "input": "coop-wreck-pane",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ]
+        },
+        {
+          "input": "coop-wreck-pane",
+          "paste_xy": [
+            0,
+            47
+          ],
+          "slice_xywh": [
+            0,
+            47,
+            64,
+            17
+          ]
+        },
+        {
+          "input": "coop-wreck-pane",
+          "paste_xy": [
+            0,
+            44
+          ],
+          "slice_xywh": [
+            0,
+            44,
+            22,
+            3
+          ]
+        },
+        {
+          "input": "coop-wreck-pane",
+          "paste_xy": [
+            24,
+            44
+          ],
+          "slice_xywh": [
+            24,
+            44,
+            40,
+            3
+          ]
+        },
+        {
+          "input": "coop-dark-broken-pane",
+          "paste_xy": [
+            22,
+            44
+          ],
+          "slice_xywh": [
+            22,
+            44,
+            2,
+            3
+          ]
+        }
+      ],
+      "sha256": "c5e0207d846471f228835789df1da50764dd8b5b6abb6e8702fb6a6e0f10eea1"
+    },
+    "coop-wreck-pane": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-wreck-pane.png",
+      "parts": [
+        {
+          "input": "coop-wreck-door",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            44
+          ]
+        },
+        {
+          "input": "coop-wreck-door",
+          "paste_xy": [
+            0,
+            49
+          ],
+          "slice_xywh": [
+            0,
+            49,
+            64,
+            15
+          ]
+        },
+        {
+          "input": "coop-wreck-door",
+          "paste_xy": [
+            0,
+            44
+          ],
+          "slice_xywh": [
+            0,
+            44,
+            14,
+            5
+          ]
+        },
+        {
+          "input": "coop-wreck-door",
+          "paste_xy": [
+            21,
+            44
+          ],
+          "slice_xywh": [
+            21,
+            44,
+            43,
+            5
+          ]
+        },
+        {
+          "input": "coop-dark-broken-pane",
+          "paste_xy": [
+            14,
+            44
+          ],
+          "slice_xywh": [
+            14,
+            44,
+            7,
+            5
+          ]
+        }
+      ],
+      "sha256": "16c6e7e2ad130220712b1c6483eee3fdd993fad693ae41c126872aa1e2c6f148"
+    },
+    "coop-wreck-roof": {
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "compose",
+      "output": "components/coop-wreck-roof.png",
+      "parts": [
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            22
+          ]
+        },
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            0,
+            39
+          ],
+          "slice_xywh": [
+            0,
+            39,
+            64,
+            25
+          ]
+        },
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            0,
+            22
+          ],
+          "slice_xywh": [
+            0,
+            22,
+            17,
+            17
+          ]
+        },
+        {
+          "input": "coop-centered-master",
+          "paste_xy": [
+            48,
+            22
+          ],
+          "slice_xywh": [
+            48,
+            22,
+            16,
+            17
+          ]
+        },
+        {
+          "input": "original-coop_wreck",
+          "paste_xy": [
+            17,
+            22
+          ],
+          "slice_xywh": [
+            17,
+            22,
+            31,
+            17
+          ]
+        }
+      ],
+      "sha256": "e9db36256370071b6d0e9d9cbe100d17fa2ceef58db80ebc26f5ece62dfa421d"
+    },
+    "original-barn": {
+      "call": "raw/recovered-barn-master-c2-r1.call.json",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "render",
+      "output": "components/original-barn.png",
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "prompt": "raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "recipe": {
+        "content_anchor_xy": [
+          44,
+          83
+        ],
+        "content_scale": 0.07691660520933252,
+        "crop_xywh": [
+          61,
+          70,
+          1159,
+          1074
+        ]
+      },
+      "sha256": "d67653712c6840defcdf62f7846252224c44c9dd90ad900f750f8e48a88119f9",
+      "source": "raw/recovered-barn-master-c2-r1.png",
+      "source_sha256": "1d79accb9cf15b61d5dd8783be9d8014d20ef68eeefa6ff9dd4bffcee2c558c1"
+    },
+    "original-barn_hurt": {
+      "call": "raw/recovered-barn_hurt-r1.call.json",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "render",
+      "output": "components/original-barn_hurt.png",
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "prompt": "raw/recovered-barn_hurt-r1.prompt.txt",
+      "prompt_sha256": "6388f6e20b75214474a321ae5483f2dcc0f4d3d04411b37e1765114856cde83b",
+      "recipe": {
+        "content_anchor_xy": [
+          44,
+          83
+        ],
+        "content_scale": 0.07691660520933252,
+        "crop_xywh": [
+          61,
+          70,
+          1159,
+          1074
+        ]
+      },
+      "sha256": "537f59e8e6aabb87efc52acca6a85ff515c3398e2639aaca16b54c7f61920ddc",
+      "source": "raw/recovered-barn_hurt-r1.png",
+      "source_sha256": "e8678c8b199c96932f3186bfeb8471287cd7e5c30b5de60e613e9d4d6ff61c28"
+    },
+    "original-barn_wreck": {
+      "call": "raw/recovered-barn_wreck-r1.call.json",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "operation": "render",
+      "output": "components/original-barn_wreck.png",
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "prompt": "raw/recovered-barn_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "recipe": {
+        "content_anchor_xy": [
+          44,
+          83
+        ],
+        "content_scale": 0.07691660520933252,
+        "crop_xywh": [
+          61,
+          70,
+          1159,
+          1074
+        ]
+      },
+      "sha256": "495363983fa66be3496f07d7ed40b92710085850a2e10c2758c25290f8bc1127",
+      "source": "raw/recovered-barn_wreck-r1.png",
+      "source_sha256": "a789fe44fe902768d694c963506b7fc2277e23a6df0f2f13ebc46154367deeb7"
+    },
+    "original-coop_hurt": {
+      "call": "raw/recovered-coop_hurt-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "render",
+      "output": "components/original-coop_hurt.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "prompt": "raw/recovered-coop_hurt-r1.prompt.txt",
+      "prompt_sha256": "6388f6e20b75214474a321ae5483f2dcc0f4d3d04411b37e1765114856cde83b",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.048611111111111105,
+        "crop_xywh": [
+          106,
+          104,
+          1152,
+          996
+        ]
+      },
+      "sha256": "c6cb25d88d713cb1a7c731332fd0ef7b9df619559ed32fc00a88da0c41923f41",
+      "source": "raw/recovered-coop_hurt-r1.png",
+      "source_sha256": "cb30042e878e7dbf6feb2f2560018e32f5abd46b4d377742820cf1ee34bae0df"
+    },
+    "original-coop_wreck": {
+      "call": "raw/recovered-coop_wreck-r1.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "operation": "render",
+      "output": "components/original-coop_wreck.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "prompt": "raw/recovered-coop_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.048611111111111105,
+        "crop_xywh": [
+          106,
+          104,
+          1152,
+          996
+        ]
+      },
+      "sha256": "60e85c45d57289109a5622b79314a611c2cb281db1960ec1c7c9284f1672ea4f",
+      "source": "raw/recovered-coop_wreck-r1.png",
+      "source_sha256": "0492a630f8bf8e25074b0a0a91b0037240d91e9de8eb739ac67d8ac3459b99e4"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "coop",
+      "call": "raw/coop-master-r4.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        26,
+        41,
+        10,
+        18
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/coop/none/01.png",
+      "parts": [
+        {
+          "input": "coop-lantern",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            64
+          ]
+        }
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {
+        "light_xy": [
+          22,
+          45
+        ],
+        "window_rects_xywh": [
+          [
+            14,
+            44,
+            7,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            15,
+            45
+          ]
+        ]
+      },
+      "pose": "coop 0",
+      "prompt": "raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.0466278101582015,
+        "crop_xywh": [
+          71,
+          89,
+          1201,
+          1022
+        ]
+      },
+      "runtime_name": "sprites/buildings/coop.png",
+      "seconds": 0.55,
+      "sha256": "0cc40b3b8dd4e4d219ccdf7ed3755db2fdd1705383fe89aaedbf9c8a820cfa63",
+      "source": "raw/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+      "visible_limits_wh": [
+        [
+          52,
+          60
+        ],
+        [
+          44,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "coop_hurt",
+      "call": "raw/coop-master-r4.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        26,
+        41,
+        10,
+        18
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/coop_hurt/none/01.png",
+      "parts": [
+        {
+          "input": "coop-hurt-board",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            64
+          ]
+        }
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {
+        "light_xy": [
+          22,
+          45
+        ],
+        "window_rects_xywh": [
+          [
+            14,
+            44,
+            7,
+            5
+          ]
+        ],
+        "windows_xy": [
+          [
+            15,
+            45
+          ]
+        ]
+      },
+      "pose": "coop_hurt 0",
+      "prompt": "raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.0466278101582015,
+        "crop_xywh": [
+          71,
+          89,
+          1201,
+          1022
+        ]
+      },
+      "runtime_name": "sprites/buildings/coop_hurt.png",
+      "seconds": 0.55,
+      "sha256": "d316c3185e6213fb2860d5539c0d876387afd561800445641e74743271d86d8a",
+      "source": "raw/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+      "visible_limits_wh": [
+        [
+          52,
+          60
+        ],
+        [
+          44,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "coop_wreck",
+      "call": "raw/coop-master-r4.call.json",
+      "canvas_wh": [
+        64,
+        64
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        26,
+        41,
+        10,
+        18
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/coop_wreck/none/01.png",
+      "parts": [
+        {
+          "input": "coop-wreck-fixed-footing",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            64,
+            64
+          ]
+        }
+      ],
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "points": {},
+      "pose": "coop_wreck 0",
+      "prompt": "raw/coop-master-r4.prompt.txt",
+      "prompt_sha256": "7b00dc16b1b68e97d25ad8c5076e1626129afdf1330b9d7a5cbaeb283663e993",
+      "recipe": {
+        "content_anchor_xy": [
+          28,
+          48
+        ],
+        "content_scale": 0.0466278101582015,
+        "crop_xywh": [
+          71,
+          89,
+          1201,
+          1022
+        ]
+      },
+      "runtime_name": "sprites/buildings/coop_wreck.png",
+      "seconds": 0.55,
+      "sha256": "c5e0207d846471f228835789df1da50764dd8b5b6abb6e8702fb6a6e0f10eea1",
+      "source": "raw/coop-master-r4.png",
+      "source_sha256": "4d27886c1525f6be1ba0baa1ff6b7cd5344be7ff4b796969835fac45676ba0bd",
+      "visible_limits_wh": [
+        [
+          1,
+          60
+        ],
+        [
+          1,
+          52
+        ]
+      ]
+    },
+    {
+      "anim": "barn",
+      "call": "raw/recovered-barn-master-c2-r1.call.json",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        35,
+        66,
+        28,
+        29
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/barn/none/01.png",
+      "parts": [
+        {
+          "input": "barn-side-pane-pale-glint",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            100
+          ]
+        }
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "points": {
+        "light_xy": [
+          31,
+          76
+        ],
+        "window_rects_xywh": [
+          [
+            47,
+            54,
+            8,
+            6
+          ],
+          [
+            20,
+            74,
+            7,
+            6
+          ]
+        ],
+        "windows_xy": [
+          [
+            48,
+            54
+          ],
+          [
+            22,
+            75
+          ]
+        ]
+      },
+      "pose": "barn 0",
+      "prompt": "raw/recovered-barn-master-c2-r1.prompt.txt",
+      "prompt_sha256": "a90542b30534d3c4625a769a37da16278aa9d27bf4d8ed18c2515af71daaeec0",
+      "recipe": {
+        "content_anchor_xy": [
+          44,
+          83
+        ],
+        "content_scale": 0.07691660520933252,
+        "crop_xywh": [
+          61,
+          70,
+          1159,
+          1074
+        ]
+      },
+      "runtime_name": "sprites/buildings/barn.png",
+      "seconds": 0.55,
+      "sha256": "3f7aac3d59af7a7f61fa9b3de43bc67245f288364cd7dca3d804f245185dcda7",
+      "source": "raw/recovered-barn-master-c2-r1.png",
+      "source_sha256": "1d79accb9cf15b61d5dd8783be9d8014d20ef68eeefa6ff9dd4bffcee2c558c1",
+      "visible_limits_wh": [
+        [
+          84,
+          92
+        ],
+        [
+          80,
+          92
+        ]
+      ]
+    },
+    {
+      "anim": "barn_hurt",
+      "call": "raw/recovered-barn_hurt-r1.call.json",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        35,
+        66,
+        28,
+        29
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/barn_hurt/none/01.png",
+      "parts": [
+        {
+          "input": "barn_hurt-side-pane-pale-glint",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            100
+          ]
+        }
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "points": {
+        "light_xy": [
+          31,
+          76
+        ],
+        "window_rects_xywh": [
+          [
+            47,
+            54,
+            8,
+            6
+          ],
+          [
+            20,
+            74,
+            7,
+            6
+          ]
+        ],
+        "windows_xy": [
+          [
+            48,
+            54
+          ],
+          [
+            22,
+            75
+          ]
+        ]
+      },
+      "pose": "barn_hurt 0",
+      "prompt": "raw/recovered-barn_hurt-r1.prompt.txt",
+      "prompt_sha256": "6388f6e20b75214474a321ae5483f2dcc0f4d3d04411b37e1765114856cde83b",
+      "recipe": {
+        "content_anchor_xy": [
+          44,
+          83
+        ],
+        "content_scale": 0.07691660520933252,
+        "crop_xywh": [
+          61,
+          70,
+          1159,
+          1074
+        ]
+      },
+      "runtime_name": "sprites/buildings/barn_hurt.png",
+      "seconds": 0.55,
+      "sha256": "f8f735cd700c915e093a3baa45a9c187a631ec3262716a28ccccf7d0c6dd2b19",
+      "source": "raw/recovered-barn_hurt-r1.png",
+      "source_sha256": "e8678c8b199c96932f3186bfeb8471287cd7e5c30b5de60e613e9d4d6ff61c28",
+      "visible_limits_wh": [
+        [
+          84,
+          92
+        ],
+        [
+          80,
+          92
+        ]
+      ]
+    },
+    {
+      "anim": "barn_wreck",
+      "call": "raw/recovered-barn_wreck-r1.call.json",
+      "canvas_wh": [
+        96,
+        100
+      ],
+      "dir": "none",
+      "door_rect_xywh": [
+        35,
+        66,
+        28,
+        29
+      ],
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/barn_wreck/none/01.png",
+      "parts": [
+        {
+          "input": "barn_wreck-fixed-footing",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            96,
+            100
+          ]
+        }
+      ],
+      "pivot_xy": [
+        48,
+        96
+      ],
+      "points": {},
+      "pose": "barn_wreck 0",
+      "prompt": "raw/recovered-barn_wreck-r1.prompt.txt",
+      "prompt_sha256": "52e388ceee813b220905f8fd63e142ff94ff5ce595aaefca14717c001160272c",
+      "recipe": {
+        "content_anchor_xy": [
+          44,
+          83
+        ],
+        "content_scale": 0.07691660520933252,
+        "crop_xywh": [
+          61,
+          70,
+          1159,
+          1074
+        ]
+      },
+      "runtime_name": "sprites/buildings/barn_wreck.png",
+      "seconds": 0.55,
+      "sha256": "3659797f24cd39b13f5a829fec3bd9971c3fd117ca29e63799d9704c5a3c9ca7",
+      "source": "raw/recovered-barn_wreck-r1.png",
+      "source_sha256": "a789fe44fe902768d694c963506b7fc2277e23a6df0f2f13ebc46154367deeb7",
+      "visible_limits_wh": [
+        [
+          1,
+          92
+        ],
+        [
+          1,
+          92
+        ]
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A030",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\buildings\\house\\whole.png",
+      "role": "identity/material/layout reference; generation approval is recorded separately",
+      "sha256": "1cec572a66451ea3d326ca012623aee83648bad21eea275b4d6b891fb6ded435"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A030-coop-barn",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The coop and the barn",
+  "tool": "built-in ImageGen"
+}

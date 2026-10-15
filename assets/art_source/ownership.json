@@ -634,6 +634,18 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/barn.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/barn_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/barn_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/barricade.png",
       "owner": "raster"
     },
@@ -723,6 +735,18 @@
     },
     {
       "output": "sprites/buildings/catapult_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/coop.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/coop_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/coop_wreck.png",
       "owner": "raster"
     },
     {
@@ -2595,6 +2619,154 @@
     },
     {
       "output": "sprites/components/A027-cow-chicken/cow-walk-legs-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-centered-doors.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-cool-glass.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-door-patch.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-fixed-footing.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-glass-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-glass-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-glass-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-local-roof-damage.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-side-pane-pale-glint.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn-split-wall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_hurt-centered-doors.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_hurt-door-patch.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_hurt-fixed-footing.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_hurt-glass-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_hurt-glass-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_hurt-glass-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_hurt-side-pane-pale-glint.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_wreck-centered-doors.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_wreck-door-patch.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/barn_wreck-fixed-footing.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-centered-master.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-cool-glass.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-dark-broken-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-hurt-board.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-hurt-roof.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-lantern.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-window.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-wreck-door.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-wreck-fixed-footing.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-wreck-lantern.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-wreck-pane.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/coop-wreck-roof.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/original-barn.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/original-barn_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/original-barn_wreck.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/original-coop_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A030-coop-barn/original-coop_wreck.png",
       "owner": "raster"
     },
     {

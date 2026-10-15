@@ -13,11 +13,49 @@ MACHINES={'keg':([48,56],[24,52],(2,2)),'preserves_jar':([48,56],[24,52],(2,2)),
           'dairy':([64,64],[32,60],(3,2)),'loom':([64,64],[32,60],(3,2)),'mill':([64,96],[32,92],(3,3))}
 JAR_POINTS={'light_xy':[21,47],'smoke_xy':[35,22]}
 
+# A030's coop and barn (task 0212): whole, hurt and the wreck that stands at
+# 0 HP, at full density over the footprint 0183 settled - the coop 64x64 at
+# (32,60) over 3x2, the barn 96x100 at (48,96) over 5x4 - with the canvas
+# offset that footprint gives. Every state is A030's composition from its
+# own components, grounded on its pivot and its own drawing. The whole and
+# hurt ones carry the lantern and their glass (`windows_xy` on opaque pixels,
+# each inside its pane); a wreck carries no light at all.
+HOMES={'coop':([64,64],[32,60],(3,2)),'barn':([96,100],[48,96],(5,4))}
+
 FAMILY={'workshop':('buildings',[48,48],[24,44]),'kitchen':('buildings',[48,48],[24,44]),'press':('props',[48,48],[24,44]),'generator':('props',[48,48],[24,44]),'shop':('props',[32,40],[16,36]),'well':('props',[24,32],[12,30])}
+
+def check_homes(entries,files,images):
+    for name,(canvas,pivot,(fw,fh)) in HOMES.items():
+        seen=[]
+        for suffix in ('','_hurt','_wreck'):
+            ident='buildings/'+name+suffix;e=entries[ident];im=images[ident]
+            if e.get('generation_task')!='A030' or e['canvas_wh']!=canvas or e['pivot_xy']!=pivot or e.get('draw_scale',1)!=1:
+                raise ValueError('Home off its box: '+ident)
+            if e.get('cell_offset_xy')!=[fw*8-pivot[0],fh*16-pivot[1]]:
+                raise ValueError('Home canvas offset is not its footprint\'s: '+ident)
+            if e.get('operation')!='compose' or 'source' in e or any(entries[p['input']].get('assembly_component_of')!='A030' for p in e['parts']):
+                raise ValueError('A layered home not promoted as its composition: '+ident)
+            box=im.getbbox()
+            if not box or box[3]!=pivot[1]:
+                raise ValueError('Home floats above its footing: '+ident)
+            if im.tobytes() in seen:raise ValueError('A home state repeats: '+ident)
+            seen.append(im.tobytes())
+            lit=suffix!='_wreck'
+            if lit!=('windows_xy' in e) or lit!=('light_xy' in e):
+                raise ValueError('Home light on the wrong state: '+ident)
+            for point in e.get('windows_xy',[]):
+                if im.getpixel(tuple(point))[3]!=255:
+                    raise ValueError('A window lamp off its glass: '+ident)
+            if (import_art.ROOT/e['output']).read_bytes()!=files[e['output']]:
+                raise ValueError('Home runtime diverges from approved source: '+ident)
+    return 3*len(HOMES)
+
 
 def main():
     data=import_art.load_manifest();files,images=import_art.build(data)
     entries={e['id']:e for e in data['assets']}
+    homes=check_homes(entries,files,images)
+    print('OK: %d coop and barn states, full density over their footprints, grounded, lit whole and hurt, dark wrecked'%homes)
     for name,(folder,canvas,pivot) in FAMILY.items():
         master=entries[folder+'/'+name]
         states=['','_active','_hurt'] if canvas==[48,48] else ['']
