@@ -1,6 +1,6 @@
 # A033 - The shipping bin
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0215
 - **Dressed by game tasks:** 0189
 - **Spec after game task:** 0189

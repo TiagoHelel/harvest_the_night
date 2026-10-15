@@ -1,0 +1,765 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "shipping_bin",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/shipping_bin-none-0-night.png",
+          "path": "native/shipping_bin/none/01.png",
+          "points": {},
+          "pose": "closed"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "poses": [
+        "closed"
+      ]
+    },
+    {
+      "anim": "shipping_bin_open",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/shipping_bin_open-none-0-night.png",
+          "path": "native/shipping_bin_open/none/01.png",
+          "points": {},
+          "pose": "lid30 degrees"
+        },
+        {
+          "issue": "",
+          "night": "preview/shipping_bin_open-none-1-night.png",
+          "path": "native/shipping_bin_open/none/02.png",
+          "points": {},
+          "pose": "lid60 degrees"
+        },
+        {
+          "issue": "",
+          "night": "preview/shipping_bin_open-none-2-night.png",
+          "path": "native/shipping_bin_open/none/03.png",
+          "points": {},
+          "pose": "lid fully open"
+        }
+      ],
+      "frame_seconds": 0.1,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "poses": [
+        "lid30 degrees",
+        "lid60 degrees",
+        "lid fully open"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "authorization": "authorization.json",
+  "colour_ramp": [],
+  "comparison": [],
+  "components": {
+    "bin-original-0": {
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/bin-original-0.png",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          24,
+          79,
+          464,
+          602
+        ]
+      },
+      "sha256": "be0c3d6e8175c883350332e9f2128a08d2bb4e8ab6427565b1112268520100c7",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d"
+    },
+    "bin-original-1": {
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/bin-original-1.png",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          542,
+          79,
+          464,
+          602
+        ]
+      },
+      "sha256": "f14c23cec509be2d701404af953a92dc8b3a01d6c2617e0e9fd716889ac8b1c4",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d"
+    },
+    "bin-original-2": {
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/bin-original-2.png",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          1050,
+          79,
+          464,
+          602
+        ]
+      },
+      "sha256": "39b738c154b6f865af7959de5336a4d11ab58fcbba93652ef61ad9d7dfac0f2f",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d"
+    },
+    "bin-original-3": {
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "render",
+      "output": "components/bin-original-3.png",
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          1559,
+          79,
+          464,
+          602
+        ]
+      },
+      "sha256": "21c552f7303ebbe3ccb32b6a0865cfacb9f050fa4cc0141f0fb75329a471ae5f",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d"
+    },
+    "bin-width19-0": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/bin-width19-0.png",
+      "parts": [
+        {
+          "input": "bin-original-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-0",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-0",
+          "paste_xy": [
+            13,
+            0
+          ],
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ]
+        }
+      ],
+      "sha256": "8a0a874fc55c58165ea8077daad302c202303a051130325fb98f3756b7e249af"
+    },
+    "bin-width19-1": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/bin-width19-1.png",
+      "parts": [
+        {
+          "input": "bin-original-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-1",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-1",
+          "paste_xy": [
+            13,
+            0
+          ],
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ]
+        }
+      ],
+      "sha256": "57a14bc4ef482465bbcf56dbca159641848b2e58c2f8ab43a7565ce1cf47fc9e"
+    },
+    "bin-width19-2": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/bin-width19-2.png",
+      "parts": [
+        {
+          "input": "bin-original-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-2",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-2",
+          "paste_xy": [
+            13,
+            0
+          ],
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ]
+        }
+      ],
+      "sha256": "bdcd1e5ebd3a4c4501090757fd47c93d304218552d5722daba744703f709567a"
+    },
+    "bin-width19-3": {
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "operation": "compose",
+      "output": "components/bin-width19-3.png",
+      "parts": [
+        {
+          "input": "bin-original-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-3",
+          "paste_xy": [
+            11,
+            0
+          ],
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ]
+        },
+        {
+          "input": "bin-original-3",
+          "paste_xy": [
+            13,
+            0
+          ],
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ]
+        }
+      ],
+      "sha256": "9bda3187ce8a027a4de5446bb8d432ee8c37f945e416379a747fbc2c4be83fa5"
+    }
+  },
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Owner authorized crop/layer composition for these frames; unchanged body, base and feet are reused from recorded ImageGen sources.",
+      "owner_words": "Sim, autorizar composi\u00e7\u00e3o com recortes do ImageGen",
+      "rule": "ART-CONTRACT 9.4 barrier-only composition"
+    }
+  ],
+  "files": [
+    {
+      "anim": "shipping_bin",
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/shipping_bin/none/01.png",
+      "parts": [
+        {
+          "input": "bin-width19-0",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ]
+        },
+        {
+          "input": "bin-width19-0",
+          "paste_xy": [
+            0,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "closed",
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          24,
+          79,
+          464,
+          602
+        ]
+      },
+      "runtime_name": "sprites/props/shipping_bin.png",
+      "seconds": 0.55,
+      "sha256": "8a0a874fc55c58165ea8077daad302c202303a051130325fb98f3756b7e249af",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "visible_limits_wh": [
+        [
+          18,
+          20
+        ],
+        [
+          14,
+          16
+        ]
+      ]
+    },
+    {
+      "anim": "shipping_bin_open",
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/shipping_bin_open/none/01.png",
+      "parts": [
+        {
+          "input": "bin-width19-1",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ]
+        },
+        {
+          "input": "bin-width19-0",
+          "paste_xy": [
+            0,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "lid30 degrees",
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          542,
+          79,
+          464,
+          602
+        ]
+      },
+      "runtime_name": "sprites/props/shipping_bin_open_0.png",
+      "seconds": 0.1,
+      "sha256": "10550a26cdf1c3110e2f8e1337d98afd32c59baca00394aa01ee0872e1f57f62",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "visible_limits_wh": [
+        [
+          1,
+          20
+        ],
+        [
+          1,
+          22
+        ]
+      ]
+    },
+    {
+      "anim": "shipping_bin_open",
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/shipping_bin_open/none/02.png",
+      "parts": [
+        {
+          "input": "bin-width19-2",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ]
+        },
+        {
+          "input": "bin-width19-0",
+          "paste_xy": [
+            0,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "lid60 degrees",
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          1050,
+          79,
+          464,
+          602
+        ]
+      },
+      "runtime_name": "sprites/props/shipping_bin_open_1.png",
+      "seconds": 0.1,
+      "sha256": "70215872f0ef97581ae762757d2f87baba041be2b9dd53bc01dc16c1bb510df5",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "visible_limits_wh": [
+        [
+          1,
+          20
+        ],
+        [
+          1,
+          22
+        ]
+      ]
+    },
+    {
+      "anim": "shipping_bin_open",
+      "call": "raw/recovered-bin-states-r3.call.json",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/shipping_bin_open/none/03.png",
+      "parts": [
+        {
+          "input": "bin-width19-3",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ]
+        },
+        {
+          "input": "bin-width19-0",
+          "paste_xy": [
+            0,
+            12
+          ],
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ]
+        }
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "points": {},
+      "pose": "lid fully open",
+      "prompt": "raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          22
+        ],
+        "content_scale": 0.03735880398671096,
+        "crop_xywh": [
+          1559,
+          79,
+          464,
+          602
+        ]
+      },
+      "runtime_name": "sprites/props/shipping_bin_open_2.png",
+      "seconds": 0.1,
+      "sha256": "a55ff57c0965492f9a0dd4194ff2f6c866b30b313676020ee7e752d01b39f964",
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "visible_limits_wh": [
+        [
+          1,
+          20
+        ],
+        [
+          1,
+          22
+        ]
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A033",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A033-shipping-bin",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The shipping bin",
+  "tool": "built-in ImageGen"
+}

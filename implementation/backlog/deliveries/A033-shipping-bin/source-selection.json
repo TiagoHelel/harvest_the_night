@@ -1,0 +1,256 @@
+{
+  "pack": "A033",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/shipping_bin/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              24,
+              79,
+              464,
+              602
+            ]
+          },
+          "parts": [
+            {
+              "input": "bin-width19-0",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                12
+              ]
+            },
+            {
+              "input": "bin-width19-0",
+              "paste_xy": [
+                0,
+                12
+              ],
+              "slice_xywh": [
+                0,
+                12,
+                24,
+                12
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/shipping_bin_open/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              542,
+              79,
+              464,
+              602
+            ]
+          },
+          "parts": [
+            {
+              "input": "bin-width19-1",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                12
+              ]
+            },
+            {
+              "input": "bin-width19-0",
+              "paste_xy": [
+                0,
+                12
+              ],
+              "slice_xywh": [
+                0,
+                12,
+                24,
+                12
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/shipping_bin_open/none/02.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              1050,
+              79,
+              464,
+              602
+            ]
+          },
+          "parts": [
+            {
+              "input": "bin-width19-2",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                12
+              ]
+            },
+            {
+              "input": "bin-width19-0",
+              "paste_xy": [
+                0,
+                12
+              ],
+              "slice_xywh": [
+                0,
+                12,
+                24,
+                12
+              ]
+            }
+          ]
+        },
+        {
+          "output": "native/shipping_bin_open/none/03.png",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              1559,
+              79,
+              464,
+              602
+            ]
+          },
+          "parts": [
+            {
+              "input": "bin-width19-3",
+              "paste_xy": [
+                0,
+                0
+              ],
+              "slice_xywh": [
+                0,
+                0,
+                24,
+                12
+              ]
+            },
+            {
+              "input": "bin-width19-0",
+              "paste_xy": [
+                0,
+                12
+              ],
+              "slice_xywh": [
+                0,
+                12,
+                24,
+                12
+              ]
+            }
+          ]
+        },
+        {
+          "component": "bin-original-0",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              24,
+              79,
+              464,
+              602
+            ]
+          }
+        },
+        {
+          "component": "bin-original-1",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              542,
+              79,
+              464,
+              602
+            ]
+          }
+        },
+        {
+          "component": "bin-original-2",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              1050,
+              79,
+              464,
+              602
+            ]
+          }
+        },
+        {
+          "component": "bin-original-3",
+          "recipe": {
+            "content_anchor_xy": [
+              8,
+              22
+            ],
+            "content_scale": 0.03735880398671096,
+            "crop_xywh": [
+              1559,
+              79,
+              464,
+              602
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

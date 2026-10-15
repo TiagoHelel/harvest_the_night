@@ -128,6 +128,10 @@ var _tarp_stage := -1
 ## and what each was last seen at: its hit points, and how long since a bite.
 var _decoys: Dictionary = {}
 var _decoy_hits: Dictionary = {}
+## The shipping bin's sprite (task 0215), and how far its lid is up, in
+## seconds of A033's opening.
+var _bin: Sprite2D
+var _lid := 0.0
 ## The sprinklers' sprites by cell index (task 0201), and the wall clock
 ## their heads turn on through the sprinklers' hour.
 var _sprinklers: Dictionary = {}
@@ -613,6 +617,7 @@ func _process(delta: float) -> void:
 	_refresh_stations(delta)
 	_sway_decoys(delta)
 	_turn_sprinklers(delta)
+	_lift_lid(delta)
 	_dress_tarps()
 	_place_house_mark()
 	_remember_towers(_state)
@@ -1514,6 +1519,7 @@ func _refresh() -> void:
 	_tarped.clear()
 	_decoys.clear()
 	_sprinklers.clear()
+	_bin = null
 	_ambient_materials.clear()
 	if _season != null:
 		_season.forget_sprites()
@@ -1617,6 +1623,9 @@ func _refresh() -> void:
 		# A sprinkler, whose head turns through the morning's hour (task 0201).
 		if Building.sprays(id):
 			_sprinklers[int(idx)] = sprite
+		# The shipping bin, whose lid lifts while its panel is open (task 0215).
+		if id == &"shipping_bin":
+			_bin = sprite
 		if id == &"tree":
 			var shadow := Sprite2D.new()
 			shadow.texture = load(PlayerView.SHADOW)
@@ -1935,6 +1944,35 @@ func _turn_sprinklers(delta: float) -> void:
 		var id := StringName((occupants.get(idx, {}) as Dictionary).get("id", &""))
 		if id != &"":
 			sprite.texture = _texture_for(sprinkler_art(_state, id, _spray_time))
+
+
+## **The bin's lid** (task 0215): up through A033's three opening frames
+## while the bin's panel is open, held on the last, and down through them
+## the other way - 2, 1, 0, closed - when it shuts. View only: whether the
+## panel is open is `Shipping`'s.
+func _lift_lid(delta: float) -> void:
+	if not is_instance_valid(_bin) or _state.is_empty():
+		return
+	var top := 3.0 * bin_frame_seconds()
+	_lid = clampf(_lid + (delta if Shipping.is_open(_state) else -delta), 0.0, top)
+	_bin.texture = _texture_for(bin_art(_lid))
+
+
+## A033's opening frames' seconds, a tenth of one when it says nothing.
+static func bin_frame_seconds() -> float:
+	return maxf(float(PlaceholderArt.frame(PROP_DIR + "shipping_bin_open_0.png").get("seconds", 0.1)), 0.01)
+
+
+## **The bin at `lid` seconds up** (task 0215): closed at 0, then each
+## opening frame for its seconds, the last held.
+static func bin_art(lid: float) -> StringName:
+	var step := mini(int(maxf(lid, 0.0) / bin_frame_seconds() + 0.0001), 3)
+	return &"shipping_bin" if step == 0 else StringName("shipping_bin_open_%d" % (step - 1))
+
+
+## The picture the shipping bin shows now - for the tests.
+func bin_shown() -> String:
+	return _bin.texture.resource_path if is_instance_valid(_bin) and _bin.texture != null else ""
 
 
 ## The picture a sprinkler on `cell` shows now - for the tests.

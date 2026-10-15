@@ -204,6 +204,7 @@ func _run() -> void:
 	_task_0209_sheep_pig()
 	_task_0210_cow_chicken()
 	_task_0212_coop_barn()
+	_task_0215_shipping_bin()
 	_task_0204_ore_hardwood()
 	_task_0205_fish()
 	_task_0213_machines()
@@ -14501,6 +14502,27 @@ func _task_0212_coop_barn() -> void:
 	expect(wrong.is_empty() and inside,
 		"A030's coop and barn are raster art at full density over their footprints, lit whole and hurt and dark wrecked, the barn's panes on its own cells",
 		"%s; panes %s" % [str(wrong), str(panes)])
+	_completed += 1
+
+
+## **A033's shipping bin** (task 0215): closed and its lid's three opening
+## frames are raster art at 24x24 on (12,22), none a stand-in; with the
+## panel open the lid lifts through them a tenth of a second each and holds
+## the last, and shuts back down the same way.
+func _task_0215_shipping_bin() -> void:
+	var wrong: Array = []
+	for name in ["shipping_bin", "shipping_bin_open_0", "shipping_bin_open_1", "shipping_bin_open_2"]:
+		var frame := PlaceholderArt.frame(WorldView.PROP_DIR + name + ".png")
+		if frame.get("canvas") != Vector2i(24, 24) or frame.get("pivot") != Vector2i(12, 22) or frame.has("stand_in"):
+			wrong.append(name)
+	if not PlaceholderArt.art(&"shipping_bin").is_empty():
+		wrong.append("registry")
+	var lifting := [WorldView.bin_art(0.0), WorldView.bin_art(0.1), WorldView.bin_art(0.2), WorldView.bin_art(0.3),
+		WorldView.bin_art(9.0)]
+	expect(wrong.is_empty() and lifting == [&"shipping_bin", &"shipping_bin_open_0", &"shipping_bin_open_1",
+			&"shipping_bin_open_2", &"shipping_bin_open_2"],
+		"A033's shipping bin is raster art; its lid lifts through three frames and holds the last",
+		"%s; %s" % [str(wrong), str(lifting)])
 	_completed += 1
 
 

@@ -71,7 +71,7 @@ const SCENARIOS: Array = [
 	["kitchen", "a kitchen on the grass at noon in spring, the farmer at it with its panel up: seven dishes, a stew on the fire", "WorkshopPanel"],
 	["house_tiers", "the house in tier I at noon, the farmer by its west wall; then tier II with its plaque over the door, the workshop's upgrades tab offering tier III, and tier III", ""],
 	["peddler", "the stall open at noon with the peddler at its end; then shut at dusk, nobody there", ""],
-	["shipping_bin", "the shipping bin by the porch at noon; then its panel with wood and carrots in; then the morning report naming what it pays", ""],
+	["shipping_bin", "the shipping bin by the porch at noon; then its panel with wood and carrots in, and the lid held open behind it (task 0215); then the morning report naming what it pays", ""],
 	["machines", "the keg, the preserves jar, the dairy, the loom and the mill in a row at noon, idle; then working; then the same at 01:30", ""],
 	["machines_worn", "the same row at noon, the keg and the dairy past the wear line, the jar and the loom wrecked, the mill whole", ""],
 	["keg_jar", "a keg aging wine, five mornings to go, its panel up; a preserves jar beside it setting jelly", "WorkshopPanel"],
@@ -2470,6 +2470,19 @@ func _take_bin_extras(main: Node, state: Dictionary, folder: String) -> void:
 	for _i in 4:
 		await process_frame
 	await _shoot("shipping_bin_panel", folder)
+	# **The lid up** (task 0215): the same moment with the panel faded out of
+	# the picture, so the bin it covers shows A033's lid held open.
+	var lid_view := main.get_node("%WorldView") as WorldView
+	var panel := main.find_child("ShopPanel", true, false) as CanvasItem
+	if panel != null:
+		panel.modulate.a = 0.0
+	# Long enough for the lid's three frames to have played.
+	for _i in 24:
+		await process_frame
+	print("  shipping_bin_lid: %s" % lid_view.bin_shown().get_file())
+	await _shoot("shipping_bin_lid", folder)
+	if panel != null:
+		panel.modulate.a = 1.0
 	var due := Shipping.due(state)
 	state["open_panel"] = &""
 	NightRoad.to_night(state)

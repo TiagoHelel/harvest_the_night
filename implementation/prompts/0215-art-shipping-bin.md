@@ -1,7 +1,7 @@
 # 0215 - Art: the shipping bin
 
 - **Phase:** 12 - The day that pays
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0189
 - **Likely files:** assets/art_source/props/, assets/art_source/manifest.json, tools/check_prop_art.py
 - **Art packs:** A033

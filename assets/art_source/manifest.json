@@ -107842,6 +107842,918 @@
         -8,
         -32
       ]
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-original-0",
+      "owner": "raster",
+      "source": "assets/art_source/props/shipping_bin/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "crop_xywh": [
+        24,
+        79,
+        464,
+        602
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.03735880398671096,
+      "content_anchor_xy": [
+        8,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-original-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-original-0.png",
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-original-0.png",
+          "sha256": "be0c3d6e8175c883350332e9f2128a08d2bb4e8ab6427565b1112268520100c7",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "78884541f5b18eb5480a89e68c885fd89d98c352e14cc3c0f812fd087ed28791"
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-original-1",
+      "owner": "raster",
+      "source": "assets/art_source/props/shipping_bin/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "crop_xywh": [
+        542,
+        79,
+        464,
+        602
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.03735880398671096,
+      "content_anchor_xy": [
+        8,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-original-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-original-1.png",
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-original-1.png",
+          "sha256": "f14c23cec509be2d701404af953a92dc8b3a01d6c2617e0e9fd716889ac8b1c4",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "f19176db0bf988ef70c2fdf3584ffc7525c4458a2f32510c335843ba3f133d8b"
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-original-2",
+      "owner": "raster",
+      "source": "assets/art_source/props/shipping_bin/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "crop_xywh": [
+        1050,
+        79,
+        464,
+        602
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.03735880398671096,
+      "content_anchor_xy": [
+        8,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-original-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-original-2.png",
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-original-2.png",
+          "sha256": "39b738c154b6f865af7959de5336a4d11ab58fcbba93652ef61ad9d7dfac0f2f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "284529c5e77b1ec9ea02a0a28379686c55546ac007ab7f107f859f9450f95006"
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-original-3",
+      "owner": "raster",
+      "source": "assets/art_source/props/shipping_bin/recovered-bin-states-r3.png",
+      "source_sha256": "0a1bf22f1b9ee1cde0a7ebc655576aeb4b63f1f83b1099b4e805d2dc190a451d",
+      "crop_xywh": [
+        1559,
+        79,
+        464,
+        602
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "content_scale": 0.03735880398671096,
+      "content_anchor_xy": [
+        8,
+        22
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-original-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-original-3.png",
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-original-3.png",
+          "sha256": "21c552f7303ebbe3ccb32b6a0865cfacb9f050fa4cc0141f0fb75329a471ae5f",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "9390e371f8d4cf1e41815f2b447bdf0676503e2a68afc695d63767fde07cd990"
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-width19-0",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-width19-0",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-width19-0.png",
+      "input": "components/A033-shipping-bin/bin-original-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-original-0",
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-0",
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-0",
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            13,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-width19-0.png",
+          "sha256": "8a0a874fc55c58165ea8077daad302c202303a051130325fb98f3756b7e249af",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "d600e81761899515583af0474fe2ea0d505ab83955df80e69f2396894ccf5e8e"
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-width19-1",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-width19-1",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-width19-1.png",
+      "input": "components/A033-shipping-bin/bin-original-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-original-1",
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-1",
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-1",
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            13,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-width19-1.png",
+          "sha256": "57a14bc4ef482465bbcf56dbca159641848b2e58c2f8ab43a7565ce1cf47fc9e",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "bd9a6b5b78c7ede32ae545241a5150791aab40899ff7341fddc6bff2ae513251"
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-width19-2",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-width19-2",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-width19-2.png",
+      "input": "components/A033-shipping-bin/bin-original-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-original-2",
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-2",
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-2",
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            13,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-width19-2.png",
+          "sha256": "bdcd1e5ebd3a4c4501090757fd47c93d304218552d5722daba744703f709567a",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "a3398a1a4b57dae5b902b56304fbeb148aef1166863d92097a806ee7f516ce25"
+    },
+    {
+      "id": "components/A033-shipping-bin/bin-width19-3",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        0,
+        0
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "components/A033-shipping-bin/bin-width19-3",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/components/A033-shipping-bin/bin-width19-3.png",
+      "input": "components/A033-shipping-bin/bin-original-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-original-3",
+          "slice_xywh": [
+            1,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-3",
+          "slice_xywh": [
+            10,
+            0,
+            2,
+            24
+          ],
+          "paste_xy": [
+            11,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-original-3",
+          "slice_xywh": [
+            12,
+            0,
+            11,
+            24
+          ],
+          "paste_xy": [
+            13,
+            0
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/components/bin-width19-3.png",
+          "sha256": "9bda3187ce8a027a4de5446bb8d432ee8c37f945e416379a747fbc2c4be83fa5",
+          "role": "Approved assembly component (supporting node, not a runtime animation); the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "assembly_component_of": "A033",
+      "output_sha256": "639cba63dfc4dea59c9e4694e97ee7d5fa4ace068e54a134ce70cb89d51c2de2"
+    },
+    {
+      "id": "props/shipping_bin",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/shipping_bin",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/props/shipping_bin.png",
+      "input": "components/A033-shipping-bin/bin-width19-0",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-width19-0",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-width19-0",
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            12
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/native/shipping_bin/none/01.png",
+          "sha256": "8a0a874fc55c58165ea8077daad302c202303a051130325fb98f3756b7e249af",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "output_sha256": "d600e81761899515583af0474fe2ea0d505ab83955df80e69f2396894ccf5e8e"
+    },
+    {
+      "id": "props/shipping_bin_open_0",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/shipping_bin_open",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/shipping_bin_open_0.png",
+      "input": "components/A033-shipping-bin/bin-width19-1",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-width19-1",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-width19-0",
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            12
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/native/shipping_bin_open/none/01.png",
+          "sha256": "10550a26cdf1c3110e2f8e1337d98afd32c59baca00394aa01ee0872e1f57f62",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "output_sha256": "2718330b49871809d8b1ecf7518ad9a0a7be6c3983b6c4e6383e3d34ec13c155"
+    },
+    {
+      "id": "props/shipping_bin_open_1",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/shipping_bin_open",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/shipping_bin_open_1.png",
+      "input": "components/A033-shipping-bin/bin-width19-2",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-width19-2",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-width19-0",
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            12
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/native/shipping_bin_open/none/02.png",
+          "sha256": "70215872f0ef97581ae762757d2f87baba041be2b9dd53bc01dc16c1bb510df5",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "output_sha256": "59ea5000cd3c5080084cb644316327835149f7410e5c6e2e93416b914faac667"
+    },
+    {
+      "id": "props/shipping_bin_open_2",
+      "owner": "raster",
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        22
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "props/shipping_bin_open",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/props/shipping_bin_open_2.png",
+      "input": "components/A033-shipping-bin/bin-width19-3",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "components/A033-shipping-bin/bin-width19-3",
+          "slice_xywh": [
+            0,
+            0,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "components/A033-shipping-bin/bin-width19-0",
+          "slice_xywh": [
+            0,
+            12,
+            24,
+            12
+          ],
+          "paste_xy": [
+            0,
+            12
+          ]
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.prompt.txt",
+      "prompt_sha256": "c5e678dca771b9415022f8a39ff77b4d755693ec725670a6489069f46d59cf9d",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/raw/recovered-bin-states-r3.call.json",
+          "sha256": "a1dbe0cd74295fcdfd7c409000c523f6a6cb972aa0332cae697e545462685eb9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/native/shipping_bin_open/none/03.png",
+          "sha256": "a55ff57c0965492f9a0dd4194ff2f6c866b30b313676020ee7e752d01b39f964",
+          "role": "Approved native export; the promoted output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/contract.json",
+          "sha256": "9a4c7586c60d33955bf3b02af8425cbdc2b2f22310be4a97fc680b031f9c8ed3",
+          "role": "Delivery contract: this node's recipe, parts, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A033-shipping-bin/APPROVAL.json",
+          "sha256": "e6aab0c593842906e6c50c03cd76a4c10e30d9811283f06e13607d8a72896840",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A033",
+      "integration_task": "0215",
+      "revision": 1,
+      "approval": "A033 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0215",
+      "output_sha256": "9c12a65c569c5aa66515501b0bf90edab9010b06242e0d2db58fd44636d16bc5"
     }
   ]
 }

@@ -1,0 +1,67 @@
+{
+  "assembly_source_hashes_match": true,
+  "bin_base_identical": true,
+  "bin_four_states": true,
+  "bin_states_distinct": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "component_prompt_matches_call": true,
+  "component_raw_provenance_matches": true,
+  "component_reference_hashes_match": true,
+  "composition_authorized": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 4,
+  "frames_found": 4,
+  "grounded_on_pivot": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/shipping_bin/none/01.png": {
+      "bounds": [
+        3,
+        7,
+        22,
+        22
+      ],
+      "opaque_pixels": 217
+    },
+    "native/shipping_bin_open/none/01.png": {
+      "bounds": [
+        3,
+        6,
+        22,
+        22
+      ],
+      "opaque_pixels": 227
+    },
+    "native/shipping_bin_open/none/02.png": {
+      "bounds": [
+        3,
+        4,
+        22,
+        22
+      ],
+      "opaque_pixels": 251
+    },
+    "native/shipping_bin_open/none/03.png": {
+      "bounds": [
+        3,
+        0,
+        22,
+        22
+      ],
+      "opaque_pixels": 307
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "source_transparency_matches_call": true,
+  "visible_targets": true
+}

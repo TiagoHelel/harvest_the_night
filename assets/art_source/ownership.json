@@ -2770,6 +2770,38 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/components/A033-shipping-bin/bin-original-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A033-shipping-bin/bin-original-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A033-shipping-bin/bin-original-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A033-shipping-bin/bin-original-3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A033-shipping-bin/bin-width19-0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A033-shipping-bin/bin-width19-1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A033-shipping-bin/bin-width19-2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/components/A033-shipping-bin/bin-width19-3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/crops/beet_0.png",
       "owner": "raster"
     },
@@ -4243,6 +4275,22 @@
     },
     {
       "output": "sprites/props/sheep_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/shipping_bin.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/shipping_bin_open_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/shipping_bin_open_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/props/shipping_bin_open_2.png",
       "owner": "raster"
     },
     {

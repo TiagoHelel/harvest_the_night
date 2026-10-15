@@ -1,0 +1,27 @@
+{
+  "pack": "A033",
+  "date": "2026-10-15",
+  "status": "approved for integration",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+  "approved_folder": "implementation/backlog/deliveries/A033-shipping-bin",
+  "approved_sha256": {
+    "native/shipping_bin_open/none/01.png": "10550a26cdf1c3110e2f8e1337d98afd32c59baca00394aa01ee0872e1f57f62",
+    "native/shipping_bin_open/none/02.png": "70215872f0ef97581ae762757d2f87baba041be2b9dd53bc01dc16c1bb510df5",
+    "native/shipping_bin_open/none/03.png": "a55ff57c0965492f9a0dd4194ff2f6c866b30b313676020ee7e752d01b39f964",
+    "native/shipping_bin/none/01.png": "8a0a874fc55c58165ea8077daad302c202303a051130325fb98f3756b7e249af"
+  },
+  "approved_component_sha256": {
+    "components/bin-original-0.png": "be0c3d6e8175c883350332e9f2128a08d2bb4e8ab6427565b1112268520100c7",
+    "components/bin-original-1.png": "f14c23cec509be2d701404af953a92dc8b3a01d6c2617e0e9fd716889ac8b1c4",
+    "components/bin-original-2.png": "39b738c154b6f865af7959de5336a4d11ab58fcbba93652ef61ad9d7dfac0f2f",
+    "components/bin-original-3.png": "21c552f7303ebbe3ccb32b6a0865cfacb9f050fa4cc0141f0fb75329a471ae5f",
+    "components/bin-width19-0.png": "8a0a874fc55c58165ea8077daad302c202303a051130325fb98f3756b7e249af",
+    "components/bin-width19-1.png": "57a14bc4ef482465bbcf56dbca159641848b2e58c2f8ab43a7565ce1cf47fc9e",
+    "components/bin-width19-2.png": "bdcd1e5ebd3a4c4501090757fd47c93d304218552d5722daba744703f709567a",
+    "components/bin-width19-3.png": "9bda3187ce8a027a4de5446bb8d432ee8c37f945e416379a747fbc2c4be83fa5"
+  },
+  "frames": 4,
+  "runtime_integrated": false,
+  "review_page": "implementation/backlog/deliveries/A003-guardian/retry-final-review.html",
+  "approval_scope": "All outputs on the final thirteen-pack correction review; no source pixels changed on approval."
+}

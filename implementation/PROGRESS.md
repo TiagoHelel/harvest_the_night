@@ -32955,3 +32955,50 @@ the workshop, tinted and scaled.
 - `python implementation/backlog/assets.py set A030 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (64 of 64).
+
+## 0215 - Art: the shipping bin - done 2026-10-15
+
+A033 is integrated. The shipping bin is the owner-approved art now: closed,
+and its lid's three opening frames, on 24x24 standing on (12,22). The owner
+approved the corrected pack on 2026-10-15 with the retried batch ("tudo
+aprovado"), as recorded in the delivery's `APPROVAL.json`. 0189's stand-in
+is gone: the barricade's planks, warmed and grown.
+
+- **Promotion**: the four frames are compositions over 8 assembly
+  components (4 `render`, 4 `compose`), under
+  `sprites/components/A033-shipping-bin/`.
+  - The one raw source is byte for byte in
+    `assets/art_source/props/shipping_bin/`.
+  - Every node and file was sha-checked, and decodes to its approved RGBA.
+- **The lid lifts while the panel is open** (`WorldView._lift_lid`):
+  - With the bin's panel open (`Shipping.is_open`, the rules' own) the lid
+    lifts through A033's three frames, a tenth of a second each, and holds
+    the last.
+  - When the panel shuts it comes down the same way - 2, 1, 0, closed - as
+    A033 asks, with no separate close frames.
+  - `bin_art` gives the frame for how far up the lid is.
+  - View only: the panel is the rules', the lid is the picture's.
+- **The stand-ins retired**: A033's `PlaceholderArt` entry and `PROP_BIN`.
+  `placeholders.py --check` passes, with 123 stand-ins left over 17 packs.
+- **Checks**: `check_prop_art.py` takes the bin (`BIN`):
+  - its four frames on their box and timing;
+  - each A033's composition from its own components;
+  - grounded and every frame its own;
+  - the lid rising frame by frame while the body below the hinge (rows
+    12-23) never moves.
+- **Tests**: `_task_0215_shipping_bin` (headless_v1) checks:
+  - the four frames are raster art, none a stand-in;
+  - the lid goes closed, 0, 1, 2 at 0, 0.1, 0.2 and 0.3 s, and holds 2.
+- **Shots** (`implementation/shots/0215/`, FHD 1920x1080, looked at):
+  - `shipping_bin`: noon, the closed bin by the porch.
+  - `shipping_bin_panel`: its panel open.
+  - `shipping_bin_lid` (new picture in the scene): the same moment with the
+    panel faded out of the picture, the lid held open. The first take
+    waited 4 frames and caught the first opening frame; it now waits 24,
+    past the lid's three.
+  - `shipping_bin_morning`: the morning report.
+- **The delivery's provenance** is committed: the files the manifest
+  cites, and the handoff notes.
+- `python implementation/backlog/assets.py set A033 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (64 of 64).

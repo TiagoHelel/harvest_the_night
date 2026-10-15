@@ -232,6 +232,45 @@ def check_animals(data, files, images):
     return count
 
 
+## A033's shipping bin (task 0215): closed and its lid's three opening
+## frames, 24x24 standing on (12,22) at 1.0, each A033's composition from its
+## own components and its own drawing. The lid rises frame by frame; the body
+## below the hinge - rows 12 to 23 - never moves.
+BIN = ('shipping_bin', 'shipping_bin_open_0', 'shipping_bin_open_1', 'shipping_bin_open_2')
+
+
+def check_bin(data, files, images):
+    by_id = {e['id']: e for e in data['assets']}
+    body, tops, seen = None, [], set()
+    for i, name in enumerate(BIN):
+        e = by_id['props/' + name]
+        timing = (0.55, 0) if i == 0 else (0.1, i - 1)
+        if e.get('generation_task') != 'A033' or e['canvas_wh'] != [24, 24] or e['pivot_xy'] != [12, 22] \
+                or (e['seconds'], e['frame']) != timing or e['loop'] is not False or e.get('draw_scale', 1) != 1:
+            raise ValueError('Bin frame drift: ' + e['id'])
+        if e.get('operation') != 'compose' or 'source' in e \
+                or any(by_id[p['input']].get('assembly_component_of') != 'A033' for p in e['parts']):
+            raise ValueError('A layered bin frame not promoted as its composition: ' + e['id'])
+        image = images[e['id']]
+        box = image.getbbox()
+        if not box or box[3] != 22:
+            raise ValueError('The bin floats: ' + e['id'])
+        rows = image.crop((0, 12, 24, 24)).tobytes()
+        if body is None:
+            body = rows
+        elif rows != body:
+            raise ValueError('The body moved under the lid: ' + e['id'])
+        if image.tobytes() in seen:
+            raise ValueError('A bin frame repeats: ' + e['id'])
+        seen.add(image.tobytes())
+        tops.append(box[1])
+        if (import_art.ROOT / e['output']).read_bytes() != files[e['output']]:
+            raise ValueError('Runtime bin diverges: ' + e['id'])
+    if tops != sorted(tops, reverse=True) or tops[0] == tops[-1]:
+        raise ValueError('The lid does not rise: %s' % tops)
+    return len(BIN)
+
+
 ## A018's sprinklers (task 0201): each tier's idle cut and its four-frame
 ## spray, 16x16 standing on (8,14) at 1.0. The spray frames are A018's
 ## compositions from its own components, a tenth of a second each, round and
@@ -388,6 +427,8 @@ def main():
     dogs = check_dog(data, files, images)
     sprays = check_sprinklers(data, files, images)
     animals = check_animals(data, files, images)
+    bins = check_bin(data, files, images)
+    print("OK: A033's shipping bin: %d frames, the lid rising on a still body" % bins)
     print("OK: the barnyard's animals: %d frames over %s, west-facing, on their feet, every frame its own"
           % (animals, ', '.join(sorted({spec.get('pack', label) for label, spec in ANIMALS.items()}))))
     print("OK: A018's sprinklers: 3 idle cuts and %d spray frames, the head risen two pixels on a still base, "

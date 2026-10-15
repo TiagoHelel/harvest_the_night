@@ -136,9 +136,6 @@ const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40),
 const MARK_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_scale": 1.0}
 const MARK_HUD := {"canvas": Vector2i(10, 10), "pivot": Vector2i(5, 5), "draw_scale": 1.0}
 
-## A033's shipping bin (task 0189): 24x24 at (12,22) over one cell by the
-## porch, drawn at 1.0.
-const PROP_BIN := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 22), "draw_scale": 1.0}
 
 ## A034's peddler (task 0190): 40x40 at (20,36), the farmer's density, drawn
 ## at 1.0; and the closed stall, the legacy `shop`'s 32x40 at (16,36) drawn at
@@ -308,9 +305,6 @@ const ART := {
 	&"hud_bone_meal": {"pack": "A036", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/hud_gunpowder", "tint": Color(1.5, 1.42, 1.18), "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
 	&"tilled_fertilised": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
 	&"tilled_fertilised_wet": {"pack": "A036", "dir": "res://sprites/crops/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"crops/tilled_wet", "tint": Color(1.45, 1.38, 1.22), "geometry": GROUND_TILE, "final": GROUND_TILE, "bare": true},
-	# A033's shipping bin (task 0189): the barricade's planks, warmed and
-	# grown to a bin by the porch, until 0215.
-	&"shipping_bin": {"pack": "A033", "dir": "res://sprites/props/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"buildings/barricade", "stand_in_scale": 1.35, "tint": Color(1.15, 1.0, 0.8), "geometry": PROP_BIN, "final": PROP_BIN, "bare": true},
 	# A034's peddler and the shut stall (task 0190): the farmer's own
 	# frames in a terracotta waistcoat's tint - standing, trading, walking
 	# - and the stall dimmed, until 0216.
