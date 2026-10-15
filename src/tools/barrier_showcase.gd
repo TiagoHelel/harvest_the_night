@@ -58,7 +58,8 @@ func _run() -> void:
 	_caption.add_theme_font_override("font", load("res://assets/fonts/harvest_hud.fnt"))
 	_caption.add_theme_font_size_override("font_size", 8)
 	overlay.add_child(_caption)
-	for family in [&"wall", &"fence"]:
+	# A042's electric fence since task 0241, joined as the fence is.
+	for family in [&"wall", &"fence", &"electric_fence"]:
 		for light in 3:
 			_state = _blank(light)
 			_centers.clear()

@@ -3321,9 +3321,6 @@ func _texture_for(id: StringName) -> Texture2D:
 	# And an enemy drawn in code, task 0248's rat, until A047.
 	if coded == null:
 		coded = drawn_enemy(ENEMY_DIR + str(id) + ".png")
-	# And task 0230's electric fence, every mask and the wreck, until A042.
-	if coded == null:
-		coded = ElectricFenceArt.texture(id)
 	# And task 0231's hardwood wall and sandbags, until A043.
 	if coded == null:
 		coded = StrongWallArt.texture(id)

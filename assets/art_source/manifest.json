@@ -64152,6 +64152,3652 @@
         18
       ],
       "output_sha256": "f05e5e3625659c0fc34c19e0458d78e18ae6c7a811caeb61f11b76cdde45b208"
+    },
+    {
+      "id": "effects/zap_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/zap/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127",
+      "crop_xywh": [
+        229,
+        267,
+        255,
+        287
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.01834862385321101,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/zap",
+      "frame": 0,
+      "seconds": 0.065,
+      "loop": false,
+      "fx_family": "zap",
+      "fx_origin": "center",
+      "output": "sprites/effects/zap_0.png",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/zap-r3.call.json",
+          "sha256": "ef2a9208d51144c13847463acc1cf717648712cdfaa45acb68c941cf2f53f48f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/zap/none/01.png",
+          "sha256": "b2a5a7f93b7b11f1985982a70fd7315f44fe922181cac47b922e103b8bd36311",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "output_sha256": "b2a5a7f93b7b11f1985982a70fd7315f44fe922181cac47b922e103b8bd36311"
+    },
+    {
+      "id": "effects/zap_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/zap/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127",
+      "crop_xywh": [
+        784,
+        153,
+        545,
+        485
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.01834862385321101,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/zap",
+      "frame": 1,
+      "seconds": 0.065,
+      "loop": false,
+      "fx_family": "zap",
+      "fx_origin": "center",
+      "variant_of": "effects/zap_0",
+      "output": "sprites/effects/zap_1.png",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/zap-r3.call.json",
+          "sha256": "ef2a9208d51144c13847463acc1cf717648712cdfaa45acb68c941cf2f53f48f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/zap/none/02.png",
+          "sha256": "a920f347118519a342c3909d5d1a6441da3dbbec31d82e596d06067d628bde6e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        5,
+        4
+      ],
+      "output_sha256": "a920f347118519a342c3909d5d1a6441da3dbbec31d82e596d06067d628bde6e"
+    },
+    {
+      "id": "effects/zap_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/zap/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127",
+      "crop_xywh": [
+        1648,
+        309,
+        292,
+        229
+      ],
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "content_scale": 0.01834862385321101,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/zap",
+      "frame": 2,
+      "seconds": 0.065,
+      "loop": false,
+      "fx_family": "zap",
+      "fx_origin": "center",
+      "variant_of": "effects/zap_0",
+      "output": "sprites/effects/zap_2.png",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/zap-r3.call.json",
+          "sha256": "ef2a9208d51144c13847463acc1cf717648712cdfaa45acb68c941cf2f53f48f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/zap/none/03.png",
+          "sha256": "b0ba73f0b45b9fe8f20df4a9366886d6d5d385efa0ee919115404ddb4618630f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        2,
+        2
+      ],
+      "output_sha256": "b0ba73f0b45b9fe8f20df4a9366886d6d5d385efa0ee919115404ddb4618630f"
+    },
+    {
+      "id": "buildings/modules/electric_fence_post",
+      "owner": "raster",
+      "source": "assets/art_source/defences/electric_fence/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420",
+      "crop_xywh": [
+        423,
+        51,
+        104,
+        364
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.037868162692847124,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/modules/electric_fence_post",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/modules/electric_fence_post.png",
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.call.json",
+          "sha256": "d97435b230deda6e65c6f22be6036a41d205db25ba0b3b35e7b4dcef29d3a13d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_post/none/01.png",
+          "sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        2,
+        22
+      ],
+      "output_sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9"
+    },
+    {
+      "id": "buildings/modules/electric_fence_horizontal",
+      "owner": "raster",
+      "source": "assets/art_source/defences/electric_fence/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420",
+      "crop_xywh": [
+        265,
+        479,
+        423,
+        121
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.037868162692847124,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/modules/electric_fence_horizontal",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/modules/electric_fence_horizontal.png",
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.call.json",
+          "sha256": "d97435b230deda6e65c6f22be6036a41d205db25ba0b3b35e7b4dcef29d3a13d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_horizontal/none/01.png",
+          "sha256": "baf857565d20bafddb6d822ed48198b2cc0f1750bac85ce0e2bc27033d99f170",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        8,
+        15
+      ],
+      "output_sha256": "baf857565d20bafddb6d822ed48198b2cc0f1750bac85ce0e2bc27033d99f170"
+    },
+    {
+      "id": "buildings/modules/electric_fence_vertical",
+      "owner": "raster",
+      "source": "assets/art_source/defences/electric_fence/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420",
+      "crop_xywh": [
+        426,
+        652,
+        100,
+        713
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.037868162692847124,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/modules/electric_fence_vertical",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/modules/electric_fence_vertical.png",
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.call.json",
+          "sha256": "d97435b230deda6e65c6f22be6036a41d205db25ba0b3b35e7b4dcef29d3a13d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_vertical/none/01.png",
+          "sha256": "e005a52a1432f91b95ef99bd1e5ff80d3e6ce2d0db0886aaf521c93c178717f1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        2,
+        27
+      ],
+      "output_sha256": "e005a52a1432f91b95ef99bd1e5ff80d3e6ce2d0db0886aaf521c93c178717f1"
+    },
+    {
+      "id": "buildings/electric_fence_wreck",
+      "owner": "raster",
+      "source": "assets/art_source/defences/electric_fence/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420",
+      "crop_xywh": [
+        285,
+        1442,
+        366,
+        149
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.037868162692847124,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_wreck",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_wreck.png",
+      "barrier_family": "electric_fence",
+      "barrier_state": "wreck",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.call.json",
+          "sha256": "d97435b230deda6e65c6f22be6036a41d205db25ba0b3b35e7b4dcef29d3a13d",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_wreck/none/01.png",
+          "sha256": "3ec3627221aaabe5fe6e8646178c439dfa8521c313bec8bcfffeebf9a2be649c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "3ec3627221aaabe5fe6e8646178c439dfa8521c313bec8bcfffeebf9a2be649c"
+    },
+    {
+      "id": "buildings/modules/electric_fence_post_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/electric_fence/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9",
+      "crop_xywh": [
+        426,
+        54,
+        105,
+        362
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.037868162692847124,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/modules/electric_fence_post_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/modules/electric_fence_post_hurt.png",
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.call.json",
+          "sha256": "83d8ff9acfc1320869fe04e9e10826aaa0da864bfb539ec623d06fbd047d6993",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_post_hurt/none/01.png",
+          "sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        2,
+        22
+      ],
+      "output_sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940"
+    },
+    {
+      "id": "buildings/modules/electric_fence_horizontal_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/electric_fence/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9",
+      "crop_xywh": [
+        265,
+        480,
+        423,
+        123
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.037868162692847124,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/modules/electric_fence_horizontal_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/modules/electric_fence_horizontal_hurt.png",
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.call.json",
+          "sha256": "83d8ff9acfc1320869fe04e9e10826aaa0da864bfb539ec623d06fbd047d6993",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_horizontal_hurt/none/01.png",
+          "sha256": "f2f1c37547aa3ee7fbc885d54200dd908dd52c8dfc0c7502eb792eb25ee28915",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        8,
+        15
+      ],
+      "output_sha256": "f2f1c37547aa3ee7fbc885d54200dd908dd52c8dfc0c7502eb792eb25ee28915"
+    },
+    {
+      "id": "buildings/modules/electric_fence_vertical_hurt",
+      "owner": "raster",
+      "source": "assets/art_source/defences/electric_fence/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9",
+      "crop_xywh": [
+        414,
+        654,
+        115,
+        713
+      ],
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "content_scale": 0.037868162692847124,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/modules/electric_fence_vertical_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/modules/electric_fence_vertical_hurt.png",
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.call.json",
+          "sha256": "83d8ff9acfc1320869fe04e9e10826aaa0da864bfb539ec623d06fbd047d6993",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_vertical_hurt/none/01.png",
+          "sha256": "6516da7a91796f96fbe12d0cc460684ae647cfcff43137927b37e94577d4b935",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "content_anchor_xy": [
+        2,
+        27
+      ],
+      "output_sha256": "6516da7a91796f96fbe12d0cc460684ae647cfcff43137927b37e94577d4b935"
+    },
+    {
+      "id": "buildings/electric_fence",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 0,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence/none/01.png",
+          "sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9"
+    },
+    {
+      "id": "buildings/electric_fence_join_1",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_1",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_1.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 1,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_1/none/01.png",
+          "sha256": "ddeca87f971f6da9771c7c2b25e7f4e5c5a5a9a7c1da406dd7fb54da13a315e8",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "ddeca87f971f6da9771c7c2b25e7f4e5c5a5a9a7c1da406dd7fb54da13a315e8"
+    },
+    {
+      "id": "buildings/electric_fence_join_2",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_2",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_2.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 2,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_2/none/01.png",
+          "sha256": "d17e47a1ffc53396143fb514356b42fe3ceeaa9c0cb7deb43f770a98a2694d22",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "d17e47a1ffc53396143fb514356b42fe3ceeaa9c0cb7deb43f770a98a2694d22"
+    },
+    {
+      "id": "buildings/electric_fence_join_3",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_3",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_3.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 3,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_3/none/01.png",
+          "sha256": "e1c63d99be9f5090cddf25715220af6e0220b1f9a0a74df08637217560a33851",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "e1c63d99be9f5090cddf25715220af6e0220b1f9a0a74df08637217560a33851"
+    },
+    {
+      "id": "buildings/electric_fence_join_4",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_4",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_4.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 4,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_4/none/01.png",
+          "sha256": "918b0b426b69fcd294884b9bad7997fcecc1eb465d15e6ace64b48030c36d089",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "918b0b426b69fcd294884b9bad7997fcecc1eb465d15e6ace64b48030c36d089"
+    },
+    {
+      "id": "buildings/electric_fence_join_5",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_5",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_5.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 5,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_5/none/01.png",
+          "sha256": "9c7eb412b10f25e391edb9f8aa9014e0e2bda420fc6aa733d995e80da55ba1ff",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "9c7eb412b10f25e391edb9f8aa9014e0e2bda420fc6aa733d995e80da55ba1ff"
+    },
+    {
+      "id": "buildings/electric_fence_join_6",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_6",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_6.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 6,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_6/none/01.png",
+          "sha256": "52907a38689e1890cb9e88f8f8c8b4e0c0029c6fe91853c430cfc7eecb8d1ab5",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "52907a38689e1890cb9e88f8f8c8b4e0c0029c6fe91853c430cfc7eecb8d1ab5"
+    },
+    {
+      "id": "buildings/electric_fence_join_7",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_7",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_7.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 7,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_7/none/01.png",
+          "sha256": "bd3766c46f8ebed0ab2769dff88b08988d3b5808b26206f27ff7833f76a7f443",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "bd3766c46f8ebed0ab2769dff88b08988d3b5808b26206f27ff7833f76a7f443"
+    },
+    {
+      "id": "buildings/electric_fence_join_8",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_8",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_8.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 8,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_8/none/01.png",
+          "sha256": "79c254c9f34b394d41c200cb503cbce077bddb53f69d637d29570cebdcd68c95",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "79c254c9f34b394d41c200cb503cbce077bddb53f69d637d29570cebdcd68c95"
+    },
+    {
+      "id": "buildings/electric_fence_join_9",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_9",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_9.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 9,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_9/none/01.png",
+          "sha256": "f4cf8702e704c05867e8c2090956a11b85ccee2ae51714b47591f90ecf7bf16d",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "f4cf8702e704c05867e8c2090956a11b85ccee2ae51714b47591f90ecf7bf16d"
+    },
+    {
+      "id": "buildings/electric_fence_join_10",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_10",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_10.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 10,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_10/none/01.png",
+          "sha256": "8668fdeb255bb949744dccfad009384dacd8df9755706a35607c076e98aee2d0",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "8668fdeb255bb949744dccfad009384dacd8df9755706a35607c076e98aee2d0"
+    },
+    {
+      "id": "buildings/electric_fence_join_11",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_11",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_11.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 11,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_11/none/01.png",
+          "sha256": "e6d6013376f8860ec71d859859e1ebb64ece7516ca4b1e88b5bc0b637e85731f",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "e6d6013376f8860ec71d859859e1ebb64ece7516ca4b1e88b5bc0b637e85731f"
+    },
+    {
+      "id": "buildings/electric_fence_join_12",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_12",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_12.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 12,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_12/none/01.png",
+          "sha256": "23aed2530bddb8047863517a7021799657ce0fe55d700e10a4582ddfc2faa836",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "23aed2530bddb8047863517a7021799657ce0fe55d700e10a4582ddfc2faa836"
+    },
+    {
+      "id": "buildings/electric_fence_join_13",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_13",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_13.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 13,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_13/none/01.png",
+          "sha256": "3b117214ca426ea0a73e05bd063a4b81875273974bf0b68ff1e2217b3d8e8f48",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "3b117214ca426ea0a73e05bd063a4b81875273974bf0b68ff1e2217b3d8e8f48"
+    },
+    {
+      "id": "buildings/electric_fence_join_14",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_14",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_14.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 14,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_14/none/01.png",
+          "sha256": "54ea607edb50927d70f91e0c3a6112c8294448613eb020c2f6454eea4cb038e7",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "54ea607edb50927d70f91e0c3a6112c8294448613eb020c2f6454eea4cb038e7"
+    },
+    {
+      "id": "buildings/electric_fence_join_15",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_15",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_15.png",
+      "input": "buildings/modules/electric_fence_post",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "whole",
+      "join_mask": 15,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_15/none/01.png",
+          "sha256": "4adc0fb2919185f156cb54cd0c26df78cd31606f7eb20dcc7632279387fdffce",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "4adc0fb2919185f156cb54cd0c26df78cd31606f7eb20dcc7632279387fdffce"
+    },
+    {
+      "id": "buildings/electric_fence_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 0,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_hurt/none/01.png",
+          "sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940"
+    },
+    {
+      "id": "buildings/electric_fence_join_1_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_1_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_1_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 1,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_1_hurt/none/01.png",
+          "sha256": "49a7bc68c86540aa1e846cc3cacd99535727db3de4a77078b340b186b1f16cc0",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "49a7bc68c86540aa1e846cc3cacd99535727db3de4a77078b340b186b1f16cc0"
+    },
+    {
+      "id": "buildings/electric_fence_join_2_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_2_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_2_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 2,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_2_hurt/none/01.png",
+          "sha256": "37db3b9ed91e166afc2b52bbe808b5069c5b8a21d404331c6d51d19344e4fdb7",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "37db3b9ed91e166afc2b52bbe808b5069c5b8a21d404331c6d51d19344e4fdb7"
+    },
+    {
+      "id": "buildings/electric_fence_join_3_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_3_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_3_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 3,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_3_hurt/none/01.png",
+          "sha256": "2542a27690626348f1e939815d067a2585b4367d627502794c68a6b8d5781c2f",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "2542a27690626348f1e939815d067a2585b4367d627502794c68a6b8d5781c2f"
+    },
+    {
+      "id": "buildings/electric_fence_join_4_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_4_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_4_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 4,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_4_hurt/none/01.png",
+          "sha256": "beef1ae472586491b21323b47e732051ebc2edcfd0e09e24080515c9d73d2dea",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "beef1ae472586491b21323b47e732051ebc2edcfd0e09e24080515c9d73d2dea"
+    },
+    {
+      "id": "buildings/electric_fence_join_5_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_5_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_5_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 5,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_5_hurt/none/01.png",
+          "sha256": "03894038a4e1ce2751c629954beadee41eee657e6470bc64cac3ee8939fa64f8",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "03894038a4e1ce2751c629954beadee41eee657e6470bc64cac3ee8939fa64f8"
+    },
+    {
+      "id": "buildings/electric_fence_join_6_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_6_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_6_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 6,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_6_hurt/none/01.png",
+          "sha256": "776d791303a1f6ac26be0f2e7d12cf2ca991d34d7fcca7b7e1660afaf7f4b470",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "776d791303a1f6ac26be0f2e7d12cf2ca991d34d7fcca7b7e1660afaf7f4b470"
+    },
+    {
+      "id": "buildings/electric_fence_join_7_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_7_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_7_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 7,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_7_hurt/none/01.png",
+          "sha256": "66a93d51bdda0e53a01f109241bb37043e4b4b92befb5acc421891fb1e266053",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "66a93d51bdda0e53a01f109241bb37043e4b4b92befb5acc421891fb1e266053"
+    },
+    {
+      "id": "buildings/electric_fence_join_8_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_8_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_8_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 8,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_8_hurt/none/01.png",
+          "sha256": "ba6a8821bae1820cef2745a72db4e1ed5c0c57de969236695423d2fc4269a00c",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "ba6a8821bae1820cef2745a72db4e1ed5c0c57de969236695423d2fc4269a00c"
+    },
+    {
+      "id": "buildings/electric_fence_join_9_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_9_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_9_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 9,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_9_hurt/none/01.png",
+          "sha256": "4d2e5a5ee1bddc969eb24a637215aae94c45d2b71a9bd42681a53417328c40c2",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "4d2e5a5ee1bddc969eb24a637215aae94c45d2b71a9bd42681a53417328c40c2"
+    },
+    {
+      "id": "buildings/electric_fence_join_10_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_10_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_10_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 10,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_10_hurt/none/01.png",
+          "sha256": "c7cfa664b2ddafe67366d4c6fc86139bc6866ba633615660e89d19f1da171ee4",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "c7cfa664b2ddafe67366d4c6fc86139bc6866ba633615660e89d19f1da171ee4"
+    },
+    {
+      "id": "buildings/electric_fence_join_11_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_11_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_11_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 11,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_11_hurt/none/01.png",
+          "sha256": "d7042359d6418e6fbb56d6af9c278de8f673e17bb5ac5c9753e024a9e018924d",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "d7042359d6418e6fbb56d6af9c278de8f673e17bb5ac5c9753e024a9e018924d"
+    },
+    {
+      "id": "buildings/electric_fence_join_12_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_12_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_12_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 12,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_12_hurt/none/01.png",
+          "sha256": "0742464bdc612073029976c80c0d8730ea48075e49de76d846893b100cc8f8e7",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "0742464bdc612073029976c80c0d8730ea48075e49de76d846893b100cc8f8e7"
+    },
+    {
+      "id": "buildings/electric_fence_join_13_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_13_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_13_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 13,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_13_hurt/none/01.png",
+          "sha256": "6525ab7a732dc86c933d8a6e6d4a0bd6a5b6afbe4fa7869d688fcab7ba09243a",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "6525ab7a732dc86c933d8a6e6d4a0bd6a5b6afbe4fa7869d688fcab7ba09243a"
+    },
+    {
+      "id": "buildings/electric_fence_join_14_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_14_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_14_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 14,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_14_hurt/none/01.png",
+          "sha256": "d78fe0ee6e46d73b37a66bec4969a5e24a0d7d6da59ef5c9b0f55560a3b1be70",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "d78fe0ee6e46d73b37a66bec4969a5e24a0d7d6da59ef5c9b0f55560a3b1be70"
+    },
+    {
+      "id": "buildings/electric_fence_join_15_hurt",
+      "owner": "raster",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "cell_offset_xy": [
+        0,
+        -12
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "buildings/electric_fence_join_15_hurt",
+      "frame": 0,
+      "seconds": 0.55,
+      "loop": false,
+      "output": "sprites/buildings/electric_fence_join_15_hurt.png",
+      "input": "buildings/modules/electric_fence_post_hurt",
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_horizontal_hurt",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_vertical_hurt",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "buildings/modules/electric_fence_post_hurt",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ],
+      "barrier_family": "electric_fence",
+      "barrier_state": "hurt",
+      "join_mask": 15,
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/native/electric_fence_join_15_hurt/none/01.png",
+          "sha256": "6a3fdc6e4c160747a5c4a04e04b94eeb5fa1fe40e9ded7c96a7bbe6f1409edae",
+          "role": "Approved native export; the composed output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/contract.json",
+          "sha256": "13e5ff106235b1671257d82e3f565cc187c4303a1ca5f83014a02b553bc4d9ec",
+          "role": "Delivery contract: this join's parts (joins.parts), in N, W, E, S, post order"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A042-electric-fence/APPROVAL.json",
+          "sha256": "c87918ecefc70c34e58a3bca7aa5674e0913a7ac99e86df29155f5672c4018f3",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "prompt": "implementation/backlog/deliveries/A042-electric-fence/raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "tool": "built-in ImageGen",
+      "generation_task": "A042",
+      "integration_task": "0241",
+      "revision": 1,
+      "approval": "A042 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0241",
+      "output_sha256": "6a3fdc6e4c160747a5c4a04e04b94eeb5fa1fe40e9ded7c96a7bbe6f1409edae"
     }
   ]
 }

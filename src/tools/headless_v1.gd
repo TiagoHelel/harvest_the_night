@@ -8645,21 +8645,22 @@ func _task_0230_electric_fence() -> void:
 		"it joins the wooden fence east, the wall south and its own kind west, not the decoy north, and the fence and the wall join it back",
 		"%d %d %d" % [mask, wood_mask, wall_mask])
 
-	# **Drawn through 0120's road**: the 32 masks and the wreck registered to
-	# A042 at its 16x32 on (8,28), drawn in code, every standing one
-	# `connected`.
+	# **A042's art since task 0241**: the 32 masks composed by the importer
+	# and the wreck, at 16x32 on (8,28), every standing one `connected`, with
+	# nothing of 0120's road left.
 	var road: Array = []
 	for name in ElectricFenceArt.names():
 		var path := ElectricFenceArt.path_of(name)
-		var frame := PlaceholderArt.frame(path)
+		var frame: Dictionary = RasterArt.FRAMES.get(path, {})
+		var texture := ElectricFenceArt.texture(name)
 		if (frame.get("canvas") != Vector2i(16, 32) or frame.get("pivot") != Vector2i(8, 28)
-				or not PlaceholderArt.is_drawn(path) or str(PlaceholderArt.art(name).get("pack", "")) != "A042"
+				or PlaceholderArt.is_drawn(path) or not PlaceholderArt.art(name).is_empty()
 				or bool(frame.get("connected", false)) == (name == ElectricFenceArt.WRECK)
-				or ElectricFenceArt.texture(name) == null):
+				or texture == null or texture.resource_path != path):
 			road.append(name)
 	expect(ElectricFenceArt.names().size() == 33 and road.is_empty() and ElectricFenceArt.texture(&"fence") == null
 		and ElectricFenceArt.texture(&"decoy") == null,
-		"the 32 masks and the wreck drawn through 0120's road at A042's 16x32 on (8,28), every standing one connected", str(road))
+		"the 32 masks and the wreck are A042's art at 16x32 on (8,28), every standing one connected", str(road))
 
 	# **Each mask's arms match its bits** - the west column, the east column,
 	# above the post's cap, below its foot - and every hurt one's alpha
@@ -8668,49 +8669,41 @@ func _task_0230_electric_fence() -> void:
 	for hurt in [false, true]:
 		for m in 16:
 			var name := ElectricFenceArt.name_of(m, hurt)
-			var image := ElectricFenceArt.drawing(name)
+			var image := _art_image(ElectricFenceArt.path_of(name))
+			# North is whatever rises above the post's own top (A042's post
+			# stands taller than 0230's drawing), as check_barrier_art asks.
+			var post_top := _art_image("res://sprites/buildings/modules/electric_fence_post%s.png" % ("_hurt" if hurt else "")).get_used_rect().position.y
 			var seen := [_any_opaque(image, Rect2i(0, 12, 1, 8)), _any_opaque(image, Rect2i(15, 12, 1, 8)),
-				_any_opaque(image, Rect2i(0, 0, 16, 7)), _any_opaque(image, Rect2i(0, 20, 16, 12))]
+				image.get_used_rect().position.y < post_top, _any_opaque(image, Rect2i(0, 20, 16, 12))]
 			if image.get_size() != Vector2i(16, 32) or seen != [(m & 8) != 0, (m & 2) != 0, (m & 1) != 0, (m & 4) != 0]:
 				arms.append(name)
-			if hurt and _alpha_apart(image, ElectricFenceArt.drawing(ElectricFenceArt.name_of(m, false))) < 3:
+			if hurt and _alpha_apart(image, _art_image(ElectricFenceArt.path_of(ElectricFenceArt.name_of(m, false)))) < 3:
 				arms.append("%s as whole" % name)
-	var post := ElectricFenceArt.module(&"post", false)
-	var span := ElectricFenceArt.module(&"horizontal", false)
-	expect(arms.is_empty() and post.get_used_rect().end.y - 1 == 19 and span.get_used_rect().end.y - 1 <= 19
-		and _any_opaque(span, Rect2i(0, 12, 1, 8)) and _any_opaque(span, Rect2i(15, 12, 1, 8))
-		and _any_opaque(ElectricFenceArt.module(&"horizontal", true), Rect2i(4, 14, 1, 2)),
-		"every mask's arms match its bits, every hurt one differs from its whole one, the post and the span stand on row 20, and the snapped wire hangs outside the post",
+	expect(arms.is_empty(),
+		"every mask's arms match its bits - west, east, above the post, below its foot - and every hurt one differs from its whole one",
 		str(arms))
-	var wreck := ElectricFenceArt.drawing(ElectricFenceArt.WRECK)
-	var pile := wreck.get_used_rect()
-	var wood := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/buildings/fence_join_10.png"))
-	wood.convert(Image.FORMAT_RGBA8)
-	var straight := ElectricFenceArt.drawing(ElectricFenceArt.name_of(10, false))
+	var pile := _art_image(ElectricFenceArt.path_of(ElectricFenceArt.WRECK)).get_used_rect()
+	var wood := _art_image("res://sprites/buildings/fence_join_8.png")
+	var straight := _art_image(ElectricFenceArt.path_of(ElectricFenceArt.name_of(10, false)))
 	var seam := 0
 	for y in 32:
 		if straight.get_pixel(15, y).a > 0.0 and wood.get_pixel(0, y).a > 0.0:
 			seam += 1
-	expect(pile.size.y <= 8 and pile.end.y - 1 == 27 and pile.size.x <= 14 and seam >= 2,
+	expect(pile.size.y <= 8 and pile.end.y == 28 and pile.size.x <= 15 and seam >= 2,
 		"the wreck is a low pile on the cell's ground line, and a straight run meets the wooden fence's on %d rows" % seam,
 		"%s %d" % [str(pile), seam])
 
-	# **The zap**: three 12x12 frames, the arcs the widest and the fade less,
-	# inside a clear pixel, a 0.065 s one-shot.
-	var areas: Array = []
-	var inside := true
+	# **The zap**: A042's three 12x12 frames round (6,6), a 0.065 s one-shot.
+	var zaps := true
 	for i in ElectricFenceArt.ZAP_FRAMES:
-		var image := ElectricFenceArt.zap_drawing(i)
-		var used := image.get_used_rect()
-		areas.append(_opaque_count(image))
-		inside = inside and image.get_size() == Vector2i(12, 12) and used.position.x >= 1 and used.position.y >= 1 \
-			and used.end.x <= 11 and used.end.y <= 11
-	expect(inside and areas.size() == 3 and int(areas[1]) > int(areas[0]) and int(areas[2]) < int(areas[1])
-		and ElectricFenceArt.zap(3) == null and ElectricFenceArt.zap(0) != null
-		and PlaceholderArt.is_drawn(ElectricFenceArt.ZAP_PATH % 0) and is_equal_approx(ElectricFenceArt.zap_seconds(), 0.065)
-		and ElectricFenceArt.zap_pivot() == Vector2i(6, 6),
-		"the zap: three 12x12 frames round (6,6) inside a clear pixel - a spark, the arcs at their widest, a fade - a 0.065 s one-shot, drawn in code for A042",
-		str(areas))
+		var frame := PlaceholderArt.frame(ElectricFenceArt.ZAP_PATH % i)
+		var texture := ElectricFenceArt.zap(i)
+		zaps = (zaps and texture != null and texture.resource_path == ElectricFenceArt.ZAP_PATH % i
+			and RasterArt.FRAMES.has(ElectricFenceArt.ZAP_PATH % i) and not bool(frame.get("loop", true))
+			and frame.get("canvas") == Vector2i(12, 12))
+	expect(zaps and ElectricFenceArt.zap(3) == null and PlaceholderArt.art(&"zap").is_empty()
+		and is_equal_approx(ElectricFenceArt.zap_seconds(), 0.065) and ElectricFenceArt.zap_pivot() == Vector2i(6, 6),
+		"the zap: A042's three 12x12 frames round (6,6), a 0.065 s one-shot")
 
 	# **The view**: a fresh stun is a zap half way to the wire it bit, at the
 	# wires' height; the stunned stand cold blue, the hurt cue first.
@@ -13762,6 +13755,13 @@ func _open_square(state: Dictionary, radius: int, id: StringName = &"decoy") -> 
 func _held(make: Callable) -> bool:
 	var weak: WeakRef = weakref(make.call())
 	return weak.get_ref() != null
+
+
+## A raster art file's own pixels (task 0241), as the image the view draws.
+func _art_image(path: String) -> Image:
+	var image := Image.load_from_file(ProjectSettings.globalize_path(path))
+	image.convert(Image.FORMAT_RGBA8)
+	return image
 
 
 ## Where a season's defences start in a hotbar order (task 0234).

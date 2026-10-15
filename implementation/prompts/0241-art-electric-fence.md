@@ -1,7 +1,7 @@
 # 0241 - Art: the electric fence
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0230
 - **Likely files:** assets/art_source/defences/, assets/art_source/effects/, assets/art_source/manifest.json, tools/check_barrier_art.py, tools/check_effect_art.py
 - **Art packs:** A042

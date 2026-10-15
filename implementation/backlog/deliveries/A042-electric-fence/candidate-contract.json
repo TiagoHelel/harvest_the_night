@@ -1,0 +1,248 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "zap",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+          "night": "preview/zap-none-0-night.png",
+          "path": "preview/candidates/zap/none/01.png",
+          "points": {},
+          "pose": "spark"
+        },
+        {
+          "issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+          "night": "preview/zap-none-1-night.png",
+          "path": "preview/candidates/zap/none/02.png",
+          "points": {},
+          "pose": "arc"
+        },
+        {
+          "issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+          "night": "preview/zap-none-2-night.png",
+          "path": "preview/candidates/zap/none/03.png",
+          "points": {},
+          "pose": "fade"
+        }
+      ],
+      "frame_seconds": 0.065,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "poses": [
+        "spark",
+        "arc",
+        "fade"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/fence.png",
+      "pivot_xy": [
+        8,
+        28
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "delivery_type": "owner-approved reviewed artwork; partial delivery",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "zap",
+      "call": "raw/zap-r3.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/zap/none/01.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "spark",
+      "prompt": "raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.01834862385321101,
+        "crop_xywh": [
+          229,
+          267,
+          255,
+          287
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          633,
+          724
+        ]
+      },
+      "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+      "runtime_name": "sprites/effects/zap_0.png",
+      "seconds": 0.065,
+      "sha256": "b2a5a7f93b7b11f1985982a70fd7315f44fe922181cac47b922e103b8bd36311",
+      "source": "raw/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127"
+    },
+    {
+      "anim": "zap",
+      "call": "raw/zap-r3.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/zap/none/02.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "arc",
+      "prompt": "raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "content_scale": 0.01834862385321101,
+        "crop_xywh": [
+          784,
+          153,
+          545,
+          485
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          633,
+          0,
+          855,
+          724
+        ]
+      },
+      "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+      "runtime_name": "sprites/effects/zap_1.png",
+      "seconds": 0.065,
+      "sha256": "a920f347118519a342c3909d5d1a6441da3dbbec31d82e596d06067d628bde6e",
+      "source": "raw/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127"
+    },
+    {
+      "anim": "zap",
+      "call": "raw/zap-r3.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/zap/none/03.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "fade",
+      "prompt": "raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.01834862385321101,
+        "crop_xywh": [
+          1648,
+          309,
+          292,
+          229
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1488,
+          0,
+          684,
+          724
+        ]
+      },
+      "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+      "runtime_name": "sprites/effects/zap_2.png",
+      "seconds": 0.065,
+      "sha256": "b0ba73f0b45b9fe8f20df4a9366886d6d5d385efa0ee919115404ddb4618630f",
+      "source": "raw/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127"
+    }
+  ],
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+    "scope": "available_reviewed_files_only"
+  },
+  "pack": "A042",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\effects\\impact_1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6a5cff67720916e243ef4264acb21b903de449abc32ac5bb4aa5c2ef335a4f54"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\props\\generator.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "26eafa19dc75728704a6c72b3a9a5bbe6ca8e579b29dd905dd85afe541d8768a"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A042-electric-fence",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "The electric fence",
+  "tool": "built-in ImageGen"
+}

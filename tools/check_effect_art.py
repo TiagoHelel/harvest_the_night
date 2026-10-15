@@ -2,10 +2,12 @@
 import json
 import import_art
 
-# The packs' effects: family, task, frames, canvas, pivot, origin, loop.
-PACK_EFFECTS=[('bee_swarm','A038',3,[8,8],[4,4],'center',True),
-              ('pumpkin_shot','A039',3,[8,8],[4,4],'center',True),
-              ('pumpkin_splat','A039',4,[20,16],[10,14],'base',False)]
+# The packs' effects: family, task, frames, canvas, pivot, origin, loop,
+# seconds a frame.
+PACK_EFFECTS=[('bee_swarm','A038',3,[8,8],[4,4],'center',True,0.1),
+              ('pumpkin_shot','A039',3,[8,8],[4,4],'center',True,0.1),
+              ('pumpkin_splat','A039',4,[20,16],[10,14],'base',False,0.1),
+              ('zap','A042',3,[12,12],[6,6],'center',False,0.065)]
 
 
 def main():
@@ -37,14 +39,14 @@ def main():
     # A loop (A038's swarm, task 0237; A039's pumpkin in the air, 0238) hangs
     # on as long as what it shows lasts, so it neither grows nor dies away; a
     # one-shot (A039's splat, 0238) bursts and fades as 0017's do.
-    for family,task,count,canvas,pivot,origin,loop in PACK_EFFECTS:
+    for family,task,count,canvas,pivot,origin,loop,seconds in PACK_EFFECTS:
         frames=sorted((e for e in data['assets'] if e.get('fx_family')==family),key=lambda e:e['frame'])
         assert [e['frame'] for e in frames]==list(range(count)) and all(e.get('generation_task')==task for e in frames),'%s owns its %d frames'%(family,count)
         assert len({e['source'] for e in frames})==len({e['content_scale'] for e in frames})==1,'One strip, one scale: '+family
         shapes=[];areas=[]
         for e in frames:
             assert e['output']=='sprites/effects/%s_%d.png'%(family,e['frame']),e['id']
-            assert e['canvas_wh']==canvas and e['pivot_xy']==pivot and e['seconds']==0.1 and e['loop'] is loop and e['fx_origin']==origin,e['id']
+            assert e['canvas_wh']==canvas and e['pivot_xy']==pivot and e['seconds']==seconds and e['loop'] is loop and e['fx_origin']==origin,e['id']
             art=images[e['id']];box=art.getbbox();w,h=art.size
             assert box and box[0]>=0 and box[1]>=0 and box[2]<=w and box[3]<=h, 'Clipped FX: '+e['id']
             assert art.tobytes() not in shapes, 'Repeated effect pose: '+e['id']

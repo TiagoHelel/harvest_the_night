@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Create DAMAGED variants of attached electric-fence sourcecolumn. EDIT TARGET = image1. Keep EXACT953x1651canvas, identical modulecenters, scales, materialpalette and top/bottomregions: post row51..414, horizontalpair y479..599, longverticalcorridor y652..1364. No resizing or reframing. Exactly THREE damaged modules in those same firstthreeregions; REMOVE FOURTHWRECK entirely totransparent, no replacement. Firstpost slightlybent and crackedceramic, a missing sidechunk so alpha differs. Horizontaltwo wires: snap the UPPER WIRE on the LEFT QUARTER (not undercenterpost), leave a clear4nativeunitgap in it, with shortloosewireend hanging below gap; lowerwire stillspans all the way to bothends. Keep upper/lower rest at SAMEheight, samefullhorizontalwidth, NOendposts. Vertical: topdown wire corridor not upright; snapone wire overonequarter of length with a cleargap outsideits center, bentloosewire hanging sideways slightly within5nativeunitswidth; keepoveralllength713sourcepx andotherwire intact. Damagemustchange transparency not justcolor. Sameverydarkiron,paleceramic,mutedcopper asinput, true transparentbackground, crisppixelart. No glow, arc,sparks, shadow,ground,text,labels,scene or fourthmodule. Preserve broadtransparentgaps.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\electric-whole-column-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-bab81ae5-c1b9-4ed5-b6a6-4a5a19ac210b.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "whole module identity/camera/scale edit target"
+  ]
+}

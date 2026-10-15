@@ -31927,3 +31927,76 @@ stand-in is gone, and the beam leaves from the lens the art draws.
 - `python implementation/backlog/assets.py set A041 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (61 of 61).
+
+## 0241 - Art: the electric fence - done 2026-10-15
+
+A042 is integrated: the electric fence's sixteen masks whole and hurt, its
+wreck and the zap where a shock lands are the owner-approved art now
+(approved 2026-10-14, "tudo aprovado, falta mais?", recorded by Codex in the
+delivery's `APPROVAL.json`). 0230's drawing is gone. The owner accepted two
+measured differences, `electric_fence_post_span_row20` and
+`zap_two_to_three_warm_sparks`, and they stay recorded as measured.
+
+- **Promotion**: the 42 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - The three raw sources were copied byte for byte into
+    `assets/art_source/defences/electric_fence/` and
+    `assets/art_source/effects/zap/`.
+  - Seven files are source crops: the post, horizontal and vertical modules,
+    whole and hurt, and the wreck. 0236's scratch promoter solved their
+    anchors so each decodes to the approved pixels exactly.
+  - The 32 masks are **compose entries**, built from the contract's
+    `joins.parts` in N, W, E, S, post order. Each has no source of its own,
+    the contact post as its `input`, and `barrier_family`, `barrier_state`
+    and `join_mask`, as 0014's fence's do. The promoter learned to build
+    them and checks each composition against the approved PNG: all 32
+    match.
+  - The modules and the wreck carry their `barrier_family`/`barrier_state`.
+    The zap's frames carry `fx_family` `zap`, `fx_origin` `center` and
+    `variant_of`.
+- **No view change**: `import_art` writes `connected` from `join_mask`, so
+  `WorldView.connected_barrier` and `_barrier_name` pick A042's joins as
+  they picked 0230's drawings. The zap plays from `ElectricFenceArt.zap`,
+  now A042's frames, when the stun lands.
+- **The stand-ins retired**:
+  - A042's 34 `PlaceholderArt` entries and the `ELECTRIC_FENCE`/`ZAP`
+    geometry are gone. `placeholders.py --check` passes, with 305
+    stand-ins left over 33 packs.
+  - `ElectricFenceArt` loses its drawing: the modules, the composition and
+    the zap's sparks. It names the masks and loads the art for the hotbar
+    and the zap.
+  - `WorldView` and `headless_check` lose their branches to the drawing.
+- **Checks**:
+  - `check_barrier_art.py` joins `electric_fence` to the wall and the fence:
+    39 entries. For every mask, whole and hurt, it checks the compose
+    recipe and that the parts are the family's modules with the post last.
+    Each arm must match its occupancy bit, and wear must change the pixels
+    and the alpha. One physical scale; a low wreck.
+  - It also checks that a straight run's east edge meets the wooden fence's
+    west arm on at least two rows, whole and hurt.
+  - `check_effect_art.py` adds the zap to the packs' table as a one-shot
+    that bursts and fades, at its own 0.065 s.
+  - The barrier showcase runs the electric fence through the wall's and the
+    fence's paces: all sixteen masks by day, at dusk and by night, hurt,
+    wrecked and kept as ruins. That makes 4,547 checks.
+  - The effect showcase passes with 3,214 checks.
+- **Tests**: `_task_0230_electric_fence`'s view half now reads the art's own
+  pixels. Each mask is A042's raster, `connected`, with nothing of 0120's
+  road left; its arms match its bits, and every hurt one differs from its
+  whole one. The wreck lies low on the ground line, the straight run meets
+  the wood, and the zap is three raster frames round (6,6) at 0.065 s.
+  - A042's post stands taller than 0230's drawing. The north arm is now
+    read as anything rising above the post's own top, as
+    `check_barrier_art` reads it, not as rows 0-6.
+- **Shots** (`implementation/shots/0241/`, FHD 1920x1080, looked at):
+  - `electric_fence`, 0230's scene at night: the joined run across the
+    road, with its tee of wood, its corners, the wood carrying the south
+    arm on, and the downed arm's wreck. A walker stands stunned cold blue
+    at the gate it bit, with A042's zap there.
+  - `electric_fence_day`, its new twin: the same run by day, tarps off. A
+    shock lands only at night (`_refresh_zaps`), so it stands quiet.
+- **The delivery folder** `implementation/backlog/deliveries/A042-electric-fence/` is
+  committed, as A041's was.
+- `python implementation/backlog/assets.py set A042 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (61 of 61).

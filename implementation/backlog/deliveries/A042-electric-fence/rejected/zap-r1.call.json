@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, pixel farm defence.\nPrimary request: A042 zap, ONE horizontal strip of exactly3 sequential electric spark burst frames.\nInput images: Image1 impact_1 is effect cluster style and native scale only. Image2 generator is darkiron/copper material source, NOT a target to draw.\nStyle/medium: hand-crafted pixel art, deliberate boldpixelclusters, coloured outlines, clean forms.\nComposition/framing: orthographic gamecamera, native12x12 perframe, originpivot(6,6), entireburst inside1pxclear border. No scenery.\nLighting/mood: neutral source colours, rendered over night relight bygame; NOT a halo or scene light.\nPalette: small jagged1px pale-blue/white arcs, 2\u20133 warmamber spark specks. No purplecloud or giantlightningbolt.\nFX family: short electric arc burst, localized origin at6,6, expansion then dissipation, no loopingflash.\nSTRIP: exactly3 equalcells in ONE horizontal row, ordered spark(small), arc(largest area, max10pxdimensions), fade(fewspecks, lessarea thanarc). Huge transparent gutters, no labels/separators. Same particle scale/origin, do NOT enlarge fadedparticles tofillcells. A few thin steppedarcclusters, not many tiny scattered specks.\nBackground: true alpha0 outside actual particles, absolutely no glow/bloom/gradient/groundshadow/text/grid/checkerboard. Completeunclipped effect, not photographic lightning. No target, fence or generator baked in.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/impact_1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/generator.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/impact_1.png",
+      "sha256": "6a5cff67720916e243ef4264acb21b903de449abc32ac5bb4aa5c2ef335a4f54",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/props/generator.png",
+      "sha256": "26eafa19dc75728704a6c72b3a9a5bbe6ca8e579b29dd905dd85afe541d8768a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-24be8cc3-58a0-4072-9a50-48236e516437.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\zap-r1.png",
+  "sha256": "fe368e9591cdb65ff4e4e3ea97fbb2e10445a7303189415795e912b5a82efc73",
+  "revision": 1,
+  "decision": "rejected: Warm spark specks vanish atnative12x12.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\rejected\\zap-r1.png"
+}

@@ -1,0 +1,131 @@
+[
+  {
+    "recipe": {
+      "id": "zap-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\zap-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        629,
+        724
+      ],
+      "crop_xywh": [
+        246,
+        291,
+        232,
+        257
+      ],
+      "content_scale": 0.017825311942959002,
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        2,
+        2
+      ]
+    },
+    "native_bounds": [
+      5,
+      5,
+      8,
+      7
+    ],
+    "unclipped_scaled_wh": [
+      4,
+      5
+    ]
+  },
+  {
+    "recipe": {
+      "id": "zap-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\zap-r1.png",
+      "sheet_cell_xywh": [
+        629,
+        0,
+        868,
+        724
+      ],
+      "crop_xywh": [
+        782,
+        183,
+        561,
+        462
+      ],
+      "content_scale": 0.017825311942959002,
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        5,
+        4
+      ]
+    },
+    "native_bounds": [
+      2,
+      2,
+      11,
+      9
+    ],
+    "unclipped_scaled_wh": [
+      10,
+      8
+    ]
+  },
+  {
+    "recipe": {
+      "id": "zap-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\zap-r1.png",
+      "sheet_cell_xywh": [
+        1497,
+        0,
+        675,
+        724
+      ],
+      "crop_xywh": [
+        1653,
+        328,
+        269,
+        196
+      ],
+      "content_scale": 0.017825311942959002,
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        2,
+        1
+      ]
+    },
+    "native_bounds": [
+      4,
+      6,
+      8,
+      7
+    ],
+    "unclipped_scaled_wh": [
+      5,
+      3
+    ]
+  }
+]

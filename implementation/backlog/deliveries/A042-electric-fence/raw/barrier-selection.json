@@ -1,0 +1,21 @@
+{
+  "electric_fence": {
+    "whole": "electric-whole-column-r3",
+    "hurt": "electric-hurt-column-r2",
+    "whole_cells_y": [
+      0,
+      446,
+      625,
+      1403,
+      1651
+    ],
+    "hurt_cells_y": [
+      0,
+      446,
+      625,
+      1403
+    ],
+    "scale_anchor": "vertical27",
+    "wire_top_row": 13
+  }
+}

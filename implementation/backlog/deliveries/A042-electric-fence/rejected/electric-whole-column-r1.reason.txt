@@ -1,0 +1,1 @@
+End blocks and over-wide horizontal span do not fit shared geometry.

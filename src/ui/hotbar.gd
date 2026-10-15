@@ -337,8 +337,8 @@ func _icon_of(id: StringName) -> Texture2D:
 
 
 ## A defence's own art as its icon: the decoy's, the garlic braid's (task
-## 0228; A040's since 0239), the electric fence's (task 0230) or the
-## sandbags' (task 0231) - the last two drawn in code until their packs land.
+## 0228; A040's since 0239), the electric fence's (task 0230; A042's since
+## 0241) or the sandbags' (task 0231, drawn in code until A043 lands).
 static func _drawn(id: StringName) -> Texture2D:
 	var drawn := DecoyArt.texture(id)
 	if drawn == null:

@@ -1,0 +1,5617 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "electric_fence",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence-none-0-night.png",
+          "path": "native/electric_fence/none/01.png",
+          "points": {},
+          "pose": "connected mask 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 0"
+      ]
+    },
+    {
+      "anim": "electric_fence_horizontal",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_horizontal-none-0-night.png",
+          "path": "native/electric_fence_horizontal/none/01.png",
+          "points": {},
+          "pose": "whole horizontal"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "whole horizontal"
+      ]
+    },
+    {
+      "anim": "electric_fence_horizontal_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_horizontal_hurt-none-0-night.png",
+          "path": "native/electric_fence_horizontal_hurt/none/01.png",
+          "points": {},
+          "pose": "damaged horizontal"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "damaged horizontal"
+      ]
+    },
+    {
+      "anim": "electric_fence_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_hurt-none-0-night.png",
+          "path": "native/electric_fence_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 0"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 0"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_1",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_1-none-0-night.png",
+          "path": "native/electric_fence_join_1/none/01.png",
+          "points": {},
+          "pose": "connected mask 1"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 1"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_10",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_10-none-0-night.png",
+          "path": "native/electric_fence_join_10/none/01.png",
+          "points": {},
+          "pose": "connected mask 10"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 10"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_10_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_10_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_10_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 10"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 10"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_11",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_11-none-0-night.png",
+          "path": "native/electric_fence_join_11/none/01.png",
+          "points": {},
+          "pose": "connected mask 11"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 11"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_11_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_11_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_11_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 11"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 11"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_12",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_12-none-0-night.png",
+          "path": "native/electric_fence_join_12/none/01.png",
+          "points": {},
+          "pose": "connected mask 12"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 12"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_12_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_12_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_12_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 12"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 12"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_13",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_13-none-0-night.png",
+          "path": "native/electric_fence_join_13/none/01.png",
+          "points": {},
+          "pose": "connected mask 13"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 13"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_13_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_13_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_13_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 13"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 13"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_14",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_14-none-0-night.png",
+          "path": "native/electric_fence_join_14/none/01.png",
+          "points": {},
+          "pose": "connected mask 14"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 14"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_14_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_14_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_14_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 14"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 14"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_15",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_15-none-0-night.png",
+          "path": "native/electric_fence_join_15/none/01.png",
+          "points": {},
+          "pose": "connected mask 15"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 15"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_15_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_15_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_15_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 15"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 15"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_1_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_1_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_1_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 1"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 1"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_2",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_2-none-0-night.png",
+          "path": "native/electric_fence_join_2/none/01.png",
+          "points": {},
+          "pose": "connected mask 2"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 2"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_2_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_2_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_2_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 2"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 2"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_3",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_3-none-0-night.png",
+          "path": "native/electric_fence_join_3/none/01.png",
+          "points": {},
+          "pose": "connected mask 3"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 3"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_3_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_3_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_3_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 3"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 3"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_4",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_4-none-0-night.png",
+          "path": "native/electric_fence_join_4/none/01.png",
+          "points": {},
+          "pose": "connected mask 4"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 4"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_4_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_4_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_4_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 4"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 4"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_5",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_5-none-0-night.png",
+          "path": "native/electric_fence_join_5/none/01.png",
+          "points": {},
+          "pose": "connected mask 5"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 5"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_5_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_5_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_5_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 5"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 5"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_6",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_6-none-0-night.png",
+          "path": "native/electric_fence_join_6/none/01.png",
+          "points": {},
+          "pose": "connected mask 6"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 6"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_6_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_6_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_6_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 6"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 6"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_7",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_7-none-0-night.png",
+          "path": "native/electric_fence_join_7/none/01.png",
+          "points": {},
+          "pose": "connected mask 7"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 7"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_7_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_7_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_7_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 7"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 7"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_8",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_8-none-0-night.png",
+          "path": "native/electric_fence_join_8/none/01.png",
+          "points": {},
+          "pose": "connected mask 8"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 8"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_8_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_8_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_8_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 8"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 8"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_9",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_9-none-0-night.png",
+          "path": "native/electric_fence_join_9/none/01.png",
+          "points": {},
+          "pose": "connected mask 9"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 9"
+      ]
+    },
+    {
+      "anim": "electric_fence_join_9_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_join_9_hurt-none-0-night.png",
+          "path": "native/electric_fence_join_9_hurt/none/01.png",
+          "points": {},
+          "pose": "connected mask 9"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "connected mask 9"
+      ]
+    },
+    {
+      "anim": "electric_fence_post",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_post-none-0-night.png",
+          "path": "native/electric_fence_post/none/01.png",
+          "points": {},
+          "pose": "whole post"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "whole post"
+      ]
+    },
+    {
+      "anim": "electric_fence_post_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_post_hurt-none-0-night.png",
+          "path": "native/electric_fence_post_hurt/none/01.png",
+          "points": {},
+          "pose": "damaged post"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "damaged post"
+      ]
+    },
+    {
+      "anim": "electric_fence_vertical",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_vertical-none-0-night.png",
+          "path": "native/electric_fence_vertical/none/01.png",
+          "points": {},
+          "pose": "whole vertical"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "whole vertical"
+      ]
+    },
+    {
+      "anim": "electric_fence_vertical_hurt",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_vertical_hurt-none-0-night.png",
+          "path": "native/electric_fence_vertical_hurt/none/01.png",
+          "points": {},
+          "pose": "damaged vertical"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "damaged vertical"
+      ]
+    },
+    {
+      "anim": "electric_fence_wreck",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/electric_fence_wreck-none-0-night.png",
+          "path": "native/electric_fence_wreck/none/01.png",
+          "points": {},
+          "pose": "whole wreck"
+        }
+      ],
+      "frame_seconds": 0.55,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "poses": [
+        "whole wreck"
+      ]
+    },
+    {
+      "anim": "zap",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+          "night": "preview/zap-none-0-night.png",
+          "path": "native/zap/none/01.png",
+          "points": {},
+          "pose": "spark"
+        },
+        {
+          "issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+          "night": "preview/zap-none-1-night.png",
+          "path": "native/zap/none/02.png",
+          "points": {},
+          "pose": "arc"
+        },
+        {
+          "issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+          "night": "preview/zap-none-2-night.png",
+          "path": "native/zap/none/03.png",
+          "points": {},
+          "pose": "fade"
+        }
+      ],
+      "frame_seconds": 0.065,
+      "frames": 3,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "poses": [
+        "spark",
+        "arc",
+        "fade"
+      ]
+    }
+  ],
+  "approved_existing_files": {
+    "native/electric_fence/none/01.png": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+    "native/electric_fence_horizontal/none/01.png": "baf857565d20bafddb6d822ed48198b2cc0f1750bac85ce0e2bc27033d99f170",
+    "native/electric_fence_horizontal_hurt/none/01.png": "f2f1c37547aa3ee7fbc885d54200dd908dd52c8dfc0c7502eb792eb25ee28915",
+    "native/electric_fence_hurt/none/01.png": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+    "native/electric_fence_join_1/none/01.png": "ddeca87f971f6da9771c7c2b25e7f4e5c5a5a9a7c1da406dd7fb54da13a315e8",
+    "native/electric_fence_join_10/none/01.png": "8668fdeb255bb949744dccfad009384dacd8df9755706a35607c076e98aee2d0",
+    "native/electric_fence_join_10_hurt/none/01.png": "c7cfa664b2ddafe67366d4c6fc86139bc6866ba633615660e89d19f1da171ee4",
+    "native/electric_fence_join_11/none/01.png": "e6d6013376f8860ec71d859859e1ebb64ece7516ca4b1e88b5bc0b637e85731f",
+    "native/electric_fence_join_11_hurt/none/01.png": "d7042359d6418e6fbb56d6af9c278de8f673e17bb5ac5c9753e024a9e018924d",
+    "native/electric_fence_join_12/none/01.png": "23aed2530bddb8047863517a7021799657ce0fe55d700e10a4582ddfc2faa836",
+    "native/electric_fence_join_12_hurt/none/01.png": "0742464bdc612073029976c80c0d8730ea48075e49de76d846893b100cc8f8e7",
+    "native/electric_fence_join_13/none/01.png": "3b117214ca426ea0a73e05bd063a4b81875273974bf0b68ff1e2217b3d8e8f48",
+    "native/electric_fence_join_13_hurt/none/01.png": "6525ab7a732dc86c933d8a6e6d4a0bd6a5b6afbe4fa7869d688fcab7ba09243a",
+    "native/electric_fence_join_14/none/01.png": "54ea607edb50927d70f91e0c3a6112c8294448613eb020c2f6454eea4cb038e7",
+    "native/electric_fence_join_14_hurt/none/01.png": "d78fe0ee6e46d73b37a66bec4969a5e24a0d7d6da59ef5c9b0f55560a3b1be70",
+    "native/electric_fence_join_15/none/01.png": "4adc0fb2919185f156cb54cd0c26df78cd31606f7eb20dcc7632279387fdffce",
+    "native/electric_fence_join_15_hurt/none/01.png": "6a3fdc6e4c160747a5c4a04e04b94eeb5fa1fe40e9ded7c96a7bbe6f1409edae",
+    "native/electric_fence_join_1_hurt/none/01.png": "49a7bc68c86540aa1e846cc3cacd99535727db3de4a77078b340b186b1f16cc0",
+    "native/electric_fence_join_2/none/01.png": "d17e47a1ffc53396143fb514356b42fe3ceeaa9c0cb7deb43f770a98a2694d22",
+    "native/electric_fence_join_2_hurt/none/01.png": "37db3b9ed91e166afc2b52bbe808b5069c5b8a21d404331c6d51d19344e4fdb7",
+    "native/electric_fence_join_3/none/01.png": "e1c63d99be9f5090cddf25715220af6e0220b1f9a0a74df08637217560a33851",
+    "native/electric_fence_join_3_hurt/none/01.png": "2542a27690626348f1e939815d067a2585b4367d627502794c68a6b8d5781c2f",
+    "native/electric_fence_join_4/none/01.png": "918b0b426b69fcd294884b9bad7997fcecc1eb465d15e6ace64b48030c36d089",
+    "native/electric_fence_join_4_hurt/none/01.png": "beef1ae472586491b21323b47e732051ebc2edcfd0e09e24080515c9d73d2dea",
+    "native/electric_fence_join_5/none/01.png": "9c7eb412b10f25e391edb9f8aa9014e0e2bda420fc6aa733d995e80da55ba1ff",
+    "native/electric_fence_join_5_hurt/none/01.png": "03894038a4e1ce2751c629954beadee41eee657e6470bc64cac3ee8939fa64f8",
+    "native/electric_fence_join_6/none/01.png": "52907a38689e1890cb9e88f8f8c8b4e0c0029c6fe91853c430cfc7eecb8d1ab5",
+    "native/electric_fence_join_6_hurt/none/01.png": "776d791303a1f6ac26be0f2e7d12cf2ca991d34d7fcca7b7e1660afaf7f4b470",
+    "native/electric_fence_join_7/none/01.png": "bd3766c46f8ebed0ab2769dff88b08988d3b5808b26206f27ff7833f76a7f443",
+    "native/electric_fence_join_7_hurt/none/01.png": "66a93d51bdda0e53a01f109241bb37043e4b4b92befb5acc421891fb1e266053",
+    "native/electric_fence_join_8/none/01.png": "79c254c9f34b394d41c200cb503cbce077bddb53f69d637d29570cebdcd68c95",
+    "native/electric_fence_join_8_hurt/none/01.png": "ba6a8821bae1820cef2745a72db4e1ed5c0c57de969236695423d2fc4269a00c",
+    "native/electric_fence_join_9/none/01.png": "f4cf8702e704c05867e8c2090956a11b85ccee2ae51714b47591f90ecf7bf16d",
+    "native/electric_fence_join_9_hurt/none/01.png": "4d2e5a5ee1bddc969eb24a637215aae94c45d2b71a9bd42681a53417328c40c2",
+    "native/electric_fence_post/none/01.png": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+    "native/electric_fence_post_hurt/none/01.png": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+    "native/electric_fence_vertical/none/01.png": "e005a52a1432f91b95ef99bd1e5ff80d3e6ce2d0db0886aaf521c93c178717f1",
+    "native/electric_fence_vertical_hurt/none/01.png": "6516da7a91796f96fbe12d0cc460684ae647cfcff43137927b37e94577d4b935",
+    "native/electric_fence_wreck/none/01.png": "3ec3627221aaabe5fe6e8646178c439dfa8521c313bec8bcfffeebf9a2be649c",
+    "native/zap/none/01.png": "b2a5a7f93b7b11f1985982a70fd7315f44fe922181cac47b922e103b8bd36311",
+    "native/zap/none/02.png": "a920f347118519a342c3909d5d1a6441da3dbbec31d82e596d06067d628bde6e",
+    "native/zap/none/03.png": "b0ba73f0b45b9fe8f20df4a9366886d6d5d385efa0ee919115404ddb4618630f"
+  },
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/fence.png",
+      "pivot_xy": [
+        8,
+        28
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [
+    {
+      "change": "Thin copper wires retain exact wire rows13/17. They have no ground foot; posts alone end at row19. The strict span-lowest-row19 measurement is false and requires owner review. No alpha pixels or outlines were painted.",
+      "rule": "Electric wire contact versus post contact"
+    },
+    {
+      "change": "Vertical source columns preserve shared module scale. The previously authorized 27px vertical envelope resolves the shared A042/A043 source-ratio conflict. Posts/spans stay at row20; joins still use the exact original 2.3 slices.",
+      "owner_words": "Permitir at\u00e9 27 px no canvas final",
+      "rule": "Continuation layout"
+    },
+    {
+      "accepted_checks": [
+        "electric_fence_post_span_row20",
+        "zap_two_to_three_warm_sparks"
+      ],
+      "change": "Owner accepted the exact displayed artwork and the documented visual differences; measurements remain unchanged.",
+      "owner_words": "tudo aprovado, falta mais?",
+      "rule": "Reviewed visual measurements"
+    }
+  ],
+  "files": [
+    {
+      "anim": "zap",
+      "call": "raw/zap-r3.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/zap/none/01.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "spark",
+      "prompt": "raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.01834862385321101,
+        "crop_xywh": [
+          229,
+          267,
+          255,
+          287
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          0,
+          0,
+          633,
+          724
+        ]
+      },
+      "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+      "runtime_name": "sprites/effects/zap_0.png",
+      "seconds": 0.065,
+      "sha256": "b2a5a7f93b7b11f1985982a70fd7315f44fe922181cac47b922e103b8bd36311",
+      "source": "raw/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127"
+    },
+    {
+      "anim": "zap",
+      "call": "raw/zap-r3.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 1,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/zap/none/02.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "arc",
+      "prompt": "raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          5,
+          4
+        ],
+        "content_scale": 0.01834862385321101,
+        "crop_xywh": [
+          784,
+          153,
+          545,
+          485
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          633,
+          0,
+          855,
+          724
+        ]
+      },
+      "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+      "runtime_name": "sprites/effects/zap_1.png",
+      "seconds": 0.065,
+      "sha256": "a920f347118519a342c3909d5d1a6441da3dbbec31d82e596d06067d628bde6e",
+      "source": "raw/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127"
+    },
+    {
+      "anim": "zap",
+      "call": "raw/zap-r3.call.json",
+      "canvas_wh": [
+        12,
+        12
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 2,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/zap/none/03.png",
+      "pivot_xy": [
+        6,
+        6
+      ],
+      "points": {},
+      "pose": "fade",
+      "prompt": "raw/zap-r3.prompt.txt",
+      "prompt_sha256": "68f2cef7ddab2f33d06e5a97c5981a97adf2b268678744a29a20bec488b7cd30",
+      "recipe": {
+        "alpha_threshold": 128,
+        "content_anchor_xy": [
+          2,
+          2
+        ],
+        "content_scale": 0.01834862385321101,
+        "crop_xywh": [
+          1648,
+          309,
+          292,
+          229
+        ],
+        "mirrored_from": null,
+        "palette_keys": null,
+        "sheet_cell_xywh": [
+          1488,
+          0,
+          684,
+          724
+        ]
+      },
+      "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner.",
+      "runtime_name": "sprites/effects/zap_2.png",
+      "seconds": 0.065,
+      "sha256": "b0ba73f0b45b9fe8f20df4a9366886d6d5d385efa0ee919115404ddb4618630f",
+      "source": "raw/zap-r3.png",
+      "source_sha256": "ebc5083aa255f5ecdaa6f027c8639e3b464b950545832d0849e10b7d5c525127"
+    },
+    {
+      "anim": "electric_fence_post",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/electric_fence_post/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "whole post",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          22
+        ],
+        "content_scale": 0.037868162692847124,
+        "crop_xywh": [
+          423,
+          51,
+          104,
+          364
+        ]
+      },
+      "runtime_name": "sprites/buildings/modules/electric_fence_post.png",
+      "seconds": 0.55,
+      "sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_horizontal",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/electric_fence_horizontal/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "whole horizontal",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          15
+        ],
+        "content_scale": 0.037868162692847124,
+        "crop_xywh": [
+          265,
+          479,
+          423,
+          121
+        ]
+      },
+      "runtime_name": "sprites/buildings/modules/electric_fence_horizontal.png",
+      "seconds": 0.55,
+      "sha256": "baf857565d20bafddb6d822ed48198b2cc0f1750bac85ce0e2bc27033d99f170",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_vertical",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/electric_fence_vertical/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "whole vertical",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          27
+        ],
+        "content_scale": 0.037868162692847124,
+        "crop_xywh": [
+          426,
+          652,
+          100,
+          713
+        ]
+      },
+      "runtime_name": "sprites/buildings/modules/electric_fence_vertical.png",
+      "seconds": 0.55,
+      "sha256": "e005a52a1432f91b95ef99bd1e5ff80d3e6ce2d0db0886aaf521c93c178717f1",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_wreck",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/electric_fence_wreck/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "whole wreck",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "content_scale": 0.037868162692847124,
+        "crop_xywh": [
+          285,
+          1442,
+          366,
+          149
+        ]
+      },
+      "runtime_name": "sprites/buildings/electric_fence_wreck.png",
+      "seconds": 0.55,
+      "sha256": "3ec3627221aaabe5fe6e8646178c439dfa8521c313bec8bcfffeebf9a2be649c",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_post_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/electric_fence_post_hurt/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "damaged post",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          22
+        ],
+        "content_scale": 0.037868162692847124,
+        "crop_xywh": [
+          426,
+          54,
+          105,
+          362
+        ]
+      },
+      "runtime_name": "sprites/buildings/modules/electric_fence_post_hurt.png",
+      "seconds": 0.55,
+      "sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_horizontal_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/electric_fence_horizontal_hurt/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "damaged horizontal",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_anchor_xy": [
+          8,
+          15
+        ],
+        "content_scale": 0.037868162692847124,
+        "crop_xywh": [
+          265,
+          480,
+          423,
+          123
+        ]
+      },
+      "runtime_name": "sprites/buildings/modules/electric_fence_horizontal_hurt.png",
+      "seconds": 0.55,
+      "sha256": "f2f1c37547aa3ee7fbc885d54200dd908dd52c8dfc0c7502eb792eb25ee28915",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_vertical_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/electric_fence_vertical_hurt/none/01.png",
+      "palette_keys": null,
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "damaged vertical",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_anchor_xy": [
+          2,
+          27
+        ],
+        "content_scale": 0.037868162692847124,
+        "crop_xywh": [
+          414,
+          654,
+          115,
+          713
+        ]
+      },
+      "runtime_name": "sprites/buildings/modules/electric_fence_vertical_hurt.png",
+      "seconds": 0.55,
+      "sha256": "6516da7a91796f96fbe12d0cc460684ae647cfcff43137927b37e94577d4b935",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 0",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence.png",
+      "seconds": 0.55,
+      "sha256": "5be40837a129413888f550c949ab82a308f19c5b602031a8e2578f5908b72dd9",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_1",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_1/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 1",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_1.png",
+      "seconds": 0.55,
+      "sha256": "ddeca87f971f6da9771c7c2b25e7f4e5c5a5a9a7c1da406dd7fb54da13a315e8",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_2",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_2/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 2",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_2.png",
+      "seconds": 0.55,
+      "sha256": "d17e47a1ffc53396143fb514356b42fe3ceeaa9c0cb7deb43f770a98a2694d22",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_3",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_3/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 3",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_3.png",
+      "seconds": 0.55,
+      "sha256": "e1c63d99be9f5090cddf25715220af6e0220b1f9a0a74df08637217560a33851",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_4",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_4/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 4",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_4.png",
+      "seconds": 0.55,
+      "sha256": "918b0b426b69fcd294884b9bad7997fcecc1eb465d15e6ace64b48030c36d089",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_5",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_5/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 5",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_5.png",
+      "seconds": 0.55,
+      "sha256": "9c7eb412b10f25e391edb9f8aa9014e0e2bda420fc6aa733d995e80da55ba1ff",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_6",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_6/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 6",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_6.png",
+      "seconds": 0.55,
+      "sha256": "52907a38689e1890cb9e88f8f8c8b4e0c0029c6fe91853c430cfc7eecb8d1ab5",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_7",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_7/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 7",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_7.png",
+      "seconds": 0.55,
+      "sha256": "bd3766c46f8ebed0ab2769dff88b08988d3b5808b26206f27ff7833f76a7f443",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_8",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_8/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 8",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_8.png",
+      "seconds": 0.55,
+      "sha256": "79c254c9f34b394d41c200cb503cbce077bddb53f69d637d29570cebdcd68c95",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_9",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_9/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 9",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_9.png",
+      "seconds": 0.55,
+      "sha256": "f4cf8702e704c05867e8c2090956a11b85ccee2ae51714b47591f90ecf7bf16d",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_10",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_10/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 10",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_10.png",
+      "seconds": 0.55,
+      "sha256": "8668fdeb255bb949744dccfad009384dacd8df9755706a35607c076e98aee2d0",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_11",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_11/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 11",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_11.png",
+      "seconds": 0.55,
+      "sha256": "e6d6013376f8860ec71d859859e1ebb64ece7516ca4b1e88b5bc0b637e85731f",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_12",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_12/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 12",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_12.png",
+      "seconds": 0.55,
+      "sha256": "23aed2530bddb8047863517a7021799657ce0fe55d700e10a4582ddfc2faa836",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_13",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_13/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 13",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_13.png",
+      "seconds": 0.55,
+      "sha256": "3b117214ca426ea0a73e05bd063a4b81875273974bf0b68ff1e2217b3d8e8f48",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_14",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_14/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 14",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_14.png",
+      "seconds": 0.55,
+      "sha256": "54ea607edb50927d70f91e0c3a6112c8294448613eb020c2f6454eea4cb038e7",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_join_15",
+      "call": "raw/electric-whole-column-r3.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_15/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 15",
+      "prompt": "raw/electric-whole-column-r3.prompt.txt",
+      "prompt_sha256": "477571335b311e5beaa686f084f724dc6f13d1f933805e6d71f52752a1ac2e0a",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_15.png",
+      "seconds": 0.55,
+      "sha256": "4adc0fb2919185f156cb54cd0c26df78cd31606f7eb20dcc7632279387fdffce",
+      "source": "raw/electric-whole-column-r3.png",
+      "source_sha256": "c9992a3895f6ab74813629fe1efc9deec57837d885de766bcd52b17240937420"
+    },
+    {
+      "anim": "electric_fence_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 0",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_hurt.png",
+      "seconds": 0.55,
+      "sha256": "8c739730cbb1a693419b9bc00930dd7bc63dd16332e5d687ab1ab05fdd400940",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_1_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_1_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 1",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_1_hurt.png",
+      "seconds": 0.55,
+      "sha256": "49a7bc68c86540aa1e846cc3cacd99535727db3de4a77078b340b186b1f16cc0",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_2_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_2_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 2",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_2_hurt.png",
+      "seconds": 0.55,
+      "sha256": "37db3b9ed91e166afc2b52bbe808b5069c5b8a21d404331c6d51d19344e4fdb7",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_3_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_3_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 3",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_3_hurt.png",
+      "seconds": 0.55,
+      "sha256": "2542a27690626348f1e939815d067a2585b4367d627502794c68a6b8d5781c2f",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_4_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_4_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 4",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_4_hurt.png",
+      "seconds": 0.55,
+      "sha256": "beef1ae472586491b21323b47e732051ebc2edcfd0e09e24080515c9d73d2dea",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_5_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_5_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 5",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_5_hurt.png",
+      "seconds": 0.55,
+      "sha256": "03894038a4e1ce2751c629954beadee41eee657e6470bc64cac3ee8939fa64f8",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_6_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_6_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 6",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_6_hurt.png",
+      "seconds": 0.55,
+      "sha256": "776d791303a1f6ac26be0f2e7d12cf2ca991d34d7fcca7b7e1660afaf7f4b470",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_7_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_7_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 7",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_7_hurt.png",
+      "seconds": 0.55,
+      "sha256": "66a93d51bdda0e53a01f109241bb37043e4b4b92befb5acc421891fb1e266053",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_8_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_8_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 8",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_8_hurt.png",
+      "seconds": 0.55,
+      "sha256": "ba6a8821bae1820cef2745a72db4e1ed5c0c57de969236695423d2fc4269a00c",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_9_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_9_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 9",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_9_hurt.png",
+      "seconds": 0.55,
+      "sha256": "4d2e5a5ee1bddc969eb24a637215aae94c45d2b71a9bd42681a53417328c40c2",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_10_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_10_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 10",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_10_hurt.png",
+      "seconds": 0.55,
+      "sha256": "c7cfa664b2ddafe67366d4c6fc86139bc6866ba633615660e89d19f1da171ee4",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_11_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_11_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 11",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_11_hurt.png",
+      "seconds": 0.55,
+      "sha256": "d7042359d6418e6fbb56d6af9c278de8f673e17bb5ac5c9753e024a9e018924d",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_12_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_12_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 12",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_12_hurt.png",
+      "seconds": 0.55,
+      "sha256": "0742464bdc612073029976c80c0d8730ea48075e49de76d846893b100cc8f8e7",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_13_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_13_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 13",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_13_hurt.png",
+      "seconds": 0.55,
+      "sha256": "6525ab7a732dc86c933d8a6e6d4a0bd6a5b6afbe4fa7869d688fcab7ba09243a",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_14_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_14_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 14",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_14_hurt.png",
+      "seconds": 0.55,
+      "sha256": "d78fe0ee6e46d73b37a66bec4969a5e24a0d7d6da59ef5c9b0f55560a3b1be70",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    },
+    {
+      "anim": "electric_fence_join_15_hurt",
+      "call": "raw/electric-hurt-column-r2.call.json",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": false,
+      "loop": false,
+      "mirror": "none",
+      "operation": "compose",
+      "output": "native/electric_fence_join_15_hurt/none/01.png",
+      "palette_keys": null,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "points": {},
+      "pose": "connected mask 15",
+      "prompt": "raw/electric-hurt-column-r2.prompt.txt",
+      "prompt_sha256": "244999c9721708fb88aacc3481f3ae201a270096e2169b9a5ad1639e07c1bbf7",
+      "recipe": {
+        "content_scale": 0.037868162692847124
+      },
+      "runtime_name": "sprites/buildings/electric_fence_join_15_hurt.png",
+      "seconds": 0.55,
+      "sha256": "6a3fdc6e4c160747a5c4a04e04b94eeb5fa1fe40e9ded7c96a7bbe6f1409edae",
+      "source": "raw/electric-hurt-column-r2.png",
+      "source_sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9"
+    }
+  ],
+  "joins": {
+    "electric_fence": {
+      "family": "electric_fence",
+      "mask": 0,
+      "parts": [
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_hurt": {
+      "family": "electric_fence",
+      "mask": 0,
+      "parts": [
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_1": {
+      "family": "electric_fence",
+      "mask": 1,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_10": {
+      "family": "electric_fence",
+      "mask": 10,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_10_hurt": {
+      "family": "electric_fence",
+      "mask": 10,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_11": {
+      "family": "electric_fence",
+      "mask": 11,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_11_hurt": {
+      "family": "electric_fence",
+      "mask": 11,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_12": {
+      "family": "electric_fence",
+      "mask": 12,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_12_hurt": {
+      "family": "electric_fence",
+      "mask": 12,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_13": {
+      "family": "electric_fence",
+      "mask": 13,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_13_hurt": {
+      "family": "electric_fence",
+      "mask": 13,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_14": {
+      "family": "electric_fence",
+      "mask": 14,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_14_hurt": {
+      "family": "electric_fence",
+      "mask": 14,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_15": {
+      "family": "electric_fence",
+      "mask": 15,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_15_hurt": {
+      "family": "electric_fence",
+      "mask": 15,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_1_hurt": {
+      "family": "electric_fence",
+      "mask": 1,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_2": {
+      "family": "electric_fence",
+      "mask": 2,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_2_hurt": {
+      "family": "electric_fence",
+      "mask": 2,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_3": {
+      "family": "electric_fence",
+      "mask": 3,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_3_hurt": {
+      "family": "electric_fence",
+      "mask": 3,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_4": {
+      "family": "electric_fence",
+      "mask": 4,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_4_hurt": {
+      "family": "electric_fence",
+      "mask": 4,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_5": {
+      "family": "electric_fence",
+      "mask": 5,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_5_hurt": {
+      "family": "electric_fence",
+      "mask": 5,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_6": {
+      "family": "electric_fence",
+      "mask": 6,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_6_hurt": {
+      "family": "electric_fence",
+      "mask": 6,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_7": {
+      "family": "electric_fence",
+      "mask": 7,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_7_hurt": {
+      "family": "electric_fence",
+      "mask": 7,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            8,
+            0
+          ],
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            8
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_8": {
+      "family": "electric_fence",
+      "mask": 8,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_8_hurt": {
+      "family": "electric_fence",
+      "mask": 8,
+      "parts": [
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    },
+    "electric_fence_join_9": {
+      "family": "electric_fence",
+      "mask": 9,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "whole"
+    },
+    "electric_fence_join_9_hurt": {
+      "family": "electric_fence",
+      "mask": 9,
+      "parts": [
+        {
+          "input": "native/electric_fence_vertical_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ]
+        },
+        {
+          "input": "native/electric_fence_horizontal_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ]
+        },
+        {
+          "input": "native/electric_fence_post_hurt/none/01.png",
+          "paste_xy": [
+            0,
+            0
+          ],
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "state": "hurt"
+    }
+  },
+  "mirror_pairs": {},
+  "owner_approval": {
+    "date": "2026-10-14",
+    "owner_words": "tudo aprovado, falta mais?",
+    "scope": "complete_reviewed_delivery"
+  },
+  "pack": "A042",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "pending_review_files": [],
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\effects\\impact_1.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "6a5cff67720916e243ef4264acb21b903de449abc32ac5bb4aa5c2ef335a4f54"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\props\\generator.png",
+      "role": "reference image; exact role specified in the recorded prompt",
+      "sha256": "26eafa19dc75728704a6c72b3a9a5bbe6ca8e579b29dd905dd85afe541d8768a"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A042-electric-fence",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The electric fence",
+  "tool": "built-in ImageGen"
+}

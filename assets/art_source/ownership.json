@@ -778,6 +778,138 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/electric_fence.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_10.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_10_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_11.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_11_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_12.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_12_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_13.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_13_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_14.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_14_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_15.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_15_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_3_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_4_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_5_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_6_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_7_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_8.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_8_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_9.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_join_9_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/electric_fence_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/fence.png",
       "owner": "raster"
     },
@@ -1183,6 +1315,30 @@
     },
     {
       "output": "sprites/buildings/mine_triggered.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/electric_fence_horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/electric_fence_horizontal_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/electric_fence_post.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/electric_fence_post_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/electric_fence_vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/electric_fence_vertical_hurt.png",
       "owner": "raster"
     },
     {
@@ -1819,6 +1975,18 @@
     },
     {
       "output": "sprites/effects/splash_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/zap_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/zap_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/zap_2.png",
       "owner": "raster"
     },
     {

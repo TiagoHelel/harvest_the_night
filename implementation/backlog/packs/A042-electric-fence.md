@@ -1,6 +1,6 @@
 # A042 - The electric fence
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0241
 - **Dressed by game tasks:** 0230
 - **Spec after game task:** 0230

@@ -1,0 +1,13 @@
+Use case: stylized-concept
+Asset type: production raster sprite source for HARVEST THE NIGHT, pixel farm defence.
+Primary request: A042 zap, ONE horizontal strip of exactly3 sequential electric spark burst frames.
+Input images: Image1 impact_1 is effect cluster style and native scale only. Image2 generator is darkiron/copper material source, NOT a target to draw.
+Style/medium: hand-crafted pixel art, deliberate boldpixelclusters, coloured outlines, clean forms.
+Composition/framing: orthographic gamecamera, native12x12 perframe, originpivot(6,6), entireburst inside1pxclear border. No scenery.
+Lighting/mood: neutral source colours, rendered over night relight bygame; NOT a halo or scene light.
+Palette: small jagged1px pale-blue/white arcs, 2–3 warmamber spark specks. No purplecloud or giantlightningbolt.
+FX family: short electric arc burst, localized origin at6,6, expansion then dissipation, no loopingflash.
+STRIP: exactly3 equalcells in ONE horizontal row, ordered spark(small), arc(largest area, max10pxdimensions), fade(fewspecks, lessarea thanarc). Huge transparent gutters, no labels/separators. Same particle scale/origin, do NOT enlarge fadedparticles tofillcells. A few thin steppedarcclusters, not many tiny scattered specks.
+Background: true alpha0 outside actual particles, absolutely no glow/bloom/gradient/groundshadow/text/grid/checkerboard. Completeunclipped effect, not photographic lightning. No target, fence or generator baked in.
+CORRECTION: Image3 edit target. Change ONLY warm spark readability. At actual12x12, the amber spark specks vanished, leaving only blue/white. Put2–3 bold amber/gold warm square sparkclusters beside the arc in EACH frame, each about60sourcepixels wide onthe561px peakburst width (one logicalpixel). Keep totalburstclearance and samecellscale; fadefewerarcclusters but amberstillvisible. No glow/bloom.
+LAST CORRECTION: Image3 revised strip edit target. Actual12x12 shows only ONE warm pixel perframe. Need TWO or THREE separate amber/gold spark pixels. Make exactlyTWO bold saturated gold/orange squareparticles in eachcell, separated by at least60sourcepixels, eachatleast80sourcepixelswide. Do not use pale cream forwarm sparks. Sourcepeak552wide maps10nativepx; use boldplain goldsquares, no micro-specks. Preserve blue/white arc positions and threeposes. No glows.

@@ -1,15 +1,15 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0240's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0241's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 251 done, 45 todo, 0 blocked (85%).**
-17 art integrations are ready, one a run as the owner asks (`task.py next`
-says 0241). 20 more wait on art that is blocked or deferred (3b, 3c), and
-the rest of the backlog on those (section 2).
+**The game backlog: 296 tasks, 252 done, 44 todo, 0 blocked (85%).**
+Every art integration in 3a and 3b is ready, one a run (`task.py next`
+says 0242). Only the farmer packs the owner deferred (3c) still wait on
+art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
 
@@ -59,7 +59,7 @@ The owner approved 15 at 16:56 and the other six's additions at 21:11
 | A039 | The pumpkin catapult (**integrated** by 0238, 2026-10-14) | 0238 |
 | A040 | The garlic braid (**integrated** by 0239, 2026-10-15) | 0239 |
 | A041 | The searchlight (**integrated** by 0240, 2026-10-15) | 0240 |
-| A042 | The electric fence | 0241 |
+| A042 | The electric fence (**integrated** by 0241, 2026-10-15) | 0241 |
 | A043 | Hardwood walls and sandbags | 0242 |
 | A044 | Day tarps over the defences | 0243 |
 | A045 | The power and weapon icons | 0244 |

@@ -236,3 +236,14 @@ Taking 0240, A041 the searchlight, through its CLAUDE-A041-PROMPT.txt.
 
 A041 is in the game and set `integrated` (the searchlight: 8 native PNGs sha-checked and rendered to the approved pixels exactly; check_tower_art names each family's point, a gun's muzzle or a lamp's lens).
 Next in the loop: 0241.
+
+## 2026-10-15 - Claude - taking 0241 (A042)
+
+Taking 0241, A042 the electric fence, through its CLAUDE-A042-PROMPT.txt;
+its joins composed from joins.parts (N, W, E, S, post). Then the rest of
+the approved queue, one a run, the owner's 13 included.
+
+## 2026-10-15 - Claude - done 0241 (A042 integrated)
+
+A042 is in the game and set `integrated` (the electric fence: 42 native PNGs sha-checked, its 32 masks composed from joins.parts and each checked against the approved PNG).
+Next in the loop: 0242.

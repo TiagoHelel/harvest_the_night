@@ -1,0 +1,19 @@
+2026-10-14 / Task0230 done verified. Owner-authorized21packbatch.
+Asked owner to resolve vertical source ratio1.7x16>=27px versus final17–20px and one sharedscale. Awaiting words; no speculative module geometry. Independent zap FX can proceed.
+
+2026-10-14 / Measured native export
+Module spec unresolved: sourcevertical length>=1.7xhorizontal16 implies>=27nativepx at one scale, finalvertical allowed17–20px. Owner question pending; modules and32joins not generated.
+Zap reached r3 limit; three distinct geometrically valid FX frames, but two-to-three warm spark specks do not all survive native reduction. Only3of42diagnosticframes; zero productionexports.
+No art approval inferred. 3 of 42 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+3/42 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: zap_two_to_three_warm_sparks. Approval applies only to displayed images. Missing outputs remain a delivery blocker, not a rejection of approved art.
+
+2026-10-14 / Completed42/42 native candidates. Preserved approved zap3 SHA values. New seven modules/wreck and32 joins pending review. Whole and hurt use one shared family scale; exact2.3 composition with honest mask-bit and broken-alpha checks. Copper wires fixed on13/17; thin-wire lowestrow17 instead of spanrow19 remains a new visual deviation, not waived. Zap warm-speck check remains the earlier owner-approved exception. No runtime integration.
+
+2026-10-14 / Complete continuation owner approval
+Owner words: tudo aprovado, falta mais?
+Review: implementation/backlog/deliveries/A028-dog/continuation-final-review.html
+All 42 native outputs approved, including 39 new PNGs. Original approved PNGs remain byte-identical. Accepted measured visual differences: electric_fence_post_span_row20, zap_two_to_three_warm_sparks. No art, motion, palette, timing or runtime files changed.

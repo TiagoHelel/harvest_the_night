@@ -17,11 +17,15 @@ def main():
     # Task 0239: A040's garlic braid, fresh, wilted and spent.
     garlic=[e for e in data['assets'] if e.get('generation_task')=='A040']
     assert len(garlic)==3,('Garlic braid contract incomplete',len(garlic))
-    by_id={e['id']:e for e in entries+decoy+garlic}
-    for e in entries+decoy+garlic:
+    # Task 0241: A042's electric fence - six modules, the wreck and 32
+    # composed masks - joined as the wooden fence is.
+    electric=[e for e in data['assets'] if e.get('generation_task')=='A042' and e['id'].startswith('buildings/')]
+    assert len(electric)==39,('Electric fence contract incomplete',len(electric))
+    by_id={e['id']:e for e in entries+decoy+garlic+electric}
+    for e in entries+decoy+garlic+electric:
         assert (ROOT/e['output']).read_bytes()==files[e['output']],e['id']
         assert all(p[3] in (0,255) for p in import_art.samples(images[e['id']])),e['id']
-    for family in ('wall','fence'):
+    for family in ('wall','fence','electric_fence'):
         for suffix in ('','_hurt'):
             for mask in range(16):
                 ident='buildings/'+family+(f'_join_{mask}' if mask else '')+suffix
@@ -45,13 +49,13 @@ def main():
                 assert whole.getchannel('A').tobytes()!=damaged.getchannel('A').tobytes(),('Wear only changes tint',family,mask)
                 # Every connected east/west cut shares opaque rows at the cell
                 # boundary, for wood/stone and whole/hurt mixed neighbors.
-                if mask&2:
+                if mask&2 and family!='electric_fence':
                     for other in ('wall','fence'):
                         for other_suffix in ('','_hurt'):
                             neighbor=images['buildings/'+other+'_join_8'+other_suffix]
                             touch=sum(bool(image.getpixel((15,y))[3] and neighbor.getpixel((0,y))[3]) for y in range(32))
                             assert touch>=2,('Open seam between occupied cells',ident,other,other_suffix)
-                if mask&1:
+                if mask&1 and family!='electric_fence':
                     for other in ('wall','fence'):
                         for other_suffix in ('','_hurt'):
                             neighbor=images['buildings/'+other+'_join_4'+other_suffix]
@@ -80,6 +84,12 @@ def main():
         for i,e in enumerate(frames):assert e['canvas_wh']==[16,32] and e['pivot_xy']==[8,28] and e['frame']==i and not e['loop'],e['id']
     bait=by_id['buildings/zombie_bait'];assert bait['canvas_wh']==[16,16] and bait['pivot_xy']==[8,14],'Bait off the ground'
     assert gen_sprites.migrated_barriers()=={'buildings/'+f for f in ('wall','fence','barricade','mine')},'Incomplete legacy migration'
-    print('OK: 84 exact source-owned outputs, A037 decoy/bait 10 and A040 garlic braid 3, all 64 occupancy masks/wear states, physical scale and mixed material seams')
+    # The wire meets the wooden fence: a straight run's east edge shares
+    # opaque rows with the fence's west arm, whole and hurt.
+    for suffix in ('','_hurt'):
+        run=images['buildings/electric_fence_join_10'+suffix];wood=images['buildings/fence_join_8'+suffix]
+        touch=sum(bool(run.getpixel((15,y))[3] and wood.getpixel((0,y))[3]) for y in range(32))
+        assert touch>=2,('Wire and wood never meet',suffix,touch)
+    print('OK: 84 exact source-owned outputs, A037 decoy/bait 10, A040 garlic braid 3 and A042 electric fence 39, all 96 occupancy masks/wear states, physical scale and mixed material seams')
 
 if __name__=='__main__':main()

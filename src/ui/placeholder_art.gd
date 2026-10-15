@@ -196,11 +196,6 @@ const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dra
 const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
-## A042's electric fence (task 0230): the wooden fence's 16x32 standing on
-## (8,28), drawn at 1.0; and its zap, 12x12 round (6,6), an impact's box.
-const ELECTRIC_FENCE := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
-const ZAP := {"canvas": Vector2i(12, 12), "pivot": Vector2i(6, 6), "draw_scale": 1.0}
-
 ## A043's hardwood wall and sandbags (task 0231): the stone wall's and the
 ## fence's 16x32 standing on (8,28), drawn at 1.0.
 const STRONG_WALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
@@ -448,44 +443,6 @@ const ART := {
 	# The Blood Moon's (task 0257): a red disc with a drip, drawn in code.
 	&"icon_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A042's electric fence (task 0230), drawn in code by `ElectricFenceArt`
-	# until 0241: the sixteen masks whole and hurt, composed from its
-	# modules with the contract's recipe and joined (`connected`) as the
-	# wooden fence's are; its wreck; and the zap where a stun lands.
-	&"electric_fence": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_1": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_2": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_3": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_4": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_5": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_6": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_7": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_8": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_9": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_10": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_11": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_12": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_13": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_14": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_15": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_1_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_2_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_3_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_4_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_5_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_6_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_7_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_8_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_9_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_10_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_11_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_12_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_13_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_14_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_join_15_hurt": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true, "connected": true},
-	&"electric_fence_wreck": {"pack": "A042", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": ELECTRIC_FENCE, "final": ELECTRIC_FENCE, "bare": true},
-	&"zap": {"pack": "A042", "dir": "res://sprites/effects/", "frames": 3, "seconds": 0.065, "loop": false, "stand_in": &"", "geometry": ZAP, "final": ZAP},
 	# A043's hardwood wall - the stone wall's level two - and sandbags (task
 	# 0231), drawn in code by `StrongWallArt` until 0242: each family's
 	# sixteen masks whole and hurt, composed with the contract's recipe and

@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION of attached electric-fence four-module COLUMN. Fix ONLY the relative module geometry at one source scale. Keep the first ironpost and third longnorthsouthwire corridor pixel-for-pixel unchanged, same positions, colors, alpha, size, no redraw. Preserve exact887x1774canvas. Shared sourceunit26.5px = one finalnativepixel. Existing post101x357 and vertical103x716 already fit4x13/4x27 and are edit invariants. Fix secondhorizontal ONLY: remove both END CAP POSTS (no endpointblocks); make full wire length424sourcepx (=16native), centeredx443, left231 right655. Two THIN copperwires, not heavywood: upperone near y518, lowerone y624 (106pxseparation =4native). Each copperwire about26pxthick, plus thin darkink undersides; lower cutface extends bottomdarkedge to y676. Full horizontal visiblebbox about424x159. No uprightendposts, no gap at either end, no extra rails. Wire rows align at final13and17, underside14and18/19. Leave ample transparentgap before thirdmodulebegin696. Fourthwreck: same falleniron/copperheap but reduce its total artwork UNIFORMLY to370wide x155high, centerx443, bottom1716, top1561. The reference's otherpostandvertical must not change. Crispclean clusteredpixelart, truealpha; no glow/beam/arc/ground/shadow/text/labels or scenes. Fourseparate modules in originalverticalcolumn.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\electric-whole-column-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-e83beb91-4cb2-4f4d-a299-f4c938774eff.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "four module column edit target"
+  ]
+}

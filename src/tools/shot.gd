@@ -151,7 +151,7 @@ const SCENARIOS: Array = [
 	["tarps", "Spring 3 at noon, a defended farm's towers asleep under tarps and the one hurt last night under a torn one; then the same towers at dusk, still covered, the covers yanked off at the wake as he goes to bed, and the night", ""],
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
 	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
-	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm", ""],
+	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm; then the same run by day (task 0241), the tarps off to show A042's art", ""],
 	["strong_walls", "a mixed line at night: Summer 2, a long line across the east road - stone, hardwood walls (the stone wall's level two) either side of the road and sandbags on it - an arm off it in one row of stone, hardwood, stone, sandbags and a fence, and a foot of sandbags, the last of them down; walkers come down the road and bite the sandbags, the cheapest way through; the sandbags picked on the hotbar, their ghost joining the arm's end", ""],
 	["powers", "the three new powers at work at night: Winter 2, a tank leading two walkers down the east road toward the house; the dog sent at the tank and caught at its bite beside its feet, the farm bell rung a moment after - its rings going out from the house and every zombie stood still in cold blue, with no spark - and the hurt middle of three walls by the road mended, its square closing in; the night bar's upper row showing all three charging", ""],
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
@@ -988,6 +988,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "beehive":
 		await _shoot("beehive", folder)
 		await _take_beehive_day(main, state, folder)
+		return
+	if name == "electric_fence":
+		await _shoot("electric_fence", folder)
+		await _take_electric_fence_day(main, state, folder)
 		return
 	if name == "searchlight_art":
 		await _shoot("searchlight_art", folder)
@@ -3462,6 +3466,42 @@ func _set_electric_fence(state: Dictionary) -> void:
 
 ## The road's cell of the run `_set_electric_fence` laid (task 0230).
 var _electric_gate := Vector2i(-1, -1)
+
+
+## **The same run by day** (task 0241): the night over, him out by the run,
+## and the tarps off so A042's art shows, as the tower showcase does. A shock
+## lands only at night (`WorldView._refresh_zaps`), so by day the run stands
+## quiet: its joins, the hurt gate, the downed arm's wreck and the wood it
+## meets.
+func _take_electric_fence_day(main: Node, state: Dictionary, folder: String) -> void:
+	if _electric_gate.x < 0:
+		return
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	Building.set_active(state, false)
+	# East of the run, facing it: the day's camera follows him.
+	_stand(state, _electric_gate + Vector2i(3, 1))
+	state["player"]["facing"] = Player.WEST
+	var view := main.get_node("%WorldView") as WorldView
+	view.tarps = false
+	_only_showing(main, "")
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	await _shoot("electric_fence_day", folder)
+	print("  electric_fence by day, %s: %d cells of wire standing" % [Phases.name_of(int(state["phase"])),
+		Farm.cells_with(state, &"electric_fence").size()])
+	view.tarps = true
 
 
 ## **A mixed line** (task 0231): Summer 2's night. A stretch of the east road,

@@ -1,0 +1,65 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / damagedelectricfencecolumn: change ONLY FIRST IRONPOST silhouette. Currentfirstpost shows hairline cracks but its transparency differs byonlyONE nativepixel fromwhole. Remove a LARGE TRIANGULAR CHUNK from its LEFT EDGE at midshaft: fromsourcex426..477, y208..287 (about2x3nativepixels), leaving true transparent notch into thepost. Bend the remainingpostslightlyright at thatnotch, keep cap andfootcenters atsamepositions. Insulatorupperrim partlychipped butwhite staysinsideink. A genuinelybrokenmaterialsilhouette, NOT a blackpaintedcrack over solidpost. Preserve exact953x1651canvas, samefullpostscale andbaseline. Keep lower two modules (brokenhorizontalpair and brokenlongvertical) LITERALLYUNCHANGED; no newwreck. Pixelart withtruealpha only where chunksmissing, no shadow/ground/glow/sparks/text/labels or newobjects. This is an exactlocaledit on the first module only.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\electric-hurt-column-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0f47376f-e22d-4e2b-841d-66de2c4427f6.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "damaged column: first post alpha-notch edit target"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\raw\\electric-hurt-column-r1.png",
+      "sha256": "3a2b4b5f84859064ac3c278fbf571a3072d824e90365f3febb24745081314927",
+      "role": "damaged column: first post alpha-notch edit target",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A042-electric-fence\\rejected\\electric-hurt-column-r1.png"
+    }
+  ],
+  "copied_path": "raw/electric-hurt-column-r2.png",
+  "sha256": "842a148b821e45e318058680f5cba6dd45dc872a799331ecc7920a2044375ec9",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      953,
+      1651
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      256,
+      54,
+      697,
+      1367
+    ]
+  },
+  "selected_native_exports": [
+    "native/electric_fence_post_hurt/none/01.png",
+    "native/electric_fence_horizontal_hurt/none/01.png",
+    "native/electric_fence_vertical_hurt/none/01.png",
+    "native/electric_fence_hurt/none/01.png",
+    "native/electric_fence_join_1_hurt/none/01.png",
+    "native/electric_fence_join_2_hurt/none/01.png",
+    "native/electric_fence_join_3_hurt/none/01.png",
+    "native/electric_fence_join_4_hurt/none/01.png",
+    "native/electric_fence_join_5_hurt/none/01.png",
+    "native/electric_fence_join_6_hurt/none/01.png",
+    "native/electric_fence_join_7_hurt/none/01.png",
+    "native/electric_fence_join_8_hurt/none/01.png",
+    "native/electric_fence_join_9_hurt/none/01.png",
+    "native/electric_fence_join_10_hurt/none/01.png",
+    "native/electric_fence_join_11_hurt/none/01.png",
+    "native/electric_fence_join_12_hurt/none/01.png",
+    "native/electric_fence_join_13_hurt/none/01.png",
+    "native/electric_fence_join_14_hurt/none/01.png",
+    "native/electric_fence_join_15_hurt/none/01.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

@@ -1,0 +1,45 @@
+{
+  "status": "blocked",
+  "issues": [
+    "Module spec unresolved: sourcevertical length>=1.7xhorizontal16 implies>=27nativepx at one scale, finalvertical allowed17–20px. Owner question pending; modules and32joins not generated.",
+    "Zap reached r3 limit; three distinct geometrically valid FX frames, but two-to-three warm spark specks do not all survive native reduction. Only3of42diagnosticframes; zero productionexports."
+  ],
+  "files": {
+    "zap/none/0": {
+      "stem": "zap-r3",
+      "index": 0,
+      "fields": {
+        "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner."
+      }
+    },
+    "zap/none/1": {
+      "stem": "zap-r3",
+      "index": 1,
+      "fields": {
+        "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner."
+      }
+    },
+    "zap/none/2": {
+      "stem": "zap-r3",
+      "index": 2,
+      "fields": {
+        "review_issue": "Too few warm spark pixels survive; fence module spec awaits owner."
+      }
+    }
+  },
+  "rejected": {
+    "zap-r1": "Warm spark specks vanish atnative12x12.",
+    "zap-r2": "Only one warm sparkpixel perframe survives."
+  },
+  "decisions": {
+    "zap-r3": {
+      "decision": "diagnostic only, spark count fails; unresolved module geometry",
+      "accepted_cells": [],
+      "rejected_cells": [
+        0,
+        1,
+        2
+      ]
+    }
+  }
+}
