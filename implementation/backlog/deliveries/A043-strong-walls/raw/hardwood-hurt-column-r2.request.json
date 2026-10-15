@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / edit ONLY THIRD LONG VERTICAL MODULE in attacheddamagedhardwoodcolumn. Its existingbrokenalpha getscovered bycenterpost in north-facingjoins. Make thebreakunmistakable: remove the ENTIRE LEFT BEAM and LEFT HALF of ONEstonecap across a90sourcepx-long section sourcey830..920, x430..510. Truefulltransparencythroughthat notch, not cracks painted overstone. This is about3nativecolumns by4nativerows missing. Do not remove rightbeam; keep overalltop669/bottom1280, same sourcepixelsscale, and do not shortenwholestrip. Removeprotrudinglooseleftironstrap atx416 ifitfillsnotch; no newfragments in thegap. FIRST andSECOND modules must remain PIXEL-FOR-PIXEL from edit target, same1024x1536canvaspositions, entirefourthrowempty. Same stone/darkwood/pixelart/iron colors, no shadows/ground/labels/text/glow or extraobjects. Every emptygap truealphaZERO.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-hurt-column-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0dc717ca-2f18-4ad4-ad4c-53a714fa2ae5.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "damaged hardwood column; third module break edit target"
+  ]
+}

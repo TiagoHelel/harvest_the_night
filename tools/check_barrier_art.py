@@ -21,11 +21,15 @@ def main():
     # composed masks - joined as the wooden fence is.
     electric=[e for e in data['assets'] if e.get('generation_task')=='A042' and e['id'].startswith('buildings/')]
     assert len(electric)==39,('Electric fence contract incomplete',len(electric))
-    by_id={e['id']:e for e in entries+decoy+garlic+electric}
-    for e in entries+decoy+garlic+electric:
+    # Task 0242: A043's hardwood wall (the stone wall's level two) and
+    # sandbags, six modules, a wreck and 32 composed masks each.
+    strong=[e for e in data['assets'] if e.get('generation_task')=='A043']
+    assert len(strong)==78,('Hardwood/sandbag contract incomplete',len(strong))
+    by_id={e['id']:e for e in entries+decoy+garlic+electric+strong}
+    for e in entries+decoy+garlic+electric+strong:
         assert (ROOT/e['output']).read_bytes()==files[e['output']],e['id']
         assert all(p[3] in (0,255) for p in import_art.samples(images[e['id']])),e['id']
-    for family in ('wall','fence','electric_fence'):
+    for family in ('wall','fence','electric_fence','wall_2','sandbag_wall'):
         for suffix in ('','_hurt'):
             for mask in range(16):
                 ident='buildings/'+family+(f'_join_{mask}' if mask else '')+suffix
@@ -40,7 +44,13 @@ def main():
                 assert bool(a.crop((0,0,1,32)).getbbox())==bool(mask&8),('West arm does not match occupancy',ident)
                 assert bool(a.crop((15,0,16,32)).getbbox())==bool(mask&2),('East arm does not match occupancy',ident)
                 post=images[f'buildings/modules/{family}_post{suffix}'].getchannel('A').getbbox()
-                assert (box[1]<post[1])==bool(mask&1),('North arm does not match occupancy',ident,box,post)
+                if family in ('wall_2','sandbag_wall'):
+                    # A south arm starts on row 8, which a low post (the
+                    # sandbags') does not reach: north is what is above both.
+                    top=min(8,post[1])
+                    assert bool(a.crop((0,0,16,top)).getbbox())==bool(mask&1),('North arm does not match occupancy',ident,top)
+                else:
+                    assert (box[1]<post[1])==bool(mask&1),('North arm does not match occupancy',ident,box,post)
                 assert (box[3]>20)==bool(mask&4),('South arm does not match occupancy',ident,box)
                 whole=images['buildings/'+family+(f'_join_{mask}' if mask else '')]
                 damaged=images['buildings/'+family+(f'_join_{mask}' if mask else '')+'_hurt']
@@ -49,13 +59,13 @@ def main():
                 assert whole.getchannel('A').tobytes()!=damaged.getchannel('A').tobytes(),('Wear only changes tint',family,mask)
                 # Every connected east/west cut shares opaque rows at the cell
                 # boundary, for wood/stone and whole/hurt mixed neighbors.
-                if mask&2 and family!='electric_fence':
+                if mask&2 and family in ('wall','fence'):
                     for other in ('wall','fence'):
                         for other_suffix in ('','_hurt'):
                             neighbor=images['buildings/'+other+'_join_8'+other_suffix]
                             touch=sum(bool(image.getpixel((15,y))[3] and neighbor.getpixel((0,y))[3]) for y in range(32))
                             assert touch>=2,('Open seam between occupied cells',ident,other,other_suffix)
-                if mask&1 and family!='electric_fence':
+                if mask&1 and family in ('wall','fence'):
                     for other in ('wall','fence'):
                         for other_suffix in ('','_hurt'):
                             neighbor=images['buildings/'+other+'_join_4'+other_suffix]
@@ -90,6 +100,16 @@ def main():
         run=images['buildings/electric_fence_join_10'+suffix];wood=images['buildings/fence_join_8'+suffix]
         touch=sum(bool(run.getpixel((15,y))[3] and wood.getpixel((0,y))[3]) for y in range(32))
         assert touch>=2,('Wire and wood never meet',suffix,touch)
-    print('OK: 84 exact source-owned outputs, A037 decoy/bait 10, A040 garlic braid 3 and A042 electric fence 39, all 96 occupancy masks/wear states, physical scale and mixed material seams')
+    # The hardwood wall is the stone wall's level two: its own art in every
+    # mask, and its runs meet the stone's and the sandbags'.
+    for suffix in ('','_hurt'):
+        for mask in range(16):
+            name='_join_%d'%mask if mask else ''
+            assert images['buildings/wall_2'+name+suffix].tobytes()!=images['buildings/wall'+name+suffix].tobytes(),('Hardwood is the stone',mask,suffix)
+        for left,right in (('wall_2','wall'),('wall','wall_2'),('wall_2','sandbag_wall'),('sandbag_wall','wall_2'),('sandbag_wall','fence')):
+            run=images['buildings/'+left+'_join_2'+suffix];other=images['buildings/'+right+'_join_8'+suffix]
+            touch=sum(bool(run.getpixel((15,y))[3] and other.getpixel((0,y))[3]) for y in range(32))
+            assert touch>=2,('Runs never meet',left,right,suffix,touch)
+    print('OK: 84 exact source-owned outputs, A037 decoy/bait 10, A040 garlic braid 3, A042 electric fence 39 and A043 hardwood/sandbags 78, all 160 occupancy masks/wear states, physical scale and mixed material seams')
 
 if __name__=='__main__':main()

@@ -1,0 +1,1 @@
+The isolated vertical shape now meets the approved 27px length at content_scale 0.02, but a shared family scale that keeps the existing post/span/wreck in their specified envelopes is about 0.03; at 0.03 this vertical would be about 41px and clip. It cannot be combined into a contract-compliant family without a fresh aligned source or an owner-approved scale deviation.

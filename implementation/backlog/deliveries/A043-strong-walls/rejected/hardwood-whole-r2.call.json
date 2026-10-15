@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Correction of the attached A043 hardwood whole-state source sheet. Change only this one failed criterion: lengthen the third, north-south span so its visible ground-axis length is 27 final native pixels on the 16x32 module, about 1.7x the full 16-pixel east-west span width at the same source scale. The current third module is visibly too short. The owner explicitly allows a 27-pixel final north-south span. Extend it along the screen Y ground axis so it nearly fills rows 1 through 27 of its 16x32 canvas, ending on row 27; keep it narrow x=6..10, with continuous lengthwise dark hardwood beams and regular cross-straps. It lies flat along the ground away from the camera; it is not an upright post, column, or fence picket. Increase the source canvas height as needed so nothing clips. Preserve the first post, second east-west span, fourth wreck, their identity/materials, relative scale, camera, palette, lighting and true transparency. Preserve the exact order and separated four-object horizontal-row layout. No other additions or edits.\nUse case: stylized-concept production raster sprite source for HARVEST THE NIGHT.\nInput images: Image 1: docs/reference-sheet.png, approved style reference only. Image 2: rejected/hardwood-whole-r1.png, current candidate and edit target; use its first, second, and fourth objects unchanged and correct only the third object.\nStyle/medium: coherent hand-crafted pixel art, chunky deliberate clusters, coloured outlines, restrained texture, no smooth painterly gradients, no blur, glow, 3D, vector shapes, antialiasing or random speckles.\nOutput: exact transparent background; exactly four separate objects in one horizontal row, ordered post, east-west span, north-south span, wreck. Native import canvases are 16x32, pivot (8,28), draw scale 1.0. No text, labels, background, ground, shadow, watermark or UI.\n\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "approved style reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r1.png",
+      "sha256": "d08250cc4b0da5d821a46ac1be615df62dc1e25c6bd2157ae9a58a7108e7a6c4",
+      "role": "current candidate edit target"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8c9216a9-24bf-49cf-bec2-4f255a54e58e.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r2.png",
+  "sha256": "6c51d3c1e15fb4af6556bce93d98cbe5a7de5480266b5557cf9f6e546a121e34",
+  "date": "2026-10-14",
+  "revision": 2,
+  "decision": "rejected",
+  "reason": "The corrected third north-south module remains shorter than 1.7x the east-west width; the whole sheet is not accepted. Its other three cells may be selected individually if retained unchanged in the final export."
+}

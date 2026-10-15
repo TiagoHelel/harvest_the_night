@@ -1,0 +1,48 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nPrimary request: A043 hardwood wall level-two whole-state source sheet with exactly four assets: wall_2_post, wall_2_horizontal, wall_2_vertical, wall_2_wreck.\nInput images: Image 1: docs/reference-sheet.png, approved game style reference. Image 2: assets/art_source/defences/wall/whole-r3.png, stone identity master and edit target for wall silhouettes. Image 3: rejected/hardwood-whole-r2.png, material reference only (dark hardwood beams, gray stone, iron straps); do not copy its incorrect vertical proportions.\nStyle/medium: coherent hand-crafted pixel art with deliberate stepped pixel clusters, coloured dark outlines, readable material planes, restrained highlights. Must remain crisp after nearest-neighbour reduction. Avoid painterly softness, gradients, antialiasing, blur, 3D, vector shapes, glows and random speckles.\nComposition: one horizontal row of exactly four isolated object sources with generous transparent gutters, ordered POST, EAST-WEST SPAN, NORTH-SOUTH SPAN, WRECK. No labels, background, ground, shadow, scene, UI, duplicate pieces, or extra parts. Keep each whole object within the image. All four are drawn at precisely one shared source pixel scale: 26 source pixels per one final logical pixel (±2 px only for a stepped edge). Shared ground baseline in the source row. The final importer will crop each object and use the same content_scale for all six modules/states of this hardwood family.\nFinal module contract: each exported sprite is 16x32 logical pixels, pivot (8,28), draw scale 1.0.\n1) POST: visible native 6x15 pixels, x=5..10 and rows 5..19; same height and width silhouette as stone wall post. Gray stone pier wrapped by dark warm hardwood planks; hardwood cap at the top; iron straps and bolts. Lowest pixel on row 19.\n2) EAST-WEST SPAN: exactly 16 pixels across (x=0..15), 8 pixels tall (rows 12..19), no endpoint posts; stone courses faced by two substantial dark hardwood rails with small iron bolts; solid silhouette touches both left and right edges. Source bounding box should be about 416x208 at the same 26 px/native scale.\n3) NORTH-SOUTH SPAN: a narrow top-down north-south projection lying flat along screen Y, not upright or receding in perspective. Final visible box 5 pixels wide (x=6..10) by exactly 27 pixels long (rows 1..27), reaching both ends and grounded at row 27. Two continuous dark hardwood beams run along its length with visible gray stone between them and three narrow iron straps crossing. At shared source scale its source bounding box is about 130x702 pixels. Its long source dimension must be at least 1.7 times the east-west span's full source width while still fitting unclipped in this source sheet.\n4) WRECK: flattened pile of stone and broken hardwood beams, at most 14x6 native pixels, rows 22..27, lowest row 27.\nLight from upper-left, warm daylight only. Wood is visibly darker/heavier than the stone, but the gray stone remains recognizable between beams. Use restrained wood and stone ramps from the reference art. No night tint or emission.\nThe owner explicitly allowed the north-south module to occupy 27 final canvas rows. The module is a ground-plane barrier segment, never a tall post.\n\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "approved style reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png",
+      "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+      "role": "stone identity/geometry edit target"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r2.png",
+      "sha256": "6c51d3c1e15fb4af6556bce93d98cbe5a7de5480266b5557cf9f6e546a121e34",
+      "role": "hardwood material reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-81904f78-9bd5-4dea-811e-52ca459f413a.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r4.png",
+  "sha256": "cee965092a0dc22e02a50fc2c64a8bd471049fc440b7bedee39285ec2c3c66d0",
+  "date": "2026-10-14",
+  "revision": 4,
+  "decision": "rejected",
+  "reason": "Owner-authorized aligned generation still produced a north-south span shorter than the 1.7x horizontal width criterion (source bounds (64, 54, 1814, 799)); the sheet cannot be exported at a common content_scale.",
+  "inspection": {
+    "canvas_wh": [
+      1849,
+      851
+    ],
+    "alpha_threshold_128_bounds": [
+      64,
+      54,
+      1814,
+      799
+    ]
+  }
+}

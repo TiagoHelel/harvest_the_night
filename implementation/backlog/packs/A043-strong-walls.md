@@ -1,6 +1,6 @@
 # A043 - Hardwood walls and sandbags
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0242
 - **Dressed by game tasks:** 0231
 - **Spec after game task:** 0231

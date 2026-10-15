@@ -1,0 +1,1 @@
+Some north-facing joined masks hide the break (only two alpha differences).

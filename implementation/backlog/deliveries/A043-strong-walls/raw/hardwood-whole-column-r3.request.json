@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / attached hardwood column. TWO local geometry fixes; preserve FIRSTPOST and SECONDhorizontalmodule exactly, same1024x1536canvas. Thirdmodule LONGverticalstrip is onecapstone too short: add ONE EXTRA STONE CAP COURSE, extend bothsidewoodbeams and ironstrapping so its totalvertical LENGTH is635px instead578, a clear 10%lengthening at unchanged WIDTH143px. Keep topy680, finalbottom1315. It liesalongSCREENY notupright, samecapstonesizeasreference. Do notsimplyenlarge theexistingstrip: addonecourse, keep stoneunit/pixelgrain. FOURTHWRECK now too wide: removeouterrubble andlengthofprotrudingbeam until overall WIDTH is325px, not400; maximumheight120px, bottom1520, top1400. Keep onlyonebrokenplank, oneironstrap andthreestonechunks inthatcompactheap. Firstpost155x352 sets sharednativeunit23.5px; atthatscale vertical635=27native, heap325=14native; these proportionsmusthold. IMPORTANTremoveSOFTGLOW in transparentmargins: outsidehardobjectpixels must havealphaZERO, nofog/halo. Samewarmstone/darkhardwoodpalette,pixelclusters, orthographiccamera. Fourclearseparatedmodules, no text,labels,frames,shadows,scene or ground.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-whole-column-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-a11dc54c-c209-4808-9541-1a5024332e41.png",
+  "date": "2026-10-14",
+  "revision": 3,
+  "roles": [
+    "hardwood whole column exact edit target"
+  ]
+}

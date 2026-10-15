@@ -1,0 +1,43 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION of attached four-module sandbagcolumn. Preserve exact887x1774canvas and existing FIRSTSTACK and THIRD longnorthsouthrow PIXEL-FOR-PIXEL: same x/y, bagidentity, colors, alpha andscale. Firststack227wide191tall at330,130; third196wide613long at346,757; these set SAMEsourceunit22.7px. Change onlySECONDHORIZONTAL andFOURTHWRECK so theyuse thatscale. Secondhorizontal atcenterx443,top435: exactlyTHREESACKSPERCOURSE, TWO staggeredcourses, overall363pxWIDE x182pxHIGH (native16x8), NOT current610pxwide. Bagsasphysicalsizeof firststack, DO NOTenlarge tofillrow. It mustbe about1.6timesfirststackWIDTH, not3times. Fourthwreck atcenterx443 bottom1694: replace oversizedrubblewithonlyTWOflattenedBURSTSACKS andonefoldedclothscrap, overall318pxwide x90pxHIGH (native14x4), lesswidththansecondspan. No uprightbags, no separatepilesof sandaroundit. Uniformsourceunitacrossallmodules; neverchangethefirststackorlongverticalruler. Truealpha outside, NOglow,groundshadow,text,labels,frame,scenery,extraobjects. Same cozycrisppixelart,burlapcreases,twine,tanpalette,topdowncamera andwarmupperleftlight.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\sandbag-whole-column-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-c08c5b17-868e-4866-8779-102e0e083bc1.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "sandbag column edit target, first stack and vertical fixed scale rulers"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\sandbag-whole-column-r1.png",
+      "sha256": "a613294362aa06dfbe5ff458a94c3960d7626f6c89b74b0d2e95bf6e748eb107",
+      "role": "sandbag column edit target, first stack and vertical fixed scale rulers",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\sandbag-whole-column-r1.png"
+    }
+  ],
+  "copied_path": "rejected/sandbag-whole-column-r2.png",
+  "sha256": "fbe3ca1c0f67186e390013d01f9896f1678b645b5d77689bb5914062c9d5c4a5",
+  "decision": "rejected / Wreck remains too wide.",
+  "inspection": {
+    "canvas_wh": [
+      953,
+      1650
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      253,
+      125,
+      715,
+      1559
+    ]
+  }
+}

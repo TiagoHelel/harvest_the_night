@@ -1,0 +1,39 @@
+{
+  "wall_2": {
+    "whole": "hardwood-whole-column-r3",
+    "hurt": "hardwood-hurt-column-r2",
+    "whole_cells_y": [
+      0,
+      417,
+      658,
+      1303,
+      1536
+    ],
+    "hurt_cells_y": [
+      0,
+      415,
+      658,
+      1303
+    ],
+    "content_scale": 0.0436,
+    "span_height": 8
+  },
+  "sandbag_wall": {
+    "whole": "sandbag-whole-column-r3",
+    "hurt": "sandbag-hurt-column-r1",
+    "whole_cells_y": [
+      0,
+      358,
+      645,
+      1357,
+      1650
+    ],
+    "hurt_cells_y": [
+      0,
+      358,
+      645,
+      1357
+    ],
+    "scale_anchor": "vertical27"
+  }
+}

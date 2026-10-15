@@ -1,0 +1,8075 @@
+{
+  "title": "Hardwood walls and sandbags",
+  "date": "2026-10-14",
+  "status": "review",
+  "palette_mode": "A",
+  "expected_files": 78,
+  "files": [
+    {
+      "anim": "wall_2_post",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole post",
+      "output": "native/wall_2_post/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_post.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          434,
+          45,
+          156,
+          354
+        ],
+        "content_scale": 0.0436,
+        "content_anchor_xy": [
+          3,
+          23
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "wall_2_horizontal",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole horizontal",
+      "output": "native/wall_2_horizontal/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_horizontal.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          328,
+          436,
+          367,
+          183
+        ],
+        "content_scale": 0.0436,
+        "content_anchor_xy": [
+          8,
+          16
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "wall_2_vertical",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole vertical",
+      "output": "native/wall_2_vertical/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_vertical.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          437,
+          669,
+          150,
+          611
+        ],
+        "content_scale": 0.0436,
+        "content_anchor_xy": [
+          3,
+          27
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": true,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "wall_2_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole wreck",
+      "output": "native/wall_2_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_wreck.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          357,
+          1327,
+          303,
+          164
+        ],
+        "content_scale": 0.0436,
+        "content_anchor_xy": [
+          6,
+          7
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": true,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "wall_2_post_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "damaged post",
+      "output": "native/wall_2_post_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_post_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          412,
+          45,
+          180,
+          354
+        ],
+        "content_scale": 0.0436,
+        "content_anchor_xy": [
+          4,
+          23
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "wall_2_horizontal_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "damaged horizontal",
+      "output": "native/wall_2_horizontal_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_horizontal_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          329,
+          432,
+          367,
+          183
+        ],
+        "content_scale": 0.0436,
+        "content_anchor_xy": [
+          8,
+          16
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "wall_2_vertical_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "damaged vertical",
+      "output": "native/wall_2_vertical_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_vertical_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          433,
+          669,
+          160,
+          613
+        ],
+        "content_scale": 0.0436,
+        "content_anchor_xy": [
+          3,
+          27
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": true,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "wall_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 0",
+      "output": "native/wall_2/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_1",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 1",
+      "output": "native/wall_2_join_1/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_1.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 2",
+      "output": "native/wall_2_join_2/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_2.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_3",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 3",
+      "output": "native/wall_2_join_3/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_3.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_4",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 4",
+      "output": "native/wall_2_join_4/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_4.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_5",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 5",
+      "output": "native/wall_2_join_5/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_5.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_6",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 6",
+      "output": "native/wall_2_join_6/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_6.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_7",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 7",
+      "output": "native/wall_2_join_7/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_7.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_8",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 8",
+      "output": "native/wall_2_join_8/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_8.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_9",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 9",
+      "output": "native/wall_2_join_9/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_9.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_10",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 10",
+      "output": "native/wall_2_join_10/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_10.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_11",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 11",
+      "output": "native/wall_2_join_11/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_11.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_12",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 12",
+      "output": "native/wall_2_join_12/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_12.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_13",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 13",
+      "output": "native/wall_2_join_13/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_13.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_14",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 14",
+      "output": "native/wall_2_join_14/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_14.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_15",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 15",
+      "output": "native/wall_2_join_15/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_15.png",
+      "source": "raw/hardwood-whole-column-r3.png",
+      "prompt": "raw/hardwood-whole-column-r3.prompt.txt",
+      "call": "raw/hardwood-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 0",
+      "output": "native/wall_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_1_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 1",
+      "output": "native/wall_2_join_1_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_1_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 2",
+      "output": "native/wall_2_join_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_2_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_3_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 3",
+      "output": "native/wall_2_join_3_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_3_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_4_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 4",
+      "output": "native/wall_2_join_4_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_4_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_5_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 5",
+      "output": "native/wall_2_join_5_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_5_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_6_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 6",
+      "output": "native/wall_2_join_6_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_6_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_7_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 7",
+      "output": "native/wall_2_join_7_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_7_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_8_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 8",
+      "output": "native/wall_2_join_8_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_8_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_9_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 9",
+      "output": "native/wall_2_join_9_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_9_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_10_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 10",
+      "output": "native/wall_2_join_10_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_10_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_11_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 11",
+      "output": "native/wall_2_join_11_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_11_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_12_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 12",
+      "output": "native/wall_2_join_12_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_12_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_13_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 13",
+      "output": "native/wall_2_join_13_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_13_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_14_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 14",
+      "output": "native/wall_2_join_14_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_14_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "wall_2_join_15_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 15",
+      "output": "native/wall_2_join_15_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_15_hurt.png",
+      "source": "raw/hardwood-hurt-column-r2.png",
+      "prompt": "raw/hardwood-hurt-column-r2.prompt.txt",
+      "call": "raw/hardwood-hurt-column-r2.call.json",
+      "recipe": {
+        "content_scale": 0.0436
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_post",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole post",
+      "output": "native/sandbag_wall_post/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_post.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          371,
+          121,
+          205,
+          173
+        ],
+        "content_scale": 0.047285464098073555,
+        "content_anchor_xy": [
+          5,
+          16
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "sandbag_wall_horizontal",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole horizontal",
+      "output": "native/sandbag_wall_horizontal/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_horizontal.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          302,
+          423,
+          338,
+          164
+        ],
+        "content_scale": 0.047285464098073555,
+        "content_anchor_xy": [
+          8,
+          16
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "sandbag_wall_vertical",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole vertical",
+      "output": "native/sandbag_wall_vertical/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_vertical.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          387,
+          705,
+          175,
+          571
+        ],
+        "content_scale": 0.047285464098073555,
+        "content_anchor_xy": [
+          4,
+          27
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": true,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "sandbag_wall_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "whole wreck",
+      "output": "native/sandbag_wall_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_wreck.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          314,
+          1438,
+          297,
+          104
+        ],
+        "content_scale": 0.047285464098073555,
+        "content_anchor_xy": [
+          7,
+          5
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": true,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "sandbag_wall_post_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "damaged post",
+      "output": "native/sandbag_wall_post_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_post_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          362,
+          122,
+          216,
+          172
+        ],
+        "content_scale": 0.047285464098073555,
+        "content_anchor_xy": [
+          5,
+          16
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "sandbag_wall_horizontal_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "damaged horizontal",
+      "output": "native/sandbag_wall_horizontal_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_horizontal_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          305,
+          425,
+          338,
+          162
+        ],
+        "content_scale": 0.047285464098073555,
+        "content_anchor_xy": [
+          8,
+          16
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "sandbag_wall_vertical_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "damaged vertical",
+      "output": "native/sandbag_wall_vertical_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_vertical_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          388,
+          707,
+          175,
+          570
+        ],
+        "content_scale": 0.047285464098073555,
+        "content_anchor_xy": [
+          4,
+          27
+        ]
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": true,
+      "palette_keys": null,
+      "points": {}
+    },
+    {
+      "anim": "sandbag_wall",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 0",
+      "output": "native/sandbag_wall/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_1",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 1",
+      "output": "native/sandbag_wall_join_1/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_1.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 2",
+      "output": "native/sandbag_wall_join_2/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_2.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_3",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 3",
+      "output": "native/sandbag_wall_join_3/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_3.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_4",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 4",
+      "output": "native/sandbag_wall_join_4/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_4.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_5",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 5",
+      "output": "native/sandbag_wall_join_5/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_5.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_6",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 6",
+      "output": "native/sandbag_wall_join_6/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_6.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_7",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 7",
+      "output": "native/sandbag_wall_join_7/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_7.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_8",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 8",
+      "output": "native/sandbag_wall_join_8/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_8.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_9",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 9",
+      "output": "native/sandbag_wall_join_9/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_9.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_10",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 10",
+      "output": "native/sandbag_wall_join_10/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_10.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_11",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 11",
+      "output": "native/sandbag_wall_join_11/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_11.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_12",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 12",
+      "output": "native/sandbag_wall_join_12/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_12.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_13",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 13",
+      "output": "native/sandbag_wall_join_13/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_13.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_14",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 14",
+      "output": "native/sandbag_wall_join_14/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_14.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_15",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 15",
+      "output": "native/sandbag_wall_join_15/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_15.png",
+      "source": "raw/sandbag-whole-column-r3.png",
+      "prompt": "raw/sandbag-whole-column-r3.prompt.txt",
+      "call": "raw/sandbag-whole-column-r3.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 0",
+      "output": "native/sandbag_wall_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_1_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 1",
+      "output": "native/sandbag_wall_join_1_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_1_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 2",
+      "output": "native/sandbag_wall_join_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_2_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_3_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 3",
+      "output": "native/sandbag_wall_join_3_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_3_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_4_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 4",
+      "output": "native/sandbag_wall_join_4_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_4_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_5_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 5",
+      "output": "native/sandbag_wall_join_5_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_5_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_6_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 6",
+      "output": "native/sandbag_wall_join_6_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_6_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_7_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 7",
+      "output": "native/sandbag_wall_join_7_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_7_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_8_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 8",
+      "output": "native/sandbag_wall_join_8_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_8_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_9_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 9",
+      "output": "native/sandbag_wall_join_9_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_9_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_10_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 10",
+      "output": "native/sandbag_wall_join_10_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_10_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_11_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 11",
+      "output": "native/sandbag_wall_join_11_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_11_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_12_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 12",
+      "output": "native/sandbag_wall_join_12_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_12_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_13_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 13",
+      "output": "native/sandbag_wall_join_13_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_13_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_14_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 14",
+      "output": "native/sandbag_wall_join_14_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_14_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "anim": "sandbag_wall_join_15_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "connected mask 15",
+      "output": "native/sandbag_wall_join_15_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_15_hurt.png",
+      "source": "raw/sandbag-hurt-column-r1.png",
+      "prompt": "raw/sandbag-hurt-column-r1.prompt.txt",
+      "call": "raw/sandbag-hurt-column-r1.call.json",
+      "recipe": {
+        "content_scale": 0.047285464098073555
+      },
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "points": {},
+      "operation": "compose",
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "deviations": [
+    {
+      "rule": "A043 vertical span length/placement geometry",
+      "change": "Owner permits a 27px north-south module on the final 16x32 canvas; place it on rows 1..27, grounded at row 27.",
+      "owner_words": "Permitir at\u00c3\u00a9 27 px no canvas final"
+    },
+    {
+      "rule": "A043 ImageGen source sheet arrangement",
+      "change": "Use separate source sheets for north-south spans and remaining modules, then export the whole/hurt module family at one shared content_scale.",
+      "owner_words": "Sim, seguir com folhas separadas e escala uniforme"
+    },
+    {
+      "rule": "Continuation layout",
+      "change": "Vertical source columns preserve shared module scale. The previously authorized 27px vertical envelope resolves the shared A042/A043 source-ratio conflict. Posts/spans stay at row20; joins still use the exact original 2.3 slices.",
+      "owner_words": "Permitir at\u00e9 27 px no canvas final"
+    }
+  ],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/buildings/wall.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "quality_issues": [],
+  "joins": {
+    "wall_2": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 0,
+      "parts": [
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_1": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 1,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_2": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 2,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_3": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 3,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_4": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 4,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_5": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 5,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_6": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 6,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_7": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 7,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_8": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 8,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_9": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 9,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_10": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 10,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_11": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 11,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_12": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 12,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_13": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 13,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_14": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 14,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_15": {
+      "family": "wall_2",
+      "state": "whole",
+      "mask": 15,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 0,
+      "parts": [
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_1_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 1,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_2_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 2,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_3_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 3,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_4_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 4,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_5_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 5,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_6_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 6,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_7_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 7,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_8_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 8,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_9_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 9,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_10_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 10,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_11_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 11,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_12_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 12,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_13_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 13,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_14_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 14,
+      "parts": [
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "wall_2_join_15_hurt": {
+      "family": "wall_2",
+      "state": "hurt",
+      "mask": 15,
+      "parts": [
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/wall_2_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/wall_2_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 0,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_1": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 1,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_2": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 2,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_3": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 3,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_4": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 4,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_5": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 5,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_6": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 6,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_7": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 7,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_8": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 8,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_9": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 9,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_10": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 10,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_11": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 11,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_12": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 12,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_13": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 13,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_14": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 14,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_15": {
+      "family": "sandbag_wall",
+      "state": "whole",
+      "mask": 15,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 0,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_1_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 1,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_2_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 2,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_3_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 3,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_4_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 4,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_5_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 5,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_6_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 6,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_7_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 7,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_8_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 8,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_9_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 9,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_10_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 10,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_11_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 11,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_12_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 12,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_13_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 13,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_14_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 14,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "sandbag_wall_join_15_hurt": {
+      "family": "sandbag_wall",
+      "state": "hurt",
+      "mask": 15,
+      "parts": [
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_horizontal_hurt/none/01.png",
+          "slice_xywh": [
+            8,
+            0,
+            8,
+            32
+          ],
+          "paste_xy": [
+            8,
+            0
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_vertical_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            8,
+            16,
+            20
+          ],
+          "paste_xy": [
+            0,
+            8
+          ]
+        },
+        {
+          "input": "native/sandbag_wall_post_hurt/none/01.png",
+          "slice_xywh": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "paste_xy": [
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  }
+}

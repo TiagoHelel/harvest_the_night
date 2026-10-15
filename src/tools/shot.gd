@@ -152,7 +152,7 @@ const SCENARIOS: Array = [
 	["decoy", "a lured crowd at night: three decoys past a defended farm's fence - walkers, a runner and a tank biting the first, hurt, while the guns work; the second whole, out of their reach; the third bitten down to its straw - and the decoy picked on the hotbar's second page", ""],
 	["searchlight", "a lit and an unlit tower line at night: Winter 2, a generator running, the east road with a line of gun towers north of it under a searchlight and a line south of it in the dark, tanks coming down the road - the lit line firing a tile further than the dark one can", ""],
 	["electric_fence", "a joined run of electric fence at night: Winter 2, a generator running, a line of electric fence across the east road with a corner, a wooden stub making a tee, two arms at its foot and a wooden fence carrying the east one on, the road's cell hurt and a west arm at the top a wreck; walkers coming down the road, the first stunned where it bit - cold blue, its zap still playing - and the fence picked on the hotbar, its ghost joining the north arm; then the same run by day (task 0241), the tarps off to show A042's art", ""],
-	["strong_walls", "a mixed line at night: Summer 2, a long line across the east road - stone, hardwood walls (the stone wall's level two) either side of the road and sandbags on it - an arm off it in one row of stone, hardwood, stone, sandbags and a fence, and a foot of sandbags, the last of them down; walkers come down the road and bite the sandbags, the cheapest way through; the sandbags picked on the hotbar, their ghost joining the arm's end", ""],
+	["strong_walls", "a mixed line at night: Summer 2, a long line across the east road - stone, hardwood walls (the stone wall's level two) either side of the road and sandbags on it - an arm off it in one row of stone, hardwood, stone, sandbags and a fence, and a foot of sandbags, the last of them down; walkers come down the road and bite the sandbags, the cheapest way through; the sandbags picked on the hotbar, their ghost joining the arm's end; then the same line by day (task 0242), the tarps off to show A043's art", ""],
 	["powers", "the three new powers at work at night: Winter 2, a tank leading two walkers down the east road toward the house; the dog sent at the tank and caught at its bite beside its feet, the farm bell rung a moment after - its rings going out from the house and every zombie stood still in cold blue, with no spark - and the hurt middle of three walls by the road mended, its square closing in; the night bar's upper row showing all three charging", ""],
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
@@ -988,6 +988,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 	if name == "beehive":
 		await _shoot("beehive", folder)
 		await _take_beehive_day(main, state, folder)
+		return
+	if name == "strong_walls":
+		await _shoot("strong_walls", folder)
+		await _take_strong_walls_day(main, state, folder)
 		return
 	if name == "electric_fence":
 		await _shoot("electric_fence", folder)
@@ -3573,6 +3577,43 @@ func _set_strong_walls(state: Dictionary) -> void:
 ## it holds the sandbags in hand (task 0231).
 var _strong_line: Array = []
 var _strong_hand := Vector2i(-1, -1)
+
+
+## **The same line by day** (task 0242): the night over, him out by the line,
+## and the tarps off so A043's art shows, as the tower showcase does: stone,
+## hardwood and sandbags joined, what the night broke hurt or down.
+func _take_strong_walls_day(main: Node, state: Dictionary, folder: String) -> void:
+	if _strong_line.is_empty():
+		return
+	# The road's cell of the line: six east and three south of the arm's end.
+	var bend := _strong_hand + Vector2i(6, 3)
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	Sim.advance(state, 4)
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 1)
+	House.leave(state)
+	Building.set_active(state, false)
+	# West of the line below its arm, facing it: the day's camera follows him,
+	# so the arm, the road's cell and the foot all clear the day's panel.
+	_stand(state, bend + Vector2i(-2, 2))
+	state["player"]["facing"] = Player.EAST
+	var view := main.get_node("%WorldView") as WorldView
+	view.tarps = false
+	_only_showing(main, "")
+	view.show_state(state)
+	view.look_at_cell(Player.cell(state))
+	for _i in SETTLE:
+		Sim.advance(state, STIR_TICKS)
+		await process_frame
+	(main.get_node("HouseView") as HouseView).skip_bedtime()
+	view.skip_transition()
+	view._light_for_phase(0.0)
+	await process_frame
+	await RenderingServer.frame_post_draw
+	await _shoot("strong_walls_day", folder)
+	print("  strong_walls by day, %s: %d stone, %d sandbags standing" % [Phases.name_of(int(state["phase"])),
+		Farm.cells_with(state, &"wall").size(), Farm.cells_with(state, &"sandbag_wall").size()])
+	view.tarps = true
 
 
 ## **The three powers at work** (task 0233): Winter 2's night, the tree's

@@ -1,0 +1,66 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / attached sandbagcolumn: change ONLY FOURTHWRECK. Preserve exact953x1650canvas and firstTHREE MODULES LITERALLYPIXEL-FOR-PIXEL, samepositions/sourcepixelscale. The finalheap is much too wide. Remove longclothscrap and replaceheapwith TWO OVERLAPPING VERYFLATTENED BURSTSACKS, onefrontonebehind. Overall finalheap WIDTH ONLY290sourcepx andHEIGHT90sourcepx, centeredx476,bottom1559,top1469. NOT462wide, NOTregularplumpbags, no protrudingscraps/sandoutside. Thirdmodule565pxlong is27nativeunits, so wreck290x90 isabout14x4native. Keep oneactualfamilyunitacrossallart: do NOT enlarge finalheap tofillcell. Preserve the entire threeuppermodules unchanged. Same tanburlap,twine, darkcoloredink, upperleftcrisp pixelartclusters, truealpha outside. No scene,ground,shadow,glow,text,labels,borders or extraobjects.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\sandbag-whole-column-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-50119a69-e563-4671-9d2a-ecefaff94e38.png",
+  "date": "2026-10-14",
+  "revision": 3,
+  "roles": [
+    "sandbag column exact edit target, first three modules fixed"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\sandbag-whole-column-r2.png",
+      "sha256": "fbe3ca1c0f67186e390013d01f9896f1678b645b5d77689bb5914062c9d5c4a5",
+      "role": "sandbag column exact edit target, first three modules fixed",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\sandbag-whole-column-r2.png"
+    }
+  ],
+  "copied_path": "raw/sandbag-whole-column-r3.png",
+  "sha256": "c87f284fc0cf0681cd981f74f3b6d986f3ff6bd9e38aa7cc3f599fff218f9223",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      953,
+      1650
+    ],
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "alpha_threshold_128_bounds": [
+      274,
+      121,
+      669,
+      1542
+    ]
+  },
+  "selected_native_exports": [
+    "native/sandbag_wall_post/none/01.png",
+    "native/sandbag_wall_horizontal/none/01.png",
+    "native/sandbag_wall_vertical/none/01.png",
+    "native/sandbag_wall_wreck/none/01.png",
+    "native/sandbag_wall/none/01.png",
+    "native/sandbag_wall_join_1/none/01.png",
+    "native/sandbag_wall_join_2/none/01.png",
+    "native/sandbag_wall_join_3/none/01.png",
+    "native/sandbag_wall_join_4/none/01.png",
+    "native/sandbag_wall_join_5/none/01.png",
+    "native/sandbag_wall_join_6/none/01.png",
+    "native/sandbag_wall_join_7/none/01.png",
+    "native/sandbag_wall_join_8/none/01.png",
+    "native/sandbag_wall_join_9/none/01.png",
+    "native/sandbag_wall_join_10/none/01.png",
+    "native/sandbag_wall_join_11/none/01.png",
+    "native/sandbag_wall_join_12/none/01.png",
+    "native/sandbag_wall_join_13/none/01.png",
+    "native/sandbag_wall_join_14/none/01.png",
+    "native/sandbag_wall_join_15/none/01.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

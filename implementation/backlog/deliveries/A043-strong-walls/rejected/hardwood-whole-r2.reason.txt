@@ -1,0 +1,1 @@
+The corrected third north-south module remains shorter than 1.7x the east-west width; the whole sheet is not accepted. Its other three cells may be selected individually if retained unchanged in the final export.

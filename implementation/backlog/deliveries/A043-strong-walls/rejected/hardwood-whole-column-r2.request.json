@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION of hardwood wall four-module column. Fix family shared-scale geometry only, preserve exact1024x1536canvas and camera/material/pixelart. Firstpost is the SCALE MASTER: keep it literallyunchanged atsourcex410..578,y24..403 (168wide380tall): this setsone finalnativeunit=25.3sourcepx, postabout6.6x15. Preserve it. Secondhorizontalwall: keep centerx512 andtop435, but width405px andheight202px (native16x8), flatcutends no endpointpiers, two hardwoodbeams on stonecourses/bolts. No arbitraryenlargement. Thirdlongnorthsouthstrip: preserve its sourcewidthabout140px but extendto685px LONG (native27), top650bottom1335, alongscreenYnotupright. Same longstone-and-hardwood beams, no post. Fourthwreck: ONLY a verylow compactheap atbottom1530, width350px xheight100px (native14x4); removeouterrubble, keep2to3stonechunksandtwosplinteredbeams, neverenlargeheaptofillits cell. Centerx512. Shrink the module shapes IN THE GENERATED SOURCE, exporter will use ONE UNIFORMscale .0395for ALLFOUR. Absolutely no glows or halos: everypixel outsidehard shapes is fullytransparent, unlike priorfoghalo. No shadow,ground,scenery,text,labels,frames. Warmupperleftclusters, same darkwood,palestone,iron. Four separatedmodules on originalcanvas withnarrowtransparentgutters; northsouthendsat1335, heapstarts1430. These relativeboundariesarecritical.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-whole-column-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-4ee21759-ce94-4e9b-9b4e-dfe03d6c917c.png",
+  "date": "2026-10-14",
+  "revision": 2,
+  "roles": [
+    "hardwood column edit target, first post fixed scale master"
+  ]
+}

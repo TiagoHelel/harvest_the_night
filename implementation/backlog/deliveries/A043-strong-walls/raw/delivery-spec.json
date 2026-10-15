@@ -1,0 +1,1738 @@
+{
+  "title": "Hardwood walls and sandbags",
+  "date": "2026-10-14",
+  "status": "blocked",
+  "palette_mode": "A",
+  "expected_files": 78,
+  "files": [
+    {
+      "anim": "wall_2_post",
+      "dir": "none",
+      "frame": 0,
+      "pose": "post",
+      "output": "native/wall_2_post/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_post.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_horizontal",
+      "dir": "none",
+      "frame": 0,
+      "pose": "horizontal",
+      "output": "native/wall_2_horizontal/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_horizontal.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_vertical",
+      "dir": "none",
+      "frame": 0,
+      "pose": "vertical",
+      "output": "native/wall_2_vertical/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_vertical.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_post_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "post_hurt",
+      "output": "native/wall_2_post_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_post_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_horizontal_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "horizontal_hurt",
+      "output": "native/wall_2_horizontal_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_horizontal_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_vertical_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "vertical_hurt",
+      "output": "native/wall_2_vertical_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/wall_2_vertical_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_0",
+      "output": "native/wall_2/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_1",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_1",
+      "output": "native/wall_2_join_1/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_1.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_2",
+      "output": "native/wall_2_join_2/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_2.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_3",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_3",
+      "output": "native/wall_2_join_3/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_3.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_4",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_4",
+      "output": "native/wall_2_join_4/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_4.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_5",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_5",
+      "output": "native/wall_2_join_5/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_5.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_6",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_6",
+      "output": "native/wall_2_join_6/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_6.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_7",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_7",
+      "output": "native/wall_2_join_7/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_7.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_8",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_8",
+      "output": "native/wall_2_join_8/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_8.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_9",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_9",
+      "output": "native/wall_2_join_9/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_9.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_10",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_10",
+      "output": "native/wall_2_join_10/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_10.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_11",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_11",
+      "output": "native/wall_2_join_11/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_11.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_12",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_12",
+      "output": "native/wall_2_join_12/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_12.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_13",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_13",
+      "output": "native/wall_2_join_13/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_13.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_14",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_14",
+      "output": "native/wall_2_join_14/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_14.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_15",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_15",
+      "output": "native/wall_2_join_15/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_15.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_0_hurt",
+      "output": "native/wall_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_1_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_1_hurt",
+      "output": "native/wall_2_join_1_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_1_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_2_hurt",
+      "output": "native/wall_2_join_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_2_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_3_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_3_hurt",
+      "output": "native/wall_2_join_3_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_3_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_4_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_4_hurt",
+      "output": "native/wall_2_join_4_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_4_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_5_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_5_hurt",
+      "output": "native/wall_2_join_5_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_5_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_6_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_6_hurt",
+      "output": "native/wall_2_join_6_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_6_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_7_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_7_hurt",
+      "output": "native/wall_2_join_7_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_7_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_8_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_8_hurt",
+      "output": "native/wall_2_join_8_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_8_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_9_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_9_hurt",
+      "output": "native/wall_2_join_9_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_9_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_10_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_10_hurt",
+      "output": "native/wall_2_join_10_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_10_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_11_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_11_hurt",
+      "output": "native/wall_2_join_11_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_11_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_12_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_12_hurt",
+      "output": "native/wall_2_join_12_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_12_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_13_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_13_hurt",
+      "output": "native/wall_2_join_13_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_13_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_14_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_14_hurt",
+      "output": "native/wall_2_join_14_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_14_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_join_15_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_15_hurt",
+      "output": "native/wall_2_join_15_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_join_15_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "wall_2_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck",
+      "output": "native/wall_2_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/wall_2_wreck.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "sandbag_wall_post",
+      "dir": "none",
+      "frame": 0,
+      "pose": "post",
+      "output": "native/sandbag_wall_post/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_post.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_horizontal",
+      "dir": "none",
+      "frame": 0,
+      "pose": "horizontal",
+      "output": "native/sandbag_wall_horizontal/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_horizontal.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_vertical",
+      "dir": "none",
+      "frame": 0,
+      "pose": "vertical",
+      "output": "native/sandbag_wall_vertical/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_vertical.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_post_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "post_hurt",
+      "output": "native/sandbag_wall_post_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_post_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_horizontal_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "horizontal_hurt",
+      "output": "native/sandbag_wall_horizontal_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_horizontal_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_vertical_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "vertical_hurt",
+      "output": "native/sandbag_wall_vertical_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/modules/sandbag_wall_vertical_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_0",
+      "output": "native/sandbag_wall/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_1",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_1",
+      "output": "native/sandbag_wall_join_1/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_1.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_2",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_2",
+      "output": "native/sandbag_wall_join_2/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_2.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_3",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_3",
+      "output": "native/sandbag_wall_join_3/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_3.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_4",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_4",
+      "output": "native/sandbag_wall_join_4/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_4.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_5",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_5",
+      "output": "native/sandbag_wall_join_5/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_5.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_6",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_6",
+      "output": "native/sandbag_wall_join_6/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_6.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_7",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_7",
+      "output": "native/sandbag_wall_join_7/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_7.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_8",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_8",
+      "output": "native/sandbag_wall_join_8/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_8.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_9",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_9",
+      "output": "native/sandbag_wall_join_9/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_9.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_10",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_10",
+      "output": "native/sandbag_wall_join_10/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_10.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_11",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_11",
+      "output": "native/sandbag_wall_join_11/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_11.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_12",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_12",
+      "output": "native/sandbag_wall_join_12/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_12.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_13",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_13",
+      "output": "native/sandbag_wall_join_13/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_13.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_14",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_14",
+      "output": "native/sandbag_wall_join_14/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_14.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_15",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_15",
+      "output": "native/sandbag_wall_join_15/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_15.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_0_hurt",
+      "output": "native/sandbag_wall_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_1_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_1_hurt",
+      "output": "native/sandbag_wall_join_1_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_1_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_2_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_2_hurt",
+      "output": "native/sandbag_wall_join_2_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_2_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_3_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_3_hurt",
+      "output": "native/sandbag_wall_join_3_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_3_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_4_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_4_hurt",
+      "output": "native/sandbag_wall_join_4_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_4_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_5_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_5_hurt",
+      "output": "native/sandbag_wall_join_5_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_5_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_6_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_6_hurt",
+      "output": "native/sandbag_wall_join_6_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_6_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_7_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_7_hurt",
+      "output": "native/sandbag_wall_join_7_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_7_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_8_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_8_hurt",
+      "output": "native/sandbag_wall_join_8_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_8_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_9_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_9_hurt",
+      "output": "native/sandbag_wall_join_9_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_9_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_10_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_10_hurt",
+      "output": "native/sandbag_wall_join_10_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_10_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_11_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_11_hurt",
+      "output": "native/sandbag_wall_join_11_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_11_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_12_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_12_hurt",
+      "output": "native/sandbag_wall_join_12_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_12_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_13_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_13_hurt",
+      "output": "native/sandbag_wall_join_13_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_13_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_14_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_14_hurt",
+      "output": "native/sandbag_wall_join_14_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_14_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_join_15_hurt",
+      "dir": "none",
+      "frame": 0,
+      "pose": "mask_15_hurt",
+      "output": "native/sandbag_wall_join_15_hurt/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_join_15_hurt.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    },
+    {
+      "anim": "sandbag_wall_wreck",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck",
+      "output": "native/sandbag_wall_wreck/none/01.png",
+      "runtime_name": "sprites/buildings/sandbag_wall_wreck.png",
+      "canvas_wh": [
+        16,
+        32
+      ],
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1,
+      "seconds": 0.55,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "mirror_pairs": {},
+  "comparison": [
+    {
+      "path": "sprites/buildings/wall.png",
+      "pivot_xy": [
+        8,
+        28
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

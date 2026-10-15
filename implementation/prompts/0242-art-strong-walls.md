@@ -1,7 +1,7 @@
 # 0242 - Art: hardwood walls and sandbags
 
 - **Phase:** 13 - Weapons of the night
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0231
 - **Likely files:** assets/art_source/defences/, assets/art_source/manifest.json, tools/check_barrier_art.py
 - **Art packs:** A043

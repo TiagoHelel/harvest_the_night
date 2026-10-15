@@ -1,0 +1,48 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "EDIT the attached source sheet and output ONLY its TOP component, corrected into the hardwood wall POST. Ignore the middle horizontal span and bottom rubble completely; do not reproduce them. The target is the compact square pier shown at the very top of Image 1 (the top object only). Preserve its stone core, twin hardwood side beams and iron strap identity. Make the complete visible silhouette 6 units wide and 15 units tall (aspect 0.4), not a long skinny north-south span. It is a freestanding square pier: front and right faces visible, short square footprint, with a flat small cap. The two wood beams are short vertical accents on the front face; they must not run beyond the stone post or transform it into a long wall segment. Use Image 2 only for compact 6x15 wall-post proportions and game camera. Use Image 3 for accepted hardwood material palette and hard pixel-cluster style. Transparent background, one object only. Pixel-art clusters with compact palette and sharp stepped contours. No light halo, shadow, floor, labels, backdrop, gradient, blur, antialiasing, painterly texture, 3D, additional wall segment or objects. Leave generous transparent margins.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-modules-stack-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-vertical-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-modules-stack-r1.png",
+      "sha256": "af0a05d95d8c32ff5d08b2250a851eab20942f4ede7127f12175d06c54331d5b",
+      "role": "source sheet; top object correction target"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png",
+      "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+      "role": "compact post proportions"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-vertical-r3.png",
+      "sha256": "d4638d9a629805e9377ef07e8c1573673bd0720e8f360491d7036361ef1e3eb6",
+      "role": "hardwood material and palette reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f67c97de-221c-4138-822b-19bf1214204f.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-post-correction-r1.png",
+  "sha256": "5fc1f780b5587168b16cc9d5e428d4582badee7d42be3152e1d6f6509a2368bc",
+  "date": "2026-10-14",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "The correction again generated a long north-south wall segment instead of the requested compact post; the output also includes a visible halo. No exports made.",
+  "inspection": {
+    "canvas_wh": [
+      1024,
+      1536
+    ],
+    "alpha_threshold_128_bounds": [
+      307,
+      239,
+      703,
+      1304
+    ]
+  }
+}

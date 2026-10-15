@@ -1,0 +1,48 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "EDIT the attached sprite, preserving its silhouette and framing exactly. The input is the existing compact stone wall POST from the game. Output the same compact freestanding post, at the same aspect ratio and approximate outline size, but upgraded with two dark hardwood facing planks and one iron strap with two bolts. Preserve the input squat compact square-pier proportions. Do not turn it into a long wall, fence rail, vertical span, column taller than the input, or any other form. Image 1 is the edit target and controls geometry, scale, camera and post silhouette. Image 2 is the accepted hardwood wall material reference; match its hardwood grain, iron color and stone palette. Image 3 is the game style reference. The post must remain compact and grounded, front and right face visible in the same three-quarter top-down game camera. Pixel art, stepped edges, limited palette, coherent large pixel clusters. Keep transparent background and preserve all transparency outside the post. No background, ground, halo, shadow, gradient, blur, anti-aliasing, painterly rendering, 3D, text, labels, UI, or extra elements.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\modules\\wall_post.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-vertical-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\sprites\\buildings\\modules\\wall_post.png",
+      "sha256": "294c1acc604fb29411c5a670d9ca14626eb5aee29fa34c5f0d0bba66a47b7789",
+      "role": "edit target geometry and camera"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-vertical-r3.png",
+      "sha256": "d4638d9a629805e9377ef07e8c1573673bd0720e8f360491d7036361ef1e3eb6",
+      "role": "accepted hardwood material reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "game style reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-075137c3-c2ac-4e40-ba07-2dec991d01e1.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-post-r2.png",
+  "sha256": "08e2554419ad973064de04469eb2efc8e6c9c312c6fd3593f2a74e94806544e1",
+  "date": "2026-10-14",
+  "revision": 2,
+  "decision": "candidate",
+  "inspection": {
+    "canvas_wh": [
+      1230,
+      1278
+    ],
+    "alpha_threshold_128_bounds": [
+      422,
+      339,
+      808,
+      1015
+    ],
+    "uniform_scale": "0.0196, per owner scale decision"
+  }
+}

@@ -247,3 +247,13 @@ the approved queue, one a run, the owner's 13 included.
 
 A042 is in the game and set `integrated` (the electric fence: 42 native PNGs sha-checked, its 32 masks composed from joins.parts and each checked against the approved PNG).
 Next in the loop: 0242.
+
+## 2026-10-15 - Claude - taking 0242 (A043)
+
+Taking 0242, A043 the hardwood wall and sandbags, through its
+CLAUDE-A043-PROMPT.txt; the masks composed from joins.parts.
+
+## 2026-10-15 - Claude - done 0242 (A043 integrated)
+
+A043 is in the game and set `integrated` (the hardwood wall and sandbags: 78 native PNGs sha-checked, the 64 masks composed from joins.parts and each checked against the approved PNG).
+Next in the loop: 0243.

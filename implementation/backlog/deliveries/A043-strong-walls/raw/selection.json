@@ -1,0 +1,8 @@
+{
+  "status": "blocked",
+  "files": {},
+  "issues": [
+    "Task0231 is done. Unresolved spec shared withA042: rawvertical length>=1.7x16 implies27px at one scale; finalvertical allowed20px. Original instructions forbid guessing contradictory geometry. Owner choice is pending; noImageGen call or productionart inthispack."
+  ],
+  "rejected": {}
+}

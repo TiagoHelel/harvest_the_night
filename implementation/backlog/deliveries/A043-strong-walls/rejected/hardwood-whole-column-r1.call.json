@@ -1,0 +1,54 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: production modular pixelart for HARVEST THE NIGHT. Input1 approved stonewall is CAMERA/material-massing/module reference, input2 gameSTYLE. Exactly4 separatecuttablemodules arranged in ONE PORTRAIT VERTICALCOLUMN, no text/labels/frames: topPOST, secondHORIZONTALSPAN, thirdLONGNORTHSOUTHSPAN, fourthLOWWRECK. Wide true transparent gutters. Same physicalsourcePIXELUNIT across ALL4, no individualenlargementtofillspace. Finalnative16x32pivot8,28draw1.0. Every unit described is one same nativepixel. Uniform20sourcepx per unit as designruler: a16unitspan is320sourcepx wide, a27unitvertical is540sourcepx long; keepverticalheightat least1.7timeshorizontalWIDTH. Northsouthspan is a long narrow run lying AWAY along SCREENY, viewedfromABOVE like traintrack, NOT an uprightpole or pairedtallposts. Sideeastswestspan lies along SCREENX notisometricdiagonal. Preserve completeunclippedends, chunky readablepixelplanes, coloredinkoutline, warmupperleftdaylight, crispstair-steppedshapes, limitedpaletteramps. No softpainting, glow, halos, groundshadow, groundpatch, grass, text, extraobjects. True transparentalpha, not a paintedcheckerboard. Material: upgrade the SAME paleSTONE wall with heavyDARKHARDWOOD facingbeams, ironstraps, bolts. Stone remainsvisible betweenwood, stone topped by darkerhardwoodcap, readableas level2stonewall, not logsor woodenfence. TopPOST: narrow6unitsWIDE x15unitsTALL (120x300source), stonepierwrappedbydarkwoodplanks, hardwoodcap andone ironstrap. SecondHORIZONTAL: flatcutendsNOENDPIERS,16wide x8high (320x160source); two horizontalhardwoodbeams facingthree stonecourses, smallironbolts. ThirdVERTICAL: 5wide x27long (100x540source); longstonecapstripdownY, onehardwoodbeamdownEACHSIDE withiron straps across, no uprightpost. FourthWRECK: compactstoneandbrokenhardwoodheap14wide x6high (280x120source), no standingpiece. Relativeunitdimensionsmatter: pierheightabout55%ofverticalheight, spanwidthabout59%ofverticalheight, wreckheightabout22%ofverticalheight. Separatecells centeraligned, no component dominatesits cell by arbitraryfitting.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9cebb1eb-ffe7-4d43-bbfb-cb3a81549a41.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "stonewall exact identity/material envelope reference",
+    "project style"
+  ],
+  "owner_words": [
+    "entao bora continuar essa poha",
+    "Permitir at\u00c3\u00a9 27 px no canvas final",
+    "Sim, seguir com folhas separadas e escala uniforme"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png",
+      "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+      "role": "stonewall exact identity/material envelope reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "project style"
+    }
+  ],
+  "copied_path": "rejected/hardwood-whole-column-r1.png",
+  "sha256": "8bce6a68149c7471bcf8790b7a1af9c10cf450555f609418d3afae02de996102",
+  "decision": "rejected / Relative module sizes and wreck envelope fail shared geometry.",
+  "inspection": {
+    "canvas_wh": [
+      1024,
+      1536
+    ],
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "alpha_threshold_128_bounds": [
+      255,
+      24,
+      774,
+      1500
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+Owner-authorized aligned generation still produced a north-south span shorter than the 1.7x horizontal width criterion (source bounds (64, 54, 1814, 799)); the sheet cannot be exported at a common content_scale.

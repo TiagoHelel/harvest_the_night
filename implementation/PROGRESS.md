@@ -32000,3 +32000,70 @@ measured differences, `electric_fence_post_span_row20` and
 - `python implementation/backlog/assets.py set A042 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (61 of 61).
+
+## 0242 - Art: hardwood walls and sandbags - done 2026-10-15
+
+A043 is integrated. The hardwood wall (the stone wall's level two) and the
+sandbags, each sixteen masks whole and hurt plus a wreck, are the
+owner-approved art now. They were approved on 2026-10-14 ("tudo aprovado,
+falta mais?"), and Codex recorded it in the delivery's `APPROVAL.json`.
+0231's drawing is gone.
+
+- **Promotion**: the 78 native PNGs were checked against `contract.json` and
+  `APPROVAL.json` (sha256 each).
+  - The four raw sources were copied byte for byte into
+    `assets/art_source/defences/strong_walls/`.
+  - Fourteen files are source crops: each family's post, horizontal and
+    vertical modules, whole and hurt, and its wreck. All decode to the
+    approved pixels exactly.
+  - The 64 masks are compose entries built from the contract's
+    `joins.parts` (N, W, E, S, post), as 0241's are. Every composition was
+    checked against its approved PNG and matches.
+  - The modules and the wrecks carry `barrier_family`/`barrier_state`. The
+    owner's 27-pixel vertical envelope is kept as delivered.
+- **No view change**: `_barrier_name` asks for `wall_2_join_<mask>` and
+  `sandbag_wall_join_<mask>`. `import_art`'s `connected` flag lets them
+  join as 0231's drawings did.
+- **The stand-ins retired**:
+  - A043's 66 `PlaceholderArt` entries and the `STRONG_WALL` geometry are
+    gone. `placeholders.py --check` passes, with 239 stand-ins left over
+    32 packs.
+  - `StrongWallArt` loses its drawing. It names the masks and loads the art
+    for the hotbar's sandbags.
+  - `WorldView` and `headless_check` lose the last branch to a code-drawn
+    building.
+- **Checks**:
+  - `check_barrier_art.py` joins `wall_2` and `sandbag_wall` to the
+    families it checks mask by mask (78 entries). It checks the recipe, the
+    parts, the arms against their bits, the wear and one physical scale.
+    The hardwood is its own art in every mask, not the stone's. Runs of
+    hardwood and stone, hardwood and sandbags, and sandbags and fence meet
+    on at least two rows.
+  - **North, for these two**: a south arm starts on row 8, and the
+    sandbags' low post starts on row 12. So north is what stands above
+    both, the rows above `min(8, post top)`; for the old families it stays
+    "above the post". On every mask of all five families the two rules
+    agree.
+  - The barrier showcase runs the sandbags through all sixteen masks, by
+    day, at dusk and by night, hurt, wrecked and kept as ruins: 5,777
+    checks.
+- **Tests**: `_task_0231_strong_walls`'s view half now reads the art's own
+  pixels.
+  - Each of the 66 names is A043's raster, `connected` but for the wrecks.
+    The arms match the bits, by the same north rule, and every hurt mask
+    differs from its whole one.
+  - The hardwood wall is its own art in all 32 masks. 0231's drawing
+    copied the stone wall's shape, and the approved art does not.
+  - The sandbags' post is low on row 19, and both wrecks lie low on row 27.
+- **Shots** (`implementation/shots/0242/`, FHD 1920x1080, looked at):
+  - `strong_walls`, 0231's mixed line at night: stone, hardwood either side
+    of the road, sandbags on it, the arm west and the foot east.
+  - `strong_walls_day`, its new twin, by day with the tarps off. It is
+    framed west of the line so the arm (stone, hardwood, stone, sandbags,
+    two fences), the line and the foot clear the day's panel. The first
+    take hid the arm behind it.
+- **The delivery folder** `implementation/backlog/deliveries/A043-strong-walls/` is
+  committed, as A042's was.
+- `python implementation/backlog/assets.py set A043 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (61 of 61).

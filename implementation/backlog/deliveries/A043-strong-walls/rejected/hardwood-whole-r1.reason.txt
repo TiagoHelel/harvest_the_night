@@ -1,0 +1,1 @@
+The north-south span is only about 1.2x the east-west width in the returned source, below the required 1.7x geometry; other cells remain usable only if selected individually after a corrected strip.

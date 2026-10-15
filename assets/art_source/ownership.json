@@ -1366,6 +1366,54 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/modules/sandbag_wall_horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/sandbag_wall_horizontal_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/sandbag_wall_post.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/sandbag_wall_post_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/sandbag_wall_vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/sandbag_wall_vertical_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/wall_2_horizontal.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/wall_2_horizontal_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/wall_2_post.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/wall_2_post_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/wall_2_vertical.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/modules/wall_2_vertical_hurt.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/modules/wall_horizontal.png",
       "owner": "raster"
     },
@@ -1454,6 +1502,138 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/buildings/sandbag_wall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_10.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_10_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_11.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_11_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_12.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_12_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_13.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_13_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_14.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_14_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_15.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_15_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_3_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_4_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_5_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_6_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_7_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_8.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_8_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_9.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_join_9_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/sandbag_wall_wreck.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/buildings/searchlight.png",
       "owner": "raster"
     },
@@ -1487,6 +1667,138 @@
     },
     {
       "output": "sprites/buildings/wall.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_10.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_10_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_11.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_11_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_12.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_12_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_13.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_13_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_14.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_14_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_15.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_15_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_1_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_2_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_3_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_4_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_5.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_5_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_6.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_6_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_7.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_7_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_8.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_8_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_9.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_join_9_hurt.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/buildings/wall_2_wreck.png",
       "owner": "raster"
     },
     {

@@ -1,0 +1,43 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Create a transparent source sheet with exactly THREE damaged hardwood wall modules, arranged top-to-bottom: a compact square POST, an EAST-WEST span, and a long narrow NORTH-SOUTH span. This is the damaged/hurt state of the three corresponding intact modules in Image 1. Preserve their exact scale, silhouettes, camera, wood/stone/iron identity, and orientation. Make each one visibly damaged but still recognizable: cracked or missing one plank, bent iron strap, chipped stone, subtle splinters. Each hurt silhouette must differ from its intact matching module by a few opaque pixels, not become rubble. The north-south one lies along the screen Y ground axis, not standing upright in world space; it is long and narrow (about 5:27). The horizontal one spans the full cell width and remains about 16:8. The post remains compact about 6:15. Separate all three with wide transparent gaps. Do not include a wreck. Image 1 is the intact hardwood source sheet and controls material, shapes, proportions, orientations and uniform source scale. Image 2 is the accepted long hardwood module and style/material reference. Image 3 is the game pixel-art style reference. Crisp stepped pixel-art clusters, compact palette, clean opaque edges, consistent texture scale across components. Transparent background. No glow, shadows, floor, halo, gradients, blur, antialiasing, painterly texture, 3D, labels, text, UI, extra objects, or background.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-modules-stack-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-vertical-r3.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-modules-stack-r1.png",
+      "sha256": "af0a05d95d8c32ff5d08b2250a851eab20942f4ede7127f12175d06c54331d5b",
+      "role": "intact module scale and geometry reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\hardwood-vertical-r3.png",
+      "sha256": "d4638d9a629805e9377ef07e8c1573673bd0720e8f360491d7036361ef1e3eb6",
+      "role": "hardwood identity and scale master"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "game pixel-art style reference"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7c2b9877-7244-49a8-abfb-5c08d8107f76.png",
+  "copied_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-hurt-stack-r1.png",
+  "sha256": "80045dbb6a34243a24358db5844dc133519203eb35157c4629664599d7718e93",
+  "date": "2026-10-14",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "At the common family content_scale derived from the vertical master, the hurt north-south span reduces to about 3x14 rather than the required 5x27, so the family cannot be exported consistently. No production export made.",
+  "inspection": {
+    "canvas_wh": [
+      1024,
+      1536
+    ],
+    "uniform_scale_reference": 0.0196
+  }
+}

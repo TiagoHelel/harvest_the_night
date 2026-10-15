@@ -8930,54 +8930,54 @@ func _task_0231_strong_walls() -> void:
 		"sandbags join the hardwood wall north, sandbags east and the fence west, not the decoy south; the wall above is drawn as level two, joined down",
 		str(drawn))
 
-	# **Drawn through 0120's road**: both families' 32 masks and wrecks at
-	# A043's 16x32 on (8,28), drawn in code, every standing one connected.
+	# **A043's art since task 0242**: both families' 32 masks, composed by
+	# the importer, and wrecks at 16x32 on (8,28), every standing one
+	# connected, with nothing of 0120's road left.
 	var road: Array = []
 	for name in StrongWallArt.names():
 		var path := StrongWallArt.path_of(name)
-		var frame := PlaceholderArt.frame(path)
+		var frame: Dictionary = RasterArt.FRAMES.get(path, {})
+		var texture := StrongWallArt.texture(name)
 		if (frame.get("canvas") != Vector2i(16, 32) or frame.get("pivot") != Vector2i(8, 28)
-				or not PlaceholderArt.is_drawn(path) or str(PlaceholderArt.art(name).get("pack", "")) != "A043"
+				or PlaceholderArt.is_drawn(path) or not PlaceholderArt.art(name).is_empty()
 				or bool(frame.get("connected", false)) == str(name).ends_with("_wreck")
-				or StrongWallArt.texture(name) == null):
+				or texture == null or texture.resource_path != path):
 			road.append(name)
 	expect(StrongWallArt.names().size() == 66 and road.is_empty() and StrongWallArt.texture(&"wall") == null
 		and StrongWallArt.texture(&"electric_fence") == null,
-		"both families' 32 masks and wrecks drawn through 0120's road at A043's 16x32 on (8,28), every standing one connected",
+		"both families' 32 masks and wrecks are A043's art at 16x32 on (8,28), every standing one connected",
 		str(road))
 
-	# **Each mask's arms match its bits**, every hurt one differs from its
-	# whole one; the hardwood wall keeps the stone wall's shape, mask for
-	# mask, in other colours; the sandbags are low.
+	# **Each mask's arms match its bits** - north being what rises above
+	# both the post and row 8, where a south arm starts - and every hurt one
+	# differs from its whole one; the hardwood wall is its own art, not the
+	# stone wall's; the sandbags are low.
 	var arms: Array = []
 	var recoloured := 0
 	for family in StrongWallArt.FAMILIES:
 		for hurt in [false, true]:
+			var post_top := _art_image("res://sprites/buildings/modules/%s_post%s.png" % [family, "_hurt" if hurt else ""]).get_used_rect().position.y
 			for m in 16:
 				var name := JoinRecipe.name_of(family, m, hurt)
-				var image := StrongWallArt.drawing(name)
+				var image := _art_image(StrongWallArt.path_of(name))
 				var seen := [_any_opaque(image, Rect2i(0, 12, 1, 8)), _any_opaque(image, Rect2i(15, 12, 1, 8)),
-					_any_opaque(image, Rect2i(0, 0, 16, 4)), _any_opaque(image, Rect2i(0, 20, 16, 12))]
+					_any_opaque(image, Rect2i(0, 0, 16, mini(8, post_top))), _any_opaque(image, Rect2i(0, 20, 16, 12))]
 				if image.get_size() != Vector2i(16, 32) or seen != [(m & 8) != 0, (m & 2) != 0, (m & 1) != 0, (m & 4) != 0]:
 					arms.append(name)
-				if hurt and _alpha_apart(image, StrongWallArt.drawing(JoinRecipe.name_of(family, m, false))) < 3:
+				if hurt and _alpha_apart(image, _art_image(StrongWallArt.path_of(JoinRecipe.name_of(family, m, false)))) < 3:
 					arms.append("%s as whole" % name)
 				if family == StrongWallArt.HARDWOOD:
-					var stone_name := JoinRecipe.name_of("wall", m, hurt)
-					var stone_image := Image.load_from_file(ProjectSettings.globalize_path("res://sprites/buildings/%s.png" % stone_name))
-					stone_image.convert(Image.FORMAT_RGBA8)
-					if _alpha_apart(image, stone_image) > 0:
-						arms.append("%s off the stone's shape" % name)
+					var stone_image := _art_image("res://sprites/buildings/%s.png" % JoinRecipe.name_of("wall", m, hurt))
 					if image.get_data() != stone_image.get_data():
 						recoloured += 1
-	var post := StrongWallArt.module(StrongWallArt.SANDBAGS, &"post", false).get_used_rect()
-	var bag_wreck := StrongWallArt.drawing(StrongWallArt.wreck_of(StrongWallArt.SANDBAGS)).get_used_rect()
-	var wood_wreck := StrongWallArt.drawing(StrongWallArt.wreck_of(StrongWallArt.HARDWOOD)).get_used_rect()
+	var post := _art_image("res://sprites/buildings/modules/sandbag_wall_post.png").get_used_rect()
+	var bag_wreck := _art_image(StrongWallArt.path_of(StrongWallArt.wreck_of(StrongWallArt.SANDBAGS))).get_used_rect()
+	var wood_wreck := _art_image(StrongWallArt.path_of(StrongWallArt.wreck_of(StrongWallArt.HARDWOOD))).get_used_rect()
 	expect(arms.is_empty() and recoloured == 32
 		and post.size.x >= 8 and post.size.x <= 10 and post.size.y >= 7 and post.size.y <= 9 and post.end.y - 1 == 19
 		and bag_wreck.size.y <= 6 and bag_wreck.end.y - 1 == 27 and bag_wreck.size.x <= 14
 		and wood_wreck.size.y <= 8 and wood_wreck.end.y - 1 == 27 and wood_wreck.size.x <= 14,
-		"every mask's arms match its bits and every hurt one differs from its whole one; the hardwood wall has the stone wall's shape in all 32 masks, in other colours; the sandbags' post is low on row 19; both wrecks lie low on row 27",
+		"every mask's arms match its bits and every hurt one differs from its whole one; the hardwood wall is its own art in all 32 masks; the sandbags' post is low on row 19; both wrecks lie low on row 27",
 		"%s post %s wrecks %s %s" % [str(arms.slice(0, 6)), str(post), str(bag_wreck), str(wood_wreck)])
 
 	# **The hotbar**: a straight run of sandbags, among summer's.

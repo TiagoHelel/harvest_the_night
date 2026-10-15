@@ -1,0 +1,43 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION (third and final revision of this asset). Edit the attached A043 hardwood sheet by extracting and correcting ONLY the north-south module. It must be a single long narrow north-south wall span lying flat along the screen Y ground axis, viewed from the same orthographic three-quarter top-down camera. Not a post, pillar, upright fence, or vertical standing object.\nOne concrete correction: make its long-axis length 27 native pixels and its cross-section 5 native pixels wide (about 5:27 aspect), so it fills rows 1..27 of a 16x32 logical canvas with x=6..10 and touches the bottom contact row 27. It must be at least 1.7 times as long as a full 16-pixel east-west span is wide. Its long side has two continuous dark hardwood beams running the full length with gray stone visible between them and three small iron straps crossing the width. Keep both ends intact and unclipped. The owner explicitly allowed a 27-pixel final length.\nGenerate this as ONE isolated, tall portrait sprite source with a generous transparent border, no other objects, no labels. Aim for at least 160 source pixels wide by 900 source pixels tall (or larger, same 5:27 proportion); this source is later cropped and uniformly reduced at content_scale 0.03. True transparent alpha.\nInput images: Image 1: docs/reference-sheet.png, approved style reference only. Image 2: rejected/hardwood-whole-r2.png, identity/material reference and correction target for the third module only. Match its warm dark hardwood beams, gray stone, iron straps, colored outlines and pixel-cluster style. Keep the other modules in Image 2 unchanged in spirit; they are not part of this output.\nDo not include ground, shadows, glow, background, grass, text, watermark, UI, extras, painterly gradients, blur, antialiasing, 3D or random speckles.\n\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "approved style reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r2.png",
+      "sha256": "6c51d3c1e15fb4af6556bce93d98cbe5a7de5480266b5557cf9f6e546a121e34",
+      "role": "hardwood identity and correction target"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2b03de9b-545e-4795-b6f6-6c83e03a7321.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-vertical-r3.png",
+  "sha256": "d4638d9a629805e9377ef07e8c1573673bd0720e8f360491d7036361ef1e3eb6",
+  "date": "2026-10-14",
+  "revision": 3,
+  "decision": "rejected",
+  "reason": "The isolated vertical shape now meets the approved 27px length at content_scale 0.02, but a shared family scale that keeps the existing post/span/wreck in their specified envelopes is about 0.03; at 0.03 this vertical would be about 41px and clip. It cannot be combined into a contract-compliant family without a fresh aligned source or an owner-approved scale deviation.",
+  "inspection": {
+    "canvas_wh": [
+      965,
+      1629
+    ],
+    "alpha_threshold_128_bounds": [
+      372,
+      129,
+      593,
+      1507
+    ],
+    "uniform_scale_for_27px_height": 0.019593613933236574
+  }
+}

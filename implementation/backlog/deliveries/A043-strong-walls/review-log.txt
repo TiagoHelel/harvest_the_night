@@ -1,0 +1,20 @@
+2026-10-14 / Spec dependency only; ImageGen remains available. Owner question aboutA042/A043 verticalgeometry is pending. No raster artgenerated, no approvals inferred. Continue independentnewpacks within authorizedbatch.
+
+2026-10-14 / Measured native export
+Task0231 is done. Unresolved spec shared withA042: rawvertical length>=1.7x16 implies27px at one scale; finalvertical allowed20px. Original instructions forbid guessing contradictory geometry. Owner choice is pending; noImageGen call or productionart inthispack.
+No art approval inferred. 0 of 78 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Owner clarification: “Permitir até 27 px no canvas final”. Recorded the geometry deviation in raw/export-plan.json. Hardwood whole-row r1 and r2 failed the required vertical ratio. Isolated r3 meets the shape but not the family-wide content_scale together with the other three modules; no native production exports were made. After three attempts on the same asset, awaiting owner direction before another generation.
+
+2026-10-14 / Owner authorization: “Autorizar uma nova geração alinhada na mesma escala (Recomendado)”. Ran a new consolidated whole-row generation; the north-south module still failed the 1.7x width criterion, so no exports were made. The isolated r3 span remains shape-correct but its source scale does not match the other modules.
+
+2026-10-14 / Owner authorization: “Sim, seguir com folhas separadas e escala uniforme”. Recording a source-layout deviation: north-south masters may use their own sheets while the six modules and wreck within each material family must share one content_scale. The approved hardwood vertical master r3 will be retained for measurement; other whole/hurt pieces will be generated on separate sheets and must match its measured source scale.
+
+2026-10-14 / Owner authorized separate source sheets at a uniform family scale: “Sim, seguir com folhas separadas e escala uniforme”. The compact-post edit returned a roughly 386x676px source (about 8x13 at scale 0.0196 versus target about 6x15). The damaged hardwood sheet returned a vertical module that reduces to about 3x14 at the same scale instead of 5x27; the consolidated whole sheet had visible halo and an undersized post. These are retained in raw/rejected with prompts and call provenance. No production frames or review HTML were built. Sandbag family sources are still absent. Pack blocked until usable aligned ImageGen sources can satisfy the scale/geometry and both material families can be completed. Owner geometry decision preserved verbatim: “Permitir até 27 px no canvas final”.
+
+2026-10-14 / Completed78/78 native candidates: two material families, each six modules/wreck and32 exact joins. Shared scale per family, authorized27px vertical envelope, all measured checks pass including damage visible in every mask. build twice/--check stable. Sources hardwoodwholecolumnr3/hurtr2 and sandbagwholecolumnr3/hurtr1. Horizontal source beams are cropped to tilelength at shared scale; hardwood lower face trimmed to8px height for seam alignment. No native pixel repaint. All78 new files require final owner review.
+
+2026-10-14 / Complete continuation owner approval
+Owner words: tudo aprovado, falta mais?
+Review: implementation/backlog/deliveries/A028-dog/continuation-final-review.html
+All 78 native outputs approved, including 78 new PNGs. Original approved PNGs remain byte-identical. Accepted measured visual differences: none. No art, motion, palette, timing or runtime files changed.

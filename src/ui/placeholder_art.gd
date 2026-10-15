@@ -196,10 +196,6 @@ const TARP_TOWER := {"canvas": Vector2i(32, 48), "pivot": Vector2i(16, 44), "dra
 const TARP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
 const TARP_SHORT := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 20), "draw_scale": 1.0}
 
-## A043's hardwood wall and sandbags (task 0231): the stone wall's and the
-## fence's 16x32 standing on (8,28), drawn at 1.0.
-const STRONG_WALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 28), "draw_scale": 1.0}
-
 ## A046's spitter (task 0247): the ordinary families' 64x48 standing on
 ## (32,44), drawn at 1.0; its glob in flight 8x8 round (4,4), and the splat
 ## where it lands 12x12 round (6,6), an impact's box. The walker it stands in
@@ -443,76 +439,6 @@ const ART := {
 	# The Blood Moon's (task 0257): a red disc with a drip, drawn in code.
 	&"icon_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},
 	&"hud_blood_moon": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_HUD, "final": MARK_HUD, "bare": true},
-	# A043's hardwood wall - the stone wall's level two - and sandbags (task
-	# 0231), drawn in code by `StrongWallArt` until 0242: each family's
-	# sixteen masks whole and hurt, composed with the contract's recipe and
-	# joined (`connected`), and its wreck.
-	&"wall_2": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_1": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_2": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_3": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_4": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_5": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_6": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_7": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_8": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_9": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_10": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_11": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_12": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_13": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_14": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_15": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_1_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_2_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_3_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_4_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_5_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_6_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_7_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_8_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_9_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_10_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_11_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_12_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_13_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_14_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_join_15_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"wall_2_wreck": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true},
-	&"sandbag_wall": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_1": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_2": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_3": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_4": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_5": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_6": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_7": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_8": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_9": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_10": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_11": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_12": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_13": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_14": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_15": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_1_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_2_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_3_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_4_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_5_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_6_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_7_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_8_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_9_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_10_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_11_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_12_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_13_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_14_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_join_15_hurt": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true, "connected": true},
-	&"sandbag_wall_wreck": {"pack": "A043", "dir": "res://sprites/buildings/", "frames": 1, "seconds": 0.55, "loop": false, "stand_in": &"", "geometry": STRONG_WALL, "final": STRONG_WALL, "bare": true},
 	# A036's bone meal (task 0222): the gunpowder's sack paled to bone, and
 	# the fertilised earth the tilled tile paled with it, dry and wet, until
 	# 0235.

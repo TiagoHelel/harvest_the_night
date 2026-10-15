@@ -1,0 +1,61 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: production modular pixelart for HARVEST THE NIGHT. Input1 approved stonewall is CAMERA/material-massing/module reference, input2 gameSTYLE. Exactly4 separatecuttablemodules arranged in ONE PORTRAIT VERTICALCOLUMN, no text/labels/frames: topPOST, secondHORIZONTALSPAN, thirdLONGNORTHSOUTHSPAN, fourthLOWWRECK. Wide true transparent gutters. Same physicalsourcePIXELUNIT across ALL4, no individualenlargementtofillspace. Finalnative16x32pivot8,28draw1.0. Every unit described is one same nativepixel. Uniform20sourcepx per unit as designruler: a16unitspan is320sourcepx wide, a27unitvertical is540sourcepx long; keepverticalheightat least1.7timeshorizontalWIDTH. Northsouthspan is a long narrow run lying AWAY along SCREENY, viewedfromABOVE like traintrack, NOT an uprightpole or pairedtallposts. Sideeastswestspan lies along SCREENX notisometricdiagonal. Preserve completeunclippedends, chunky readablepixelplanes, coloredinkoutline, warmupperleftdaylight, crispstair-steppedshapes, limitedpaletteramps. No softpainting, glow, halos, groundshadow, groundpatch, grass, text, extraobjects. True transparentalpha, not a paintedcheckerboard. Material: plump TANBURLAP SANDBAGS tiedwithtwine, staggeredlikebricks, broadclothcreases notstones. One bag has samephysicalsize in everymodule; do not redrawlargerbagsforsmallpost. TopPOST: smallstackofTHREE SACKS, TWO BELOW andONE ABOVE,10unitswide x8high (200x160source). SecondHORIZONTAL: TWO staggeredcourses of3to4plumpsacks spanning16unitswide x8high (320x160source), cutendsmeet neighboringsections, NOendposts. ThirdVERTICAL: 7unitswide x27long (140x540source), oneverynarrowLONGlineofSEVEN bagsrecedingup SCREENY, mostlytopfaces, notuprightstack; lengthclearly1.7timeshorizontalspanWIDTH. FourthWRECK: lowflattenedburstsacks, sandinsidepile,no surroundingground,14unitswide x4high (280x80source). Postwidth0.625horizontalwidth, verticalwidth0.44horizontalwidth, wreckwidth0.875horizontalwidth. PostheightandhorizontalheightIDENTICAL; northsouth3.4timesasTALLas either; wreckHALFheightofpost. Allsharedunitstyle andproportions. No woodenframe,pier,metal,logo,grass,shadow,glow or extraobjects.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r2.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A032-artisan-goods\\native\\icon_sandbag\\none\\01.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-a417c7db-7e12-4d38-9b0d-609cc0918249.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "stonewall camera and modular layout reference",
+    "project style",
+    "approved sandbag burlap material reference"
+  ],
+  "owner_words": [
+    "entao bora continuar essa poha",
+    "Permitir at\u00c3\u00a9 27 px no canvas final",
+    "Sim, seguir com folhas separadas e escala uniforme"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r2.png",
+      "sha256": "93926678e72f136ee17b2fe607fa79a7f51c31d114efe304022958cfcb7fcf0c",
+      "role": "stonewall camera and modular layout reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "project style"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A032-artisan-goods\\native\\icon_sandbag\\none\\01.png",
+      "sha256": "0139f15aa76fd8862787a18f730fef4aaf85fbba44c26ffdfb8e8ff2d161d3da",
+      "role": "approved sandbag burlap material reference"
+    }
+  ],
+  "copied_path": "rejected/sandbag-whole-column-r1.png",
+  "sha256": "a613294362aa06dfbe5ff458a94c3960d7626f6c89b74b0d2e95bf6e748eb107",
+  "decision": "rejected / Horizontal span and wreck are oversized relative to the stack.",
+  "inspection": {
+    "canvas_wh": [
+      887,
+      1774
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      132,
+      130,
+      756,
+      1694
+    ]
+  }
+}

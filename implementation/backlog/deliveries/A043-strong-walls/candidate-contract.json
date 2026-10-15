@@ -1,0 +1,31 @@
+{
+  "alpha_threshold": 128,
+  "animations": [],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 1,
+      "path": "sprites/buildings/wall.png",
+      "pivot_xy": [
+        8,
+        28
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [],
+  "mirror_pairs": {},
+  "pack": "A043",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_keys": null,
+  "palette_mode": "A",
+  "references": [],
+  "runtime_integrated": false,
+  "slug": "A043-strong-walls",
+  "status": "blocked",
+  "supersedes": [],
+  "title": "Hardwood walls and sandbags",
+  "tool": "built-in ImageGen"
+}

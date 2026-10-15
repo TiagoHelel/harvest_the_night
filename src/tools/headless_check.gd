@@ -14069,10 +14069,6 @@ func _building_art(name: StringName) -> Image:
 		var path := PlaceholderArt.texture_path("%s%s.png" % [folder, name])
 		if not path.is_empty() and ResourceLoader.exists(path):
 			return Image.load_from_file(ProjectSettings.globalize_path(path))
-		# **Or drawn in code** until its pack lands (task 0231's hardwood
-		# wall and sandbags): the drawing the view puts there.
-		if path.is_empty() and StrongWallArt.texture(name) != null:
-			return StrongWallArt.drawing(name)
 	return null
 
 

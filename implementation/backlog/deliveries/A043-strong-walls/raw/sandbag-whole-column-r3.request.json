@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION / attached sandbagcolumn: change ONLY FOURTHWRECK. Preserve exact953x1650canvas and firstTHREE MODULES LITERALLYPIXEL-FOR-PIXEL, samepositions/sourcepixelscale. The finalheap is much too wide. Remove longclothscrap and replaceheapwith TWO OVERLAPPING VERYFLATTENED BURSTSACKS, onefrontonebehind. Overall finalheap WIDTH ONLY290sourcepx andHEIGHT90sourcepx, centeredx476,bottom1559,top1469. NOT462wide, NOTregularplumpbags, no protrudingscraps/sandoutside. Thirdmodule565pxlong is27nativeunits, so wreck290x90 isabout14x4native. Keep oneactualfamilyunitacrossallart: do NOT enlarge finalheap tofillcell. Preserve the entire threeuppermodules unchanged. Same tanburlap,twine, darkcoloredink, upperleftcrisp pixelartclusters, truealpha outside. No scene,ground,shadow,glow,text,labels,borders or extraobjects.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\sandbag-whole-column-r2.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-50119a69-e563-4671-9d2a-ecefaff94e38.png",
+  "date": "2026-10-14",
+  "revision": 3,
+  "roles": [
+    "sandbag column exact edit target, first three modules fixed"
+  ]
+}

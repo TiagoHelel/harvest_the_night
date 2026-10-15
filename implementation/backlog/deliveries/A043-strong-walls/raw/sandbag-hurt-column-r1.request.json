@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Create THREE DAMAGED sandbag modules as exactedit of attachedfourmodulecolumn. Preserve original953x1650canvas, same nativepixelscale, bagmaterials,size, originalpositions of the firstTHREE. REMOVE FOURTHWRECK tofulltransparent. First3bagPOST: leftlowerbag torn withlarge bittenawayleftedge (x371..420,y210..270), a REAL TRANSPARENTNOTCH2x3nativepx; sackslumps, no blackpaintedcrackalone. SecondHORIZONTAL: onebag missing/torn in LEFTQUARTER, clear2to3nativeunits structuralgap outsidecenterpostposition, onecourse slumped, but bothendcutfacesstillmeetneighbours. Keep originaloverallheight,width,centering, no risingpile. ThirdLONGVERTICAL: splitonebag inupperquarter, clearalpha gap/notch downleftside, clothcollapsed and sandINSIDEremainingpile, same overalllong27nativeextent. Alpha mustchange inEVERYMODULE, not just color. Keep exactlythreeseparateobjects and fullyemptylastrow, same positions andpixelgrain as reference. Cozy crisptanburlap/twine, upperleft, truealpha, no groundpatch/sandoutside, shadow,glow,scene,text,labels,border or extraobjects.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A043-strong-walls\\raw\\sandbag-whole-column-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1ae7e1a3-560f-4198-9b4d-76323ad4bb5e.png",
+  "date": "2026-10-14",
+  "revision": 1,
+  "roles": [
+    "whole sandbag module column exact damage edit target"
+  ]
+}

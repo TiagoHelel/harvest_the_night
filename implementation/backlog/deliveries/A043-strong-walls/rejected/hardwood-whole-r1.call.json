@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production raster sprite source for HARVEST THE NIGHT, a cozy farm that becomes a fortress against zombies at night.\nPrimary request: A043 hardwood wall level 2 whole-state master sheet, containing exactly four separate modules: wall_2_post, wall_2_horizontal, wall_2_vertical, and wall_2_wreck.\nInput images: Image 1: docs/reference-sheet.png, approved game style reference only; Image 2: assets/art_source/defences/wall/whole-r3.png, exact stone wall shape/layout edit target and identity master. Preserve its wall construction logic and transform stone into level-two hardwood.\nStyle/medium: coherent hand-crafted pixel art with deliberate chunky pixel clusters, coloured outlines, restrained texture, readable material planes, clean stepped silhouettes. Strict game sprite pixel art, no smooth painted gradients, no antialiasing, blur, glow, bloom, 3D, vector shapes, or noisy single-pixel speckle.\nComposition/framing: orthographic three-quarter top-down view on a rectangular grid, same camera as the wall source. One horizontal row of FOUR isolated sprite sources with wide transparent gutters, ordered POST, EAST-WEST SPAN, NORTH-SOUTH SPAN, WRECK. They are separate assets, not a wall scene. Every object fits wholly in its cell. Consistent source pixel scale: all source pixels correspond to the same final scale factor. Do not enlarge any object to fill the sheet.\nNative target geometry: each output is cropped and imported onto a 16x32 transparent canvas with pivot (8,28), scale 1.0. Post: visible x=5..10 and rows 5..19, a 6x15 stone pier wrapped with dark hardwood planks, iron strap, hardwood cap; grounded at row 19. Horizontal span: 16x8, exact full width x=0..15, rows 12..19, no end posts; three stone courses faced with two broad horizontal dark hardwood beams and small iron bolts, grounded at row 19. Vertical span: a narrow north-south projection lying along the screen Y ground axis, not an upright pillar; x=6..10, 5x27 px, rows 1..27, reaching both ends, with dark hardwood beams down each side and straps crossing at intervals. This 27 px final span is explicitly allowed by the owner. Wreck: low pile of stone and broken dark hardwood beams, width at most 14, height 6, rows 22..27.\nLighting/mood: neutral warm daytime; highlights upper-left, underside/contact areas darker; runtime adds night relight. No emissive pixels.\nColor palette: match the approved project palette and stone source. Hardwood: dark warm browns, muted golden-brown highlights, iron fasteners; keep the recognizable gray stone visible between wood bands. Limited ramps.\nConstraints: true transparent alpha background. No ground, shadows, labels, text, watermark, UI, duplicate objects, scene/background, grass, glow, or extra blocked cells. Keep material planes readable at 1x. The hardwood is a visibly stronger stone-wall upgrade, not a fence or all-wood palisade. Match stone wall's existing proportions and silhouette for its post and east-west seam.\n\n",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "approved style reference"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\defences\\wall\\whole-r3.png",
+      "sha256": "98bb946042365835d3ddeeecb57e2d25e44861c4864028b8b8c4dae45ba85ea3",
+      "role": "stone wall identity/geometry and edit target"
+    }
+  ],
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7c0f2727-493c-4e49-9f9f-be17157a0995.png",
+  "copied_path": "implementation\\backlog\\deliveries\\A043-strong-walls\\rejected\\hardwood-whole-r1.png",
+  "sha256": "d08250cc4b0da5d821a46ac1be615df62dc1e25c6bd2157ae9a58a7108e7a6c4",
+  "date": "2026-10-14",
+  "revision": 1,
+  "decision": "rejected",
+  "reason": "The north-south span is only about 1.2x the east-west width in the returned source, below the required 1.7x geometry; other cells remain usable only if selected individually after a corrected strip."
+}

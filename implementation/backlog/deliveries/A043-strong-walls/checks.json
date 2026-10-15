@@ -1,0 +1,852 @@
+{
+  "all_64_masks_composed": true,
+  "approved_art_hashes_match": true,
+  "approved_sitting_unchanged": true,
+  "barrier_measurements": {
+    "sandbag_wall": {
+      "hurt_alpha_difference": [
+        10,
+        7,
+        8
+      ],
+      "join_alpha_differences": [
+        10,
+        12,
+        8,
+        10,
+        11,
+        12,
+        9,
+        10,
+        9,
+        13,
+        7,
+        11,
+        9,
+        12,
+        7,
+        10
+      ],
+      "whole_bounds": [
+        [
+          3,
+          12,
+          13,
+          20
+        ],
+        [
+          0,
+          12,
+          16,
+          20
+        ],
+        [
+          4,
+          1,
+          12,
+          28
+        ]
+      ],
+      "wreck_bounds": [
+        1,
+        23,
+        15,
+        28
+      ]
+    },
+    "wall_2": {
+      "hurt_alpha_difference": [
+        10,
+        10,
+        30
+      ],
+      "join_alpha_differences": [
+        10,
+        17,
+        10,
+        17,
+        10,
+        17,
+        10,
+        17,
+        14,
+        27,
+        14,
+        27,
+        14,
+        27,
+        14,
+        27
+      ],
+      "whole_bounds": [
+        [
+          5,
+          5,
+          12,
+          20
+        ],
+        [
+          0,
+          12,
+          16,
+          20
+        ],
+        [
+          5,
+          1,
+          12,
+          28
+        ]
+      ],
+      "wreck_bounds": [
+        2,
+        21,
+        15,
+        28
+      ]
+    }
+  },
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 78,
+  "frames_found": 78,
+  "grounded_on_pivot": true,
+  "hardwood_and_sandbag_modules_complete": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/sandbag_wall/none/01.png": {
+      "bounds": [
+        3,
+        12,
+        13,
+        20
+      ],
+      "opaque_pixels": 68
+    },
+    "native/sandbag_wall_horizontal/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 128
+    },
+    "native/sandbag_wall_horizontal_hurt/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 121
+    },
+    "native/sandbag_wall_hurt/none/01.png": {
+      "bounds": [
+        4,
+        12,
+        13,
+        20
+      ],
+      "opaque_pixels": 58
+    },
+    "native/sandbag_wall_join_1/none/01.png": {
+      "bounds": [
+        3,
+        0,
+        13,
+        20
+      ],
+      "opaque_pixels": 148
+    },
+    "native/sandbag_wall_join_10/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 128
+    },
+    "native/sandbag_wall_join_10_hurt/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 121
+    },
+    "native/sandbag_wall_join_11/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 206
+    },
+    "native/sandbag_wall_join_11_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 195
+    },
+    "native/sandbag_wall_join_12/none/01.png": {
+      "bounds": [
+        0,
+        8,
+        13,
+        28
+      ],
+      "opaque_pixels": 180
+    },
+    "native/sandbag_wall_join_12_hurt/none/01.png": {
+      "bounds": [
+        0,
+        8,
+        13,
+        28
+      ],
+      "opaque_pixels": 171
+    },
+    "native/sandbag_wall_join_13/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        13,
+        28
+      ],
+      "opaque_pixels": 235
+    },
+    "native/sandbag_wall_join_13_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        13,
+        28
+      ],
+      "opaque_pixels": 223
+    },
+    "native/sandbag_wall_join_14/none/01.png": {
+      "bounds": [
+        0,
+        8,
+        16,
+        28
+      ],
+      "opaque_pixels": 210
+    },
+    "native/sandbag_wall_join_14_hurt/none/01.png": {
+      "bounds": [
+        0,
+        8,
+        16,
+        28
+      ],
+      "opaque_pixels": 203
+    },
+    "native/sandbag_wall_join_15/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 264
+    },
+    "native/sandbag_wall_join_15_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 254
+    },
+    "native/sandbag_wall_join_1_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        13,
+        20
+      ],
+      "opaque_pixels": 136
+    },
+    "native/sandbag_wall_join_2/none/01.png": {
+      "bounds": [
+        3,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 98
+    },
+    "native/sandbag_wall_join_2_hurt/none/01.png": {
+      "bounds": [
+        4,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 90
+    },
+    "native/sandbag_wall_join_3/none/01.png": {
+      "bounds": [
+        3,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 177
+    },
+    "native/sandbag_wall_join_3_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 167
+    },
+    "native/sandbag_wall_join_4/none/01.png": {
+      "bounds": [
+        3,
+        8,
+        13,
+        28
+      ],
+      "opaque_pixels": 152
+    },
+    "native/sandbag_wall_join_4_hurt/none/01.png": {
+      "bounds": [
+        4,
+        8,
+        13,
+        28
+      ],
+      "opaque_pixels": 141
+    },
+    "native/sandbag_wall_join_5/none/01.png": {
+      "bounds": [
+        3,
+        0,
+        13,
+        28
+      ],
+      "opaque_pixels": 207
+    },
+    "native/sandbag_wall_join_5_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        13,
+        28
+      ],
+      "opaque_pixels": 195
+    },
+    "native/sandbag_wall_join_6/none/01.png": {
+      "bounds": [
+        3,
+        8,
+        16,
+        28
+      ],
+      "opaque_pixels": 182
+    },
+    "native/sandbag_wall_join_6_hurt/none/01.png": {
+      "bounds": [
+        4,
+        8,
+        16,
+        28
+      ],
+      "opaque_pixels": 173
+    },
+    "native/sandbag_wall_join_7/none/01.png": {
+      "bounds": [
+        3,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 236
+    },
+    "native/sandbag_wall_join_7_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 226
+    },
+    "native/sandbag_wall_join_8/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        13,
+        20
+      ],
+      "opaque_pixels": 98
+    },
+    "native/sandbag_wall_join_8_hurt/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        13,
+        20
+      ],
+      "opaque_pixels": 89
+    },
+    "native/sandbag_wall_join_9/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        13,
+        20
+      ],
+      "opaque_pixels": 177
+    },
+    "native/sandbag_wall_join_9_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        13,
+        20
+      ],
+      "opaque_pixels": 164
+    },
+    "native/sandbag_wall_post/none/01.png": {
+      "bounds": [
+        3,
+        12,
+        13,
+        20
+      ],
+      "opaque_pixels": 68
+    },
+    "native/sandbag_wall_post_hurt/none/01.png": {
+      "bounds": [
+        4,
+        12,
+        13,
+        20
+      ],
+      "opaque_pixels": 58
+    },
+    "native/sandbag_wall_vertical/none/01.png": {
+      "bounds": [
+        4,
+        1,
+        12,
+        28
+      ],
+      "opaque_pixels": 176
+    },
+    "native/sandbag_wall_vertical_hurt/none/01.png": {
+      "bounds": [
+        4,
+        1,
+        12,
+        28
+      ],
+      "opaque_pixels": 168
+    },
+    "native/sandbag_wall_wreck/none/01.png": {
+      "bounds": [
+        1,
+        23,
+        15,
+        28
+      ],
+      "opaque_pixels": 50
+    },
+    "native/wall_2/none/01.png": {
+      "bounds": [
+        5,
+        5,
+        12,
+        20
+      ],
+      "opaque_pixels": 97
+    },
+    "native/wall_2_horizontal/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 128
+    },
+    "native/wall_2_horizontal_hurt/none/01.png": {
+      "bounds": [
+        0,
+        12,
+        16,
+        20
+      ],
+      "opaque_pixels": 118
+    },
+    "native/wall_2_hurt/none/01.png": {
+      "bounds": [
+        4,
+        5,
+        12,
+        20
+      ],
+      "opaque_pixels": 89
+    },
+    "native/wall_2_join_1/none/01.png": {
+      "bounds": [
+        5,
+        0,
+        12,
+        20
+      ],
+      "opaque_pixels": 140
+    },
+    "native/wall_2_join_10/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        16,
+        20
+      ],
+      "opaque_pixels": 173
+    },
+    "native/wall_2_join_10_hurt/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        16,
+        20
+      ],
+      "opaque_pixels": 161
+    },
+    "native/wall_2_join_11/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 212
+    },
+    "native/wall_2_join_11_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 187
+    },
+    "native/wall_2_join_12/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        12,
+        28
+      ],
+      "opaque_pixels": 197
+    },
+    "native/wall_2_join_12_hurt/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        12,
+        28
+      ],
+      "opaque_pixels": 185
+    },
+    "native/wall_2_join_13/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        12,
+        28
+      ],
+      "opaque_pixels": 236
+    },
+    "native/wall_2_join_13_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        12,
+        28
+      ],
+      "opaque_pixels": 211
+    },
+    "native/wall_2_join_14/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        16,
+        28
+      ],
+      "opaque_pixels": 229
+    },
+    "native/wall_2_join_14_hurt/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        16,
+        28
+      ],
+      "opaque_pixels": 217
+    },
+    "native/wall_2_join_15/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 268
+    },
+    "native/wall_2_join_15_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 243
+    },
+    "native/wall_2_join_1_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        12,
+        20
+      ],
+      "opaque_pixels": 125
+    },
+    "native/wall_2_join_2/none/01.png": {
+      "bounds": [
+        5,
+        5,
+        16,
+        20
+      ],
+      "opaque_pixels": 131
+    },
+    "native/wall_2_join_2_hurt/none/01.png": {
+      "bounds": [
+        4,
+        5,
+        16,
+        20
+      ],
+      "opaque_pixels": 123
+    },
+    "native/wall_2_join_3/none/01.png": {
+      "bounds": [
+        5,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 172
+    },
+    "native/wall_2_join_3_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        16,
+        20
+      ],
+      "opaque_pixels": 157
+    },
+    "native/wall_2_join_4/none/01.png": {
+      "bounds": [
+        5,
+        5,
+        12,
+        28
+      ],
+      "opaque_pixels": 157
+    },
+    "native/wall_2_join_4_hurt/none/01.png": {
+      "bounds": [
+        4,
+        5,
+        12,
+        28
+      ],
+      "opaque_pixels": 149
+    },
+    "native/wall_2_join_5/none/01.png": {
+      "bounds": [
+        5,
+        0,
+        12,
+        28
+      ],
+      "opaque_pixels": 196
+    },
+    "native/wall_2_join_5_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        12,
+        28
+      ],
+      "opaque_pixels": 181
+    },
+    "native/wall_2_join_6/none/01.png": {
+      "bounds": [
+        5,
+        5,
+        16,
+        28
+      ],
+      "opaque_pixels": 189
+    },
+    "native/wall_2_join_6_hurt/none/01.png": {
+      "bounds": [
+        4,
+        5,
+        16,
+        28
+      ],
+      "opaque_pixels": 181
+    },
+    "native/wall_2_join_7/none/01.png": {
+      "bounds": [
+        5,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 228
+    },
+    "native/wall_2_join_7_hurt/none/01.png": {
+      "bounds": [
+        4,
+        0,
+        16,
+        28
+      ],
+      "opaque_pixels": 213
+    },
+    "native/wall_2_join_8/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        12,
+        20
+      ],
+      "opaque_pixels": 139
+    },
+    "native/wall_2_join_8_hurt/none/01.png": {
+      "bounds": [
+        0,
+        5,
+        12,
+        20
+      ],
+      "opaque_pixels": 127
+    },
+    "native/wall_2_join_9/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        12,
+        20
+      ],
+      "opaque_pixels": 180
+    },
+    "native/wall_2_join_9_hurt/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        12,
+        20
+      ],
+      "opaque_pixels": 155
+    },
+    "native/wall_2_post/none/01.png": {
+      "bounds": [
+        5,
+        5,
+        12,
+        20
+      ],
+      "opaque_pixels": 97
+    },
+    "native/wall_2_post_hurt/none/01.png": {
+      "bounds": [
+        4,
+        5,
+        12,
+        20
+      ],
+      "opaque_pixels": 89
+    },
+    "native/wall_2_vertical/none/01.png": {
+      "bounds": [
+        5,
+        1,
+        12,
+        28
+      ],
+      "opaque_pixels": 187
+    },
+    "native/wall_2_vertical_hurt/none/01.png": {
+      "bounds": [
+        5,
+        1,
+        12,
+        28
+      ],
+      "opaque_pixels": 157
+    },
+    "native/wall_2_wreck/none/01.png": {
+      "bounds": [
+        2,
+        21,
+        15,
+        28
+      ],
+      "opaque_pixels": 59
+    }
+  },
+  "mirror_pairs_exact": true,
+  "module_spec_resolved": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "sandbag_wall_all_32_masks_composed": true,
+  "sandbag_wall_horizontal_full_width": true,
+  "sandbag_wall_hurt_breaks_visible": true,
+  "sandbag_wall_hurt_modules_different": true,
+  "sandbag_wall_mask_arms_match_bits": true,
+  "sandbag_wall_one_family_scale": true,
+  "sandbag_wall_post_span_row20": true,
+  "sandbag_wall_vertical_27_envelope": true,
+  "sandbag_wall_wreck_bounds": true,
+  "wall_2_all_32_masks_composed": true,
+  "wall_2_horizontal_full_width": true,
+  "wall_2_hurt_breaks_visible": true,
+  "wall_2_hurt_modules_different": true,
+  "wall_2_mask_arms_match_bits": true,
+  "wall_2_one_family_scale": true,
+  "wall_2_post_span_row20": true,
+  "wall_2_vertical_27_envelope": true,
+  "wall_2_wreck_bounds": true
+}
