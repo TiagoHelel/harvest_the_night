@@ -1,0 +1,18 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION: four Winter Lord walk figures must have fully empty transparent gutters. Image1 exact identity master, Image2 preceding walkingstrip as motionreference. The prior source has touching staff/robe silhouettes between frames, so it cannot be safely cut. Produce exactly FOUR SMALL complete west-facing poses in one 4-cell horizontal strip. Each full silhouette must occupy at most16% of TOTAL IMAGE WIDTH and at most60% of IMAGE HEIGHT; transparent gap between every two figures at least9% of total image width. All four figures same actual scale, same figure baseline, no neighbor overlap at any row. Shrink all four UNIFORMLY to leave broad empty margins; the exporter will restore one common native scale. Pose1 nearbootleft/farbootright, pose2 passing, pose3 farbootleft/nearbootright, pose4passing. Two separately identifiable blue boots below hem, lowstaff and freehand counter-swing. Crown-tohem proportions46native tall, totalbodymatchmaster. Friendly? no, keep exact ice undead boss identity with icicle crown, blue layeredrobe, whitefur/beard and mattecolds. Pixelart clustered planes, no glow, no shadow/snow/scene/text/labels/borders. True transparentbackground.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-walk-r4.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f7b249f2-57fb-4d0c-99f4-930e841205a9.png",
+  "date": "2026-10-14",
+  "revision": 5,
+  "roles": [
+    "exact identity master",
+    "uncuttable source: correction target"
+  ]
+}

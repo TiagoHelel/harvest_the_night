@@ -1,0 +1,7 @@
+{
+  "prompt": "Use the accepted Winter Lord master as exact identity. Draw FOUR fully separated walk frames in one horizontal row with a full-height empty transparent gutter of at least 120px between every complete figure; the long staff must stay within its own cell. Sequence: 1 left-foot contact with staff low; 2 passing with feet close and staff beginning to swing; 3 right-foot contact with the other leg forward and staff marking the opposite step; 4 passing, returning smoothly toward frame 1. This is a slow heavy gliding stride: both legs visibly alternate; the robe hem shifts slightly and the free arm/staff counter-swing. Do not repeat the same leg pose in all frames. Keep body height, face, crown, robe, fur, ice plates and palette identical to master. West-facing camera, same 46px body scale, feet/hem align to one baseline at row 59, native canvas80x64 pivot40,60. No row shifts. Crisp pixel art, transparent background. No snow, glow, aura, ground, shadow, text, labels, divider lines, blur, gradients, extra limbs, or contact sheet. Return four non-touching equal cells only.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use the accepted Winter Lord master as exact identity. Create exactly three separate attack frames in one horizontal strip: anticipation (staff drawn back), contact (one decisive westward staff strike), recovery (staff returns and the robe settles). Keep the face, crown, robe, fur, ice plates, scale and camera consistent. Staff and free arm move clearly in three distinct poses. Same 46px body height, feet/hem on baseline row59, west facing, native80x64 pivot40,60. One full figure per cell, clear transparent gutters, no overlaps. Crisp pixel art, transparent background, no ground or shadow. No glow, aura, ice particles, snow, extra limbs, text, labels, dividers, blur, gradients or contact sheet. Return exactly 3 frames.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+      "sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-ac84adf0-7384-4957-afdc-4db025d41b71.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-attack-r1.png",
+  "sha256": "57ae8b1d61e3bc3b0164074f74cb7b88a54cd80c9982d4f215d1281832d427be",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

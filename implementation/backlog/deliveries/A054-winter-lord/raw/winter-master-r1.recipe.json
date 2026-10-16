@@ -1,0 +1,20 @@
+{
+  "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-master-r1.png",
+  "crop_xywh": [
+    217,
+    67,
+    983,
+    1009
+  ],
+  "content_scale": 0.04558969276511397,
+  "canvas_wh": [
+    80,
+    64
+  ],
+  "pivot_xy": [
+    40,
+    60
+  ],
+  "palette": "tools/palette.py:COLOURS",
+  "alpha_threshold": 128
+}

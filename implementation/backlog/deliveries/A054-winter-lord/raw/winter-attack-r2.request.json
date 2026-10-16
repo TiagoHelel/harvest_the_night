@@ -1,0 +1,7 @@
+{
+  "prompt": "Use the Winter Lord master as exact character reference. Make exactly three attack cutouts in a horizontal row. Leave at least 100 pixels fully transparent between the nearest opaque pixels of each complete figure, including the staff. Do not let the westward strike or crystals touch the neighboring cell. Sequence: frame1 anticipation, the staff lifts back; frame2 one strong staff strike to the left/west with the crystal aimed at the target; frame3 the staff returns and the robe recovers. All three remain the same 46px-tall body at native80x64 pivot40,60, feet at row59, west view. Keep the exact crown, face, robe, fur, ice plates and colors. One complete figure per equal cell. Crisp pixel art, transparent background. No glow, aura, ice particles, snow, ground, shadow, text, labels, lines, extra limbs, blur, gradients or contact sheet. Exactly three separate poses.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+  ]
+}

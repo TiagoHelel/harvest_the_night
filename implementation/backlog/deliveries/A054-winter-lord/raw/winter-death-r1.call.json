@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use the accepted Winter Lord master as exact identity. Create exactly five death frames in one horizontal strip with complete figures separated by wide transparent gutters. Sequence: 0 cracks spread through robe and body but it stays upright; 1 the icicle crown shatters and falls to the ground; 2 the body breaks into ice blocks and starts sinking; 3 collapses to the ground; 4 low grounded heap of ice blocks and empty blue robe. Every next silhouette is visibly lower and never taller than the previous; final heap <=20 native pixels tall. Feet/heap at same ground row59, centered x40; native80x64 pivot40,60; use one scale for strip so body matches the 46px master, never enlarge individual frames. Same colors and identity, matte ice, west view. No snow, glow, aura, shards, particles, ground, shadow, text, labels, divider, blur, gradient or contact sheet. Transparent background, exactly five separate poses.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+      "sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-0feaab8c-35d0-452e-bc06-f2480abaa878.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r1.png",
+  "sha256": "1313e36eba636bd8625113d0f018e21fd429e36b74cf191c3f51bb317b9d0470",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

@@ -1,0 +1,7 @@
+{
+  "prompt": "Use the accepted Winter Lord master as exact identity. Create exactly four sequential cast poses in a horizontal strip, one complete figure per cell with wide transparent gutters. This is a clear freeze warning: frame0 lifts the staff; frame1 raises it overhead with small matte ice crystals growing on its head; frame2 both arms high and staff crystal at its largest; frame3 holds frame2 almost still. In frames1-3 the staff head is visibly above the icicle crown. Keep the pale face, crown, deep blue robe, fur, ice plates and scale consistent. Feet/hem on one shared baseline; body height same as the 46px master, total silhouette never above58px. Canvas80x64, pivot40,60, west-facing. No glow, aura, flash, snow, particles, ring or baked freeze effect. Pixel art with crisp outline, transparent background, no ground or shadow. No labels, dividers, blur, gradients, duplicated staff or extra limbs. Return four distinct cast frames only.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+  ]
+}

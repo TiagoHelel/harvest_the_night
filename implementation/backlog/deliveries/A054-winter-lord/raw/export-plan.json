@@ -1,0 +1,1073 @@
+{
+  "title": "The Winter Lord",
+  "date": "2026-10-14",
+  "status": "review",
+  "palette_mode": "A",
+  "expected_files": 22,
+  "files": [
+    {
+      "anim": "winter_lord",
+      "dir": "west",
+      "frame": 0,
+      "pose": "winter_lord_0",
+      "output": "native/winter_lord/west/01.png",
+      "source": "raw/winter-master-r1.png",
+      "prompt": "raw/winter-master-r1.prompt.txt",
+      "call": "raw/winter-master-r1.call.json",
+      "recipe": {
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-master-r1.png",
+        "crop_xywh": [
+          217,
+          67,
+          983,
+          1009
+        ],
+        "content_scale": 0.04558969276511397,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "palette": "tools/palette.py:COLOURS",
+        "alpha_threshold": 128
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord.png"
+    },
+    {
+      "anim": "winter_lord_attack",
+      "dir": "west",
+      "frame": 0,
+      "pose": "winter_lord_attack_0",
+      "output": "native/winter_lord_attack/west/01.png",
+      "source": "raw/winter-attack-r2.png",
+      "prompt": "raw/winter-attack-r2.prompt.txt",
+      "call": "raw/winter-attack-r2.call.json",
+      "recipe": {
+        "id": "winter-attack-r2-0",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-attack-r2.png",
+        "sheet_cell_xywh": [
+          0,
+          0,
+          615,
+          724
+        ],
+        "crop_xywh": [
+          159,
+          76,
+          422,
+          596
+        ],
+        "content_scale": 0.07718120805369127,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_attack_0.png"
+    },
+    {
+      "anim": "winter_lord_attack",
+      "dir": "west",
+      "frame": 1,
+      "pose": "winter_lord_attack_1",
+      "output": "native/winter_lord_attack/west/02.png",
+      "source": "raw/winter-attack-r2.png",
+      "prompt": "raw/winter-attack-r2.prompt.txt",
+      "call": "raw/winter-attack-r2.call.json",
+      "recipe": {
+        "id": "winter-attack-r2-1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-attack-r2.png",
+        "sheet_cell_xywh": [
+          615,
+          0,
+          921,
+          724
+        ],
+        "crop_xywh": [
+          651,
+          197,
+          812,
+          472
+        ],
+        "content_scale": 0.07718120805369127,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_attack_1.png"
+    },
+    {
+      "anim": "winter_lord_attack",
+      "dir": "west",
+      "frame": 2,
+      "pose": "winter_lord_attack_2",
+      "output": "native/winter_lord_attack/west/03.png",
+      "source": "raw/winter-attack-r2.png",
+      "prompt": "raw/winter-attack-r2.prompt.txt",
+      "call": "raw/winter-attack-r2.call.json",
+      "recipe": {
+        "id": "winter-attack-r2-2",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-attack-r2.png",
+        "sheet_cell_xywh": [
+          1536,
+          0,
+          636,
+          724
+        ],
+        "crop_xywh": [
+          1611,
+          181,
+          538,
+          488
+        ],
+        "content_scale": 0.07718120805369127,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_attack_2.png"
+    },
+    {
+      "anim": "winter_lord_death",
+      "dir": "west",
+      "frame": 0,
+      "pose": "winter_lord_death_0",
+      "output": "native/winter_lord_death/west/01.png",
+      "source": "raw/winter-death-r2.png",
+      "prompt": "raw/winter-death-r2.prompt.txt",
+      "call": "raw/winter-death-r2.call.json",
+      "recipe": {
+        "id": "winter-death-r2-0",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+        "sheet_cell_xywh": [
+          0,
+          0,
+          451,
+          724
+        ],
+        "crop_xywh": [
+          47,
+          133,
+          367,
+          553
+        ],
+        "content_scale": 0.08318264014466546,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_death_0.png"
+    },
+    {
+      "anim": "winter_lord_death",
+      "dir": "west",
+      "frame": 1,
+      "pose": "winter_lord_death_1",
+      "output": "native/winter_lord_death/west/02.png",
+      "source": "raw/winter-death-r2.png",
+      "prompt": "raw/winter-death-r2.prompt.txt",
+      "call": "raw/winter-death-r2.call.json",
+      "recipe": {
+        "id": "winter-death-r2-1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+        "sheet_cell_xywh": [
+          451,
+          0,
+          470,
+          724
+        ],
+        "crop_xywh": [
+          489,
+          77,
+          406,
+          608
+        ],
+        "content_scale": 0.08318264014466546,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_death_1.png"
+    },
+    {
+      "anim": "winter_lord_death",
+      "dir": "west",
+      "frame": 2,
+      "pose": "winter_lord_death_2",
+      "output": "native/winter_lord_death/west/03.png",
+      "source": "raw/winter-death-r2.png",
+      "prompt": "raw/winter-death-r2.prompt.txt",
+      "call": "raw/winter-death-r2.call.json",
+      "recipe": {
+        "id": "winter-death-r2-2",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+        "sheet_cell_xywh": [
+          921,
+          0,
+          418,
+          724
+        ],
+        "crop_xywh": [
+          949,
+          268,
+          362,
+          416
+        ],
+        "content_scale": 0.08318264014466546,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_death_2.png"
+    },
+    {
+      "anim": "winter_lord_death",
+      "dir": "west",
+      "frame": 3,
+      "pose": "winter_lord_death_3",
+      "output": "native/winter_lord_death/west/04.png",
+      "source": "raw/winter-death-r2.png",
+      "prompt": "raw/winter-death-r2.prompt.txt",
+      "call": "raw/winter-death-r2.call.json",
+      "recipe": {
+        "id": "winter-death-r2-3",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+        "sheet_cell_xywh": [
+          1339,
+          0,
+          429,
+          724
+        ],
+        "crop_xywh": [
+          1369,
+          449,
+          384,
+          235
+        ],
+        "content_scale": 0.08318264014466546,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_death_3.png"
+    },
+    {
+      "anim": "winter_lord_death",
+      "dir": "west",
+      "frame": 4,
+      "pose": "winter_lord_death_4",
+      "output": "native/winter_lord_death/west/05.png",
+      "source": "raw/winter-death-r2.png",
+      "prompt": "raw/winter-death-r2.prompt.txt",
+      "call": "raw/winter-death-r2.call.json",
+      "recipe": {
+        "id": "winter-death-r2-4",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+        "sheet_cell_xywh": [
+          1768,
+          0,
+          404,
+          724
+        ],
+        "crop_xywh": [
+          1785,
+          544,
+          363,
+          141
+        ],
+        "content_scale": 0.08318264014466546,
+        "canvas_wh": [
+          80,
+          64
+        ],
+        "pivot_xy": [
+          40,
+          60
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null,
+      "runtime_name": "sprites/enemies/winter_lord_death_4.png"
+    },
+    {
+      "anim": "ice_shards",
+      "dir": "none",
+      "frame": 0,
+      "pose": "ice_shards_0",
+      "output": "native/ice_shards/none/01.png",
+      "source": "raw/winter-shards-r1.png",
+      "prompt": "raw/winter-shards-r1.prompt.txt",
+      "call": "raw/winter-shards-r1.call.json",
+      "recipe": {
+        "id": "winter-shards-r1-0",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+        "sheet_cell_xywh": [
+          0,
+          0,
+          503,
+          724
+        ],
+        "crop_xywh": [
+          169,
+          343,
+          229,
+          243
+        ],
+        "content_scale": 0.04028436018957346,
+        "canvas_wh": [
+          24,
+          20
+        ],
+        "pivot_xy": [
+          12,
+          18
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "runtime_name": "sprites/effects/ice_shards_0.png"
+    },
+    {
+      "anim": "ice_shards",
+      "dir": "none",
+      "frame": 1,
+      "pose": "ice_shards_1",
+      "output": "native/ice_shards/none/02.png",
+      "source": "raw/winter-shards-r1.png",
+      "prompt": "raw/winter-shards-r1.prompt.txt",
+      "call": "raw/winter-shards-r1.call.json",
+      "recipe": {
+        "id": "winter-shards-r1-1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+        "sheet_cell_xywh": [
+          503,
+          0,
+          658,
+          724
+        ],
+        "crop_xywh": [
+          610,
+          191,
+          459,
+          422
+        ],
+        "content_scale": 0.04028436018957346,
+        "canvas_wh": [
+          24,
+          20
+        ],
+        "pivot_xy": [
+          12,
+          18
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "runtime_name": "sprites/effects/ice_shards_1.png"
+    },
+    {
+      "anim": "ice_shards",
+      "dir": "none",
+      "frame": 2,
+      "pose": "ice_shards_2",
+      "output": "native/ice_shards/none/03.png",
+      "source": "raw/winter-shards-r1.png",
+      "prompt": "raw/winter-shards-r1.prompt.txt",
+      "call": "raw/winter-shards-r1.call.json",
+      "recipe": {
+        "id": "winter-shards-r1-2",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+        "sheet_cell_xywh": [
+          1161,
+          0,
+          575,
+          724
+        ],
+        "crop_xywh": [
+          1255,
+          272,
+          343,
+          323
+        ],
+        "content_scale": 0.04028436018957346,
+        "canvas_wh": [
+          24,
+          20
+        ],
+        "pivot_xy": [
+          12,
+          18
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "runtime_name": "sprites/effects/ice_shards_2.png"
+    },
+    {
+      "anim": "ice_shards",
+      "dir": "none",
+      "frame": 3,
+      "pose": "ice_shards_3",
+      "output": "native/ice_shards/none/04.png",
+      "source": "raw/winter-shards-r1.png",
+      "prompt": "raw/winter-shards-r1.prompt.txt",
+      "call": "raw/winter-shards-r1.call.json",
+      "recipe": {
+        "id": "winter-shards-r1-3",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+        "sheet_cell_xywh": [
+          1736,
+          0,
+          436,
+          724
+        ],
+        "crop_xywh": [
+          1875,
+          411,
+          138,
+          164
+        ],
+        "content_scale": 0.04028436018957346,
+        "canvas_wh": [
+          24,
+          20
+        ],
+        "pivot_xy": [
+          12,
+          18
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": null,
+      "runtime_name": "sprites/effects/ice_shards_3.png"
+    },
+    {
+      "anim": "head_winter_lord",
+      "dir": "none",
+      "frame": 0,
+      "pose": "head_winter_lord_0",
+      "output": "native/head_winter_lord/none/01.png",
+      "source": "raw/winter-head-r3.png",
+      "prompt": "raw/winter-head-r3.prompt.txt",
+      "call": "raw/winter-head-r3.call.json",
+      "recipe": {
+        "id": "winter-head-r3",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-head-r3.png",
+        "crop_xywh": [
+          337,
+          281,
+          633,
+          752
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.018617021276595744,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS",
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "grass",
+          "grass_light",
+          "soil_light",
+          "water_dark",
+          "water",
+          "water_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "wood_light",
+          "bone",
+          "bone_dark",
+          "cloth_dark",
+          "cloth",
+          "cloth_light",
+          "night",
+          "night_light",
+          "moon",
+          "rot_dark",
+          "rot"
+        ]
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "mirror": "none",
+      "grounded": false,
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass",
+        "grass_light",
+        "soil_light",
+        "water_dark",
+        "water",
+        "water_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "night",
+        "night_light",
+        "moon",
+        "rot_dark",
+        "rot"
+      ],
+      "runtime_name": "sprites/ui/head_winter_lord.png"
+    },
+    {
+      "anim": "winter_lord_walk",
+      "dir": "west",
+      "frame": 0,
+      "pose": "near contact",
+      "output": "native/winter_lord_walk/west/01.png",
+      "runtime_name": "sprites/enemies/winter_lord_walk_0.png",
+      "source": "raw/winter-walk-r5.png",
+      "prompt": "raw/winter-walk-r5.prompt.txt",
+      "call": "raw/winter-walk-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          33,
+          131,
+          482,
+          487
+        ],
+        "content_scale": 0.0944558521560575
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    },
+    {
+      "anim": "winter_lord_walk",
+      "dir": "west",
+      "frame": 1,
+      "pose": "passing",
+      "output": "native/winter_lord_walk/west/02.png",
+      "runtime_name": "sprites/enemies/winter_lord_walk_1.png",
+      "source": "raw/winter-walk-r5.png",
+      "prompt": "raw/winter-walk-r5.prompt.txt",
+      "call": "raw/winter-walk-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          575,
+          132,
+          454,
+          486
+        ],
+        "content_scale": 0.0944558521560575
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    },
+    {
+      "anim": "winter_lord_walk",
+      "dir": "west",
+      "frame": 2,
+      "pose": "opposite contact",
+      "output": "native/winter_lord_walk/west/03.png",
+      "runtime_name": "sprites/enemies/winter_lord_walk_2.png",
+      "source": "raw/winter-walk-r5.png",
+      "prompt": "raw/winter-walk-r5.prompt.txt",
+      "call": "raw/winter-walk-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1127,
+          132,
+          479,
+          486
+        ],
+        "content_scale": 0.0944558521560575
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    },
+    {
+      "anim": "winter_lord_walk",
+      "dir": "west",
+      "frame": 3,
+      "pose": "opposite passing",
+      "output": "native/winter_lord_walk/west/04.png",
+      "runtime_name": "sprites/enemies/winter_lord_walk_3.png",
+      "source": "raw/winter-walk-r5.png",
+      "prompt": "raw/winter-walk-r5.prompt.txt",
+      "call": "raw/winter-walk-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1684,
+          131,
+          438,
+          487
+        ],
+        "content_scale": 0.0944558521560575
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    },
+    {
+      "anim": "winter_lord_cast",
+      "dir": "west",
+      "frame": 0,
+      "pose": "staff lifting",
+      "output": "native/winter_lord_cast/west/01.png",
+      "runtime_name": "sprites/enemies/winter_lord_cast_0.png",
+      "source": "raw/winter-cast-r5.png",
+      "prompt": "raw/winter-cast-r5.prompt.txt",
+      "call": "raw/winter-cast-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          58,
+          216,
+          493,
+          483
+        ],
+        "content_scale": 0.09523809523809523
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    },
+    {
+      "anim": "winter_lord_cast",
+      "dir": "west",
+      "frame": 1,
+      "pose": "crystal above crown",
+      "output": "native/winter_lord_cast/west/02.png",
+      "runtime_name": "sprites/enemies/winter_lord_cast_1.png",
+      "source": "raw/winter-cast-r5.png",
+      "prompt": "raw/winter-cast-r5.prompt.txt",
+      "call": "raw/winter-cast-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          660,
+          150,
+          428,
+          551
+        ],
+        "content_scale": 0.09523809523809523
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    },
+    {
+      "anim": "winter_lord_cast",
+      "dir": "west",
+      "frame": 2,
+      "pose": "peak crystals",
+      "output": "native/winter_lord_cast/west/03.png",
+      "runtime_name": "sprites/enemies/winter_lord_cast_2.png",
+      "source": "raw/winter-cast-r5.png",
+      "prompt": "raw/winter-cast-r5.prompt.txt",
+      "call": "raw/winter-cast-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1206,
+          116,
+          398,
+          586
+        ],
+        "content_scale": 0.09523809523809523
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    },
+    {
+      "anim": "winter_lord_cast",
+      "dir": "west",
+      "frame": 3,
+      "pose": "peak held",
+      "output": "native/winter_lord_cast/west/04.png",
+      "runtime_name": "sprites/enemies/winter_lord_cast_3.png",
+      "source": "raw/winter-cast-r5.png",
+      "prompt": "raw/winter-cast-r5.prompt.txt",
+      "call": "raw/winter-cast-r5.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1763,
+          119,
+          399,
+          583
+        ],
+        "content_scale": 0.09523809523809523
+      },
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "grounded": true,
+      "palette_keys": null
+    }
+  ],
+  "comparison": [
+    {
+      "path": "sprites/enemies/giant.png",
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1.0
+    }
+  ],
+  "deviations": [
+    "Death grows from 46px to 51px in frame 1, violating the monotonic fall; three attempts used.",
+    "The forecast icon remains diagnostic; the three generated portraits are oversized and the required walk-frame colour reference could not be extracted.",
+    {
+      "rule": "Continuation after previous r3 limit",
+      "owner_words": "entao bora continuar essa poha",
+      "change": "Generate only the two missing four-frame animations. All 14 previously approved native outputs are preserved. Source columns are measured from alpha gaps, one scale per strip."
+    }
+  ],
+  "supersedes": []
+}

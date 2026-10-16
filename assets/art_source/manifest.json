@@ -130585,6 +130585,1735 @@
       "operation": "copy",
       "alias_of": "enemies/scarecrow_king_cast_3",
       "output_sha256": "735c808f076dfeb32aab9de110dd7665dff937361fc5b8658f2be982c61be3ca"
+    },
+    {
+      "id": "enemies/winter_lord",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-master-r1.png",
+      "source_sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+      "crop_xywh": [
+        217,
+        67,
+        983,
+        1009
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "master",
+      "content_scale": 0.04558969276511397,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.prompt.txt",
+      "prompt_sha256": "e89070df81b20c1a5caa5d773b83f7b266134caeb02a5f9a0d9f84d3f5701505",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.call.json",
+          "sha256": "8eedfe9c6401d97246cebba24ee6b0aa6365486e7303d6ba10f03832273898a4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord/west/01.png",
+          "sha256": "e24b58c79a633f500221d5cbcda1978068b848e86d21ecc1d6c1d89827f0f6e0",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        22,
+        46
+      ],
+      "output_sha256": "e24b58c79a633f500221d5cbcda1978068b848e86d21ecc1d6c1d89827f0f6e0"
+    },
+    {
+      "id": "enemies/winter_lord_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-attack-r2.png",
+      "source_sha256": "743676ffb80634666e0ec6903b38d6719a952f81ab68197cc85b22aa147afad2",
+      "crop_xywh": [
+        159,
+        76,
+        422,
+        596
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "attack",
+      "content_scale": 0.07718120805369127,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_attack_0.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.prompt.txt",
+      "prompt_sha256": "4562a35aa1fe9f0b36b5081aace32595ce35f40fbd2bdcbc2e40315a67ab975c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.call.json",
+          "sha256": "b0732e6c657d695e13df968598f07132524fca0991070a64f2ec1f48680fe144",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_attack/west/01.png",
+          "sha256": "94ebec5c58a0b5f91965909962aee50b5d5ab6ebba1f84c831461218f834265a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        16,
+        46
+      ],
+      "output_sha256": "94ebec5c58a0b5f91965909962aee50b5d5ab6ebba1f84c831461218f834265a"
+    },
+    {
+      "id": "enemies/winter_lord_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-attack-r2.png",
+      "source_sha256": "743676ffb80634666e0ec6903b38d6719a952f81ab68197cc85b22aa147afad2",
+      "crop_xywh": [
+        651,
+        197,
+        812,
+        472
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "attack",
+      "content_scale": 0.07718120805369127,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_attack_1.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.prompt.txt",
+      "prompt_sha256": "4562a35aa1fe9f0b36b5081aace32595ce35f40fbd2bdcbc2e40315a67ab975c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.call.json",
+          "sha256": "b0732e6c657d695e13df968598f07132524fca0991070a64f2ec1f48680fe144",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_attack/west/02.png",
+          "sha256": "9f76e17e52e59529105be8fdd9d50446940b392bc46105ca657cebdfa9d00ee4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        31,
+        36
+      ],
+      "output_sha256": "9f76e17e52e59529105be8fdd9d50446940b392bc46105ca657cebdfa9d00ee4"
+    },
+    {
+      "id": "enemies/winter_lord_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-attack-r2.png",
+      "source_sha256": "743676ffb80634666e0ec6903b38d6719a952f81ab68197cc85b22aa147afad2",
+      "crop_xywh": [
+        1611,
+        181,
+        538,
+        488
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "attack",
+      "content_scale": 0.07718120805369127,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_attack_2.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.prompt.txt",
+      "prompt_sha256": "4562a35aa1fe9f0b36b5081aace32595ce35f40fbd2bdcbc2e40315a67ab975c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.call.json",
+          "sha256": "b0732e6c657d695e13df968598f07132524fca0991070a64f2ec1f48680fe144",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_attack/west/03.png",
+          "sha256": "a804bf8ae228e5226f67b26b42c3e1ebb207dd209dac257a85cc263390912e3c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        21,
+        38
+      ],
+      "output_sha256": "a804bf8ae228e5226f67b26b42c3e1ebb207dd209dac257a85cc263390912e3c"
+    },
+    {
+      "id": "enemies/winter_lord_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-death-r2.png",
+      "source_sha256": "7426097ae9102c4cf82ee0d02be689c216b3212a6f5ac26990f993437e9deb34",
+      "crop_xywh": [
+        47,
+        133,
+        367,
+        553
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "death",
+      "content_scale": 0.08318264014466546,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_death",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.prompt.txt",
+      "prompt_sha256": "1f2a0065de22f473832b0b1fdfcd39f5f35e84d26d630c9603323b78f4f1da28",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.call.json",
+          "sha256": "ca8d6948e829662a28adf50ed22b130634f942895c6929164acc795eba06b53c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_death/west/01.png",
+          "sha256": "1f6489f603fd3e6f099895dce5073ba4de5dea0ab7bbb0ed607688703e92b5c7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        15,
+        46
+      ],
+      "output_sha256": "1f6489f603fd3e6f099895dce5073ba4de5dea0ab7bbb0ed607688703e92b5c7"
+    },
+    {
+      "id": "enemies/winter_lord_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-death-r2.png",
+      "source_sha256": "7426097ae9102c4cf82ee0d02be689c216b3212a6f5ac26990f993437e9deb34",
+      "crop_xywh": [
+        489,
+        77,
+        406,
+        608
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "death",
+      "content_scale": 0.08318264014466546,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_death",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.prompt.txt",
+      "prompt_sha256": "1f2a0065de22f473832b0b1fdfcd39f5f35e84d26d630c9603323b78f4f1da28",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.call.json",
+          "sha256": "ca8d6948e829662a28adf50ed22b130634f942895c6929164acc795eba06b53c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_death/west/02.png",
+          "sha256": "d33d17c39842229a1e8c08edbd9cfcfae418bcd8868d6ffe2f7b8efeb603a657",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        17,
+        51
+      ],
+      "output_sha256": "d33d17c39842229a1e8c08edbd9cfcfae418bcd8868d6ffe2f7b8efeb603a657"
+    },
+    {
+      "id": "enemies/winter_lord_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-death-r2.png",
+      "source_sha256": "7426097ae9102c4cf82ee0d02be689c216b3212a6f5ac26990f993437e9deb34",
+      "crop_xywh": [
+        949,
+        268,
+        362,
+        416
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "death",
+      "content_scale": 0.08318264014466546,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_death",
+      "frame": 2,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.prompt.txt",
+      "prompt_sha256": "1f2a0065de22f473832b0b1fdfcd39f5f35e84d26d630c9603323b78f4f1da28",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.call.json",
+          "sha256": "ca8d6948e829662a28adf50ed22b130634f942895c6929164acc795eba06b53c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_death/west/03.png",
+          "sha256": "977974ca927f55ce84476385f52ba01a9f2621463130c9ad1c020355571f3f81",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        15,
+        35
+      ],
+      "output_sha256": "977974ca927f55ce84476385f52ba01a9f2621463130c9ad1c020355571f3f81"
+    },
+    {
+      "id": "enemies/winter_lord_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-death-r2.png",
+      "source_sha256": "7426097ae9102c4cf82ee0d02be689c216b3212a6f5ac26990f993437e9deb34",
+      "crop_xywh": [
+        1369,
+        449,
+        384,
+        235
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "death",
+      "content_scale": 0.08318264014466546,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_death",
+      "frame": 3,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_death_3.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.prompt.txt",
+      "prompt_sha256": "1f2a0065de22f473832b0b1fdfcd39f5f35e84d26d630c9603323b78f4f1da28",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.call.json",
+          "sha256": "ca8d6948e829662a28adf50ed22b130634f942895c6929164acc795eba06b53c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_death/west/04.png",
+          "sha256": "8c4d843069e68cf6fe38e9a1f21d8a339215ac485fd90f8625b7c6f37ecb25dd",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        16,
+        20
+      ],
+      "output_sha256": "8c4d843069e68cf6fe38e9a1f21d8a339215ac485fd90f8625b7c6f37ecb25dd"
+    },
+    {
+      "id": "enemies/winter_lord_death_4",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-death-r2.png",
+      "source_sha256": "7426097ae9102c4cf82ee0d02be689c216b3212a6f5ac26990f993437e9deb34",
+      "crop_xywh": [
+        1785,
+        544,
+        363,
+        141
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "death",
+      "content_scale": 0.08318264014466546,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_death",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_death_4.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.prompt.txt",
+      "prompt_sha256": "1f2a0065de22f473832b0b1fdfcd39f5f35e84d26d630c9603323b78f4f1da28",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.call.json",
+          "sha256": "ca8d6948e829662a28adf50ed22b130634f942895c6929164acc795eba06b53c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_death/west/05.png",
+          "sha256": "e050c348861a32a03b7cfc914d89db50da5b149db864e24a63070c3715dd8a1b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        15,
+        12
+      ],
+      "output_sha256": "e050c348861a32a03b7cfc914d89db50da5b149db864e24a63070c3715dd8a1b"
+    },
+    {
+      "id": "effects/ice_shards_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/winter-shards-r1.png",
+      "source_sha256": "0e85af6a4f952a88d2d7970b1e405b04bad32afd3cf6af98f2e79863c8696b13",
+      "crop_xywh": [
+        169,
+        343,
+        229,
+        243
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.04028436018957346,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/ice_shards",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "ice_shards",
+      "fx_origin": "base",
+      "output": "sprites/effects/ice_shards_0.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.prompt.txt",
+      "prompt_sha256": "02a3ab25bc31162fb59d514a1605d477411f374578426faffa7475830f446bb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.call.json",
+          "sha256": "f47e90ca58d4e50b786eb9d2d358410c8ad0f9c9f16018bcb6b79c01d0f65c65",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/ice_shards/none/01.png",
+          "sha256": "a527176023ef41001e5e11f485e4699f01271ba04cea4335882c3dfd0a0551a7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        4,
+        10
+      ],
+      "output_sha256": "a527176023ef41001e5e11f485e4699f01271ba04cea4335882c3dfd0a0551a7"
+    },
+    {
+      "id": "effects/ice_shards_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/winter-shards-r1.png",
+      "source_sha256": "0e85af6a4f952a88d2d7970b1e405b04bad32afd3cf6af98f2e79863c8696b13",
+      "crop_xywh": [
+        610,
+        191,
+        459,
+        422
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.04028436018957346,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/ice_shards",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "ice_shards",
+      "fx_origin": "base",
+      "variant_of": "effects/ice_shards_0",
+      "output": "sprites/effects/ice_shards_1.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.prompt.txt",
+      "prompt_sha256": "02a3ab25bc31162fb59d514a1605d477411f374578426faffa7475830f446bb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.call.json",
+          "sha256": "f47e90ca58d4e50b786eb9d2d358410c8ad0f9c9f16018bcb6b79c01d0f65c65",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/ice_shards/none/02.png",
+          "sha256": "6af0371695b9026c68e06595181ffeb74da2dfa6bb3522052eb1575b4c4d94fe",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        9,
+        17
+      ],
+      "output_sha256": "6af0371695b9026c68e06595181ffeb74da2dfa6bb3522052eb1575b4c4d94fe"
+    },
+    {
+      "id": "effects/ice_shards_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/winter-shards-r1.png",
+      "source_sha256": "0e85af6a4f952a88d2d7970b1e405b04bad32afd3cf6af98f2e79863c8696b13",
+      "crop_xywh": [
+        1255,
+        272,
+        343,
+        323
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.04028436018957346,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/ice_shards",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "ice_shards",
+      "fx_origin": "base",
+      "variant_of": "effects/ice_shards_0",
+      "output": "sprites/effects/ice_shards_2.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.prompt.txt",
+      "prompt_sha256": "02a3ab25bc31162fb59d514a1605d477411f374578426faffa7475830f446bb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.call.json",
+          "sha256": "f47e90ca58d4e50b786eb9d2d358410c8ad0f9c9f16018bcb6b79c01d0f65c65",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/ice_shards/none/03.png",
+          "sha256": "3e56996344e991ce27f772dffc1ff0966349ee1823e17e877f75c89cea407b07",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        7,
+        13
+      ],
+      "output_sha256": "3e56996344e991ce27f772dffc1ff0966349ee1823e17e877f75c89cea407b07"
+    },
+    {
+      "id": "effects/ice_shards_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/winter-shards-r1.png",
+      "source_sha256": "0e85af6a4f952a88d2d7970b1e405b04bad32afd3cf6af98f2e79863c8696b13",
+      "crop_xywh": [
+        1875,
+        411,
+        138,
+        164
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.04028436018957346,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "effects/ice_shards",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "fx_family": "ice_shards",
+      "fx_origin": "base",
+      "variant_of": "effects/ice_shards_0",
+      "output": "sprites/effects/ice_shards_3.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.prompt.txt",
+      "prompt_sha256": "02a3ab25bc31162fb59d514a1605d477411f374578426faffa7475830f446bb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-shards-r1.call.json",
+          "sha256": "f47e90ca58d4e50b786eb9d2d358410c8ad0f9c9f16018bcb6b79c01d0f65c65",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/ice_shards/none/04.png",
+          "sha256": "35174a6601597d70d8c94239fd853450cab5aee1fcf5762528df86f5a4ea108e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        3,
+        7
+      ],
+      "output_sha256": "35174a6601597d70d8c94239fd853450cab5aee1fcf5762528df86f5a4ea108e"
+    },
+    {
+      "id": "ui/head_winter_lord",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/winter-head-r3.png",
+      "source_sha256": "65e3cabb4b3474d8dffd3dbec7c0111a61a9e7ae542e97824cff0b60d93a57ec",
+      "crop_xywh": [
+        337,
+        281,
+        633,
+        752
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.018617021276595744,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass",
+        "grass_light",
+        "soil_light",
+        "water_dark",
+        "water",
+        "water_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_light",
+        "bone",
+        "bone_dark",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "night",
+        "night_light",
+        "moon",
+        "rot_dark",
+        "rot"
+      ],
+      "animation": "ui/head_winter_lord",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/head_winter_lord.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-head-r3.prompt.txt",
+      "prompt_sha256": "66eea4439d273ad321302ab7e86ba579b23b40418bb2c5495251e96cdfaeffc1",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-head-r3.call.json",
+          "sha256": "e3a993b5a8947a447e7ef546863a83e0dbcb2e88782ebb7dd824a355a88f1176",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/head_winter_lord/none/01.png",
+          "sha256": "bedfc13c80763cd3b1f9c81decd32b0345b557947c5cb43132a68aa226766b8e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        6,
+        7
+      ],
+      "output_sha256": "bedfc13c80763cd3b1f9c81decd32b0345b557947c5cb43132a68aa226766b8e"
+    },
+    {
+      "id": "enemies/winter_lord_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-walk-r5.png",
+      "source_sha256": "efaa1b5cf52a5acaf0dd2ad44550c2887490a761aa859376483df550383a3e75",
+      "crop_xywh": [
+        33,
+        131,
+        482,
+        487
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "walk",
+      "content_scale": 0.0944558521560575,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_walk",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/winter_lord_walk_0.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.prompt.txt",
+      "prompt_sha256": "f8c0bc13fe6a17239366f6a41893cfb97a7dcf9dbf396b1c39aa7beed630c366",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.call.json",
+          "sha256": "3b2db824478c8740f60fba34bf72dbf2825d363f49e1b4da136b83a6a53b6350",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_walk/west/01.png",
+          "sha256": "f330827c5885f20d8775d8eb85a570dbfa4928e85023293071da101b410fe996",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        23,
+        46
+      ],
+      "output_sha256": "f330827c5885f20d8775d8eb85a570dbfa4928e85023293071da101b410fe996"
+    },
+    {
+      "id": "enemies/winter_lord_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-walk-r5.png",
+      "source_sha256": "efaa1b5cf52a5acaf0dd2ad44550c2887490a761aa859376483df550383a3e75",
+      "crop_xywh": [
+        575,
+        132,
+        454,
+        486
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "walk",
+      "content_scale": 0.0944558521560575,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_walk",
+      "frame": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/winter_lord_walk_1.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.prompt.txt",
+      "prompt_sha256": "f8c0bc13fe6a17239366f6a41893cfb97a7dcf9dbf396b1c39aa7beed630c366",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.call.json",
+          "sha256": "3b2db824478c8740f60fba34bf72dbf2825d363f49e1b4da136b83a6a53b6350",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_walk/west/02.png",
+          "sha256": "ff8f4ea13ec8876b8e49b93016dabd088ffc97bef02d2709c08b7588125e79b7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        21,
+        46
+      ],
+      "output_sha256": "ff8f4ea13ec8876b8e49b93016dabd088ffc97bef02d2709c08b7588125e79b7"
+    },
+    {
+      "id": "enemies/winter_lord_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-walk-r5.png",
+      "source_sha256": "efaa1b5cf52a5acaf0dd2ad44550c2887490a761aa859376483df550383a3e75",
+      "crop_xywh": [
+        1127,
+        132,
+        479,
+        486
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "walk",
+      "content_scale": 0.0944558521560575,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_walk",
+      "frame": 2,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/winter_lord_walk_2.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.prompt.txt",
+      "prompt_sha256": "f8c0bc13fe6a17239366f6a41893cfb97a7dcf9dbf396b1c39aa7beed630c366",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.call.json",
+          "sha256": "3b2db824478c8740f60fba34bf72dbf2825d363f49e1b4da136b83a6a53b6350",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_walk/west/03.png",
+          "sha256": "1b3caf551fbbfb0386eaa9ed2a704b779a03b7d20720ab6b7a35c1ec6880dee8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        22,
+        46
+      ],
+      "output_sha256": "1b3caf551fbbfb0386eaa9ed2a704b779a03b7d20720ab6b7a35c1ec6880dee8"
+    },
+    {
+      "id": "enemies/winter_lord_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-walk-r5.png",
+      "source_sha256": "efaa1b5cf52a5acaf0dd2ad44550c2887490a761aa859376483df550383a3e75",
+      "crop_xywh": [
+        1684,
+        131,
+        438,
+        487
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "walk",
+      "content_scale": 0.0944558521560575,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_walk",
+      "frame": 3,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/winter_lord_walk_3.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.prompt.txt",
+      "prompt_sha256": "f8c0bc13fe6a17239366f6a41893cfb97a7dcf9dbf396b1c39aa7beed630c366",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.call.json",
+          "sha256": "3b2db824478c8740f60fba34bf72dbf2825d363f49e1b4da136b83a6a53b6350",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_walk/west/04.png",
+          "sha256": "20f5fd9dd50dedb08aee906a80d64a1dc3c76a65da5e65b37e12c21a603ae12d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        20,
+        46
+      ],
+      "output_sha256": "20f5fd9dd50dedb08aee906a80d64a1dc3c76a65da5e65b37e12c21a603ae12d"
+    },
+    {
+      "id": "enemies/winter_lord_cast_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-cast-r5.png",
+      "source_sha256": "42c05461ce6d1b1d8f8c39cb33e7a93b919d3418c31979fcc271a519d7cee849",
+      "crop_xywh": [
+        58,
+        216,
+        493,
+        483
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "cast",
+      "content_scale": 0.09523809523809523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_cast",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_cast_0.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.prompt.txt",
+      "prompt_sha256": "aa150d40c42fd62bbd77f1b267675e56214ff409106f862e1bce44cfc08a4c3c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.call.json",
+          "sha256": "24be563aa3d6a3260430f61941ecb7f5bf522cc77f379361d0503ed7b1ea1d84",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_cast/west/01.png",
+          "sha256": "1053237b173778538c16f062880648fca3224d7db9a9a18afa4233966606dc57",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        23,
+        46
+      ],
+      "output_sha256": "1053237b173778538c16f062880648fca3224d7db9a9a18afa4233966606dc57"
+    },
+    {
+      "id": "enemies/winter_lord_cast_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-cast-r5.png",
+      "source_sha256": "42c05461ce6d1b1d8f8c39cb33e7a93b919d3418c31979fcc271a519d7cee849",
+      "crop_xywh": [
+        660,
+        150,
+        428,
+        551
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "cast",
+      "content_scale": 0.09523809523809523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_cast",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_cast_1.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.prompt.txt",
+      "prompt_sha256": "aa150d40c42fd62bbd77f1b267675e56214ff409106f862e1bce44cfc08a4c3c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.call.json",
+          "sha256": "24be563aa3d6a3260430f61941ecb7f5bf522cc77f379361d0503ed7b1ea1d84",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_cast/west/02.png",
+          "sha256": "6b131904fbf0966d27d0a7d1fe5b1beb5c5d747e88d1e5eb59a44626fb6330b6",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        20,
+        52
+      ],
+      "output_sha256": "6b131904fbf0966d27d0a7d1fe5b1beb5c5d747e88d1e5eb59a44626fb6330b6"
+    },
+    {
+      "id": "enemies/winter_lord_cast_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-cast-r5.png",
+      "source_sha256": "42c05461ce6d1b1d8f8c39cb33e7a93b919d3418c31979fcc271a519d7cee849",
+      "crop_xywh": [
+        1206,
+        116,
+        398,
+        586
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "cast",
+      "content_scale": 0.09523809523809523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_cast",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_cast_2.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.prompt.txt",
+      "prompt_sha256": "aa150d40c42fd62bbd77f1b267675e56214ff409106f862e1bce44cfc08a4c3c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.call.json",
+          "sha256": "24be563aa3d6a3260430f61941ecb7f5bf522cc77f379361d0503ed7b1ea1d84",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_cast/west/03.png",
+          "sha256": "6bc33ccb74d7ee222c6f05cee6528298328a2dd9677c39554a7de321b5ecdc70",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        19,
+        56
+      ],
+      "output_sha256": "6bc33ccb74d7ee222c6f05cee6528298328a2dd9677c39554a7de321b5ecdc70"
+    },
+    {
+      "id": "enemies/winter_lord_cast_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/winter_lord/winter-cast-r5.png",
+      "source_sha256": "42c05461ce6d1b1d8f8c39cb33e7a93b919d3418c31979fcc271a519d7cee849",
+      "crop_xywh": [
+        1763,
+        119,
+        399,
+        583
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "winter_lord",
+      "enemy_motion": "cast",
+      "content_scale": 0.09523809523809523,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_cast",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_cast_3.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.prompt.txt",
+      "prompt_sha256": "aa150d40c42fd62bbd77f1b267675e56214ff409106f862e1bce44cfc08a4c3c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.call.json",
+          "sha256": "24be563aa3d6a3260430f61941ecb7f5bf522cc77f379361d0503ed7b1ea1d84",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_cast/west/04.png",
+          "sha256": "c3143d188915ac95535335be89e9c4cedb9e4812db4b674fb3ef3d0ade5f33e3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "approval": "A054 approved for integration 2026-10-14, owner's words \"tudo aprovado, falta mais?\"; integrated by task 0268",
+      "content_anchor_xy": [
+        19,
+        56
+      ],
+      "output_sha256": "c3143d188915ac95535335be89e9c4cedb9e4812db4b674fb3ef3d0ade5f33e3"
+    },
+    {
+      "id": "enemies/winter_lord_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.prompt.txt",
+      "prompt_sha256": "f8c0bc13fe6a17239366f6a41893cfb97a7dcf9dbf396b1c39aa7beed630c366",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-walk-r5.call.json",
+          "sha256": "3b2db824478c8740f60fba34bf72dbf2825d363f49e1b4da136b83a6a53b6350",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_walk/west/03.png",
+          "sha256": "1b3caf551fbbfb0386eaa9ed2a704b779a03b7d20720ab6b7a35c1ec6880dee8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "enemy_family": "winter_lord",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/winter_lord",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/winter_lord_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/winter_lord_walk_2",
+      "output_sha256": "1b3caf551fbbfb0386eaa9ed2a704b779a03b7d20720ab6b7a35c1ec6880dee8"
+    },
+    {
+      "id": "enemies/winter_lord_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_attack.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.prompt.txt",
+      "prompt_sha256": "4562a35aa1fe9f0b36b5081aace32595ce35f40fbd2bdcbc2e40315a67ab975c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-attack-r2.call.json",
+          "sha256": "b0732e6c657d695e13df968598f07132524fca0991070a64f2ec1f48680fe144",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_attack/west/02.png",
+          "sha256": "9f76e17e52e59529105be8fdd9d50446940b392bc46105ca657cebdfa9d00ee4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "enemy_family": "winter_lord",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/winter_lord",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/winter_lord_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/winter_lord_attack_1",
+      "output_sha256": "9f76e17e52e59529105be8fdd9d50446940b392bc46105ca657cebdfa9d00ee4"
+    },
+    {
+      "id": "enemies/winter_lord_death",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_compat_death",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_death.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.prompt.txt",
+      "prompt_sha256": "1f2a0065de22f473832b0b1fdfcd39f5f35e84d26d630c9603323b78f4f1da28",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-death-r2.call.json",
+          "sha256": "ca8d6948e829662a28adf50ed22b130634f942895c6929164acc795eba06b53c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_death/west/05.png",
+          "sha256": "e050c348861a32a03b7cfc914d89db50da5b149db864e24a63070c3715dd8a1b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "enemy_family": "winter_lord",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/winter_lord",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/winter_lord_death_4",
+      "operation": "copy",
+      "alias_of": "enemies/winter_lord_death_4",
+      "output_sha256": "e050c348861a32a03b7cfc914d89db50da5b149db864e24a63070c3715dd8a1b"
+    },
+    {
+      "id": "enemies/winter_lord_telegraph",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/winter_lord_compat_telegraph",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/winter_lord_telegraph.png",
+      "prompt": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.prompt.txt",
+      "prompt_sha256": "aa150d40c42fd62bbd77f1b267675e56214ff409106f862e1bce44cfc08a4c3c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/raw/winter-cast-r5.call.json",
+          "sha256": "24be563aa3d6a3260430f61941ecb7f5bf522cc77f379361d0503ed7b1ea1d84",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/native/winter_lord_cast/west/04.png",
+          "sha256": "c3143d188915ac95535335be89e9c4cedb9e4812db4b674fb3ef3d0ade5f33e3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/contract.json",
+          "sha256": "ef2de1167a4dff23ca69a031c92affec8eca74958488440a613199c758cde67e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A054-winter-lord/APPROVAL.json",
+          "sha256": "e0fd01fae79f51e444b579d0eb7f79b7ffa896a720b518f6a104849bc1d1e837",
+          "role": "Owner's approval for integration, 2026-10-14: \"tudo aprovado, falta mais?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A054",
+      "integration_task": "0268",
+      "revision": 1,
+      "enemy_family": "winter_lord",
+      "enemy_motion": "cast",
+      "enemy_master_id": "enemies/winter_lord",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/winter_lord_cast_3",
+      "operation": "copy",
+      "alias_of": "enemies/winter_lord_cast_3",
+      "output_sha256": "c3143d188915ac95535335be89e9c4cedb9e4812db4b674fb3ef3d0ade5f33e3"
     }
   ]
 }

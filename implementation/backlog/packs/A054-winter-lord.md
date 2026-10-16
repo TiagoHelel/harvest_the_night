@@ -1,6 +1,6 @@
 # A054 - The Winter Lord
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0268
 - **Dressed by game tasks:** 0255
 - **Spec after game task:** 0255

@@ -1,0 +1,240 @@
+{
+  "all_required_groups_present": true,
+  "approved_art_hashes_match": true,
+  "approved_sitting_unchanged": true,
+  "attack_has_3_frames": true,
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "cast_has_4_frames": true,
+  "cast_height_ceiling_58": true,
+  "colours_allowed": true,
+  "death_final_at_most_20": true,
+  "death_has_5_frames": true,
+  "death_never_grows": false,
+  "exact_22_files": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 22,
+  "frames_found": 22,
+  "grounded_on_pivot": true,
+  "head_size_and_margin": true,
+  "importer_recipe_matches": true,
+  "master_size_ok": true,
+  "measurements": {
+    "native/head_winter_lord/none/01.png": {
+      "bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 114
+    },
+    "native/ice_shards/none/01.png": {
+      "bounds": [
+        8,
+        8,
+        17,
+        18
+      ],
+      "opaque_pixels": 34
+    },
+    "native/ice_shards/none/02.png": {
+      "bounds": [
+        3,
+        1,
+        21,
+        18
+      ],
+      "opaque_pixels": 133
+    },
+    "native/ice_shards/none/03.png": {
+      "bounds": [
+        5,
+        5,
+        19,
+        18
+      ],
+      "opaque_pixels": 62
+    },
+    "native/ice_shards/none/04.png": {
+      "bounds": [
+        9,
+        11,
+        15,
+        18
+      ],
+      "opaque_pixels": 14
+    },
+    "native/winter_lord/west/01.png": {
+      "bounds": [
+        18,
+        14,
+        63,
+        60
+      ],
+      "opaque_pixels": 973
+    },
+    "native/winter_lord_attack/west/01.png": {
+      "bounds": [
+        24,
+        14,
+        57,
+        60
+      ],
+      "opaque_pixels": 829
+    },
+    "native/winter_lord_attack/west/02.png": {
+      "bounds": [
+        9,
+        24,
+        72,
+        60
+      ],
+      "opaque_pixels": 968
+    },
+    "native/winter_lord_attack/west/03.png": {
+      "bounds": [
+        19,
+        22,
+        61,
+        60
+      ],
+      "opaque_pixels": 772
+    },
+    "native/winter_lord_cast/west/01.png": {
+      "bounds": [
+        17,
+        14,
+        64,
+        60
+      ],
+      "opaque_pixels": 1049
+    },
+    "native/winter_lord_cast/west/02.png": {
+      "bounds": [
+        20,
+        8,
+        61,
+        60
+      ],
+      "opaque_pixels": 1158
+    },
+    "native/winter_lord_cast/west/03.png": {
+      "bounds": [
+        21,
+        4,
+        59,
+        60
+      ],
+      "opaque_pixels": 1137
+    },
+    "native/winter_lord_cast/west/04.png": {
+      "bounds": [
+        21,
+        4,
+        59,
+        60
+      ],
+      "opaque_pixels": 1146
+    },
+    "native/winter_lord_death/west/01.png": {
+      "bounds": [
+        25,
+        14,
+        56,
+        60
+      ],
+      "opaque_pixels": 842
+    },
+    "native/winter_lord_death/west/02.png": {
+      "bounds": [
+        23,
+        9,
+        57,
+        60
+      ],
+      "opaque_pixels": 824
+    },
+    "native/winter_lord_death/west/03.png": {
+      "bounds": [
+        25,
+        25,
+        55,
+        60
+      ],
+      "opaque_pixels": 632
+    },
+    "native/winter_lord_death/west/04.png": {
+      "bounds": [
+        24,
+        40,
+        56,
+        60
+      ],
+      "opaque_pixels": 382
+    },
+    "native/winter_lord_death/west/05.png": {
+      "bounds": [
+        25,
+        48,
+        55,
+        60
+      ],
+      "opaque_pixels": 208
+    },
+    "native/winter_lord_walk/west/01.png": {
+      "bounds": [
+        17,
+        14,
+        63,
+        60
+      ],
+      "opaque_pixels": 1045
+    },
+    "native/winter_lord_walk/west/02.png": {
+      "bounds": [
+        19,
+        14,
+        62,
+        60
+      ],
+      "opaque_pixels": 1033
+    },
+    "native/winter_lord_walk/west/03.png": {
+      "bounds": [
+        18,
+        14,
+        63,
+        60
+      ],
+      "opaque_pixels": 1005
+    },
+    "native/winter_lord_walk/west/04.png": {
+      "bounds": [
+        20,
+        14,
+        61,
+        60
+      ],
+      "opaque_pixels": 965
+    }
+  },
+  "mirror_pairs_exact": true,
+  "new_frames_distinct": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "death_never_grows"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "shards_expand_then_fade": true,
+  "shards_have_4_frames": true,
+  "shards_peak_fits": true,
+  "walk_has_4_frames": true
+}

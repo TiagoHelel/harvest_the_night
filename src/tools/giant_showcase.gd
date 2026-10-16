@@ -11,7 +11,8 @@ extends "res://src/tools/enemy_showcase.gd"
 
 ## The boss family shown, and each one's ground pivot.
 var _family: StringName = &"giant"
-const PIVOTS := {&"giant": Vector2(40, 60), &"harvester": Vector2(40, 60), &"scarecrow_king": Vector2(40, 60)}
+const PIVOTS := {&"giant": Vector2(40, 60), &"harvester": Vector2(40, 60), &"scarecrow_king": Vector2(40, 60),
+	&"winter_lord": Vector2(40, 60)}
 
 
 func _run() -> void:

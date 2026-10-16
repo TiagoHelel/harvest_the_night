@@ -1,0 +1,9 @@
+{
+  "prompt": "EDIT the supplied bad icon candidate into a proper tiny 16x16 pixel-art forecast icon. Keep the Winter Lord identity from the second reference. This must be ONLY one small head-and-collar bust, not a full body, not a giant portrait, no shoulders extending broadly. Its whole opaque shape should be a compact 14-by-14 pixel icon with clear one-pixel margin. Three-quarter face turned left; face visible and readable under a short jagged icicle crown; short frost beard, compact fur collar. Show two distinct small bone-white eyes with dark navy pupils. Cut the bust flat at the bottom. The target is a compact heads-up-display SPRITE ICON with only 14 pixels of artwork in each direction, scaled from sharp pixel-art clusters. Dark navy outline, ice blue, blue-white and pale bone. Matte and non-emissive. Transparent background. No torso, arms, broad robe, background, border, text, labels or panels.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-head-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A011-forecast-heads/native/head_giant/none/01.png"
+  ]
+}

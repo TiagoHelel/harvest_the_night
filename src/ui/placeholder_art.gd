@@ -160,9 +160,8 @@ const HARVESTER_TINT := Color(1.5, 0.82, 0.55)
 ## 0267, and still A056's King trophy's.
 const SCARECROW_KING_TINT := Color(1.2, 1.0, 0.45)
 
-## A054's Winter Lord (task 0255): the Giant's 80x64 standing on (40,60),
-## drawn at 1.0 - the Giant it stands in as gone to ice.
-const WINTER_LORD := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
+## The Giant gone to ice - A054's Winter Lord's stand-in until task 0268, and
+## still A056's Lord trophy's.
 const WINTER_LORD_TINT := Color(0.95, 1.15, 1.65)
 
 ## A056's collection book (task 0287), HUD art drawn at 1.0: the closed book
@@ -186,16 +185,6 @@ const ORNAMENT := {"canvas": Vector2i(64, 12), "pivot": Vector2i(32, 6), "draw_s
 ## `bare` is a static file with no frame number (`hud_bait.png`). One line
 ## each, like `POSES`.
 const ART := {
-	# A054's Winter Lord (task 0255): the Giant gone to ice, until 0268 - its
-	# walk the Giant's, its cast the Giant's wind-up (four frames on three:
-	# the last held), its attack the slam, its fall the Giant's; and its
-	# forecast mark the Giant's head.
-	&"winter_lord": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant", "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD, "bare": true},
-	&"winter_lord_walk": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.14, "loop": true, "stand_in": &"enemies/giant_walk", "stand_in_frames": 4, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
-	&"winter_lord_cast": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_windup", "stand_in_frames": 3, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
-	&"winter_lord_attack": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
-	&"winter_lord_death": {"pack": "A054", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": WINTER_LORD_TINT, "geometry": WINTER_LORD, "final": WINTER_LORD},
-	&"head_winter_lord": {"pack": "A054", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": WINTER_LORD_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	# A055's night weather (task 0256): fog and rain in the forecast's event
 	# slot, drawn in code (`WeatherArt`) at both boxes until 0269.
 	&"icon_fog": {"pack": "A055", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": MARK_ICON, "final": MARK_ICON, "bare": true},

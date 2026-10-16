@@ -1,0 +1,119 @@
+[
+  {
+    "recipe": {
+      "id": "winter-attack-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-attack-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        615,
+        724
+      ],
+      "crop_xywh": [
+        159,
+        76,
+        422,
+        596
+      ],
+      "content_scale": 0.07718120805369127,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      24,
+      14,
+      57,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      33,
+      46
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-attack-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-attack-r2.png",
+      "sheet_cell_xywh": [
+        615,
+        0,
+        921,
+        724
+      ],
+      "crop_xywh": [
+        651,
+        197,
+        812,
+        472
+      ],
+      "content_scale": 0.07718120805369127,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      24,
+      72,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      63,
+      36
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-attack-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-attack-r2.png",
+      "sheet_cell_xywh": [
+        1536,
+        0,
+        636,
+        724
+      ],
+      "crop_xywh": [
+        1611,
+        181,
+        538,
+        488
+      ],
+      "content_scale": 0.07718120805369127,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      19,
+      22,
+      61,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      42,
+      38
+    ]
+  }
+]

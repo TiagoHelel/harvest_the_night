@@ -98,6 +98,7 @@ PACK_HEADS = {
     'A051': ['wraith'],
     'A052': ['harvester'],
     'A053': ['scarecrow_king'],
+    'A054': ['winter_lord'],
 }
 
 

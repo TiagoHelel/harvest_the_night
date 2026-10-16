@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use the accepted Winter Lord master as exact identity. Draw FOUR fully separated walk frames in one horizontal row with a full-height empty transparent gutter of at least 120px between every complete figure; the long staff must stay within its own cell. Sequence: 1 left-foot contact with staff low; 2 passing with feet close and staff beginning to swing; 3 right-foot contact with the other leg forward and staff marking the opposite step; 4 passing, returning smoothly toward frame 1. This is a slow heavy gliding stride: both legs visibly alternate; the robe hem shifts slightly and the free arm/staff counter-swing. Do not repeat the same leg pose in all frames. Keep body height, face, crown, robe, fur, ice plates and palette identical to master. West-facing camera, same 46px body scale, feet/hem align to one baseline at row 59, native canvas80x64 pivot40,60. No row shifts. Crisp pixel art, transparent background. No snow, glow, aura, ground, shadow, text, labels, divider lines, blur, gradients, extra limbs, or contact sheet. Return four non-touching equal cells only.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+      "sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9b837b0a-3404-4197-bf98-5f50a224d6ac.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-walk-r2.png",
+  "sha256": "f37a4984956bf3dcd513b685978dc1f5e63913bee5ddeee234a84d30500d0c6b",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

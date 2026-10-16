@@ -1,0 +1,19 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "Production pixel-art animation for HARVEST THE NIGHT. Image1 is the exact accepted Winter Lord identity master: same gaunt undead frozen face/beard, jagged icicle crown, layered deep blue robe with white fur collar and hem, shoulder ice plates, wood staff with matte ice crystal. Side view facing WEST/LEFT in the existing three-quarter camera, same proportions and palette, upper-left light, clean square clusters, no blur/gradients/painterly rendering. Final native80x64 canvas pivot40,60, body crown-to-hem46px. Four FULL unclipped figures of identical source scale, in one horizontal row, same ground baseline and fixed torso center in four equal cells; broad fully transparent gutters between cells, no subject crosses gutters. True transparent background. No snow, ground, shadow, glow, aura, text, labels, border, extra object or contact sheet. Generate exactly4 CAST frames. Previous cast held the staff too high and exceeded58nativepx. Keep total silhouette58px MAX at unchanged46px crown-to-hem BODY size: only12px extra above crown available. Grip the staff near its upper end; slide the shaft DOWN alongside the body as hands lift, so the crystal cluster is close above the crown, never on an extended pole high overhead. Keep elbows BENT near head, not straight arms overhead. Frame1 lifting staff fromlow; frame2 both bent hands at brow height with crystal tip4px above crown; frame3 bent hands high beside crown, crystal cluster tip8px above crown, strongest/crystals broad; frame4 holds peak, slightly different fingers/crystals settling (must not be byteidentical to3). Crystal tip above crown in2,3,4. Full lengthstaff lower end remains above ground, robefootbaseline fixed, no crouching/scalingbodydown. Matte ice only, no glow/particles/aura.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-master-r1.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-cast-r3.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-34fa85fc-f109-4fe3-bf89-da85ef328b38.png",
+  "date": "2026-10-14",
+  "revision": 4,
+  "roles": [
+    "owner-approved exact identity master",
+    "previous cast: excessive staff height to correct"
+  ],
+  "owner_continuation": "entao bora continuar essa poha"
+}

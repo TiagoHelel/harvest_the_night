@@ -6,12 +6,12 @@ extends RefCounted
 ## most 24 forms; newer contacts replace older ones during a crowded wave.
 const MAX_FORMS := 24
 ## A050's ice burst since task 0264, moved here from `DRAWN`.
-## A052's wreck debris since task 0266.
+## A052's wreck debris since task 0266, A054's ice shards since 0268.
 const COUNTS := {&"muzzle":3, &"impact":3, &"flame":4, &"smoke":4,
-	&"dust":3, &"splash":4, &"flare":4, &"ice_shatter":4, &"wreck_debris":4}
+	&"dust":3, &"splash":4, &"flare":4, &"ice_shatter":4, &"wreck_debris":4, &"ice_shards":4}
 const OPACITY := {&"muzzle":1.0, &"impact":0.85, &"flame":1.0,
 	&"smoke":0.6, &"dust":0.8, &"splash":1.0, &"flare":1.0, &"ice_shatter":1.0,
-	&"wreck_debris":1.0}
+	&"wreck_debris":1.0, &"ice_shards":1.0}
 ## **One-shots drawn in code until their pack lands** (task 0251), frames by
 ## family, played as the raster ones are at full opacity. `COUNTS` stays the
 ## raster families the effect showcase holds to their PNGs; the leaf that
@@ -45,6 +45,9 @@ var _bursts: Dictionary = {}
 ## **A charge's line** (task 0266): before the tick, the cells of every
 ## charger's line with a structure on them - the ones it may bring down.
 var _wrecks: Dictionary = {}
+## **A freeze landing** (task 0268): each tower's freeze left before the tick.
+## One that rises in it - started or refreshed - is one the freeze landed on.
+var _frozen: Dictionary = {}
 
 
 func reset() -> void:
@@ -54,6 +57,7 @@ func reset() -> void:
 	_kills.clear()
 	_bursts.clear()
 	_wrecks.clear()
+	_frozen.clear()
 	_work.reset()
 	_tick = -1
 	_credit = 0.0
@@ -162,6 +166,7 @@ func before_tick(state: Dictionary, gun_cells: Array) -> void:
 	_kills.clear()
 	_bursts.clear()
 	_wrecks.clear()
+	_frozen.clear()
 	var killed: Dictionary = state["killed_by_kind"]
 	for id in Entities.ids(state):
 		var one := Entities.get_one(state, int(id))
@@ -178,6 +183,7 @@ func before_tick(state: Dictionary, gun_cells: Array) -> void:
 				_wrecks[Grid.index(cell)] = true
 	for idx in gun_cells:
 		_guns[int(idx)] = int(state["occupants"][int(idx)].get("reload",0))
+		_frozen[int(idx)] = int(state["occupants"][int(idx)].get("frozen",0))
 	_flares = Ability.used(state, Ability.FLARE)
 	_work.before_tick(state)
 
@@ -187,6 +193,7 @@ func after_tick(state: Dictionary) -> void:
 		_entities.clear()
 		_guns.clear()
 		_wrecks.clear()
+		_frozen.clear()
 		_tick = -1
 		_work.reset()
 		return
@@ -208,6 +215,14 @@ func after_tick(state: Dictionary) -> void:
 			emit(&"impact", at-Vector2(0,20 if EnemyMotion.posed_boss(was[3]) else 12))
 		if Combat.is_burning(state,int(id)) and not bool(was[2]):
 			emit(&"flame", at-Vector2(0,4))
+	# **The freeze lands** (task 0268): A054's shards thrown up at the base of
+	# each tower whose freeze rose this tick, the bottom middle of its cell.
+	var chilled: Array = _frozen.keys()
+	chilled.sort()
+	for idx in chilled:
+		var tower: Dictionary = state["occupants"].get(idx,{})
+		if int(tower.get("frozen",0)) > int(_frozen[idx]):
+			emit(&"ice_shards", (Vector2(Grid.cell(int(idx))) + Vector2(0.5, 1.0)) * GameData.TILE_SIZE)
 	# **A structure a charge brought down** (task 0266): A052's debris thrown
 	# up at its foot, the bottom middle of its cell.
 	var crushed: Array = _wrecks.keys()
@@ -240,6 +255,7 @@ func after_tick(state: Dictionary) -> void:
 	_kills.clear()
 	_bursts.clear()
 	_wrecks.clear()
+	_frozen.clear()
 	_tick = -1
 
 

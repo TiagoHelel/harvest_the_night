@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-14",
+  "status": "blocked",
+  "selected_candidate_files": 14,
+  "expected_files": 22,
+  "approved": false,
+  "issues": [
+    "The walk strip could not be separated into four unambiguous frames after three attempts.",
+    "The cast exceeds the 58px silhouette ceiling at the master body scale after three attempts.",
+    "Death grows from 46px to 51px in frame 1, violating the monotonic fall; three attempts used.",
+    "The forecast icon remains diagnostic; the three generated portraits are oversized and the required walk-frame colour reference could not be extracted."
+  ]
+}

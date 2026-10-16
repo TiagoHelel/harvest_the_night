@@ -1,0 +1,57 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION: existing four-frame Winter Lord CAST strip, preserve exact four cells, figure body size, blue robe, fur, face, crown, feet, camera and baseline. ONLY shorten the raised crystal assembly in frames2,3,4 so the tip is barely above crown and the full height fits. Existing crystalshaft is too tall. At original source framing each upright crown-to-ground body is about475px; finalnativebody46px. TOTAL cast height must be at most570sourcepx (55native), never680sourcepx. The crystal tip must be only60–90sourcepx above crown, not200px. Make the ice crystal itself SMALL, about70sourcepx tall (7native), not an enormous200px spearhead. Keep hands at brow/crown side with elbows bent, shaft slides down alongside torso, no arms overhead. Fourorderedposes: lift, head-level staff with smallcrystalabove crown, bothhands peak with small broad crystal justabove crown, heldpeak slightlydifferent. No resizing individual bodies; only lower/shorten raisedweapon. All4figures have broad transparentgutters and complete unclippedbody. Matteice, pixelart, truealpha, no glow/aura/rays/shadow/snow/scene/text/border.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-cast-r4.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-master-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1ae3ffab-0fdf-40b5-ba2c-ea9e422fb416.png",
+  "date": "2026-10-14",
+  "revision": 5,
+  "roles": [
+    "cast strip exact edit target",
+    "approved body identity reference"
+  ],
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-cast-r4.png",
+      "sha256": "aee61d1e08ad6e026e3b88eb0a6de45b4fc9076aa1f822ea23f710034af8c0ef",
+      "role": "cast strip exact edit target",
+      "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\rejected\\winter-cast-r4.png"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-master-r1.png",
+      "sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+      "role": "approved body identity reference"
+    }
+  ],
+  "copied_path": "raw/winter-cast-r5.png",
+  "sha256": "42c05461ce6d1b1d8f8c39cb33e7a93b919d3418c31979fcc271a519d7cee849",
+  "decision": "selected; native exports explicitly owner-approved on 2026-10-14",
+  "inspection": {
+    "canvas_wh": [
+      2172,
+      724
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "alpha_threshold_128_bounds": [
+      58,
+      116,
+      2162,
+      702
+    ]
+  },
+  "selected_native_exports": [
+    "native/winter_lord_cast/west/01.png",
+    "native/winter_lord_cast/west/02.png",
+    "native/winter_lord_cast/west/03.png",
+    "native/winter_lord_cast/west/04.png"
+  ],
+  "approval_record": "APPROVAL.json"
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "winter-shards-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        503,
+        724
+      ],
+      "crop_xywh": [
+        169,
+        343,
+        229,
+        243
+      ],
+      "content_scale": 0.04028436018957346,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      8,
+      8,
+      17,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      9,
+      10
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-shards-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+      "sheet_cell_xywh": [
+        503,
+        0,
+        658,
+        724
+      ],
+      "crop_xywh": [
+        610,
+        191,
+        459,
+        422
+      ],
+      "content_scale": 0.04028436018957346,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      3,
+      1,
+      21,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      18,
+      17
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-shards-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+      "sheet_cell_xywh": [
+        1161,
+        0,
+        575,
+        724
+      ],
+      "crop_xywh": [
+        1255,
+        272,
+        343,
+        323
+      ],
+      "content_scale": 0.04028436018957346,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      5,
+      19,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      14,
+      13
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-shards-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-shards-r1.png",
+      "sheet_cell_xywh": [
+        1736,
+        0,
+        436,
+        724
+      ],
+      "crop_xywh": [
+        1875,
+        411,
+        138,
+        164
+      ],
+      "content_scale": 0.04028436018957346,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      11,
+      15,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      6,
+      7
+    ]
+  }
+]

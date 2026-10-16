@@ -902,7 +902,9 @@ func _task_0120_placeholders() -> void:
 	# **An enemy with no raster art stands in through the lookup** (task
 	# 0247): its master, walk, attack and death at the canvas and pivot of
 	# the art they stand for, and its head registered - the art groups
-	# (0074, 0088) check only the kinds with raster art.
+	# (0074, 0088) check only the kinds with raster art. **None since task
+	# 0268**: A054's Winter Lord was the last enemy pack to land, so the rule
+	# holds for any kind a later task adds before its art.
 	var standing: Array = []
 	var off: Array = []
 	for kind in GameData.sorted_names(GameData.ENEMIES.keys()):
@@ -929,8 +931,8 @@ func _task_0120_placeholders() -> void:
 				off.append(path)
 		if PlaceholderArt.art(StringName("head_%s" % kind)).is_empty():
 			off.append("head_%s" % kind)
-	expect(not standing.is_empty() and off.is_empty(),
-		"every enemy without raster art stands in through the lookup - master, walk, attack, death and head - at the canvas and pivot of what it stands for, or drawn in code at its pack's",
+	expect(off.is_empty(),
+		"every enemy without raster art - none since 0268 - stands in through the lookup - master, walk, attack, death and head - at the canvas and pivot of what it stands for, or drawn in code at its pack's",
 		"%s: %s" % [str(standing), str(off.slice(0, 4))])
 	_completed += 1
 
@@ -9605,10 +9607,10 @@ func _task_0246_bosses() -> void:
 			by_name.append(file)
 	var voices := SuiteKit.code_lines_of("res://src/ui/sfx.gd").count("&\"giant\"")
 	# The posed bosses by name: the Harvester too since task 0266 (A052), the
-	# Scarecrow King since 0267 (A053).
+	# Scarecrow King since 0267 (A053) and the Winter Lord since 0268 (A054).
 	expect(EnemyMotion.posed_boss(&"giant") and not EnemyMotion.posed_boss(&"walker")
 		and EnemyMotion.tracks(&"giant")
-		and EnemyMotion.tracked() == EnemyMotion.FAMILIES + [&"giant", &"harvester", &"scarecrow_king"]
+		and EnemyMotion.tracked() == EnemyMotion.FAMILIES + [&"giant", &"harvester", &"scarecrow_king", &"winter_lord"]
 		and EnemyMotion.FAMILIES.slice(0, 4) == [&"walker", &"runner", &"tank", &"breaker"]
 		and EnemyMotion.TRACKED == EnemyMotion.tracked()
 		and Sfx.voice_of(&"giant") == &"sfx/roar_giant" and Sfx.voice_of(&"walker") == &"sfx/groan_walker"
@@ -11272,6 +11274,64 @@ func _task_0255_winter_lord() -> void:
 		and Describe.enemy(&"winter_lord").contains(I18n.t(&"DESC_FREEZES"))
 		and Sfx.voice_of(&"winter_lord") == &"sfx/lord_ice",
 		"Winter 14, the year's last night, is the Winter Lord's; it has its name, its intro, a tooltip line that it freezes the towers, and since 0284 a voice of its own")
+
+	# **A054's art since task 0268**: nothing of 0120's road left; a boss in
+	# the Giant's pose names drawn as the King is - its cast the freeze's tell,
+	# the rules' own, four frames in order and the last held; its attack its
+	# blow - and A054's shards thrown up at the base of each tower the freeze
+	# lands on, in cell order, none at the two outside.
+	var drawn: Array = []
+	for art_name in ["winter_lord", "winter_lord_walk", "winter_lord_cast", "winter_lord_attack",
+			"winter_lord_death", "head_winter_lord", "ice_shards"]:
+		if not PlaceholderArt.art(StringName(art_name)).is_empty():
+			drawn.append(art_name)
+	var court := _powers_night(25503)
+	var seat := _open_square(court, 6, &"wall")
+	var near: Array = [seat + Vector2i(2, 0), seat + Vector2i(-3, 1), seat + Vector2i(0, -3)]
+	var far: Array = [seat + Vector2i(4, 0), seat + Vector2i(-2, 5)]
+	var guns: Array = []
+	for at in near + far:
+		Farm.place(court, at as Vector2i, {"id": &"gun_tower", "hp": gun_hp})
+		guns.append(Grid.index(at as Vector2i))
+	_ring_in_hardwood(court, seat)
+	Pathing.refresh(court)
+	var ruler := Entities.spawn(court, &"winter_lord", seat)
+	(Entities.get_one(court, ruler))["freeze_in"] = 1
+	var watching := EnemyMotion.new()
+	var shards := PixelEffects.new()
+	var cast_poses: Array = []
+	for _t in telegraph + 2:
+		watching.before_tick(court)
+		shards.before_tick(court, guns)
+		Sim.advance(court, 1)
+		shards.after_tick(court)
+		watching.after_tick(court)
+		if Enemies.is_freezing(court, ruler):
+			var seen_pose := watching.pose(Entities.get_one(court, ruler), court)
+			if cast_poses.is_empty() or cast_poses[-1] != seen_pose:
+				cast_poses.append(seen_pose)
+	var thrown: Array = []
+	for record in shards.records:
+		if StringName(record["family"]) == &"ice_shards":
+			thrown.append(record["at"])
+	var by_index: Array = []
+	for at in near:
+		by_index.append(Grid.index(at as Vector2i))
+	by_index.sort()
+	var want_thrown: Array = []
+	for idx in by_index:
+		want_thrown.append((Vector2(Grid.cell(int(idx))) + Vector2(0.5, 1.0)) * GameData.TILE_SIZE)
+	var struck := _powers_night(25504)
+	var smiter := Entities.get_one(struck, Entities.spawn(struck, &"winter_lord", _open_square(struck, 3, &"wall")))
+	var blow := EnemyMotion.new()._boss_pose(smiter, struck, {"tick": int(struck["tick"]), "moving": false,
+		"pos": Vector2i(int(smiter["pos"][0]), int(smiter["pos"][1])), "travel": 0, "strike": int(struck["tick"]) - 4})
+	expect(drawn.is_empty() and EnemyMotion.posed_boss(&"winter_lord") and EnemyMotion.tracks(&"winter_lord")
+		and EnemyMotion.windup_of(&"winter_lord") == "cast" and EnemyMotion.strike_of(&"winter_lord") == "attack"
+		and cast_poses == [&"winter_lord_cast_0", &"winter_lord_cast_1", &"winter_lord_cast_2", &"winter_lord_cast_3"]
+		and blow == &"winter_lord_attack_1" and EnemyDeaths.death_frames(&"winter_lord") == 5
+		and thrown == want_thrown,
+		"A054's Lord is a posed boss: its cast for the freeze the rules' own, four frames in order and the last held; its attack its blow, five death frames; the shards thrown at the base of each tower the freeze landed on, none outside; nothing of 0120's road left",
+		"%s; %s; %s; %s against %s" % [str(drawn), str(cast_poses), blow, str(thrown), str(want_thrown)])
 	_completed += 1
 
 

@@ -1,0 +1,7 @@
+{
+  "prompt": "Use the Winter Lord master as exact identity. Render a four-frame cast strip as four small, separate sprite cutouts on one transparent horizontal canvas. Keep each full figure within one quarter of the canvas, with at least 100 pixels of fully empty transparent gutter spanning the entire canvas height between frames. There must be three uninterrupted vertical transparent columns; no staff, crystal, fingers, robe edge or noise may cross them. Ordered: 1 staff low begins lifting; 2 staff held upright with the crystal just above crown; 3 both hands raise it overhead with crystals largest but total height at most58px; 4 hold pose3. Keep the same 46px body size and feet at row59. West-facing, same robe, fur, face, crown, ice colors and camera as master. Matte, no glow/aura/snow/particles. Pixel art, transparent background, no ground, shadow, text, labels, frames, dividers, blur, gradient or extra objects. Return exactly four separated positions in one row.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+  ]
+}

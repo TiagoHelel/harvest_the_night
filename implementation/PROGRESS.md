@@ -33527,3 +33527,84 @@ the forecast mark misses the matte bone eye-pixel rule after three attempts.
 - `python implementation/backlog/assets.py set A053 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second run: a power cut stopped the first before it finished.
+
+## 0268 - Art: the Winter Lord - done 2026-10-16
+
+A054 is integrated. The Winter Lord is the owner-approved art now:
+
+- standing, its four-frame gliding walk, its four-frame cast, its
+  three-frame staff strike and its five-frame collapse;
+- its head in the forecast;
+- its ice shards, four frames on 24x20 standing on (12,18), thrown up at
+  the base of every tower its freeze lands on.
+
+The owner approved the whole delivery on 2026-10-14, continuation
+included, as recorded in the delivery's `APPROVAL.json`. The approval
+accepts one measured difference: the collapse grows from 46 to 51 px on its
+second frame (`death_never_grows`). 0255's Giant gone to ice is gone. The
+aura on the ground and the ice on a frozen tower stay 0255's code.
+
+- **Promotion**:
+  - The 22 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their raw sources were copied byte for byte into
+    `assets/art_source/enemies/winter_lord/`, `assets/art_source/effects/ice/`
+    and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - The Lord is on the Giant's 80x64 at (40,60), [-32,-44], with
+    `enemy_family`/`enemy_motion` and the four aliases A054's handoff names
+    (`walk_b` = walk 2, `telegraph` = cast 3, `attack` = attack 1,
+    `death` = death 4).
+  - The shards carry `fx_family` `ice_shards` and their `base` origin.
+- **A posed boss that casts, as the King** (`EnemyMotion`, 0267's road):
+  - its cast is the wind-up before a blow;
+  - while it freezes (`freezing`) its pose is the rules' own cast, as 0255
+    posed it;
+  - its attack is its blow, and its collapse plays its five frames.
+- **The shards** (`PixelEffects`):
+  - Before each tick it notes each tower's freeze left (`_frozen`), next
+    to its reload.
+  - After the tick, each tower whose freeze rose throws A054's shards at
+    its base, the bottom middle of its cell, in cell order. A freeze rises
+    when it starts or is refreshed; it only runs down otherwise.
+  - The freeze lands in the enemies' turn, so the tick it lands is when
+    they play.
+  - `ice_shards` is a raster one-shot in `COUNTS` at full opacity.
+- **The stand-ins retired**: A054's six `PlaceholderArt` entries and
+  `WINTER_LORD`. `WINTER_LORD_TINT` stays: A056's Lord trophy still stands
+  in with it. `placeholders.py --check` passes, with 69 stand-ins left over
+  8 packs. No enemy stands in any more.
+- **Checks**:
+  - `check_giant_art.py`'s `BOSSES` takes the Lord, drawn as the King: a
+    cast never taller than 58 and a collapse that ends at most 20 tall. A
+    `death_may_grow` flag lets its collapse grow once, as the owner
+    accepted; the other bosses still may not.
+  - `check_effect_art.py`'s `PACK_EFFECTS` takes `ice_shards`: A054, four
+    frames, 24x20 at (12,18), base, one-shot, 0.1 s.
+  - `check_ui_art.py` takes its head.
+- **The boss showcase**: `--boss=winter_lord` runs it. Its new cast step
+  (0267) plays the freeze's cast.
+- **Tests**:
+  - 0255's check asks for A054's art. Nothing of 0120's road is left.
+    Through a freeze the view's own pose is the cast's four frames in
+    order, the last held. Its attack is its blow, with five death frames.
+  - The shards land at the base of each of the three towers inside, in
+    cell order, and none at the two outside.
+  - 0246's tracked list takes the Lord.
+  - 0247's stand-in rule no longer asks that some enemy still stands in:
+    none does since this task.
+- **Shots** (`implementation/shots/0268/`, FHD 1920x1080, looked at):
+  - `winter_lord`: Winter 14's night, the Lord mid-cast with its reach laid
+    on the ground, the three towers inside still iced from the cast before
+    and the two outside firing.
+  - `winter_lord_frozen` (new, inside the same scenario): that cast landed
+    and A054's shards thrown up at the base of each of the three towers
+    inside.
+  - `forecast_build`: Winter 14's forecast, the Lord's head among the
+    winter kinds.
+- **The delivery folder** `implementation/backlog/deliveries/A054-winter-lord/`
+  is committed, as A053's was.
+- `python implementation/backlog/assets.py set A054 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

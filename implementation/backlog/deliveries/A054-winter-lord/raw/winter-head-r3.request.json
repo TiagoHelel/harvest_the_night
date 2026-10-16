@@ -1,0 +1,9 @@
+{
+  "prompt": "Create a single tiny pixel-art RPG HUD icon, not an illustration. The full head-and-collar bust must occupy a compact 14x14 pixel footprint, centered on a 16x16 transparent canvas. Show the Winter Lord's LEFT-FACING three-quarter face, short angular icicle crown (only a few small spikes, not a tall crown), two tiny pale bone eyes with dark pupils, compact frost beard, small fur collar. Flat bottom crop at row 14. Dark navy outline, pale blue skin/ice, white beard, dark blue shadow. Use deliberately large readable pixel clusters as though the final image itself is only 16 pixels square. The entire bust is a tiny icon. Absolutely no large portrait, no broad mantle, no giant crown, no body, no setting, no background, no text, no border, no panel, no extra objects. Transparent background.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-head-r2.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A011-forecast-heads/native/head_giant/none/01.png"
+  ]
+}

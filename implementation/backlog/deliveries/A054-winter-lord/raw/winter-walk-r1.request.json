@@ -1,0 +1,7 @@
+{
+  "prompt": "Use the accepted Winter Lord master as exact identity. Generate exactly 4 sequential west-facing walk poses in a horizontal strip, one complete figure per equal cell, with clear empty transparent gutters. Ordered: left-foot contact, passing, right-foot contact, passing. Make a slow heavy gliding stride with real alternating feet, small robe-hem sway and the free arm/staff marking the step. Do not row-shift or redraw the body identity. Keep the icicle crown, pale frozen face, layered dark-blue robe, white fur and long staff consistent. Feet/hem stay on the same ground row, one contact pivot, same 46px standing height in every pose, same scale in the strip. Native 80x64, pivot (40,60), west facing, complete unclipped silhouette. Pixel art, crisp colored outlines, readable at 1x. Transparent background, no ground or shadow. No aura, snow, glow, extra limbs, duplicated staff, text, dividers, blur, gradient or contact sheet. Return only 4 separated frames.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+  ]
+}

@@ -1,7 +1,7 @@
 # 0268 - Art: the Winter Lord
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0255
 - **Likely files:** assets/art_source/enemies/winter_lord/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_giant_art.py, tools/gen_sprites.py, src/tools/headless_check.gd, tools/check_effect_art.py, src/tools/giant_showcase.gd, src/ui/enemy_motion.gd
 - **Art packs:** A054

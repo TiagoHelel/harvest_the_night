@@ -1,0 +1,13 @@
+2026-10-14: Diagnostic candidates were assembled from recorded ImageGen sources. Walk, cast, death, and forecast-mark constraints remain unmet as listed in raw/selection.json. Package blocked; no production export and no approval inferred.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+14/22 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: death_never_grows. Approval applies only to displayed images. Missing outputs remain a delivery blocker, not a rejection of approved art.
+
+2026-10-14 / New walk4/cast4 exported at one scale per strip. Cast height 46/52/56/56, within58.22/22 native candidates; all14 approved hashes preserved. The previous owner-accepted death_never_grows remains false; new checks pass. New8 require owner review, no autoapproval or integration. Source choices: winter-walk-r5 and winter-cast-r5.
+
+2026-10-14 / Complete continuation owner approval
+Owner words: tudo aprovado, falta mais?
+Review: implementation/backlog/deliveries/A028-dog/continuation-final-review.html
+All 22 native outputs approved, including 8 new PNGs. Original approved PNGs remain byte-identical. Accepted measured visual differences: death_never_grows. No art, motion, palette, timing or runtime files changed.

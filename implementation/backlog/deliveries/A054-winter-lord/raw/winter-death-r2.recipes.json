@@ -1,0 +1,197 @@
+[
+  {
+    "recipe": {
+      "id": "winter-death-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        451,
+        724
+      ],
+      "crop_xywh": [
+        47,
+        133,
+        367,
+        553
+      ],
+      "content_scale": 0.08318264014466546,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      25,
+      14,
+      56,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      31,
+      46
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-death-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+      "sheet_cell_xywh": [
+        451,
+        0,
+        470,
+        724
+      ],
+      "crop_xywh": [
+        489,
+        77,
+        406,
+        608
+      ],
+      "content_scale": 0.08318264014466546,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      23,
+      9,
+      57,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      34,
+      51
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-death-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+      "sheet_cell_xywh": [
+        921,
+        0,
+        418,
+        724
+      ],
+      "crop_xywh": [
+        949,
+        268,
+        362,
+        416
+      ],
+      "content_scale": 0.08318264014466546,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      25,
+      25,
+      55,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      30,
+      35
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-death-r2-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+      "sheet_cell_xywh": [
+        1339,
+        0,
+        429,
+        724
+      ],
+      "crop_xywh": [
+        1369,
+        449,
+        384,
+        235
+      ],
+      "content_scale": 0.08318264014466546,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      24,
+      40,
+      56,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      32,
+      20
+    ]
+  },
+  {
+    "recipe": {
+      "id": "winter-death-r2-4",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+      "sheet_cell_xywh": [
+        1768,
+        0,
+        404,
+        724
+      ],
+      "crop_xywh": [
+        1785,
+        544,
+        363,
+        141
+      ],
+      "content_scale": 0.08318264014466546,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      25,
+      48,
+      55,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      30,
+      12
+    ]
+  }
+]

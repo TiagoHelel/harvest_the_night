@@ -162,7 +162,7 @@ const SCENARIOS: Array = [
 	["arsenal_spring", "the hotbar in spring: Spring 3's build step on a modest purse, the gun tower picked on spring's page - six slots from the cheapest, each price money first - a wall's kit banked and asking its money, the barricade's nightly five and the mine short; the page turner saying SPRING, 1 of 4", ""],
 	["arsenal_winter", "the hotbar in winter: Winter 3's build step, every season open, the searchlight picked on winter's page beside the electric fence, their money first; the page turner saying WINTER, 4 of 4", ""],
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
-	["winter_lord", "the Winter Lord's aura during a cast: Winter 14's night, the year's last, gun towers round open snow south-east of the house - three inside its reach, two outside - the Lord in its cast with its reach laid on the ground in ice, the towers inside still iced from the cast before, the two outside firing", ""],
+	["winter_lord", "the Winter Lord's aura during a cast: Winter 14's night, the year's last, gun towers round open snow south-east of the house - three inside its reach, two outside - the Lord in its cast with its reach laid on the ground in ice, the towers inside still iced from the cast before, the two outside firing; then winter_lord_frozen (task 0268), that cast landed and A054's ice shards thrown up at the base of each tower inside", ""],
 	["scarecrow_king", "the Scarecrow King mid-cast: Autumn 14's night, the starter field sown, the King east of it on open ground standing in its cast with rings on the six cells its flock will rise on, and the flock it raised before flying in over the field", ""],
 	["harvester", "the Harvester's charge: Summer 14's night, three layers of stone wall and one of hardwood across open ground east of the house, the Harvester before them winding up with its strip over the line by the shutter; then harvester_charging (task 0266), mid-charge through the stone with A052's debris thrown up off the walls it brought down; then harvester_after, the line its charge left - a corridor through the stone, the hardwood holding", ""],
 	["wraith", "wraiths in the light and out of it: Winter 2's night, a searchlight and a gun tower on open snow south-east of the house, one wraith in the lamp's square - solid, a target - and one out in the dark - faint, never gone", ""],
@@ -1071,6 +1071,10 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		await _shoot("guardian", folder)
 		await _take_guardian_point(main, state, folder)
 		return
+	if name == "winter_lord":
+		await _shoot("winter_lord", folder)
+		await _take_winter_lord_frozen(main, state, folder)
+		return
 	if name == "harvester":
 		await _shoot("harvester", folder)
 		await _take_harvester_after(main, state, folder)
@@ -1266,6 +1270,7 @@ func _just_before_the_shutter(main: Node, state: Dictionary,
 			# (task 0255): set down at the shutter, one cast run through, then a
 			# second begun and caught two thirds of a second in.
 			var lord := Entities.spawn(state, &"winter_lord", _lord_at)
+			_lord = lord
 			(Entities.get_one(state, lord))["freeze_in"] = 1
 			var cast := int((GameData.ENEMIES[&"winter_lord"] as Dictionary)["telegraph_ticks"])
 			Sim.advance(state, cast + 1)
@@ -4030,6 +4035,37 @@ func _set_winter_lord(state: Dictionary) -> void:
 ## Where `_set_winter_lord` will stand the Lord, and the towers round it.
 var _lord_at := Vector2i.ZERO
 var _lord_towers: Array = []
+## The Lord once the scene has set it down (task 0268).
+var _lord := -1
+
+
+## **The freeze landing** (task 0268): the cast caught in `winter_lord` run to
+## its end with the view watching each tick, as the game's does - A054's ice
+## shards thrown up at the base of each tower inside, held at their tallest -
+## and `winter_lord_frozen`.
+func _take_winter_lord_frozen(main: Node, state: Dictionary, folder: String) -> void:
+	var world := main.get_node("%WorldView") as WorldView
+	var particles := main.get_node("%Particles") as Particles
+	for _i in 300:
+		if not Entities.alive(state, _lord) or not Enemies.is_freezing(state, _lord):
+			break
+		world.before_tick(state)
+		particles.before_tick(state)
+		Sim.advance(state, 1)
+		particles.after_tick(state)
+		world.after_tick(state)
+	for _i in 5:
+		await process_frame
+	var thrown := 0
+	for record in particles._forms.records:
+		if StringName(record["family"]) == &"ice_shards":
+			record["age"] = PixelEffects.seconds(&"ice_shards") * 1.2
+			thrown += 1
+	var iced: Array = []
+	for at in _lord_towers:
+		iced.append("%s %d" % [str(at), Towers.frozen_left(state, at as Vector2i)])
+	print("  winter_lord_frozen: %d shards thrown, the towers %s" % [thrown, ", ".join(iced)])
+	await _shoot("winter_lord_frozen", folder)
 
 
 ## **The Scarecrow King mid-cast** (task 0254): Autumn 14's night, parked, the

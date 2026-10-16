@@ -1,0 +1,18 @@
+{
+  "tool": "built-in ImageGen",
+  "arguments": {
+    "prompt": "CORRECTION: existing four-frame Winter Lord CAST strip, preserve exact four cells, figure body size, blue robe, fur, face, crown, feet, camera and baseline. ONLY shorten the raised crystal assembly in frames2,3,4 so the tip is barely above crown and the full height fits. Existing crystalshaft is too tall. At original source framing each upright crown-to-ground body is about475px; finalnativebody46px. TOTAL cast height must be at most570sourcepx (55native), never680sourcepx. The crystal tip must be only60–90sourcepx above crown, not200px. Make the ice crystal itself SMALL, about70sourcepx tall (7native), not an enormous200px spearhead. Keep hands at brow/crown side with elbows bent, shaft slides down alongside torso, no arms overhead. Fourorderedposes: lift, head-level staff with smallcrystalabove crown, bothhands peak with small broad crystal justabove crown, heldpeak slightlydifferent. No resizing individual bodies; only lower/shorten raisedweapon. All4figures have broad transparentgutters and complete unclippedbody. Matteice, pixelart, truealpha, no glow/aura/rays/shadow/snow/scene/text/border.",
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-cast-r4.png",
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-master-r1.png"
+    ],
+    "transparent_background": true
+  },
+  "returned_path": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1ae3ffab-0fdf-40b5-ba2c-ea9e422fb416.png",
+  "date": "2026-10-14",
+  "revision": 5,
+  "roles": [
+    "cast strip exact edit target",
+    "approved body identity reference"
+  ]
+}

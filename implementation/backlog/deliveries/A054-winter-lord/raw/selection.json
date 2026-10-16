@@ -1,0 +1,121 @@
+{
+  "status": "blocked",
+  "issues": [
+    "The walk strip could not be separated into four unambiguous frames after three attempts.",
+    "The cast exceeds the 58px silhouette ceiling at the master body scale after three attempts.",
+    "Death grows from 46px to 51px in frame 1, violating the monotonic fall; three attempts used.",
+    "The forecast icon remains diagnostic; the three generated portraits are oversized and the required walk-frame colour reference could not be extracted."
+  ],
+  "files": {
+    "winter_lord/west/0": {
+      "stem": "winter-master-r1",
+      "index": 0
+    },
+    "winter_lord_attack/west/0": {
+      "stem": "winter-attack-r2",
+      "index": 0
+    },
+    "winter_lord_attack/west/1": {
+      "stem": "winter-attack-r2",
+      "index": 1
+    },
+    "winter_lord_attack/west/2": {
+      "stem": "winter-attack-r2",
+      "index": 2
+    },
+    "winter_lord_death/west/0": {
+      "stem": "winter-death-r2",
+      "index": 0
+    },
+    "winter_lord_death/west/1": {
+      "stem": "winter-death-r2",
+      "index": 1
+    },
+    "winter_lord_death/west/2": {
+      "stem": "winter-death-r2",
+      "index": 2
+    },
+    "winter_lord_death/west/3": {
+      "stem": "winter-death-r2",
+      "index": 3
+    },
+    "winter_lord_death/west/4": {
+      "stem": "winter-death-r2",
+      "index": 4
+    },
+    "ice_shards/none/0": {
+      "stem": "winter-shards-r1",
+      "index": 0
+    },
+    "ice_shards/none/1": {
+      "stem": "winter-shards-r1",
+      "index": 1
+    },
+    "ice_shards/none/2": {
+      "stem": "winter-shards-r1",
+      "index": 2
+    },
+    "ice_shards/none/3": {
+      "stem": "winter-shards-r1",
+      "index": 3
+    },
+    "head_winter_lord/none/0": {
+      "stem": "winter-head-r3",
+      "index": 0
+    }
+  },
+  "rejected": {
+    "winter-walk-r1": "No three transparent gutters; figures touch.",
+    "winter-walk-r2": "Gait is largely hidden by robe; no three transparent gutters.",
+    "winter-walk-r3": "No three transparent gutters after final attempt.",
+    "winter-cast-r1": "Frame heights exceed 58px at master scale.",
+    "winter-cast-r2": "Frames overlap and heights exceed 58px at master scale.",
+    "winter-cast-r3": "Frame heights exceed 58px at master scale.",
+    "winter-death-r1": "Poses touch; no four measurable gutters.",
+    "winter-death-r2": "Pose 1 height 51px exceeds pose 0 height 46px.",
+    "winter-head-r1": "Oversized portrait, not a 16px icon.",
+    "winter-head-r2": "Oversized portrait repeated; no compact icon.",
+    "winter-head-r3": "Still an oversized portrait; maximum three attempts reached."
+  },
+  "decisions": {
+    "winter-master-r1": {
+      "decision": "selected diagnostic source; not approved"
+    },
+    "winter-attack-r2": {
+      "decision": "selected diagnostic source; not approved"
+    },
+    "winter-death-r2": {
+      "decision": "selected diagnostic source; not approved"
+    },
+    "winter-shards-r1": {
+      "decision": "selected diagnostic source; not approved"
+    },
+    "winter-head-r3": {
+      "decision": "selected diagnostic source; not approved"
+    }
+  },
+  "body_palette_keys": [
+    "ink",
+    "ink_soft",
+    "grass",
+    "grass_light",
+    "soil_light",
+    "water_dark",
+    "water",
+    "water_light",
+    "stone_dark",
+    "stone",
+    "stone_light",
+    "wood_light",
+    "bone",
+    "bone_dark",
+    "cloth_dark",
+    "cloth",
+    "cloth_light",
+    "night",
+    "night_light",
+    "moon",
+    "rot_dark",
+    "rot"
+  ]
+}

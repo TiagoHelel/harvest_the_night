@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Create exactly FIVE separate isolated pixel-art death poses of the accepted Winter Lord, in a single horizontal strip on transparent background, each pose occupying its own invisible cell and separated from adjacent pose by a VERY WIDE fully transparent gutter at least 100 pixels wide. No staff, robe, ice, crystals, or any opaque pixel may touch or overlap another pose. Maintain the exact accepted character identity, palette, west-facing view, and same apparent body scale as the supplied accepted master. Sequence: 0 upright with cracks; 1 crown breaking and falling, body upright; 2 body breaking into ice blocks while sinking; 3 collapsed low; 4 only a grounded low heap of robe and ice blocks. The body silhouette must monotonically decrease from frame to frame; the final heap is less than half the original body height. Align all frames on one common ground baseline. No extra poses, no duplicated character, no labels, no borders, no panels, no grid, no background, no shadows, no glow, no particles, no snow, no scene. Output crisp pixel art, transparent background.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+      "sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-7b04d66f-59b9-4521-b507-5f3cb666f46a.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A054-winter-lord\\raw\\winter-death-r2.png",
+  "sha256": "7426097ae9102c4cf82ee0d02be689c216b3212a6f5ac26990f993437e9deb34",
+  "revision": 2,
+  "decision": "selected diagnostic source; not approved"
+}

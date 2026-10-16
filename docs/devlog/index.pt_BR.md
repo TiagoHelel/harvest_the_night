@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-289 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+290 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -332,6 +332,7 @@ voz alta.
 | 0265 | Art: the wraith | 2026-10-15 |
 | 0266 | Art: the Harvester | 2026-10-15 |
 | 0267 | Art: the Scarecrow King | 2026-10-15 |
+| 0268 | Art: the Winter Lord | 2026-10-16 |
 
 ## Toda vez que o jogo mudou por baixo
 

@@ -11,7 +11,8 @@ extends RefCounted
 ## exactly as before. A052's Harvester since task 0266: its blow the crush,
 ## and through a charge the rules' rear and run, as 0253 posed them. A053's
 ## Scarecrow King since task 0267: its cast the wind-up before a blow, its
-## attack the blow, and while it casts for its flock the rules' cast.
+## attack the blow, and while it casts for its flock the rules' cast. A054's
+## Winter Lord since task 0268, as the King, its cast the freeze's.
 ## The rat since task 0261 (A047): its scurry by the distance it runs, its
 ## bite off the rules' own hit, its death played on.
 ## The digger since task 0263 (A049): its burrow on the tick the rules put it
@@ -209,8 +210,9 @@ func _boss_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> StringN
 	# run's end, its rear and its charge are the rules' own.
 	if one.has("charge_dir") and PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_charge_0.png" % kind):
 		return WorldView.posed_off_the_rules(state, one)
-	# **A caster casting** (task 0267, A053's King): its cast for the flock is
-	# the rules' own, as 0254 posed it.
+	# **A caster casting** (task 0267, A053's King; 0268, A054's Lord): its
+	# cast for the flock or the freeze is the rules' own, as 0254 and 0255
+	# posed them.
 	if one.has("casting") or one.has("freezing"):
 		return WorldView.posed_off_the_rules(state, one)
 	var current: bool = not memo.is_empty() and int(memo["tick"]) == int(state["tick"]) and memo["pos"] == Vector2i(int(one["pos"][0]), int(one["pos"][1]))

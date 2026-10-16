@@ -3706,6 +3706,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/effects/ice_shards_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/ice_shards_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/ice_shards_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/ice_shards_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/effects/ice_shatter_0.png",
       "owner": "raster"
     },
@@ -4695,6 +4711,90 @@
     },
     {
       "output": "sprites/enemies/walker_walk_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_attack_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_cast_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_cast_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_cast_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_cast_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_death_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_telegraph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/winter_lord_walk_b.png",
       "owner": "raster"
     },
     {
@@ -5771,6 +5871,10 @@
     },
     {
       "output": "sprites/ui/head_walker.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_winter_lord.png",
       "owner": "raster"
     },
     {

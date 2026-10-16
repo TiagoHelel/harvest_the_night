@@ -4,7 +4,8 @@
 canvas, pivot, cell offset and the generation task its sources came from - the
 Giant's, and since task 0266 A052's Harvester, whose blow is a crush and which
 charges; since task 0267 A053's Scarecrow King, drawn with a cast for its
-wind-up and an attack for its blow; 0268 adds its own. The five ordinary-and-Giant families keep
+wind-up and an attack for its blow; and since task 0268 A054's Winter Lord,
+drawn as the King is, whose collapse the owner accepted growing once. The five ordinary-and-Giant families keep
 complete ownership, as a subset: a new enemy family cannot fail this check.
 """
 from PIL import ImageChops
@@ -37,6 +38,14 @@ BOSSES = {
                        'task': 'A053', 'cast_top': 58, 'death_low': 20,
                        'aliases': (('walk_b', 'walk_2'), ('attack', 'attack_1'), ('death', 'death_4'),
                                    ('telegraph', 'cast_3'))},
+    # The Winter Lord (task 0268): drawn as the King is. Its collapse grows
+    # once, 46 to 51 px on its second frame - the owner accepted it on
+    # 2026-10-14 (A054's `death_never_grows`) - so only its low end holds.
+    'winter_lord': {'counts': {'master': 1, 'walk': 4, 'cast': 4, 'attack': 3, 'death': 5},
+                    'canvas': [80, 64], 'pivot': [40, 60], 'offset': [-32, -44],
+                    'task': 'A054', 'cast_top': 58, 'death_low': 20, 'death_may_grow': True,
+                    'aliases': (('walk_b', 'walk_2'), ('attack', 'attack_1'), ('death', 'death_4'),
+                                ('telegraph', 'cast_3'))},
 }
 ORDINARY = ('walker', 'runner', 'tank', 'breaker')
 WORDS = {1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six'}
@@ -76,7 +85,8 @@ def check_family(family, spec, data, files, images, entries, old):
             raise ValueError('Wind-up does not visibly raise the striking arm')
         if motion == 'cast' and max(heights) > spec['cast_top']:
             raise ValueError('%s cast stands taller than %d' % (title, spec['cast_top']))
-        if motion == 'death' and (heights[-1] > spec['death_low'] or any(a < b for a, b in zip(heights, heights[1:]))):
+        grows = not spec.get('death_may_grow', False) and any(a < b for a, b in zip(heights, heights[1:]))
+        if motion == 'death' and (heights[-1] > spec['death_low'] or grows):
             raise ValueError('%s collapse does not finish low' % title)
         if motion == 'walk':
             for i, a in enumerate(frames):
