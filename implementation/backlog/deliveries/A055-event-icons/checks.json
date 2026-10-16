@@ -1,0 +1,15 @@
+{
+  "six_files": true,
+  "canvas_and_pivot": true,
+  "binary_alpha": true,
+  "bounds_ok": true,
+  "palette_allowed": true,
+  "pairs_from_same_source": true,
+  "blood_disc_matches_full_moon": true,
+  "blood_moon_grayscale_distinct": true,
+  "importer_recipe_matches": true,
+  "rebuild_identical": true,
+  "owner_visual_approval_recorded": true,
+  "owner_accepted_visual_checks": [],
+  "approved_art_hashes_match": true
+}

@@ -33608,3 +33608,51 @@ aura on the ground and the ice on a frozen tower stay 0255's code.
 - `python implementation/backlog/assets.py set A054 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0269 - Art: fog, rain and the Blood Moon icons - done 2026-10-16
+
+A055 is integrated. The night events' marks are the owner-approved art now:
+fog, rain and the Blood Moon. Each is a pair, `ui/icon_<id>` 16x16 on (8,8)
+and `ui/hud_<id>` 10x10 on (5,5), and both cuts of a pair come from one raw
+source and one crop. They sit in the forecast's event slot. The owner
+approved them on 2026-10-14 in the batch review, as recorded in the
+delivery's `APPROVAL.json`. 0256's and 0257's drawings in code are gone.
+
+- **Promotion**:
+  - The 6 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their three raw sources were copied byte for byte into
+    `assets/art_source/ui/events/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - Each carries its `display_role`, `inventory` at 16 and `compact_hud`
+    at 10, as the other icon pairs do.
+- **The drawing goes** (`CalendarMark`): a mark loads its file through the
+  lookup, a season's or a night event's alike. `WeatherArt`, the three
+  marks drawn in code from ASCII maps, is deleted: nothing else used it.
+- **The stand-ins retired**: A055's six `PlaceholderArt` entries.
+  `placeholders.py --check` passes, with 63 stand-ins left over 7 packs.
+- **Checks**:
+  - `check_ui_art.py`'s `PAIRS` takes A055: one source and one crop per
+    pair, clear margins, binary alpha, no shared silhouette, the approved
+    pixels.
+  - The `--ui` showcase shows the family at 16 and at 10.
+  - `UiKit.orphan_icons` claims the events' icons.
+- **Tests**: 0256's and 0257's mark checks ask for A055's art: no drawing,
+  no stand-in entry, the texture the file at its path and its box. The
+  Blood Moon's outline is still not the Full Moon's: its drip tells it
+  apart, not only its red.
+- **Shots** (`implementation/shots/0269/`, FHD 1920x1080, looked at):
+  - By day, each event in the dusk forecast at 18:30, on the first night
+    of the shots' run that `Weather` makes so, found and never forced:
+    `forecast_fog` (Spring 11), `forecast_rain` (new, Spring 2) and
+    `forecast_blood_moon` (Autumn 13).
+  - By night, the same nights' build step, the mark on the night's
+    forecast: `forecast_build_fog`, `forecast_build_rain` and
+    `forecast_build_blood_moon`, all three new.
+  - `headless_check` counts 140 scenes.
+- **The delivery folder** `implementation/backlog/deliveries/A055-event-icons/`
+  is committed, as A054's was.
+- `python implementation/backlog/assets.py set A055 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

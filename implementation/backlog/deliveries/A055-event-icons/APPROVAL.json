@@ -1,0 +1,23 @@
+{
+  "pack": "A055",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A055-event-icons",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/icon_fog/none/01.png": "70cda148ecf0af0645bd610480db9e8e7bc3f985c13a5ba91440a942e62c30bc",
+    "native/hud_fog/none/01.png": "868e19fc21c8dacee07b5a06752bdda739dad3977a6fce6bdbedf17feb159048",
+    "native/icon_rain/none/01.png": "44f12a0f1d8c57bfd486b0a47de1d0436b2cfe77cb0eb389f262e27472507c1e",
+    "native/hud_rain/none/01.png": "08844264c9c222d07f999eccc218e55a5148f1dac9a8c03b89ee25425cf7f482",
+    "native/icon_blood_moon/none/01.png": "66e1da086efd01bf1448e3752bc3193e9e5f34c244afe21cac471ef9ef77a13c",
+    "native/hud_blood_moon/none/01.png": "09c4302377b9eb79ed3a0e3070cc6441af2e95aa850617541d25111c8d451db2"
+  },
+  "frames": 6,
+  "frames_expected": 6,
+  "accepted_visual_checks": [],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

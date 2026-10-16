@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Create one isolated forecast weather icon: fog, three solid soft horizontal wavy mist bands, staggered left and right so they unmistakably read as layered fog. Tiny pixel-art sprite for a 16x16 native icon, one centered complete object, maximum visible 14x14, clear transparent padding. Use pale stone-grey and bone-dark with an ink-soft underside, 2-3 flat palette planes, colored outline, deliberate joined pixel clusters, sharp pixel edges. No sky, cloud, rain, ground, shadow, frame, glow, halo, gradient, labels, letters, text, watermark, contact sheet, or extra objects. Transparent background. Style references only, do not copy their objects.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "style reference only"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+      "sha256": "4512ede924397f8fdbf6e9bd4afdf6271898f7d600f734930dacaf2c8486f291",
+      "role": "approved weather icon family reference"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "global pixel-art style reference"
+    }
+  ],
+  "returned_file": "implementation\\backlog\\deliveries\\A055-event-icons\\raw\\fog-r1.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A055-event-icons\\raw\\fog-r1.png",
+  "sha256": "4b1ddc70175a78570ffa318980f0bfe45d7b715450fca1e8852ee97ff7400128",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Create one isolated forecast weather icon: a compact grey rain cloud with three clear slanted water-blue drops falling toward lower left. Tiny pixel-art sprite for 16x16 native icon, centered complete object, maximum visible 14x14 and clear transparent padding. Use stone and pale stone cloud with darker underside; three separated bright water-blue diagonal drops, all visible at native scale. Colored outline, 2-3 material planes, deliberate joined pixel clusters, sharp pixel edges. No sky, ground, shadow, frame, glow, halo, gradient, labels, letters, text, watermark, contact sheet, or extra objects. Transparent background. References are style/family only.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "style reference only"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+      "sha256": "4512ede924397f8fdbf6e9bd4afdf6271898f7d600f734930dacaf2c8486f291",
+      "role": "approved weather icon family reference"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "global pixel-art style reference"
+    }
+  ],
+  "returned_file": "implementation\\backlog\\deliveries\\A055-event-icons\\raw\\rain-r1.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A055-event-icons\\raw\\rain-r1.png",
+  "sha256": "ae264cd1a4f130928236caa5f65c5f3406bd955e65c48ab6fa8bfa4d186e08e8",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

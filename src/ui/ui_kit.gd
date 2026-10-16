@@ -142,6 +142,10 @@ static func orphan_icons() -> Array:
 		wanted["icon_%s" % id] = true
 	for id in GameData.DEFENCES.keys() + NightHud.ICONS + CalendarMark.MARKS:
 		wanted["icon_%s" % id] = true
+	# **The night events' marks** (task 0269): A055's fog, rain and Blood
+	# Moon, in the calendar mark's event slot.
+	for id in Weather.EVENTS:
+		wanted["icon_%s" % id] = true
 	# **The powers' pictures and a defence's later levels** (A045, task
 	# 0244): the bell, the dog and the repair, and the hardwood wall that is
 	# the stone wall's level two.

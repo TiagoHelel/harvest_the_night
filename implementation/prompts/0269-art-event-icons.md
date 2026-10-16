@@ -1,7 +1,7 @@
 # 0269 - Art: fog, rain and the Blood Moon icons
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0256, 0257
 - **Likely files:** assets/art_source/ui/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/ui/forecast_panel.gd
 - **Art packs:** A055

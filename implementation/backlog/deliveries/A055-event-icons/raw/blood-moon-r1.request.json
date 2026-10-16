@@ -1,0 +1,5 @@
+{
+  "prompt": "EDIT the supplied accepted A010 Full Moon icon. Keep the exact same round disc silhouette, size, position, crater layout and pixel-art outline. Change only its palette to a muted blood-red ramp (deep roof-dark outline, roof red, blood red, small roof-light upper-left highlight) and add exactly one short simple red drip hanging from the lower edge. The single drip is the only shape change, and it must be visible even in grayscale. No halo, glow, splatter, extra drops, sky, background, frame, labels, letters or text. Transparent background. Preserve the original clean pixel clusters and transparent margins.",
+  "transparent_background": true,
+  "referenced_image_paths": ["C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A010-calendar-icons/raw/full_moon-r1.png"]
+}

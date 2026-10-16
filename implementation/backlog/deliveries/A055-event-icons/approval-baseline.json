@@ -1,0 +1,593 @@
+{
+  "contract": {
+    "pack": "A055",
+    "slug": "A055-event-icons",
+    "title": "Fog, Rain and the Blood Moon",
+    "date": "2026-10-14",
+    "status": "review",
+    "runtime_integrated": false,
+    "tool": "built-in ImageGen",
+    "palette_mode": "A",
+    "palette": "tools/palette.py:COLOURS",
+    "alpha_threshold": 128,
+    "files": [
+      {
+        "name": "icon_fog",
+        "id": "fog",
+        "source": "raw/fog-r1.png",
+        "call": "raw/fog-r1.call.json",
+        "recipe": {
+          "id": "icon_fog",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\fog-r1.png",
+          "crop_xywh": [
+            329,
+            421,
+            646,
+            519
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.021671826625386997,
+          "content_anchor_xy": [
+            7,
+            5
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            8
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "output": "native/icon_fog/none/01.png",
+        "bounds": [
+          1,
+          3,
+          15,
+          14
+        ],
+        "sha256": "70cda148ecf0af0645bd610480db9e8e7bc3f985c13a5ba91440a942e62c30bc"
+      },
+      {
+        "name": "hud_fog",
+        "id": "fog",
+        "source": "raw/fog-r1.png",
+        "call": "raw/fog-r1.call.json",
+        "recipe": {
+          "id": "hud_fog",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\fog-r1.png",
+          "crop_xywh": [
+            329,
+            421,
+            646,
+            519
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.01238390092879257,
+          "content_anchor_xy": [
+            4,
+            3
+          ],
+          "canvas_wh": [
+            10,
+            10
+          ],
+          "pivot_xy": [
+            5,
+            5
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "output": "native/hud_fog/none/01.png",
+        "bounds": [
+          1,
+          2,
+          9,
+          8
+        ],
+        "sha256": "868e19fc21c8dacee07b5a06752bdda739dad3977a6fce6bdbedf17feb159048"
+      },
+      {
+        "name": "icon_rain",
+        "id": "rain",
+        "source": "raw/rain-r1.png",
+        "call": "raw/rain-r1.call.json",
+        "recipe": {
+          "id": "icon_rain",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\rain-r1.png",
+          "crop_xywh": [
+            387,
+            416,
+            523,
+            478
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.02676864244741874,
+          "content_anchor_xy": [
+            7,
+            6
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            8
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "output": "native/icon_rain/none/01.png",
+        "bounds": [
+          1,
+          2,
+          15,
+          15
+        ],
+        "sha256": "44f12a0f1d8c57bfd486b0a47de1d0436b2cfe77cb0eb389f262e27472507c1e"
+      },
+      {
+        "name": "hud_rain",
+        "id": "rain",
+        "source": "raw/rain-r1.png",
+        "call": "raw/rain-r1.call.json",
+        "recipe": {
+          "id": "hud_rain",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\rain-r1.png",
+          "crop_xywh": [
+            387,
+            416,
+            523,
+            478
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.015296367112810707,
+          "content_anchor_xy": [
+            4,
+            3
+          ],
+          "canvas_wh": [
+            10,
+            10
+          ],
+          "pivot_xy": [
+            5,
+            5
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "output": "native/hud_rain/none/01.png",
+        "bounds": [
+          1,
+          2,
+          9,
+          9
+        ],
+        "sha256": "08844264c9c222d07f999eccc218e55a5148f1dac9a8c03b89ee25425cf7f482"
+      },
+      {
+        "name": "icon_blood_moon",
+        "id": "blood_moon",
+        "source": "raw/blood-moon-r1.png",
+        "call": "raw/blood-moon-r1.call.json",
+        "recipe": {
+          "id": "icon_blood_moon",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\blood-moon-r1.png",
+          "crop_xywh": [
+            359,
+            381,
+            552,
+            602
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.023255813953488372,
+          "content_anchor_xy": [
+            6,
+            7
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            8
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "output": "native/icon_blood_moon/none/01.png",
+        "bounds": [
+          2,
+          1,
+          15,
+          15
+        ],
+        "sha256": "66e1da086efd01bf1448e3752bc3193e9e5f34c244afe21cac471ef9ef77a13c"
+      },
+      {
+        "name": "hud_blood_moon",
+        "id": "blood_moon",
+        "source": "raw/blood-moon-r1.png",
+        "call": "raw/blood-moon-r1.call.json",
+        "recipe": {
+          "id": "hud_blood_moon",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\blood-moon-r1.png",
+          "crop_xywh": [
+            359,
+            381,
+            552,
+            602
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.013289036544850499,
+          "content_anchor_xy": [
+            3,
+            4
+          ],
+          "canvas_wh": [
+            10,
+            10
+          ],
+          "pivot_xy": [
+            5,
+            5
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "output": "native/hud_blood_moon/none/01.png",
+        "bounds": [
+          2,
+          1,
+          9,
+          9
+        ],
+        "sha256": "09c4302377b9eb79ed3a0e3070cc6441af2e95aa850617541d25111c8d451db2"
+      }
+    ],
+    "references": [
+      {
+        "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\assets\\art_source\\ui\\wood.png",
+        "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+        "role": "style reference only"
+      },
+      {
+        "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A010-calendar-icons\\raw\\winter-r1.png",
+        "sha256": "4512ede924397f8fdbf6e9bd4afdf6271898f7d600f734930dacaf2c8486f291",
+        "role": "approved weather icon family reference"
+      },
+      {
+        "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+        "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+        "role": "global pixel-art style reference"
+      },
+      {
+        "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A010-calendar-icons\\raw\\full_moon-r1.png",
+        "sha256": "f5915e1b066a2748f28e2874c6d6837f7019993494a0e31a74c729efbc08650f",
+        "role": "edit target; preserve disc silhouette and add the only permitted drip"
+      }
+    ]
+  },
+  "checks": {
+    "six_files": true,
+    "canvas_and_pivot": true,
+    "binary_alpha": true,
+    "bounds_ok": true,
+    "palette_allowed": true,
+    "pairs_from_same_source": true,
+    "blood_disc_matches_full_moon": true,
+    "blood_moon_grayscale_distinct": true,
+    "importer_recipe_matches": true,
+    "rebuild_identical": true
+  },
+  "expected": 6,
+  "files": [
+    {
+      "name": "icon_fog",
+      "id": "fog",
+      "source": "raw/fog-r1.png",
+      "call": "raw/fog-r1.call.json",
+      "recipe": {
+        "id": "icon_fog",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\fog-r1.png",
+        "crop_xywh": [
+          329,
+          421,
+          646,
+          519
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.021671826625386997,
+        "content_anchor_xy": [
+          7,
+          5
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "output": "native/icon_fog/none/01.png",
+      "bounds": [
+        1,
+        3,
+        15,
+        14
+      ],
+      "sha256": "70cda148ecf0af0645bd610480db9e8e7bc3f985c13a5ba91440a942e62c30bc"
+    },
+    {
+      "name": "hud_fog",
+      "id": "fog",
+      "source": "raw/fog-r1.png",
+      "call": "raw/fog-r1.call.json",
+      "recipe": {
+        "id": "hud_fog",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\fog-r1.png",
+        "crop_xywh": [
+          329,
+          421,
+          646,
+          519
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.01238390092879257,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "output": "native/hud_fog/none/01.png",
+      "bounds": [
+        1,
+        2,
+        9,
+        8
+      ],
+      "sha256": "868e19fc21c8dacee07b5a06752bdda739dad3977a6fce6bdbedf17feb159048"
+    },
+    {
+      "name": "icon_rain",
+      "id": "rain",
+      "source": "raw/rain-r1.png",
+      "call": "raw/rain-r1.call.json",
+      "recipe": {
+        "id": "icon_rain",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\rain-r1.png",
+        "crop_xywh": [
+          387,
+          416,
+          523,
+          478
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.02676864244741874,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "output": "native/icon_rain/none/01.png",
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "sha256": "44f12a0f1d8c57bfd486b0a47de1d0436b2cfe77cb0eb389f262e27472507c1e"
+    },
+    {
+      "name": "hud_rain",
+      "id": "rain",
+      "source": "raw/rain-r1.png",
+      "call": "raw/rain-r1.call.json",
+      "recipe": {
+        "id": "hud_rain",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\rain-r1.png",
+        "crop_xywh": [
+          387,
+          416,
+          523,
+          478
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.015296367112810707,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "output": "native/hud_rain/none/01.png",
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "08844264c9c222d07f999eccc218e55a5148f1dac9a8c03b89ee25425cf7f482"
+    },
+    {
+      "name": "icon_blood_moon",
+      "id": "blood_moon",
+      "source": "raw/blood-moon-r1.png",
+      "call": "raw/blood-moon-r1.call.json",
+      "recipe": {
+        "id": "icon_blood_moon",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\blood-moon-r1.png",
+        "crop_xywh": [
+          359,
+          381,
+          552,
+          602
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.023255813953488372,
+        "content_anchor_xy": [
+          6,
+          7
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "output": "native/icon_blood_moon/none/01.png",
+      "bounds": [
+        2,
+        1,
+        15,
+        15
+      ],
+      "sha256": "66e1da086efd01bf1448e3752bc3193e9e5f34c244afe21cac471ef9ef77a13c"
+    },
+    {
+      "name": "hud_blood_moon",
+      "id": "blood_moon",
+      "source": "raw/blood-moon-r1.png",
+      "call": "raw/blood-moon-r1.call.json",
+      "recipe": {
+        "id": "hud_blood_moon",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A055-event-icons\\raw\\blood-moon-r1.png",
+        "crop_xywh": [
+          359,
+          381,
+          552,
+          602
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.013289036544850499,
+        "content_anchor_xy": [
+          3,
+          4
+        ],
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "output": "native/hud_blood_moon/none/01.png",
+      "bounds": [
+        2,
+        1,
+        9,
+        9
+      ],
+      "sha256": "09c4302377b9eb79ed3a0e3070cc6441af2e95aa850617541d25111c8d451db2"
+    }
+  ]
+}

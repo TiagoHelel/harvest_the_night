@@ -1,0 +1,9 @@
+{
+  "prompt": "Create one isolated forecast weather icon: a compact grey rain cloud with three clear slanted water-blue drops falling toward lower left. Tiny pixel-art sprite for 16x16 native icon, centered complete object, maximum visible 14x14 and clear transparent padding. Use stone and pale stone cloud with darker underside; three separated bright water-blue diagonal drops, all visible at native scale. Colored outline, 2-3 material planes, deliberate joined pixel clusters, sharp pixel edges. No sky, ground, shadow, frame, glow, halo, gradient, labels, letters, text, watermark, contact sheet, or extra objects. Transparent background. References are style/family only.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png"
+  ]
+}

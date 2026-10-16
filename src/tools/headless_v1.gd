@@ -11562,8 +11562,9 @@ func _task_0256_fog_rain() -> void:
 		and Enemies.slowed_ticks(base, true, garlic, mud) == maxi(maxi(flare, braided), muddy),
 		"the mud joins the flare's and the garlic's slows by their one rule: the slowest of those on a walker, never two at once")
 
-	# **Its marks** through 0120's road until 0269: A055's fog and rain at
-	# both boxes, drawn in code; the forecast has a word for each.
+	# **Its marks**: A055's fog and rain at both boxes - drawn in code through
+	# 0120's road until task 0269 landed the pack, its art since - and the
+	# forecast has a word for each.
 	var marks_wrong: Array = []
 	for which in Weather.EVENTS:
 		for small in [false, true]:
@@ -11572,15 +11573,15 @@ func _task_0256_fog_rain() -> void:
 			var mark := CalendarMark.new()
 			mark.setup(which, small)
 			var texture := mark.texture()
-			if (not PlaceholderArt.is_drawn(path)
-					or str(PlaceholderArt.art(StringName(path.get_file().get_basename())).get("pack", "")) != "A055"
-					or texture == null or texture.resource_name != path
+			if (PlaceholderArt.is_drawn(path)
+					or not PlaceholderArt.art(StringName(path.get_file().get_basename())).is_empty()
+					or texture == null or texture.resource_path != path
 					or Vector2i(texture.get_size()) != Vector2i(side, side)):
 				marks_wrong.append(path.get_file())
 			mark.free()
 	expect(marks_wrong.is_empty() and not CalendarMark.MARKS.has(Weather.FOG)
 		and GameData.sorted_names(ForecastPanel.EVENT_WORDS.keys()) == GameData.sorted_names(Weather.EVENTS),
-		"every night event - fog, rain and since 0257 the Blood Moon - has A055's marks at 16x16 and 10x10, drawn in code until 0269, and a word on the forecast",
+		"every night event - fog, rain and since 0257 the Blood Moon - has A055's marks at 16x16 and 10x10, its art since 0269, and a word on the forecast",
 		str(marks_wrong))
 	_completed += 1
 
@@ -11690,9 +11691,9 @@ func _task_0257_blood_moon() -> void:
 		"a won Blood Moon pays %d essence more on its own line, which the morning report names last; a plain night of its season does not, and nothing is paid a second time" % essence,
 		"%s, again %s" % [str(lines), str(again["essence_from"])])
 
-	# **On the forecast**: its word in the boss's red beside A055's mark,
-	# drawn in code until 0269 - a red disc whose drip changes its outline, so
-	# it is never only the colour that tells it from A010's Full Moon.
+	# **On the forecast**: its word in the boss's red beside A055's mark - its
+	# art since task 0269 - a red disc whose drip changes its outline, so it is
+	# never only the colour that tells it from A010's Full Moon.
 	var mark := CalendarMark.new()
 	mark.setup(Weather.BLOOD_MOON)
 	var small := CalendarMark.new()
@@ -11711,9 +11712,10 @@ func _task_0257_blood_moon() -> void:
 		and ForecastPanel.EVENT_ROLES.get(Weather.BLOOD_MOON, &"") == UiKit.BAD
 		and texture != null and Vector2i(texture.get_size()) == Vector2i(CalendarMark.ICON, CalendarMark.ICON)
 		and small.texture() != null and Vector2i(small.texture().get_size()) == Vector2i(CalendarMark.HUD, CalendarMark.HUD)
-		and PlaceholderArt.is_drawn(CalendarMark.file_of(Weather.BLOOD_MOON, false))
+		and not PlaceholderArt.is_drawn(CalendarMark.file_of(Weather.BLOOD_MOON, false))
+		and texture.resource_path == CalendarMark.file_of(Weather.BLOOD_MOON, false)
 		and outline_differs,
-		"the forecast says BLOOD MOON in the boss's red beside A055's mark, drawn in code until 0269 at both boxes, its outline not the Full Moon's")
+		"the forecast says BLOOD MOON in the boss's red beside A055's mark, its art since 0269 at both boxes, its outline not the Full Moon's")
 	mark.free()
 	small.free()
 	_completed += 1

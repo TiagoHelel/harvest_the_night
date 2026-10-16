@@ -1,6 +1,6 @@
 # A055 - Fog, rain and the Blood Moon icons
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0269
 - **Dressed by game tasks:** 0256, 0257
 - **Spec after game task:** 0257

@@ -1,0 +1,9 @@
+{
+  "prompt": "Create one isolated forecast weather icon: fog, three solid soft horizontal wavy mist bands, staggered left and right so they unmistakably read as layered fog. Tiny pixel-art sprite for a 16x16 native icon, one centered complete object, maximum visible 14x14, clear transparent padding. Use pale stone-grey and bone-dark with an ink-soft underside, 2-3 flat palette planes, colored outline, deliberate joined pixel clusters, sharp pixel edges. No sky, cloud, rain, ground, shadow, frame, glow, halo, gradient, labels, letters, text, watermark, contact sheet, or extra objects. Transparent background. Style references only, do not copy their objects.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A010-calendar-icons/raw/winter-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png"
+  ]
+}

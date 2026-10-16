@@ -12,8 +12,8 @@ extends Control
 ## mark keeps its colours at night.
 ##
 ## **Or a night's weather** (task 0256): A055's `fog`, `rain` and, since task
-## 0257, `blood_moon`, at the same two boxes, drawn in code (`WeatherArt`)
-## until 0269 integrates the pack.
+## 0257, `blood_moon`, at the same two boxes - drawn in code until task 0269
+## integrated the pack, its art since.
 
 ## The two boxes, in native pixels.
 const ICON := 16
@@ -37,12 +37,8 @@ func setup(which: StringName, small: bool = false) -> void:
 	var side := float(HUD if compact else ICON)
 	size = Vector2(side, side)
 	custom_minimum_size = size
-	var file := file_of(mark, compact)
-	if PlaceholderArt.is_drawn(file):
-		_texture = WeatherArt.texture_at(file)
-	else:
-		var path := PlaceholderArt.texture_path(file)
-		_texture = load(path) if path != "" and ResourceLoader.exists(path) else null
+	var path := PlaceholderArt.texture_path(file_of(mark, compact))
+	_texture = load(path) if path != "" and ResourceLoader.exists(path) else null
 	queue_redraw()
 
 

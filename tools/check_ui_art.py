@@ -57,6 +57,8 @@ PAIRS = {
     # Task 0244: the powers' pictures and the new defences' icons.
     'A045': ['farm_bell', 'call_dog', 'emergency_repair', 'decoy', 'beehive', 'catapult',
              'garlic_braid', 'searchlight', 'electric_fence', 'wall_2', 'sandbag_wall'],
+    # Task 0269: the night events' marks - fog and rain (0256), the Blood Moon (0257).
+    'A055': ['fog', 'rain', 'blood_moon'],
 }
 
 ## A022's book portraits (task 0205): each species' third cut, 32x32 at

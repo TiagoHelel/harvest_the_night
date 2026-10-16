@@ -5922,6 +5922,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_blood_moon.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_bone_meal.png",
       "owner": "raster"
     },
@@ -6071,6 +6075,10 @@
     },
     {
       "output": "sprites/ui/hud_flour.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/hud_fog.png",
       "owner": "raster"
     },
     {
@@ -6258,6 +6266,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/hud_rain.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/hud_rod_bamboo.png",
       "owner": "raster"
     },
@@ -6434,6 +6446,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/icon_blood_moon.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/icon_bone_meal.png",
       "owner": "raster"
     },
@@ -6583,6 +6599,10 @@
     },
     {
       "output": "sprites/ui/icon_flour.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_fog.png",
       "owner": "raster"
     },
     {
@@ -6767,6 +6787,10 @@
     },
     {
       "output": "sprites/ui/icon_pumpkin_seed.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/icon_rain.png",
       "owner": "raster"
     },
     {

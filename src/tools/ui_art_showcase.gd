@@ -125,7 +125,7 @@ func _inventory_page(speaking: String, high: bool, ids: Array, page: int) -> voi
 ## A029: the animals' goods (task 0211). A015 and A016: spring's and
 ## summer's produce and seed packets (tasks 0198 and 0199). A022: the sixteen
 ## fish, then their book portraits at 32 (task 0205). A032: the artisan goods
-## and the bread (task 0214).
+## and the bread (task 0214). A055: fog, rain and the Blood Moon (task 0269).
 ## A011: the forecast's heads, which are 16x16 only (task 0162).
 func _families(speaking: String, high: bool) -> void:
 	var tools: Array = []
@@ -153,6 +153,8 @@ func _families(speaking: String, high: bool) -> void:
 		# Task 0244: the powers' pictures and the new defences' icons.
 		"A045": [&"farm_bell", &"call_dog", &"emergency_repair", &"decoy", &"beehive", &"catapult",
 			&"garlic_braid", &"searchlight", &"electric_fence", &"wall_2", &"sandbag_wall"],
+		# Task 0269: the night events' marks.
+		"A055": Weather.EVENTS,
 		"A032": [GameData.WINE, GameData.JUICE, GameData.JELLY, GameData.PICKLES, GameData.CHEESE,
 			GameData.BUTTER, GameData.CLOTH, GameData.SANDBAG, GameData.FLOUR, GameData.SUGAR,
 			GameData.BREAD]}
