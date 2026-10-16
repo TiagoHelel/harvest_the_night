@@ -518,3 +518,12 @@ Taking 0279, Year 2 (no art pack).
 
 0279 is done, no art involved: Year 2 and every year after replay the seasons from their templates, three tenths heavier a year, the bosses back on every day 14; the MVP's endless curve is retired.
 Next in the loop: 0280.
+
+## 2026-10-16 - Claude - taking 0280
+
+Taking 0280, the checkpoint: do fifty-six nights tire?
+
+## 2026-10-16 - Claude - done 0280 (the checkpoint)
+
+0280 is done: the first week of every season does not tire, the second (days 9-13) does - five same nights four times a year. New task 0298 "The seasons' second weeks" is in 0295's deps. No art involved.
+Next in the loop: 0291.

@@ -1,7 +1,7 @@
 # 0280 - Checkpoint: do fifty-six nights tire?
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0277, 0278, 0279, 0159, 0258
 - **Likely files:** implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)
 

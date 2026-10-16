@@ -368,7 +368,7 @@ TASKS = [
               "by one: no clipped, overlapping or English word"]),
 
     dict(id=295, phase=P17, title="A playtest build of the year",
-         slug="playtest-v1", deps=[280, 291, 292, 293, 294],
+         slug="playtest-v1", deps=[280, 291, 292, 293, 294, 298],
          files="src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, "
                "docs/PLAYTEST.md, src/tools/headless_v1.gd, "
                "src/tools/headless_check.gd",

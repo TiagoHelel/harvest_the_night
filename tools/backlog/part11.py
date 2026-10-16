@@ -739,4 +739,51 @@ TASKS = [
               "The journal answers 'do the fifty-six nights tire?' in plain "
               "words and lists every prompt edited and every task added because "
               "of it"]),
+
+    # 0280's answer: the seasons' second weeks are where the year tires.
+    dict(id=298, phase=P15, title="The seasons' second weeks",
+         slug="second-weeks", deps=[280],
+         files="src/core/game_data.gd, src/core/almanac.gd, src/tools/nights.gd, "
+               "src/tools/headless_v1.gd, implementation/BALANCE.md",
+         goal="0280 found where the year tires: each season's days 9-13 send "
+              "the same kinds from the same sides five nights running, only "
+              "bigger - twenty of the year's 56 nights - and the forecast "
+              "says the same thing two nights running about twenty times a "
+              "year, most of them there. Give every second week something "
+              "to meet without breaking the rhythm the plan wants (days 8-13 "
+              "grow again with the season's novelty) or the year 0277 "
+              "balanced.",
+         req=["Measure first: `python tools/nights.py --sameness` for seeds "
+              "0-3, before and after, in the journal",
+              "One written key night in each season's second week (day 11 is "
+              "free of every other rule: no Full Moon, no boss, no "
+              "introduction): a pinch rather than a bigger copy - the "
+              "season's heaviest kinds from one side, or its newest kind "
+              "leading - at the made night's hit points for that day, so "
+              "`check_nights`' rules (a size never falls, a gap never grows) "
+              "hold as written",
+              "The made nights of days 9-13 no longer share a mix: a "
+              "template's `mix` may name a day a kind's weight changes "
+              "(`[weight, the day it joins]` gains an optional third, "
+              "`[weight, day, weight from day 9]`), read by `Almanac.mix_on`, "
+              "checked by `check_nights`; Year 2's `_later` follows it",
+              "Targets, asserted in `_task_0298_second_weeks` in "
+              "`src/tools/headless_v1.gd`: no two nights of a season's days "
+              "9-13 share their mix of kinds and sides; the longest run of "
+              "nights that bring nothing new is three at most; the forecast "
+              "says the same thing two nights running at most once a season",
+              "The year still holds: `python tools/autoplay.py --year 8` "
+              "after the change keeps 0277's target (`towers` two to four "
+              "nights lost before Winter 1) or the journal says why and the "
+              "owner calls it; the table in the journal",
+              "DATA moves on purpose (the key nights and the templates), SIM "
+              "should not - the determinism night is day 1 - both in "
+              "`implementation/PROGRESS.md`"],
+         dod=["`_task_0298_second_weeks` in `src/tools/headless_v1.gd` holds "
+              "the three sameness targets for seeds 0-3",
+              "`python tools/nights.py --sameness` before and after, and the "
+              "`--year 8` table after, are in the journal",
+              "`python tools/verify.py` prints PASS",
+              "the determinism hash is unchanged, or the change is deliberate "
+              "and both the old and the new number are in the journal"]),
 ]

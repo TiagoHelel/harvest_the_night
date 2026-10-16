@@ -1,6 +1,6 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######################.`  **282 / 296 done**
+`#######################.`  **283 / 297 done**
 
 0 doing / 14 todo / 0 blocked across 18 phases.
 
@@ -158,24 +158,6 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0208/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0280 - Checkpoint: do fifty-six nights tire?
-
-Ready to pick up.  Likely files: `implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)`.
-
-The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpoint like 0027, 0066 and 0148, not a feature - a 'yes' found here is worth more than every polish task after it.
-
-- Play, not only measure: the year autoplayer for all four policies, `python tools/nights.py` for the year, and at least one night of each season and each boss night driven through the real game with the cursor, by mouse and by pad (a real pad if one is attached; say honestly if it was synthetic), and looked at
-- Captures at 1920x1080 (`python tools/shot.py 0280 <scenarios> --fhd`): each season by day and at night mid-wave, a Full Moon, a fog or rain night, a Blood Moon, and the four bosses mid-fight. Reuse what exists - 0159's `season_*`, 0258's `fog`, `rain`, `blood_moon` and `full_moon`, 0246's `boss` and the boss scenarios of 0253-0255 - and add to `src/tools/shot.gd` only what is missing (a tool change, hashes untouched)
-- Look for sameness with numbers, computed by a tool rather than by eye (a `--sameness` report in `src/tools/nights.gd`): per season, how many nights share a mix of kinds and sides; the longest run of nights that bring nothing new (no new enemy, side, weapon, event or boss); how often the forecast says the same thing two nights running
-- Answer in the journal: do the fifty-six nights tire, where and why, with the stretches named by day - then what would fix it (more events, fewer generated nights, new key nights, shorter seasons) and what each fix costs
-- Fixes that fit go into the later prompts (P16-P17), or into new tasks in `tools/backlog/part*.py` run through `python tools/gen_backlog.py` - each with a free id and added to 0295's deps, so the playtest waits for it; anything that changes an owner decision (14 days a season, Normal only) is a recommendation to the owner in the journal, not an edit made here
-- If the honest answer is that the year tires and the cure is bigger than prompt edits, mark this task blocked with the reason (`python tools/task.py blocked 0280 "<why>"`), so 0295 (the playtest of the year) waits for the owner
-- No rule changes here: nothing in `src/core/` moves, and neither hash moves
-
-  - done when: `implementation/shots/0280/` holds the FHD captures listed above, every one opened and looked at; the journal names what is wrong in any of them
-  - done when: The journal has the year's autoplayer table, the sameness numbers and the longest stretch with nothing new, by day
-  - done when: The journal answers 'do the fifty-six nights tire?' in plain words and lists every prompt edited and every task added because of it
-
 ### 0291 - Saves into 1.0
 
 Ready to pick up.  Likely files: `src/app/save.gd, src/tools/make_goldens.gd, src/tools/play_goldens.gd (new), tools/verify.py, tools/goldens/, src/ui/title_screen.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd, assets/locale/strings.csv`.
@@ -196,6 +178,24 @@ Somebody who played the 0.1 prototype opens 1.0 and finds their farm in the cale
   - done when: the same group: the 0.1 profile golden loads through `Save.read_profile_at` with its numbers (and `best_night` as the journal decided) and every 1.0 key at its default
   - done when: verify prints the `goldens` row passing: every migrated golden woke on its next date in DAY with no enemy on the farm - the dates and the row's time in the journal
   - done when: the title with the archive line captured at 1920x1080 in both languages (`python tools/shot.py 0291 --title --fhd` and `--title --fhd --pt_BR`, staging an archived run in `shot.gd` the way the crash dialogue is staged, and putting back any real `user://run.sav` afterwards) and opened: the line fits and sits clear of the menu
+
+### 0298 - The seasons' second weeks
+
+Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/almanac.gd, src/tools/nights.gd, src/tools/headless_v1.gd, implementation/BALANCE.md`.
+
+0280 found where the year tires: each season's days 9-13 send the same kinds from the same sides five nights running, only bigger - twenty of the year's 56 nights - and the forecast says the same thing two nights running about twenty times a year, most of them there. Give every second week something to meet without breaking the rhythm the plan wants (days 8-13 grow again with the season's novelty) or the year 0277 balanced.
+
+- Measure first: `python tools/nights.py --sameness` for seeds 0-3, before and after, in the journal
+- One written key night in each season's second week (day 11 is free of every other rule: no Full Moon, no boss, no introduction): a pinch rather than a bigger copy - the season's heaviest kinds from one side, or its newest kind leading - at the made night's hit points for that day, so `check_nights`' rules (a size never falls, a gap never grows) hold as written
+- The made nights of days 9-13 no longer share a mix: a template's `mix` may name a day a kind's weight changes (`[weight, the day it joins]` gains an optional third, `[weight, day, weight from day 9]`), read by `Almanac.mix_on`, checked by `check_nights`; Year 2's `_later` follows it
+- Targets, asserted in `_task_0298_second_weeks` in `src/tools/headless_v1.gd`: no two nights of a season's days 9-13 share their mix of kinds and sides; the longest run of nights that bring nothing new is three at most; the forecast says the same thing two nights running at most once a season
+- The year still holds: `python tools/autoplay.py --year 8` after the change keeps 0277's target (`towers` two to four nights lost before Winter 1) or the journal says why and the owner calls it; the table in the journal
+- DATA moves on purpose (the key nights and the templates), SIM should not - the determinism night is day 1 - both in `implementation/PROGRESS.md`
+
+  - done when: `_task_0298_second_weeks` in `src/tools/headless_v1.gd` holds the three sameness targets for seeds 0-3
+  - done when: `python tools/nights.py --sameness` before and after, and the `--year 8` table after, are in the journal
+  - done when: `python tools/verify.py` prints PASS
+  - done when: the determinism hash is unchanged, or the change is deliberate and both the old and the new number are in the journal
 
 ### 0290 - The 1.0 visual gate
 
@@ -236,7 +236,7 @@ Portuguese is the owner's language and most of the audience's. Every line 1.0 ad
 
 ### 0295 - A playtest build of the year
 
-Waits on 0280, 0291, 0294.  Likely files: `src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, docs/PLAYTEST.md, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
+Waits on 0291, 0294, 0298.  Likely files: `src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, docs/PLAYTEST.md, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
 
 Put the year in front of somebody and learn from it: a build that says it is a playtest, a log of what 1.0 is about - bedtimes, the build step, dawn, seasons, lost nights - and a reader that answers 1.0's questions instead of the MVP's. It goes out with the art that has arrived, placeholders and all.
 
@@ -608,7 +608,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md)
 - [x] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md)
 
-## 15 - Fifty-six nights and balance  (10/11)
+## 15 - Fifty-six nights and balance  (11/12)
 
 - [x] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md)
 - [x] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md)
@@ -620,7 +620,8 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0277** [Balancing the year](prompts/0277-balance-year.md)
 - [x] **0278** [The economy across a year](prompts/0278-economy-seasons.md)
 - [x] **0279** [Year 2](prompts/0279-year-two.md)
-- [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md)
+- [x] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md)
+- [ ] **0298** [The seasons' second weeks](prompts/0298-second-weeks.md)
 
 ## 16 - Sound, collections and polish  (9/10)
 
@@ -641,6 +642,6 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0292** [Options for the new controls](prompts/0292-options-v1.md)
 - [x] **0293** [The first week, taught](prompts/0293-onboarding-v1.md)
 - [ ] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md) - needs 0291
-- [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0280, 0291, 0294
+- [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0291, 0294, 0298
 - [ ] **0296** [The store page and trailer for 1.0](prompts/0296-store-v1.md) - needs 0290, 0294
 - [ ] **0297** [Releasing 1.0](prompts/0297-release-v1.md) - needs 0290, 0291, 0294, 0295, 0296

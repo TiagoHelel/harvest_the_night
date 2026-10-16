@@ -33996,3 +33996,202 @@ src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_v1.gd,
 src/tools/headless_check.gd, src/tools/input_check.gd, tools/nights.py,
 tools/perf.py
 - **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second run: the first, with `--accept` recording the data hash, failed input_check's play-on case, mended above.
+
+## 0280 - Checkpoint: do fifty-six nights tire? - done 2026-10-16
+
+This is the plan's Phase 6 checkpoint, a question and not a feature:
+"as 56 noites cansam?". The year was played by the autoplayer, measured for
+sameness by a new tool, pictured at 1920x1080, and its seasons and boss
+nights driven through the real game. No rule moved: nothing in `src/core/`
+changed, and neither hash moved.
+
+### The answer
+
+**The first week of every season does not tire. Its second week does.**
+
+- **Days 1-8 of each season bring something new about every other
+  night.** The season's weapons open on its first day. A new kind comes on
+  day 3 (or a new side), another on day 5, a Full Moon on day 7, and the
+  season's novelty on day 8. The calm night and the first Full Moon break
+  the rhythm.
+- **Days 9-13 of each season are the same night five times, bigger each
+  time.** They send the same kinds from the same sides, and the forecast
+  says the same thing night after night. Twenty of the year's 56 nights
+  sit in these four stretches. Weather (fog, rain, a Blood Moon from
+  autumn) breaks one or two of them, depending on the seed.
+- **The plan wants those days to grow** ("dias 8-13: as noites crescem de
+  novo, com a novidade da estação"), and they do. They are also where the
+  year is decided: the robot loses its nights at Spring 12-14 and Autumn
+  8-14. So they are tense rather than empty.
+- **But tension that comes the same way five nights running is the shape
+  that tires**, and it comes four times a year. A player who has met the
+  season's novelty on day 8 meets nothing else until the boss.
+
+So the year tires in its second weeks. The cure is a task, not the
+calendar: **0298, "The seasons' second weeks"** (below), added before the
+playtest (0295) so the tester meets the cured year. The year's shape - 14
+days a season, four seasons - stands. Shortening the seasons would cut the
+second weeks, but it is an owner decision and the wrong cure: it cuts the
+climb along with the sameness.
+
+### The year's autoplayer
+
+`python tools/autoplay.py --year 8` (32 runs in 1,689 s, 8 processes). It
+is the year 0277 and 0278 left, run for run:
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0    3.4    1.8         1.9  0.0  2.2  0.0   7/8    1/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0    3.0    3.0         0.0  0.0  2.0  0.0   7/8    1/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+```
+
+Where the shooting policies lose: Spring 12-14, Autumn 8-14 and the middle
+of winter - the second weeks.
+
+### The sameness, measured
+
+`python tools/nights.py --sameness` (new), seed 0. Seeds 1-3 give the same
+mixes and 32 plain nights; their forecast repeats are 2-6 a season.
+
+| Season | Nights | Distinct mixes of kinds and sides | Nights sharing a mix | The forecast the same two nights running |
+|---|---|---|---|---|
+| spring | 14 | 5 | 13 | 5 |
+| summer | 13 | 5 | 11 | 6 |
+| autumn | 13 | 5 | 11 | 3 |
+| winter | 13 | 6 | 9 | 6 |
+
+**31 of the year's 53 fought nights bring nothing new** - no kind, side,
+event or Full Moon met for the first time, no weapon opened, no boss. The
+longest stretches, by day:
+
+| Nights | Days | Dates |
+|---|---|---|
+| 5 | 9-13 | Spring 9 to Spring 13 |
+| 5 | 23-27 | Summer 9 to Summer 13 |
+| 5 | 51-55 | Winter 9 to Winter 13 |
+| 4 | 38-41 | Autumn 10 to Autumn 13 (Autumn 9's first Blood Moon breaks it) |
+| 2 | 20-21 | Summer 6 to Summer 7 |
+| 2 | 34-35 | Autumn 6 to Autumn 7 |
+
+First met: walker 1, runner 3, tank 5, breaker 8, the Giant 14, spitter
+19, rat 22, the Harvester 28, crow 33, digger 36, the King 42, frost zombie
+47, wraith 50, the Lord 56. The sides open on 1, 17, 31, 45 and 46; rain on
+6, the Full Moon 7, fog 32 and the Blood Moon 37; each season's weapons on
+its first day.
+
+### The year, driven
+
+`src/tools/year_session.gd` (new) drives the real `Main` the way 0148's
+`night_session.gd` drove spring's first four nights.
+- One run of the `towers` robot, seed 9000, plays the year day and night up
+  to each date, and `Main` resumes that farm as a saved run.
+- Then the night is driven: to bed, two more gun towers by cursor, START,
+  a flare once the field fills, 4x to the end, and the morning report.
+- **Synthetic, and said so**: no pad was attached, so the pad's nights are
+  `InputEvent`s.
+
+| Night | Device | The robot's farm | How it ended | House | Killed | Walked off |
+|---|---|---|---|---|---|---|
+| Spring 9 | pad | 7 defences | everything dead | 100/100 | 65 | 0 |
+| Spring 14, the Giant | mouse | 10 | everything dead | 70/100 | 125 | 0 |
+| Summer 9 | mouse | 17 | everything dead | 100/100 | 204 | 0 |
+| Summer 14, the Harvester | pad | 19 | everything dead | 100/100 | 307 | 0 |
+| Autumn 9 | pad | 10 | everything dead | 85/100 | 279 | 0 |
+| Autumn 14, the King | mouse | 5, the house down | house down | 0/100 | 56 | 33 |
+| Winter 9 | mouse | 18, the house down | house down | 0/100 | 156 | 30 |
+| Winter 14, the Lord | pad | 18 | everything dead | 97/100 | 261 | 0 |
+
+**What driving them showed:**
+- Every season's tools work by mouse and by pad: the bed, the hotbar, the
+  cursor, START, the flare, the speed and the report.
+- The robot's farm lost its autumn line from Autumn 8 on, as its year does
+  (above). The King's night and Winter 9 were fought on a farm already down
+  - "a lost night is never won back" (0277).
+- **Two notes from the session, neither a fault of the game:**
+  - GO TO BED is the yard's button, hidden inside the house where the bed
+    is. A mouse night that starts indoors walks out of the door first.
+  - In winter the hotbar's page is the season's, so the gun tower is a page
+    back. The session's click looked for it on the open page and placed
+    none on Winter 9; the night was driven by mouse all the same.
+- After the Winter Lord falls, the morning is the year's ending, not a
+  morning. The session's last step, which waited for a morning, timed out
+  there: 19 checks, 5 failed, every one of them the session's own (the
+  winter page, the ending), noted here rather than hidden.
+
+### The captures
+
+`implementation/shots/0280/`, FHD 1920x1080, every one opened:
+- by day, each season: `noon`, `season_summer`, `season_autumn`,
+  `season_winter`;
+- at night mid-wave, each season: `wave`, and the new
+  `season_summer_wave`, `season_autumn_wave`, `season_winter_wave`;
+- the moons and the weather: `full_moon`, `fog`, `rain`, `blood_moon`;
+- the four bosses mid-fight: `boss`, `harvester` (with
+  `harvester_charging` and `harvester_after`), `scarecrow_king`,
+  `winter_lord` (with `winter_lord_frozen`).
+
+`headless_check` counts 145 scenes.
+
+**What is wrong in them:**
+- **The boss bar's name and hit points** - `GIANT 400/400`,
+  `HARVESTER 350/350`, `WINTER LORD 880/900` - are red text with no backing
+  over the map. They read poorly over trees and snow (`boss.png`,
+  `harvester.png`, `winter_lord.png`). On the Giant's night the banner THE
+  GIANT IS COMING sits across them too.
+- **The night's hotbar opens on spring's page in every season**
+  (`season_*_wave.png`: SPRING 1/4 on a winter night). A winter player meets
+  spring's weapons first at night, though the build step opens on the
+  season's.
+- `season_winter` raises 0159's script error at noon on winter plots, the
+  one already filed as its own task. The picture is right.
+- Both of the first two go to 0290, the visual gate, written into its
+  prompt.
+
+### What would fix the second weeks, and what each costs
+
+1. **A written key night in each second week**, a pinch rather than a
+   bigger copy. Cost: four key nights authored and held to `check_nights`;
+   0277's year run again. Chosen, in 0298.
+2. **A template mix that changes inside the second week**, so no two of its
+   nights send the same kinds. Cost: an optional third field in a
+   template's `mix`, read by `Almanac`, checked by `check_nights`. Chosen,
+   in 0298.
+3. **More weather in the second weeks** - a rule that one of days 9-13 is
+   foggy or rainy. Cheap, but the weather is a roll by design (0256), and
+   fog makes a hard stretch harder. Not chosen; 0298 can lean on it if the
+   first two fall short.
+4. **Fewer generated nights or shorter seasons** - 14 days a season is the
+   owner's. Ten days would cut the second week to a single night, and with
+   it the climb the plan asks for. A recommendation only, and not mine:
+   keep 14 and vary the second week.
+
+### What was edited or added because of it
+
+- **New task 0298, "The seasons' second weeks"** (`tools/backlog/part11.py`,
+  `implementation/prompts/0298-second-weeks.md`):
+  - a written key night and a changing mix in every second week;
+  - sameness targets asserted (no shared mix in days 9-13, at most three
+    plain nights running, the forecast repeated at most once a season);
+  - the year's target kept.
+  - It is in 0295's deps (`part13.py` and the prompt's `Depends on:`), so
+    the playtest waits for it.
+- **0290's prompt** names what these captures found: the boss bar's label
+  and the night hotbar's page.
+- No other prompt changed, and no owner decision was edited.
+
+### The tools
+
+- `python tools/nights.py --sameness [seed]` (new): the three sameness
+  numbers.
+- `src/tools/year_session.gd` (new): the year driven on the robot's farm.
+- `src/tools/shot.gd`: `season_summer_wave`, `season_autumn_wave` and
+  `season_winter_wave` (new).
+- Tools only: neither hash moved - SIM 2260114289, DATA 2003073212.
+Files: src/tools/nights.gd, src/tools/year_session.gd (new),
+src/tools/shot.gd, src/tools/headless_check.gd, tools/backlog/part11.py,
+tools/backlog/part13.py, implementation/prompts/0290-visual-gate-v1.md,
+implementation/prompts/0295-playtest-v1.md,
+implementation/prompts/0298-second-weeks.md (new), implementation/shots/0280/
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

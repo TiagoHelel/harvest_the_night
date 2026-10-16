@@ -2,7 +2,7 @@
 
 - **Phase:** 17 - Ship 1.0
 - **Status:** todo
-- **Depends on:** 0280, 0291, 0292, 0293, 0294
+- **Depends on:** 0280, 0291, 0292, 0293, 0294, 0298
 - **Likely files:** src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, docs/PLAYTEST.md, src/tools/headless_v1.gd, src/tools/headless_check.gd
 
 ## Goal

@@ -202,6 +202,9 @@ const SCENARIOS: Array = [
 	["season_summer", "the farm at noon on Summer 3", ""],
 	["season_autumn", "the farm at noon on Autumn 3", ""],
 	["season_winter", "the farm at noon on Winter 3, snowing", ""],
+	["season_summer_wave", "a wave mid-fight on Summer 9's night: a defended farm, the season's own kinds coming in from its open sides (task 0280)", ""],
+	["season_autumn_wave", "a wave mid-fight on Autumn 9's night: a defended farm, the season's own kinds coming in from its open sides (task 0280)", ""],
+	["season_winter_wave", "a wave mid-fight on Winter 9's night: a defended farm, the season's own kinds coming in from its open sides (task 0280)", ""],
 	["season_winter_night", "the same farm on Winter 3's night", ""],
 	["winter_fishing", "Winter 3 at noon: a line in the north-west pond, its snowed shore and corners round open water", ""],
 	["winter_quarry", "the quarry on Winter 3: snow caps on the rocks, the ores, the seams and the copper, coal and gold", ""],
@@ -916,6 +919,9 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"season_autumn": _set_season_autumn(state)
 		"season_winter": _set_season_winter(state)
 		"season_winter_night": _set_season_winter_night(state)
+		"season_summer_wave": _set_season_summer_wave(state)
+		"season_autumn_wave": _set_season_autumn_wave(state)
+		"season_winter_wave": _set_season_winter_wave(state)
 		"woken": _set_woken(state)
 		"repair": _set_repair(state)
 		"aim": _set_aim(state)
@@ -2910,6 +2916,37 @@ func _set_season_winter(state: Dictionary) -> void:
 
 func _set_season_winter_night(state: Dictionary) -> void:
 	_set_season_night(state, 3)
+
+
+func _set_season_summer_wave(state: Dictionary) -> void:
+	_set_season_wave(state, 1)
+
+
+func _set_season_autumn_wave(state: Dictionary) -> void:
+	_set_season_wave(state, 2)
+
+
+func _set_season_winter_wave(state: Dictionary) -> void:
+	_set_season_wave(state, 3)
+
+
+## **A season's wave mid-fight** (task 0280): its ninth night on a defended
+## farm, thirty of the night's own kinds sent from the sides its date has
+## open, four seconds in - `wave`'s fight in the season's colours.
+func _set_season_wave(state: Dictionary, season: int) -> void:
+	_a_defended_farm(state, true)
+	var date := season * GameData.SEASON_DAYS + 9
+	state["day"] = date
+	state["nights_won"] = date - 1
+	NightRoad.to_night(state)
+	Sim.advance(state, 1)
+	var kinds: Array = GameData.sorted_names(Waves.kinds_of(date, int(state["seed"])).keys())
+	var sides := Calendar.open_sides(date)
+	for i in 30:
+		Enemies.spawn(state, StringName(kinds[i % kinds.size()]), int(sides[i % sides.size()]))
+	Sim.advance(state, 4 * GameData.SECONDS)
+	_look_at(_the_defence_line(state))
+	print("  %s: %s, from %s" % [Calendar.season_id(date), ", ".join(kinds), str(sides)])
 
 
 ## **The seasons on screen** (task 0159): the noon farm, framed as `noon`

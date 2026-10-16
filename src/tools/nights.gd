@@ -4,6 +4,7 @@ extends SceneTree
 ##
 ##     python tools/nights.py [from] [to] [seed]
 ##     python tools/nights.py --years 3
+##     python tools/nights.py --sameness [seed]
 ##     python tools/nights.py --check
 ##
 ## **By default the year** (task 0270): days 1 to `Calendar.year_days()` for
@@ -22,6 +23,12 @@ extends SceneTree
 ## **`--years N`** (task 0279) prints Years 1 to N for seed 0, day by day,
 ## then a line a season of each year: its nights, hit points, largest night,
 ## boss and the boss's hit points that year, and its weather.
+##
+## **`--sameness [seed]`** (task 0280) counts how alike the year's nights are,
+## by the rules rather than by eye: per season, the nights that share their
+## mix of kinds and sides with another; the longest runs of nights that bring
+## nothing new - no enemy, side, weapon, event or boss first met - by day; and
+## how often the forecast says the same thing two nights running.
 ##
 ## **`--check` is a gate** (task 0151), run by `tools/verify.py`: the year's
 ## tables pass `GameData.check_nights`, and every date of the year, 1 to
@@ -59,6 +66,11 @@ func _init() -> void:
 	var args := OS.get_cmdline_user_args()
 	if args.has("--check"):
 		quit(_check_the_year())
+		return
+	var same := args.find("--sameness")
+	if same >= 0:
+		_print_sameness(int(str(args[same + 1])) if same + 1 < args.size() and str(args[same + 1]).is_valid_int() else 0)
+		quit()
 		return
 	var at := args.find("--years")
 	if at >= 0:
@@ -223,6 +235,126 @@ func _side_code(side: int) -> String:
 	for word in String(GameData.SPAWN_SIDES[side]).split("_"):
 		code += word.left(1).to_upper()
 	return code
+
+
+## **How alike the year's nights are** (task 0280), for `seed_value`'s
+## weather:
+## - **a mix shared**: a night's kinds and sides, as a set each, the same as
+##   another night's of its season;
+## - **nothing new**: a night that meets no kind, side or event (fog, rain,
+##   a Blood Moon, a Full Moon) for the first time this year, opens no weapon
+##   (the season's arsenal on its first day) and brings no boss; the longest
+##   runs of them, by day;
+## - **the forecast again**: two nights running whose forecast says the same
+##   thing - its sides, its kinds, its weather, its moon and its boss - the
+##   counts aside.
+func _print_sameness(seed_value: int) -> void:
+	var year := Calendar.year_days()
+	print("HARVEST THE NIGHT - how alike the year's nights are, seed %d" % seed_value)
+	var seen_kinds := {}
+	var seen_sides := {}
+	var seen_events := {}
+	var weapons := {}
+	var plain_days: Array = []
+	var forecast_again: Dictionary = {}
+	var previous := ""
+	var by_season := {}
+	for day in range(1, year + 1):
+		var one := Waves.night_of(day, seed_value)
+		var season := Calendar.season_id(day)
+		var kinds := GameData.sorted_names(Waves.kinds_in(one).keys())
+		var sides: Array = []
+		for side in Waves.spawns_in(one):
+			if not sides.has(int(side)):
+				sides.append(int(side))
+		sides.sort()
+		var event := Weather.event(seed_value, day)
+		var moon := Calendar.is_full_moon(day)
+		var calm := bool(one.get("calm", false))
+		var mix := "%s|%s" % [",".join(kinds), str(sides)]
+		if not calm:
+			var rows: Array = by_season.get(season, [])
+			rows.append(mix)
+			by_season[season] = rows
+		# What this night meets for the first time.
+		var news: Array = []
+		for kind in kinds:
+			if not seen_kinds.has(kind):
+				seen_kinds[kind] = day
+				news.append(String(kind))
+		for side in sides:
+			if not seen_sides.has(side):
+				seen_sides[side] = day
+				news.append("side %d" % side)
+		for mark in [String(event), "full moon" if moon else ""]:
+			if mark != "" and not seen_events.has(mark):
+				seen_events[mark] = day
+				news.append(mark)
+		if Calendar.day_of_season(day) == 1:
+			for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+				if Building.season_of(id) == Calendar.season_of(day) and not weapons.has(id):
+					weapons[id] = day
+					news.append(String(id))
+		if Calendar.is_boss_night(day):
+			news.append(String(Calendar.boss_of(day)))
+		if news.is_empty() and not calm:
+			plain_days.append(day)
+		var said := "%s|%s|%s|%s|%s" % [str(sides), ",".join(kinds), event, moon, Calendar.boss_of(day) if Calendar.is_boss_night(day) else &""]
+		if not calm and said == previous:
+			forecast_again[season] = int(forecast_again.get(season, 0)) + 1
+		previous = said if not calm else ""
+
+	print("")
+	print("  season   nights   distinct mixes   nights sharing a mix   forecast the same two nights running")
+	for season in GameData.SEASONS:
+		var rows: Array = by_season.get(season, [])
+		var counts := {}
+		for mix in rows:
+			counts[mix] = int(counts.get(mix, 0)) + 1
+		var sharing := 0
+		for mix in counts:
+			if int(counts[mix]) > 1:
+				sharing += int(counts[mix])
+		print("  %-7s  %6d   %14d   %20d   %d" % [season, rows.size(), counts.size(), sharing,
+			int(forecast_again.get(season, 0))])
+
+	# The runs of nights with nothing new, longest first.
+	var runs: Array = []
+	var start := -1
+	var last := -10
+	for day in plain_days:
+		if int(day) == last + 1 or (int(day) == last + 2 and Calendar.is_calm(last + 1)):
+			last = int(day)
+			continue
+		if start >= 0:
+			runs.append([start, last])
+		start = int(day)
+		last = int(day)
+	if start >= 0:
+		runs.append([start, last])
+	runs.sort_custom(func(a: Array, b: Array) -> bool:
+		return int(a[1]) - int(a[0]) > int(b[1]) - int(b[0]) or (int(a[1]) - int(a[0]) == int(b[1]) - int(b[0]) and int(a[0]) < int(b[0])))
+	print("")
+	print("  %d of the year's nights bring nothing new; the longest runs of them:" % plain_days.size())
+	for run in runs.slice(0, 6):
+		var nights := 0
+		for day in range(int(run[0]), int(run[1]) + 1):
+			if plain_days.has(day):
+				nights += 1
+		print("    %d nights, days %d-%d (%s to %s)" % [nights, int(run[0]), int(run[1]), _date_of(int(run[0])), _date_of(int(run[1]))])
+	print("")
+	print("  first met: %s" % ", ".join(_firsts(seen_kinds) + _firsts(seen_sides) + _firsts(seen_events) + _firsts(weapons)))
+
+
+## `name on day`, a dictionary of first days in day order.
+func _firsts(found: Dictionary) -> Array:
+	var keys: Array = found.keys()
+	keys.sort_custom(func(a: Variant, b: Variant) -> bool:
+		return int(found[a]) < int(found[b]) or (int(found[a]) == int(found[b]) and str(a) < str(b)))
+	var out: Array = []
+	for key in keys:
+		out.append("%s %d" % [("side %d" % int(key)) if typeof(key) == TYPE_INT else str(key), int(found[key])])
+	return out
 
 
 ## **The years, a season a line** (task 0279): each year's seasons with
