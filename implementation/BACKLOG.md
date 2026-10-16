@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######################.`  **278 / 296 done**
+`#######################.`  **279 / 296 done**
 
-0 doing / 18 todo / 0 blocked across 18 phases.
+0 doing / 17 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-18 task(s) left, the ready ones first, then what they
+17 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -200,24 +200,6 @@ After the Winter Lord the farm carries on, and today that means the MVP's endles
   - done when: The `python tools/nights.py --years 3` summary and where the `balanced` policy fell in Year 2 are in the journal
   - done when: `python tools/shot.py 0279 year_two --fhd` opened: the year label fits, in English and in Portuguese
 
-### 0288 - Art: the collection book, trophies and badges
-
-Ready to pick up.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd`.
-
-The book cover, the four boss trophies and the achievement badges Codex drew replace 0287's stand-ins, so the screen a player opens before Year 2 looks like the rest of the game.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A056` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- Use only the folder named in the pack's `CLAUDE-A056-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
-- Family `ui`, no text in any of it: names, canvases and pivots exactly as A056's Deliverables table (settled by 0287) - the cover, the tab icons, a trophy per `is_boss` enemy, a badge per achievement id, the ornament. `tools/check_ui_art.py` hard-codes the 0018 resource icons (`len(plans)==15`): give the A056 set its own section and counts rather than loosening that one, and show it in `ui_art_showcase.gd`
-- Delete A056's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) once the raster outputs land at the same paths, so `collections_screen.gd` draws the real art through the lookup it already uses and `python tools/placeholders.py` no longer lists A056; locked trophies and badges stay the same art dimmed by code
-- Set the pack to integrated: `python implementation/backlog/assets.py set A056 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the A056 set counted
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures of the collections screen, every tab with a full profile, opened in a run by day and by night, opened and looked at, in `implementation/shots/0288/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-
 ### 0289 - Art: the morning report
 
 Ready to pick up.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
@@ -257,7 +239,7 @@ The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpo
 
 ### 0290 - The 1.0 visual gate
 
-Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0288.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
+Waits on 0123, 0124, 0125, 0143, 0144, 0207, 0208.  Likely files: `src/tools/shot.gd, src/tools/capture_menus.gd, implementation/shots/0290/, implementation/backlog/CATALOGUE.md, implementation/backlog/packs/, tools/backlog/, implementation/prompts/, implementation/PROGRESS.md`.
 
 Before 1.0 ships, look at the whole game in its real frame - every screen, season, family and state at 1920x1080, by day and by night - and prove nothing is still drawn on a stand-in. Like sprite task 0020: no claim of done from one nice farm shot.
 
@@ -701,7 +683,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0279** [Year 2](prompts/0279-year-two.md)
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0278, 0279
 
-## 16 - Sound, collections and polish  (7/10)
+## 16 - Sound, collections and polish  (8/10)
 
 - [x] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
 - [x] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
@@ -710,9 +692,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0285** [Music for four seasons](prompts/0285-music-seasons.md)
 - [x] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md)
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
-- [ ] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
+- [x] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
 - [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
-- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208, 0288
+- [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208
 
 ## 17 - Ship 1.0  (2/7)
 

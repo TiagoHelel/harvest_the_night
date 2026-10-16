@@ -1,0 +1,3964 @@
+{
+  "contract": {
+    "pack": "A056",
+    "slug": "A056-collections",
+    "title": "The collection book, trophies and badges",
+    "date": "2026-10-14",
+    "status": "blocked",
+    "runtime_integrated": false,
+    "tool": "built-in ImageGen",
+    "palette_mode": "A",
+    "palette": "tools/palette.py:COLOURS",
+    "alpha_threshold": 128,
+    "files": [
+      {
+        "name": "collection_cover",
+        "runtime_name": "sprites/ui/collection_cover.png",
+        "source": "raw/collection-cover-r1.png",
+        "call": "raw/collection-cover-r1.call.json",
+        "recipe": {
+          "id": "collection-cover-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\collection-cover-r1.png",
+          "crop_xywh": [
+            208,
+            387,
+            680,
+            729
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1086,
+            1448
+          ],
+          "content_scale": 0.06764705882352941,
+          "content_anchor_xy": [
+            23,
+            24
+          ],
+          "canvas_wh": [
+            48,
+            64
+          ],
+          "pivot_xy": [
+            24,
+            32
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          48,
+          64
+        ],
+        "pivot_xy": [
+          24,
+          32
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "cover",
+        "output": "preview/candidates/collection_cover/none/01.png",
+        "bounds": [
+          1,
+          8,
+          47,
+          57
+        ],
+        "sha256": "1c0dea82bc8b7eb48eb34d9f62e25c81924ce392b204ff123e18e5a81944791a",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "icon_book_crops",
+        "runtime_name": "sprites/ui/icon_book_crops.png",
+        "source": "raw/book-crops-r1.png",
+        "call": "raw/book-crops-r1.call.json",
+        "recipe": {
+          "id": "book-crops-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-crops-r1.png",
+          "crop_xywh": [
+            297,
+            362,
+            691,
+            622
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.020260492040520984,
+          "content_anchor_xy": [
+            7,
+            6
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            8
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/icon_book_crops/none/01.png",
+        "bounds": [
+          1,
+          2,
+          15,
+          15
+        ],
+        "sha256": "394fc529b85d954d1ada3594ccb8ab901bfb91a1cd4a824922c30d2faa620b93",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "hud_book_crops",
+        "runtime_name": "sprites/ui/hud_book_crops.png",
+        "source": "raw/book-crops-r1.png",
+        "call": "raw/book-crops-r1.call.json",
+        "recipe": {
+          "id": "book-crops-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-crops-r1.png",
+          "crop_xywh": [
+            297,
+            362,
+            691,
+            622
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.011577424023154847,
+          "content_anchor_xy": [
+            4,
+            3
+          ],
+          "canvas_wh": [
+            10,
+            10
+          ],
+          "pivot_xy": [
+            5,
+            5
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/hud_book_crops/none/01.png",
+        "bounds": [
+          1,
+          2,
+          9,
+          9
+        ],
+        "sha256": "09575a8f88129ea65ad10ba28d7376390f60879b3e4e8ab5eb5f060def998634",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "icon_book_bosses",
+        "runtime_name": "sprites/ui/icon_book_bosses.png",
+        "source": "raw/book-bosses-r1.png",
+        "call": "raw/book-bosses-r1.call.json",
+        "recipe": {
+          "id": "book-bosses-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-bosses-r1.png",
+          "crop_xywh": [
+            295,
+            360,
+            694,
+            624
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.020172910662824207,
+          "content_anchor_xy": [
+            7,
+            6
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            8
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/icon_book_bosses/none/01.png",
+        "bounds": [
+          1,
+          2,
+          15,
+          15
+        ],
+        "sha256": "ba2d2e5ebe65580acf4ca26f68b9d5d4e0c4ea9c7e3750bb6cfa0007e2be8828",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "hud_book_bosses",
+        "runtime_name": "sprites/ui/hud_book_bosses.png",
+        "source": "raw/book-bosses-r1.png",
+        "call": "raw/book-bosses-r1.call.json",
+        "recipe": {
+          "id": "book-bosses-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-bosses-r1.png",
+          "crop_xywh": [
+            295,
+            360,
+            694,
+            624
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.011527377521613832,
+          "content_anchor_xy": [
+            4,
+            3
+          ],
+          "canvas_wh": [
+            10,
+            10
+          ],
+          "pivot_xy": [
+            5,
+            5
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/hud_book_bosses/none/01.png",
+        "bounds": [
+          1,
+          2,
+          9,
+          9
+        ],
+        "sha256": "a2526b2720c8cce635e8b06f1e402717a9d3eaf7376c4bdfcb87d1612e6babcc",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "icon_book_year",
+        "runtime_name": "sprites/ui/icon_book_year.png",
+        "source": "raw/book-year-r1.png",
+        "call": "raw/book-year-r1.call.json",
+        "recipe": {
+          "id": "book-year-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-year-r1.png",
+          "crop_xywh": [
+            297,
+            361,
+            692,
+            622
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.02023121387283237,
+          "content_anchor_xy": [
+            7,
+            6
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            8
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/icon_book_year/none/01.png",
+        "bounds": [
+          1,
+          2,
+          15,
+          15
+        ],
+        "sha256": "acb119cff2b08a184aafad50af87c2288cbf71d2d24fd3a269bcd15ef3b67628",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "hud_book_year",
+        "runtime_name": "sprites/ui/hud_book_year.png",
+        "source": "raw/book-year-r1.png",
+        "call": "raw/book-year-r1.call.json",
+        "recipe": {
+          "id": "book-year-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-year-r1.png",
+          "crop_xywh": [
+            297,
+            361,
+            692,
+            622
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.011560693641618497,
+          "content_anchor_xy": [
+            4,
+            3
+          ],
+          "canvas_wh": [
+            10,
+            10
+          ],
+          "pivot_xy": [
+            5,
+            5
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/hud_book_year/none/01.png",
+        "bounds": [
+          1,
+          2,
+          9,
+          9
+        ],
+        "sha256": "680040e8ceda20a81fb3b4f4bacd757c226d0201e57fcd775a7431c672b48398",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "icon_book_achievements",
+        "runtime_name": "sprites/ui/icon_book_achievements.png",
+        "source": "raw/book-achievements-r1.png",
+        "call": "raw/book-achievements-r1.call.json",
+        "recipe": {
+          "id": "book-achievements-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-achievements-r1.png",
+          "crop_xywh": [
+            295,
+            362,
+            695,
+            621
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.02014388489208633,
+          "content_anchor_xy": [
+            7,
+            6
+          ],
+          "canvas_wh": [
+            16,
+            16
+          ],
+          "pivot_xy": [
+            8,
+            8
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/icon_book_achievements/none/01.png",
+        "bounds": [
+          1,
+          2,
+          15,
+          15
+        ],
+        "sha256": "9acbdf6e2fc1f851ab30b4027c3f8eca6f6ddd9a8fb73eb3716de1c68869e2e4",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "hud_book_achievements",
+        "runtime_name": "sprites/ui/hud_book_achievements.png",
+        "source": "raw/book-achievements-r1.png",
+        "call": "raw/book-achievements-r1.call.json",
+        "recipe": {
+          "id": "book-achievements-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-achievements-r1.png",
+          "crop_xywh": [
+            295,
+            362,
+            695,
+            621
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.011510791366906475,
+          "content_anchor_xy": [
+            4,
+            3
+          ],
+          "canvas_wh": [
+            10,
+            10
+          ],
+          "pivot_xy": [
+            5,
+            5
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "tab",
+        "output": "preview/candidates/hud_book_achievements/none/01.png",
+        "bounds": [
+          1,
+          2,
+          9,
+          9
+        ],
+        "sha256": "3a9c6f00daf272e8bb04c7c1e348515f5be49935879d00bd135116ea19ed98d8",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+            "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "trophy_giant",
+        "runtime_name": "sprites/ui/trophy_giant.png",
+        "source": "raw/trophy-giant-r1.png",
+        "call": "raw/trophy-giant-r1.call.json",
+        "recipe": {
+          "id": "trophy-giant-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+          "crop_xywh": [
+            353,
+            298,
+            550,
+            660
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.04491017964071856,
+          "content_anchor_xy": [
+            12,
+            15
+          ],
+          "canvas_wh": [
+            32,
+            32
+          ],
+          "pivot_xy": [
+            16,
+            16
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "trophy",
+        "output": "preview/candidates/trophy_giant/none/01.png",
+        "bounds": [
+          4,
+          1,
+          29,
+          31
+        ],
+        "sha256": "f9bb88111a0dcb0046a9d0445b4788d41c252bdba5feba34fc476d0530b422b9",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+            "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "trophy_harvester",
+        "runtime_name": "sprites/ui/trophy_harvester.png",
+        "source": "raw/trophy-harvester-r1.png",
+        "call": "raw/trophy-harvester-r1.call.json",
+        "recipe": {
+          "id": "trophy-harvester-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-harvester-r1.png",
+          "crop_xywh": [
+            353,
+            296,
+            548,
+            663
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.04491017964071856,
+          "content_anchor_xy": [
+            12,
+            15
+          ],
+          "canvas_wh": [
+            32,
+            32
+          ],
+          "pivot_xy": [
+            16,
+            16
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "trophy",
+        "output": "preview/candidates/trophy_harvester/none/01.png",
+        "bounds": [
+          4,
+          1,
+          29,
+          31
+        ],
+        "sha256": "cf7ce7359438594ac7a5ef477f6d6b39e76eb40d7decc6ece692c93aac57c202",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+            "sha256": "fea3869f8d44b876c615dcd4a8f910ede36a892432465919ce4d415a9ad99616",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png",
+            "sha256": "55812df0c9cdc7988f2501fbb7a5e13a6754fab1b14c36c9f27d02173e3d78df",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "trophy_scarecrow_king",
+        "runtime_name": "sprites/ui/trophy_scarecrow_king.png",
+        "source": "raw/trophy-scarecrow-r2.png",
+        "call": "raw/trophy-scarecrow-r2.call.json",
+        "recipe": {
+          "id": "trophy-scarecrow-r2",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-scarecrow-r2.png",
+          "crop_xywh": [
+            348,
+            295,
+            559,
+            666
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.04491017964071856,
+          "content_anchor_xy": [
+            12,
+            15
+          ],
+          "canvas_wh": [
+            32,
+            32
+          ],
+          "pivot_xy": [
+            16,
+            16
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "trophy",
+        "output": "preview/candidates/trophy_scarecrow_king/none/01.png",
+        "bounds": [
+          4,
+          1,
+          29,
+          31
+        ],
+        "sha256": "846dd6400992f2d30ef91ee2a55dd6eebb8b006ec0562a2f8164a4f38060481c",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/trophy-scarecrow-r1.png",
+            "sha256": "e0b889cd0d3ea5b4889f761db1a25fd8ec99bbc8ea01498696914fe8f2cb0a49",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+            "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "trophy_winter_lord",
+        "runtime_name": "sprites/ui/trophy_winter_lord.png",
+        "source": "raw/trophy-winter-r1.png",
+        "call": "raw/trophy-winter-r1.call.json",
+        "recipe": {
+          "id": "trophy-winter-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-winter-r1.png",
+          "crop_xywh": [
+            350,
+            294,
+            555,
+            668
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1254,
+            1254
+          ],
+          "content_scale": 0.04491017964071856,
+          "content_anchor_xy": [
+            12,
+            15
+          ],
+          "canvas_wh": [
+            32,
+            32
+          ],
+          "pivot_xy": [
+            16,
+            16
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "trophy",
+        "output": "preview/candidates/trophy_winter_lord/none/01.png",
+        "bounds": [
+          4,
+          1,
+          29,
+          31
+        ],
+        "sha256": "a175f31fa89f5bffe271572b2fe6cb321a57c185b75906ccaad7e93103d5952a",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+            "sha256": "fea3869f8d44b876c615dcd4a8f910ede36a892432465919ce4d415a9ad99616",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+            "sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_first_night",
+        "runtime_name": "sprites/ui/badge_first_night.png",
+        "source": "raw/badge-first_night-r1.png",
+        "call": "raw/badge-first_night-r1.call.json",
+        "recipe": {
+          "id": "badge-first_night-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-first_night-r1.png",
+          "crop_xywh": [
+            365,
+            295,
+            530,
+            695
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1265,
+            1244
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_first_night/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "af69521190ea2484ab75c0ffed9574fce7320a01e2a0b016946b3207f8520d2c",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_hundred_nights",
+        "runtime_name": "sprites/ui/badge_hundred_nights.png",
+        "source": "raw/badge-hundred_nights-r1.png",
+        "call": "raw/badge-hundred_nights-r1.call.json",
+        "recipe": {
+          "id": "badge-hundred_nights-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-hundred_nights-r1.png",
+          "crop_xywh": [
+            363,
+            295,
+            537,
+            693
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1270,
+            1239
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_hundred_nights/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "dbaa04c33ada4ede8050de082c1e913c5811b30d42b9a1beae866eaf5a939686",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_slayer",
+        "runtime_name": "sprites/ui/badge_slayer.png",
+        "source": "raw/badge-slayer-r1.png",
+        "call": "raw/badge-slayer-r1.call.json",
+        "recipe": {
+          "id": "badge-slayer-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-slayer-r1.png",
+          "crop_xywh": [
+            364,
+            296,
+            534,
+            695
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_slayer/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "2ba6210074ff55b0cdeb598c178a3d8f860c3134bc63030600f62cf1bf5d69cd",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_builder",
+        "runtime_name": "sprites/ui/badge_builder.png",
+        "source": "raw/badge-builder-r1.png",
+        "call": "raw/badge-builder-r1.call.json",
+        "recipe": {
+          "id": "badge-builder-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-builder-r1.png",
+          "crop_xywh": [
+            363,
+            297,
+            536,
+            695
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_builder/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "5162d3097158164f443cad0086ab3f7a63778539a584d66c6b9523f697794682",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_gatherer",
+        "runtime_name": "sprites/ui/badge_gatherer.png",
+        "source": "raw/badge-gatherer-r1.png",
+        "call": "raw/badge-gatherer-r1.call.json",
+        "recipe": {
+          "id": "badge-gatherer-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-gatherer-r1.png",
+          "crop_xywh": [
+            360,
+            295,
+            542,
+            697
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_gatherer/none/01.png",
+        "bounds": [
+          4,
+          2,
+          21,
+          23
+        ],
+        "sha256": "77da449dd805a23ea546928665aa16d6672c041d3819b15b88a745c19ae3a3a4",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_angler",
+        "runtime_name": "sprites/ui/badge_angler.png",
+        "source": "raw/badge-angler-r1.png",
+        "call": "raw/badge-angler-r1.call.json",
+        "recipe": {
+          "id": "badge-angler-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-angler-r1.png",
+          "crop_xywh": [
+            362,
+            295,
+            537,
+            696
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1265,
+            1243
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_angler/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "2bf00874fb2d4f8d27c4dc4ba23aa3b78749ff58c448f984dd45bab35be6839d",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_regular",
+        "runtime_name": "sprites/ui/badge_regular.png",
+        "source": "raw/badge-regular-r1.png",
+        "call": "raw/badge-regular-r1.call.json",
+        "recipe": {
+          "id": "badge-regular-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-regular-r1.png",
+          "crop_xywh": [
+            363,
+            296,
+            536,
+            695
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_regular/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "d1723269fac5846b2056443012c25c8936b2cca58f32161234f2cf50e749adbb",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_long_haul",
+        "runtime_name": "sprites/ui/badge_long_haul.png",
+        "source": "raw/badge-long_haul-r1.png",
+        "call": "raw/badge-long_haul-r1.call.json",
+        "recipe": {
+          "id": "badge-long_haul-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-long_haul-r1.png",
+          "crop_xywh": [
+            363,
+            296,
+            533,
+            695
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_long_haul/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "53c5f6d245e29509cb1196523c3af322b0438f76ec1060660e47dadb92320b75",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_full_moon",
+        "runtime_name": "sprites/ui/badge_full_moon.png",
+        "source": "raw/badge-full_moon-r1.png",
+        "call": "raw/badge-full_moon-r1.call.json",
+        "recipe": {
+          "id": "badge-full_moon-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-full_moon-r1.png",
+          "crop_xywh": [
+            360,
+            295,
+            542,
+            696
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_full_moon/none/01.png",
+        "bounds": [
+          4,
+          2,
+          21,
+          23
+        ],
+        "sha256": "eb23a406dbf75b3eb9f4ca0f6b63da94c6298b302f068a32c1a9f9149022b253",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_legend",
+        "runtime_name": "sprites/ui/badge_legend.png",
+        "source": "raw/badge-legend-r1.png",
+        "call": "raw/badge-legend-r1.call.json",
+        "recipe": {
+          "id": "badge-legend-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-legend-r1.png",
+          "crop_xywh": [
+            362,
+            293,
+            534,
+            695
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1271,
+            1238
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_legend/none/01.png",
+        "bounds": [
+          4,
+          2,
+          20,
+          23
+        ],
+        "sha256": "3b45c761189ba6d7a7c8726da6c912d522e3ea6d065375df4b61ce0cc76044c8",
+        "input_images": [
+          {
+            "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_arsenal",
+        "runtime_name": "sprites/ui/badge_arsenal.png",
+        "source": "raw/badge-arsenal-r2.png",
+        "call": "raw/badge-arsenal-r2.call.json",
+        "recipe": {
+          "id": "badge-arsenal-r2",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-arsenal-r2.png",
+          "crop_xywh": [
+            354,
+            291,
+            554,
+            702
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            10
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_arsenal/none/01.png",
+        "bounds": [
+          4,
+          2,
+          21,
+          23
+        ],
+        "sha256": "4a25e50cfc7923f3fe18724b962b1b4f724a2c0be3b19b774ee38b0130951ab9",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/badge-arsenal-r1.png",
+            "sha256": "9c5abe1fd1d03b303e2b4a7bd5e18be4f0db6d9ed2e21a8a1f1e4540b0626e1f",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "badge_year_two",
+        "runtime_name": "sprites/ui/badge_year_two.png",
+        "source": "raw/badge-year_two-r2.png",
+        "call": "raw/badge-year_two-r2.call.json",
+        "recipe": {
+          "id": "badge-year_two-r2",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-year_two-r2.png",
+          "crop_xywh": [
+            351,
+            280,
+            560,
+            720
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1262,
+            1246
+          ],
+          "content_scale": 0.030555555555555555,
+          "content_anchor_xy": [
+            8,
+            11
+          ],
+          "canvas_wh": [
+            24,
+            24
+          ],
+          "pivot_xy": [
+            12,
+            12
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "badge",
+        "output": "preview/candidates/badge_year_two/none/01.png",
+        "bounds": [
+          4,
+          1,
+          21,
+          23
+        ],
+        "sha256": "c2306d6c6eb03fc923dc57f97fb03cbe16d9d71e6d9f186c79261c211f19f44e",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/badge-year_two-r1.png",
+            "sha256": "c2743c331d2a94d4fb997aee357d41ef2a09bc69e2a8ba9fee0baf213d845131",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/medal-master-r1.png",
+            "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      },
+      {
+        "name": "collection_ornament",
+        "runtime_name": "sprites/ui/collection_ornament.png",
+        "source": "raw/collection-ornament-r1.png",
+        "call": "raw/collection-ornament-r1.call.json",
+        "recipe": {
+          "id": "collection-ornament-r1",
+          "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\collection-ornament-r1.png",
+          "crop_xywh": [
+            74,
+            369,
+            1524,
+            205
+          ],
+          "sheet_cell_xywh": [
+            0,
+            0,
+            1672,
+            941
+          ],
+          "content_scale": 0.04068241469816273,
+          "content_anchor_xy": [
+            31,
+            4
+          ],
+          "canvas_wh": [
+            64,
+            12
+          ],
+          "pivot_xy": [
+            32,
+            6
+          ],
+          "alpha_threshold": 128,
+          "palette": "tools/palette.py:COLOURS"
+        },
+        "canvas_wh": [
+          64,
+          12
+        ],
+        "pivot_xy": [
+          32,
+          6
+        ],
+        "draw_scale": 1,
+        "seconds": 1.0,
+        "loop": false,
+        "direction": "none",
+        "mirror": "none",
+        "category": "ornament",
+        "output": "preview/candidates/collection_ornament/none/01.png",
+        "bounds": [
+          1,
+          2,
+          63,
+          10
+        ],
+        "sha256": "605e4352a95c70a87dfc4cebf44707198ac1ecf779e123592869e520bf0710cc",
+        "input_images": [
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+            "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+            "role": "reference image; exact role specified in the recorded prompt"
+          },
+          {
+            "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+            "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+            "role": "reference image; exact role specified in the recorded prompt"
+          }
+        ]
+      }
+    ],
+    "expected_pngs": 26,
+    "blank_medal_master": "raw/medal-master-r1.png (reference only; not exported)",
+    "fish_tab_reference": "implementation\\backlog\\deliveries\\A023-fishing-gear\\preview\\candidates\\icon_book_fish\\none\\01.png",
+    "candidate_reference_exception": {
+      "date": "2026-10-14",
+      "owner_words": "Usar candidatas como referência e registrar a exceção",
+      "question": "May existing A023 and the three new boss candidates be used as references for creating final batch review, without approving or integrating them?",
+      "scope": "Use existing A023 and new A052/A053/A054 candidate raw masters as identity/style references for A056 final batch review. Their approval prerequisites are waived for reference use only.",
+      "approval_inferred": false,
+      "runtime_integrated": false
+    },
+    "deviations": [
+      "The source-count field in the pack says 22 but its table and generation steps require 23 ImageGen sources (one cover, four tabs, four trophies, blank medal master, twelve badge edits, one ornament). The 23 items required by the detailed instructions were generated.",
+      "All badges share a scale chosen to fit the largest measured emblem crop; this is slightly below the written 22px/blank-master scale because the Year Two sprout extends beyond the master bounds. Badge raw crop bounds vary by more than the stated ±2%, so visual rim/ribbon alignment still needs owner review.",
+      "Objective checks failed: badge_crop_bounds_within_2_percent, raw_source_count_contract_matches"
+    ]
+  },
+  "checks": {
+    "files_exactly_26": true,
+    "fish_tab_is_reference_only": true,
+    "one_scale_all_trophies": true,
+    "one_scale_all_badges": true,
+    "tabs_use_one_crop_for_both_sizes": true,
+    "alpha_binary": true,
+    "palette_allowed": true,
+    "centered_on_pivot": true,
+    "margins_ok": true,
+    "badge_crop_bounds_within_2_percent": false,
+    "badge_distinct": true,
+    "fish_book_size_match": true,
+    "source_receipts_complete": true,
+    "authorized_candidate_reference_exception_recorded": true,
+    "raw_source_count_contract_matches": false
+  },
+  "expected": 26,
+  "files": [
+    {
+      "name": "collection_cover",
+      "runtime_name": "sprites/ui/collection_cover.png",
+      "source": "raw/collection-cover-r1.png",
+      "call": "raw/collection-cover-r1.call.json",
+      "recipe": {
+        "id": "collection-cover-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\collection-cover-r1.png",
+        "crop_xywh": [
+          208,
+          387,
+          680,
+          729
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1086,
+          1448
+        ],
+        "content_scale": 0.06764705882352941,
+        "content_anchor_xy": [
+          23,
+          24
+        ],
+        "canvas_wh": [
+          48,
+          64
+        ],
+        "pivot_xy": [
+          24,
+          32
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        48,
+        64
+      ],
+      "pivot_xy": [
+        24,
+        32
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "cover",
+      "output": "preview/candidates/collection_cover/none/01.png",
+      "bounds": [
+        1,
+        8,
+        47,
+        57
+      ],
+      "sha256": "1c0dea82bc8b7eb48eb34d9f62e25c81924ce392b204ff123e18e5a81944791a",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "icon_book_crops",
+      "runtime_name": "sprites/ui/icon_book_crops.png",
+      "source": "raw/book-crops-r1.png",
+      "call": "raw/book-crops-r1.call.json",
+      "recipe": {
+        "id": "book-crops-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-crops-r1.png",
+        "crop_xywh": [
+          297,
+          362,
+          691,
+          622
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.020260492040520984,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/icon_book_crops/none/01.png",
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "sha256": "394fc529b85d954d1ada3594ccb8ab901bfb91a1cd4a824922c30d2faa620b93",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "hud_book_crops",
+      "runtime_name": "sprites/ui/hud_book_crops.png",
+      "source": "raw/book-crops-r1.png",
+      "call": "raw/book-crops-r1.call.json",
+      "recipe": {
+        "id": "book-crops-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-crops-r1.png",
+        "crop_xywh": [
+          297,
+          362,
+          691,
+          622
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.011577424023154847,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/hud_book_crops/none/01.png",
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "09575a8f88129ea65ad10ba28d7376390f60879b3e4e8ab5eb5f060def998634",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "icon_book_bosses",
+      "runtime_name": "sprites/ui/icon_book_bosses.png",
+      "source": "raw/book-bosses-r1.png",
+      "call": "raw/book-bosses-r1.call.json",
+      "recipe": {
+        "id": "book-bosses-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-bosses-r1.png",
+        "crop_xywh": [
+          295,
+          360,
+          694,
+          624
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.020172910662824207,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/icon_book_bosses/none/01.png",
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "sha256": "ba2d2e5ebe65580acf4ca26f68b9d5d4e0c4ea9c7e3750bb6cfa0007e2be8828",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "hud_book_bosses",
+      "runtime_name": "sprites/ui/hud_book_bosses.png",
+      "source": "raw/book-bosses-r1.png",
+      "call": "raw/book-bosses-r1.call.json",
+      "recipe": {
+        "id": "book-bosses-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-bosses-r1.png",
+        "crop_xywh": [
+          295,
+          360,
+          694,
+          624
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.011527377521613832,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/hud_book_bosses/none/01.png",
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "a2526b2720c8cce635e8b06f1e402717a9d3eaf7376c4bdfcb87d1612e6babcc",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "icon_book_year",
+      "runtime_name": "sprites/ui/icon_book_year.png",
+      "source": "raw/book-year-r1.png",
+      "call": "raw/book-year-r1.call.json",
+      "recipe": {
+        "id": "book-year-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-year-r1.png",
+        "crop_xywh": [
+          297,
+          361,
+          692,
+          622
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.02023121387283237,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/icon_book_year/none/01.png",
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "sha256": "acb119cff2b08a184aafad50af87c2288cbf71d2d24fd3a269bcd15ef3b67628",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "hud_book_year",
+      "runtime_name": "sprites/ui/hud_book_year.png",
+      "source": "raw/book-year-r1.png",
+      "call": "raw/book-year-r1.call.json",
+      "recipe": {
+        "id": "book-year-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-year-r1.png",
+        "crop_xywh": [
+          297,
+          361,
+          692,
+          622
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.011560693641618497,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/hud_book_year/none/01.png",
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "680040e8ceda20a81fb3b4f4bacd757c226d0201e57fcd775a7431c672b48398",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "icon_book_achievements",
+      "runtime_name": "sprites/ui/icon_book_achievements.png",
+      "source": "raw/book-achievements-r1.png",
+      "call": "raw/book-achievements-r1.call.json",
+      "recipe": {
+        "id": "book-achievements-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-achievements-r1.png",
+        "crop_xywh": [
+          295,
+          362,
+          695,
+          621
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.02014388489208633,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "canvas_wh": [
+          16,
+          16
+        ],
+        "pivot_xy": [
+          8,
+          8
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/icon_book_achievements/none/01.png",
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "sha256": "9acbdf6e2fc1f851ab30b4027c3f8eca6f6ddd9a8fb73eb3716de1c68869e2e4",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "hud_book_achievements",
+      "runtime_name": "sprites/ui/hud_book_achievements.png",
+      "source": "raw/book-achievements-r1.png",
+      "call": "raw/book-achievements-r1.call.json",
+      "recipe": {
+        "id": "book-achievements-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\book-achievements-r1.png",
+        "crop_xywh": [
+          295,
+          362,
+          695,
+          621
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.011510791366906475,
+        "content_anchor_xy": [
+          4,
+          3
+        ],
+        "canvas_wh": [
+          10,
+          10
+        ],
+        "pivot_xy": [
+          5,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "tab",
+      "output": "preview/candidates/hud_book_achievements/none/01.png",
+      "bounds": [
+        1,
+        2,
+        9,
+        9
+      ],
+      "sha256": "3a9c6f00daf272e8bb04c7c1e348515f5be49935879d00bd135116ea19ed98d8",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+          "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "trophy_giant",
+      "runtime_name": "sprites/ui/trophy_giant.png",
+      "source": "raw/trophy-giant-r1.png",
+      "call": "raw/trophy-giant-r1.call.json",
+      "recipe": {
+        "id": "trophy-giant-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+        "crop_xywh": [
+          353,
+          298,
+          550,
+          660
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.04491017964071856,
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "trophy",
+      "output": "preview/candidates/trophy_giant/none/01.png",
+      "bounds": [
+        4,
+        1,
+        29,
+        31
+      ],
+      "sha256": "f9bb88111a0dcb0046a9d0445b4788d41c252bdba5feba34fc476d0530b422b9",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+          "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "trophy_harvester",
+      "runtime_name": "sprites/ui/trophy_harvester.png",
+      "source": "raw/trophy-harvester-r1.png",
+      "call": "raw/trophy-harvester-r1.call.json",
+      "recipe": {
+        "id": "trophy-harvester-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-harvester-r1.png",
+        "crop_xywh": [
+          353,
+          296,
+          548,
+          663
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.04491017964071856,
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "trophy",
+      "output": "preview/candidates/trophy_harvester/none/01.png",
+      "bounds": [
+        4,
+        1,
+        29,
+        31
+      ],
+      "sha256": "cf7ce7359438594ac7a5ef477f6d6b39e76eb40d7decc6ece692c93aac57c202",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+          "sha256": "fea3869f8d44b876c615dcd4a8f910ede36a892432465919ce4d415a9ad99616",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png",
+          "sha256": "55812df0c9cdc7988f2501fbb7a5e13a6754fab1b14c36c9f27d02173e3d78df",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "trophy_scarecrow_king",
+      "runtime_name": "sprites/ui/trophy_scarecrow_king.png",
+      "source": "raw/trophy-scarecrow-r2.png",
+      "call": "raw/trophy-scarecrow-r2.call.json",
+      "recipe": {
+        "id": "trophy-scarecrow-r2",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-scarecrow-r2.png",
+        "crop_xywh": [
+          348,
+          295,
+          559,
+          666
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.04491017964071856,
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "trophy",
+      "output": "preview/candidates/trophy_scarecrow_king/none/01.png",
+      "bounds": [
+        4,
+        1,
+        29,
+        31
+      ],
+      "sha256": "846dd6400992f2d30ef91ee2a55dd6eebb8b006ec0562a2f8164a4f38060481c",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/trophy-scarecrow-r1.png",
+          "sha256": "e0b889cd0d3ea5b4889f761db1a25fd8ec99bbc8ea01498696914fe8f2cb0a49",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+          "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "trophy_winter_lord",
+      "runtime_name": "sprites/ui/trophy_winter_lord.png",
+      "source": "raw/trophy-winter-r1.png",
+      "call": "raw/trophy-winter-r1.call.json",
+      "recipe": {
+        "id": "trophy-winter-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-winter-r1.png",
+        "crop_xywh": [
+          350,
+          294,
+          555,
+          668
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.04491017964071856,
+        "content_anchor_xy": [
+          12,
+          15
+        ],
+        "canvas_wh": [
+          32,
+          32
+        ],
+        "pivot_xy": [
+          16,
+          16
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "trophy",
+      "output": "preview/candidates/trophy_winter_lord/none/01.png",
+      "bounds": [
+        4,
+        1,
+        29,
+        31
+      ],
+      "sha256": "a175f31fa89f5bffe271572b2fe6cb321a57c185b75906ccaad7e93103d5952a",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+          "sha256": "fea3869f8d44b876c615dcd4a8f910ede36a892432465919ce4d415a9ad99616",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A054-winter-lord/raw/winter-master-r1.png",
+          "sha256": "0877011b3879025c01abbc82a475bdb48d341e1334053b37785bd627ba7cb567",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_first_night",
+      "runtime_name": "sprites/ui/badge_first_night.png",
+      "source": "raw/badge-first_night-r1.png",
+      "call": "raw/badge-first_night-r1.call.json",
+      "recipe": {
+        "id": "badge-first_night-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-first_night-r1.png",
+        "crop_xywh": [
+          365,
+          295,
+          530,
+          695
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1265,
+          1244
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_first_night/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "af69521190ea2484ab75c0ffed9574fce7320a01e2a0b016946b3207f8520d2c",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_hundred_nights",
+      "runtime_name": "sprites/ui/badge_hundred_nights.png",
+      "source": "raw/badge-hundred_nights-r1.png",
+      "call": "raw/badge-hundred_nights-r1.call.json",
+      "recipe": {
+        "id": "badge-hundred_nights-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-hundred_nights-r1.png",
+        "crop_xywh": [
+          363,
+          295,
+          537,
+          693
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1270,
+          1239
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_hundred_nights/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "dbaa04c33ada4ede8050de082c1e913c5811b30d42b9a1beae866eaf5a939686",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_slayer",
+      "runtime_name": "sprites/ui/badge_slayer.png",
+      "source": "raw/badge-slayer-r1.png",
+      "call": "raw/badge-slayer-r1.call.json",
+      "recipe": {
+        "id": "badge-slayer-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-slayer-r1.png",
+        "crop_xywh": [
+          364,
+          296,
+          534,
+          695
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_slayer/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "2ba6210074ff55b0cdeb598c178a3d8f860c3134bc63030600f62cf1bf5d69cd",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_builder",
+      "runtime_name": "sprites/ui/badge_builder.png",
+      "source": "raw/badge-builder-r1.png",
+      "call": "raw/badge-builder-r1.call.json",
+      "recipe": {
+        "id": "badge-builder-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-builder-r1.png",
+        "crop_xywh": [
+          363,
+          297,
+          536,
+          695
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_builder/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "5162d3097158164f443cad0086ab3f7a63778539a584d66c6b9523f697794682",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_gatherer",
+      "runtime_name": "sprites/ui/badge_gatherer.png",
+      "source": "raw/badge-gatherer-r1.png",
+      "call": "raw/badge-gatherer-r1.call.json",
+      "recipe": {
+        "id": "badge-gatherer-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-gatherer-r1.png",
+        "crop_xywh": [
+          360,
+          295,
+          542,
+          697
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_gatherer/none/01.png",
+      "bounds": [
+        4,
+        2,
+        21,
+        23
+      ],
+      "sha256": "77da449dd805a23ea546928665aa16d6672c041d3819b15b88a745c19ae3a3a4",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_angler",
+      "runtime_name": "sprites/ui/badge_angler.png",
+      "source": "raw/badge-angler-r1.png",
+      "call": "raw/badge-angler-r1.call.json",
+      "recipe": {
+        "id": "badge-angler-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-angler-r1.png",
+        "crop_xywh": [
+          362,
+          295,
+          537,
+          696
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1265,
+          1243
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_angler/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "2bf00874fb2d4f8d27c4dc4ba23aa3b78749ff58c448f984dd45bab35be6839d",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_regular",
+      "runtime_name": "sprites/ui/badge_regular.png",
+      "source": "raw/badge-regular-r1.png",
+      "call": "raw/badge-regular-r1.call.json",
+      "recipe": {
+        "id": "badge-regular-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-regular-r1.png",
+        "crop_xywh": [
+          363,
+          296,
+          536,
+          695
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_regular/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "d1723269fac5846b2056443012c25c8936b2cca58f32161234f2cf50e749adbb",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_long_haul",
+      "runtime_name": "sprites/ui/badge_long_haul.png",
+      "source": "raw/badge-long_haul-r1.png",
+      "call": "raw/badge-long_haul-r1.call.json",
+      "recipe": {
+        "id": "badge-long_haul-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-long_haul-r1.png",
+        "crop_xywh": [
+          363,
+          296,
+          533,
+          695
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_long_haul/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "53c5f6d245e29509cb1196523c3af322b0438f76ec1060660e47dadb92320b75",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_full_moon",
+      "runtime_name": "sprites/ui/badge_full_moon.png",
+      "source": "raw/badge-full_moon-r1.png",
+      "call": "raw/badge-full_moon-r1.call.json",
+      "recipe": {
+        "id": "badge-full_moon-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-full_moon-r1.png",
+        "crop_xywh": [
+          360,
+          295,
+          542,
+          696
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_full_moon/none/01.png",
+      "bounds": [
+        4,
+        2,
+        21,
+        23
+      ],
+      "sha256": "eb23a406dbf75b3eb9f4ca0f6b63da94c6298b302f068a32c1a9f9149022b253",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_legend",
+      "runtime_name": "sprites/ui/badge_legend.png",
+      "source": "raw/badge-legend-r1.png",
+      "call": "raw/badge-legend-r1.call.json",
+      "recipe": {
+        "id": "badge-legend-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-legend-r1.png",
+        "crop_xywh": [
+          362,
+          293,
+          534,
+          695
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1271,
+          1238
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_legend/none/01.png",
+      "bounds": [
+        4,
+        2,
+        20,
+        23
+      ],
+      "sha256": "3b45c761189ba6d7a7c8726da6c912d522e3ea6d065375df4b61ce0cc76044c8",
+      "input_images": [
+        {
+          "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_arsenal",
+      "runtime_name": "sprites/ui/badge_arsenal.png",
+      "source": "raw/badge-arsenal-r2.png",
+      "call": "raw/badge-arsenal-r2.call.json",
+      "recipe": {
+        "id": "badge-arsenal-r2",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-arsenal-r2.png",
+        "crop_xywh": [
+          354,
+          291,
+          554,
+          702
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          10
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_arsenal/none/01.png",
+      "bounds": [
+        4,
+        2,
+        21,
+        23
+      ],
+      "sha256": "4a25e50cfc7923f3fe18724b962b1b4f724a2c0be3b19b774ee38b0130951ab9",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/badge-arsenal-r1.png",
+          "sha256": "9c5abe1fd1d03b303e2b4a7bd5e18be4f0db6d9ed2e21a8a1f1e4540b0626e1f",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "badge_year_two",
+      "runtime_name": "sprites/ui/badge_year_two.png",
+      "source": "raw/badge-year_two-r2.png",
+      "call": "raw/badge-year_two-r2.call.json",
+      "recipe": {
+        "id": "badge-year_two-r2",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\badge-year_two-r2.png",
+        "crop_xywh": [
+          351,
+          280,
+          560,
+          720
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1262,
+          1246
+        ],
+        "content_scale": 0.030555555555555555,
+        "content_anchor_xy": [
+          8,
+          11
+        ],
+        "canvas_wh": [
+          24,
+          24
+        ],
+        "pivot_xy": [
+          12,
+          12
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "badge",
+      "output": "preview/candidates/badge_year_two/none/01.png",
+      "bounds": [
+        4,
+        1,
+        21,
+        23
+      ],
+      "sha256": "c2306d6c6eb03fc923dc57f97fb03cbe16d9d71e6d9f186c79261c211f19f44e",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/badge-year_two-r1.png",
+          "sha256": "c2743c331d2a94d4fb997aee357d41ef2a09bc69e2a8ba9fee0baf213d845131",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/medal-master-r1.png",
+          "sha256": "26e8da041ba3ca443017a05914205913590f1dae8ba88553492971d8c7ee5b3a",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    },
+    {
+      "name": "collection_ornament",
+      "runtime_name": "sprites/ui/collection_ornament.png",
+      "source": "raw/collection-ornament-r1.png",
+      "call": "raw/collection-ornament-r1.call.json",
+      "recipe": {
+        "id": "collection-ornament-r1",
+        "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\collection-ornament-r1.png",
+        "crop_xywh": [
+          74,
+          369,
+          1524,
+          205
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1672,
+          941
+        ],
+        "content_scale": 0.04068241469816273,
+        "content_anchor_xy": [
+          31,
+          4
+        ],
+        "canvas_wh": [
+          64,
+          12
+        ],
+        "pivot_xy": [
+          32,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette": "tools/palette.py:COLOURS"
+      },
+      "canvas_wh": [
+        64,
+        12
+      ],
+      "pivot_xy": [
+        32,
+        6
+      ],
+      "draw_scale": 1,
+      "seconds": 1.0,
+      "loop": false,
+      "direction": "none",
+      "mirror": "none",
+      "category": "ornament",
+      "output": "preview/candidates/collection_ornament/none/01.png",
+      "bounds": [
+        1,
+        2,
+        63,
+        10
+      ],
+      "sha256": "605e4352a95c70a87dfc4cebf44707198ac1ecf779e123592869e520bf0710cc",
+      "input_images": [
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+          "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+          "role": "reference image; exact role specified in the recorded prompt"
+        },
+        {
+          "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+          "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+          "role": "reference image; exact role specified in the recorded prompt"
+        }
+      ]
+    }
+  ]
+}

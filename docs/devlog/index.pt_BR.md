@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-291 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+292 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -334,6 +334,7 @@ voz alta.
 | 0267 | Art: the Scarecrow King | 2026-10-15 |
 | 0268 | Art: the Winter Lord | 2026-10-16 |
 | 0269 | Art: fog, rain and the Blood Moon icons | 2026-10-16 |
+| 0288 | Art: the collection book, trophies and badges | 2026-10-16 |
 
 ## Toda vez que o jogo mudou por baixo
 

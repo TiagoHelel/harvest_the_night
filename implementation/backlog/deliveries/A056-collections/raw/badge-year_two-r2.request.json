@@ -1,0 +1,8 @@
+{
+  "prompt": "EDIT the supplied YEAR TWO badge. The current sprout extends the overall medal outside the shared badge master dimensions. Keep the medal and ribbon exactly the same size, shape, position and proportions as the supplied blank medal master. Preserve the rim and ribbon perfectly. Change only the face emblem: draw a compact two-leaf green sprout entirely inside the gold circular face, no leaf or stem beyond the face. Make the entire opaque badge the same outer dimensions as the master, no larger. Transparent background, crisp tiny pixel art, no added object or text.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/badge-year_two-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/medal-master-r1.png"
+  ]
+}

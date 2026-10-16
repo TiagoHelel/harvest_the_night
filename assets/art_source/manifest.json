@@ -132692,6 +132692,1626 @@
       ],
       "output_sha256": "8b3cc3aa9437fbbb42067308584a317fd57b2b6813c209330d75382ddf6f10c7",
       "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/collection_cover",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/collection-cover-r1.png",
+      "source_sha256": "36ece43e313362d7c7c7dbd009f506e709ae48cd46f44ff2f24c8da80d2fddc9",
+      "crop_xywh": [
+        208,
+        387,
+        680,
+        729
+      ],
+      "canvas_wh": [
+        48,
+        64
+      ],
+      "pivot_xy": [
+        24,
+        32
+      ],
+      "content_scale": 0.06764705882352941,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/collection_cover",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/collection_cover.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/collection-cover-r1.prompt.txt",
+      "prompt_sha256": "8fb3f8ab5bf60d3794ef3dbc476058dc596d7259d738d3416fa87e4c90f888a7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/collection-cover-r1.call.json",
+          "sha256": "bdb95456b09b85f0768fc8ce5d701971f8051b69bcafac57cb6fbd69034979f1",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/collection_cover/none/01.png",
+          "sha256": "1c0dea82bc8b7eb48eb34d9f62e25c81924ce392b204ff123e18e5a81944791a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        23,
+        24
+      ],
+      "output_sha256": "131dd90a9b4b48f2235ff191e2eedfcfffe681d28e157c895f81278fea2ad933"
+    },
+    {
+      "id": "ui/icon_book_crops",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-crops-r1.png",
+      "source_sha256": "37f040c4e7ea5abb40694b994b1350ce1c8cc803f83480682d66f7cea6da385d",
+      "crop_xywh": [
+        297,
+        362,
+        691,
+        622
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.020260492040520984,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_book_crops",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_book_crops.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-crops-r1.prompt.txt",
+      "prompt_sha256": "9832abe20d21c101ecb672a2c940f824b2b0ae34d76281bda7d049479611e133",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-crops-r1.call.json",
+          "sha256": "a03fc3f47da84561312d1a7a8615e8e1f1a6fa1f89c49b4c45fb276720e2fe48",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/icon_book_crops/none/01.png",
+          "sha256": "394fc529b85d954d1ada3594ccb8ab901bfb91a1cd4a824922c30d2faa620b93",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "fa21d953b8fb9902d61dcff2bd0e25e29c21eeee416815acb3c3996a1ea94a5d",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_book_crops",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-crops-r1.png",
+      "source_sha256": "37f040c4e7ea5abb40694b994b1350ce1c8cc803f83480682d66f7cea6da385d",
+      "crop_xywh": [
+        297,
+        362,
+        691,
+        622
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011577424023154847,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_book_crops",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_book_crops.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-crops-r1.prompt.txt",
+      "prompt_sha256": "9832abe20d21c101ecb672a2c940f824b2b0ae34d76281bda7d049479611e133",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-crops-r1.call.json",
+          "sha256": "a03fc3f47da84561312d1a7a8615e8e1f1a6fa1f89c49b4c45fb276720e2fe48",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/hud_book_crops/none/01.png",
+          "sha256": "09575a8f88129ea65ad10ba28d7376390f60879b3e4e8ab5eb5f060def998634",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "545f57b70c88c771564412a1c12b4587dd343611d732910ce7a81fcca3cc7d40",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_book_bosses",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-bosses-r1.png",
+      "source_sha256": "bb397f99aa4b437310a2b692936f584fe86a2fb2991e24402ce8b1a9122e249f",
+      "crop_xywh": [
+        295,
+        360,
+        694,
+        624
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.020172910662824207,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_book_bosses",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_book_bosses.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-bosses-r1.prompt.txt",
+      "prompt_sha256": "516a32b625f05825097522e065467f721e064db6273fd1514a19bf100fabcd32",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-bosses-r1.call.json",
+          "sha256": "76c6cdab31d20046ffca9e64eb4cee1fa6f959d7bc3403dd32c6e3c6081f14a4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/icon_book_bosses/none/01.png",
+          "sha256": "ba2d2e5ebe65580acf4ca26f68b9d5d4e0c4ea9c7e3750bb6cfa0007e2be8828",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "0708928ee8b70ba986a23f136894bb9c36ec45249c237c53d21c05c25d4882a5",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_book_bosses",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-bosses-r1.png",
+      "source_sha256": "bb397f99aa4b437310a2b692936f584fe86a2fb2991e24402ce8b1a9122e249f",
+      "crop_xywh": [
+        295,
+        360,
+        694,
+        624
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011527377521613832,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_book_bosses",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_book_bosses.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-bosses-r1.prompt.txt",
+      "prompt_sha256": "516a32b625f05825097522e065467f721e064db6273fd1514a19bf100fabcd32",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-bosses-r1.call.json",
+          "sha256": "76c6cdab31d20046ffca9e64eb4cee1fa6f959d7bc3403dd32c6e3c6081f14a4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/hud_book_bosses/none/01.png",
+          "sha256": "a2526b2720c8cce635e8b06f1e402717a9d3eaf7376c4bdfcb87d1612e6babcc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "97d2243f6cdd28e8a8df0fd13c5289ae11499aafa6675e937cbe00b5d50878b2",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_book_year",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-year-r1.png",
+      "source_sha256": "a7ed30f865c2d5462097019db9a8e2b1b6da597c7a0b47a4e1f3659ebb70a737",
+      "crop_xywh": [
+        297,
+        361,
+        692,
+        622
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.02023121387283237,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_book_year",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_book_year.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-year-r1.prompt.txt",
+      "prompt_sha256": "c13b79e3c13aea837147c286f7060fd9a9d16162bb0eefdf033ad0e1a473d612",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-year-r1.call.json",
+          "sha256": "f91a96c3f5cdda3d7daab192b666ae0a39950f2976b56c857d3a5c52927f4a40",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/icon_book_year/none/01.png",
+          "sha256": "acb119cff2b08a184aafad50af87c2288cbf71d2d24fd3a269bcd15ef3b67628",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "b69d3e0ec9693374514d8a569836d844bbd0cf0e1e59181d2736ef50c60f0ba4",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_book_year",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-year-r1.png",
+      "source_sha256": "a7ed30f865c2d5462097019db9a8e2b1b6da597c7a0b47a4e1f3659ebb70a737",
+      "crop_xywh": [
+        297,
+        361,
+        692,
+        622
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011560693641618497,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_book_year",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_book_year.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-year-r1.prompt.txt",
+      "prompt_sha256": "c13b79e3c13aea837147c286f7060fd9a9d16162bb0eefdf033ad0e1a473d612",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-year-r1.call.json",
+          "sha256": "f91a96c3f5cdda3d7daab192b666ae0a39950f2976b56c857d3a5c52927f4a40",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/hud_book_year/none/01.png",
+          "sha256": "680040e8ceda20a81fb3b4f4bacd757c226d0201e57fcd775a7431c672b48398",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "111e2fef1807e93fc49e6bac10417fca529017dd4fc91e821d90916798551847",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/icon_book_achievements",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-achievements-r1.png",
+      "source_sha256": "d24db2eddb7e86acd51e5c645bab13270f002fc7106fd4f23ed1662d9bb0a27c",
+      "crop_xywh": [
+        295,
+        362,
+        695,
+        621
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.02014388489208633,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/icon_book_achievements",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/icon_book_achievements.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-achievements-r1.prompt.txt",
+      "prompt_sha256": "98d03cf88c7578ad1ba0eee7173c81d7a0e059e4c6013e14b4d3952bc8a6969a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-achievements-r1.call.json",
+          "sha256": "35e341ddf584f89a7cc4762ae8383f2322967a034cbed3bba489dcae557bb0b8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/icon_book_achievements/none/01.png",
+          "sha256": "9acbdf6e2fc1f851ab30b4027c3f8eca6f6ddd9a8fb73eb3716de1c68869e2e4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "4820322b1d508808a426036ba6287eca49406a5bb74e45f5415b8cd98a7b2046",
+      "display_role": "inventory"
+    },
+    {
+      "id": "ui/hud_book_achievements",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/book-achievements-r1.png",
+      "source_sha256": "d24db2eddb7e86acd51e5c645bab13270f002fc7106fd4f23ed1662d9bb0a27c",
+      "crop_xywh": [
+        295,
+        362,
+        695,
+        621
+      ],
+      "canvas_wh": [
+        10,
+        10
+      ],
+      "pivot_xy": [
+        5,
+        5
+      ],
+      "content_scale": 0.011510791366906475,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/hud_book_achievements",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/hud_book_achievements.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/book-achievements-r1.prompt.txt",
+      "prompt_sha256": "98d03cf88c7578ad1ba0eee7173c81d7a0e059e4c6013e14b4d3952bc8a6969a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/book-achievements-r1.call.json",
+          "sha256": "35e341ddf584f89a7cc4762ae8383f2322967a034cbed3bba489dcae557bb0b8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/hud_book_achievements/none/01.png",
+          "sha256": "3a9c6f00daf272e8bb04c7c1e348515f5be49935879d00bd135116ea19ed98d8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        4,
+        3
+      ],
+      "output_sha256": "496936708de23a8eccfb8e90f2392254fabbf1d4b32c9c5cbe95d20d99d4588b",
+      "display_role": "compact_hud"
+    },
+    {
+      "id": "ui/trophy_giant",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/trophy-giant-r1.png",
+      "source_sha256": "fea3869f8d44b876c615dcd4a8f910ede36a892432465919ce4d415a9ad99616",
+      "crop_xywh": [
+        353,
+        298,
+        550,
+        660
+      ],
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "content_scale": 0.04491017964071856,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/trophy_giant",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/trophy_giant.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/trophy-giant-r1.prompt.txt",
+      "prompt_sha256": "5168ee90fb0ba2cea1822c38b712e0f00e438ad3eb5f5aa8fac9600352e94ca9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/trophy-giant-r1.call.json",
+          "sha256": "cd2277801cd826f0cd6a8148c601cb75c20ac55fcd657efa6e93d2fa3e2f90b7",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/trophy_giant/none/01.png",
+          "sha256": "f9bb88111a0dcb0046a9d0445b4788d41c252bdba5feba34fc476d0530b422b9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "output_sha256": "5d20e8607ba26c82197335bd3438c49ed7a235d944aee6c9b890ec55086351ea"
+    },
+    {
+      "id": "ui/trophy_harvester",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/trophy-harvester-r1.png",
+      "source_sha256": "c2283cac90e94fbf0bd66f13006726ade3ba2aa60b82280d90a16707dfa1bc4d",
+      "crop_xywh": [
+        353,
+        296,
+        548,
+        663
+      ],
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "content_scale": 0.04491017964071856,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/trophy_harvester",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/trophy_harvester.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/trophy-harvester-r1.prompt.txt",
+      "prompt_sha256": "39053eeb1e79677b331c3f1f377bd7a9d834f12ce7ccbc8ce264dca058f0abcb",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/trophy-harvester-r1.call.json",
+          "sha256": "b395668b89e0a5d29d3cc996c2194807c14685a5f648484d3308be793014bb29",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/trophy_harvester/none/01.png",
+          "sha256": "cf7ce7359438594ac7a5ef477f6d6b39e76eb40d7decc6ece692c93aac57c202",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "output_sha256": "101d8e954c374a93e77bc8bdcf633b1f43f4470f89fb24d9f01489e105f19f7c"
+    },
+    {
+      "id": "ui/trophy_scarecrow_king",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/trophy-scarecrow-r2.png",
+      "source_sha256": "dac54d691352ca24793324832f7f53feb411f33bb3f96b7e973858c41290da83",
+      "crop_xywh": [
+        348,
+        295,
+        559,
+        666
+      ],
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "content_scale": 0.04491017964071856,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/trophy_scarecrow_king",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/trophy_scarecrow_king.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/trophy-scarecrow-r2.prompt.txt",
+      "prompt_sha256": "c6506c3c94815a8b57d771ed1154289ddbdcf6baca8ba93ff9640e60f0e60500",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/trophy-scarecrow-r2.call.json",
+          "sha256": "ac562d73e7228aacd5811e208848da40f6f5e1c8eaae7fbe4941ddf8d5b4a78b",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/trophy_scarecrow_king/none/01.png",
+          "sha256": "846dd6400992f2d30ef91ee2a55dd6eebb8b006ec0562a2f8164a4f38060481c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "output_sha256": "7d472e6e740ea502ef193552278355e501e5eaf114063af6136adf1f0016b3fa"
+    },
+    {
+      "id": "ui/trophy_winter_lord",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/trophy-winter-r1.png",
+      "source_sha256": "691ca46b4d4b3ffcbb64297fec0cf5428c5de981a558eefda9951a34815846bb",
+      "crop_xywh": [
+        350,
+        294,
+        555,
+        668
+      ],
+      "canvas_wh": [
+        32,
+        32
+      ],
+      "pivot_xy": [
+        16,
+        16
+      ],
+      "content_scale": 0.04491017964071856,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/trophy_winter_lord",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/trophy_winter_lord.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/trophy-winter-r1.prompt.txt",
+      "prompt_sha256": "32208d741d96965ced3783a811bd645dd27f9b60d526fcdc709473eaee409251",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/trophy-winter-r1.call.json",
+          "sha256": "52e9a0f4b5ea08d0ef3d66de32d5d821658c87f5724566ab98356e0bb2c507b6",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/trophy_winter_lord/none/01.png",
+          "sha256": "a175f31fa89f5bffe271572b2fe6cb321a57c185b75906ccaad7e93103d5952a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        12,
+        15
+      ],
+      "output_sha256": "0a5446f52394af150c6b173ced1249440231129bf3fe785c6502ee6c7a4edaaa"
+    },
+    {
+      "id": "ui/badge_first_night",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-first_night-r1.png",
+      "source_sha256": "d4fca40221baf2f8676467f14215e8a3167e4913e57d6473e35eb7c6d404bea0",
+      "crop_xywh": [
+        365,
+        295,
+        530,
+        695
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_first_night",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_first_night.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-first_night-r1.prompt.txt",
+      "prompt_sha256": "5e72f265ba7464e27ff0b9a0b0e9a67f8f85144fa7295c0358b577d77297338c",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-first_night-r1.call.json",
+          "sha256": "9dea017ce82814f2799be4d5053c46deb2dc06214f98cb6601f5f470ff081db8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_first_night/none/01.png",
+          "sha256": "af69521190ea2484ab75c0ffed9574fce7320a01e2a0b016946b3207f8520d2c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "01d5b540511be6f34444b3f4bf8ebc3238b8f92450fb807c8b9eca5ca02a188e"
+    },
+    {
+      "id": "ui/badge_hundred_nights",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-hundred_nights-r1.png",
+      "source_sha256": "8c852e2370636bc32cb53b99fcff1f58afcf816e757d9a9cbeb91c4933b407bb",
+      "crop_xywh": [
+        363,
+        295,
+        537,
+        693
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_hundred_nights",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_hundred_nights.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-hundred_nights-r1.prompt.txt",
+      "prompt_sha256": "f8724c0aa215840c59c4eeffa632486ec43b078023f8a465f1f846785a0af6d7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-hundred_nights-r1.call.json",
+          "sha256": "cbe610ef9c8c3a661f703ee33a098b0a38e36e277d6b77a0479c1d2cc32970c5",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_hundred_nights/none/01.png",
+          "sha256": "dbaa04c33ada4ede8050de082c1e913c5811b30d42b9a1beae866eaf5a939686",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "88e190fa9df5a2702bf103a8ecda32d6e0a25c3ff3894a4776aeccc460efa1db"
+    },
+    {
+      "id": "ui/badge_slayer",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-slayer-r1.png",
+      "source_sha256": "58bf71d20ee41d4f0372070d4224b6449bb6f51ecc62b0199fd4925d7592faf8",
+      "crop_xywh": [
+        364,
+        296,
+        534,
+        695
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_slayer",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_slayer.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-slayer-r1.prompt.txt",
+      "prompt_sha256": "ac7ea24ef0528496b47a0968045a0cbcf7763cdd24d6199f618f394304760e10",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-slayer-r1.call.json",
+          "sha256": "35e00505c9aaacfa48fc3f6d71559ff5f761a08b381886810bbf05645cdbc65b",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_slayer/none/01.png",
+          "sha256": "2ba6210074ff55b0cdeb598c178a3d8f860c3134bc63030600f62cf1bf5d69cd",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "71cbaa341ed168fe8a104961562e3f812b2c55bbfd6c9860870f3e2771a6aa93"
+    },
+    {
+      "id": "ui/badge_builder",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-builder-r1.png",
+      "source_sha256": "db1c82a63abd8075aee14a95a1e03fe597fd0476f0a7dd9a1d2f54c702cf592d",
+      "crop_xywh": [
+        363,
+        297,
+        536,
+        695
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_builder",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_builder.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-builder-r1.prompt.txt",
+      "prompt_sha256": "329f61b5d4f4e579b95df6424df9511045c394ee862d791215ee0ec72dae7169",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-builder-r1.call.json",
+          "sha256": "8afd72f93298e2d178f3f0cafc04c51aa7fb2225877339075cddacda7576ed7a",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_builder/none/01.png",
+          "sha256": "5162d3097158164f443cad0086ab3f7a63778539a584d66c6b9523f697794682",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "df81c5c8737c96612b0d0ca84295e07f03f93e1dbd1a17321b8fc049196a96be"
+    },
+    {
+      "id": "ui/badge_gatherer",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-gatherer-r1.png",
+      "source_sha256": "46cc68461b5b23e39f3324dee50aaf4bb1583266fd7a690aeede850fd96fea96",
+      "crop_xywh": [
+        360,
+        295,
+        542,
+        697
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_gatherer",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_gatherer.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-gatherer-r1.prompt.txt",
+      "prompt_sha256": "e0d6b8c8abedb9ec4999b254b74f369a87c6a2f2a68db3eb128f143312eb3f6f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-gatherer-r1.call.json",
+          "sha256": "466f5f91472493960d2710676825eb97e440c039c9176354dec7bbce6e18ed8b",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_gatherer/none/01.png",
+          "sha256": "77da449dd805a23ea546928665aa16d6672c041d3819b15b88a745c19ae3a3a4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "0df6612d4af389ec09950c653906df9f23d9a9296dee6970ad8e007b57135a7f"
+    },
+    {
+      "id": "ui/badge_angler",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-angler-r1.png",
+      "source_sha256": "13b9999fab2179e62c5e2bb42263b1fa8d7ea8cb5e5902e2374f0cdfdbc136fb",
+      "crop_xywh": [
+        362,
+        295,
+        537,
+        696
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_angler",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_angler.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-angler-r1.prompt.txt",
+      "prompt_sha256": "54154311a35dda0610011de1cd81494cf44d20ed3c02a05cb7696119aaeb4c6f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-angler-r1.call.json",
+          "sha256": "304a66e8b401ad1d722b2c955c9ac14a409ec83a0e15f2b70cf25c6265260c87",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_angler/none/01.png",
+          "sha256": "2bf00874fb2d4f8d27c4dc4ba23aa3b78749ff58c448f984dd45bab35be6839d",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "d1cda2fea5143f18ba7e153c8150159e66910456850aa3ce25f50942024d69ac"
+    },
+    {
+      "id": "ui/badge_regular",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-regular-r1.png",
+      "source_sha256": "e15b59767da33bc6574ab73ec06d5ad6353f959b9579b7ffedeb9ddc6a6a4fbc",
+      "crop_xywh": [
+        363,
+        296,
+        536,
+        695
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_regular",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_regular.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-regular-r1.prompt.txt",
+      "prompt_sha256": "1e25b14442123e6802f5d57ffb2f15a31eaa0f3334b1560fb9457a6d07200684",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-regular-r1.call.json",
+          "sha256": "1f50c4e5da3bfb1fe451e1036ea6649bab7da7be3d10602e330b0709ea214fe8",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_regular/none/01.png",
+          "sha256": "d1723269fac5846b2056443012c25c8936b2cca58f32161234f2cf50e749adbb",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "0a4775213347e6174bc6f4c3c2e6d0d6d5457e6b9a3ed4bafa8db64f1390fb68"
+    },
+    {
+      "id": "ui/badge_long_haul",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-long_haul-r1.png",
+      "source_sha256": "8b24688844490dc39b95b9680af88a4504a6aee9f7c12f87886e43fb73eb72b2",
+      "crop_xywh": [
+        363,
+        296,
+        533,
+        695
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_long_haul",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_long_haul.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-long_haul-r1.prompt.txt",
+      "prompt_sha256": "ba444948fd30e66a37098894ebf5a074d2adec03a8ac95e8f3ab781f84a24f26",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-long_haul-r1.call.json",
+          "sha256": "0837a4ed5889ea3f8fc0f62e437d5f2c8174b3f67c1496091ff3ab8f629dbde9",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_long_haul/none/01.png",
+          "sha256": "53c5f6d245e29509cb1196523c3af322b0438f76ec1060660e47dadb92320b75",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "13c1500204ae8c1e14bfdb0ffb1359c7a43bbdead11bee55c3c2cf2ac049d8db"
+    },
+    {
+      "id": "ui/badge_full_moon",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-full_moon-r1.png",
+      "source_sha256": "f788180a87bfc5e7c8ebf300a43561bc54918a3cb097bcad54ff9289f450f43b",
+      "crop_xywh": [
+        360,
+        295,
+        542,
+        696
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_full_moon",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_full_moon.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-full_moon-r1.prompt.txt",
+      "prompt_sha256": "ddb58c76960fd58a54ce34dac7ada5493ce48164b0a35b26326b286ba8a059db",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-full_moon-r1.call.json",
+          "sha256": "403ef3439e493e6f8cebf73e598219c8d974969898bf6ef688978d7dc7066786",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_full_moon/none/01.png",
+          "sha256": "eb23a406dbf75b3eb9f4ca0f6b63da94c6298b302f068a32c1a9f9149022b253",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "e1ceabc01c16254ace393fb09a49280bb9dfa3743a70cdbf466eb6dedd6d196f"
+    },
+    {
+      "id": "ui/badge_legend",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-legend-r1.png",
+      "source_sha256": "230e664430c60f0d507e8e9ca09978d38f24526ff0afe23f073e6334fd05173a",
+      "crop_xywh": [
+        362,
+        293,
+        534,
+        695
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_legend",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_legend.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-legend-r1.prompt.txt",
+      "prompt_sha256": "fb2e3299708bd8db364a8c09539ca8cc5d23324194bdaa4c9d8323fdf6506ffe",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-legend-r1.call.json",
+          "sha256": "66e253842f597583db1ba4974f0b14a6328d183527b6fd8159635801a0d96235",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_legend/none/01.png",
+          "sha256": "3b45c761189ba6d7a7c8726da6c912d522e3ea6d065375df4b61ce0cc76044c8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "f960cb81c2fcdf3cb8c2fcc143742569f68e91a0535e555a54866b16a0a78e1b"
+    },
+    {
+      "id": "ui/badge_arsenal",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-arsenal-r2.png",
+      "source_sha256": "332e71bffe7625ba609874f7fac5b4b565d759f1d63f50ffd863e673d47c470d",
+      "crop_xywh": [
+        354,
+        291,
+        554,
+        702
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_arsenal",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_arsenal.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-arsenal-r2.prompt.txt",
+      "prompt_sha256": "d8c2248fd9c31ccec8d8aabbdd95f757e13173c4b951d4f385ca6516c9b442ca",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-arsenal-r2.call.json",
+          "sha256": "2666ee692bd65ddff384d75c1a71bf699d5b141598a9608c1b8bdb5b54578db3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_arsenal/none/01.png",
+          "sha256": "4a25e50cfc7923f3fe18724b962b1b4f724a2c0be3b19b774ee38b0130951ab9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        10
+      ],
+      "output_sha256": "18fe478ca741dcff16934dbbb905b71a301b32fb9f508da45d17fdb6ac5be065"
+    },
+    {
+      "id": "ui/badge_year_two",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/badge-year_two-r2.png",
+      "source_sha256": "4f7f1a7c5636cd3a7d3146ebbbf677275b09314e549eb99cc2c5998db2920ef1",
+      "crop_xywh": [
+        351,
+        280,
+        560,
+        720
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.030555555555555555,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/badge_year_two",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/badge_year_two.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/badge-year_two-r2.prompt.txt",
+      "prompt_sha256": "bdb5d075e625cd8ccd84f110721b0b24181f71c2b4edd81b616eaac1f18ec969",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/badge-year_two-r2.call.json",
+          "sha256": "709774e3ac8ea3a21e06ac9ff02ac2f48544941c1001b4d7b28155a6182c92d4",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/badge_year_two/none/01.png",
+          "sha256": "c2306d6c6eb03fc923dc57f97fb03cbe16d9d71e6d9f186c79261c211f19f44e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        8,
+        11
+      ],
+      "output_sha256": "ac61cf9c0b1967e24ba2a85bdfad5ea2114b83df8641ff557914744f6deb18ce"
+    },
+    {
+      "id": "ui/collection_ornament",
+      "owner": "raster",
+      "source": "assets/art_source/ui/collections/collection-ornament-r1.png",
+      "source_sha256": "a253598c6f1b6b92f98766879811e4933c4d9f755e4e93065241f0c529fa6fb8",
+      "crop_xywh": [
+        74,
+        369,
+        1524,
+        205
+      ],
+      "canvas_wh": [
+        64,
+        12
+      ],
+      "pivot_xy": [
+        32,
+        6
+      ],
+      "content_scale": 0.04068241469816273,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "ui/collection_ornament",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/collection_ornament.png",
+      "prompt": "implementation/backlog/deliveries/A056-collections/raw/collection-ornament-r1.prompt.txt",
+      "prompt_sha256": "66585c80c5988d67b2b5eb8aa6d133401d526c98cb2198d9de365af1e1a0a8ef",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/raw/collection-ornament-r1.call.json",
+          "sha256": "046aaaf925963233087b82072c75238590610e7e9d5e81c532d0e1e4445a6831",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/native/collection_ornament/none/01.png",
+          "sha256": "605e4352a95c70a87dfc4cebf44707198ac1ecf779e123592869e520bf0710cc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/contract.json",
+          "sha256": "adf088e7f3117a0be9744275c4fdd82572e2b3b78bbd08379571873e14fce1a7",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A056-collections/APPROVAL.json",
+          "sha256": "6289693fc521091d5c39276afcfd794f12b81c9594b39fc966e5b117904ec7e4",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A056",
+      "integration_task": "0288",
+      "revision": 1,
+      "approval": "A056 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0288",
+      "content_anchor_xy": [
+        31,
+        4
+      ],
+      "output_sha256": "0cbe7f865d95fbbb1b7704e1cd534041dd8512e2e8db1a3b1f5c52a8e981c2e1"
     }
   ]
 }

@@ -3,7 +3,8 @@ extends SceneTree
 ## The collections book (task 0287), photographed from the real renderer at
 ## 1920x1080: every tab with an empty profile and with a full one, opened
 ## from the title menu through the router the way a player opens it, and the
-## book over a run once, for the run's own hint.
+## book over a run, for the run's own hint - by day, and since task 0288 by
+## night as well.
 ##
 ##     godot --path . --position -4000,-4000 \
 ##         --script res://src/tools/capture_collections.gd -- [--out=<dir>] [--pt_BR]
@@ -82,6 +83,20 @@ func _run() -> void:
 	in_run.show_tab(&"achievements")
 	await _settle(3)
 	await _shoot(folder, "%s_run_achievements" % tag)
+	# **By night** (task 0288): the run taken into its night, the book opened
+	# over it again, its trophies and its badges.
+	router.back()
+	await _settle(4)
+	var driver := main.find_child("SimDriver", true, false) as SimDriver
+	NightRoad.to_night(driver.state)
+	await _settle(6)
+	router.goto(router.COLLECTIONS)
+	await _settle(4)
+	in_run.show_profile(full_profile())
+	for tab in [&"bosses", &"achievements"]:
+		in_run.show_tab(tab)
+		await _settle(3)
+		await _shoot(folder, "%s_run_night_%s" % [tag, tab])
 	root.remove_child(main)
 	main.free()
 	print("COLLECTIONS CAPTURE: %d pictures into %s" % [_written, folder])

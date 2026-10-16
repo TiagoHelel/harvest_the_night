@@ -1,0 +1,8 @@
+{
+  "prompt": "EDIT the supplied ARSENAL badge. Keep the medal and ribbon exactly the same size, shape, position and proportions as the blank medal master. Preserve the rim and ribbon perfectly. Change only the face emblem: make a compact crenellated stone tower head that fits entirely inside the gold circular face. The emblem must not widen or enlarge the overall badge beyond the shared blank medal bounds. Transparent background, crisp pixel art, no extra shapes or text.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/badge-arsenal-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/medal-master-r1.png"
+  ]
+}

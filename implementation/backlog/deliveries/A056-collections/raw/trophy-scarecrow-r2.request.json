@@ -1,0 +1,8 @@
+{
+  "prompt": "EDIT the supplied Scarecrow King trophy candidate. It incorrectly shows wheat stalks; remove every grain/corn/wheat shape and replace the mounted token ONLY with a single crooked crown made of bare twig branches, unmistakably like a simple scarecrow's twig crown. Do not add crops, leaves, straw bundles or stalks. Preserve the same plaque silhouette, gold rim, nail, wood, outline, pixel scale, position and transparent margin from Image 1. The boss identity reference is Image 2 and is a candidate reference only. Tiny readable 32x32 collection trophy icon, transparent background, no words.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/trophy-scarecrow-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "EDIT the approved-style Giant trophy raw (Image 1). Replace ONLY its mounted token with a crooked twig crown, preserving the exact plaque, gold rim, nail, size, position, angle, pixels and outline. Boss identity reference is Image 2; do not copy its whole body. One trophy icon.\n\nUse deliberate pixel-art clusters with a colored outline, clean pixel edges and only 2-3 readable material planes. Isolated transparent-background game sprite, one fixed complete object, centered on its native pivot, no scene, shadow, glow, gradient, blur, anti-aliased halo, text, labels, numbers, watermark, frame, panel, or contact sheet. Final native target is 48x64 (pivot 24,32) for the cover; 16x16 (pivot 8,8) for a tab; 32x32 (pivot 16,16) for a trophy; 24x24 (pivot 12,12) for a medal; 64x12 (pivot 32,6) for the divider. Preserve generous transparent margins and keep all artwork comfortably inside the stated visible bounds.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+      "sha256": "fea3869f8d44b876c615dcd4a8f910ede36a892432465919ce4d415a9ad99616",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9359368b-35bf-44e4-a141-5967021bae22.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-scarecrow-r1.png",
+  "sha256": "e0b889cd0d3ea5b4889f761db1a25fd8ec99bbc8ea01498696914fe8f2cb0a49",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "EDIT the supplied Scarecrow King trophy candidate. It incorrectly shows wheat stalks; remove every grain/corn/wheat shape and replace the mounted token ONLY with a single crooked crown made of bare twig branches, unmistakably like a simple scarecrow's twig crown. Do not add crops, leaves, straw bundles or stalks. Preserve the same plaque silhouette, gold rim, nail, wood, outline, pixel scale, position and transparent margin from Image 1. The boss identity reference is Image 2 and is a candidate reference only. Tiny readable 32x32 collection trophy icon, transparent background, no words.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/trophy-scarecrow-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A056-collections/raw/trophy-scarecrow-r1.png",
+      "sha256": "e0b889cd0d3ea5b4889f761db1a25fd8ec99bbc8ea01498696914fe8f2cb0a49",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1b2d73f3-9e1a-4802-a55c-0d07420e46b1.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-scarecrow-r2.png",
+  "sha256": "dac54d691352ca24793324832f7f53feb411f33bb3f96b7e973858c41290da83",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

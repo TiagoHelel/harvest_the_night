@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "EDIT the approved-style Giant trophy raw (Image 1). Replace ONLY its mounted token with a bent rusted cutting-reel blade with one broken tine and muted red paint, preserving the exact plaque, gold rim, nail, size, position, angle, pixels and outline. Boss identity reference is Image 2; do not copy its whole body. One trophy icon.\n\nUse deliberate pixel-art clusters with a colored outline, clean pixel edges and only 2-3 readable material planes. Isolated transparent-background game sprite, one fixed complete object, centered on its native pivot, no scene, shadow, glow, gradient, blur, anti-aliased halo, text, labels, numbers, watermark, frame, panel, or contact sheet. Final native target is 48x64 (pivot 24,32) for the cover; 16x16 (pivot 8,8) for a tab; 32x32 (pivot 16,16) for a trophy; 24x24 (pivot 12,12) for a medal; 64x12 (pivot 32,6) for the divider. Preserve generous transparent margins and keep all artwork comfortably inside the stated visible bounds.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+      "sha256": "fea3869f8d44b876c615dcd4a8f910ede36a892432465919ce4d415a9ad99616",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png",
+      "sha256": "55812df0c9cdc7988f2501fbb7a5e13a6754fab1b14c36c9f27d02173e3d78df",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-366ed63e-813d-49dc-994a-1ec2d88f17c6.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-harvester-r1.png",
+  "sha256": "c2283cac90e94fbf0bd66f13006726ade3ba2aa60b82280d90a16707dfa1bc4d",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

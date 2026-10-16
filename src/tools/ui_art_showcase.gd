@@ -155,6 +155,8 @@ func _families(speaking: String, high: bool) -> void:
 			&"garlic_braid", &"searchlight", &"electric_fence", &"wall_2", &"sandbag_wall"],
 		# Task 0269: the night events' marks.
 		"A055": Weather.EVENTS,
+		# Task 0288: the collection book's tabs.
+		"A056": [&"book_crops", &"book_bosses", &"book_year", &"book_achievements"],
 		"A032": [GameData.WINE, GameData.JUICE, GameData.JELLY, GameData.PICKLES, GameData.CHEESE,
 			GameData.BUTTER, GameData.CLOTH, GameData.SANDBAG, GameData.FLOUR, GameData.SUGAR,
 			GameData.BREAD]}
@@ -175,6 +177,20 @@ func _families(speaking: String, high: bool) -> void:
 	for i in fish.size():
 		_picture(StringName("portrait_%s" % fish[i]), Vector2(12+(i%8)*56,30+(i/8)*44))
 	await _check_icons("family_A022_portraits_"+speaking+("_contrast" if high else ""))
+	# A056's book (task 0288): its cover, ornament, trophies and badges at
+	# their own boxes.
+	_new_room()
+	var bosses: Array = Collections.boss_ids()
+	var badges: Array = GameData.ACHIEVEMENTS.keys()
+	_label("A056 / cover, ornament, %d trophies, %d badges / native / %s" % [bosses.size(), badges.size(), speaking],
+		Vector2(12,5), UiKit.WARM)
+	_picture(&"collection_cover", Vector2(12,30))
+	_picture(&"collection_ornament", Vector2(72,30))
+	for i in bosses.size():
+		_picture(StringName("trophy_%s" % bosses[i]), Vector2(72+i*40,52))
+	for i in badges.size():
+		_picture(StringName("badge_%s" % badges[i]), Vector2(12+(i%6)*32,104+(i/6)*30))
+	await _check_icons("family_A056_book_"+speaking+("_contrast" if high else ""))
 	_new_room()
 	var kinds: Array = [&"walker", &"runner", &"tank", &"breaker", &"giant"]
 	_label("A011 / %d forecast heads / native 16px / %s" % [kinds.size(), speaking],
@@ -200,14 +216,27 @@ func _picture(name: StringName, at: Vector2) -> TextureRect:
 	image.position = at
 	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	image.stretch_mode = TextureRect.STRETCH_KEEP
-	image.size = Vector2(10,10) if String(name).begins_with("hud_") \
-		else (Vector2(32,32) if String(name).begins_with("portrait_") else Vector2(16,16))
+	image.size = _box(name)
 	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_room.add_child(image)
 	_icons.append(image)
 	expect(image.texture!=null and image.texture.resource_path=="res://sprites/ui/%s.png" % name
 		and PlaceholderArt.art(name).is_empty(),"The pack's own file draws, not a stand-in: "+String(name))
 	return image
+
+
+## A picture's native box by its name: a `hud_` cut 10x10, a book `portrait_`
+## or a boss's `trophy_` 32x32, a `badge_` 24x24, the book's cover 48x64 and
+## its ornament 64x12 (task 0288), anything else 16x16.
+static func _box(name: StringName) -> Vector2:
+	var text := String(name)
+	if text.begins_with("hud_"):
+		return Vector2(10,10)
+	if text.begins_with("portrait_") or text.begins_with("trophy_"):
+		return Vector2(32,32)
+	if text.begins_with("badge_"):
+		return Vector2(24,24)
+	return {"collection_cover": Vector2(48,64), "collection_ornament": Vector2(64,12)}.get(text, Vector2(16,16))
 
 
 ## Every icon of the room: it loads, at its native size, with the imported

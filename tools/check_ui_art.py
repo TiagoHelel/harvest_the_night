@@ -59,7 +59,17 @@ PAIRS = {
              'garlic_braid', 'searchlight', 'electric_fence', 'wall_2', 'sandbag_wall'],
     # Task 0269: the night events' marks - fog and rain (0256), the Blood Moon (0257).
     'A055': ['fog', 'rain', 'blood_moon'],
+    # Task 0288: the collection book's four tabs (0287); the fish's is A023's.
+    'A056': ['book_crops', 'book_bosses', 'book_year', 'book_achievements'],
 }
+
+## A056's collection book (task 0288), its own section: the cover, the page
+## ornament, a trophy per boss and a badge per achievement, each its own
+## source at its own box. Its four tabs are pairs, in `PAIRS`.
+COLLECTION = {'ui/collection_cover': ([48, 64], [24, 32]), 'ui/collection_ornament': ([64, 12], [32, 6])}
+TROPHIES = ['giant', 'harvester', 'scarecrow_king', 'winter_lord']
+BADGES = ['first_night', 'hundred_nights', 'slayer', 'builder', 'gatherer', 'angler', 'regular',
+          'long_haul', 'full_moon', 'legend', 'arsenal', 'year_two']
 
 ## A022's book portraits (task 0205): each species' third cut, 32x32 at
 ## (16,16), from its icon pair's source and crop. The book draws a fish never
@@ -147,6 +157,31 @@ def check_approved(e, art):
     assert len(approved)==1,'No approved export recorded for '+e['id']
     with Image.open(import_art.ROOT/approved[0]['path']) as image:
         assert image.convert('RGBA').tobytes()==art.tobytes(),'Approved pixels changed: '+e['id']
+
+
+def check_collection(manifest, images, files, registry):
+    """A056's book (task 0288): every piece at its box from a source of its own,
+    binary alpha inside a clear margin, no two alike, its exact bytes on disk and
+    the approved pixels. Returns how many pieces."""
+    by_id={e['id']:e for e in manifest['assets']}
+    pieces=dict(COLLECTION)
+    pieces.update({'ui/trophy_'+boss:([32,32],[16,16]) for boss in TROPHIES})
+    pieces.update({'ui/badge_'+badge:([24,24],[12,12]) for badge in BADGES})
+    packed=[e for e in manifest['assets'] if e.get('generation_task')=='A056']
+    assert len(packed)==len(pieces)+2*len(PAIRS['A056']),'Incomplete A056 set: %d' % len(packed)
+    sources=set();shapes=set()
+    for ident,(canvas,pivot) in pieces.items():
+        e=by_id[ident]
+        assert e.get('generation_task')=='A056' and e['canvas_wh']==canvas and e['pivot_xy']==pivot,'Collection piece drift: '+ident
+        assert not e['loop'] and e['frame']==0 and registry[e['output']]=='raster'
+        assert e['source'] not in sources,'Two pieces share a source: '+ident;sources.add(e['source'])
+        art=images[ident];box=art.getbbox();pixels=list(import_art.samples(art))
+        assert box and 0<box[0] and 0<box[1] and box[2]<canvas[0] and box[3]<canvas[1],'Clipped collection piece: '+ident
+        assert all(p[3] in (0,255) for p in pixels),'Collection piece alpha: '+ident
+        assert art.tobytes() not in shapes,'Two pieces alike: '+ident;shapes.add(art.tobytes())
+        assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
+        check_approved(e,art)
+    return len(pieces)
 
 
 def main():
@@ -311,6 +346,9 @@ def main():
     focus=Image.open(import_art.ROOT/'sprites/ui/button_focus.png').convert('RGBA')
     assert focus.getpixel((8,8))[3]==0 and focus.getpixel((1,8))[3]==255,'Focus must be a visible open ring'
     print('OK: %d cursor frames, seven looks pulsing, unlit, aim keeps its plus' % len(cursors))
+    collection=check_collection(manifest,images,files,registry)
+    print('OK: %d collection pieces - the cover, the ornament, %d trophies and %d badges, each its own source at its box, at its approved pixels (A056)'
+          % (collection,len(TROPHIES),len(BADGES)))
     print('OK: 14 exact generated resources / 28 distinct native cuts / %d pack icons at their approved pixels (%s) / ingots, gold and coal / cream milk and wool / %d book portraits, no shared silhouette (%s) / %d exact forecast heads (%s) / clear margins / palette alpha / preserved three-pixel frame profiles / focus ring'
           % (pairs,', '.join(sorted(PAIRS)),portraits,', '.join(sorted(PORTRAITS)),heads,', '.join(sorted(HEADS))))
 

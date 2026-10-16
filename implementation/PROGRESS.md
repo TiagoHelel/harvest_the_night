@@ -33656,3 +33656,69 @@ delivery's `APPROVAL.json`. 0256's and 0257's drawings in code are gone.
 - `python implementation/backlog/assets.py set A055 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0288 - Art: the collection book, trophies and badges - done 2026-10-16
+
+A056 is integrated. The collection book is the owner-approved art now:
+
+- the closed book on the column, 48x64 round (24,32);
+- the page ornament, 64x12 round (32,6);
+- the four tab books, each a pair at 16 and 10 (the fish's stays A023's);
+- a trophy per boss on its plaque, 32x32 round (16,16);
+- a medal per achievement, 24x24 round (12,12).
+
+The owner approved it on 2026-10-14 in the batch review, as recorded in the
+delivery's `APPROVAL.json`. The delivery's notes name its deviations, among
+them one shared scale for all twelve badges. 0287's drawings in code and
+its trophies (a boss's walk frame in its tint) are gone. Locked trophies and
+badges stay the same art dimmed by code.
+
+- **Promotion**:
+  - The 26 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their 22 raw sources were copied byte for byte into
+    `assets/art_source/ui/collections/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - The tab pairs carry their `display_role`, as the other pairs do.
+- **The screen draws the pack** (`CollectionsScreen`):
+  - `_piece` is the picture at its box.
+  - `_trophy` is A056's trophy at 32x32, its plaque in the picture.
+  - `CollectionArt`, which drew the cover, the ornament, the medals and the
+    plaque in code, is deleted.
+- **The stand-ins retired**:
+  - A056's twenty-six `PlaceholderArt` entries and its boxes
+    (`COLLECTION_COVER`, `TROPHY`, `BADGE`, `ORNAMENT`).
+  - The three boss tints, which only A056's trophies still used.
+  - `placeholders.py --check` passes, with 37 stand-ins left over 6 packs.
+- **Checks**:
+  - `check_ui_art.py` takes A056 in two parts. Its four tabs go in
+    `PAIRS`.
+  - Its own section, `check_collection`, takes the cover, the ornament, the
+    four trophies and the twelve badges. Each has its own source, its box,
+    binary alpha inside a clear margin, no two alike, and the approved
+    pixels.
+  - The `--ui` showcase shows the tabs as a family, and a room of the
+    cover, the ornament, the trophies and the badges at their boxes.
+    `UiKit.orphan_icons` claims the tab icons.
+- **Tests**: 0287's check asks for A056's art: every piece the pack's own
+  file at its path, no stand-in and nothing drawn in code, no two badges
+  alike, the cover 48x64.
+- **Captures** (`src/tools/capture_collections.gd`, into
+  `implementation/shots/0288/`, FHD 1920x1080, looked at):
+  - every tab with an empty profile (the trophies and the badges dimmed)
+    and with a full one, from the title menu;
+  - the fish book's last page;
+  - the book over a run by day.
+  - New since this task: the same run taken into its night and the book
+    opened over it again, its trophies and its badges (`en_run_night_*`).
+- **A flaw the night captures show, not this task's**: opened during a
+  night, the book has the night's hotbar, the log's lines and the cursor's
+  tooltip drawn over it. By day it covers the day HUD cleanly. The
+  layering is 0287's screen's, not A056's art, so it is left for its own
+  task.
+- **The delivery folder** `implementation/backlog/deliveries/A056-collections/`
+  is committed, as A055's was.
+- `python implementation/backlog/assets.py set A056 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

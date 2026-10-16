@@ -1,0 +1,9 @@
+{
+  "prompt": "EDIT the approved-style Giant trophy raw (Image 1). Replace ONLY its mounted token with a crooked twig crown, preserving the exact plaque, gold rim, nail, size, position, angle, pixels and outline. Boss identity reference is Image 2; do not copy its whole body. One trophy icon.\n\nUse deliberate pixel-art clusters with a colored outline, clean pixel edges and only 2-3 readable material planes. Isolated transparent-background game sprite, one fixed complete object, centered on its native pivot, no scene, shadow, glow, gradient, blur, anti-aliased halo, text, labels, numbers, watermark, frame, panel, or contact sheet. Final native target is 48x64 (pivot 24,32) for the cover; 16x16 (pivot 8,8) for a tab; 32x32 (pivot 16,16) for a trophy; 24x24 (pivot 12,12) for a medal; 64x12 (pivot 32,6) for the divider. Preserve generous transparent margins and keep all artwork comfortably inside the stated visible bounds.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A056-collections\\raw\\trophy-giant-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+  ]
+}

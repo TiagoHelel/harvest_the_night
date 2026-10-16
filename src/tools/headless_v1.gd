@@ -13022,7 +13022,7 @@ func _task_0286_weather_ambience() -> void:
 ## run that lost a night never earns the year, one whose boss only walked
 ## off still can, and one that lost none and beat Winter 14 does; folding
 ## twice adds nothing; a profile from before reads with the new keys; the
-## achievements' table is checked; and A056 is registered on 0120's road.
+## achievements' table is checked; and A056 is its art since task 0288.
 ## On crafted states: a 56-night run would not fit the 120 s.
 func _task_0287_collections() -> void:
 	var blank := Save.default_profile()
@@ -13158,30 +13158,29 @@ func _task_0287_collections() -> void:
 		str(read.get("collections")))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 
-	# **A056 on 0120's road**: every piece registered in its box until 0288.
+	# **A056's art since task 0288**: every piece the pack's own file at its
+	# path - no stand-in, nothing drawn in code - and no two badges alike.
 	var unregistered: Array = []
+	var faces: Dictionary = {}
+	var pieces: Array = [&"collection_cover", &"collection_ornament"]
 	for boss in Collections.boss_ids():
-		var name := StringName("trophy_%s" % boss)
-		if PlaceholderArt.art(name).get("geometry") != PlaceholderArt.TROPHY \
-				or UiKit.picture(name) == null:
-			unregistered.append(name)
+		pieces.append(StringName("trophy_%s" % boss))
 	for id in GameData.ACHIEVEMENTS:
-		if not PlaceholderArt.is_drawn("res://sprites/ui/badge_%s.png" % id) \
-				or not CollectionArt.EMBLEMS.has(id):
-			unregistered.append(id)
+		pieces.append(StringName("badge_%s" % id))
 	for tab in [&"crops", &"bosses", &"year", &"achievements"]:
-		for cut in ["icon_book_%s", "hud_book_%s"]:
-			if UiKit.picture(StringName(cut % tab)) == null:
-				unregistered.append(cut % tab)
-	for piece in [&"collection_cover", &"collection_ornament"]:
-		if not PlaceholderArt.is_drawn("res://sprites/ui/%s.png" % piece):
+		pieces.append(StringName("icon_book_%s" % tab))
+		pieces.append(StringName("hud_book_%s" % tab))
+	for piece in pieces:
+		var file := "res://sprites/ui/%s.png" % piece
+		var texture := UiKit.picture(piece)
+		if PlaceholderArt.is_drawn(file) or not PlaceholderArt.art(piece).is_empty() \
+				or texture == null or texture.resource_path != file:
 			unregistered.append(piece)
-	var emblems: Dictionary = {}
-	for id in CollectionArt.EMBLEMS:
-		emblems[CollectionArt.EMBLEMS[id]] = true
-	expect(unregistered.is_empty() and emblems.size() == GameData.ACHIEVEMENTS.size()
-			and PlaceholderArt.frame("res://sprites/ui/collection_cover.png").get("canvas") == Vector2i(48, 64),
-		"A056's cover, ornament, eight tab cuts, four trophies and twelve badges stand in, each badge its own emblem",
+		elif String(piece).begins_with("badge_"):
+			faces[texture.get_image().get_data()] = true
+	expect(unregistered.is_empty() and faces.size() == GameData.ACHIEVEMENTS.size()
+			and Vector2i(UiKit.picture(&"collection_cover").get_size()) == Vector2i(48, 64),
+		"A056's cover, ornament, eight tab cuts, four trophies and twelve badges are its art since 0288, no two badges alike",
 		str(unregistered))
 	_completed += 1
 

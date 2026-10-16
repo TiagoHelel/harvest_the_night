@@ -1,0 +1,5 @@
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+26/26 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: badge_crop_bounds_within_2_percent, raw_source_count_contract_matches. Complete delivery released for Claude integration.

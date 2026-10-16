@@ -1,6 +1,6 @@
 # A056 - The collection book, trophies and badges
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0288
 - **Dressed by game tasks:** 0287
 - **Spec after game task:** 0287

@@ -31,12 +31,11 @@ extends Control
 ##
 ## ## Placeholders
 ##
-## A056 through 0120's road until 0288 integrates it: the tab books and the
-## trophies are `UiKit.picture`s - a trophy is each boss's first walk frame
-## in its tint, hung on a plaque `CollectionArt` draws - and the cover, the
-## ornament and the badges are `CollectionArt` while `PlaceholderArt.is_drawn`
-## says so. **Locked is the earned art dimmed** (`LOCKED`): A056 has no locked
-## state to draw.
+## A056 is its art since task 0288: the cover, the tab books, the ornament,
+## a trophy per boss and a badge per achievement, each `UiKit.picture` at its
+## box. Through 0120's road until then, a trophy was each boss's first walk
+## frame in its tint and the rest was drawn in code. **Locked is the earned
+## art dimmed** (`LOCKED`): A056 has no locked state to draw.
 
 ## The tabs, in their order down the column.
 const TABS: Array = [&"fish", &"crops", &"bosses", &"year", &"achievements"]
@@ -111,8 +110,7 @@ func _ready() -> void:
 	add_child(_frame)
 
 	# **The column**: the book's cover, its tabs, the keys.
-	var cover := _piece(&"collection_cover", CollectionArt.COVER, &"",
-		Vector2(48, 64))
+	var cover := _piece(&"collection_cover", Vector2(48, 64))
 	cover.name = "CollectionsCover"
 	cover.position = Vector2(4 + (COLUMN_W - 48) / 2.0, 4)
 	_frame.add_child(cover)
@@ -142,8 +140,7 @@ func _ready() -> void:
 	heading.text = I18n.t(&"COLL_TITLE")
 	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	heading.size = Vector2(PAGE.size.x, 12)
-	var ornament := _piece(&"collection_ornament", CollectionArt.ORNAMENT, &"",
-		Vector2(64, 12))
+	var ornament := _piece(&"collection_ornament", Vector2(64, 12))
 	ornament.name = "CollectionsOrnament"
 	ornament.position = Vector2(PAGE.position.x + (PAGE.size.x - 64) / 2.0, 14)
 	_frame.add_child(ornament)
@@ -279,8 +276,7 @@ func _build_achievements(page: Control) -> void:
 		var id := StringName(ids[i])
 		var one: Dictionary = GameData.ACHIEVEMENTS[id]
 		var at := Vector2((i % 2) * 166.0, 14 + (i / 2) * 32.0)
-		var badge := _piece(StringName("badge_%s" % id), CollectionArt.BADGE, id,
-			Vector2(24, 24))
+		var badge := _piece(StringName("badge_%s" % id), Vector2(24, 24))
 		badge.name = "CollectionsBadge_%s" % id
 		badge.position = at + Vector2(0, 2)
 		page.add_child(badge)
@@ -306,46 +302,34 @@ static func describe(id: StringName) -> String:
 	return text % [int(one.get("n", 1))] if text.contains("%d") else text
 
 
-# ------------------------------------------------------------- the art, drawn
+# ------------------------------------------------------------- the art
 
-## One of A056's pieces: the pack's picture once it has arrived, and until
-## then `CollectionArt` drawing it in its box (`PlaceholderArt.is_drawn`).
-func _piece(name: StringName, kind: int, id: StringName, box: Vector2) -> Control:
-	var path := "%s%s.png" % [UiKit.DIR, name]
-	if PlaceholderArt.is_drawn(path):
-		return CollectionArt.make(kind, id)
+## One of A056's pieces at its native box (task 0288: the pack's picture,
+## which `CollectionArt` drew in code until then).
+func _piece(name: StringName, box: Vector2) -> Control:
 	var art := TextureRect.new()
 	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	art.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	art.texture = UiKit.tinted_picture(name)
+	art.texture = UiKit.picture(name)
 	art.size = box
 	art.custom_minimum_size = box
 	return art
 
 
-## A boss's trophy: A056's own once it lands; until then the boss's first
-## walk frame, in its tint, on a plaque drawn by code.
+## A boss's trophy, A056's own on its plaque (task 0288), at 32x32.
 func _trophy(boss: StringName) -> Control:
-	var name := StringName("trophy_%s" % boss)
 	var holder := Control.new()
 	holder.name = "CollectionsTrophy_%s" % boss
 	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	holder.size = Vector2(32, 32)
-	if not PlaceholderArt.art(name).is_empty():
-		holder.add_child(CollectionArt.make(CollectionArt.PLAQUE))
 	var art := TextureRect.new()
 	art.name = "TrophyArt"
 	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	art.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	art.texture = UiKit.picture(name)
-	art.self_modulate = PlaceholderArt.art_tint(name)
+	art.texture = UiKit.picture(StringName("trophy_%s" % boss))
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	if not PlaceholderArt.art(name).is_empty():
-		art.position = Vector2(4, 4)
-		art.size = Vector2(24, 22)
-	else:
-		art.size = Vector2(32, 32)
+	art.size = Vector2(32, 32)
 	holder.add_child(art)
 	return holder
 

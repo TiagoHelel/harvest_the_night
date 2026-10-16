@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Create one closed collection book cover, seen straight on, deep red-brown leather with gold corner caps and clasp, cream page edges visible on the right, centered embossed farmhouse roof under a crescent moon. This is the collection book from the same family as the supplied fish book.\n\nUse deliberate pixel-art clusters with a colored outline, clean pixel edges and only 2-3 readable material planes. Isolated transparent-background game sprite, one fixed complete object, centered on its native pivot, no scene, shadow, glow, gradient, blur, anti-aliased halo, text, labels, numbers, watermark, frame, panel, or contact sheet. Final native target is 48x64 (pivot 24,32) for the cover; 16x16 (pivot 8,8) for a tab; 32x32 (pivot 16,16) for a trophy; 24x24 (pivot 12,12) for a medal; 64x12 (pivot 32,6) for the divider. Preserve generous transparent margins and keep all artwork comfortably inside the stated visible bounds.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A023-fishing-gear/raw/book_fish-r1.png",
+      "sha256": "063ae983590011c9358e463f279fb0ad8bc957913e573150227b6bb3841b4e6d",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2a21a9cb-76e5-49a7-92f7-297c6ff5fa41.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A056-collections\\raw\\collection-cover-r1.png",
+  "sha256": "36ece43e313362d7c7c7dbd009f506e709ae48cd46f44ff2f24c8da80d2fddc9",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

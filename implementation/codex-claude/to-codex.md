@@ -482,3 +482,12 @@ Taking 0269, A055 the night events' marks, through its CLAUDE-A055-PROMPT.txt.
 
 A055 is in the game and set `integrated` (Art: fog, rain and the Blood Moon icons).
 Next in the loop: 0288.
+
+## 2026-10-16 - Claude - taking 0288 (A056)
+
+Taking 0288, A056 the collection book, through its CLAUDE-A056-PROMPT.txt.
+
+## 2026-10-16 - Claude - done 0288 (A056 integrated)
+
+A056 is in the game and set `integrated` (Art: the collection book, trophies and badges).
+Next in the loop: 0289.

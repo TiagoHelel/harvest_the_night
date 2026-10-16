@@ -1,0 +1,50 @@
+A056-collections: owner-approved artwork
+
+Approval date: 2026-10-14
+Owner words (verbatim): meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Authoritative delivery: implementation/backlog/deliveries/A056-collections
+Game integration task: 0288
+
+Scope: Complete reviewed delivery approved for integration.
+Review-log.txt and APPROVAL.json preserve the owner acceptance of documented visual differences. Measured QA booleans remain unchanged; accepted visual checks are listed separately.
+No older delivery is superseded. The batch review HTML is an index, not an art source.
+Mode A: use the original raw ImageGen sources and the exact per-file crop, scale, pivot, alpha threshold and palette_keys in the contract; tools/palette.py:COLOURS is the palette. Preserve exact approved PNG hashes.
+01.png is frame 0. All per-file timing, canvas, pivot, points, aliases and mirror behavior are included below. A runtime mirror means east is obtained by flipping west in the game. Bind baked mirrors directly and do not flip them again.
+Use contract.json for complete deliveries. For partial deliveries, use candidate-contract.json only to locate the explicitly approved hashes in APPROVAL.json; it does not claim the missing frames exist.
+Never use raw rejected cells, screenshots, GIFs, or unlisted PNGs. Never regenerate, repaint, recolor, resample or retime these approved images.
+
+Exact mappings:
+native/collection_cover/none/01.png -> sprites/ui/collection_cover.png | [48, 64] pivot [24, 32] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/icon_book_crops/none/01.png -> sprites/ui/icon_book_crops.png | [16, 16] pivot [8, 8] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/hud_book_crops/none/01.png -> sprites/ui/hud_book_crops.png | [10, 10] pivot [5, 5] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/icon_book_bosses/none/01.png -> sprites/ui/icon_book_bosses.png | [16, 16] pivot [8, 8] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/hud_book_bosses/none/01.png -> sprites/ui/hud_book_bosses.png | [10, 10] pivot [5, 5] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/icon_book_year/none/01.png -> sprites/ui/icon_book_year.png | [16, 16] pivot [8, 8] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/hud_book_year/none/01.png -> sprites/ui/hud_book_year.png | [10, 10] pivot [5, 5] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/icon_book_achievements/none/01.png -> sprites/ui/icon_book_achievements.png | [16, 16] pivot [8, 8] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/hud_book_achievements/none/01.png -> sprites/ui/hud_book_achievements.png | [10, 10] pivot [5, 5] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/trophy_giant/none/01.png -> sprites/ui/trophy_giant.png | [32, 32] pivot [16, 16] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/trophy_harvester/none/01.png -> sprites/ui/trophy_harvester.png | [32, 32] pivot [16, 16] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/trophy_scarecrow_king/none/01.png -> sprites/ui/trophy_scarecrow_king.png | [32, 32] pivot [16, 16] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/trophy_winter_lord/none/01.png -> sprites/ui/trophy_winter_lord.png | [32, 32] pivot [16, 16] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_first_night/none/01.png -> sprites/ui/badge_first_night.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_hundred_nights/none/01.png -> sprites/ui/badge_hundred_nights.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_slayer/none/01.png -> sprites/ui/badge_slayer.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_builder/none/01.png -> sprites/ui/badge_builder.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_gatherer/none/01.png -> sprites/ui/badge_gatherer.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_angler/none/01.png -> sprites/ui/badge_angler.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_regular/none/01.png -> sprites/ui/badge_regular.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_long_haul/none/01.png -> sprites/ui/badge_long_haul.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_full_moon/none/01.png -> sprites/ui/badge_full_moon.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_legend/none/01.png -> sprites/ui/badge_legend.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_arsenal/none/01.png -> sprites/ui/badge_arsenal.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/badge_year_two/none/01.png -> sprites/ui/badge_year_two.png | [24, 24] pivot [12, 12] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+native/collection_ornament/none/01.png -> sprites/ui/collection_ornament.png | [64, 12] pivot [32, 6] draw 1 | frame 0 | 1.0 seconds | loop False | mirror none | points {}
+
+Integration procedure for complete deliveries:
+1. Verify APPROVAL.json and contract.json SHA-256 values before promotion.
+2. Promote versioned raw sources through assets/art_source/<family>/, the raster manifest, ownership.json and tools/import_art.py, with prompt/reference/approval provenance. Metadata points are native coordinates.
+3. Extend the relevant hard-coded family validation lists. Any changes to code, aliases and manifest bindings belong to the named game task.
+4. Run python tools/verify.py and inspect day/night FHD captures.
+5. Only after integration succeeds, run python implementation/backlog/assets.py set A056 integrated.
+6. Claude owns assets.py unblock and game-task state changes. Codex did not run them.

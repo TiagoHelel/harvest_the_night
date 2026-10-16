@@ -1,0 +1,8 @@
+{
+  "prompt": "Create one blank bronze-gold achievement medallion master: a round gold-dark rim, gold face, upper-left gold-light highlight, short red-brown ribbon at top. Plain empty face, no emblem. Perfect centered front view, visible at most 22x22 in a 24x24 icon.\n\nUse deliberate pixel-art clusters with a colored outline, clean pixel edges and only 2-3 readable material planes. Isolated transparent-background game sprite, one fixed complete object, centered on its native pivot, no scene, shadow, glow, gradient, blur, anti-aliased halo, text, labels, numbers, watermark, frame, panel, or contact sheet. Final native target is 48x64 (pivot 24,32) for the cover; 16x16 (pivot 8,8) for a tab; 32x32 (pivot 16,16) for a trophy; 24x24 (pivot 12,12) for a medal; 64x12 (pivot 32,6) for the divider. Preserve generous transparent margins and keep all artwork comfortably inside the stated visible bounds.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+  ]
+}

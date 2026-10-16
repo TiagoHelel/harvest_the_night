@@ -1,7 +1,7 @@
 # 0288 - Art: the collection book, trophies and badges
 
 - **Phase:** 16 - Sound, collections and polish
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0287
 - **Likely files:** assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/collections_screen.gd
 - **Art packs:** A056

@@ -1,0 +1,23 @@
+{
+  "files_exactly_26": true,
+  "fish_tab_is_reference_only": true,
+  "one_scale_all_trophies": true,
+  "one_scale_all_badges": true,
+  "tabs_use_one_crop_for_both_sizes": true,
+  "alpha_binary": true,
+  "palette_allowed": true,
+  "centered_on_pivot": true,
+  "margins_ok": true,
+  "badge_crop_bounds_within_2_percent": false,
+  "badge_distinct": true,
+  "fish_book_size_match": true,
+  "source_receipts_complete": true,
+  "authorized_candidate_reference_exception_recorded": true,
+  "raw_source_count_contract_matches": false,
+  "owner_visual_approval_recorded": true,
+  "owner_accepted_visual_checks": [
+    "badge_crop_bounds_within_2_percent",
+    "raw_source_count_contract_matches"
+  ],
+  "approved_art_hashes_match": true
+}
