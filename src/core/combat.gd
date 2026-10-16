@@ -35,8 +35,8 @@ static func boss_here(state: Dictionary) -> int:
 	return int(bosses[0]) if not bosses.is_empty() else 0
 
 
-## **Every boss on the farm** (task 0246), lowest id first: Endless sends
-## two Giants, and 0253-0255 add bosses of their own.
+## **Every boss on the farm** (task 0246), lowest id first: a night may send
+## more than one, and 0253-0255 add bosses of their own.
 static func bosses_here(state: Dictionary) -> Array:
 	var out: Array = []
 	for id in Entities.ids(state):

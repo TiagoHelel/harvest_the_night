@@ -179,6 +179,7 @@ func _run() -> void:
 	_task_0276_year_autoplay()
 	_task_0277_year_balance()
 	_task_0278_season_economy()
+	_task_0279_year_two()
 	_task_0281_day_sounds()
 	_task_0282_fishing_sounds()
 	_task_0283_guardian_sounds()
@@ -264,7 +265,7 @@ func _task_0112_digest() -> void:
 		return
 
 	# The body of `digest()`: everything indented under it, comments cut,
-	# because "they are not in `ENDLESS`" is not `ENDLESS` being hashed.
+	# because a comment naming a table is not that table being hashed.
 	var body := ""
 	for line in source.substr(at + 1).split("\n").slice(1):
 		if not line.is_empty() and not line.begins_with("\t") \
@@ -2215,8 +2216,9 @@ func _task_0150_lookup() -> void:
 		"night_of(1) is GameData.KEY_NIGHTS[1], the same object")
 	var year_end := Calendar.year_days()
 	expect(is_same(Waves.plain_night(year_end), GameData.KEY_NIGHTS[year_end])
-		and str(Waves.plain_night(year_end + 2, 7)) == str(Endless.night(7, year_end + 2)),
-		"the year is its tables to its last day, and the curve takes over past it")
+		and str(Waves.plain_night(year_end + 2, 7)) == str(Almanac.night(7, year_end + 2))
+		and Almanac.is_later(year_end + 2),
+		"the year is its tables to its last day, and a later year's past it (task 0279)")
 
 	# **The run's last night, asked in one place**: the year's last day since
 	# task 0151.
@@ -11967,14 +11969,12 @@ func _task_0270_year_records() -> void:
 		"for days 1-56 and two seeds the forecast's counts are size_of and kinds_of for the day",
 		str(told_wrong.slice(0, 3)))
 
-	# **Past the year the curve goes on** (0070, until 0279), from Spring
-	# 14's key night as written - the tenth without its Giant - and day 57
-	# is calm.
-	expect(Endless.size_of(Endless.DRAWN_PAST) == Waves.size_in(GameData.KEY_NIGHTS[GameData.SEASON_DAYS])
-		and bool(Waves.night_of(days + 1).get("calm", false))
-		and str(Waves.plain_night(days + 2, 3)) == str(Endless.night(3, days + 2)),
-		"past the year the curve goes on from Spring 14's key night as written, and day 57 is calm",
-		str(Endless.size_of(Endless.DRAWN_PAST)))
+	# **Past the year, Year 2** (task 0279, where the old curve was): day 57
+	# is calm, and day 58 Year 1's second day grown.
+	expect(bool(Waves.night_of(days + 1).get("calm", false))
+		and str(Waves.plain_night(days + 2, 3)) == str(Almanac.night(3, days + 2))
+		and Waves.hit_points_in(Waves.plain_night(days + 2, 3)) > Waves.hit_points_in(Waves.plain_night(2, 3)),
+		"past the year Year 2 goes on from Year 1's days grown, and day 57 is calm")
 	_completed += 1
 
 
@@ -12278,7 +12278,8 @@ func _task_0275_perf_year() -> void:
 		"missing: %s" % str(missing))
 
 	# **Winter 14, by the calendar, in fog**: the date is `day`, which
-	# `Calendar.date` reads, and the seed is found, never forced.
+	# `Calendar.date` reads - Winter 14 unless `--date` names another (task
+	# 0279) - and the seed is found, never forced.
 	var night := Calendar.year_days()
 	var foggy := -1
 	for seed_value in range(102102, 102102 + 4000):
@@ -12286,8 +12287,9 @@ func _task_0275_perf_year() -> void:
 			foggy = seed_value
 			break
 	expect(foggy >= 0 and Calendar.boss_of(night) == &"winter_lord"
-		and bench.contains("state[\"day\"] = Calendar.year_days()")
-		and bench.contains("Weather.event(seed_value, night) == Weather.FOG")
+		and bench.contains("var _date := Calendar.year_days()")
+		and bench.contains("state[\"day\"] = _date")
+		and bench.contains("Weather.event(seed_value, _date) == Weather.FOG")
 		and bench.contains("const FIRST_SEED := 102102"),
 		"the worst case is Winter 14 by the calendar, the Winter Lord's night, on the first seed from 102102 that gives it fog",
 		str(foggy))
@@ -12707,6 +12709,125 @@ func _task_0278_season_economy() -> void:
 		"each season's best focused day buys about one of its openers - the gun tower, the hive, the catapult, the searchlight - within 0.7-1.5",
 		str(ratios))
 	_completed += 1
+
+## 0279 - Year 2. Day 57 is Spring 1 of Year 2 and calm. A Giant spawned on
+## a later year's day has more `Combat.full_hp` than one spawned in Year 1.
+## On every day but Spring 1, Year 2 sends at least Year 1's hit points on
+## the same day and Year 3 at least Year 2's. Days 57-168 resolve for seeds
+## 0-2 without touching `state["rng"]`, each record kept to `check_record`.
+## A later year has no introductions, keeps its season's kinds, sides and
+## weather, its boss on every day 14, and its Full Moons scaled from the
+## made record. The levers are checked, the year's end is said on its
+## morning, and a run carried on past the year is not over.
+func _task_0279_year_two() -> void:
+	var year := Calendar.year_days()
+	# **Spring 1 of Year 2, calm; and a later Giant has more to it.**
+	var early := State.create(27901)
+	early["day"] = GameData.SEASON_DAYS
+	var giant_y1 := Entities.spawn(early, &"giant", Vector2i(30, 20))
+	var later := State.create(27901)
+	later["day"] = year + GameData.SEASON_DAYS
+	later["endless"] = true
+	var giant_y2 := Entities.spawn(later, &"giant", Vector2i(30, 20))
+	var walker_y2 := Entities.spawn(later, &"walker", Vector2i(31, 20))
+	expect(Calendar.year_of(year + 1) == 2 and Calendar.season_of(year + 1) == 0
+		and Calendar.day_of_season(year + 1) == 1 and bool(Waves.night_of(year + 1).get("calm", false))
+		and Combat.full_hp(later, giant_y2) > Combat.full_hp(early, giant_y1)
+		and Combat.full_hp(later, giant_y2) == Almanac.boss_hp(int((GameData.ENEMIES[&"giant"] as Dictionary)["hp"]), year + GameData.SEASON_DAYS)
+		and not Entities.is_elite(later, giant_y2)
+		and Combat.full_hp(later, walker_y2) == int((GameData.ENEMIES[&"walker"] as Dictionary)["hp"]),
+		"day 57 is Spring 1 of Year 2 and calm; a Giant on day 70 has more hit points than one on day 14, by the boss lever, and is no elite - a walker is what it was",
+		"%d against %d" % [Combat.full_hp(later, giant_y2), Combat.full_hp(early, giant_y1)])
+
+	# **Heavier every year**: every day but Spring 1, at least the year
+	# before's hit points as fought.
+	var lighter: Array = []
+	for day in range(2, year + 1):
+		var one := Waves.hit_points_in(Waves.night_of(day))
+		var two := Waves.hit_points_in(Waves.night_of(day + year))
+		var three := Waves.hit_points_in(Waves.night_of(day + 2 * year))
+		if two < one or three < two:
+			lighter.append("%d: %d, %d, %d" % [day, one, two, three])
+	expect(lighter.is_empty(),
+		"on every day of the year but Spring 1, Year 2 sends at least Year 1's hit points and Year 3 at least Year 2's",
+		str(lighter.slice(0, 4)))
+
+	# **Days 57-168 resolve for seeds 0-2**, each kept to `check_record`,
+	# and asking moves nothing on a run's own dice.
+	var asker := State.create(27902)
+	var dice: Array = (asker["rng"] as Array).duplicate()
+	var faults: Array = []
+	var keys_later: Array = []
+	var foreign: Array = []
+	for seed_value in 3:
+		for day in range(year + 1, 3 * year + 1):
+			var one := Waves.night_of(day, seed_value)
+			if one.is_empty() or (not bool(one.get("calm", false)) and (one["waves"] as Array).is_empty()):
+				faults.append("%d/%d empty" % [seed_value, day])
+			for line in GameData.check_record(one, day):
+				faults.append("%d/%d: %s" % [seed_value, day, line])
+			if Almanac.is_key(day):
+				keys_later.append(day)
+			var template: Dictionary = GameData.SEASON_NIGHTS[Calendar.season_of(day)]
+			for kind in GameData.sorted_names(Waves.kinds_in(one).keys()):
+				if not (template["mix"] as Dictionary).has(kind) and kind != Calendar.boss_of(day):
+					foreign.append("%d/%d %s" % [seed_value, day, kind])
+	expect(faults.is_empty() and keys_later.is_empty() and foreign.is_empty()
+		and asker["rng"] == dice,
+		"days 57-168 resolve for seeds 0-2 to records check_record keeps, none of them a key night, every kind its season's - and the run's dice are untouched",
+		"%s %s %s" % [str(faults.slice(0, 3)), str(keys_later.slice(0, 3)), str(foreign.slice(0, 3))])
+
+	# **Each season keeps its character**: Year 1's sides on the same day,
+	# its weather by season - no Blood Moon before autumn - its boss on every
+	# day 14, and its Full Moons the made record at the horde's percent.
+	var characters: Array = []
+	for day in range(year + 2, 3 * year + 1):
+		if Calendar.is_calm(day):
+			continue
+		var one := Waves.night_of(day, 1)
+		var template: Dictionary = GameData.SEASON_NIGHTS[Calendar.season_of(day)]
+		var open := Almanac.sides_on(template, Calendar.day_of_season(day))
+		for side in Waves.spawns_in(one):
+			if not open.has(side):
+				characters.append("%d: side %d" % [day, side])
+		if Weather.event(1, day) == Weather.BLOOD_MOON and Calendar.season_of(day) < 2:
+			characters.append("%d: a Blood Moon before autumn" % day)
+		if Calendar.is_boss_night(day) and StringName(one.get("boss", &"")) != Calendar.boss_of(day):
+			characters.append("%d: no boss" % day)
+		if Calendar.is_full_moon(day):
+			var plain := Waves.plain_night(day, 1)
+			var scaled := Waves._under_a_full_moon(Waves._with_the_season_boss(plain, Calendar.boss_of(day))
+				if Calendar.is_boss_night(day) else plain)
+			if bool(plain.get("full_moon", false)) or str(Waves.kinds_in(one)) != str(Waves.kinds_in(scaled)):
+				characters.append("%d: the Full Moon" % day)
+	expect(characters.is_empty(),
+		"a later year keeps its season's sides as Year 1 opened them, its weather, its boss on every day 14, and its Full Moons the made record at FULL_MOON_HORDE_PERCENT",
+		str(characters.slice(0, 4)))
+
+	# **The levers are checked; the year's end is said; a carried-on run is
+	# not over.**
+	var flat := GameData.LATER_YEARS.duplicate(true)
+	flat["growth_percent"] = 0
+	var wild := GameData.LATER_YEARS.duplicate(true)
+	wild["boss_hp_percent"] = 300
+	var carried := State.create(27903)
+	carried["day"] = year + 1
+	var refused := not Run.is_endless(carried) and Run.is_over(carried)
+	var went := Run.go_endless(carried)
+	var lord_fell := State.create(27904)
+	lord_fell["day"] = 2 * year + 1
+	lord_fell["endless"] = true
+	expect(GameData.check_later_years(GameData.LATER_YEARS).is_empty()
+		and _says(GameData.check_later_years(flat), "grows 0%")
+		and _says(GameData.check_later_years(wild), "boss grows 300%")
+		and refused and went and not Run.is_over(carried) and Calendar.year_of(Calendar.date(carried)) == 2
+		and ResultScreen.year_survived(lord_fell, 2 * year) == 2
+		and ResultScreen.year_survived(lord_fell, year) == 0
+		and ResultScreen.year_survived(carried, year + GameData.SEASON_DAYS) == 0,
+		"the later years' levers are refused out of range; a run carried on past Winter 14 is in Year 2 and not over; Year 2's Winter Lord down ends its year on the morning report, Year 1's does not",
+		"%s %s" % [str(GameData.check_later_years(flat)), str(GameData.check_later_years(wild))])
+	_completed += 1
+
 
 ## **Task 0281: the new day's sounds.** Every new id is a file. What a verb is
 ## done to, the verbs that used to borrow, and the smith's anvil keep the

@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-16**, with task 0278's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-16**, with task 0279's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 281 done, 15 todo, 0 blocked (95%).**
+**The game backlog: 296 tasks, 282 done, 14 todo, 0 blocked (95%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0279). Only the farmer packs the owner deferred (3c) still wait on
+says 0280). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -26,7 +26,7 @@ What is left goes to 0278 and 0280. Every call and trial is in
 | Task | What | Needs |
 | --- | --- | --- |
 | 0278 | The economy across a year - **done 2026-10-16**; the night's purse by season and the hens' second egg are the owner's calls (BALANCE.md) | 0277 |
-| 0279 | Year 2 | 0277 |
+| 0279 | Year 2 - **done 2026-10-16**: the calendar replays the seasons a year heavier (`LATER_YEARS`), the endless curve retired | 0277 |
 | 0280 | Checkpoint: do fifty-six nights tire? | 0277, 0278, 0279 |
 | 0291 | Saves into 1.0 | 0279 |
 | 0294 | Every new word in Portuguese | 0291 |

@@ -33853,3 +33853,146 @@ src/tools/autoplay_run.gd, src/tools/year_economy.gd (new),
 src/tools/headless_v1.gd, tools/autoplay.py, tools/balance.py,
 implementation/BALANCE.md
 - **Checks**: `python tools/verify.py --accept` - PASS (65 of 65), the data hash recorded.
+
+## 0279 - Year 2 - done 2026-10-16
+
+What changed: after the Winter Lord the farm carries on into the calendar,
+not the MVP's endless curve. Year 2 and every year after replay the four
+seasons from their templates, heavier each year, with each season's boss
+back on its fourteenth day. `Endless` and `ENDLESS` are retired.
+
+- **A later year's night** (`Almanac._later`):
+  - Its hit points are Year 1's on the same day of the year - a key night's
+    as written too, boss rows aside - grown by `LATER_YEARS.growth_percent`
+    (30, new lever) for each year past the first, added and never
+    compounded.
+  - It is made from its season's whole template: every kind of the season
+    from its first day. Nothing is new any more, so there are no
+    introductions (`Almanac.is_key` is Year 1's alone).
+  - Each kind's share is rounded up to whole bodies, so a later year never
+    sends fewer hit points than the year before it.
+  - Its sides open day by day as Year 1's did, its weather is its season's
+    (no Blood Moon before autumn, no earlier lever), and its waves and gaps
+    are the template's.
+- **The Full Moons on 7 and 14 stay**, generated with the Full Moon percent:
+  a later year's day 7 and 14 are made records, scaled by
+  `FULL_MOON_HORDE_PERCENT` in `Waves.night_of` as Year 1's written ones are
+  (asserted).
+- **The bosses**: every season's day 14 sends its boss again (0153's row).
+  - A later year's boss has its hit points grown by
+    `LATER_YEARS.boss_hp_percent` (30, new lever), written down as `max_hp`
+    on the elites' road (0257) and read by `Combat.full_hp`.
+  - `Entities.is_elite` is a body with `max_hp` that is no boss.
+  - The boss-repeat rule (0153) and the calm night after a fallen boss (0154)
+    hold every year: Spring 1 of Year 2 is calm.
+  - `GameData.check_later_years` holds both levers inside their ranges.
+- **The old curve's deal moved to `Almanac`**:
+  - `stream_for`, `share_out`, `lay_out` and `fit_before_dawn`, which
+    `Waves`, `Weather` and the made nights use;
+  - `src/core/endless.gd` and the `ENDLESS` table are deleted, its
+    `giant_every` levers with them;
+  - `Waves.plain_night` asks `Almanac` for every day;
+  - `check_nights` and `digest()` stay, `LATER_YEARS` in place of `ENDLESS`.
+- **`Run`'s `endless` flag** keeps its name and its meaning since save
+  version 5, past the year: set when a player carries on at 0160's ending,
+  into Year 2 of the calendar. No saved key changed meaning, so no version
+  bump.
+- **The year's end**:
+  - 0160's ending screen still shows once, after Year 1 (`Run.is_over`).
+  - A later Winter Lord down ends his year with a line in the morning
+    report: `RES_YEAR_SURVIVED`, "YEAR %d SURVIVED" / "ANO %d SOBREVIVIDO"
+    (200 px, `i18n_check` measured it), through
+    `ResultScreen.year_survived`.
+- **The robot carries on**: asked for days past the year, `Autoplay.play`
+  takes 0160's choice once the Lord falls.
+- **The instruments**:
+  - `python tools/nights.py --years 3` prints Years 1-3 day by day and a line
+    a season.
+  - `python tools/perf.py --date=<n>` arms 0275's case on day n and holds
+    it to the budgets alone - nothing compared, nothing accepted
+    (`perf_check.gd --date`).
+- **Tests**:
+  - `_task_0279_year_two` in `headless_v1.gd`:
+    - day 57 is Spring 1 of Year 2 and calm;
+    - a Giant on day 70 has more `full_hp` than one on day 14, and is no
+      elite;
+    - on every day but Spring 1, Year 2 sends at least Year 1's hit points
+      and Year 3 at least Year 2's;
+    - days 57-168 resolve for seeds 0-2 to records `check_record` keeps,
+      none a key night, every kind its season's, the run's dice untouched;
+    - sides, weather, bosses and Full Moons keep to their season;
+    - the levers are refused out of range;
+    - a carried-on run is not over;
+    - the year's end is said on its morning, Year 1's not.
+  - `headless_check.gd`'s `_task_0070_endless` is rewritten over Year 2's
+    days. What a later night must be is still asserted on them: the record a
+    person would write, seeded, its count the calendar's, playable, kept and
+    saved. Its Giant schedule and mix drift went with the curve.
+  - The 0250-0277 asserts that named the curve now name the later years.
+  - `input_check`'s play-on case (0160): Spring 1 of Year 2 is calm with no
+    record of its own, as Year 1's calm dates have none, and Year 2's own
+    night comes after it.
+- **Shots**: `python tools/shot.py 0279 year_two --fhd` and `--pt_BR`,
+  opened: Spring 3 of Year 2 at noon, "SPRING 3" beside the clock and
+  "YEAR 2" under it - "PRIMAVERA 3" and "ANO 2" in Portuguese, both fit.
+  `headless_check` counts 142 scenes.
+- **The years at a glance** (`python tools/nights.py --years 3`, seed 0;
+  hit points as fought, the boss's that year):
+
+  | Year | Season | Nights | Hit points | Largest | Boss | Its hp | Fog / rain / Blood Moon |
+  |---|---|---|---|---|---|---|---|
+  | 1 | spring | 14 | 23,550 | 4,255 | giant | 400 | 0 / 2 / 0 |
+  | 1 | summer | 13 | 48,841 | 7,622 | harvester | 350 | 0 / 1 / 0 |
+  | 1 | autumn | 13 | 76,780 | 8,414 | scarecrow king | 600 | 2 / 1 / 1 |
+  | 1 | winter | 13 | 93,646 | 9,664 | winter lord | 900 | 1 / 0 / 0 |
+  | 2 | spring | 13 | 31,555 | 5,355 | giant | 520 | 0 / 2 / 0 |
+  | 2 | summer | 13 | 65,114 | 10,126 | harvester | 455 | 1 / 4 / 0 |
+  | 2 | autumn | 13 | 101,918 | 11,178 | scarecrow king | 780 | 2 / 1 / 0 |
+  | 2 | winter | 13 | 123,827 | 12,539 | winter lord | 1,170 | 1 / 0 / 2 |
+  | 3 | spring | 13 | 38,230 | 6,580 | giant | 640 | 1 / 6 / 0 |
+  | 3 | summer | 13 | 79,661 | 12,320 | harvester | 560 | 2 / 5 / 0 |
+  | 3 | autumn | 13 | 124,768 | 13,386 | scarecrow king | 960 | 1 / 3 / 0 |
+  | 3 | winter | 13 | 151,713 | 15,168 | winter lord | 1,440 | 3 / 0 / 1 |
+
+- **Year 2's spring is lighter than Year 1's winter**: 31,555 hit points
+  against 93,646, its largest night 5,355 against 9,664. The drop stands on
+  purpose.
+  - The plan wants each season heavier than itself a year before, which it
+    is by three tenths, and each season to keep its character. Spring is
+    one side and four kinds.
+  - Year 1's winter climbed in sides and kinds, which spring does not
+    have. A spring sized to winter would be winter on one side.
+  - The farm comes into Year 2 with the whole line that beat the Lord, so
+    spring is its breath before summer's second side.
+  - If the owner wants Year 2 to open harder, `growth_percent` is the lever.
+- **Year 3's heaviest night**, day 168 (Winter 14, the Lord in fog and a
+  Full Moon, 550 bodies, 15,168 hit points), with 0275's case
+  (`python tools/perf.py --date=168`):
+  - a night tick 1,921 us of the 8,333 it may have (23%);
+  - a swarm's 3,650 us;
+  - a path rebuild 22,205 us of 33,333 (16,967 with decoys, 24,930 with
+    garlic);
+  - the night 10.3 s end to end.
+  - Inside every budget.
+- **Where `balanced` fell in Year 2** (seed 9000, `Autoplay.play` to day
+  112):
+  - Year 1 as it always played it: 17 nights lost, Spring 12-14 and
+    Autumn 8-14 among them.
+  - Year 2 to its end with three lost - Winter 5, 6 and 13 (days 103, 104
+    and 111) - and its Lord down.
+  - A farm that came through Year 1 carries its whole line into a Year 2
+    three tenths heavier, and finds it easier than its first.
+  - That is the curve's to judge with fifty-six more nights in front of it
+    (0280), and `growth_percent` is the lever.
+- **Hashes**: DATA 383100454 -> 2003073212 (the later years' levers, and
+  `ENDLESS` out of the digest), accepted. SIM 2260114289, unchanged: the
+  determinism night is day 1.
+Files: src/core/almanac.gd, src/core/waves.gd, src/core/weather.gd,
+src/core/forecast.gd, src/core/entities.gd, src/core/run.gd,
+src/core/game_data.gd, src/core/combat.gd, src/core/loot.gd,
+src/core/endless.gd (deleted), src/ui/result_screen.gd, src/ui/night_hud.gd,
+assets/locale/strings.csv, src/tools/autoplay.gd, src/tools/nights.gd,
+src/tools/perf_check.gd, src/tools/shot.gd, src/tools/headless_v1.gd,
+src/tools/headless_check.gd, src/tools/input_check.gd, tools/nights.py,
+tools/perf.py
+- **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second run: the first, with `--accept` recording the data hash, failed input_check's play-on case, mended above.

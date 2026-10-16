@@ -30,7 +30,7 @@ extends RefCounted
 ## the towers, the walking, the fire, and later the night on screen. It is
 ## rolled from a stream of the run's seed and the calendar date
 ## (`Calendar.date`, which 0153's hold keeps on a boss's night until it
-## falls), mixed the way `Endless._stream_for` deals a generated night and
+## falls), mixed the way `Almanac.stream_for` deals a made night and
 ## salted so it is never that night's own stream - and never `state["rng"]`,
 ## so asking it a thousand times moves nothing. It keeps nothing either: no
 ## State key, so a save cannot disagree with it.
@@ -82,7 +82,7 @@ static func event_in(key_nights: Dictionary, seed_value: int, date: int) -> Stri
 	if key.has("event"):
 		return StringName(key["event"])
 	var season := Calendar.season_id(date)
-	var rng := Rng.create(Endless._stream_for(seed_value, date) ^ STREAM_SALT)
+	var rng := Rng.create(Almanac.stream_for(seed_value, date) ^ STREAM_SALT)
 	var roll := Rng.int_between(rng, 0, 99)
 	var below := 0
 	for kind in EVENTS:

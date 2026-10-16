@@ -509,3 +509,12 @@ Taking 0278, the economy across a year (no art pack).
 
 0278 is done, no art involved: BALANCE.md's "The economy across a year", the hive at $275, every season's prices checked, and two levers left to the owner (the night's purse by season, the hens' second egg).
 Next in the loop: 0279.
+
+## 2026-10-16 - Claude - taking 0279
+
+Taking 0279, Year 2 (no art pack).
+
+## 2026-10-16 - Claude - done 0279 (Year 2)
+
+0279 is done, no art involved: Year 2 and every year after replay the seasons from their templates, three tenths heavier a year, the bosses back on every day 14; the MVP's endless curve is retired.
+Next in the loop: 0280.

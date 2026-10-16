@@ -4,6 +4,7 @@
     python tools/perf.py             measure, compare, fail on a regression
     python tools/perf.py --accept    move the baseline, printing both numbers
     python tools/perf.py --report    the table, and nothing compared
+    python tools/perf.py --date=<n>  the same case on day n: budgets only
 
 Runs `src/tools/perf_check.gd` on the worst case the game has - Winter 14
 with the Winter Lord in fog since task 0275, forty guns and one of every
@@ -28,6 +29,12 @@ decided rather than discovered.
 Every system is timed on its own, so a regression points at itself: the table
 is sorted and the worst one is called out by name. Without that, "the tick
 got slower" is a sentence somebody has to go and investigate.
+
+## Another date (task 0279)
+
+`--date=<n>` arms the same case on day n - Year 3's heaviest night, say -
+and holds it to the budgets alone: a later year's farm is not the baseline's,
+so nothing is compared and nothing accepted on such a run.
 
 ## What this cannot measure
 
@@ -81,10 +88,11 @@ TOLERANCE = 0.40
 FLOOR_US = 30
 
 
-def run():
+def run(extra=()):
     """{name: microseconds}, {name: count} from a fresh measurement."""
     done = subprocess.run(
-        [GODOT, "--headless", "--path", ROOT, "--script", SCRIPT],
+        [GODOT, "--headless", "--path", ROOT, "--script", SCRIPT]
+        + (["++"] + list(extra) if extra else []),
         capture_output=True, text=True, timeout=600)
     out = (done.stdout or "") + (done.stderr or "")
     timings = {}
@@ -155,17 +163,22 @@ def main():
     print("HARVEST THE NIGHT - performance")
     print("")
 
-    timings, counts = run()
+    dates = [a for a in args if a.startswith("--date=")]
+    timings, counts = run(dates)
     if not timings:
         print("FAIL  the benchmark printed no measurements")
         return 1
     old = read_baseline()
+    # **Another date: the budgets alone** (task 0279). Its farm is not the
+    # baseline's, so it is never compared with it nor written over it.
+    if dates:
+        old = {}
 
     if "--report" in args:
         table(timings, counts, old)
         return 0
 
-    if "--accept" in args:
+    if "--accept" in args and not dates:
         moved = []
         for name in sorted(timings):
             if old.get(name) != timings[name]:

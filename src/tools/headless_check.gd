@@ -1603,8 +1603,7 @@ func _task_0110_refusals() -> void:
 	#
 	# Three strings are left and are **not** player-facing: `Waves.note_for`
 	# and `Waves.summary_of` are for `tools/nights.py` and this journal, and
-	# `Endless._note` is what a generated night calls itself in the same
-	# place. No screen reads any of them - which is checked below rather than
+	# a made night's `note` is what it calls itself in the same place. No screen reads any of them - which is checked below rather than
 	# asserted in a comment, because that is the sort of thing that stops
 	# being true.
 	var sentences: Array = []
@@ -11219,8 +11218,8 @@ func _task_0059_wave_data() -> void:
 	# used to read "nothing authored" and now reads like a night, which is the
 	# whole of that task's integration - past the year since 0270.
 	# Night 97 rather than 99: 99 is Winter 1 of Year 2, a calm night since
-	# task 0154.
-	expect(Waves.summary_of(97).contains("past the ten"),
+	# task 0154. Since task 0279 it is Year 2's own, made from its season.
+	expect(Waves.summary_of(97).contains("of year 2"),
 		"and one past the year is generated rather than empty",
 		Waves.summary_of(97))
 
@@ -13083,148 +13082,88 @@ func _somewhere_for_a_wall(state: Dictionary) -> Vector2i:
 	return Vector2i(-1, -1)
 
 
-## 0070 - the nights past the authored ten.
+## 0070 - the nights past the authored ten; **since task 0279 the later
+## years**, which retired the curve this group was written for. Its giant
+## schedule and its mix's drift went with it; what a later night must still
+## be - the record a person would have written, seeded, playable, kept and
+## saved - is asserted here on Year 2's days.
 func _task_0070_endless() -> void:
-	# **A generated night is the same record a person would have written.**
-	# That is the whole integration: everything downstream of `night_of()`
-	# carries on without a line about endless.
-	# **The curve itself** (task 0270): the year's 56 days are its tables
-	# since then, so the curve is asked by name here - still counted from
-	# the tenth night - and `Waves.plain_night` hands it back past the year.
-	var past := Endless.DRAWN_PAST
-	var twenty_five := Endless.night(777, 25)
-	expect(not twenty_five.is_empty(), "night 25 is generated")
+	# **A later night is the same record a person would have written.** That
+	# is the whole integration: everything downstream of `night_of()`
+	# carries on without a line about the year.
+	var year := Calendar.year_days()
+	var day := year + 25
+	var one_night := Waves.plain_night(day, 777)
+	expect(not one_night.is_empty() and Almanac.is_later(day), "Year 2's day 25 is made")
 	for field in ["note", "opening_ticks", "gap_ticks", "waves"]:
-		expect(twenty_five.has(field),
+		expect(one_night.has(field),
 			"and it has the same '%s' an authored night has" % field,
-			str(twenty_five.keys()))
-	expect(Endless.is_generated(past + 1) and not Endless.is_generated(past),
-		"the curve's first night is the one after the ten it was drawn past")
+			str(one_night.keys()))
 
-	# **It never invents an enemy**, which is the requirement, and every wave
-	# is a real row: a kind that exists, a count above zero, a spawn point
-	# that is on the map.
-	for step in [1, 2, 5, 10, 15, 30, 89]:
-		var night: int = past + step
-		var rows: Array = Endless.night(777, night).get("waves", [])
-		expect(not rows.is_empty(), "night %d sends something" % night)
+	# **It never invents an enemy**, and every wave is a real row: a kind
+	# that exists, a count above zero, a spawn point that is on the map.
+	for later in [year + 2, year + 9, year + 20, year + 33, year + 50, 2 * year + 30]:
+		var rows: Array = Waves.night_of(later, 777).get("waves", [])
+		expect(not rows.is_empty(), "day %d sends something" % later)
 		for row in rows:
 			var wave: Array = row
 			expect(GameData.ENEMIES.has(StringName(wave[0])),
-				"night %d sends only enemies that exist" % night, str(wave[0]))
+				"day %d sends only enemies that exist" % later, str(wave[0]))
 			expect(int(wave[1]) > 0,
 				"and never a wave of nobody", str(wave))
 			expect(int(wave[2]) >= 0
 				and int(wave[2]) < (GameData.SPAWNS as Array).size(),
 				"and from a spawn point that is on the map", str(wave))
 
-	# **The same seed generates the same night 25 twice.** The done-when.
-	expect(str(Endless.night(777, 25)) == str(Endless.night(777, 25)),
-		"the same seed generates the same night 25 twice")
-	expect(str(Waves.plain_night(60, 777)) == str(Endless.night(777, 60)),
-		"and past the year Waves hands back exactly what Endless made")
+	# **The same seed makes the same day twice**, and `Waves` hands back
+	# exactly what `Almanac` made.
+	expect(str(Waves.plain_night(day, 777)) == str(Waves.plain_night(day, 777)),
+		"the same seed makes the same later day twice")
+	expect(str(Waves.plain_night(day, 777)) == str(Almanac.night(777, day)),
+		"and past the year Waves hands back exactly what Almanac made")
 
-	# **And different seeds are different nights.** Not asserted on one pair:
-	# the seed decides the order the kinds are dealt and which side opens, so
-	# two particular seeds can legitimately agree. Thirty of them must not.
+	# **And different seeds are different nights**: thirty of them may not
+	# all agree, for the seed deals the order and the opening side.
 	var seen: Dictionary = {}
 	for seed_value in range(700, 730):
-		seen[str(Endless.night(seed_value, 25))] = true
+		seen[str(Waves.plain_night(day, seed_value))] = true
 	expect(seen.size() >= 10,
-		"and thirty seeds give many different night 25s", str(seen.size()))
+		"and thirty seeds give many different later nights", str(seen.size()))
 
-	# **What comes is the curve's, not the seed's.** A night that was harder
-	# on an unlucky seed would make "how far did you get" mean nothing.
-	var size_700 := Waves.size_in(Endless.night(700, 25))
-	var size_729 := Waves.size_in(Endless.night(729, 25))
-	expect(size_700 == size_729,
-		"every seed's night 25 sends the same number",
-		"%d against %d" % [size_700, size_729])
-	# **Compared by contents, not by `str()`.** `kinds_of()` fills its
-	# dictionary in wave order and the seed shuffles that order, so two
-	# identical tallies print differently - which is the trap the state hash
-	# sorts its keys to avoid, met again from the other end.
-	var one_mix := Waves.kinds_in(Endless.night(700, 25))
-	var other_mix := Waves.kinds_in(Endless.night(729, 25))
-	expect(GameData.sorted_names(one_mix.keys())
-		== GameData.sorted_names(other_mix.keys()),
-		"of the same kinds", "%s against %s"
-			% [str(one_mix.keys()), str(other_mix.keys())])
+	# **What comes is the calendar's, not the seed's**: the same count and
+	# the same kinds on every seed.
+	var one_mix := Waves.kinds_in(Waves.plain_night(day, 700))
+	var other_mix := Waves.kinds_in(Waves.plain_night(day, 729))
+	expect(Waves.size_in(Waves.plain_night(day, 700)) == Waves.size_in(Waves.plain_night(day, 729)),
+		"every seed's later night sends the same number")
 	for kind in GameData.sorted_names(one_mix.keys()):
 		expect(int(one_mix[kind]) == int(other_mix.get(kind, -1)),
 			"and the same number of %s" % kind,
-			"%d against %d" % [int(one_mix[kind]),
-				int(other_mix.get(kind, -1))])
+			"%d against %d" % [int(one_mix[kind]), int(other_mix.get(kind, -1))])
 
-	# **The table sends exactly what it promises.** The dealing rounds, and
-	# the leftovers have to land somewhere rather than quietly vanishing.
-	for step in [1, 7, 15, 40]:
-		var night: int = past + step
-		var total := 0
-		for row in (Endless.night(777, night).get("waves", []) as Array):
-			total += int((row as Array)[1])
-		var promised := Endless.size_of(night) + Endless.giants_on(night)
-		expect(total == promised,
-			"night %d deals out every body it promised" % night,
-			"%d against %d" % [total, promised])
+	# **It sends what it was made to**: at least the day's hit points, each
+	# kind's share rounded up to whole bodies.
+	for later in [year + 2, year + 16, year + 40, 2 * year + 50]:
+		if Calendar.is_calm(later):
+			continue
+		expect(Waves.hit_points_in(Waves.plain_night(later, 777)) >= Almanac.later_hit_points(later),
+			"day %d sends at least the hit points it was made to" % later,
+			"%d against %d" % [Waves.hit_points_in(Waves.plain_night(later, 777)), Almanac.later_hit_points(later)])
 
-	# **It grows.** Each generated night is at least as big as the one before,
-	# and than the tenth night as written - Spring 14's key night (0270).
-	var last := Waves.size_in(GameData.KEY_NIGHTS[GameData.SEASON_DAYS])
-	for night in range(past + 1, 40):
-		var size := Waves.size_in(Endless.night(777, night))
-		expect(size >= last, "night %d is no smaller than night %d"
-			% [night, night - 1], "%d against %d" % [size, last])
-		last = size
+	# **Every side open on that date** (task 0157), and no other.
+	for later in [year + 3, year + 17, year + 31, year + 49]:
+		for side in Waves.spawns_in(Waves.night_of(later, 777)):
+			expect(Calendar.open_sides(later).has(side),
+				"day %d comes from a side open on its date" % later, str(side))
 
-	# **A Giant every fifth night, scaling.** The requirement, exactly.
-	var every := int((GameData.ENDLESS as Dictionary)["giant_every"])
-	for night in range(past + 1, 46):
-		var giants := Endless.giants_on(night)
-		if night % every == 0:
-			expect(giants >= 1, "night %d brings a Giant" % night,
-				str(giants))
-		else:
-			expect(giants == 0, "and night %d does not" % night, str(giants))
-	expect(Endless.giants_on(40) > Endless.giants_on(15),
-		"and there are more of them later",
-		"%d against %d" % [Endless.giants_on(40), Endless.giants_on(15)])
-
-	# **The mix shifts and then settles.** A walker weight left to drift for
-	# ever reached its floor and the night sent one of them against 386
-	# breakers, which is the kind narrowing this was supposed to prevent.
-	var early: Dictionary = Waves.kinds_in(Endless.night(777, 12))
-	var late: Dictionary = Waves.kinds_in(Endless.night(777, 60))
-	expect(int(late.get(&"tank", 0)) * int(early.get(&"walker", 1))
-		> int(early.get(&"tank", 0)) * int(late.get(&"walker", 1)),
-		"a late night is heavier than an early one, not merely bigger",
-		"%s against %s" % [str(early), str(late)])
-	for kind in (GameData.ENDLESS["mix"] as Dictionary):
-		expect(int(late.get(StringName(kind), 0)) > 1,
-			"and %s has not been squeezed out of night 60" % kind,
-			str(late))
-
-	# **Every side open on that date** (task 0157; it was both sides,
-	# always). Rolling each wave's side on its own gave night 20 seven waves
-	# all on the east edge, which is a night half a farm answers - so the
-	# deal alternates through the sides the season has open.
-	for step in [1, 3, 10, 15, 23]:
-		var night: int = past + step
-		var sides := Waves.spawns_in(Endless.night(777, night))
-		expect(sides == Calendar.open_sides(night),
-			"night %d comes from every side open on its date" % night, str(sides))
-
-	# **Night 25 is playable.** The other done-when: it begins, it sends, and
-	# it ends. Since 0270 day 25 is made from summer's template - the night a
-	# run meets on it, the same record `Endless` made before.
+	# **A later night is playable**: it begins, it sends, and it ends.
 	var state := State.create(777)
 	state["endless"] = true
-	# The day picks the night since task 0151.
-	state["day"] = 25
-	state["nights_won"] = 24
+	state["day"] = day
+	state["nights_won"] = day - 1
 	NightRoad.to_night(state)
-	expect(int(state["phase"]) == Phases.NIGHT and int(state["night"]) == 25,
-		"night 25 starts", str(state["night"]))
+	expect(int(state["phase"]) == Phases.NIGHT and int(state["night"]) == day,
+		"Year 2's day 25 starts", str(state["night"]))
 	var ever_out := 0
 	var ticks := 0
 	for _t in 200000:
@@ -13235,53 +13174,45 @@ func _task_0070_endless() -> void:
 		ever_out = maxi(ever_out, Entities.count(state))
 	expect(ever_out > 0, "things walk out of the dark on it", str(ever_out))
 	expect(int(state["phase"]) != Phases.NIGHT,
-		"and night 25 ends rather than running for ever", str(ticks))
-	print("  night 25: %s, %d ticks, %d killed, %d breaches"
-		% [Waves.summary_of(25, 777).strip_edges(), ticks,
+		"and it ends rather than running for ever", str(ticks))
+	print("  Year 2, day 25: %s, %d ticks, %d killed, %d breaches"
+		% [Waves.summary_of(day, 777).strip_edges(), ticks,
 			int(state["killed"]), int(state["breaches"])])
 
-	# **Tonight's table is generated once and kept.** `remaining()` is asked
-	# every tick by the HUD, and regenerating a wave table sixty times a
-	# second is the mistake tasks 0025 and 0067 both cost a day to.
+	# **Tonight's table is made once and kept**, `remaining()` being asked
+	# every tick by the HUD - and it survives a save.
 	var kept := State.create(777)
 	kept["endless"] = true
-	kept["nights_won"] = 24
-	kept["night"] = 25
+	kept["nights_won"] = day - 1
+	kept["night"] = day
 	var first := Waves.tonight(kept)
 	expect(str(first) == str(Waves.tonight(kept)),
 		"the night being fought is the same record every time it is asked for")
 	expect((kept["wave"] as Dictionary).has("tonight"),
 		"and it is kept on the state", str((kept["wave"] as Dictionary).keys()))
-	# It survives a save, because it is on the state like everything else.
 	Save.delete_run()
 	Save.write_run(kept)
 	var back := Save.read_run()
 	expect(not back.is_empty() and str(Waves.tonight(back)) == str(first),
 		"and it comes back off a save unchanged")
 	Save.delete_run()
-	# A different night throws the kept one away rather than fighting the
-	# wrong table.
-	kept["night"] = 26
-	kept["nights_won"] = 25
+	kept["night"] = day + 1
+	kept["nights_won"] = day
 	expect(str(Waves.tonight(kept)) != str(first),
 		"and the next night gets its own table")
 
-	# **The curve is validated.** It may not name an enemy that does not
-	# exist, and may not name a boss: one rolled out of the weighted bag would
-	# turn up on night eleven.
 	expect(GameData.validate().is_empty(),
-		"the shipped curve validates", str(GameData.validate()))
+		"the shipped tables validate", str(GameData.validate()))
 
-	# **Best night reached, kept in the profile.** The requirement, and it
-	# needed nothing new: `nights_won` keeps climbing past ten.
+	# **Best night reached, kept in the profile**, past the year.
 	var beaten := State.create(778)
 	beaten["endless"] = true
-	beaten["nights_won"] = 26
+	beaten["nights_won"] = year + 26
 	var profile := Run.record(beaten, Save.default_profile())
-	expect(int(profile["best_night"]) == 26,
-		"the profile keeps the best night reached, past the authored ten",
+	expect(int(profile["best_night"]) == year + 26,
+		"the profile keeps the best night reached, past the year",
 		str(profile["best_night"]))
-	expect(int(Stats.lifetime(profile)["best_night"]) == 26,
+	expect(int(Stats.lifetime(profile)["best_night"]) == year + 26,
 		"and the records screen reads it", str(Stats.lifetime(profile)))
 
 	# **Off the critical path.** `go_endless` refuses a run that has not been
@@ -14747,9 +14678,9 @@ func _task_0082_shots() -> void:
 	# and thirty-six since 0267: the Scarecrow King's. A hundred and forty
 	# since 0269: a rainy night's forecast, and each night event's at the
 	# build step. A hundred and forty-one since 0289: the morning after a lost
-	# night.
-	expect(names.size() == 141,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast, the guardian awake, the cursor's looks, autumn's field, the sprinklers at rest and by night, the Harvester's and the King's forecasts, the rain's and each event's at the build step, the lost night's morning and the 1.0 farm",
+	# night. A hundred and forty-two since 0279: a Year 2 day.
+	expect(names.size() == 142,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast, the guardian awake, the cursor's looks, autumn's field, the sprinklers at rest and by night, the Harvester's and the King's forecasts, the rain's and each event's at the build step, the lost night's morning, a Year 2 day and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",

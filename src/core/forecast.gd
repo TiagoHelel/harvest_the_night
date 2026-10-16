@@ -14,7 +14,7 @@ extends RefCounted
 ## `state["rng"]`: asking the forecast a thousand times must leave the run
 ## exactly where it was. The one thing in it that is random, the night's
 ## weather (task 0256), is `Weather.event`'s: a fresh `(seed, date)` stream
-## the way `Endless._stream_for` deals a generated night.
+## the way `Almanac.stream_for` deals a made night.
 
 
 ## The forecast for one date of a run started on `seed_value`:

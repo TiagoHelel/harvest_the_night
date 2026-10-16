@@ -186,7 +186,16 @@ func _confirm() -> void:
 	(_state["intent"] as Dictionary)["confirm_result"] = true
 
 
-## Carry on into the next spring and the endless years.
+## **The year a morning ends** (task 0279): the year of `night` when it was a
+## later year's last boss night and the calendar has moved past it - its
+## Winter Lord fell - else 0. Year 1's ends on 0160's screen instead.
+static func year_survived(state: Dictionary, night: int) -> int:
+	if Calendar.year_of(night) <= 1 or not Calendar.is_boss_night(night) 			or Calendar.season_of(night) != GameData.SEASONS.size() - 1 			or Calendar.date(state) <= night:
+		return 0
+	return Calendar.year_of(night)
+
+
+## Carry on into Year 2 of the calendar (task 0279), and the years after it.
 func _carry_on() -> void:
 	if _state.is_empty() or not Run.is_over(_state) or _credits.visible or _wait_for_release:
 		return
@@ -255,6 +264,12 @@ func _build(payout: Dictionary) -> void:
 	if escaped:
 		_title.text = I18n.t(&"RES_NIGHT_OVER")
 		_title.theme_type_variation = UiKit.WARN
+	# **A later year's Winter Lord down** (task 0279): the year survived,
+	# said on its morning - 0160's ending is Year 1's alone, and a farm that
+	# carried on ends each later year here.
+	var fought := int(payout["night"])
+	if survived and not escaped and year_survived(_state, fought) > 0:
+		_row(I18n.f(&"RES_YEAR_SURVIVED", [year_survived(_state, fought)]), "", UiKit.GOOD)
 
 	# **Four numbers on two rows, not four.** A `Label` reserves its font's
 	# line height whatever `custom_minimum_size` claims, so a row here is

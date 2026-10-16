@@ -3,8 +3,9 @@ extends RefCounted
 
 ## What comes, in what order, and when the night is over.
 ##
-## A night is a record - a key night of `GameData.KEY_NIGHTS`, one `Almanac`
-## makes from its season's template, or `Endless`'s past the year - and a wave
+## A night is a record - a key night of `GameData.KEY_NIGHTS`, or one
+## `Almanac` makes from its season's template, in Year 1 or grown in a later
+## year (task 0279) - and a wave
 ## is `[enemy, count, spawn point, ticks to wait first]`. Nothing about which
 ## night is which lives here: the year is data (task 0270) and this file does
 ## not change for it.
@@ -41,9 +42,9 @@ static func initial() -> Dictionary:
 
 
 ## **The record as written** - where the year comes from (task 0270): a
-## day's key night, else the one `Almanac` makes from its season's template,
-## for the year's days; the `Endless` curve past them until 0279. Empty for a
-## calm date of the year, which has no record of its own (`night_of` answers
+## day's key night, else the one `Almanac` makes from its season's template;
+## and since task 0279 a later year's day, Year 1's grown (`Almanac._later`).
+## Empty for a calm date, which has no record of its own (`night_of` answers
 ## it). The calendar's rules (0152-0154) go on top in `night_of`, never here.
 ##
 ## **The seed is optional and that is deliberate.** A key night does not have
@@ -54,9 +55,7 @@ static func initial() -> Dictionary:
 static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 	if night < 1:
 		return {}
-	if night <= Calendar.year_days():
-		return Almanac.night(seed_value, night)
-	return Endless.night(seed_value, night)
+	return Almanac.night(seed_value, night)
 
 
 ## **The record a night actually fights** (task 0150): `plain_night` with
@@ -64,8 +63,7 @@ static func plain_night(night: int, seed_value: int = 0) -> Dictionary:
 ##
 ## The rules, each added here and nowhere else:
 ## - **the boss** (task 0153): the season's boss on its last night, and no
-##   boss on any other - today's night ten loses its Giant, and `Endless`'s
-##   every-fifth-night Giants stop reaching the calendar;
+##   boss on any other - in every year (task 0279);
 ## - **the Full Moon** (task 0152): a bigger horde on `FULL_MOON_DAYS`, over
 ##   the boss rule, leaving the boss row as it is;
 ## - **the calm night** (task 0154): the first night of every season but the
@@ -132,7 +130,7 @@ static func _is_boss(kind: StringName) -> bool:
 
 ## **The season's boss night** (task 0153): the night as written with any
 ## boss of its own taken out and one row of the season's boss put in, third
-## from last - where `Endless` put its Giants - from spawn 0, the east,
+## from last - where the old curve put its Giants - from spawn 0, the east,
 ## which every season keeps open (0157). It carries `"boss"`, which the
 ## forecast (0158) reads.
 static func _with_the_season_boss(plain: Dictionary, boss: StringName) -> Dictionary:
@@ -201,7 +199,7 @@ static func _under_a_full_moon(plain: Dictionary) -> Dictionary:
 ## **A bigger horde still fits the night** (0137): when the scaled record
 ## would be sending within `DAWN_MARGIN_TICKS` of dawn, it tightens its own
 ## pace - the gaps between its waves first, a quarter at a time, then the
-## spacing of their members as `Endless` does. Never the check.
+## spacing of their members as a made night does. Never the check.
 static func _fit_inside_the_night(one: Dictionary) -> void:
 	var budget := GameData.NIGHT_TICKS - GameData.DAWN_MARGIN_TICKS
 	for _step in 32:
@@ -211,12 +209,12 @@ static func _fit_inside_the_night(one: Dictionary) -> void:
 		for row in (one["waves"] as Array):
 			if (row as Array).size() > 3:
 				(row as Array)[3] = int((row as Array)[3]) * 3 / 4
-	Endless._fit_before_dawn(one)
+	Almanac.fit_before_dawn(one)
 
 
 ## The record for the night being fought, generated once and kept.
 ##
-## A made night (`Almanac`, `Endless`) is a pure function and cheap, but not
+## A made night (`Almanac`) is a pure function and cheap, but not
 ## free, and `remaining()` is asked for it every tick by the night HUD.
 ## Making a fresh one sixty times a second would be sixty wave tables a
 ## second for one answer - the mistake task 0067 found in `Tutorial` and task
@@ -448,8 +446,7 @@ static func size_of(night: int, seed_value: int = 0) -> int:
 	return size_in(night_of(night, seed_value))
 
 
-## The same count off a record already in hand: `Endless` sizes its curve
-## from Spring 14's key night as written, never as the calendar changes it.
+## The same count off a record already in hand.
 static func size_in(one: Dictionary) -> int:
 	var total := 0
 	for row in _rows_in(one):

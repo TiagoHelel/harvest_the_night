@@ -5,7 +5,8 @@ extends RefCounted
 ##
 ## The year ends when Winter 14's boss falls. The calendar holds that date
 ## until then, even when the house survives; a loss after the boss falls
-## still opens Year 2. Endless keeps that farm going through later years.
+## still opens Year 2. Carrying on keeps that farm going through the later
+## years of the calendar (task 0279), each a year heavier.
 ##
 ## ## The summary is read, not kept
 ##
@@ -22,7 +23,9 @@ static func initial() -> Dictionary:
 		# here because `Farm` sweeps the rubble every morning and nothing
 		# else remembers.
 		"structures_lost": 0,
-		# Set when the player chooses to carry on past the authored nights.
+		# Set when the player chooses to carry on past Year 1 (0160), into
+		# Year 2 of the calendar (task 0279). The name is the MVP's, kept so
+		# the save keeps its meaning: past the year, since save version 5.
 		"endless": false,
 	}
 
@@ -129,9 +132,9 @@ static func _worth_gathering(state: Dictionary) -> Dictionary:
 
 # -------------------------------------------------------------------- doing
 
-## Carry on past the year. Task 0070 made the nights after it worth
-## playing; this is the switch that lets a player ask for it, once the
-## year's winter boss has fallen.
+## Carry on past the year, into Year 2 of the calendar (task 0279): the
+## switch that lets a player ask for it, once the year's winter boss has
+## fallen.
 static func go_endless(state: Dictionary) -> bool:
 	if not beat_the_year(state):
 		return false

@@ -279,6 +279,10 @@ static func play(seed_value: int, policy_name: StringName,
 	var low := [-1, -1]
 
 	while Calendar.date(state) <= days_wanted:
+		# **Into Year 2** (task 0279): asked for days past the year, the robot
+		# carries on once the Winter Lord falls, as 0160 offers a player.
+		if Run.is_over(state) and days_wanted > Calendar.year_days():
+			Run.go_endless(state)
 		if Run.is_over(state):
 			break
 		var date := Calendar.date(state)

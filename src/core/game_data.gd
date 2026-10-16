@@ -3663,65 +3663,26 @@ const REACTION_TICKS := 45              # LEVER: ticks, 20-120
 ## standing at the pond can see.
 const REACTION_NEAR := 6                # LEVER: tiles, 3-12
 
-## The curve that writes every night past the year (Year 2 on, until 0279
-## retires it - task 0270 moved it past day 56).
+## **The years after the first** (task 0279; plan section 2): Year 2 and every
+## year after it replay the four seasons from their templates
+## (`SEASON_NIGHTS`), heavier each year, with each season's boss back on its
+## fourteenth day - in place of the MVP's endless curve (0070), which this
+## task retired.
 ##
-## **The ten nights `design.md` wrote were the shape; this is the
-## extrapolation**, counted past the tenth as it always was. A generated
-## night is the same record as a written one - note, opening, gap, waves - so
-## everything downstream of `Waves.night_of()` cannot tell the difference, and
-## nothing in `Enemies`, `Rewards` or the HUD needed a line about endless.
+## - **`growth_percent`** is added a year past the first, **not compounded**
+##   (the old curve's lesson): a day of a later year has Year 1's hit points
+##   on the same day of the year - a key night's as written too - and this
+##   share of them again for each year since. Year 2 at 30 is Year 1 and
+##   three tenths; Year 3 and six. Compounding turns the tenth year into a
+##   number no farm answers.
+## - **`boss_hp_percent`**, the same for a season's boss: its hit points a
+##   year past the first, written down as the body's `max_hp` the way a Blood
+##   Moon's elites are (0257), so `Combat.full_hp` and the boss bar read it.
 ##
-## ## What grows, and what must not
-##
-## `growth_percent` is added per night past the tenth, **not compounded**:
-## compounding turns night forty into a number with no relationship to a farm
-## anyone could build, and the point of endless is "how far does my build go",
-## not "watch an exponent win". Its base is the tenth night as written - since
-## task 0270 Spring 14's key night, the Giant's company, 84 - so at 12 a night
-## past the tenth it sends 84 + ten more each night: night 25 sends 235.
-##
-## `mix` is a weight per kind and how much that weight shifts per night. The
-## walker's share falls and the tank's and breaker's rise, so a late night is
-## not merely a bigger early night - which is the difference between a curve
-## and a multiplier. **A weight never falls below one**: a kind that dropped
-## out entirely would quietly narrow the game the longer you played it.
-##
-## `is_boss` kinds are not in `mix` and cannot be: the Giant arrives on its own
-## schedule below, and rolling one out of the mix would put a boss on night
-## eleven. `validate()` refuses a mix that names one, or that names an enemy
-## which does not exist.
-const ENDLESS: Dictionary = {
-	# Added to the night's size per night past the tenth, of night ten's size.
-	"growth_percent": 12,           # LEVER: percent a night, 4-30
-	# **About** how many waves a generated night arrives in, and how often
-	# that grows. A target rather than a count: the bodies are dealt to the
-	# kinds in proportion, and the rounding sometimes lands a wave short.
-	"waves": 7,                     # LEVER: waves, 4-12
-	"extra_wave_every": 10,         # LEVER: nights per extra wave, 5-25
-	# A generated night is paced at the tightest the authored ten reach.
-	"opening_ticks": 0,
-	"gap_ticks": 4 * SECONDS,       # LEVER: ticks, 2-10 seconds worth
-	# The Giant comes back every fifth night - 15, 20, 25 - and one more of
-	# them every tenth, so night twenty brings two and night thirty three.
-	"giant_every": 5,               # LEVER: nights, 3-10
-	"giant_extra_every": 10,        # LEVER: nights per extra Giant, 5-30
-	# **The drift stops here.** Left to run, `walker` reaches its floor of one
-	# and stays there: night 99 was measured at 992 bodies of which **one** was
-	# a walker, against 386 breakers. A weight clamped at one is not a kind
-	# that still turns up, it is a kind that has dropped out with a rounding
-	# error for a headstone - which is exactly the narrowing the floor was put
-	# there to prevent. Twenty nights of drift and then a fixed heavy mix:
-	# night 99 becomes 110 walkers, 275 runners, 286 tanks and 319 breakers,
-	# which is a wall with everything still in it.
-	"mix_settles_after": 20,        # LEVER: nights of drift, 5-40
-	# kind -> [weight at night ten, how much it shifts each night after]
-	"mix": {
-		&"walker": [40, -1],        # LEVER: weight and drift
-		&"runner": [30, 1],         # LEVER: weight and drift
-		&"tank": [12, 2],           # LEVER: weight and drift
-		&"breaker": [18, 2],        # LEVER: weight and drift
-	},
+## `validate()` holds both inside their ranges.
+const LATER_YEARS: Dictionary = {
+	"growth_percent": 30,           # LEVER: percent of Year 1's hit points added a year, 5-100
+	"boss_hp_percent": 30,          # LEVER: percent of a boss's hit points added a year, 0-100
 }
 
 ## Where the horde comes in, as `[[x, y], ...]` per spawn point.
@@ -6574,32 +6535,21 @@ static func check_nights(templates: Array, key_nights: Dictionary) -> Array:
 		if Calendar.is_full_moon(day) and not key_nights.has(day):
 			errors.append("day %d is a Full Moon with no key night" % day)
 
-	# **The curve past the year may not invent an enemy**, which is task
-	# 0070's own requirement, and may not name a boss: one rolled out of the
-	# weighted mix would turn up on an ordinary night.
-	var mix: Dictionary = ENDLESS["mix"]
-	if mix.is_empty():
-		errors.append("the endless mix is empty, so the night past the year sends nothing")
-	for kind in sorted_names(mix.keys()):
-		if not ENEMIES.has(kind):
-			errors.append("the endless mix names '%s', which is not an enemy" % kind)
-			continue
-		if bool((ENEMIES[kind] as Dictionary).get("is_boss", false)):
-			errors.append("the endless mix names '%s', which is a boss - " % kind
-				+ "bosses come from giant_every, not from the bag")
-		var pair: Variant = mix[kind]
-		if not (pair is Array) or (pair as Array).size() != 2:
-			errors.append("the endless mix entry for '%s' is not [weight, drift]" % kind)
-	for field in ["growth_percent", "waves", "extra_wave_every", "gap_ticks",
-			"giant_every", "giant_extra_every", "mix_settles_after"]:
-		if not ENDLESS.has(field):
-			errors.append("the endless curve has no '%s'" % field)
-		elif int(ENDLESS.get(field, 0)) < 0:
-			errors.append("the endless curve's '%s' is negative" % field)
-	for field in ["waves", "extra_wave_every", "giant_every", "giant_extra_every"]:
-		if int(ENDLESS.get(field, 0)) < 1:
-			errors.append("the endless curve's '%s' must be at least one, " % field
-				+ "or it divides by zero or sends nothing")
+	# **The years after the first** (task 0279).
+	errors.append_array(check_later_years(LATER_YEARS))
+	return errors
+
+
+## **The years after the first hold together** (task 0279): their growth
+## and their bosses', inside the levers' ranges.
+static func check_later_years(levers: Dictionary) -> Array:
+	var errors: Array = []
+	var grows := int(levers.get("growth_percent", 0))
+	if grows < 5 or grows > 100:
+		errors.append("a later year grows %d%% a year: keep it within 5-100" % grows)
+	var boss := int(levers.get("boss_hp_percent", -1))
+	if boss < 0 or boss > 100:
+		errors.append("a later year's boss grows %d%% a year: keep it within 0-100" % boss)
 	return errors
 
 
@@ -6772,7 +6722,7 @@ static func digest() -> int:
 		# year's tables, so without this line every lever of the endless curve could be
 		# turned without the data guard noticing - which is the one thing the
 		# guard exists to stop.
-		"endless": ENDLESS,
+		"later_years": LATER_YEARS,
 		"spawns": SPAWNS,
 		# **The sides, by season** (task 0157).
 		"sides": [SPAWN_SIDES, SIDES_BY_SEASON],

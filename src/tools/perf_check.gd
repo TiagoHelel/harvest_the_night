@@ -125,9 +125,17 @@ var _done := false
 ## frame times (task 0275).
 var _night: Dictionary = {}
 var _start: Dictionary = {}
+## **The date the case is armed on** (task 0279): Winter 14 of Year 1 unless
+## `--date=<n>` names another - Year 3's heaviest night, say. `tools/perf.py
+## --date` forwards it, and compares and accepts nothing on such a run.
+var _date := Calendar.year_days()
 
 
 func _initialize() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if String(arg).begins_with("--date="):
+			_date = maxi(int(String(arg).trim_prefix("--date=")), 1)
+	print("COUNT date ", _date)
 	_run()
 
 
@@ -287,14 +295,14 @@ func _top_level(id: StringName) -> int:
 	return mini(GameData.TOP_TOWER_LEVEL, (GameData.TOWER_LEVELS.get(id, []) as Array).size() + 1)
 
 
-## **The first seed whose Winter 14 is foggy** (task 0275), or `FIRST_SEED`
-## with an error when none in `SEEDS_TRIED` is.
+## **The first seed whose night on the case's date is foggy** (task 0275;
+## the date since task 0279), or `FIRST_SEED` with an error when none in
+## `SEEDS_TRIED` is.
 func _foggy_seed() -> int:
-	var night := Calendar.year_days()
 	for seed_value in range(FIRST_SEED, FIRST_SEED + SEEDS_TRIED):
-		if Weather.event(seed_value, night) == Weather.FOG:
+		if Weather.event(seed_value, _date) == Weather.FOG:
 			return seed_value
-	push_error("perf_check: no seed from %d gives Winter 14 fog" % FIRST_SEED)
+	push_error("perf_check: no seed from %d gives day %d fog" % [FIRST_SEED, _date])
 	return FIRST_SEED
 
 
@@ -315,9 +323,11 @@ func _the_winter_farm() -> Dictionary:
 		if res != GameData.ENERGY:
 			plenty[res] = 9000
 	Resources.gain(state, plenty)
-	state["day"] = Calendar.year_days()
+	state["day"] = _date
 	state["days_held"] = 0
-	state["nights_won"] = Calendar.year_days() - 1
+	state["nights_won"] = _date - 1
+	# **Carried on** (task 0279): a run past Year 1 chose to, at 0160's ending.
+	state["endless"] = _date > Calendar.year_days()
 	# A run this far in has its lessons behind it.
 	var lessons: Array = []
 	for step in Tutorial.steps():

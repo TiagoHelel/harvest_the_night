@@ -34,6 +34,10 @@ static func initial() -> Dictionary:
 ## them down as `max_hp` - on the elite only, so an ordinary night's bodies
 ## are what they always were. Never a boss: an elite boss is another balance
 ## problem.
+##
+## **A boss of a later year** (task 0279) comes by the same road: its hit
+## points grown a year (`Almanac.boss_hp`), written down as `max_hp`, so
+## `Combat.full_hp` and the boss bar read them.
 static func spawn(state: Dictionary, kind: StringName, cell: Vector2i) -> int:
 	var data: Variant = GameData.ENEMIES.get(kind, null)
 	if data == null:
@@ -51,18 +55,22 @@ static func spawn(state: Dictionary, kind: StringName, cell: Vector2i) -> int:
 		# not need a float anywhere. Task 0025 uses it.
 		"step": 0,
 	}
-	if not bool((data as Dictionary).get("is_boss", false)) \
-			and Weather.tonight(state) == Weather.BLOOD_MOON:
+	var boss := bool((data as Dictionary).get("is_boss", false))
+	if not boss and Weather.tonight(state) == Weather.BLOOD_MOON:
 		one["hp"] = Weather.elite_hp(int(one["hp"]))
+		one["max_hp"] = int(one["hp"])
+	elif boss and Calendar.year_of(Calendar.date(state)) > 1:
+		one["hp"] = Almanac.boss_hp(int(one["hp"]), Calendar.date(state))
 		one["max_hp"] = int(one["hp"])
 	(state["entities"] as Dictionary)[id] = one
 	return id
 
 
 ## **Whether a body is a Blood Moon's elite** (task 0257): it carries
-## `max_hp`, which nothing else does.
+## `max_hp` and is no boss - a later year's boss carries one too (task 0279).
 static func is_elite(state: Dictionary, id: int) -> bool:
-	return get_one(state, id).has("max_hp")
+	var one := get_one(state, id)
+	return one.has("max_hp") and not bool((GameData.ENEMIES.get(one.get("kind", &""), {}) as Dictionary).get("is_boss", false))
 
 
 static func get_one(state: Dictionary, id: int) -> Dictionary:

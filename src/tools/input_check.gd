@@ -3797,10 +3797,12 @@ func _case_0070_endless() -> void:
 	expect(next_night == Run.final_night() + 1,
 		"the next night is the year's last plus one", str(next_night))
 	# Spring 1 of Year 2 is the calm night after Winter's boss (task 0154):
-	# nothing comes, though the night as written has plenty.
+	# nothing comes, and since task 0279 it has no record of its own, as a
+	# calm date of Year 1 has none - Year 2's own night comes after it.
 	expect(bool(Waves.night_of(next_night, int(driver.state["seed"])).get("calm", false))
-		and Waves.size_in(Waves.plain_night(next_night, int(driver.state["seed"]))) > 0,
-		"and it is the calm night, over a night written with something to send",
+		and Waves.plain_night(next_night, int(driver.state["seed"])).is_empty()
+		and Waves.size_in(Waves.night_of(next_night + 1, int(driver.state["seed"]))) > 0,
+		"and it is the calm night, with Year 2's own night to send after it",
 		str(Waves.summary_of(next_night, int(driver.state["seed"]))))
 
 	await close_scene()

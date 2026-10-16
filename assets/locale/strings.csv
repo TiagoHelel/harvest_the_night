@@ -520,6 +520,7 @@ RES_UNTOUCHED_ALL,0,money and the farm are untouched,o dinheiro e a fazenda est�
 RES_WALKED,200,%d walked off at dawn,%d foi embora ao amanhecer
 RES_WALKED.other,200,%d walked off at dawn,%d foram embora ao amanhecer
 RES_WAS_LOST,0,LOST,PERDIDA
+RES_YEAR_SURVIVED,200,YEAR %d SURVIVED,ANO %d SOBREVIVIDO
 RES_ZOMBIES,0,zombies killed,zumbis mortos
 SAVE_DAMAGED,0,the file is damaged,o arquivo está danificado
 SAVE_FROM_THE_FUTURE,0,it was written by a newer version of the game,foi escrito por uma versão mais nova do jogo

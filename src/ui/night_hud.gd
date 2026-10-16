@@ -666,7 +666,7 @@ func _id_at(cell: Vector2i) -> StringName:
 
 ## The boss bar, up only while there is one on the farm (task 0246: any
 ## `is_boss`, the lowest id's health against `Combat.full_hp`, its name, and
-## `x2` when more than one is alive - Endless sends two Giants).
+## `x2` when more than one is alive).
 func _refresh_boss() -> void:
 	_refresh_banner()
 	var bosses := Combat.bosses_here(_state)

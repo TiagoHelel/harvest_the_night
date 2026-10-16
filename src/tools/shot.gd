@@ -113,6 +113,7 @@ const SCENARIOS: Array = [
 	["till_grass", "tilled grass beside starter beds at noon", ""],
 	["till_grass_night", "the same expanded field at night", ""],
 	["noon", "the farm at noon", ""],
+	["year_two", "a Year 2 day: Spring 3 of Year 2 at noon on a farm that carried on past the Winter Lord - SPRING 3 beside the clock and YEAR 2 on the line under it (task 0279)", ""],
 	["dusk", "the same farm at dusk", ""],
 	["bedtime", "the same farm at 22:30, time for bed", ""],
 	["wave", "a wave mid-fight", ""],
@@ -803,6 +804,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"till_grass": _set_till_grass(state)
 		"till_grass_night": _set_till_grass_night(state)
 		"noon": _set_noon(state)
+		"year_two": _set_year_two(state)
 		"dusk": _set_dusk(state)
 		"bedtime": _set_bedtime(state)
 		"wave": _set_wave(state)
@@ -1809,6 +1811,17 @@ func _room_near(state: Dictionary, id: StringName, near: Vector2i) -> Vector2i:
 func _stand(state: Dictionary, cell: Vector2i) -> void:
 	state["player"]["pos"] = [cell.x * Player.SUBTILE + Player.SUBTILE / 2,
 		cell.y * Player.SUBTILE + Player.SUBTILE / 2]
+
+
+## **A Year 2 day** (task 0279): Spring 3 of Year 2 at noon, the farm carried
+## on past the Winter Lord (0160's choice), its field sown - where the HUD
+## says the year under the date until dusk.
+func _set_year_two(state: Dictionary) -> void:
+	_on_date(state, Calendar.year_days() + 3)
+	state["endless"] = true
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(WorldView.NOON_MINUTE)
+		- int(state["day_tick"]), 1))
 
 
 func _set_noon(state: Dictionary) -> void:

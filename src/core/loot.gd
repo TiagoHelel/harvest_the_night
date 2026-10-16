@@ -218,7 +218,7 @@ static func lay_moon_stones(state: Dictionary) -> Array:
 
 ## Where tonight's moon stones go: `MOON_STONES` cells spread evenly along
 ## `road(state)`, every Kth cell from an offset drawn from a stream of the
-## night's own - mixed from the run's seed and the night as `Endless` mixes
+## night's own - mixed from the run's seed and the night as `Almanac` mixes
 ## its waves', and never the run's own dice. The same seed and the same farm,
 ## the same cells.
 static func moon_cells(state: Dictionary) -> Array:
@@ -263,7 +263,7 @@ static func road(state: Dictionary) -> Array:
 
 
 ## A stream for the stones, mixed from the run's seed and the night the way
-## `Endless` mixes one for its waves, with a salt of its own so that the two
+## `Almanac` mixes one for its waves, with a salt of its own so that the two
 ## never draw the same numbers.
 static func _stream_for(seed_value: int, night: int) -> int:
 	var h := (seed_value ^ STONE_SALT) & 0xFFFFFFFF

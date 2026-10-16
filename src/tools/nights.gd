@@ -3,19 +3,25 @@ extends SceneTree
 ## Print the year's nights, without running one of them.
 ##
 ##     python tools/nights.py [from] [to] [seed]
+##     python tools/nights.py --years 3
 ##     python tools/nights.py --check
 ##
 ## **By default the year** (task 0270): days 1 to `Calendar.year_days()` for
 ## seed 0, a block per season. Each day gives its kinds, sides, count, hit
 ## points, reward and weather, and is marked `key` (written in
 ## `GameData.KEY_NIGHTS`), `made` (made by `Almanac` from its season's
-## template), `curve` (past the year, `Endless`'s) or `calm`, and `FULL` and
+## template - in a later year, Year 1's day grown, task 0279) or `calm`, and
+## `FULL` and
 ## `BOSS` on a Full Moon and a boss's night. **When it is all sent** stands
 ## against the fill line (task 0271, `Waves.fill_line`): a `!` marks a night
 ## over before it. Then it prints the day each kind is first sent and the
 ## days as bars of hit points.
 ## `python tools/nights.py 15 28 3` prints Summer for seed 3, and a range past
-## the year prints the curve.
+## the year prints the later years.
+##
+## **`--years N`** (task 0279) prints Years 1 to N for seed 0, day by day,
+## then a line a season of each year: its nights, hit points, largest night,
+## boss and the boss's hit points that year, and its weather.
 ##
 ## **`--check` is a gate** (task 0151), run by `tools/verify.py`: the year's
 ## tables pass `GameData.check_nights`, and every date of the year, 1 to
@@ -54,6 +60,13 @@ func _init() -> void:
 	if args.has("--check"):
 		quit(_check_the_year())
 		return
+	var at := args.find("--years")
+	if at >= 0:
+		var years := maxi(int(str(args[at + 1])) if at + 1 < args.size() and str(args[at + 1]).is_valid_int() else 3, 1)
+		_print_the_days(1, years * Calendar.year_days(), 0)
+		_print_the_years(years, 0)
+		quit()
+		return
 
 	var numbers: Array = []
 	for arg in args:
@@ -70,8 +83,8 @@ func _init() -> void:
 ## season, the totals, the first day each kind is sent, and the bars.
 func _print_the_days(first: int, last: int, seed_value: int) -> void:
 	print("HARVEST THE NIGHT - days %d to %d, seed %d" % [first, last, seed_value])
-	print("  key: written in KEY_NIGHTS   made: from its season's template   "
-		+ "curve: Endless, past the year")
+	print("  key: written in KEY_NIGHTS   made: from its season's template "
+		+ "(a later year's: Year 1's day grown)")
 	print(("  FULL: a Full Moon, the horde at %d%%   BOSS: the season's boss comes   "
 		+ "calm: nothing comes") % GameData.FULL_MOON_HORDE_PERCENT)
 	# **Each night against the night** (task 0137): when its last member is
@@ -178,17 +191,15 @@ func _line_of(day: int, seed_value: int) -> String:
 		"-" if weather.is_empty() else weather, sent / GameData.SECONDS, short, ", ".join(parts)]
 
 
-## What a day is: `key`, `made`, `curve` or `calm`, then `FULL` and `BOSS`.
+## What a day is: `key`, `made` or `calm`, then `FULL` and `BOSS`.
 func _marks_of(day: int) -> Array:
 	var marks: Array = []
 	if Calendar.is_calm(day):
 		marks.append("calm")
 	elif Almanac.is_key(day):
 		marks.append("key")
-	elif Almanac.is_made(day):
-		marks.append("made")
 	else:
-		marks.append("curve")
+		marks.append("made")
 	if Calendar.is_full_moon(day):
 		marks.append("FULL")
 	if Calendar.is_boss_night(day):
@@ -212,6 +223,39 @@ func _side_code(side: int) -> String:
 	for word in String(GameData.SPAWN_SIDES[side]).split("_"):
 		code += word.left(1).to_upper()
 	return code
+
+
+## **The years, a season a line** (task 0279): each year's seasons with
+## their nights, their hit points and largest night, their boss and the
+## boss's hit points that year (`Almanac.boss_hp`), and their weather - the
+## heavier-each-year the calendar promises, read at a glance.
+func _print_the_years(years: int, seed_value: int) -> void:
+	print("")
+	print("  THE YEARS, a season a line (seed %d)" % seed_value)
+	print("   year  season   nights   hit points   largest   boss              its hp   fog  rain  blood")
+	for year in range(1, years + 1):
+		for s in GameData.SEASONS.size():
+			var first := (year - 1) * Calendar.year_days() + s * GameData.SEASON_DAYS + 1
+			var nights := 0
+			var points := 0
+			var largest := 0
+			var weather := {}
+			for day in range(first, first + GameData.SEASON_DAYS):
+				var one := Waves.night_of(day, seed_value)
+				if (one.get("waves", []) as Array).is_empty():
+					continue
+				nights += 1
+				var hp := Waves.hit_points_in(one)
+				points += hp
+				largest = maxi(largest, hp)
+				var event := Weather.event(seed_value, day)
+				weather[event] = int(weather.get(event, 0)) + 1
+			var last := first + GameData.SEASON_DAYS - 1
+			var boss := Calendar.boss_of(last)
+			var boss_hp := Almanac.boss_hp(int((GameData.ENEMIES.get(boss, {}) as Dictionary).get("hp", 0)), last)
+			print("   %4d  %-7s  %6d   %10d   %7d   %-15s %8d  %4d  %4d  %5d" % [year, GameData.SEASONS[s],
+				nights, points, largest, boss, boss_hp, int(weather.get(Weather.FOG, 0)),
+				int(weather.get(Weather.RAIN, 0)), int(weather.get(Weather.BLOOD_MOON, 0))])
 
 
 ## **The year, as a gate.** The tables pass `check_nights`, and every date
