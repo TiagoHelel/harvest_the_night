@@ -1,0 +1,1 @@
+Superseded by r3. Earlier sourcehalo diagnosis withdrawn: hiddenzeroalphaRGB was misread as visiblehalo.

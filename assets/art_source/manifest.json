@@ -124425,6 +124425,1390 @@
       "operation": "copy",
       "alias_of": "enemies/digger_death_3",
       "output_sha256": "0b66cbe7d37a4064cf1d4b3b73e7bc36e209fcfa47b25eab2eac756ae9ae397f"
+    },
+    {
+      "id": "enemies/frost_zombie",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-master-r1.png",
+      "source_sha256": "7f3eea4ed2f171d2bb7bee6a4dd20f494c4a268d877d7c19bbabeed3623efa18",
+      "crop_xywh": [
+        405,
+        66,
+        641,
+        987
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "master",
+      "content_scale": 0.029381965552178316,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-master-r1.prompt.txt",
+      "prompt_sha256": "304b72ff65c9b60cdb6a63bf2331cfbc5cf175063655845af167baefcc6edf2f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-master-r1.call.json",
+          "sha256": "ab9ab659b112389eba540ea65869ad64058a7666fcefac83b3eee2f3acacaa91",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie/west/01.png",
+          "sha256": "c7544a0e351b01907834e04fa06ecc99f1e558bc0fdb8bc1504c20febc64d91f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        12,
+        29
+      ],
+      "output_sha256": "c7544a0e351b01907834e04fa06ecc99f1e558bc0fdb8bc1504c20febc64d91f"
+    },
+    {
+      "id": "enemies/frost_zombie_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-walk-r3.png",
+      "source_sha256": "43c0e38320536ddb0ba4902e764b1473b3e5d7de1c8366884b40416fed86650e",
+      "crop_xywh": [
+        38,
+        75,
+        427,
+        647
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "walk",
+      "content_scale": 0.04482225656877898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_walk",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/frost_zombie_walk_0.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.prompt.txt",
+      "prompt_sha256": "f3618329fee655cdd4143be1dc8a5fe17609790a92ac6d70011bad5528c3cecd",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.call.json",
+          "sha256": "ad093f8970fbac22810d7916edd92ae3a8331b810de7a1cfb846cba7c22df3fd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_walk/west/01.png",
+          "sha256": "c8d4431386e5889355f54128c9497c2bb8a08d42151a41e6bcb46db1aedc03f3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        10,
+        29
+      ],
+      "output_sha256": "c8d4431386e5889355f54128c9497c2bb8a08d42151a41e6bcb46db1aedc03f3"
+    },
+    {
+      "id": "enemies/frost_zombie_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-walk-r3.png",
+      "source_sha256": "43c0e38320536ddb0ba4902e764b1473b3e5d7de1c8366884b40416fed86650e",
+      "crop_xywh": [
+        538,
+        69,
+        439,
+        661
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "walk",
+      "content_scale": 0.04482225656877898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_walk",
+      "frame": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/frost_zombie_walk_1.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.prompt.txt",
+      "prompt_sha256": "f3618329fee655cdd4143be1dc8a5fe17609790a92ac6d70011bad5528c3cecd",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.call.json",
+          "sha256": "ad093f8970fbac22810d7916edd92ae3a8331b810de7a1cfb846cba7c22df3fd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_walk/west/02.png",
+          "sha256": "9a7ee27b18bad690dc5245d671310139bca681b442b552cd2e9db8544b18ef16",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        11,
+        30
+      ],
+      "output_sha256": "9a7ee27b18bad690dc5245d671310139bca681b442b552cd2e9db8544b18ef16"
+    },
+    {
+      "id": "enemies/frost_zombie_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-walk-r3.png",
+      "source_sha256": "43c0e38320536ddb0ba4902e764b1473b3e5d7de1c8366884b40416fed86650e",
+      "crop_xywh": [
+        1053,
+        79,
+        450,
+        648
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "walk",
+      "content_scale": 0.04482225656877898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_walk",
+      "frame": 2,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/frost_zombie_walk_2.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.prompt.txt",
+      "prompt_sha256": "f3618329fee655cdd4143be1dc8a5fe17609790a92ac6d70011bad5528c3cecd",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.call.json",
+          "sha256": "ad093f8970fbac22810d7916edd92ae3a8331b810de7a1cfb846cba7c22df3fd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_walk/west/03.png",
+          "sha256": "04242dfb9b3a3501507a7ec489e06bd178fc0d75e2993972b24dff07a26e291e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        11,
+        29
+      ],
+      "output_sha256": "04242dfb9b3a3501507a7ec489e06bd178fc0d75e2993972b24dff07a26e291e"
+    },
+    {
+      "id": "enemies/frost_zombie_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-walk-r3.png",
+      "source_sha256": "43c0e38320536ddb0ba4902e764b1473b3e5d7de1c8366884b40416fed86650e",
+      "crop_xywh": [
+        1578,
+        72,
+        427,
+        654
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "walk",
+      "content_scale": 0.04482225656877898,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_walk",
+      "frame": 3,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/frost_zombie_walk_3.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.prompt.txt",
+      "prompt_sha256": "f3618329fee655cdd4143be1dc8a5fe17609790a92ac6d70011bad5528c3cecd",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.call.json",
+          "sha256": "ad093f8970fbac22810d7916edd92ae3a8331b810de7a1cfb846cba7c22df3fd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_walk/west/04.png",
+          "sha256": "c202511d3397a5881e1529a69a907e3cc7493442c2db4870189694e1e8b073af",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        11,
+        29
+      ],
+      "output_sha256": "c202511d3397a5881e1529a69a907e3cc7493442c2db4870189694e1e8b073af"
+    },
+    {
+      "id": "enemies/frost_zombie_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-attack-r1.png",
+      "source_sha256": "9dd6443a52769cd3472378d94a296fda64ebb83b821a7f3355c7240f2a07a416",
+      "crop_xywh": [
+        132,
+        238,
+        370,
+        551
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "attack",
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_attack_0.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.prompt.txt",
+      "prompt_sha256": "71038f6dfcc10310f3fb05d65287a8a7ce10a771698da3c64e99a6903889b102",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.call.json",
+          "sha256": "dc7ebf850d7c5530f4fc9d08056ab07dda6ba5dfd1e91ee71380b25b93ccae40",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_attack/west/01.png",
+          "sha256": "4c4ee45d800368824b04df9a19547faf598648454fc09a1ffbbe4b3d00a44f05",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        12,
+        29
+      ],
+      "output_sha256": "4c4ee45d800368824b04df9a19547faf598648454fc09a1ffbbe4b3d00a44f05"
+    },
+    {
+      "id": "enemies/frost_zombie_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-attack-r1.png",
+      "source_sha256": "9dd6443a52769cd3472378d94a296fda64ebb83b821a7f3355c7240f2a07a416",
+      "crop_xywh": [
+        566,
+        266,
+        614,
+        519
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "attack",
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_attack_1.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.prompt.txt",
+      "prompt_sha256": "71038f6dfcc10310f3fb05d65287a8a7ce10a771698da3c64e99a6903889b102",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.call.json",
+          "sha256": "dc7ebf850d7c5530f4fc9d08056ab07dda6ba5dfd1e91ee71380b25b93ccae40",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_attack/west/02.png",
+          "sha256": "06b0db18276202d34b89a113e3e6c8fd8fc55ef616c3df8e5a99a5ef29c02fd8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        23,
+        27
+      ],
+      "output_sha256": "06b0db18276202d34b89a113e3e6c8fd8fc55ef616c3df8e5a99a5ef29c02fd8"
+    },
+    {
+      "id": "enemies/frost_zombie_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-attack-r1.png",
+      "source_sha256": "9dd6443a52769cd3472378d94a296fda64ebb83b821a7f3355c7240f2a07a416",
+      "crop_xywh": [
+        1346,
+        238,
+        353,
+        551
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "attack",
+      "content_scale": 0.05263157894736842,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_attack_2.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.prompt.txt",
+      "prompt_sha256": "71038f6dfcc10310f3fb05d65287a8a7ce10a771698da3c64e99a6903889b102",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.call.json",
+          "sha256": "dc7ebf850d7c5530f4fc9d08056ab07dda6ba5dfd1e91ee71380b25b93ccae40",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_attack/west/03.png",
+          "sha256": "78214e31c2d16a78467bfacbeb8bb095d407b025bbcce6eab3c5f1ab983ab15b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        11,
+        29
+      ],
+      "output_sha256": "78214e31c2d16a78467bfacbeb8bb095d407b025bbcce6eab3c5f1ab983ab15b"
+    },
+    {
+      "id": "enemies/frost_zombie_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-death-r1.png",
+      "source_sha256": "164566e9634cabfa8b4324adbac2374ea4b1d7876c29529cd60dcdf1a99c9cf2",
+      "crop_xywh": [
+        83,
+        168,
+        341,
+        519
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "death",
+      "content_scale": 0.055876685934489405,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.prompt.txt",
+      "prompt_sha256": "adc409e2c81e98b5a6d531c63273570c28904f504e700f5c4b84eb453e507ad0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.call.json",
+          "sha256": "87878235b790cec5e6b9f5f0d987d9c68a4353398a3635f1662dae88681494dc",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_death/west/01.png",
+          "sha256": "7ab2d5c7bda1ac5e33262a73922ce4e87f0a779c5d6e45a37742922282ee8aa1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        12,
+        29
+      ],
+      "output_sha256": "7ab2d5c7bda1ac5e33262a73922ce4e87f0a779c5d6e45a37742922282ee8aa1"
+    },
+    {
+      "id": "enemies/frost_zombie_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-death-r1.png",
+      "source_sha256": "164566e9634cabfa8b4324adbac2374ea4b1d7876c29529cd60dcdf1a99c9cf2",
+      "crop_xywh": [
+        554,
+        239,
+        360,
+        451
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "death",
+      "content_scale": 0.055876685934489405,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.prompt.txt",
+      "prompt_sha256": "adc409e2c81e98b5a6d531c63273570c28904f504e700f5c4b84eb453e507ad0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.call.json",
+          "sha256": "87878235b790cec5e6b9f5f0d987d9c68a4353398a3635f1662dae88681494dc",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_death/west/02.png",
+          "sha256": "3a67259871b3d3d734bccd2056314cc4c5c2975fa7236df2fb462d4b4bec8268",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        12,
+        25
+      ],
+      "output_sha256": "3a67259871b3d3d734bccd2056314cc4c5c2975fa7236df2fb462d4b4bec8268"
+    },
+    {
+      "id": "enemies/frost_zombie_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-death-r1.png",
+      "source_sha256": "164566e9634cabfa8b4324adbac2374ea4b1d7876c29529cd60dcdf1a99c9cf2",
+      "crop_xywh": [
+        993,
+        361,
+        497,
+        341
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "death",
+      "content_scale": 0.055876685934489405,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.prompt.txt",
+      "prompt_sha256": "adc409e2c81e98b5a6d531c63273570c28904f504e700f5c4b84eb453e507ad0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.call.json",
+          "sha256": "87878235b790cec5e6b9f5f0d987d9c68a4353398a3635f1662dae88681494dc",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_death/west/03.png",
+          "sha256": "f3003ed95edbff5c34324323488b936b8423335a8de9019b4318afbeba77654f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        14,
+        19
+      ],
+      "output_sha256": "f3003ed95edbff5c34324323488b936b8423335a8de9019b4318afbeba77654f"
+    },
+    {
+      "id": "enemies/frost_zombie_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/frost_zombie/frost-death-r1.png",
+      "source_sha256": "164566e9634cabfa8b4324adbac2374ea4b1d7876c29529cd60dcdf1a99c9cf2",
+      "crop_xywh": [
+        1543,
+        521,
+        466,
+        187
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "death",
+      "content_scale": 0.055876685934489405,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_death_3.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.prompt.txt",
+      "prompt_sha256": "adc409e2c81e98b5a6d531c63273570c28904f504e700f5c4b84eb453e507ad0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.call.json",
+          "sha256": "87878235b790cec5e6b9f5f0d987d9c68a4353398a3635f1662dae88681494dc",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_death/west/04.png",
+          "sha256": "03ce8e10c810ec81ece9d9ecb0cad9a4f3de4a9594aa0426e870581c43a46ad7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        13,
+        10
+      ],
+      "output_sha256": "03ce8e10c810ec81ece9d9ecb0cad9a4f3de4a9594aa0426e870581c43a46ad7"
+    },
+    {
+      "id": "effects/ice_shatter_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/ice-shatter-r1.png",
+      "source_sha256": "84191138fd33897d1b42d2798b475bfd43eb3c49697787fa3d9812ae596fbc69",
+      "crop_xywh": [
+        169,
+        296,
+        192,
+        181
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.04442148760330578,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ],
+      "animation": "effects/ice_shatter",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "ice_shatter",
+      "fx_origin": "center",
+      "output": "sprites/effects/ice_shatter_0.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.prompt.txt",
+      "prompt_sha256": "ffd43876d68ea3be06662ee26c8b62aa701461937292406e993e95488c7e5377",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.call.json",
+          "sha256": "466219b3920045594767b75ae7b3967e39b89c8afe2169a6d289719c6a374a80",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/ice_shatter/none/01.png",
+          "sha256": "0235079cbaa7af40b9850f2e616c7446b46a1178973f367ec25a71b6806af6ff",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "output_sha256": "0235079cbaa7af40b9850f2e616c7446b46a1178973f367ec25a71b6806af6ff"
+    },
+    {
+      "id": "effects/ice_shatter_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/ice-shatter-r1.png",
+      "source_sha256": "84191138fd33897d1b42d2798b475bfd43eb3c49697787fa3d9812ae596fbc69",
+      "crop_xywh": [
+        563,
+        169,
+        484,
+        405
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.04442148760330578,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ],
+      "animation": "effects/ice_shatter",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "ice_shatter",
+      "fx_origin": "center",
+      "variant_of": "effects/ice_shatter_0",
+      "output": "sprites/effects/ice_shatter_1.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.prompt.txt",
+      "prompt_sha256": "ffd43876d68ea3be06662ee26c8b62aa701461937292406e993e95488c7e5377",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.call.json",
+          "sha256": "466219b3920045594767b75ae7b3967e39b89c8afe2169a6d289719c6a374a80",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/ice_shatter/none/02.png",
+          "sha256": "3dd2a248b19e71aefa8a5d5597ba3028f2854a7285d79b2d155d1d63fa12ead4",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        11,
+        9
+      ],
+      "output_sha256": "3dd2a248b19e71aefa8a5d5597ba3028f2854a7285d79b2d155d1d63fa12ead4"
+    },
+    {
+      "id": "effects/ice_shatter_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/ice-shatter-r1.png",
+      "source_sha256": "84191138fd33897d1b42d2798b475bfd43eb3c49697787fa3d9812ae596fbc69",
+      "crop_xywh": [
+        1174,
+        203,
+        439,
+        361
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.04442148760330578,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ],
+      "animation": "effects/ice_shatter",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "ice_shatter",
+      "fx_origin": "center",
+      "variant_of": "effects/ice_shatter_0",
+      "output": "sprites/effects/ice_shatter_2.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.prompt.txt",
+      "prompt_sha256": "ffd43876d68ea3be06662ee26c8b62aa701461937292406e993e95488c7e5377",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.call.json",
+          "sha256": "466219b3920045594767b75ae7b3967e39b89c8afe2169a6d289719c6a374a80",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/ice_shatter/none/03.png",
+          "sha256": "3b0d7624f254dcf1b5dbffa6ab8c0de4718d5cc2fe189327d0e494ad75bc71f8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        10,
+        8
+      ],
+      "output_sha256": "3b0d7624f254dcf1b5dbffa6ab8c0de4718d5cc2fe189327d0e494ad75bc71f8"
+    },
+    {
+      "id": "effects/ice_shatter_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/ice/ice-shatter-r1.png",
+      "source_sha256": "84191138fd33897d1b42d2798b475bfd43eb3c49697787fa3d9812ae596fbc69",
+      "crop_xywh": [
+        1864,
+        312,
+        157,
+        175
+      ],
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "content_scale": 0.04442148760330578,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ],
+      "animation": "effects/ice_shatter",
+      "frame": 3,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "ice_shatter",
+      "fx_origin": "center",
+      "variant_of": "effects/ice_shatter_0",
+      "output": "sprites/effects/ice_shatter_3.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.prompt.txt",
+      "prompt_sha256": "ffd43876d68ea3be06662ee26c8b62aa701461937292406e993e95488c7e5377",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/ice-shatter-r1.call.json",
+          "sha256": "466219b3920045594767b75ae7b3967e39b89c8afe2169a6d289719c6a374a80",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/ice_shatter/none/04.png",
+          "sha256": "ee1f15fc6dc30bd115bdf5c969820624cbf1576e6d16fcb002c26da9dd83cb5f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "output_sha256": "ee1f15fc6dc30bd115bdf5c969820624cbf1576e6d16fcb002c26da9dd83cb5f"
+    },
+    {
+      "id": "ui/head_frost_zombie",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/head-frost-r1.png",
+      "source_sha256": "48e1257668a09aa903f92e1e71d3b8b788a432298f4a5ceb74ad3af63e4bfe1d",
+      "crop_xywh": [
+        240,
+        242,
+        792,
+        840
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.015476190476190477,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "water_dark",
+        "water",
+        "water_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "night",
+        "night_light",
+        "moon",
+        "rot",
+        "blood"
+      ],
+      "animation": "ui/head_frost_zombie",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/head_frost_zombie.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/head-frost-r1.prompt.txt",
+      "prompt_sha256": "e3d296d22ff875f680b56ef8dc6de8fde619534edcbc2049543760150398b8c9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/head-frost-r1.call.json",
+          "sha256": "74adaec6ada8e736998e30d66724860f63106c580681f809aafbce2ee7c2a594",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/head_frost_zombie/none/01.png",
+          "sha256": "5da1d94e36f2159f230951ab49030f0992a81104792ffbd111719e3825422e20",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "approval": "A050 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0264",
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "output_sha256": "5da1d94e36f2159f230951ab49030f0992a81104792ffbd111719e3825422e20"
+    },
+    {
+      "id": "enemies/frost_zombie_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.prompt.txt",
+      "prompt_sha256": "f3618329fee655cdd4143be1dc8a5fe17609790a92ac6d70011bad5528c3cecd",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r3.call.json",
+          "sha256": "ad093f8970fbac22810d7916edd92ae3a8331b810de7a1cfb846cba7c22df3fd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_walk/west/03.png",
+          "sha256": "04242dfb9b3a3501507a7ec489e06bd178fc0d75e2993972b24dff07a26e291e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/frost_zombie",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/frost_zombie_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/frost_zombie_walk_2",
+      "output_sha256": "04242dfb9b3a3501507a7ec489e06bd178fc0d75e2993972b24dff07a26e291e"
+    },
+    {
+      "id": "enemies/frost_zombie_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_attack.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.prompt.txt",
+      "prompt_sha256": "71038f6dfcc10310f3fb05d65287a8a7ce10a771698da3c64e99a6903889b102",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-attack-r1.call.json",
+          "sha256": "dc7ebf850d7c5530f4fc9d08056ab07dda6ba5dfd1e91ee71380b25b93ccae40",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_attack/west/02.png",
+          "sha256": "06b0db18276202d34b89a113e3e6c8fd8fc55ef616c3df8e5a99a5ef29c02fd8",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/frost_zombie",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/frost_zombie_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/frost_zombie_attack_1",
+      "output_sha256": "06b0db18276202d34b89a113e3e6c8fd8fc55ef616c3df8e5a99a5ef29c02fd8"
+    },
+    {
+      "id": "enemies/frost_zombie_death",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/frost_zombie_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/frost_zombie_death.png",
+      "prompt": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.prompt.txt",
+      "prompt_sha256": "adc409e2c81e98b5a6d531c63273570c28904f504e700f5c4b84eb453e507ad0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/raw/frost-death-r1.call.json",
+          "sha256": "87878235b790cec5e6b9f5f0d987d9c68a4353398a3635f1662dae88681494dc",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/native/frost_zombie_death/west/04.png",
+          "sha256": "03ce8e10c810ec81ece9d9ecb0cad9a4f3de4a9594aa0426e870581c43a46ad7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/contract.json",
+          "sha256": "5524e0de9f4322d45b69a8fd97247358ec21ea9154bd7a311f52e5d184934163",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A050-frost-zombie/APPROVAL.json",
+          "sha256": "09d42c69b476fc185aed8bc0eb6fe311cb3263ed452f311d62b548c047c50b96",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A050",
+      "integration_task": "0264",
+      "revision": 1,
+      "enemy_family": "frost_zombie",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/frost_zombie",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/frost_zombie_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/frost_zombie_death_3",
+      "output_sha256": "03ce8e10c810ec81ece9d9ecb0cad9a4f3de4a9594aa0426e870581c43a46ad7"
     }
   ]
 }

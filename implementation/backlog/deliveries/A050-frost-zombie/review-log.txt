@@ -1,0 +1,14 @@
+
+2026-10-14 / Measured native export
+Walking sources retain diffuseblue/purple halo outside sprites in all3attempts, includingbackground-removal r3. Thresholded native diagnostics do not excuse the rejectedsource. No fourthattempt or production export.
+No art approval inferred. 17 of 17 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Measured native export
+Alpha audit correction: raw RGB preview displays hidden RGB in zero-alpha areas. Correct RGBA compositing is clean; the apparent diffusehalo is not visible art. Source outside-dilatedmask alpha is at most1 beyond18rawpixels (<1logicalpixel). Binary128 threshold removes edge/mask encoding noise as prescribed. The formerhalo rejection is withdrawn; no additional generation was used.
+Selected r3 walking has warmnear leg ahead in contact0 and coolfar leg ahead in contact2. Final owner visualapproval pending.
+No art approval inferred. 17 of 17 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+17/17 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: none. Complete delivery released for Claude integration.

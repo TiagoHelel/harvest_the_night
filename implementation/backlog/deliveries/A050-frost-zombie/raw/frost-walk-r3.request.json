@@ -1,0 +1,7 @@
+{
+  "prompt": "BACKGROUND REMOVAL EDIT ONLY. This is a four-pose pixel sprite sheet. Remove the entire diffuse blue/purple cloud, glow and haze around and between the four characters. All space outside the sharp pixel silhouette of each zombie must be PURE TRANSPARENT alpha ZERO. Preserve ALL four sprites including ice/hair, skin, clothes, legs, feet, exact positions, physical scale and poses. Do not redraw them or change their palette. Do not add shadows. Keep opaque solid sprite pixels and crisp pixel edges. No residual soft haze, not even faint haze. Transparent cutouts only, no coloured backdrop. The cloud is NOT part of the character. Keep four separate complete sprites.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/raw/frost-walk-r2.png"
+  ]
+}

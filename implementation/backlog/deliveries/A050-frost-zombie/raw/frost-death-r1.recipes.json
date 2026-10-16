@@ -1,0 +1,210 @@
+[
+  {
+    "recipe": {
+      "id": "frost-death-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\frost-death-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        488,
+        768
+      ],
+      "crop_xywh": [
+        83,
+        168,
+        341,
+        519
+      ],
+      "content_scale": 0.055876685934489405,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        12,
+        29
+      ]
+    },
+    "native_bounds": [
+      20,
+      15,
+      39,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      19,
+      29
+    ],
+    "measured_contact_band_raw_xywh": [
+      83,
+      598,
+      341,
+      89
+    ],
+    "contact_centre_raw_x": 294.5,
+    "native_grid_registration_dx": 0,
+    "native_grid_registration_dy": 0
+  },
+  {
+    "recipe": {
+      "id": "frost-death-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\frost-death-r1.png",
+      "sheet_cell_xywh": [
+        488,
+        0,
+        465,
+        768
+      ],
+      "crop_xywh": [
+        554,
+        239,
+        360,
+        451
+      ],
+      "content_scale": 0.055876685934489405,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        12,
+        25
+      ]
+    },
+    "native_bounds": [
+      20,
+      19,
+      40,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      20,
+      25
+    ],
+    "measured_contact_band_raw_xywh": [
+      554,
+      601,
+      360,
+      89
+    ],
+    "contact_centre_raw_x": 744.0,
+    "native_grid_registration_dx": 1,
+    "native_grid_registration_dy": 0
+  },
+  {
+    "recipe": {
+      "id": "frost-death-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\frost-death-r1.png",
+      "sheet_cell_xywh": [
+        953,
+        0,
+        563,
+        768
+      ],
+      "crop_xywh": [
+        993,
+        361,
+        497,
+        341
+      ],
+      "content_scale": 0.055876685934489405,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        14,
+        19
+      ]
+    },
+    "native_bounds": [
+      18,
+      25,
+      46,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      28,
+      19
+    ],
+    "measured_contact_band_raw_xywh": [
+      993,
+      613,
+      497,
+      89
+    ],
+    "contact_centre_raw_x": 1241.5,
+    "native_grid_registration_dx": 0,
+    "native_grid_registration_dy": 0
+  },
+  {
+    "recipe": {
+      "id": "frost-death-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\frost-death-r1.png",
+      "sheet_cell_xywh": [
+        1516,
+        0,
+        530,
+        768
+      ],
+      "crop_xywh": [
+        1543,
+        521,
+        466,
+        187
+      ],
+      "content_scale": 0.055876685934489405,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        13,
+        10
+      ]
+    },
+    "native_bounds": [
+      19,
+      34,
+      45,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      26,
+      10
+    ],
+    "measured_contact_band_raw_xywh": [
+      1543,
+      619,
+      466,
+      89
+    ],
+    "contact_centre_raw_x": 1776.0,
+    "native_grid_registration_dx": 0,
+    "native_grid_registration_dy": 0
+  }
+]

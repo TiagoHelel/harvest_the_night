@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A050 production frost-zombie animation source.\nImage1 is exact identity master: torn redbrown wintershirt and mudbrown trousers, bluegrey deadskin withgreenrot, frostwhite hair, matte jagged shoulder/backice and armicicles, pale cloudybone eyes. WEST side view, same proportions, logicalstandingbody29px high,18\u201324wide,64x48canvas pivot32,44, feet on lowest row43. Footcontact centred32\u00b11. Sameorthographic three-quarter top-downfarmcamera, coloureddarkoutline, neutralupper-leftdaylight. Handcrafted COARSEpixelart, broadlargesimpleclusters, no microdetail. One physicalscale forwhole strip; do not resize smallfallenpose to cell. Exactly ordered poses, no duplicate/translated clones. Figures SMALL at most30percentcellwidth, huge fullheight transparentgutters even aroundwidestpose, generousmargins, completeunclippedfeet/head/hands. TruealphaZERO outsidefullyOPAQUE sprite. No diffusehalo/haze, lightingcloud, glow/bloom, groundshadow, environment, groundpatch, extraFX, UI, words/labels, gradient/blur or3D. Frost is pale MATTE ice, never shininglight.\nONE horizontalstrip EXACTLY 4 frames.\nStiff frozen-jointed walking cycle:0 near warmbrown leg planted AHEAD WEST, far cooldark leg BACK;1 passing;2 FARcooldark leg planted AHEAD WEST, nearwarmbrown leg bent BEHIND east;3 oppositepassing. Fixedanatomical near/far shading, never swap colours. Both legs alternate at hip, knee and ankle. Clear negative space between legs. Arms counter-swing. Spiky head/torso constant, atmost1px bob. Allfour standing28\u201330pxhigh.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/raw/frost-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/raw/frost-master-r1.png",
+      "sha256": "7f3eea4ed2f171d2bb7bee6a4dd20f494c4a268d877d7c19bbabeed3623efa18",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-3d3914f7-a675-4281-9359-2192659efc7f.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\frost-walk-r1.png",
+  "sha256": "b0141d64a316be2c4a6a1047dd326490eae34b1c7c2daece090e9281a51b886b",
+  "revision": 1,
+  "decision": "rejected: Same leg forward in contacts; superseded byr2/r3. Halo diagnosis withdrawn after correctRGBA alpha audit.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\rejected\\frost-walk-r1.png"
+}

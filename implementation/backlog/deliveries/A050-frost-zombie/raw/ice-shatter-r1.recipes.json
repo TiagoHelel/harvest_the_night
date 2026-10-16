@@ -1,0 +1,218 @@
+[
+  {
+    "recipe": {
+      "id": "ice-shatter-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\ice-shatter-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        461,
+        724
+      ],
+      "crop_xywh": [
+        169,
+        296,
+        192,
+        181
+      ],
+      "content_scale": 0.04442148760330578,
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        4,
+        4
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ]
+    },
+    "native_bounds": [
+      8,
+      8,
+      17,
+      16
+    ],
+    "unclipped_scaled_wh": [
+      9,
+      8
+    ]
+  },
+  {
+    "recipe": {
+      "id": "ice-shatter-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\ice-shatter-r1.png",
+      "sheet_cell_xywh": [
+        461,
+        0,
+        649,
+        724
+      ],
+      "crop_xywh": [
+        563,
+        169,
+        484,
+        405
+      ],
+      "content_scale": 0.04442148760330578,
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        11,
+        9
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ]
+    },
+    "native_bounds": [
+      1,
+      3,
+      23,
+      21
+    ],
+    "unclipped_scaled_wh": [
+      22,
+      18
+    ]
+  },
+  {
+    "recipe": {
+      "id": "ice-shatter-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\ice-shatter-r1.png",
+      "sheet_cell_xywh": [
+        1110,
+        0,
+        628,
+        724
+      ],
+      "crop_xywh": [
+        1174,
+        203,
+        439,
+        361
+      ],
+      "content_scale": 0.04442148760330578,
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        10,
+        8
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ]
+    },
+    "native_bounds": [
+      2,
+      4,
+      22,
+      20
+    ],
+    "unclipped_scaled_wh": [
+      20,
+      16
+    ]
+  },
+  {
+    "recipe": {
+      "id": "ice-shatter-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\ice-shatter-r1.png",
+      "sheet_cell_xywh": [
+        1738,
+        0,
+        434,
+        724
+      ],
+      "crop_xywh": [
+        1864,
+        312,
+        157,
+        175
+      ],
+      "content_scale": 0.04442148760330578,
+      "canvas_wh": [
+        24,
+        24
+      ],
+      "pivot_xy": [
+        12,
+        12
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        3,
+        4
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "water_dark",
+        "water",
+        "water_light",
+        "moon",
+        "bone",
+        "stone_light",
+        "night_light"
+      ]
+    },
+    "native_bounds": [
+      9,
+      8,
+      16,
+      16
+    ],
+    "unclipped_scaled_wh": [
+      7,
+      8
+    ]
+  }
+]

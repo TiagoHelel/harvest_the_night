@@ -152,13 +152,6 @@ const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_s
 const GROUND_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "draw_scale": 1.0}
 const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "draw_scale": 1.0}
 
-## A050's frost zombie (task 0251): the families' 64x48 standing on (32,44),
-## drawn at 1.0, the walker it stands in as gone cold; and its ice burst,
-## the flare's 24x24 round (12,12) - a whole body's worth of shards.
-const FROST_ZOMBIE := {"canvas": Vector2i(64, 48), "pivot": Vector2i(32, 44), "draw_scale": 1.0}
-const FROST_TINT := Color(0.78, 1.0, 1.45)
-const ICE_SHATTER := {"canvas": Vector2i(24, 24), "pivot": Vector2i(12, 12), "draw_scale": 1.0}
-
 ## A051's wraith (task 0252): the families' 64x48 standing on (32,44), drawn
 ## at 1.0, the walker it stands in as gone pale as a shade. Its fading is
 ## `wraith_fade.gdshader`'s, never the art's.
@@ -201,15 +194,6 @@ const ORNAMENT := {"canvas": Vector2i(64, 12), "pivot": Vector2i(32, 6), "draw_s
 ## `bare` is a static file with no frame number (`hud_bait.png`). One line
 ## each, like `POSES`.
 const ART := {
-	# A050's frost zombie (task 0251): the walker gone cold, every pose its
-	# own, until 0264; its ice burst drawn in code (`FrostArt`), and its
-	# forecast head the box over the walker's head.
-	&"frost_zombie": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker", "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE, "bare": true},
-	&"frost_zombie_walk": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.125, "loop": true, "stand_in": &"enemies/walker_walk", "stand_in_frames": 4, "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE},
-	&"frost_zombie_attack": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_attack", "stand_in_frames": 3, "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE},
-	&"frost_zombie_death": {"pack": "A050", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": false, "stand_in": &"enemies/walker_death", "stand_in_frames": 4, "tint": FROST_TINT, "geometry": FROST_ZOMBIE, "final": FROST_ZOMBIE},
-	&"ice_shatter": {"pack": "A050", "dir": "res://sprites/effects/", "frames": 4, "seconds": 0.08, "loop": false, "stand_in": &"", "geometry": ICE_SHATTER, "final": ICE_SHATTER},
-	&"head_frost_zombie": {"pack": "A050", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"enemies/walker_walk_0", "tint": FROST_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true, "stand_in_region": Rect2i(22, 15, 16, 16)},
 	# A051's wraith (task 0252): the walker gone pale, every pose its own,
 	# until 0265; faint outside light by `wraith_fade.gdshader`, and its
 	# forecast head the box over the walker's head.

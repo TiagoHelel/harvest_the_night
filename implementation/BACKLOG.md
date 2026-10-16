@@ -2,7 +2,7 @@
 
 `######################..`  **272 / 296 done**
 
-0 doing / 24 todo / 0 blocked across 18 phases.
+1 doing / 23 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -160,7 +160,7 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
 
 ### 0264 - Art: the frost zombie
 
-Ready to pick up.  Likely files: `assets/art_source/enemies/frost_zombie/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
+In progress.  Likely files: `assets/art_source/enemies/frost_zombie/, assets/art_source/effects/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, tools/check_effect_art.py, src/ui/enemy_motion.gd`.
 
 The frost zombie as Codex drew it, in place of 0251's stand-in, with the ice shattering when it dies.
 
@@ -788,7 +788,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0261** [Art: the rat swarm](prompts/0261-art-rats.md)
 - [x] **0262** [Art: the crow](prompts/0262-art-crow.md)
 - [x] **0263** [Art: the digger](prompts/0263-art-digger.md)
-- [ ] **0264** [Art: the frost zombie](prompts/0264-art-frost-zombie.md)
+- [ ] **0264** [Art: the frost zombie](prompts/0264-art-frost-zombie.md) - **DOING**
 - [ ] **0265** [Art: the wraith](prompts/0265-art-wraith.md)
 - [ ] **0266** [Art: the Harvester](prompts/0266-art-harvester.md)
 - [ ] **0267** [Art: the Scarecrow King](prompts/0267-art-scarecrow-king.md)

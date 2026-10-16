@@ -10540,10 +10540,15 @@ func _task_0251_frost() -> void:
 		counts.append(count)
 		if used.position.x < 1 or used.position.y < 1 or used.end.x > 23 or used.end.y > 23:
 			off.append("%s off its border: %s" % [path, used])
+	# A050's own, nothing of 0120's road; the frost zombie tracked (task 0264).
+	if not (PlaceholderArt.art(&"ice_shatter").is_empty() and PlaceholderArt.art(&"frost_zombie_walk").is_empty()
+			and PlaceholderArt.art(&"head_frost_zombie").is_empty() and EnemyMotion.tracks(&"frost_zombie")
+			and FrostArt.texture_at(FrostArt.SHATTER_PATH % 0).resource_path == FrostArt.SHATTER_PATH % 0):
+		off.append("still on 0120's road")
 	expect(off.is_empty() and frames.size() == 4 and int(counts[0]) < int(counts[1]) and int(counts[3]) < int(counts[1])
 		and (boxes[1] as Rect2i).size.x <= 22 and (boxes[1] as Rect2i).size.y <= 18
 		and (boxes[3] as Rect2i).get_area() < (boxes[1] as Rect2i).get_area(),
-		"the ice burst sits on A050's canvas, grows to its widest and fades, every frame its own, in the ice's keys",
+		"the ice burst is A050's art (task 0264) on its canvas, grows to its widest and fades, every frame its own, in the ice's keys",
 		"%s %s %s" % [str(off), str(counts), str(boxes)])
 	_completed += 1
 

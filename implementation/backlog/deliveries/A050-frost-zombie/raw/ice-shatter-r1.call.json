@@ -1,0 +1,29 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nProduction pixelart ice shatter effect A050 for HARVEST THE NIGHT. ONE horizontalstrip EXACTLY4 distinctframes:0 small compact cracked icecore;1 WIDE outwardburst of faceted MATTE pale-blue ice shards at peak22wide x16high;2 flyingapart andthinning;3justaFEW TINY shards. One physicalscale acrossallfour, do notenlarge tinycore/finalshards, relativepeak22x16 tofinal5x4. Native24x24 canvas centred12,12,1pxclearallborders. Broad chunky pixelclusters, coloureddarkblueoutline, pale moonwhite tipsonshards with waterbluefaces. Detached icepieces, no lightflash, starflare, whitecoreglow, bloom, halo, fog, particlesoutside actualshards, shadow, ground orscene. Completeunclipped SMALL objects within equalvirtualcells, hugefullheight transparentgutters. Truealpha0 exceptfullyopaque angularpixelshards. Same farm orthographic camera and upperleft neutraldaylight. Input1 flare is timing/size only, replacefire withsolidice. Input2 splash suppliesmattewaterbluecolour ramp, notsplashsubject. No labels/text, blur/gradients/3D.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/effects/flare.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/splash_1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/effects/flare.png",
+      "sha256": "dacef2fd1f172bb27223a2e342742889906a23bbb0b05da4e992552f54bbd1c1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/effects/splash_1.png",
+      "sha256": "61498ad8b7f37c6ca394703d329ebf3ef2b77def65eef486c1240d70a5131c5d",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-a9f8c6f8-1c44-496e-9206-755dd156f184.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\ice-shatter-r1.png",
+  "sha256": "84191138fd33897d1b42d2798b475bfd43eb3c49697787fa3d9812ae596fbc69",
+  "revision": 1,
+  "decision": "selected for final owner review, not approved"
+}

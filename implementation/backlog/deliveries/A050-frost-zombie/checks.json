@@ -1,0 +1,204 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "body_border": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "death_heights": [
+    29,
+    25,
+    19,
+    10
+  ],
+  "death_settles": true,
+  "effect_expands_then_fades": true,
+  "effect_peak_and_border": true,
+  "family_checks_complete": true,
+  "footcontact_centred": true,
+  "frame_count_matches": true,
+  "frames_distinct": true,
+  "frames_expected": 17,
+  "frames_found": 17,
+  "grounded_on_pivot": true,
+  "head_body_palette_only": true,
+  "head_eye_bone": true,
+  "icon_bounds_ok": true,
+  "importer_recipe_matches": true,
+  "master_size_ok": true,
+  "measurements": {
+    "native/frost_zombie/west/01.png": {
+      "bounds": [
+        20,
+        15,
+        39,
+        44
+      ],
+      "opaque_pixels": 306
+    },
+    "native/frost_zombie_attack/west/01.png": {
+      "bounds": [
+        20,
+        15,
+        39,
+        44
+      ],
+      "opaque_pixels": 309
+    },
+    "native/frost_zombie_attack/west/02.png": {
+      "bounds": [
+        9,
+        17,
+        41,
+        44
+      ],
+      "opaque_pixels": 320
+    },
+    "native/frost_zombie_attack/west/03.png": {
+      "bounds": [
+        21,
+        15,
+        40,
+        44
+      ],
+      "opaque_pixels": 304
+    },
+    "native/frost_zombie_death/west/01.png": {
+      "bounds": [
+        20,
+        15,
+        39,
+        44
+      ],
+      "opaque_pixels": 306
+    },
+    "native/frost_zombie_death/west/02.png": {
+      "bounds": [
+        20,
+        19,
+        40,
+        44
+      ],
+      "opaque_pixels": 290
+    },
+    "native/frost_zombie_death/west/03.png": {
+      "bounds": [
+        18,
+        25,
+        46,
+        44
+      ],
+      "opaque_pixels": 259
+    },
+    "native/frost_zombie_death/west/04.png": {
+      "bounds": [
+        19,
+        34,
+        45,
+        44
+      ],
+      "opaque_pixels": 138
+    },
+    "native/frost_zombie_walk/west/01.png": {
+      "bounds": [
+        22,
+        15,
+        41,
+        44
+      ],
+      "opaque_pixels": 317
+    },
+    "native/frost_zombie_walk/west/02.png": {
+      "bounds": [
+        21,
+        14,
+        41,
+        44
+      ],
+      "opaque_pixels": 330
+    },
+    "native/frost_zombie_walk/west/03.png": {
+      "bounds": [
+        21,
+        15,
+        41,
+        44
+      ],
+      "opaque_pixels": 329
+    },
+    "native/frost_zombie_walk/west/04.png": {
+      "bounds": [
+        21,
+        15,
+        40,
+        44
+      ],
+      "opaque_pixels": 317
+    },
+    "native/head_frost_zombie/none/01.png": {
+      "bounds": [
+        2,
+        2,
+        14,
+        15
+      ],
+      "opaque_pixels": 103
+    },
+    "native/ice_shatter/none/01.png": {
+      "bounds": [
+        8,
+        8,
+        17,
+        16
+      ],
+      "opaque_pixels": 34
+    },
+    "native/ice_shatter/none/02.png": {
+      "bounds": [
+        1,
+        3,
+        23,
+        21
+      ],
+      "opaque_pixels": 150
+    },
+    "native/ice_shatter/none/03.png": {
+      "bounds": [
+        2,
+        4,
+        22,
+        20
+      ],
+      "opaque_pixels": 88
+    },
+    "native/ice_shatter/none/04.png": {
+      "bounds": [
+        9,
+        8,
+        16,
+        16
+      ],
+      "opaque_pixels": 20
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "silhouette_distances": {
+    "breaker": 76,
+    "runner": 59,
+    "tank": 60,
+    "walker": 41
+  },
+  "silhouette_distinct": true,
+  "source_halo_absent": true,
+  "source_outside_alpha_max": 1,
+  "standing_height_ok": true,
+  "walk_not_vertical_shift": true
+}

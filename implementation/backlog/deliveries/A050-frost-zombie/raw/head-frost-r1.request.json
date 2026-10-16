@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: stylized-concept\nCreate ONE forecast head-and-shoulders bust of this exact frost zombie. Three-quarter facing LEFT, flat bottom cut. Frost-white spiky hair, pale blue-grey rottenface withgreenpatches, redbrownwintershirt shoulders, ONE matteblueice shoulder spike. Native16x16 icon, visible12–13high andatmost13wide, centered8, lowestopaque14, clear1pxborder. Input1 master is identity, input2 nativewalk is in-game colour/scale, input3 woodicon is outline/framing style only. Bold single matte BONE cream eye, minimum15percentportraitheight tosurvive as1–2nativepixels, not a tiny sliver, darksocket; no emission. Keep head compact, shoulders occupy bottomthird so white hair doesn't fill entireportrait. Coarse handcraftedpixelart withfew broadclusters andcoloureddarkoutline. Upperleftneutraldaylight onspriteonly. Truezeroalpha background outside sharpfullyopaque pixels. No halo, mist, aura, bloom, shadows, snowcloud, frame, UI, label,text, blur orgradient. Samebody palette, pale matteice not light.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/raw/frost-master-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/preview/walk0-head-reference-4x.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+  ]
+}

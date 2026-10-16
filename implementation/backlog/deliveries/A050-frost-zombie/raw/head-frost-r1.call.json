@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nCreate ONE forecast head-and-shoulders bust of this exact frost zombie. Three-quarter facing LEFT, flat bottom cut. Frost-white spiky hair, pale blue-grey rottenface withgreenpatches, redbrownwintershirt shoulders, ONE matteblueice shoulder spike. Native16x16 icon, visible12\u201313high andatmost13wide, centered8, lowestopaque14, clear1pxborder. Input1 master is identity, input2 nativewalk is in-game colour/scale, input3 woodicon is outline/framing style only. Bold single matte BONE cream eye, minimum15percentportraitheight tosurvive as1\u20132nativepixels, not a tiny sliver, darksocket; no emission. Keep head compact, shoulders occupy bottomthird so white hair doesn't fill entireportrait. Coarse handcraftedpixelart withfew broadclusters andcoloureddarkoutline. Upperleftneutraldaylight onspriteonly. Truezeroalpha background outside sharpfullyopaque pixels. No halo, mist, aura, bloom, shadows, snowcloud, frame, UI, label,text, blur orgradient. Samebody palette, pale matteice not light.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/raw/frost-master-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/preview/walk0-head-reference-4x.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/raw/frost-master-r1.png",
+      "sha256": "7f3eea4ed2f171d2bb7bee6a4dd20f494c4a268d877d7c19bbabeed3623efa18",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A050-frost-zombie/preview/walk0-head-reference-4x.png",
+      "sha256": "bdde1570ae2090ad215a00eb6f70d53ccc3284006521e87212bbd6b795107024",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f9e5cb5f-8042-4dad-a946-24d40926945c.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A050-frost-zombie\\raw\\head-frost-r1.png",
+  "sha256": "48e1257668a09aa903f92e1e71d3b8b788a432298f4a5ceb74ad3af63e4bfe1d",
+  "revision": 1,
+  "decision": "selected for final owner review, not approved"
+}

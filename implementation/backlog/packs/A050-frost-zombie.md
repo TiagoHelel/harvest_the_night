@@ -1,6 +1,6 @@
 # A050 - The frost zombie
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0264
 - **Dressed by game tasks:** 0251
 - **Spec after game task:** 0251

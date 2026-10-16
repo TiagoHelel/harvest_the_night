@@ -3706,6 +3706,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/effects/ice_shatter_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/ice_shatter_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/ice_shatter_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/ice_shatter_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/effects/impact_0.png",
       "owner": "raster"
     },
@@ -4047,6 +4063,66 @@
     },
     {
       "output": "sprites/enemies/digger_walk_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_attack_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/frost_zombie_walk_b.png",
       "owner": "raster"
     },
     {
@@ -5403,6 +5479,10 @@
     },
     {
       "output": "sprites/ui/head_digger.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_frost_zombie.png",
       "owner": "raster"
     },
     {

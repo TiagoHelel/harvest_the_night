@@ -13,7 +13,8 @@ extends RefCounted
 ## bite off the rules' own hit, its death played on.
 ## The digger since task 0263 (A049): its burrow on the tick the rules put it
 ## under, its mound while it stays there, its emergence when it comes up.
-const FAMILIES: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker", &"rat", &"digger"]
+## The frost zombie since task 0264 (A050), as the four walk and bite.
+const FAMILIES: Array[StringName] = [&"walker", &"runner", &"tank", &"breaker", &"rat", &"digger", &"frost_zombie"]
 ## The ticks a boss's slam shows, its three frames.
 const SLAM_TICKS := 9
 var _before: Dictionary = {}

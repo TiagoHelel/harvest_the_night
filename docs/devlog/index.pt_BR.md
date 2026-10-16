@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-285 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+286 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -328,6 +328,7 @@ voz alta.
 | 0217 | Art: the house in three tiers | 2026-10-15 |
 | 0235 | Art: bones, moon stones and essence | 2026-10-15 |
 | 0263 | Art: the digger | 2026-10-15 |
+| 0264 | Art: the frost zombie | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

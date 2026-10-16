@@ -1,0 +1,1 @@
+Same leg forward in contacts; superseded byr2/r3. Halo diagnosis withdrawn after correctRGBA alpha audit.

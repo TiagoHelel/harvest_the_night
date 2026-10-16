@@ -26,6 +26,8 @@ PACK_FAMILIES = {
     # The digger (task 0263): the four's frame and motion, and its burrow,
     # its mound under a fence and its emerging, every frame on the ground.
     'digger':dict(ORDINARY,task='A049',counts={'master':1,'walk':4,'burrow':4,'mound':3,'emerge':4,'attack':3,'death':4}),
+    # The frost zombie (task 0264): the four's frame and motion.
+    'frost_zombie':dict(ORDINARY,task='A050'),
 }
 
 def bodies(image):

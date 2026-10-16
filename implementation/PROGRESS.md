@@ -33280,3 +33280,56 @@ mound and the walker caked in soil are gone.
 - `python implementation/backlog/assets.py set A049 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0264 - Art: the frost zombie - done 2026-10-15
+
+A050 is integrated. The frost zombie is the owner-approved art now:
+standing, its four-frame walk, its three-frame bite, its four-frame death
+and its head in the forecast. Its ice burst - four frames on 24x24 round
+(12,12), growing to its widest and fading - is the art too. The owner
+approved it on 2026-10-14 in the batch review, as recorded in the
+delivery's `APPROVAL.json`. 0251's walker gone cold and its code-drawn
+burst are gone.
+
+- **Promotion**:
+  - The 17 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their raw sources were copied byte for byte into
+    `assets/art_source/enemies/frost_zombie/`, `assets/art_source/effects/ice/`
+    and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - The frost zombie is on the families' 64x48 at (32,44), [-24,-28],
+    with `enemy_family`/`enemy_motion` and the three aliases. The burst
+    carries `fx_family` `ice_shatter` and its `center` origin.
+- **Tracked** (`EnemyMotion.FAMILIES`): it walks and bites by the rules'
+  own steps and hits, and its death plays.
+- **The burst is a raster one-shot**: `PixelEffects` moves `ice_shatter`
+  from `DRAWN` - which 0251 kept for one-shots drawn in code until their
+  pack landed, and which is empty now - into `COUNTS`, at full opacity.
+  - It loads the PNGs as the other bursts do.
+  - The effect showcase holds it to them with the seven of 0017 and the
+    pack effects.
+  - `FrostArt` is the burst's loader by path; its drawing is gone. The
+    frost tint on a chilled tower stays code.
+- **The stand-ins retired**: A050's six `PlaceholderArt` entries,
+  `FROST_ZOMBIE`, `FROST_TINT` and `ICE_SHATTER`. `placeholders.py
+  --check` passes, with 93 stand-ins left over 12 packs.
+- **Checks**:
+  - `check_enemy_art.py` takes the frost zombie at the families' frame.
+  - `check_effect_art.py`'s `PACK_EFFECTS` takes `ice_shatter`: A050, four
+    frames, 24x24 at (12,12), centre, one-shot, 0.08 s.
+  - `check_ui_art.py` takes its head.
+- **Tests**: 0251's burst check asks for A050's art and the frost zombie
+  tracked; the burst still plays at the body's middle when one is killed
+  in a tick, and not for one that bit the house.
+- **Shots** (`implementation/shots/0264/`, FHD 1920x1080, looked at):
+  - `frost`: Winter 2's night, a frost zombie killed between the first two
+    of four gun towers - the ice burst at its widest, those two frosted,
+    the other two not - and two more coming in from the east.
+  - `forecast_build`: Winter 14's forecast with the winter kinds' heads.
+- **The delivery folder** `implementation/backlog/deliveries/A050-frost-zombie/`
+  is committed, as A049's was.
+- `python implementation/backlog/assets.py set A050 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second run: the first lost only the backlog index, to a transient Errno 22 writing `BACKLOG.md`.

@@ -5,15 +5,16 @@ extends RefCounted
 ## retained entity/occupant dictionary. The shared particle budget reserves at
 ## most 24 forms; newer contacts replace older ones during a crowded wave.
 const MAX_FORMS := 24
+## A050's ice burst since task 0264, moved here from `DRAWN`.
 const COUNTS := {&"muzzle":3, &"impact":3, &"flame":4, &"smoke":4,
-	&"dust":3, &"splash":4, &"flare":4}
+	&"dust":3, &"splash":4, &"flare":4, &"ice_shatter":4}
 const OPACITY := {&"muzzle":1.0, &"impact":0.85, &"flame":1.0,
-	&"smoke":0.6, &"dust":0.8, &"splash":1.0, &"flare":1.0}
-## **One-shots drawn in code until their pack lands** (task 0251: A050's ice
-## burst, `FrostArt`), frames by family, played as the raster ones are at
-## full opacity. `COUNTS` stays the raster families the effect showcase holds
-## to their PNGs; the leaf that integrates a pack moves its family there.
-const DRAWN := {&"ice_shatter":4}
+	&"smoke":0.6, &"dust":0.8, &"splash":1.0, &"flare":1.0, &"ice_shatter":1.0}
+## **One-shots drawn in code until their pack lands** (task 0251), frames by
+## family, played as the raster ones are at full opacity. `COUNTS` stays the
+## raster families the effect showcase holds to their PNGs; the leaf that
+## integrates a pack moves its family there - none left since task 0264.
+const DRAWN := {}
 ## How far over the ground point a burst plays: the body's middle, as an
 ## impact's (A050's "minus 12 px", task 0251).
 const BODY_LIFT := 12
@@ -138,8 +139,7 @@ func advance(delta: float, parent: Node2D) -> void:
 		var phase := int(floorf((float(record["age"]) + 0.000001) / seconds(family))) if motion else 0
 		var path := path_for(family, mini(phase, frames_of(family)-1))
 		if not _textures.has(path):
-			# Drawn in code until its pack lands (task 0251's ice burst).
-			_textures[path] = FrostArt.texture_at(path) if PlaceholderArt.is_drawn(path) else load(path)
+			_textures[path] = load(path)
 		sprite.texture = _textures[path]
 		sprite.offset = -Vector2(PlaceholderArt.frame(path)["pivot"])
 		sprite.position = (record["at"] as Vector2).round()
