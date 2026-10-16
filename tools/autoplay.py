@@ -4,6 +4,7 @@
     python tools/autoplay.py
     python tools/autoplay.py 4 --nights=1  # one full day and night per policy
     python tools/autoplay.py --year [seeds] [--jobs=N]
+    python tools/autoplay.py --economy [seeds] [--jobs=N]
 
 A reader, not a check: `verify.py` is what fails. This is for looking at the
 curve while tuning it, which task 0060 does a great deal of.
@@ -21,6 +22,17 @@ season each - the dominant-strategy alarm a season, and how long it took.
 Since task 0277 it also prints each policy's survival per day (the share of
 the runs that reached a date that held it) and the days no run of any policy
 held, from `tools/balance.py`, whose `RUN` parser it uses.
+
+## The economy across a year (task 0278)
+
+`--economy` plays the same year and adds, from the same `RUN` lines:
+- **what each boss cost**: the worth of the line it fell to, less the line
+  that faced the season's first night, over that season's best focused day
+  (`src/tools/year_economy.gd` prints those days, and the rest of 0278's
+  tables, from the rules alone);
+- **what winter lived off**, run by run: the stock, food and ammunition each
+  run entered Winter 1 (day 43) with, the least food and ammunition it held
+  on a winter morning, its winter losses and whether the Lord fell.
 """
 import concurrent.futures
 import os
@@ -67,7 +79,7 @@ def one_year(policy, seed):
     return None
 
 
-def year(seeds, jobs):
+def year(seeds, jobs, economy=False):
     import balance
     # A sweep has a lever moved while it holds the lock (`tools/balance.py`).
     if os.path.exists(os.path.join(ROOT, ".balance-lock")):
@@ -92,12 +104,60 @@ def year(seeds, jobs):
     table(rows, seeds)
     alarms(rows, seeds)
     balance.survival_report(rows)
+    if economy:
+        economy_report(rows)
     runs_ms = [r["ms"] for r in rows]
     print("")
     print("  %d runs in %.0f s wall, %d processes; a run took %.0f-%.0f s (%.0f s on average)"
           % (len(rows), wall, jobs, min(runs_ms) / 1000.0, max(runs_ms) / 1000.0,
              sum(runs_ms) / 1000.0 / max(len(runs_ms), 1)))
     return 0 if len(rows) == len(work) else 1
+
+
+def focused_days():
+    """Each season's best focused day, off `year_economy.gd`'s first table."""
+    done = subprocess.run(
+        [GODOT, "--headless", "--path", ROOT, "--script", "res://src/tools/year_economy.gd"],
+        capture_output=True, text=True)
+    days = {}
+    for line in (done.stdout or "").splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) > 6 and cells[0] in SEASONS and cells[6].startswith("$"):
+            days[cells[0]] = int(cells[6].lstrip("$"))
+    return days
+
+
+def economy_report(rows):
+    """**The economy across a year** (task 0278), off the `RUN` lines: what
+    each boss cost in focused days, and what each run lived off in winter."""
+    days = focused_days()
+    print("")
+    print("  THE ECONOMY ACROSS A YEAR - what each boss cost, in the season's best focused day (%s)"
+          % ", ".join("%s $%d" % (s, days.get(s, 0)) for s in SEASONS))
+    print("  policy     season   line at its start   line its boss fell to   built for it   focused days   runs")
+    for p in POLICIES:
+        mine = [r for r in rows if r["policy"] == p and len(r.get("built", [])) == 4]
+        for i, season in enumerate(SEASONS):
+            fell = [r for r in mine if r["built"][i] >= 0 and r["boss_built"][i] >= 0]
+            if not fell:
+                continue
+            start = sum(r["built"][i] for r in fell) / float(len(fell))
+            end = sum(r["boss_built"][i] for r in fell) / float(len(fell))
+            cost = end - start
+            print("  %-10s %-7s  %17.0f   %21.0f   %12.0f   %12.1f   %d"
+                  % (p, season, start, end, cost, cost / max(days.get(season, 1), 1), len(fell)))
+    print("")
+    print("  WINTER - what each run entered Winter 1 with, and the least it held on a winter morning")
+    print("  policy     seed    stock    food   ammo   least food   least ammo   winter lost   Lord down")
+    for p in POLICIES:
+        for r in sorted([r for r in rows if r["policy"] == p and len(r.get("stock", [])) == 4],
+                        key=lambda r: r["seed"]):
+            if r["stock"][3] < 0:
+                continue
+            low = r.get("low", [-1, -1])
+            print("  %-10s %5d %8d %7d %6d %12d %12d %13d   %s"
+                  % (p, r["seed"], r["stock"][3], r["food"][3], r["ammo"][3], low[0], low[1],
+                     r["losses"][3], "yes" if r["over"] else "no"))
 
 
 def table(rows, seeds):
@@ -163,7 +223,7 @@ def main():
         print("no godot at %s - set GODOT" % GODOT)
         return 1
     args = sys.argv[1:]
-    if "--year" in args:
+    if "--year" in args or "--economy" in args:
         seeds = YEAR_SEEDS
         jobs = max(min((os.cpu_count() or 4) - 4, 8), 1)
         for arg in args:
@@ -171,7 +231,7 @@ def main():
                 seeds = max(int(arg), 1)
             if arg.startswith("--jobs="):
                 jobs = max(int(arg.split("=", 1)[1]), 1)
-        return year(seeds, jobs)
+        return year(seeds, jobs, economy="--economy" in args)
     code, out = godot(args)
     for line in out.splitlines():
         # The engine's own banner is not part of the answer.

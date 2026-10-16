@@ -22,10 +22,16 @@ extends SceneTree
 ##     RUN policy=<p> seed=<s> days=<n> nights=<played> losses=<a,b,c,d>
 ##         repeats=<a,b,c,d> money=<a,b,c,d> essence=<a,b,c,d> capped=<0|1>
 ##         over=<0|1> walked=<tiles> lost=<date,date,...|-> ms=<wall time>
+##         built=<a,b,c,d> boss_built=<a,b,c,d> stock=<a,b,c,d>
+##         food=<a,b,c,d> ammo=<a,b,c,d> low=<food,ammo>
 ##
 ## one line, the four numbers a season each: the nights lost, the boss nights
 ## the boss lived through (each fought again, unless it was the one the cap
 ## stopped on), and the money and essence at the season's first morning.
+## **Since task 0278** the season's economy too: the worth of the line its
+## first night faced and of the one its boss fell to, and the stock, food and
+## ammunition at its first morning; and `low`, the least food and ammunition
+## held on a winter morning.
 ## `tools/balance.py` keeps reading today's table until task 0277 moves its
 ## parser onto `RUN`. **`--year`** plays every date of the year instead of
 ## the first ten, and **`--policy=<name>`** and **`--seeds=a,b,...`** narrow
@@ -208,12 +214,15 @@ static func _run_line(out: Dictionary, ms: int) -> String:
 	var repeats: Array = []
 	var money: Array = []
 	var essence: Array = []
+	var economy: Dictionary = {"built": [], "boss_built": [], "stock": [], "food": [], "ammo": []}
 	for season in (out["seasons"] as Array):
 		var one: Dictionary = season
 		losses.append(str(int(one["losses"])))
 		repeats.append(str(int(one["repeats"])))
 		money.append(str(int(one["money"])))
 		essence.append(str(int(one["essence"])))
+		for key in ["built", "boss_built", "stock", "food", "ammo"]:
+			(economy[key] as Array).append(str(int(one.get(key, -1))))
 	# **The dates of the nights lost** (task 0277), each time it was lost - a
 	# boss night lost twice is there twice - for the survival per day
 	# `tools/balance.py` reads; `-` for none.
@@ -227,12 +236,16 @@ static func _run_line(out: Dictionary, ms: int) -> String:
 			lost.append(str(int((row as Dictionary)["date"])))
 		if int((row as Dictionary).get("boss_left", -1)) >= 0:
 			boss_left.append(str(int((row as Dictionary)["boss_left"])))
-	return "RUN policy=%s seed=%d days=%d nights=%d losses=%s repeats=%s money=%s essence=%s capped=%d over=%d walked=%d lost=%s boss_left=%s ms=%d" % [
+	var low: Array = out.get("low", [-1, -1])
+	return ("RUN policy=%s seed=%d days=%d nights=%d losses=%s repeats=%s money=%s essence=%s capped=%d over=%d walked=%d lost=%s boss_left=%s ms=%d"
+		+ " built=%s boss_built=%s stock=%s food=%s ammo=%s low=%d,%d") % [
 		out["policy"], int(out["seed"]), (out["nights"] as Array).back()["date"] if not (out["nights"] as Array).is_empty() else 0,
 		(out["nights"] as Array).size(), ",".join(losses), ",".join(repeats), ",".join(money), ",".join(essence),
 		1 if bool(out["capped"]) else 0, 1 if bool(out["year_over"]) else 0, int(out["walked"]),
 		",".join(lost) if not lost.is_empty() else "-",
-		",".join(boss_left) if not boss_left.is_empty() else "-", ms]
+		",".join(boss_left) if not boss_left.is_empty() else "-", ms,
+		",".join(economy["built"]), ",".join(economy["boss_built"]), ",".join(economy["stock"]),
+		",".join(economy["food"]), ",".join(economy["ammo"]), int(low[0]), int(low[1])]
 
 
 ## **The dominant-strategy alarm.** One policy winning everything while the

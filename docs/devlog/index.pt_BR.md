@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-293 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+294 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -336,10 +336,11 @@ voz alta.
 | 0269 | Art: fog, rain and the Blood Moon icons | 2026-10-16 |
 | 0288 | Art: the collection book, trophies and badges | 2026-10-16 |
 | 0289 | Art: the morning report | 2026-10-16 |
+| 0278 | The economy across a year | 2026-10-16 |
 
 ## Toda vez que o jogo mudou por baixo
 
-Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 140 vezes, e cada uma teve que ser escrita antes de ser aceita.
+Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas de balanceamento. Entre os dois eles se mexeram 141 vezes, e cada uma teve que ser escrita antes de ser aceita.
 
 - **verify.py and the determinism guard** (0005) - `data` 3714036227 -> 1895612796
 - **The resource ledger** (0007) - `sim` 2127612543 -> 673656594
@@ -481,6 +482,7 @@ Dois hashes protegem este projeto: um sobre as regras e outro sobre as tabelas d
 - **Balancing the year, the Winter Lord sized to winter** (0277) - `data` 488203718 -> 3280859363
 - **Balancing the year, autumn's Full Moon** (0277) - `data` 3280859363 -> 2774795767
 - **Balancing the year, the Winter Lord's company** (0277) - `data` 2774795767 -> 363647928
+- **The economy across a year** (0278) - `data` 363647928 -> 383100454
 
 ## O que deu errado
 

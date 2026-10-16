@@ -1,7 +1,7 @@
 # 0278 - The economy across a year
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0277
 - **Likely files:** src/core/game_data.gd, src/core/shop.gd, src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, implementation/BALANCE.md, src/tools/headless_v1.gd
 

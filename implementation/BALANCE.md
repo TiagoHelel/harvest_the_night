@@ -1,3 +1,220 @@
+# The economy across a year - task 0278 (2026-10-16)
+
+The plan's rule of thumb, measured in every season and not only the first:
+a good day buys about one new defence, a boss costs five to seven focused
+days, and winter lives off what autumn put away.
+
+**What moved:**
+- **The hive costs $275**, from $205: $80 and six sunflowers, where it was
+  $60 and four. Summer's best focused day now buys about one hive, as every
+  other season's buys its opener.
+- **A new lever, the night's share by season**
+  (`REWARDS["night_money_percent"]`), left at 100 in every season.
+- **Every season's prices are checked**: `validate()` runs the stall's and
+  the kitchen's checks at each season's prices.
+
+**Two calls are the owner's,** each measured below: the night's purse by
+season, and the hens' eggs. Both would move the year 0277 tuned.
+
+**The instruments:**
+- `src/tools/year_economy.gd` (new) prints the tables below from the rules
+  alone: the focused days (`Economy.day`, 0194), the mixed day, the season's
+  defences at a money-only price (`Building.price_of`, 0234), the night held
+  well (`night_pay.gd`, 0219) and the hens' eggs at each number of visits.
+- `python tools/autoplay.py --economy [seeds]` (new) plays the year as
+  `--year` does. From the same `RUN` lines it adds:
+  - what each boss cost: the worth of the line it fell to, less the line
+    that faced the season's first night, in the season's best focused days;
+  - what each run entered Winter 1 with, and the least food and ammunition
+    it held on a winter morning.
+  - The `RUN` line carries both: `built`, `boss_built`, `stock`, `food` and
+    `ammo` a season each, and `low`.
+
+## The day, the defence and the night, a season at a time
+
+| Season | Field | Pond | Cliff and woods | Animals | Machines | Best focused day | Mixed day | Opener | Its price | Focused ratio | Mixed ratio | Night held well | Night / best day | What it leaves |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| spring | $308 | $238 | $294 | - | - | $308 | $546 | gun tower | $261 | 1.18 | 2.09 | $68 | 22% | $22 |
+| summer | $280 | $262 | $393 | $247 | $231 | $393 | $599 | beehive | $275 | 1.43 | 2.18 | $100 | 25% | $29 |
+| autumn | $451 | $308 | $393 | $401 | $317 | $451 | $776 | catapult | $390 | 1.16 | 1.99 | $132 | 29% | $38 |
+| winter | - | $354 | $474 | $401 | $369 | $474 | $474 | searchlight | $400 | 1.19 | 1.19 | $156 | 32% | $41 |
+
+**The mixed day** is 0196's real one: the field tended for two and a quarter
+game hours (the tour took two to two and a half), then the season's best
+other earner for the rest of 06:00 to dusk. Winter has no field, so its
+mixed day is its best earner.
+
+**The rule of thumb is held to the focused day.**
+- 0194's bands (`DAY_TARGETS`) and 0234's prices are built on it.
+- Every season's opener is within 0.7-1.5 of it: 1.18, 1.43, 1.16 and 1.19.
+  `_task_0278_season_economy` asserts it.
+- A mixed day earns about twice a focused one from spring to autumn: the
+  field pays its whole day's money in two hours. Held to it, every opener
+  would cost about double, and the year 0277 tuned would go with it.
+- So a real day buys about two openers, or one and the levels, the mends and
+  the kits around it. That is the distance between the plan's rule and how
+  a player actually plays.
+
+**Summer's opener was a day's work and a half.**
+- At $205 the hive cost 0.52 of the cliff's $393 day, a ratio of 1.92.
+- It costs $275 now ($80 and six sunflowers), a ratio of 1.43. $80 is the top
+  of its money lever, and every defence's money stays under $100 (0234's
+  rule). With a decoy and a line of sandbags it is still about a day.
+- The year does not feel it: `towers` and `balanced` play their years to the
+  run they played before.
+
+**The night's purse grows faster than the day** - the owner's call.
+- A night held well is fee + bounty + bonuses + the Full Moon's line.
+- The fee grows with the night and the bounty with the horde, each about
+  three times over the year. A season's best focused day grows about half
+  again.
+- So a night held well pays 22% of spring's best day, 25% of summer's, 29%
+  of autumn's and 32% of winter's.
+- **Tried: 90% of the fee and bounty in summer, 80% in autumn and 75% in
+  winter** (the flat bonuses whole). Every season was then within three
+  points of spring's share: 23%, 24% and 25%.
+- **The year fell from fourteen runs won of sixteen to eight.**
+  - `towers` lost 4.9 nights before Winter 1, outside 0277's two to four.
+  - Both shooting policies lost about one and a half more nights in
+    autumn, where the King's line is decided.
+  - Twenty dollars less a night was enough to break it.
+- So the lever is in place and left at 100 in every season. It is 0280's to
+  weigh (do fifty-six nights tire?) or the owner's to turn, with the bosses
+  or the autumn nights moved with it.
+- What the night leaves lying about (0221) is beside it: $22 a spring night
+  to $41 a winter one at the stall.
+
+| Season | Fee | Bounty | Bonuses | Full Moon | A night's money | Its materials' worth | What it leaves | Tried at 90/80/75 |
+|---|---|---|---|---|---|---|---|---|
+| spring | $17 | $14 | $26 | $10 | $68 | $31 | $22 | $68 |
+| summer | $29 | $30 | $24 | $16 | $100 | $59 | $29 | $92 |
+| autumn | $42 | $47 | $24 | $18 | $132 | $74 | $38 | $111 |
+| winter | $55 | $54 | $24 | $22 | $156 | $89 | $41 | $123 |
+
+**Prices stayed the same in every season.**
+- Costs moved instead, as the task prefers.
+- `GameData.prices_by_season()` returns `SELL_PRICE` in all four seasons,
+  and `validate()` runs the stall's and the kitchen's checks at each of them
+  (`check_season_prices`).
+- A seasonal table, should one ever be needed, has its checks waiting. A
+  price that breaks the chain in one season is refused in that season alone
+  (asserted).
+- `Shop.sell_price` keeps taking only an id: it gains the season the day a
+  season's prices differ.
+
+## The hens' clock - the owner's call
+
+A hen lays every 4h10m of the day and holds what she laid until it is
+collected (`Livestock._produce`). Eggs a hen a day, steady state, collected
+at:
+
+| Visits a day | Holding 1 (now) | Holding 2 | Holding 3 |
+|---|---|---|---|
+| one (06:00, the morning feed) | 1.00 | 2.00 | 3.00 |
+| two (06:00, 18:00) | 2.00 | 3.00 | 4.00 |
+| three (06:00, 12:00, 18:00) | 3.00 | 4.00 | 4.71 |
+| the tour's two (06:00, 10:00) | 1.00 | 2.00 | 3.00 |
+
+**What it means:**
+- `Economy.animals`, and so 0194's animals day, counts every egg as it is
+  laid: 4.68 a day.
+- Holding one, a hen pays that only to a farmer back at the coop every four
+  hours. Three visits a day get 64% of it, and the tour's second round,
+  four hours after its first, found nothing.
+- Holding two, the morning feed collects two and a visit at dusk makes it
+  three: the visit made anyway pays, and coming back still pays more. That
+  reads as the pressure the plan wants rather than a chore.
+
+**Two was tried, and it moved the year.**
+- The map's own hens lay into the robot's day, and `balanced` won four years
+  of eight instead of seven.
+- The shooting policies' autumn sits so near its edge that a few eggs
+  reshuffle which seeds hold the King.
+- So `holds` stays 1 here, and two is the owner's to choose, with the year
+  run again.
+
+## What each boss cost, and what winter lived off
+
+`python tools/autoplay.py --economy 8`, after the changes (32 runs in
+1,601 s, 8 processes). The year is the one 0277 left, run for run:
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.6    0.0    3.4    1.8         1.9  0.0  2.2  0.0   7/8    1/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.0    3.0    3.0         0.0  0.0  2.0  0.0   7/8    1/8
+  walls              8.1    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+```
+
+0277's target still holds: `towers` loses 3.4 nights before Winter 1, and
+fourteen runs of sixteen win the year.
+
+**What each boss cost**, in the season's best focused day ($308, $393, $451,
+$474): the worth of the line it fell to, less the line that faced the
+season's first night, averaged over the runs whose boss fell.
+
+| Policy | Season | Line at its start | Line its boss fell to | Built for it | Focused days |
+|---|---|---|---|---|---|
+| balanced | spring | $261 | $2,954 | $2,694 | 8.7 |
+| | summer | $2,776 | $7,275 | $4,500 | 11.4 |
+| | autumn | $6,578 | $7,880 | $1,302 | 2.9 |
+| | winter | $8,205 | $8,728 | $523 | 1.1 |
+| towers | spring | $261 | $3,836 | $3,575 | 11.6 |
+| | summer | $3,406 | $8,070 | $4,664 | 11.9 |
+| | autumn | $7,721 | $8,477 | $756 | 1.7 |
+| | winter | $8,882 | $10,452 | $1,570 | 3.3 |
+
+**What the boss table says:**
+- **Spring and summer cost more than five to seven days.** The robot builds
+  its whole line in them: spring from a single gun tower, summer the heavy
+  towers. It spends what it earns, which is more than a focused day - the
+  field, the nights and what they leave.
+- **Autumn and winter cost one to three.** The line spring and summer built
+  still stands. What those seasons pay for is mends (0277's ruins), which
+  restore the line rather than add to it, so they do not show here.
+- So the rule holds over the year rather than a season at a time: 24 to 29
+  focused days of line for four bosses, six to seven a boss.
+- Front-loading is the robot's way of playing. The plan's rhythm - a boss
+  saved for each season - is a curve for 0280 to judge, with fifty-six
+  nights in front of it.
+
+**What winter lived off** (`balanced` runs that reached Winter 1):
+
+| Seed | Stock entering Winter 1 | Food | Ammunition | Least food on a winter morning | Least ammunition | Winter nights lost | Lord down |
+|---|---|---|---|---|---|---|---|
+| 9000 | $2,472 | 1 | 15 | 2 | 0 | 2 | yes |
+| 9007 | $2,175 | 1 | 10 | 2 | 0 | 2 | yes |
+| 9014 | $4,777 | 1 | 16 | 1 | 0 | 2 | yes |
+| 9021 | $5,572 | 1 | 0 | 1 | 0 | 1 | yes |
+| 9028 | $5,086 | 1 | 0 | 1 | 0 | 4 | yes |
+| 9042 | $4,657 | 1 | 0 | 2 | 0 | 2 | yes |
+| 9049 | $5,269 | 1 | 0 | 1 | 0 | 1 | yes |
+
+**What the winter table says:**
+- **The money lasts.** Every `balanced` run enters winter with $2,175-5,572
+  of stock. With fish, the cliff, the machines and the animals it pays for
+  winter's searchlights, fences and mends to day 56. The Lord falls in all
+  seven runs.
+- **The food and the ammunition do not.** The robot enters winter with a
+  single food and at most sixteen shells, and every run is dry of
+  ammunition on some winter morning: it lays nothing by in autumn for
+  either.
+- That is the robot's way, not the economy's: a farm that cooks its grain
+  and brews its powder in autumn has both. The rule - winter lives off what
+  autumn put away - holds for the money. Food and shells are a habit the
+  robot lacks and 0280's player should not.
+- `towers` is the same: $1,475-6,726 of stock, its food and shells at zero.
+
+## The next calls are the owner's
+
+1. **The night's purse by season**: the lever is in place, at 100. Holding
+   every season to spring's share costs the year as it stands. It could go
+   with lighter autumn nights or an autumn opener the robot fields.
+2. **The hens' two eggs**: the better feel by the numbers above. It moves
+   the year through the map's own hens and would want the year run again.
+3. **A real day is about two focused ones.** The rule is held to the focused
+   day, which is what the bands and the prices were built on.
+
 # The year - task 0277 (2026-10-13 to 2026-10-14), done on the owner's twelfth call
 
 **Done, on the target itself** (2026-10-14, "vai na 3"): fourteen runs of

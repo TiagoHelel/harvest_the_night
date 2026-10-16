@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######################.`  **280 / 296 done**
+`#######################.`  **281 / 296 done**
 
-0 doing / 16 todo / 0 blocked across 18 phases.
+0 doing / 15 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-16 task(s) left, the ready ones first, then what they
+15 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -158,27 +158,6 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0208/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0278 - The economy across a year
-
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/shop.gd, src/tools/autoplay.gd, src/tools/autoplay_run.gd, tools/autoplay.py, implementation/BALANCE.md, src/tools/headless_v1.gd`.
-
-The plan's rule of thumb, checked in every season and not only the first: a good day buys about one new defence, a boss costs five to seven focused days, and winter - when nothing grows - lives off what autumn put away.
-
-- Measure first, with the year autoplayer: per season, what a focused day earns by earner (crops, fish, animals, machines, mining), the price of each of that season's new defences (0234's money and materials, at stall prices), and what was standing on the night each boss fell - `python tools/autoplay.py --economy` or an equivalent report
-- A real day is the field and then a second earner (0196): the tour's field took two to two and a half game hours, and the rest of the day went to the pond and the cliff. Measure each season against that mixed day - the field, then the best earner for the hours left - beside the focused ones, and say in BALANCE.md which of the two the rule of thumb is held to
-- The hens' clock (0196): a hen holds one egg and its clock waits until it is collected, 4h10m a lay, so the tour's second round, four hours after its first, found nothing. Report eggs a day at one, two and three visits, and keep `holds` at 1 only if the journal says why that is the pressure the plan wants and not a chore
-- The night's purse by season (0219): a night held well pays about a quarter of a well-worked day in spring, but its bounty grows with the horde, to about seven tenths of a winter day (`src/tools/night_pay.gd` prints it). Measure it beside each season's day, and hold every season near spring's share - a `bounty_percent` that falls by season, or a bounty that grows slower than the horde - or the journal says why not. Count what the night leaves lying about with it (0221): bones at $1 and a Full Moon's four moon stones at $20 are $23 a spring night and $93 a winter one at the stall (`night_pay.gd`'s last columns)
-- Rule of thumb: one well-worked day at the start of each season buys about one of that season's new defences - the ratio per season in BALANCE.md, each within 0.7-1.5 or the journal says why
-- A boss costs 5-7 focused days: the value of the build that beat it, less what stood at the season's start, divided by that season's focused-day income
-- Winter: nothing grows (0171), so the `balanced` policy enters day 43 with autumn's stock, and its winter income (fish, mining, machines, animals) plus that stock pays for winter's defences and repairs to day 56 without running out of food or ammunition - reported per run
-- Costs before prices: prefer moving defence costs, machine times and yields, starting from 0234's day-to-defence table in BALANCE.md; if prices must differ by season, one `# LEVER` table (a percent per resource group per season) read through `Shop.sell_price` (it takes only an id today: it gains the season, and every caller follows) and so by the bin, listed in `digest()`
-- `GameData.check_stall` and `check_chain` already take the prices as an argument: `validate()` runs them at every season's prices, so markups stay above prices and every recipe still adds value in every season
-- DATA moves on purpose, SIM too if the determinism scenario's shop visit reads a moved price - both in PROGRESS.md; re-check 0277's target after the changes
-
-  - done when: BALANCE.md 'The economy across a year': per season the focused-day income by earner, the day-to-defence ratio, the days each boss cost, and winter's stock from day 43 to day 56, all measured
-  - done when: `_task_0278_season_economy` in `src/tools/headless_v1.gd`: the stall and chain checks pass at every season's prices, and a doctored price that breaks the chain in one season only is refused
-  - done when: 0277's target still holds: the `--year 8` table after the changes is in the journal
-
 ### 0279 - Year 2
 
 Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/almanac.gd, src/core/endless.gd, src/core/waves.gd, src/core/run.gd, src/ui/result_screen.gd, assets/locale/strings.csv, src/tools/nights.gd, tools/nights.py, src/tools/perf_check.gd, tools/perf.py, src/tools/shot.gd, src/tools/headless_check.gd, src/tools/headless_v1.gd`.
@@ -202,7 +181,7 @@ After the Winter Lord the farm carries on, and today that means the MVP's endles
 
 ### 0280 - Checkpoint: do fifty-six nights tire?
 
-Waits on 0278, 0279.  Likely files: `implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)`.
+Waits on 0279.  Likely files: `implementation/PROGRESS.md, implementation/shots/0280/, src/tools/shot.gd, src/tools/nights.gd, implementation/prompts/ (later prompts, if the answer needs it), tools/backlog/ (new tasks, if any)`.
 
 The plan's Phase 6 question, answered honestly: 'as 56 noites cansam?' A checkpoint like 0027, 0066 and 0148, not a feature - a 'yes' found here is worth more than every polish task after it.
 
@@ -650,7 +629,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md)
 - [x] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md)
 
-## 15 - Fifty-six nights and balance  (8/11)
+## 15 - Fifty-six nights and balance  (9/11)
 
 - [x] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md)
 - [x] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md)
@@ -660,9 +639,9 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0275** [The worst night of the year, within budget](prompts/0275-perf-year.md)
 - [x] **0276** [The autoplayer plays a whole year](prompts/0276-autoplay-year.md)
 - [x] **0277** [Balancing the year](prompts/0277-balance-year.md)
-- [ ] **0278** [The economy across a year](prompts/0278-economy-seasons.md)
+- [x] **0278** [The economy across a year](prompts/0278-economy-seasons.md)
 - [ ] **0279** [Year 2](prompts/0279-year-two.md)
-- [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0278, 0279
+- [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0279
 
 ## 16 - Sound, collections and polish  (9/10)
 

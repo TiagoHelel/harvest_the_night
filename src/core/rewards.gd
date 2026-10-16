@@ -226,6 +226,12 @@ static func _money_from(state: Dictionary, percent: int = -1) -> Dictionary:
 			worth += int((data as Dictionary)["reward"]) \
 				* int((state["killed_by_kind"] as Dictionary)[kind])
 	out["bounty"] = worth * int(table["bounty_percent"]) / 100
+	# **A season's share** (task 0278): the fee and the bounty at the night's
+	# season's `night_money_percent`, each rounded down once.
+	var share := int((table.get("night_money_percent", {}) as Dictionary).get(
+		StringName(GameData.SEASONS[Calendar.season_of(Calendar.date(state))]), 100))
+	out["for the night"] = int(out["for the night"]) * share / 100
+	out["bounty"] = int(out["bounty"]) * share / 100
 
 	var intact := _intact(state)
 	out["nothing touched"] = int(table["intact_structure_bonus"]) * intact

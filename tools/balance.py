@@ -163,7 +163,8 @@ def parse_run(line):
     out = {}
     for pair in hit.group(1).split():
         key, _, value = pair.partition("=")
-        if key in ("losses", "repeats", "money", "essence", "lost", "boss_left"):
+        if key in ("losses", "repeats", "money", "essence", "lost", "boss_left",
+                   "built", "boss_built", "stock", "food", "ammo", "low"):
             out[key] = [int(v) for v in value.split(",") if re.match(r"^-?\d+$", v)]
         elif re.match(r"^-?\d+$", value):
             out[key] = int(value)

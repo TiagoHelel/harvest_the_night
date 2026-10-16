@@ -33764,3 +33764,92 @@ gone.
 - `python implementation/backlog/assets.py set A057 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0278 - The economy across a year - done 2026-10-16
+
+What changed: the plan's rule of thumb is measured in every season, in
+BALANCE.md's new "The economy across a year":
+- a focused day by earner, and the mixed day a real one is;
+- the day-to-defence ratio;
+- the night's purse beside the day;
+- the hens' eggs at each number of visits;
+- what each boss cost, in focused days;
+- what winter lived off.
+
+Summer's hive was the one opener out of its band. It costs $275 now, $80
+and six sunflowers, where it was $60 and four. Every season's best focused
+day buys its opener at 1.18, 1.43, 1.16 and 1.19. Prices stay the same in
+every season, and `validate()` now checks the stall and the kitchen at each
+season's prices. Two calls are left to the owner, measured: the night's
+purse by season and the hens' second egg.
+
+- **The instruments**:
+  - `src/tools/year_economy.gd` (new) prints the season tables from the
+    rules alone. A real day is the field tended for 2.25 game hours (0196's
+    tour), then the best other earner.
+  - `python tools/autoplay.py --economy [seeds]` (new) plays the year and,
+    from the `RUN` lines, adds each boss's cost and each run's winter.
+  - `Autoplay` records the line each night faced (`_line_worth`: every
+    defence at a money-only price, levels counted), and each season's stock,
+    food and ammunition at its first morning. The `RUN` line carries them
+    (`built`, `boss_built`, `stock`, `food`, `ammo`, `low`), and
+    `tools/balance.py` parses them as lists. No run plays differently: the
+    year below is 0277's, run for run.
+- **The rule of thumb is held to the focused day.** A mixed day earns about
+  twice one from spring to autumn, so a real day buys about two openers.
+  Holding the rule to it would double every price and the year with it.
+- **The hive**: at $205 summer's best day (the cliff, $393) bought nearly two,
+  a ratio of 1.92. At $275 it is 1.43.
+- **Prices by season** (`GameData.prices_by_season`, `check_season_prices`):
+  `SELL_PRICE` in all four seasons, every line of the stall's and the
+  kitchen's checks named by its season. `validate()` runs them in place of
+  the single chain check and the per-season stall loop. No season needed
+  prices of its own, so `Shop.sell_price` still takes only an id.
+- **The night's purse** - the owner's call:
+  - A night held well pays 22% of spring's best day and 32% of winter's: fee
+    and bounty grow about three times over the year, the day half again.
+  - A new lever, `REWARDS["night_money_percent"]`, pays the fee and the
+    bounty at a season's share and the bonuses whole, read in
+    `Rewards._money_from`; `check_rewards` wants every season at 1-100.
+  - At 90/80/75 every season sat within three points of spring's share, and
+    the year fell from fourteen runs won of sixteen to eight. `towers` lost
+    4.9 nights before Winter 1, outside 0277's two to four, with both shooting
+    policies about one and a half nights worse in autumn.
+  - So the lever is left at 100 in every season.
+- **The hens** - the owner's call:
+  - Holding one egg, a hen lays 1, 2 or 3 a day at 1, 2 or 3 visits, where
+    `Economy.animals` counts 4.7; the tour's two rounds four hours apart got
+    one.
+  - Holding two, the morning feed collects two and dusk a third: the better
+    feel.
+  - Tried, it moved the year through the map's own hens: `balanced` won four
+    years of eight instead of seven. So `holds` stays 1 with the numbers in
+    its comment.
+- **The bosses**: 8.7-11.9 focused days in spring and summer, 1.1-3.3 in
+  autumn and winter. The robot builds its whole line in the first two
+  seasons, and the later bosses fall to it. 24-29 days over the year's four
+  bosses is six to seven each.
+- **Winter**:
+  - Every `balanced` run enters Winter 1 with $2,175-5,572 of stock, and the
+    Lord falls in all seven that reach him.
+  - Food (1) and ammunition (0-16) run dry on some winter morning in every
+    run. The robot lays neither by in autumn: a habit it lacks, not a gap in
+    the economy.
+- **0277's target still holds** (`python tools/autoplay.py --economy 8`, 32
+  runs in 1,601 s): `balanced` 2.6/0.0/3.4/1.8 nights lost a season and 7/8
+  over; `towers` 0.4/0.0/3.0/3.0 and 7/8; `economy` 17.0 and `walls` 8.1 in
+  spring, 0/8 each. `towers` loses 3.4 before Winter 1, and fourteen runs of
+  sixteen win the year - the table 0277 left.
+- **Tests**: `_task_0278_season_economy` in `headless_v1.gd` checks:
+  - the stall's and the kitchen's checks pass at every season's prices;
+  - wine doctored cheap in winter alone is refused in winter alone;
+  - a season with no share of the night's money is refused;
+  - a night pays fee and bounty at its season's share;
+  - every season's opener is within 0.7-1.5 of its best focused day.
+- **Hashes**: DATA 363647928 -> 383100454 (the hive's price and the new
+  lever), accepted. SIM 2260114289, unchanged.
+Files: src/core/game_data.gd, src/core/rewards.gd, src/tools/autoplay.gd,
+src/tools/autoplay_run.gd, src/tools/year_economy.gd (new),
+src/tools/headless_v1.gd, tools/autoplay.py, tools/balance.py,
+implementation/BALANCE.md
+- **Checks**: `python tools/verify.py --accept` - PASS (65 of 65), the data hash recorded.

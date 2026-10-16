@@ -1809,7 +1809,9 @@ const DEFENCES: Dictionary = {
 		# **Bees that sting what comes near and keep stinging** (task 0226;
 		# the plan's section 5, summer). Wood for the box and sunflowers for
 		# the colony - and as strong as the field planted round it.
-		"cost": {WOOD: 15, SUNFLOWER: 4, MONEY: 60},  # LEVER: wood, sunflowers and $40-80
+		# **Dearer since task 0278**: at $205 the cliff's summer day bought
+		# nearly two, where each season's opener is about a day's work.
+		"cost": {WOOD: 15, SUNFLOWER: 6, MONEY: 80},  # LEVER: wood, sunflowers and $40-80
 		"season": &"summer",            # LEVER: the season it opens in (task 0234)
 		"targeting": TARGET_NEAREST,
 		# **A sting lands at once and keeps hurting** (`Combat.sting()`),
@@ -1989,6 +1991,12 @@ const LIVESTOCK: Dictionary = {
 		# **Eggs, since task 0184.**
 		"produces": {EGG: 1},
 		"every_ticks": DAY_TICKS * 5 / 24,  # LEVER: ticks, 4.8 production intervals/day
+		# **One egg held - the owner's call since task 0278.** A visit pays an
+		# egg, two visits two and three three, where `Economy.animals` counts
+		# 4.7 a day; holding two, the morning feed would collect two and dusk
+		# a third. Two was measured and moved the year 0277 tuned - `balanced`
+		# won it four runs of eight, not seven (BALANCE.md, "The economy across
+		# a year").
 		"holds": 1,                     # LEVER: units before it stops, 1-4
 		"feed_per_day": 1,              # LEVER: hay a day, 0-3
 		"home": &"coop",
@@ -3781,6 +3789,16 @@ const REWARDS: Dictionary = {
 	# everything pays about what holding to dawn does in spring - the plan's
 	# 'holding to the sunrise is worth as much as killing everything'.
 	"bounty_percent": 5,                # LEVER: percent of the kills' worth, 0-100
+	# **A season's share of the fee and the bounty** (task 0278), the bonuses
+	# paid whole. The fee grows with the night and the bounty with the horde,
+	# about three times over the year, where a season's best focused day
+	# grows about half again: a night held well is 22% of spring's best day
+	# and 32% of winter's. **Left at 100** - the owner's call: at 90/80/75
+	# every season sat within three points of spring's share, and the year
+	# 0277 tuned fell from fourteen runs won of sixteen to eight, autumn's
+	# line short of the night's money (BALANCE.md, "The economy across a
+	# year").
+	"night_money_percent": {&"spring": 100, &"summer": 100, &"autumn": 100, &"winter": 100},  # LEVER: percent by season, 1-100
 	"resources": {WOOD: 5, STONE: 3, IRON: 1},
 	"resources_per_night": {WOOD: 1},
 	# **Defending well should pay more than barely holding**, so this is paid
@@ -4345,15 +4363,14 @@ static func validate() -> Array:
 	errors.append_array(check_sides(SPAWNS, SPAWN_SIDES, SIDES_BY_SEASON))
 	errors.append_array(check_ponds(PONDS, FARM_MAP))
 	errors.append_array(check_sites(MAP_SITES, FARM_MAP))
-	errors.append_array(check_chain(RECIPES, SELL_PRICE))
+	# **At every season's prices** (task 0278): the kitchen's chain, and every
+	# season's shelf (task 0190) with its animals and upgrades.
+	errors.append_array(check_season_prices(prices_by_season(), RECIPES, BUY_MARKUP))
 	errors.append_array(check_livestock(LIVESTOCK, FARM_MAP))
 	errors.append_array(check_ammo(DEFENCES, RECIPES))
 	errors.append_array(check_kits(DEFENCES, RECIPES))
 	errors.append_array(check_groups(RESOURCE_GROUPS, RESOURCES))
 	errors.append_array(check_resource_prices(RESOURCES, SELL_PRICE))
-	# Every season's shelf (task 0190), animals and upgrades on it.
-	for season in SEASONS:
-		errors.append_array(check_stall(stall_stock(season), SELL_PRICE, BUY_MARKUP))
 	errors.append_array(check_season_stock(SEASON_STOCK))
 	errors.append_array(check_seasonal_supply(DEFENCES, RECIPES))
 	errors.append_array(check_day_targets(DAY_TARGETS, DAY_FARM))
@@ -5562,6 +5579,34 @@ static func _price_of(res: StringName, prices: Dictionary) -> int:
 ## Kits are skipped: their output is a structure, which has no sale price
 ## because it is not a resource. `check_recipes()` already holds them to the
 ## structure's build cost.
+## **What the stall pays in each season** (task 0278): today `SELL_PRICE` in
+## all four - no season has needed prices of its own; costs, times and yields
+## moved instead (BALANCE.md, "The economy across a year"). A seasonal table
+## would be read here, and `check_season_prices` holds every season to the
+## stall's and the kitchen's rules.
+static func prices_by_season() -> Dictionary:
+	var out := {}
+	for season in SEASONS:
+		out[season] = SELL_PRICE
+	return out
+
+
+## **The stall's and the kitchen's checks at each season's prices** (task
+## 0278): every season's stock marked up above what it fetches, every recipe
+## worth more than what goes in - each line named with its season, so a price
+## that breaks one season only is refused in that season alone.
+static func check_season_prices(by_season: Dictionary, recipes: Dictionary, markup: float) -> Array:
+	var errors: Array = []
+	for season in SEASONS:
+		if not by_season.has(season):
+			errors.append("%s: no prices" % season)
+			continue
+		var prices: Dictionary = by_season[season]
+		for line in check_chain(recipes, prices) + check_stall(stall_stock(season), prices, markup):
+			errors.append("%s: %s" % [season, line])
+	return errors
+
+
 static func check_chain(recipes: Dictionary, prices: Dictionary) -> Array:
 	var errors: Array = []
 	for id in sorted_names(recipes.keys()):
@@ -6165,6 +6210,13 @@ static func check_rewards(rewards: Dictionary) -> Array:
 	var share := int(rewards.get("bounty_percent", 100))
 	if share < 0 or share > 100:
 		errors.append("the bounty pays %d%% of the kills' worth: keep it within 0-100" % share)
+	# **A season's share of the fee and the bounty** (task 0278), for every
+	# season.
+	var by_season: Dictionary = rewards.get("night_money_percent", {})
+	for season in SEASONS:
+		var part := int(by_season.get(season, 0))
+		if part < 1 or part > 100:
+			errors.append("the %s nights pay %d%% of their fee and bounty: keep it within 1-100" % [season, part])
 	var blood := int(rewards.get("blood_moon_essence", 1))
 	if blood < 1:
 		errors.append("a Blood Moon pays %d essence: it needs at least one" % blood)

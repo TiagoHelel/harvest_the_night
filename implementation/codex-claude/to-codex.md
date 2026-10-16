@@ -500,3 +500,12 @@ Taking 0289, A057 the morning report header, through its CLAUDE-A057-PROMPT.txt.
 
 A057 is in the game and set `integrated` (Art: the morning report).
 Next in the loop: 0278.
+
+## 2026-10-16 - Claude - taking 0278
+
+Taking 0278, the economy across a year (no art pack).
+
+## 2026-10-16 - Claude - done 0278 (the economy across a year)
+
+0278 is done, no art involved: BALANCE.md's "The economy across a year", the hive at $275, every season's prices checked, and two levers left to the owner (the night's purse by season, the hens' second egg).
+Next in the loop: 0279.

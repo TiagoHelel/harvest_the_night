@@ -268,7 +268,15 @@ static func play(seed_value: int, policy_name: StringName,
 	var capped := false
 	var seasons: Array = []
 	for _season in GameData.SEASONS.size():
-		seasons.append({"losses": 0, "repeats": 0, "money": -1, "essence": -1})
+		# **The season's economy** (task 0278): what the line facing its first
+		# night was worth and what stood on the night its boss fell
+		# (`_line_worth`), and the stock, the food and the ammunition at its
+		# first morning - -1 for a season never reached.
+		seasons.append({"losses": 0, "repeats": 0, "money": -1, "essence": -1,
+			"built": -1, "boss_built": -1, "stock": -1, "food": -1, "ammo": -1})
+	# **Winter's lows** (task 0278): the least food and ammunition held on any
+	# winter morning, -1 before winter - whether autumn's stock ran out.
+	var low := [-1, -1]
 
 	while Calendar.date(state) <= days_wanted:
 		if Run.is_over(state):
@@ -278,8 +286,19 @@ static func play(seed_value: int, policy_name: StringName,
 		if int(season["money"]) < 0:
 			season["money"] = Resources.amount(state, GameData.MONEY)
 			season["essence"] = Tech.held(state)
+			season["stock"] = _worth_of_stock(state)
+			season["food"] = Resources.amount(state, GameData.FOOD)
+			season["ammo"] = _ammo_held(state)
 		var row := _one_night(state, policy)
 		nights.append(row)
+		if int(season["built"]) < 0:
+			season["built"] = int(row["built"])
+		if Calendar.is_boss_night(date) and int(row["boss_left"]) == 0:
+			season["boss_built"] = int(row["built"])
+		if Calendar.season_of(date) == GameData.SEASONS.size() - 1:
+			for i in 2:
+				var held := int(row["food"]) if i == 0 else int(row["ammo"])
+				low[i] = held if int(low[i]) < 0 else mini(int(low[i]), held)
 		if not bool(row["held"]):
 			season["losses"] = int(season["losses"]) + 1
 			if died_on == 0:
@@ -316,6 +335,7 @@ static func play(seed_value: int, policy_name: StringName,
 		"capped": capped,
 		"year_over": Run.is_over(state),
 		"walked": walked,
+		"low": low,
 		"money": Resources.amount(state, GameData.MONEY),
 		"essence": Tech.held(state),
 	}
@@ -342,6 +362,7 @@ static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 	var day_ticks := int(state["day_tick"])
 	var day_earned := int(state["gained"][GameData.MONEY]) - earned_before
 	_a_build_step(state, policy)
+	var built := _line_worth(state)
 	state["autoplay_boss_low"] = -1
 	var bosses_before := Combat.bosses_down(state)
 	_a_night(state, policy)
@@ -367,12 +388,16 @@ static func _one_night(state: Dictionary, policy: Dictionary) -> Dictionary:
 		# the night, 0 when it fell, or -1 on a night with none - what a
 		# fight that did not end it still says about how close it came.
 		"boss_left": int(state.get("autoplay_boss_low", -1)),
+		# **The line the night faced** (task 0278), at a money-only price.
+		"built": built,
 	}
 	if int(state["phase"]) == Phases.RESULT:
 		(state["intent"] as Dictionary)["confirm_result"] = true
 		Sim.advance(state, 1)
 	row["essence"] = Tech.held(state)
 	row["money"] = Resources.amount(state, GameData.MONEY)
+	row["food"] = Resources.amount(state, GameData.FOOD)
+	row["ammo"] = _ammo_held(state)
 	return row
 
 
@@ -2292,6 +2317,54 @@ static func _worth_of_stock(state: Dictionary) -> int:
 			continue
 		total += Resources.amount(state, res) \
 			* int(GameData.SELL_PRICE.get(res, 1))
+	return total
+
+
+## **What the defences standing are worth** (task 0278): each one once - a
+## wide one by its anchor, a ruin not at all - at what a player with only
+## money would pay, as `Building.price_of` prices a new one, with every level
+## it has climbed at its step's cost. The line a night faced, for the days a
+## boss cost.
+static func _line_worth(state: Dictionary) -> int:
+	var total := 0
+	var occupants: Dictionary = state["occupants"]
+	var keys: Array = occupants.keys()
+	keys.sort()
+	for idx in keys:
+		var on: Dictionary = occupants[idx]
+		var id := StringName(on.get("id", &""))
+		var cell := Grid.cell(int(idx))
+		if not GameData.DEFENCES.has(id) or Building.is_wrecked(state, cell) 				or Building.anchor_of(state, cell) != cell:
+			continue
+		total += _cost_worth(Building.cost_of(id))
+		var steps: Array = GameData.TOWER_LEVELS.get(id, [])
+		for step in steps.slice(0, maxi(int(on.get("level", 1)) - 1, 0)):
+			total += _cost_worth((step as Dictionary)["cost"])
+	return total
+
+
+## A cost at a money-only price: its money, and each material at what the
+## stall charges (`Building.price_of`'s reckoning).
+static func _cost_worth(cost: Dictionary) -> int:
+	var out := 0
+	for res in GameData.sorted_names(cost.keys()):
+		if res == GameData.MONEY:
+			out += int(cost[res])
+			continue
+		var each: StringName = GameData.pay_order(res)[0] if GameData.is_any_of(res) else res
+		out += Shop.buy_price(each) * int(cost[res])
+	return out
+
+
+## **The ammunition held** (task 0278): every resource a defence fires.
+static func _ammo_held(state: Dictionary) -> int:
+	var kinds: Dictionary = {}
+	for id in GameData.sorted_names(GameData.DEFENCES.keys()):
+		for res in ((GameData.DEFENCES[id] as Dictionary).get("ammo", {}) as Dictionary):
+			kinds[res] = true
+	var total := 0
+	for res in GameData.sorted_names(kinds.keys()):
+		total += Resources.amount(state, res)
 	return total
 
 

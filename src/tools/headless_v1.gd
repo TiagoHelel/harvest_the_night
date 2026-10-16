@@ -178,6 +178,7 @@ func _run() -> void:
 	_task_0275_perf_year()
 	_task_0276_year_autoplay()
 	_task_0277_year_balance()
+	_task_0278_season_economy()
 	_task_0281_day_sounds()
 	_task_0282_fishing_sounds()
 	_task_0283_guardian_sounds()
@@ -12638,6 +12639,73 @@ func _task_0277_year_balance() -> void:
 			and int(Farm.occupant(mender, mend_cell).get("hp", 0)) == gun_full,
 		"the robot's plan saves for a ruin's mend first, and it raises the ruin only whole",
 		"%s %s %s %s" % [str(mend_ahead), str(raised_poor), str(raised_rich), str(Farm.occupant(mender, mend_cell))])
+	_completed += 1
+
+
+## 0278 - the economy across a year. The stall's and the kitchen's checks
+## pass at every season's prices, and a price doctored in one season only is
+## refused in that season alone. A night pays its fee and its bounty at its
+## season's share and its bonuses whole - every share at 100 today, the
+## owner's call. Each season's opener is about a focused day's work.
+func _task_0278_season_economy() -> void:
+	# **The prices, a season at a time.**
+	var by_season := GameData.prices_by_season()
+	var doctored := by_season.duplicate(true)
+	var winter_prices: Dictionary = (doctored[&"winter"] as Dictionary).duplicate()
+	winter_prices[GameData.WINE] = 1
+	doctored[&"winter"] = winter_prices
+	var refused := GameData.check_season_prices(doctored, GameData.RECIPES, GameData.BUY_MARKUP)
+	var winter_only := not refused.is_empty()
+	for line in refused:
+		winter_only = winter_only and String(line).begins_with("winter: ")
+	var bad_share := GameData.REWARDS.duplicate(true)
+	(bad_share["night_money_percent"] as Dictionary).erase(&"autumn")
+	expect(GameData.check_season_prices(by_season, GameData.RECIPES, GameData.BUY_MARKUP).is_empty()
+		and by_season.size() == GameData.SEASONS.size() and winter_only
+		and _says(GameData.check_rewards(bad_share), "the autumn nights pay 0%")
+		and GameData.validate().is_empty(),
+		"the stall's and the kitchen's checks pass at every season's prices; wine doctored cheap in winter alone is refused in winter alone, and a season with no share of the night's money is refused",
+		str(refused.slice(0, 3)))
+
+	# **The night's purse, a season's share**: the same kills on a night in
+	# each season pay their fee and bounty at the season's percent.
+	var shares: Dictionary = GameData.REWARDS["night_money_percent"]
+	var paid_wrong: Array = []
+	for i in GameData.SEASONS.size():
+		var date := i * GameData.SEASON_DAYS + 3
+		var night := State.create(27800 + date)
+		night["day"] = date
+		night["night"] = date
+		night["killed_by_kind"] = {&"walker": 20}
+		var lines := Rewards._money_from(night, 100)
+		var share := int(shares[GameData.SEASONS[i]])
+		var fee := (int(GameData.REWARDS["base_money"]) + int(GameData.REWARDS["money_per_night"]) * date) * share / 100
+		var bounty := 20 * int((GameData.ENEMIES[&"walker"] as Dictionary)["reward"]) \
+			* int(GameData.REWARDS["bounty_percent"]) / 100 * share / 100
+		if int(lines["for the night"]) != fee or int(lines["bounty"]) != bounty:
+			paid_wrong.append("%s: %s against %d and %d" % [GameData.SEASONS[i], str(lines), fee, bounty])
+	var halved := GameData.REWARDS.duplicate(true)
+	(halved["night_money_percent"] as Dictionary)[&"winter"] = 50
+	expect(paid_wrong.is_empty() and shares.size() == GameData.SEASONS.size()
+		and GameData.check_rewards(halved).is_empty(),
+		"a night pays its fee and its bounty at its season's share, the bonuses whole; a share of 50 is a lever the checks accept",
+		str(paid_wrong.slice(0, 2)))
+
+	# **A day buys about one of the season's openers** (0234's bold rows),
+	# within 0.7-1.5 of the season's best focused day.
+	var openers := {&"spring": &"gun_tower", &"summer": &"beehive", &"autumn": &"catapult", &"winter": &"searchlight"}
+	var ratios: Array = []
+	var within := true
+	for season in GameData.SEASONS:
+		var best := 0
+		for earner in Economy.STRATEGIES:
+			best = maxi(best, Economy.day(earner, season))
+		var ratio := float(best) / float(Building.price_of(openers[season]))
+		ratios.append(snappedf(ratio, 0.01))
+		within = within and ratio >= 0.7 and ratio <= 1.5
+	expect(within,
+		"each season's best focused day buys about one of its openers - the gun tower, the hive, the catapult, the searchlight - within 0.7-1.5",
+		str(ratios))
 	_completed += 1
 
 ## **Task 0281: the new day's sounds.** Every new id is a file. What a verb is
