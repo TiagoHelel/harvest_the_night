@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Make an animation strip as FOUR DISTINCT, NON-TOUCHING figures in one horizontal row for the attached Scarecrow King. There must be three fully transparent vertical columns of empty space separating the figures; at least 100 pixels wide each, extending the full height of the canvas. Absolutely no arm, hand, twig, coat or straw may bridge a gap. Do not place the figures shoulder-to-shoulder. Use the same character identity and outfit in all four cells. Exact order: 1) arms extend out to the sides, 2) arms rise to shoulder height and coat flares, 3) both arms reach vertically above the head, head tilts back, 4) same raised pose held almost still. Feet all align to one horizontal baseline. Four frames are for a slow summon telegraph, no crows or magic. Keep the body same height as attached master (48 native px), cast total silhouette at most 58 px. Each pose should be centered in its own equal-width quarter of the horizontal image. Pixel art, crisp hard edges, transparent background, no backdrop. No labels, panel borders, dividers, text, ground, shadows, glow, blur, gradients, extra limbs, or any fifth object. Return exactly four separated frames.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-993b9f9e-96ca-406d-ae2b-2567edb26173.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-cast-r3.png",
+  "sha256": "24a6e8146c61f5982a7bd90a6b1e647bdb22bda26e4733ace91ddb2efa44030f",
+  "revision": 3,
+  "decision": "selected as diagnostic candidate for owner review; not approved"
+}

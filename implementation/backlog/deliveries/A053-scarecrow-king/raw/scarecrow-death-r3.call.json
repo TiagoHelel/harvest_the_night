@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Produce exactly five separated death poses of the Scarecrow King in one horizontal row. IMPORTANT: put each complete pose in its own equal-width cell and leave four completely empty vertical gutters at least 120 pixels wide from top to bottom. No crown, straw, robe, hand or pixel may bridge between frames. Sequence with measured decreasing silhouette heights: 1 upright stagger; 2 crown has fallen to ground and torso buckled, 40px max height; 3 slumps lower, 32px max; 4 lies on its side, 24px max; 5 grounded heap, 18px max. Every next silhouette is shorter than the last; crown and debris stay at or below the previous top. All feet or heap contact the same bottom row, centered x=40. Preserve this exact identity and costume from the reference. Native size 80x64, pivot 40,60, no scaling the poses independently. West-facing view, crisp pixel art, transparent background. No glow, crows, smoke, ground, shadow, text, labels, dividers, blur, gradient, extra objects, or contact sheet. Return exactly these five distinct poses separated by the four transparent full-height gutters.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-92626ef3-0d4b-4ad9-8b83-5c4c4ef125c9.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-death-r3.png",
+  "sha256": "5789ac32f142fdcdd2e45eafd76238f1590ddb3f8897f96685bcc206ea49436b",
+  "revision": 3,
+  "decision": "selected as diagnostic candidate for owner review; not approved"
+}

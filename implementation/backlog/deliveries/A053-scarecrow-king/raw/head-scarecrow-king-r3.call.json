@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Edit the attached Scarecrow King icon at the face only. Keep the entire icon silhouette, crown, face shape, collar, pixels, crop, colors, and stitched grin unchanged. Inside the burlap face there are two BLACK eye sockets under the brow; place exactly one small matte BONE-CREAM pixel at the center of each eye socket so the eyes read bone or bone-dark, never black-only, never yellow/orange/red, never glowing. Do not change, brighten, whiten or reshape the jagged mouth or teeth. Only change the two eye centers. Keep the three-quarter-left head bust, transparent background, crisp pixels, no new shapes. Output the same isolated square icon only; no full figure, background, caption, frame, glow, haze, blur, gradient, 3D or extra elements.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r2.png",
+      "sha256": "9f4adf6fa1401f059ad12e3619b631c9bbecb4c5f02eaaea65a860c9f031d419",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-131de171-711e-4967-83d1-c6f2b92a7cbb.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\head-scarecrow-king-r3.png",
+  "sha256": "f39ece425125a1e3428638cce6a75fbab206512f7b144efc8afe00bf43d33b51",
+  "revision": 3,
+  "decision": "selected as diagnostic candidate for owner review; not approved"
+}

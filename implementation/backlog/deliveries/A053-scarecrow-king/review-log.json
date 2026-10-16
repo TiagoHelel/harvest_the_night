@@ -1,0 +1,7 @@
+{
+  "date": "2026-10-14",
+  "status": "blocked",
+  "selected_candidate_files": 18,
+  "approved": false,
+  "issue": "The selected head mark has no matte bone/bone_dark eye pixels after native reduction. All three head ImageGen attempts were used."
+}

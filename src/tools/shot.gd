@@ -186,6 +186,7 @@ const SCENARIOS: Array = [
 	["forecast_summer", "Summer 10 at 18:30: a summer night's forecast, the spitter's and the rat's heads among the kinds coming (task 0260)", ""],
 	["forecast_autumn", "Autumn 10 at 18:30: an autumn night's forecast, the crow's head among the kinds coming (task 0262)", ""],
 	["forecast_harvester", "Summer 14 at 18:30: the Harvester's night forecast, its head among the kinds coming (task 0266)", ""],
+	["forecast_king", "Autumn 14 at 18:30: the Scarecrow King's night forecast, its head among the kinds coming (task 0267)", ""],
 	["cursor_looks", "the guardian's cursor in each look (task 0146): the first night's build step, the cursor on dark grass in neutral, place, blocked, upgrade, sell, repair and aim in turn - Main's own choice of look held off for the picture - then neutral over a field's soil and sell over a wall", ""],
 	["guardian", "the porch guardian awake (task 0145): the first night's build step, the camera on the porch - A003's night idle with its eyes lit; then guardian_point, a wall put down below the porch and the guardian pointing at it", ""],
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
@@ -892,6 +893,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"forecast_summer": _set_forecast_summer(state)
 		"forecast_autumn": _set_forecast_autumn(state)
 		"forecast_harvester": _set_forecast_harvester(state)
+		"forecast_king": _set_forecast_king(state)
 		"guardian": _set_guardian(state)
 		"cursor_looks": _set_cursor_looks(state)
 		"forecast_build": _set_forecast_build(state)
@@ -2919,6 +2921,15 @@ func _set_forecast_autumn(state: Dictionary) -> void:
 ## head on the panel by day among the kinds coming.
 func _set_forecast_harvester(state: Dictionary) -> void:
 	_on_date(state, GameData.SEASON_DAYS + 14)
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
+		- int(state["day_tick"]), 1))
+
+
+## **The Scarecrow King's night forecast** (task 0267): Autumn 14 at 18:30,
+## A053's head on the panel by day among the kinds coming.
+func _set_forecast_king(state: Dictionary) -> void:
+	_on_date(state, 2 * GameData.SEASON_DAYS + 14)
 	_a_sown_field(state)
 	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
 		- int(state["day_tick"]), 1))

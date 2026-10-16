@@ -1,0 +1,41 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept. Generate ONE compact 16x16 forecast icon, only the Scarecrow King's sack head and twig-and-corn crown, three-quarter view turned left; include the crow-feather collar as a small lower bust. The head itself fills the box like the approved Giant forecast mark. Use Image 1 as exact character identity, Image 2 as reduced in-game palette and scale, Image 3 as icon palette/style, Image 4 only as icon framing reference. A stitched jagged burlap grin, two small matte bone or bone-dark eyes (never yellow, red or glowing), angular crown of dead branches and corn husks, a few blue-black feather tips. Crisp pixel clusters and colored outline, simple enough to read at one native pixel per feature. Complete uncut bust, flat bottom row 14, centered at x=8, no more than 14px wide or tall, 1px transparent border at top/left/right and row15 empty. Use only colors already present in the King's own body palette. Transparent background with sharp binary alpha. No full body, arms, legs, pole, birds, text, frame, backdrop, shadow, halo, glow, blur, gradients, 3D or extra objects. Return one icon, not a sheet.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/preview/scarecrow-walk-0-reference-4x.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A011-forecast-heads/native/head_giant/none/01.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/preview/scarecrow-walk-0-reference-4x.png",
+      "sha256": "126111589b197e1a17bdcc2f8a3de53a4032542e6a20e6abce5d2164e01d3a33",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A011-forecast-heads/native/head_giant/none/01.png",
+      "sha256": "d9f6e73f785e75d48b8752efb58cc43efb07f414a7066cd4eed8af82fd8785db",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-9035e9cb-118f-451c-b8a8-21d6608853ad.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\head-scarecrow-king-r1.png",
+  "sha256": "ceeb248e91b0971e84657fcfaf6edd4b9801ec6bc77eb56fda085de31b4cb949",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

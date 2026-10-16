@@ -33451,3 +33451,79 @@ delivery's `APPROVAL.json`. 0253's Giant gone to rust is gone.
 - `python implementation/backlog/assets.py set A052 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0267 - Art: the Scarecrow King - done 2026-10-15
+
+A053 is integrated. The Scarecrow King is the owner-approved art now:
+
+- standing, its four-frame stilted walk, its four-frame cast, its
+  three-frame raking attack and its five-frame collapse;
+- its head in the forecast.
+
+The owner approved it on 2026-10-14 in the batch review, as recorded in the
+delivery's `APPROVAL.json`. The approval accepts one documented difference:
+the forecast mark misses the matte bone eye-pixel rule after three attempts.
+0254's Giant gone to dark straw is gone.
+
+- **Promotion**:
+  - The 18 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their raw sources were copied byte for byte into
+    `assets/art_source/enemies/scarecrow_king/` and
+    `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - The King is on the Giant's 80x64 at (40,60), [-32,-44], with
+    `enemy_family`/`enemy_motion` and four aliases (`walk_b` = walk 2,
+    `attack` = attack 1, `death` = death 4, `telegraph` = cast 3, as A054's
+    handoff names them for the Lord).
+- **A posed boss that casts** (`EnemyMotion`):
+  - `posed_boss` takes a boss with its first cast frame on disk as well as
+    one with a wind-up.
+  - `windup_of` is the Giant's `windup`, or the `cast` of a boss drawn with
+    none. The King's wind-up before a blow is its cast: four frames on their
+    own 0.1 s, the last held, as its cast for the flock plays.
+  - While it casts for its flock (`casting`), its pose is the rules' own
+    (`WorldView.posed_off_the_rules`), as 0254 posed it.
+  - `strike_of` falls to `attack` for a boss drawn with neither slam nor
+    crush: the King's raking sweep.
+  - `is_windup` takes a cast, so the ring under the target of a blow shows
+    through the King's wind-up as through the Giant's.
+  - Its collapse plays its five frames.
+- **The stand-ins retired**: A053's six `PlaceholderArt` entries and
+  `SCARECROW_KING`. `SCARECROW_KING_TINT` stays: A056's King trophy still
+  stands in with it. `placeholders.py --check` passes, with 75 stand-ins
+  left over 9 packs.
+- **Checks**:
+  - `check_giant_art.py`'s `BOSSES` takes the King: its counts, the Giant's
+    canvas and contact, a cast never taller than 58 (A053's rule), a
+    collapse that ends at most 20 tall, and its four aliases. Its report
+    names a boss with a space, "Scarecrow King".
+  - `check_ui_art.py` takes its head.
+- **The boss showcase** (`giant_showcase.gd`): `--boss=scarecrow_king` runs
+  it.
+  - A boss's wind-up is its own (`windup_of`) with its own frame count.
+  - Its attack watch lasts the boss's `telegraph_ticks` and fifteen more,
+    at least the 60 it was.
+  - A new step for a boss that casts: its clock run out on open ground,
+    the cast plays its four frames in order and holds the last through its
+    `telegraph_ticks`.
+- **Tests**:
+  - 0254's check asks for A053's art: nothing of 0120's road left; the
+    view's own pose through a cast for the flock, four frames in order and
+    the last held; its cast its wind-up and its attack its blow; five
+    death frames.
+  - 0246's tracked list is the families, the Giant, the Harvester and the
+    King.
+- **Shots** (`implementation/shots/0267/`, FHD 1920x1080, looked at):
+  - `scarecrow_king`: Autumn 14's night, the King east of the sown field
+    in its held cast, arms high, with rings on the six cells its flock will
+    rise on and the first flock's crows in the air.
+  - `forecast_king` (new scene): Autumn 14 at 18:30, its crowned head among
+    the kinds coming. `headless_check` counts 136 scenes.
+- **The delivery folder**
+  `implementation/backlog/deliveries/A053-scarecrow-king/` is committed, as
+  A052's was.
+- `python implementation/backlog/assets.py set A053 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second run: a power cut stopped the first before it finished.

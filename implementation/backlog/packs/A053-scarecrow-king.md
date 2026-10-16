@@ -1,6 +1,6 @@
 # A053 - The Scarecrow King
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0267
 - **Dressed by game tasks:** 0254
 - **Spec after game task:** 0254

@@ -1,0 +1,119 @@
+[
+  {
+    "recipe": {
+      "id": "scarecrow-attack-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-attack-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        569,
+        793
+      ],
+      "crop_xywh": [
+        11,
+        160,
+        536,
+        559
+      ],
+      "content_scale": 0.08586762075134168,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      17,
+      12,
+      63,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      46,
+      48
+    ]
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-attack-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-attack-r2.png",
+      "sheet_cell_xywh": [
+        569,
+        0,
+        831,
+        793
+      ],
+      "crop_xywh": [
+        593,
+        158,
+        753,
+        562
+      ],
+      "content_scale": 0.08586762075134168,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      8,
+      13,
+      73,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      65,
+      48
+    ]
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-attack-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-attack-r2.png",
+      "sheet_cell_xywh": [
+        1400,
+        0,
+        583,
+        793
+      ],
+      "crop_xywh": [
+        1455,
+        145,
+        527,
+        580
+      ],
+      "content_scale": 0.08586762075134168,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      18,
+      11,
+      63,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      45,
+      50
+    ]
+  }
+]

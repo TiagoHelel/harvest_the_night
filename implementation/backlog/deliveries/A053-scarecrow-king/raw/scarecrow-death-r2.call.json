@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use the attached exact Scarecrow King master. Generate five clearly separated sequential death frames in one horizontal row with large transparent gutters. The silhouette must shrink monotonically; make each next frame visibly lower than the previous and never let a falling crown or straw rise above the prior top. Frame 0: upright stagger, 48 native px tall. Frame 1: crown falls to the ground beside the head while the body starts buckling, no taller than 40 px. Frame 2: body folds and slumps, no taller than 32 px. Frame 3: collapsed on its side, no taller than 24 px. Frame 4: a low grounded heap of dark coat, straw and sticks, no taller than 18 px. All five bases sit on the same ground row, centered at x=40. Keep the crowned burlap identity and violet-black coat. One complete figure per cell, equal cells, wide empty gutters, no overlaps. West-facing side/three-quarter view. Crisp pixel art, transparent background, no background, no shadow, no crows, particles, magic, text, labels, glow, blur, gradients, extra objects or contact sheet. Return exactly these five ordered frames.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-d67c2f8e-cf20-4a9e-bce7-987c94f5a468.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-death-r2.png",
+  "sha256": "b4026e7632f3a542e5bae46bd710f27bc613307a2aad7cb316778f73478b1e82",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

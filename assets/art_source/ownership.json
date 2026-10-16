@@ -4434,6 +4434,90 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/enemies/scarecrow_king.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_attack_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_cast_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_cast_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_cast_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_cast_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_death_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_telegraph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/scarecrow_king_walk_b.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/enemies/spitter.png",
       "owner": "raster"
     },
@@ -5671,6 +5755,10 @@
     },
     {
       "output": "sprites/ui/head_runner.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_scarecrow_king.png",
       "owner": "raster"
     },
     {

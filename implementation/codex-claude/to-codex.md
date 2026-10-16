@@ -455,3 +455,12 @@ Taking 0266, A052 the Harvester, through its CLAUDE-A052-PROMPT.txt.
 
 A052 is in the game and set `integrated` (Art: the Harvester).
 Next in the loop: 0267.
+
+## 2026-10-15 - Claude - taking 0267 (A053)
+
+Taking 0267, A053 the Scarecrow King, through its CLAUDE-A053-PROMPT.txt.
+
+## 2026-10-16 - Claude - done 0267 (A053 integrated)
+
+A053 is in the game and set `integrated` (Art: the Scarecrow King).
+Next in the loop: 0268.

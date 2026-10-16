@@ -3,7 +3,8 @@
 **Table-driven** (task 0246): `BOSSES` holds each boss family's motion counts,
 canvas, pivot, cell offset and the generation task its sources came from - the
 Giant's, and since task 0266 A052's Harvester, whose blow is a crush and which
-charges; 0267-0268 add theirs. The five ordinary-and-Giant families keep
+charges; since task 0267 A053's Scarecrow King, drawn with a cast for its
+wind-up and an attack for its blow; 0268 adds its own. The five ordinary-and-Giant families keep
 complete ownership, as a subset: a new enemy family cannot fail this check.
 """
 from PIL import ImageChops
@@ -14,7 +15,8 @@ COUNTS = {'master': 1, 'walk': 4, 'windup': 3, 'slam': 3, 'death': 5}
 
 ## Each boss family: its motion counts, canvas, pivot and cell offset, the
 ## generation task its sources came from, how tall its raised wind-up must
-## stand and how low its collapse must finish.
+## stand (or how tall its cast may reach) and how low its collapse must
+## finish.
 BOSSES = {
     'giant': {'counts': COUNTS, 'canvas': [80, 64], 'pivot': [40, 60], 'offset': [-32, -44],
               'task': '0016', 'windup_top': 50, 'death_low': 20,
@@ -27,6 +29,14 @@ BOSSES = {
                   'task': 'A052', 'windup_top': 50, 'death_low': 20,
                   'aliases': (('walk_b', 'walk_2'), ('attack', 'crush_0'), ('death', 'death_4'),
                               ('telegraph', 'windup_2'))},
+    # The Scarecrow King (task 0267): the Giant's canvas and contact, a
+    # four-frame cast - for the flock and before a blow - that never stands
+    # taller than 58, and a three-frame raking attack for the slam.
+    'scarecrow_king': {'counts': {'master': 1, 'walk': 4, 'cast': 4, 'attack': 3, 'death': 5},
+                       'canvas': [80, 64], 'pivot': [40, 60], 'offset': [-32, -44],
+                       'task': 'A053', 'cast_top': 58, 'death_low': 20,
+                       'aliases': (('walk_b', 'walk_2'), ('attack', 'attack_1'), ('death', 'death_4'),
+                                   ('telegraph', 'cast_3'))},
 }
 ORDINARY = ('walker', 'runner', 'tank', 'breaker')
 WORDS = {1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six'}
@@ -35,7 +45,7 @@ OWNED = {'enemies/' + f for f in ORDINARY + ('giant',)}
 
 def check_family(family, spec, data, files, images, entries, old):
     """One boss family's poses; returns its visible master's width and height."""
-    title = family.capitalize()
+    title = family.replace('_', ' ').title()
     width, height = spec['canvas']
     for motion, count in spec['counts'].items():
         frames = sorted((e for e in data['assets'] if e.get('enemy_family') == family and e.get('enemy_motion') == motion and 'source' in e), key=lambda e: e['frame'])
@@ -64,6 +74,8 @@ def check_family(family, spec, data, files, images, entries, old):
                 raise ValueError('%s source/runtime/legacy mismatch: %s' % (title, e['id']))
         if motion == 'windup' and not (heights[0] < heights[1] < heights[2] and heights[2] >= spec['windup_top']):
             raise ValueError('Wind-up does not visibly raise the striking arm')
+        if motion == 'cast' and max(heights) > spec['cast_top']:
+            raise ValueError('%s cast stands taller than %d' % (title, spec['cast_top']))
         if motion == 'death' and (heights[-1] > spec['death_low'] or any(a < b for a, b in zip(heights, heights[1:]))):
             raise ValueError('%s collapse does not finish low' % title)
         if motion == 'walk':
@@ -99,7 +111,8 @@ def main():
         poses = sum(spec['counts'].values())
         width, height = spec['canvas']
         pivot_x, pivot_y = spec['pivot']
-        print(f'OK: {poses} authored {family.capitalize()} poses, {WORDS.get(len(spec["aliases"]), len(spec["aliases"]))} exact aliases, {width}x{height}/({pivot_x},{pivot_y}), visible master {gw}x{gh}, real wind-up/collapse')
+        name = family.replace('_', ' ').title()
+        print(f'OK: {poses} authored {name} poses, {WORDS.get(len(spec["aliases"]), len(spec["aliases"]))} exact aliases, {width}x{height}/({pivot_x},{pivot_y}), visible master {gw}x{gh}, real wind-up/collapse')
 
 
 if __name__ == '__main__':

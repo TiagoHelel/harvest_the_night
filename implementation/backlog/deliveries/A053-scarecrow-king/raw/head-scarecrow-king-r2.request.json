@@ -1,0 +1,7 @@
+{
+  "prompt": "Edit this exact existing 16x16 forecast icon and preserve its compact silhouette, crop, twig-corn crown, burlap face, stitched jagged grin, feather collar, rust/gold/blue-black palette, and all shapes. Change only the two small eye pixels inside the burlap face: both eyes must use matte bone cream or bone-dark colors from the game's palette, clearly visible against the sack. Do not leave the eye holes black, dark purple, yellow, orange or red. The eyes are small dead markings, not lights; no emission. Keep icon framing exactly: complete bust, flat opaque baseline row14, centered x8, max14 wide or tall, clear row15 and one-pixel left/right/top margins. Crisp nearest-neighbor pixel art, hard edges, true transparent background. Do not add full body, shoulders larger than before, any new objects, text, frame, background, glow, blur, gradients, 3D or contact sheet. Return only the edited icon.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r1.png"
+  ]
+}

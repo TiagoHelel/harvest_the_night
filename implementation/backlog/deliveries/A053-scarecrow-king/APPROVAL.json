@@ -1,0 +1,37 @@
+{
+  "pack": "A053",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A053-scarecrow-king",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/scarecrow_king/west/01.png": "27ad91d9f15bef3eb95b87c5f547b69c826eba4e8c151a1670ce1c4ba7cadeaa",
+    "native/scarecrow_king_walk/west/01.png": "6ec1299a08edfa29aec787dd3e248c4dd360d4be7ed367989701e183bad7abdc",
+    "native/scarecrow_king_walk/west/02.png": "06cc4aae8c37785fe3b4c8ee3e4451f0f0f24408a73c4a10cbc648fb3be404b2",
+    "native/scarecrow_king_walk/west/03.png": "6b9e5f3537bd5a3c029d83be7d8ecc1f2946b34f6a2a27771a39d7873533373a",
+    "native/scarecrow_king_walk/west/04.png": "ce404747488fea41fe0f7fb4b7896a636b8bd7ed6fe1b1faa17be5dc91623938",
+    "native/scarecrow_king_cast/west/01.png": "25027418b279525d01d0249d4daab73b472e640e0efb595c6048cdfb65d1bfb2",
+    "native/scarecrow_king_cast/west/02.png": "fbd362a159da95e3a0f1fdf6656aefe71efb5d1aaab1a0b72b3b42dfa2018ad6",
+    "native/scarecrow_king_cast/west/03.png": "620a65c2218788dfd3a72ef95bc006ad7dec745006eccf3ba1a6fa32feeb85f0",
+    "native/scarecrow_king_cast/west/04.png": "735c808f076dfeb32aab9de110dd7665dff937361fc5b8658f2be982c61be3ca",
+    "native/scarecrow_king_attack/west/01.png": "ce703a790117ce181ea62e503a274ffaac035387390b409c91a541ccd1601ec7",
+    "native/scarecrow_king_attack/west/02.png": "055c372119ec14c0c05ae98121c6fefc9035886d817749a1491e66fc1e8d72bf",
+    "native/scarecrow_king_attack/west/03.png": "fb56939061434c7e1a98c86f4077f5f0886a6dd80300546c5afdd1083a81b4bc",
+    "native/scarecrow_king_death/west/01.png": "e35d11ca051b4ce31e2075104e98787e7da8170aa9e72c8edb468029a7e4abbe",
+    "native/scarecrow_king_death/west/02.png": "4041f9c769cd39a53afa0dbfdc3f4e0d50d49e8cc3f3c52e4a8565e8979b7ea7",
+    "native/scarecrow_king_death/west/03.png": "e1ebdc8fe690a1de9e7a62502f91fe59fb329e89984293e26d935e118ed6dbc3",
+    "native/scarecrow_king_death/west/04.png": "935647bc426d25dfa523568e62479b2a38a040617a194dcb59a719c238c39400",
+    "native/scarecrow_king_death/west/05.png": "4e262649280f4b8ab279e8312fdfcd3f0091f83bf83de753b64d214ad1757a06",
+    "native/head_scarecrow_king/none/01.png": "48093ed657a2488faee87ec983585d28cd48757457226dce109ed5635e6f132e"
+  },
+  "frames": 18,
+  "frames_expected": 18,
+  "accepted_visual_checks": [
+    "icon_eyes_bone_matte"
+  ],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

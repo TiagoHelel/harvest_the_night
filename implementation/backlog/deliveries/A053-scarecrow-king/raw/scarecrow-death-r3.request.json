@@ -1,0 +1,7 @@
+{
+  "prompt": "Produce exactly five separated death poses of the Scarecrow King in one horizontal row. IMPORTANT: put each complete pose in its own equal-width cell and leave four completely empty vertical gutters at least 120 pixels wide from top to bottom. No crown, straw, robe, hand or pixel may bridge between frames. Sequence with measured decreasing silhouette heights: 1 upright stagger; 2 crown has fallen to ground and torso buckled, 40px max height; 3 slumps lower, 32px max; 4 lies on its side, 24px max; 5 grounded heap, 18px max. Every next silhouette is shorter than the last; crown and debris stay at or below the previous top. All feet or heap contact the same bottom row, centered x=40. Preserve this exact identity and costume from the reference. Native size 80x64, pivot 40,60, no scaling the poses independently. West-facing view, crisp pixel art, transparent background. No glow, crows, smoke, ground, shadow, text, labels, dividers, blur, gradient, extra objects, or contact sheet. Return exactly these five distinct poses separated by the four transparent full-height gutters.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+  ]
+}

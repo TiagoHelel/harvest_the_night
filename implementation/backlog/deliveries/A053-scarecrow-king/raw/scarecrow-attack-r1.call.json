@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use the accepted Scarecrow King master as exact identity. Generate exactly three sequential attack animation frames in one horizontal strip with transparent gutters between complete figures. Order: anticipation (the long twig-clawed western hand draws back while the body crouches), contact (one arm rakes in a fast westward sweep; the leading twig claws reach toward the west), recovery (the arm returns and the body settles). Clearly show the arm moving through three distinct poses without changing the crown, burlap sack, crow-feather shoulders, coat or body scale. Keep both feet on one baseline, one contact pivot, west-facing side/three-quarter camera. Native 80x64, pivot (40,60), figure size matches the 48px-tall master. Equal cells, each character fully separate, no overlap, no labels or dividers. Crisp pixel art, transparent background. No gore, ground, shadow, text, glow, blur, gradients, duplicated limbs or extra objects. Return only the 3-frame horizontal strip.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-f170c7b8-77bc-4994-a0e7-0776040a9db2.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-attack-r1.png",
+  "sha256": "9aa2556c6496ef5d621da661e8a2a3d478cdb5777816b65e607f94b5e511c0c7",
+  "revision": 1,
+  "decision": "pending native-size inspection"
+}

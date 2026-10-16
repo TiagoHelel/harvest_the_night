@@ -1,0 +1,6 @@
+2026-10-14: 18 diagnostic candidate frames assembled from recorded built-in ImageGen sources. The mark misses the bone/bone_dark eye rule after three attempts; package blocked, no production export. Rejected cuts, silhouettes, and revisions are listed in raw/selection.json. No approval inferred.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+18/18 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: icon_eyes_bone_matte. Complete delivery released for Claude integration.

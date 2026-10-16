@@ -1,0 +1,7 @@
+{
+  "prompt": "Edit the attached Scarecrow King icon at the face only. Keep the entire icon silhouette, crown, face shape, collar, pixels, crop, colors, and stitched grin unchanged. Inside the burlap face there are two BLACK eye sockets under the brow; place exactly one small matte BONE-CREAM pixel at the center of each eye socket so the eyes read bone or bone-dark, never black-only, never yellow/orange/red, never glowing. Do not change, brighten, whiten or reshape the jagged mouth or teeth. Only change the two eye centers. Keep the three-quarter-left head bust, transparent background, crisp pixels, no new shapes. Output the same isolated square icon only; no full figure, background, caption, frame, glow, haze, blur, gradient, 3D or extra elements.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r2.png"
+  ]
+}

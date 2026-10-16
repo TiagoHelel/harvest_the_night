@@ -9604,9 +9604,11 @@ func _task_0246_bosses() -> void:
 		if SuiteKit.code_lines_of("res://src/ui/" + file).contains("&\"giant\""):
 			by_name.append(file)
 	var voices := SuiteKit.code_lines_of("res://src/ui/sfx.gd").count("&\"giant\"")
-	# The posed bosses by name: the Harvester too since task 0266 (A052).
+	# The posed bosses by name: the Harvester too since task 0266 (A052), the
+	# Scarecrow King since 0267 (A053).
 	expect(EnemyMotion.posed_boss(&"giant") and not EnemyMotion.posed_boss(&"walker")
-		and EnemyMotion.tracks(&"giant") and EnemyMotion.tracked() == EnemyMotion.FAMILIES + [&"giant", &"harvester"]
+		and EnemyMotion.tracks(&"giant")
+		and EnemyMotion.tracked() == EnemyMotion.FAMILIES + [&"giant", &"harvester", &"scarecrow_king"]
 		and EnemyMotion.FAMILIES.slice(0, 4) == [&"walker", &"runner", &"tank", &"breaker"]
 		and EnemyMotion.TRACKED == EnemyMotion.tracked()
 		and Sfx.voice_of(&"giant") == &"sfx/roar_giant" and Sfx.voice_of(&"walker") == &"sfx/groan_walker"
@@ -11020,6 +11022,42 @@ func _task_0254_scarecrow_king() -> void:
 		and Describe.enemy(&"scarecrow_king").contains(I18n.t(&"DESC_SUMMONS"))
 		and Sfx.voice_of(&"scarecrow_king") == &"sfx/king_call",
 		"Autumn 14 is the Scarecrow King's night; it has its name, its intro, a tooltip line that it calls down crows, and since 0284 a voice of its own")
+
+	# **A053's art since task 0267**: nothing of 0120's road left; a boss in
+	# the Giant's pose names, drawn with a cast for its wind-up and its attack
+	# for its blow; while it casts for its flock the view's pose is the rules'
+	# own, its four frames on their seconds and the last held.
+	var drawn: Array = []
+	for art_name in ["scarecrow_king", "scarecrow_king_walk", "scarecrow_king_cast", "scarecrow_king_attack",
+			"scarecrow_king_death", "head_scarecrow_king"]:
+		if not PlaceholderArt.art(StringName(art_name)).is_empty():
+			drawn.append(art_name)
+	var court := _powers_night(25403)
+	var throne := _open_square(court, 4, &"wall")
+	_ring_in_hardwood(court, throne)
+	var crowned := Entities.spawn(court, &"scarecrow_king", throne)
+	(Entities.get_one(court, crowned))["summon_in"] = 1
+	var watching := EnemyMotion.new()
+	var cast_poses: Array = []
+	for _t in telegraph + 1:
+		watching.before_tick(court)
+		Sim.advance(court, 1)
+		watching.after_tick(court)
+		if Enemies.is_casting(court, crowned):
+			var seen_pose := watching.pose(Entities.get_one(court, crowned), court)
+			if cast_poses.is_empty() or cast_poses[-1] != seen_pose:
+				cast_poses.append(seen_pose)
+	var struck := _powers_night(25404)
+	var raker := Entities.get_one(struck, Entities.spawn(struck, &"scarecrow_king", _open_square(struck, 3, &"wall")))
+	var blow := EnemyMotion.new()._boss_pose(raker, struck, {"tick": int(struck["tick"]), "moving": false,
+		"pos": Vector2i(int(raker["pos"][0]), int(raker["pos"][1])), "travel": 0, "strike": int(struck["tick"]) - 4})
+	expect(drawn.is_empty() and EnemyMotion.posed_boss(&"scarecrow_king") and EnemyMotion.tracks(&"scarecrow_king")
+		and EnemyMotion.windup_of(&"scarecrow_king") == "cast" and EnemyMotion.windup_of(&"giant") == "windup"
+		and EnemyMotion.strike_of(&"scarecrow_king") == "attack" and EnemyMotion.is_windup(&"scarecrow_king_cast_3")
+		and cast_poses == [&"scarecrow_king_cast_0", &"scarecrow_king_cast_1", &"scarecrow_king_cast_2", &"scarecrow_king_cast_3"]
+		and blow == &"scarecrow_king_attack_1" and EnemyDeaths.death_frames(&"scarecrow_king") == 5,
+		"A053's King is a posed boss: its cast for the flock the rules' own, four frames in order and the last held; its cast its wind-up, its attack its blow, five death frames; nothing of 0120's road left",
+		"%s; %s; %s" % [str(drawn), str(cast_poses), blow])
 	_completed += 1
 
 

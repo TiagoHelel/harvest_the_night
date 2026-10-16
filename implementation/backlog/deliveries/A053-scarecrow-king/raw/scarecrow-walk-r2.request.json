@@ -1,0 +1,7 @@
+{
+  "prompt": "Use the accepted Scarecrow King master exactly as the character identity. Create a horizontal animation strip of exactly four equal cells, each 512x640 source pixels, with the 4 scarecrow figures centered one per cell. Leave a wide empty transparent gutter of at least 100 source pixels between the complete silhouettes; no limb, coat or crown may enter the next cell. Ordered poses: left-leg forward contact; passing with legs together; right-leg forward contact; passing with legs together. This is a readable slow lurching stilt-leg walk: alternate which leg leads, keep both legs visible, transfer the weight, and make the loop return naturally. The coat tails and straw sway a little. Keep the same master crown, sack grin, feather collar and body proportions in all frames. Same size and camera, feet on one shared baseline, no whole-body translation. Side/three-quarter camera facing west (left). Target each exported figure at 80x64 with a 48px standing height. Transparent background and crisp pixel art. No text, dividers, ground, shadows, glow, magic, birds, extra limbs, blur, gradients, speckles, or contact sheet. Return only the four-cell strip.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+  ]
+}

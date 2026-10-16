@@ -1,0 +1,10 @@
+{
+  "prompt": "Use case: stylized-concept. Generate ONE compact 16x16 forecast icon, only the Scarecrow King's sack head and twig-and-corn crown, three-quarter view turned left; include the crow-feather collar as a small lower bust. The head itself fills the box like the approved Giant forecast mark. Use Image 1 as exact character identity, Image 2 as reduced in-game palette and scale, Image 3 as icon palette/style, Image 4 only as icon framing reference. A stitched jagged burlap grin, two small matte bone or bone-dark eyes (never yellow, red or glowing), angular crown of dead branches and corn husks, a few blue-black feather tips. Crisp pixel clusters and colored outline, simple enough to read at one native pixel per feature. Complete uncut bust, flat bottom row 14, centered at x=8, no more than 14px wide or tall, 1px transparent border at top/left/right and row15 empty. Use only colors already present in the King's own body palette. Transparent background with sharp binary alpha. No full body, arms, legs, pole, birds, text, frame, backdrop, shadow, halo, glow, blur, gradients, 3D or extra objects. Return one icon, not a sheet.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/preview/scarecrow-walk-0-reference-4x.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A011-forecast-heads/native/head_giant/none/01.png"
+  ]
+}

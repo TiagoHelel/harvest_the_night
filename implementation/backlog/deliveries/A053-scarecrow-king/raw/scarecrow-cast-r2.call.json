@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use the attached exact Scarecrow King master identity. Create one single horizontal row of exactly four animation cells. Each cell is 640x640 pixels; center one complete character in each cell. Preserve at least 160 fully transparent pixels between the nearest opaque pixels of neighboring figures; arms and coat must not overlap cell boundaries. The poses in order are: (0) arms sweep outward, coat starts opening; (1) arms lift above shoulders, coat flares; (2) both arms raised high above the head, head thrown back, straw only at cuffs; (3) hold pose 2 almost exactly for the telegraph hold. All four feet share one baseline and the same position and scale. Same crown, stitched sack grin, feather collar, costume and camera. Clear call for crow summoning, no crows, feathers in air, symbols, ring, smoke or magic. The 80x64 native figure is 48px tall in its master; cast arms may extend to at most 58px total. West-facing side/three-quarter view. Crisp pixel art, transparent background, no background/ground, no text, labels, separators, glow, blur, gradients, extra limbs or contact sheet. Return exactly the four poses in the specified row and nothing else.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-dd39924d-2769-441c-9d41-fb193fee4f70.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-cast-r2.png",
+  "sha256": "b08d1d235e0f35cc27df6f22b0c5fcbbda63840b0cdcb49fa7725cca12223eb9",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

@@ -1,0 +1,111 @@
+{
+  "status": "blocked",
+  "issues": [
+    "The forecast mark misses the matte bone/bone_dark eye-pixel requirement after three ImageGen attempts. No fourth attempt was made."
+  ],
+  "files": {
+    "scarecrow_king/west/0": {
+      "stem": "scarecrow-master-r1",
+      "index": 0
+    },
+    "scarecrow_king_walk/west/0": {
+      "stem": "scarecrow-walk-r2",
+      "index": 0
+    },
+    "scarecrow_king_walk/west/1": {
+      "stem": "scarecrow-walk-r2",
+      "index": 1
+    },
+    "scarecrow_king_walk/west/2": {
+      "stem": "scarecrow-walk-r2",
+      "index": 2
+    },
+    "scarecrow_king_walk/west/3": {
+      "stem": "scarecrow-walk-r2",
+      "index": 3
+    },
+    "scarecrow_king_cast/west/0": {
+      "stem": "scarecrow-cast-r3",
+      "index": 0
+    },
+    "scarecrow_king_cast/west/1": {
+      "stem": "scarecrow-cast-r3",
+      "index": 1
+    },
+    "scarecrow_king_cast/west/2": {
+      "stem": "scarecrow-cast-r3",
+      "index": 2
+    },
+    "scarecrow_king_cast/west/3": {
+      "stem": "scarecrow-cast-r3",
+      "index": 3
+    },
+    "scarecrow_king_attack/west/0": {
+      "stem": "scarecrow-attack-r2",
+      "index": 0
+    },
+    "scarecrow_king_attack/west/1": {
+      "stem": "scarecrow-attack-r2",
+      "index": 1
+    },
+    "scarecrow_king_attack/west/2": {
+      "stem": "scarecrow-attack-r2",
+      "index": 2
+    },
+    "scarecrow_king_death/west/0": {
+      "stem": "scarecrow-death-r3",
+      "index": 0
+    },
+    "scarecrow_king_death/west/1": {
+      "stem": "scarecrow-death-r3",
+      "index": 1
+    },
+    "scarecrow_king_death/west/2": {
+      "stem": "scarecrow-death-r3",
+      "index": 2
+    },
+    "scarecrow_king_death/west/3": {
+      "stem": "scarecrow-death-r3",
+      "index": 3
+    },
+    "scarecrow_king_death/west/4": {
+      "stem": "scarecrow-death-r3",
+      "index": 4
+    },
+    "head_scarecrow_king/none/0": {
+      "stem": "head-scarecrow-king-r3",
+      "index": 0
+    }
+  },
+  "rejected": {
+    "scarecrow-master-r2": "At the required shared 48px body height its silhouette is only about 21px wide; cannot meet the 30-44px body width without breaking the single body scale.",
+    "scarecrow-walk-r1": "Adjacent figures overlap; no measurable full-height gutters for an unambiguous crop.",
+    "scarecrow-cast-r1": "Adjacent arms bridge frames; only two empty vertical gaps for four poses.",
+    "scarecrow-cast-r2": "Adjacent arms bridge frames; only two empty vertical gaps for four poses.",
+    "scarecrow-attack-r1": "Figures touch; fewer than two measurable vertical gaps.",
+    "scarecrow-death-r1": "Silhouette grows from frame 0 to frame 1 (48px to 50px).",
+    "scarecrow-death-r2": "Figures touch; only three measurable gutters for five poses.",
+    "head-scarecrow-king-r1": "No matte bone/bone_dark eye pixels after native palette reduction.",
+    "head-scarecrow-king-r2": "The edit lightened teeth rather than both eye pixels; no bone/bone_dark eye pixels after native palette reduction."
+  },
+  "decisions": {
+    "scarecrow-master-r1": {
+      "decision": "selected as diagnostic candidate for owner review; not approved"
+    },
+    "scarecrow-walk-r2": {
+      "decision": "selected as diagnostic candidate for owner review; not approved"
+    },
+    "scarecrow-cast-r3": {
+      "decision": "selected as diagnostic candidate for owner review; not approved"
+    },
+    "scarecrow-attack-r2": {
+      "decision": "selected as diagnostic candidate for owner review; not approved"
+    },
+    "scarecrow-death-r3": {
+      "decision": "selected as diagnostic candidate for owner review; not approved"
+    },
+    "head-scarecrow-king-r3": {
+      "decision": "selected as diagnostic candidate for owner review; not approved"
+    }
+  }
+}

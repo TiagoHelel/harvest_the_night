@@ -1,0 +1,197 @@
+[
+  {
+    "recipe": {
+      "id": "scarecrow-death-r3-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-death-r3.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        382,
+        793
+      ],
+      "crop_xywh": [
+        17,
+        276,
+        352,
+        442
+      ],
+      "content_scale": 0.1085972850678733,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      12,
+      59,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      38,
+      48
+    ]
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-death-r3-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-death-r3.png",
+      "sheet_cell_xywh": [
+        382,
+        0,
+        414,
+        793
+      ],
+      "crop_xywh": [
+        396,
+        431,
+        386,
+        294
+      ],
+      "content_scale": 0.1085972850678733,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      19,
+      28,
+      61,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      42,
+      32
+    ]
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-death-r3-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-death-r3.png",
+      "sheet_cell_xywh": [
+        796,
+        0,
+        391,
+        793
+      ],
+      "crop_xywh": [
+        812,
+        547,
+        353,
+        173
+      ],
+      "content_scale": 0.1085972850678733,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      41,
+      59,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      38,
+      19
+    ]
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-death-r3-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-death-r3.png",
+      "sheet_cell_xywh": [
+        1187,
+        0,
+        444,
+        793
+      ],
+      "crop_xywh": [
+        1211,
+        601,
+        396,
+        118
+      ],
+      "content_scale": 0.1085972850678733,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      20,
+      47,
+      62,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      43,
+      13
+    ]
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-death-r3-4",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-death-r3.png",
+      "sheet_cell_xywh": [
+        1631,
+        0,
+        352,
+        793
+      ],
+      "crop_xywh": [
+        1657,
+        626,
+        308,
+        87
+      ],
+      "content_scale": 0.1085972850678733,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      24,
+      51,
+      57,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      33,
+      9
+    ]
+  }
+]

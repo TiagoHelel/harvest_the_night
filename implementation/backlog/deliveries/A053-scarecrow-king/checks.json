@@ -1,0 +1,213 @@
+{
+  "all_motion_frames_distinct": true,
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "boss_frames_grounded_and_clear": true,
+  "canvas_and_pivot_consistent": true,
+  "cast_reaches_without_exceeding_58": true,
+  "colours_allowed": true,
+  "death_heights": [
+    48,
+    32,
+    19,
+    13,
+    9
+  ],
+  "death_settles": true,
+  "dominates_ordinary_enemies": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 18,
+  "frames_found": 18,
+  "grounded_on_pivot": true,
+  "icon_body_palette_only": true,
+  "icon_bounds_ok": true,
+  "icon_eyes_bone_matte": false,
+  "importer_recipe_matches": true,
+  "master_size_ok": true,
+  "measurements": {
+    "native/head_scarecrow_king/none/01.png": {
+      "bounds": [
+        3,
+        1,
+        14,
+        15
+      ],
+      "opaque_pixels": 106
+    },
+    "native/scarecrow_king/west/01.png": {
+      "bounds": [
+        19,
+        12,
+        62,
+        60
+      ],
+      "opaque_pixels": 955
+    },
+    "native/scarecrow_king_attack/west/01.png": {
+      "bounds": [
+        17,
+        12,
+        63,
+        60
+      ],
+      "opaque_pixels": 1161
+    },
+    "native/scarecrow_king_attack/west/02.png": {
+      "bounds": [
+        8,
+        13,
+        73,
+        60
+      ],
+      "opaque_pixels": 1252
+    },
+    "native/scarecrow_king_attack/west/03.png": {
+      "bounds": [
+        18,
+        11,
+        63,
+        60
+      ],
+      "opaque_pixels": 1153
+    },
+    "native/scarecrow_king_cast/west/01.png": {
+      "bounds": [
+        15,
+        12,
+        65,
+        60
+      ],
+      "opaque_pixels": 1012
+    },
+    "native/scarecrow_king_cast/west/02.png": {
+      "bounds": [
+        17,
+        15,
+        60,
+        60
+      ],
+      "opaque_pixels": 1012
+    },
+    "native/scarecrow_king_cast/west/03.png": {
+      "bounds": [
+        21,
+        5,
+        58,
+        60
+      ],
+      "opaque_pixels": 1040
+    },
+    "native/scarecrow_king_cast/west/04.png": {
+      "bounds": [
+        22,
+        5,
+        56,
+        60
+      ],
+      "opaque_pixels": 985
+    },
+    "native/scarecrow_king_death/west/01.png": {
+      "bounds": [
+        21,
+        12,
+        59,
+        60
+      ],
+      "opaque_pixels": 1082
+    },
+    "native/scarecrow_king_death/west/02.png": {
+      "bounds": [
+        19,
+        28,
+        61,
+        60
+      ],
+      "opaque_pixels": 746
+    },
+    "native/scarecrow_king_death/west/03.png": {
+      "bounds": [
+        21,
+        41,
+        59,
+        60
+      ],
+      "opaque_pixels": 432
+    },
+    "native/scarecrow_king_death/west/04.png": {
+      "bounds": [
+        20,
+        47,
+        62,
+        60
+      ],
+      "opaque_pixels": 337
+    },
+    "native/scarecrow_king_death/west/05.png": {
+      "bounds": [
+        24,
+        51,
+        57,
+        60
+      ],
+      "opaque_pixels": 191
+    },
+    "native/scarecrow_king_walk/west/01.png": {
+      "bounds": [
+        22,
+        12,
+        62,
+        60
+      ],
+      "opaque_pixels": 979
+    },
+    "native/scarecrow_king_walk/west/02.png": {
+      "bounds": [
+        23,
+        11,
+        52,
+        60
+      ],
+      "opaque_pixels": 876
+    },
+    "native/scarecrow_king_walk/west/03.png": {
+      "bounds": [
+        23,
+        13,
+        60,
+        60
+      ],
+      "opaque_pixels": 957
+    },
+    "native/scarecrow_king_walk/west/04.png": {
+      "bounds": [
+        23,
+        11,
+        53,
+        60
+      ],
+      "opaque_pixels": 885
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "icon_eyes_bone_matte"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "silhouette_distances": {
+    "scarecrow_king/breaker": 51,
+    "scarecrow_king/giant": 43,
+    "scarecrow_king/runner": 62,
+    "scarecrow_king/tank": 45,
+    "scarecrow_king/walker": 56
+  },
+  "silhouette_distinct": true,
+  "walk_not_shifted_clones": true
+}

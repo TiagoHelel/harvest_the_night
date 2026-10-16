@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: stylized-concept. Asset type: production raster sprite source for HARVEST THE NIGHT. Candidate B for the A053 Scarecrow King master; design a fresh alternative to candidate A, still a hostile crowned scarecrow, not the porch guardian or straw decoy. Make the silhouette slimmer and taller with a compact burlap sack head, angular twig-corn crown, jagged stitched grin and dark hollow eyes; narrow stilt legs; dark violet-black coat with muted red panels and blue-black crow-feather shoulder trim; straw at the cuffs, collar and hem. Side view facing west (left) in the game's three-quarter camera. Arms hang down in a neutral standing pose. No hat, no pole, no birds, no glow. Input 1 is approved style only; input 2 is Giant scale and palette only; input 3 is farmer scale only. Canvas 80x64, pivot (40,60), complete unclipped figure, visible body target 38x48, within 30-44 wide and 44-50 tall after reduction, feet meet the pivot, room above for later cast arms up to 58 tall. Crisp hand-crafted pixel art, colored outline, restrained clusters, readable at 1x, neutral upper-left daylight. True transparent background, no ground. No text, UI, extra objects, duplicate limbs, glow, blur, gradients, speckle, 3D or contact sheet.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png"
+  ]
+}

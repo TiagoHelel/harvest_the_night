@@ -1,0 +1,210 @@
+[
+  {
+    "recipe": {
+      "id": "scarecrow-walk-r2-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-walk-r2.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        506,
+        887
+      ],
+      "crop_xywh": [
+        19,
+        212,
+        462,
+        549
+      ],
+      "content_scale": 0.08743169398907104,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        18,
+        48
+      ]
+    },
+    "native_bounds": [
+      22,
+      12,
+      62,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      40,
+      48
+    ],
+    "measured_contact_band_raw_xywh": [
+      19,
+      704,
+      462,
+      57
+    ],
+    "contact_centre_raw_x": 245.0,
+    "native_grid_registration_dx": -2,
+    "native_grid_registration_dy": 0
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-walk-r2-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-walk-r2.png",
+      "sheet_cell_xywh": [
+        506,
+        0,
+        387,
+        887
+      ],
+      "crop_xywh": [
+        533,
+        203,
+        336,
+        560
+      ],
+      "content_scale": 0.08743169398907104,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        17,
+        49
+      ]
+    },
+    "native_bounds": [
+      23,
+      11,
+      52,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      29,
+      49
+    ],
+    "measured_contact_band_raw_xywh": [
+      533,
+      706,
+      336,
+      57
+    ],
+    "contact_centre_raw_x": 727.0,
+    "native_grid_registration_dx": 0,
+    "native_grid_registration_dy": 0
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-walk-r2-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-walk-r2.png",
+      "sheet_cell_xywh": [
+        893,
+        0,
+        486,
+        887
+      ],
+      "crop_xywh": [
+        919,
+        211,
+        428,
+        550
+      ],
+      "content_scale": 0.08743169398907104,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        17,
+        48
+      ]
+    },
+    "native_bounds": [
+      23,
+      13,
+      60,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      37,
+      48
+    ],
+    "measured_contact_band_raw_xywh": [
+      919,
+      704,
+      428,
+      57
+    ],
+    "contact_centre_raw_x": 1117.5,
+    "native_grid_registration_dx": 0,
+    "native_grid_registration_dy": 0
+  },
+  {
+    "recipe": {
+      "id": "scarecrow-walk-r2-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-walk-r2.png",
+      "sheet_cell_xywh": [
+        1379,
+        0,
+        395,
+        887
+      ],
+      "crop_xywh": [
+        1413,
+        203,
+        339,
+        558
+      ],
+      "content_scale": 0.08743169398907104,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        17,
+        49
+      ]
+    },
+    "native_bounds": [
+      23,
+      11,
+      53,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      30,
+      49
+    ],
+    "measured_contact_band_raw_xywh": [
+      1413,
+      704,
+      339,
+      57
+    ],
+    "contact_centre_raw_x": 1605.0,
+    "native_grid_registration_dx": 0,
+    "native_grid_registration_dy": 0
+  }
+]

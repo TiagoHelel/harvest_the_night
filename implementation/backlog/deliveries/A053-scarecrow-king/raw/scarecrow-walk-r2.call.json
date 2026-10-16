@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use the accepted Scarecrow King master exactly as the character identity. Create a horizontal animation strip of exactly four equal cells, each 512x640 source pixels, with the 4 scarecrow figures centered one per cell. Leave a wide empty transparent gutter of at least 100 source pixels between the complete silhouettes; no limb, coat or crown may enter the next cell. Ordered poses: left-leg forward contact; passing with legs together; right-leg forward contact; passing with legs together. This is a readable slow lurching stilt-leg walk: alternate which leg leads, keep both legs visible, transfer the weight, and make the loop return naturally. The coat tails and straw sway a little. Keep the same master crown, sack grin, feather collar and body proportions in all frames. Same size and camera, feet on one shared baseline, no whole-body translation. Side/three-quarter camera facing west (left). Target each exported figure at 80x64 with a 48px standing height. Transparent background and crisp pixel art. No text, dividers, ground, shadows, glow, magic, birds, extra limbs, blur, gradients, speckles, or contact sheet. Return only the four-cell strip.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.png",
+      "sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-6038930b-81aa-49cc-8b52-635203f8d46c.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-walk-r2.png",
+  "sha256": "8701f52cf9e393c719b46502c42510d3fb14221ab4ad435afb05e352ee0073ca",
+  "revision": 2,
+  "decision": "selected as diagnostic candidate for owner review; not approved"
+}

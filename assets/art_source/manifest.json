@@ -129107,6 +129107,1484 @@
       "operation": "copy",
       "alias_of": "enemies/harvester_windup_2",
       "output_sha256": "80108decf8e5a7598406887cdacd28594310a07939ebc4136c54f9df8ebc7057"
+    },
+    {
+      "id": "enemies/scarecrow_king",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-master-r1.png",
+      "source_sha256": "f8b0584dee880c482023a8c46fa48cbec02cb1550bdab797fbb6cdb245abef1a",
+      "crop_xywh": [
+        214,
+        16,
+        973,
+        1095
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "master",
+      "content_scale": 0.043835616438356165,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.prompt.txt",
+      "prompt_sha256": "bdfff079114a1ec2daf89c69421a8c64bf88ba4429f65856a58abed66b5d22d0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-master-r1.call.json",
+          "sha256": "a32088731355a0e54cb125825cbeec23b7d24e1e305c911f371840d7c445d90f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king/west/01.png",
+          "sha256": "27ad91d9f15bef3eb95b87c5f547b69c826eba4e8c151a1670ce1c4ba7cadeaa",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        21,
+        48
+      ],
+      "output_sha256": "27ad91d9f15bef3eb95b87c5f547b69c826eba4e8c151a1670ce1c4ba7cadeaa"
+    },
+    {
+      "id": "enemies/scarecrow_king_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-walk-r2.png",
+      "source_sha256": "8701f52cf9e393c719b46502c42510d3fb14221ab4ad435afb05e352ee0073ca",
+      "crop_xywh": [
+        19,
+        212,
+        462,
+        549
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "walk",
+      "content_scale": 0.08743169398907104,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_walk",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/scarecrow_king_walk_0.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.prompt.txt",
+      "prompt_sha256": "3aa952a0ad87c69e323e55b6c2722540cda1d68343ed88823c47f3d203077619",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.call.json",
+          "sha256": "9e8fef01cf37aba98314c013fbfe866303a4daabe35e0772e61ea8952d92ed4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_walk/west/01.png",
+          "sha256": "6ec1299a08edfa29aec787dd3e248c4dd360d4be7ed367989701e183bad7abdc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        18,
+        48
+      ],
+      "output_sha256": "6ec1299a08edfa29aec787dd3e248c4dd360d4be7ed367989701e183bad7abdc"
+    },
+    {
+      "id": "enemies/scarecrow_king_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-walk-r2.png",
+      "source_sha256": "8701f52cf9e393c719b46502c42510d3fb14221ab4ad435afb05e352ee0073ca",
+      "crop_xywh": [
+        533,
+        203,
+        336,
+        560
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "walk",
+      "content_scale": 0.08743169398907104,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_walk",
+      "frame": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/scarecrow_king_walk_1.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.prompt.txt",
+      "prompt_sha256": "3aa952a0ad87c69e323e55b6c2722540cda1d68343ed88823c47f3d203077619",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.call.json",
+          "sha256": "9e8fef01cf37aba98314c013fbfe866303a4daabe35e0772e61ea8952d92ed4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_walk/west/02.png",
+          "sha256": "06cc4aae8c37785fe3b4c8ee3e4451f0f0f24408a73c4a10cbc648fb3be404b2",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        17,
+        49
+      ],
+      "output_sha256": "06cc4aae8c37785fe3b4c8ee3e4451f0f0f24408a73c4a10cbc648fb3be404b2"
+    },
+    {
+      "id": "enemies/scarecrow_king_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-walk-r2.png",
+      "source_sha256": "8701f52cf9e393c719b46502c42510d3fb14221ab4ad435afb05e352ee0073ca",
+      "crop_xywh": [
+        919,
+        211,
+        428,
+        550
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "walk",
+      "content_scale": 0.08743169398907104,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_walk",
+      "frame": 2,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/scarecrow_king_walk_2.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.prompt.txt",
+      "prompt_sha256": "3aa952a0ad87c69e323e55b6c2722540cda1d68343ed88823c47f3d203077619",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.call.json",
+          "sha256": "9e8fef01cf37aba98314c013fbfe866303a4daabe35e0772e61ea8952d92ed4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_walk/west/03.png",
+          "sha256": "6b9e5f3537bd5a3c029d83be7d8ecc1f2946b34f6a2a27771a39d7873533373a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        17,
+        48
+      ],
+      "output_sha256": "6b9e5f3537bd5a3c029d83be7d8ecc1f2946b34f6a2a27771a39d7873533373a"
+    },
+    {
+      "id": "enemies/scarecrow_king_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-walk-r2.png",
+      "source_sha256": "8701f52cf9e393c719b46502c42510d3fb14221ab4ad435afb05e352ee0073ca",
+      "crop_xywh": [
+        1413,
+        203,
+        339,
+        558
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "walk",
+      "content_scale": 0.08743169398907104,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_walk",
+      "frame": 3,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/scarecrow_king_walk_3.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.prompt.txt",
+      "prompt_sha256": "3aa952a0ad87c69e323e55b6c2722540cda1d68343ed88823c47f3d203077619",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.call.json",
+          "sha256": "9e8fef01cf37aba98314c013fbfe866303a4daabe35e0772e61ea8952d92ed4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_walk/west/04.png",
+          "sha256": "ce404747488fea41fe0f7fb4b7896a636b8bd7ed6fe1b1faa17be5dc91623938",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        17,
+        49
+      ],
+      "output_sha256": "ce404747488fea41fe0f7fb4b7896a636b8bd7ed6fe1b1faa17be5dc91623938"
+    },
+    {
+      "id": "enemies/scarecrow_king_cast_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-cast-r3.png",
+      "source_sha256": "24a6e8146c61f5982a7bd90a6b1e647bdb22bda26e4733ace91ddb2efa44030f",
+      "crop_xywh": [
+        10,
+        199,
+        564,
+        539
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "cast",
+      "content_scale": 0.08905380333951762,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_cast",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_cast_0.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.prompt.txt",
+      "prompt_sha256": "81f1326c0d0b72d3ccb70c1ced73545bde967ff38f2db34fbd8850f6bdf39e6e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.call.json",
+          "sha256": "6796bb7275ecb2ca6a49b724f091b305407313659872454be4fa0fa489d8a761",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_cast/west/01.png",
+          "sha256": "25027418b279525d01d0249d4daab73b472e640e0efb595c6048cdfb65d1bfb2",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        25,
+        48
+      ],
+      "output_sha256": "25027418b279525d01d0249d4daab73b472e640e0efb595c6048cdfb65d1bfb2"
+    },
+    {
+      "id": "enemies/scarecrow_king_cast_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-cast-r3.png",
+      "source_sha256": "24a6e8146c61f5982a7bd90a6b1e647bdb22bda26e4733ace91ddb2efa44030f",
+      "crop_xywh": [
+        581,
+        227,
+        487,
+        511
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "cast",
+      "content_scale": 0.08905380333951762,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_cast",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_cast_1.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.prompt.txt",
+      "prompt_sha256": "81f1326c0d0b72d3ccb70c1ced73545bde967ff38f2db34fbd8850f6bdf39e6e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.call.json",
+          "sha256": "6796bb7275ecb2ca6a49b724f091b305407313659872454be4fa0fa489d8a761",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_cast/west/02.png",
+          "sha256": "fbd362a159da95e3a0f1fdf6656aefe71efb5d1aaab1a0b72b3b42dfa2018ad6",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        23,
+        46
+      ],
+      "output_sha256": "fbd362a159da95e3a0f1fdf6656aefe71efb5d1aaab1a0b72b3b42dfa2018ad6"
+    },
+    {
+      "id": "enemies/scarecrow_king_cast_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-cast-r3.png",
+      "source_sha256": "24a6e8146c61f5982a7bd90a6b1e647bdb22bda26e4733ace91ddb2efa44030f",
+      "crop_xywh": [
+        1101,
+        116,
+        416,
+        622
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "cast",
+      "content_scale": 0.08905380333951762,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_cast",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_cast_2.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.prompt.txt",
+      "prompt_sha256": "81f1326c0d0b72d3ccb70c1ced73545bde967ff38f2db34fbd8850f6bdf39e6e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.call.json",
+          "sha256": "6796bb7275ecb2ca6a49b724f091b305407313659872454be4fa0fa489d8a761",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_cast/west/03.png",
+          "sha256": "620a65c2218788dfd3a72ef95bc006ad7dec745006eccf3ba1a6fa32feeb85f0",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        19,
+        55
+      ],
+      "output_sha256": "620a65c2218788dfd3a72ef95bc006ad7dec745006eccf3ba1a6fa32feeb85f0"
+    },
+    {
+      "id": "enemies/scarecrow_king_cast_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-cast-r3.png",
+      "source_sha256": "24a6e8146c61f5982a7bd90a6b1e647bdb22bda26e4733ace91ddb2efa44030f",
+      "crop_xywh": [
+        1596,
+        115,
+        383,
+        623
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "cast",
+      "content_scale": 0.08905380333951762,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_cast",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_cast_3.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.prompt.txt",
+      "prompt_sha256": "81f1326c0d0b72d3ccb70c1ced73545bde967ff38f2db34fbd8850f6bdf39e6e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.call.json",
+          "sha256": "6796bb7275ecb2ca6a49b724f091b305407313659872454be4fa0fa489d8a761",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_cast/west/04.png",
+          "sha256": "735c808f076dfeb32aab9de110dd7665dff937361fc5b8658f2be982c61be3ca",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        18,
+        55
+      ],
+      "output_sha256": "735c808f076dfeb32aab9de110dd7665dff937361fc5b8658f2be982c61be3ca"
+    },
+    {
+      "id": "enemies/scarecrow_king_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-attack-r2.png",
+      "source_sha256": "49aaf918f5092b26b6116df184531c572871c874104d90c086248d0bcb30fc85",
+      "crop_xywh": [
+        11,
+        160,
+        536,
+        559
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "attack",
+      "content_scale": 0.08586762075134168,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_attack_0.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.prompt.txt",
+      "prompt_sha256": "aadcc6fedc3387ae9d255d8a94d69b17f28ad5c0d8bac821c493a3b04c584705",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.call.json",
+          "sha256": "a5c0ced44a81decb6f13576bb90ca11431081212aed5aea165b3e58e4c902003",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_attack/west/01.png",
+          "sha256": "ce703a790117ce181ea62e503a274ffaac035387390b409c91a541ccd1601ec7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        23,
+        48
+      ],
+      "output_sha256": "ce703a790117ce181ea62e503a274ffaac035387390b409c91a541ccd1601ec7"
+    },
+    {
+      "id": "enemies/scarecrow_king_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-attack-r2.png",
+      "source_sha256": "49aaf918f5092b26b6116df184531c572871c874104d90c086248d0bcb30fc85",
+      "crop_xywh": [
+        593,
+        158,
+        753,
+        562
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "attack",
+      "content_scale": 0.08586762075134168,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_attack_1.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.prompt.txt",
+      "prompt_sha256": "aadcc6fedc3387ae9d255d8a94d69b17f28ad5c0d8bac821c493a3b04c584705",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.call.json",
+          "sha256": "a5c0ced44a81decb6f13576bb90ca11431081212aed5aea165b3e58e4c902003",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_attack/west/02.png",
+          "sha256": "055c372119ec14c0c05ae98121c6fefc9035886d817749a1491e66fc1e8d72bf",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        32,
+        48
+      ],
+      "output_sha256": "055c372119ec14c0c05ae98121c6fefc9035886d817749a1491e66fc1e8d72bf"
+    },
+    {
+      "id": "enemies/scarecrow_king_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-attack-r2.png",
+      "source_sha256": "49aaf918f5092b26b6116df184531c572871c874104d90c086248d0bcb30fc85",
+      "crop_xywh": [
+        1455,
+        145,
+        527,
+        580
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "attack",
+      "content_scale": 0.08586762075134168,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_attack_2.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.prompt.txt",
+      "prompt_sha256": "aadcc6fedc3387ae9d255d8a94d69b17f28ad5c0d8bac821c493a3b04c584705",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.call.json",
+          "sha256": "a5c0ced44a81decb6f13576bb90ca11431081212aed5aea165b3e58e4c902003",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_attack/west/03.png",
+          "sha256": "fb56939061434c7e1a98c86f4077f5f0886a6dd80300546c5afdd1083a81b4bc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        22,
+        50
+      ],
+      "output_sha256": "fb56939061434c7e1a98c86f4077f5f0886a6dd80300546c5afdd1083a81b4bc"
+    },
+    {
+      "id": "enemies/scarecrow_king_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-death-r3.png",
+      "source_sha256": "5789ac32f142fdcdd2e45eafd76238f1590ddb3f8897f96685bcc206ea49436b",
+      "crop_xywh": [
+        17,
+        276,
+        352,
+        442
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "death",
+      "content_scale": 0.1085972850678733,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_death",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.prompt.txt",
+      "prompt_sha256": "1e29e16a309410e6568e0f25775e60c2387c0467d86da76cd894e365d66f5990",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.call.json",
+          "sha256": "0920dbfde6382dda9673fdc8d6016d7fe708f0afe8c5ebdf6b22225702c885d3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_death/west/01.png",
+          "sha256": "e35d11ca051b4ce31e2075104e98787e7da8170aa9e72c8edb468029a7e4abbe",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        19,
+        48
+      ],
+      "output_sha256": "e35d11ca051b4ce31e2075104e98787e7da8170aa9e72c8edb468029a7e4abbe"
+    },
+    {
+      "id": "enemies/scarecrow_king_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-death-r3.png",
+      "source_sha256": "5789ac32f142fdcdd2e45eafd76238f1590ddb3f8897f96685bcc206ea49436b",
+      "crop_xywh": [
+        396,
+        431,
+        386,
+        294
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "death",
+      "content_scale": 0.1085972850678733,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_death",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.prompt.txt",
+      "prompt_sha256": "1e29e16a309410e6568e0f25775e60c2387c0467d86da76cd894e365d66f5990",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.call.json",
+          "sha256": "0920dbfde6382dda9673fdc8d6016d7fe708f0afe8c5ebdf6b22225702c885d3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_death/west/02.png",
+          "sha256": "4041f9c769cd39a53afa0dbfdc3f4e0d50d49e8cc3f3c52e4a8565e8979b7ea7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        21,
+        32
+      ],
+      "output_sha256": "4041f9c769cd39a53afa0dbfdc3f4e0d50d49e8cc3f3c52e4a8565e8979b7ea7"
+    },
+    {
+      "id": "enemies/scarecrow_king_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-death-r3.png",
+      "source_sha256": "5789ac32f142fdcdd2e45eafd76238f1590ddb3f8897f96685bcc206ea49436b",
+      "crop_xywh": [
+        812,
+        547,
+        353,
+        173
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "death",
+      "content_scale": 0.1085972850678733,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_death",
+      "frame": 2,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.prompt.txt",
+      "prompt_sha256": "1e29e16a309410e6568e0f25775e60c2387c0467d86da76cd894e365d66f5990",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.call.json",
+          "sha256": "0920dbfde6382dda9673fdc8d6016d7fe708f0afe8c5ebdf6b22225702c885d3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_death/west/03.png",
+          "sha256": "e1ebdc8fe690a1de9e7a62502f91fe59fb329e89984293e26d935e118ed6dbc3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        19,
+        19
+      ],
+      "output_sha256": "e1ebdc8fe690a1de9e7a62502f91fe59fb329e89984293e26d935e118ed6dbc3"
+    },
+    {
+      "id": "enemies/scarecrow_king_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-death-r3.png",
+      "source_sha256": "5789ac32f142fdcdd2e45eafd76238f1590ddb3f8897f96685bcc206ea49436b",
+      "crop_xywh": [
+        1211,
+        601,
+        396,
+        118
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "death",
+      "content_scale": 0.1085972850678733,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_death",
+      "frame": 3,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_death_3.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.prompt.txt",
+      "prompt_sha256": "1e29e16a309410e6568e0f25775e60c2387c0467d86da76cd894e365d66f5990",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.call.json",
+          "sha256": "0920dbfde6382dda9673fdc8d6016d7fe708f0afe8c5ebdf6b22225702c885d3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_death/west/04.png",
+          "sha256": "935647bc426d25dfa523568e62479b2a38a040617a194dcb59a719c238c39400",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        21,
+        13
+      ],
+      "output_sha256": "935647bc426d25dfa523568e62479b2a38a040617a194dcb59a719c238c39400"
+    },
+    {
+      "id": "enemies/scarecrow_king_death_4",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/scarecrow_king/scarecrow-death-r3.png",
+      "source_sha256": "5789ac32f142fdcdd2e45eafd76238f1590ddb3f8897f96685bcc206ea49436b",
+      "crop_xywh": [
+        1657,
+        626,
+        308,
+        87
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "death",
+      "content_scale": 0.1085972850678733,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_death",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_death_4.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.prompt.txt",
+      "prompt_sha256": "1e29e16a309410e6568e0f25775e60c2387c0467d86da76cd894e365d66f5990",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.call.json",
+          "sha256": "0920dbfde6382dda9673fdc8d6016d7fe708f0afe8c5ebdf6b22225702c885d3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_death/west/05.png",
+          "sha256": "4e262649280f4b8ab279e8312fdfcd3f0091f83bf83de753b64d214ad1757a06",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        16,
+        9
+      ],
+      "output_sha256": "4e262649280f4b8ab279e8312fdfcd3f0091f83bf83de753b64d214ad1757a06"
+    },
+    {
+      "id": "ui/head_scarecrow_king",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/head-scarecrow-king-r3.png",
+      "source_sha256": "f39ece425125a1e3428638cce6a75fbab206512f7b144efc8afe00bf43d33b51",
+      "crop_xywh": [
+        263,
+        113,
+        807,
+        1009
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.013875123885034688,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "water_dark",
+        "water",
+        "stone_dark",
+        "stone",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "flame_hot",
+        "bone",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "cloth_dark",
+        "cloth",
+        "cloth_light",
+        "night",
+        "night_light",
+        "blood"
+      ],
+      "animation": "ui/head_scarecrow_king",
+      "frame": 0,
+      "seconds": 1.0,
+      "loop": false,
+      "output": "sprites/ui/head_scarecrow_king.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r3.prompt.txt",
+      "prompt_sha256": "19c9c822a6187026d1e32df52ab128662f668f10df458538fa960ce6dd285e50",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r3.call.json",
+          "sha256": "8b606e1e50fae78164ec88ab2a96184c36b9ce272a001cf9cafbdc0d35854aef",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/head_scarecrow_king/none/01.png",
+          "sha256": "48093ed657a2488faee87ec983585d28cd48757457226dce109ed5635e6f132e",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "approval": "A053 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0267",
+      "content_anchor_xy": [
+        5,
+        7
+      ],
+      "output_sha256": "48093ed657a2488faee87ec983585d28cd48757457226dce109ed5635e6f132e"
+    },
+    {
+      "id": "enemies/scarecrow_king_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.prompt.txt",
+      "prompt_sha256": "3aa952a0ad87c69e323e55b6c2722540cda1d68343ed88823c47f3d203077619",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-walk-r2.call.json",
+          "sha256": "9e8fef01cf37aba98314c013fbfe866303a4daabe35e0772e61ea8952d92ed4c",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_walk/west/03.png",
+          "sha256": "6b9e5f3537bd5a3c029d83be7d8ecc1f2946b34f6a2a27771a39d7873533373a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/scarecrow_king",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/scarecrow_king_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/scarecrow_king_walk_2",
+      "output_sha256": "6b9e5f3537bd5a3c029d83be7d8ecc1f2946b34f6a2a27771a39d7873533373a"
+    },
+    {
+      "id": "enemies/scarecrow_king_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_attack.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.prompt.txt",
+      "prompt_sha256": "aadcc6fedc3387ae9d255d8a94d69b17f28ad5c0d8bac821c493a3b04c584705",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-attack-r2.call.json",
+          "sha256": "a5c0ced44a81decb6f13576bb90ca11431081212aed5aea165b3e58e4c902003",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_attack/west/02.png",
+          "sha256": "055c372119ec14c0c05ae98121c6fefc9035886d817749a1491e66fc1e8d72bf",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/scarecrow_king",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/scarecrow_king_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/scarecrow_king_attack_1",
+      "output_sha256": "055c372119ec14c0c05ae98121c6fefc9035886d817749a1491e66fc1e8d72bf"
+    },
+    {
+      "id": "enemies/scarecrow_king_death",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_compat_death",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_death.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.prompt.txt",
+      "prompt_sha256": "1e29e16a309410e6568e0f25775e60c2387c0467d86da76cd894e365d66f5990",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-death-r3.call.json",
+          "sha256": "0920dbfde6382dda9673fdc8d6016d7fe708f0afe8c5ebdf6b22225702c885d3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_death/west/05.png",
+          "sha256": "4e262649280f4b8ab279e8312fdfcd3f0091f83bf83de753b64d214ad1757a06",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/scarecrow_king",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/scarecrow_king_death_4",
+      "operation": "copy",
+      "alias_of": "enemies/scarecrow_king_death_4",
+      "output_sha256": "4e262649280f4b8ab279e8312fdfcd3f0091f83bf83de753b64d214ad1757a06"
+    },
+    {
+      "id": "enemies/scarecrow_king_telegraph",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/scarecrow_king_compat_telegraph",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/scarecrow_king_telegraph.png",
+      "prompt": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.prompt.txt",
+      "prompt_sha256": "81f1326c0d0b72d3ccb70c1ced73545bde967ff38f2db34fbd8850f6bdf39e6e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/raw/scarecrow-cast-r3.call.json",
+          "sha256": "6796bb7275ecb2ca6a49b724f091b305407313659872454be4fa0fa489d8a761",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/native/scarecrow_king_cast/west/04.png",
+          "sha256": "735c808f076dfeb32aab9de110dd7665dff937361fc5b8658f2be982c61be3ca",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/contract.json",
+          "sha256": "d626320664def4a5fde8ac4b1349965699d6473638df97505900ee7c2ac02b7e",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A053-scarecrow-king/APPROVAL.json",
+          "sha256": "ce8ebd43bbf3787d8c97a3dcf8332535fc4194ba189a3bdfa499555e87177968",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A053",
+      "integration_task": "0267",
+      "revision": 1,
+      "enemy_family": "scarecrow_king",
+      "enemy_motion": "cast",
+      "enemy_master_id": "enemies/scarecrow_king",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/scarecrow_king_cast_3",
+      "operation": "copy",
+      "alias_of": "enemies/scarecrow_king_cast_3",
+      "output_sha256": "735c808f076dfeb32aab9de110dd7665dff937361fc5b8658f2be982c61be3ca"
     }
   ]
 }

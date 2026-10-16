@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Edit this exact existing 16x16 forecast icon and preserve its compact silhouette, crop, twig-corn crown, burlap face, stitched jagged grin, feather collar, rust/gold/blue-black palette, and all shapes. Change only the two small eye pixels inside the burlap face: both eyes must use matte bone cream or bone-dark colors from the game's palette, clearly visible against the sack. Do not leave the eye holes black, dark purple, yellow, orange or red. The eyes are small dead markings, not lights; no emission. Keep icon framing exactly: complete bust, flat opaque baseline row14, centered x8, max14 wide or tall, clear row15 and one-pixel left/right/top margins. Crisp nearest-neighbor pixel art, hard edges, true transparent background. Do not add full body, shoulders larger than before, any new objects, text, frame, background, glow, blur, gradients, 3D or contact sheet. Return only the edited icon.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A053-scarecrow-king/raw/head-scarecrow-king-r1.png",
+      "sha256": "ceeb248e91b0971e84657fcfaf6edd4b9801ec6bc77eb56fda085de31b4cb949",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-1521bcb2-0eb8-43a4-bec7-2885b6bbd685.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\head-scarecrow-king-r2.png",
+  "sha256": "9f4adf6fa1401f059ad12e3619b631c9bbecb4c5f02eaaea65a860c9f031d419",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

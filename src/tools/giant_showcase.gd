@@ -5,12 +5,13 @@ extends "res://src/tools/enemy_showcase.gd"
 ## **Any boss drawn in the Giant's pose names** (task 0246): `--boss=<family>`
 ## picks it, `--giant` and no flag the Giant, whose pictures and report are as
 ## before. The leaves 0266-0268 run it for theirs: a boss's blow is its own
-## (`EnemyMotion.strike_of`, the Harvester's crush) and its wind-up its own
-## `telegraph_ticks`.
+## (`EnemyMotion.strike_of`, the Harvester's crush, the King's attack), its
+## wind-up its own `telegraph_ticks` and its own frames (`windup_of`, the
+## King's cast), and a boss that casts stands through its cast (task 0267).
 
 ## The boss family shown, and each one's ground pivot.
 var _family: StringName = &"giant"
-const PIVOTS := {&"giant": Vector2(40, 60), &"harvester": Vector2(40, 60)}
+const PIVOTS := {&"giant": Vector2(40, 60), &"harvester": Vector2(40, 60), &"scarecrow_king": Vector2(40, 60)}
 
 
 func _run() -> void:
@@ -27,6 +28,7 @@ func _run() -> void:
 	await _boss_attack(false)
 	await _boss_attack(true)
 	await _house_warning()
+	await _boss_cast()
 	await _death_playback(false)
 	await _death_playback(true)
 	await _pool_guards()
@@ -49,7 +51,18 @@ func _strike() -> String:
 	return EnemyMotion.strike_of(_family)
 
 
-## The boss's pose name: `walk`, `windup`, its blow and a frame.
+## The boss's wind-up: the Giant's, or the cast of a boss drawn with none -
+## the King's (task 0267).
+func _windup() -> String:
+	return EnemyMotion.windup_of(_family)
+
+
+## How many frames a motion has: a cast four, a wind-up or a blow three.
+func _frames(motion: String) -> int:
+	return 4 if motion == "cast" else 3
+
+
+## The boss's pose name: `walk`, its wind-up, its blow and a frame.
 func _pose_name(motion: String, frame: int) -> StringName:
 	return StringName("%s_%s_%d" % [_family, motion, frame])
 
@@ -109,15 +122,16 @@ func _boss_attack(right: bool) -> void:
 	var poses: Dictionary = {}
 	var hit_tick := -1
 	var last_hp := int(Farm.occupant(_state,cell+toward).get("hp",0))
-	for t in 60:
+	# The King's cast stands two seconds before its blow (task 0267).
+	for t in maxi(60, int(GameData.ENEMIES[_family]["telegraph_ticks"]) + 15):
 		_step()
 		var one := Entities.get_one(_state,id)
 		var pose := _world._pose_of(one)
-		if str(pose).begins_with(_prefix("windup")) or str(pose).begins_with(_prefix(_strike())):
+		if str(pose).begins_with(_prefix(_windup())) or str(pose).begins_with(_prefix(_strike())):
 			if not poses.has(pose):
 				await _settle()
 				await _shoot("attack_%d_%s" % [int(right),str(pose)], "Actual core target/wait/hit / body and ring agree")
-				if str(pose).begins_with(_prefix("windup")):
+				if str(pose).begins_with(_prefix(_windup())):
 					expect(Enemies.winding_at(_state,id)==cell+toward,"Raised arm targets the existing core ring cell")
 					expect(_world._enemy_motion.faces_right(one)==right,"Wind-up faces its observed target")
 					await _ring_pixels()
@@ -130,9 +144,9 @@ func _boss_attack(right: bool) -> void:
 			expect(hp==120,"Telegraph does not invent early wall damage")
 		last_hp = hp
 	expect(hit_tick>=int(GameData.ENEMIES[_family]["telegraph_ticks"]),"Giant's first strike preserves the existing warning")
-	for prefix in ["windup",_strike()]:
-		for frame in 3:
-			expect(poses.has(_pose_name(prefix,frame)),"All three actual "+prefix+" poses played")
+	for prefix in [_windup(),_strike()]:
+		for frame in _frames(prefix):
+			expect(poses.has(_pose_name(prefix,frame)),"All actual "+prefix+" poses played")
 	# A loaded target is read directly; a stale distant target is not a tell.
 	one_saved_guard(id,cell+toward)
 
@@ -157,17 +171,48 @@ func _house_warning() -> void:
 		if one.is_empty():
 			continue
 		var pose := _world._pose_of(one)
-		if str(pose).begins_with(_prefix("windup")) and not seen.has(pose):
+		if str(pose).begins_with(_prefix(_windup())) and not seen.has(pose):
 			seen[pose] = true
 			await _settle()
 			await _shoot("house_"+str(pose),"Existing house wind-up / visible ring above roof and boss")
 			await _ring_pixels()
-	expect(seen.size()==3,"House wind-up preserves all three real warning phases")
+	expect(seen.size()==_frames(_windup()),"House wind-up preserves all its real warning phases")
 	expect(not Entities.alive(_state,id) and int(_state["house_hp"])==GameData.HOUSE_HP-int(GameData.ENEMIES[_family]["damage"]),"The actual house strike consumes the Giant and deals the original forty damage")
 	expect(_world._enemy_deaths._cues.size()==1,"A spent Giant is removed and gets one bounded visual death")
 	_world._refresh_actors()
 	_world._refresh_deaths(0.0)
 	await _shoot("house_spent_death","House damage uses core rules; spent Giant plays one death at its final contact")
+
+
+## **A cast for the flock or the freeze** (task 0267): a boss drawn with a
+## cast, its clock run out on open ground, stands through its own
+## `telegraph_ticks` on its four cast frames in order, the last held to the
+## end - the rules' own.
+func _boss_cast() -> void:
+	if _windup() != "cast":
+		return
+	_state = _blank(true)
+	var id := Entities.spawn(_state,_family,Vector2i(14,9))
+	var one := Entities.get_one(_state,id)
+	one["summon_in"] = 1
+	one["freeze_in"] = 1
+	await _settle()
+	var order: Array = []
+	var cast_ticks := 0
+	for t in int(GameData.ENEMIES[_family]["telegraph_ticks"])+2:
+		_step()
+		one = Entities.get_one(_state,id)
+		if one.is_empty() or not (one.has("casting") or one.has("freezing")):
+			continue
+		cast_ticks += 1
+		var pose := _world._pose_of(one)
+		if order.is_empty() or order[-1] != pose:
+			order.append(pose)
+			await _settle()
+			await _shoot("cast_"+str(pose),"Actual core cast / four frames, the last held")
+	expect(order==[_pose_name("cast",0),_pose_name("cast",1),_pose_name("cast",2),_pose_name("cast",3)],
+		"The cast plays its four frames in order and holds the last: "+str(order))
+	expect(cast_ticks>=int(GameData.ENEMIES[_family]["telegraph_ticks"])-1,"The cast stands its telegraph: "+str(cast_ticks))
 
 
 func _ring_pixels() -> void:

@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept. Asset type: production raster sprite source for HARVEST THE NIGHT. Candidate B for the A053 Scarecrow King master; design a fresh alternative to candidate A, still a hostile crowned scarecrow, not the porch guardian or straw decoy. Make the silhouette slimmer and taller with a compact burlap sack head, angular twig-corn crown, jagged stitched grin and dark hollow eyes; narrow stilt legs; dark violet-black coat with muted red panels and blue-black crow-feather shoulder trim; straw at the cuffs, collar and hem. Side view facing west (left) in the game's three-quarter camera. Arms hang down in a neutral standing pose. No hat, no pole, no birds, no glow. Input 1 is approved style only; input 2 is Giant scale and palette only; input 3 is farmer scale only. Canvas 80x64, pivot (40,60), complete unclipped figure, visible body target 38x48, within 30-44 wide and 44-50 tall after reduction, feet meet the pivot, room above for later cast arms up to 58 tall. Crisp hand-crafted pixel art, colored outline, restrained clusters, readable at 1x, neutral upper-left daylight. True transparent background, no ground. No text, UI, extra objects, duplicate limbs, glow, blur, gradients, speckle, 3D or contact sheet.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+      "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-3ea65166-8711-4bbd-a0d0-bdde55062060.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A053-scarecrow-king\\raw\\scarecrow-master-r2.png",
+  "sha256": "df6eb465e06a6647bc654641ab358902b9a42cc62983048bda1d09d60b593086",
+  "revision": 2,
+  "decision": "pending native-size inspection"
+}

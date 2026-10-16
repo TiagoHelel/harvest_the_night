@@ -9,7 +9,9 @@ extends RefCounted
 ## its art has them (`posed_boss`). A boss with none drawn yet falls back to
 ## the ordinary path, as any family this does not track; the Giant draws
 ## exactly as before. A052's Harvester since task 0266: its blow the crush,
-## and through a charge the rules' rear and run, as 0253 posed them.
+## and through a charge the rules' rear and run, as 0253 posed them. A053's
+## Scarecrow King since task 0267: its cast the wind-up before a blow, its
+## attack the blow, and while it casts for its flock the rules' cast.
 ## The rat since task 0261 (A047): its scurry by the distance it runs, its
 ## bite off the rules' own hit, its death played on.
 ## The digger since task 0263 (A049): its burrow on the tick the rules put it
@@ -24,8 +26,10 @@ var _before: Dictionary = {}
 var _actors: Dictionary = {}
 ## Whether each boss kind has the Giant's poses drawn, asked once.
 static var _posed: Dictionary = {}
-## Each posed boss's blow, `slam` or `crush`, asked once.
+## Each posed boss's blow, `slam`, `crush` or `attack`, asked once.
 static var _strikes: Dictionary = {}
+## Each posed boss's wind-up, `windup` or `cast`, asked once.
+static var _windups: Dictionary = {}
 
 
 ## **Whether this follows a kind's authored poses**: the four ordinary
@@ -53,12 +57,23 @@ static var TRACKED: Array[StringName]:
 
 
 ## **A boss drawn in the Giant's pose names** (task 0246): `is_boss`, and its
-## first wind-up frame on disk.
+## first wind-up frame on disk - or, since task 0267, its first cast frame,
+## the wind-up of a boss that casts (`windup_of`).
 static func posed_boss(kind: StringName) -> bool:
 	if not _posed.has(kind):
-		_posed[kind] = Combat.is_boss(kind) \
-			and ResourceLoader.exists(WorldView.ENEMY_DIR + "%s_windup_0.png" % kind)
+		_posed[kind] = Combat.is_boss(kind) and (ResourceLoader.exists(WorldView.ENEMY_DIR + "%s_windup_0.png" % kind)
+			or ResourceLoader.exists(WorldView.ENEMY_DIR + "%s_cast_0.png" % kind))
 	return bool(_posed[kind])
+
+
+## **A posed boss's wind-up** (task 0267): the Giant's `windup`, three frames
+## spread over its `telegraph_ticks`; or the `cast` of a boss drawn with no
+## wind-up - A053's King - its four frames on their own seconds and the last
+## held, as its cast for the flock plays.
+static func windup_of(kind: StringName) -> String:
+	if not _windups.has(kind):
+		_windups[kind] = "windup" if PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_windup_0.png" % kind) else "cast"
+	return String(_windups[kind])
 
 
 func clear() -> void:
@@ -194,6 +209,10 @@ func _boss_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> StringN
 	# run's end, its rear and its charge are the rules' own.
 	if one.has("charge_dir") and PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_charge_0.png" % kind):
 		return WorldView.posed_off_the_rules(state, one)
+	# **A caster casting** (task 0267, A053's King): its cast for the flock is
+	# the rules' own, as 0254 posed it.
+	if one.has("casting") or one.has("freezing"):
+		return WorldView.posed_off_the_rules(state, one)
 	var current: bool = not memo.is_empty() and int(memo["tick"]) == int(state["tick"]) and memo["pos"] == Vector2i(int(one["pos"][0]), int(one["pos"][1]))
 	var age := int(state["tick"]) - int(memo.get("strike", -1000))
 	if current and age >= 0 and age < SLAM_TICKS:
@@ -207,22 +226,32 @@ func _boss_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> StringN
 		if Grid.manhattan(here, target) <= 1 and not on.is_empty() and (on.get("id", &"") == &"house" or int(on.get("hp", 0)) > 0):
 			var full := maxi(int((GameData.ENEMIES[kind] as Dictionary).get("telegraph_ticks", 0)), 1)
 			var elapsed := maxi(full - int(one.get("chew_wait", 0)), 0)
+			if windup_of(kind) == "cast":
+				var each := maxi(roundi(float(PlaceholderArt.frame(WorldView.ENEMY_DIR + "%s_cast_0.png" % kind)
+					.get("seconds", 0.1)) * float(GameData.TICK_HZ)), 1)
+				return StringName("%s_cast_%d" % [kind, mini(elapsed / each, 3)])
 			return StringName("%s_windup_%d" % [kind, mini(elapsed * 3 / full, 2)])
 	return kind
 
 
-## **A posed boss's blow** (task 0266): the Giant's slam, or the crush of a
-## boss drawn with no slam - A052's Harvester.
+## **A posed boss's blow** (task 0266): the Giant's slam, the crush of a boss
+## drawn with no slam - A052's Harvester - and since task 0267 the attack of
+## one drawn with neither, A053's King.
 static func strike_of(kind: StringName) -> String:
 	if not _strikes.has(kind):
-		_strikes[kind] = "slam" if PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_slam_0.png" % kind) else "crush"
+		var blow := "attack"
+		for motion in ["slam", "crush"]:
+			if blow == "attack" and PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_%s_0.png" % [kind, motion]):
+				blow = motion
+		_strikes[kind] = blow
 	return String(_strikes[kind])
 
 
 ## Whether a body's pose is a boss's wind-up - the moment the ring under its
-## target shows (task 0246: any posed boss's, not the Giant's by name).
+## target shows (task 0246: any posed boss's, not the Giant's by name). A cast
+## is one since task 0267: the King's before a blow.
 static func is_windup(pose: StringName) -> bool:
-	return String(pose).contains("_windup_")
+	return String(pose).contains("_windup_") or String(pose).contains("_cast_")
 
 
 func faces_right(one: Dictionary) -> bool:
