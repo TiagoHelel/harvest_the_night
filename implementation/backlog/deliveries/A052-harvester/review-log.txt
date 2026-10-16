@@ -1,0 +1,11 @@
+
+2026-10-14 / Measured native export
+Wind-up anchors are registered to measured wheelhub centres; contact-only anchoring would incorrectlyplace liftedwheel poses. Smoke is metadata only.
+Charge r3 is an edit of roll r2 at matching source dimensions and inherits its exactcontent_scale; do not fit each newheaderangle independently.
+Death0 scale is measured from rearstack/ground, excluding airbornepanel. No per-frame resize. Final owner must judge machineproportions and rotation/charge/readability at1x in assembledscene.
+No art approval inferred. 25 of 25 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+25/25 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: head_lamps_bone. Complete delivery released for Claude integration.

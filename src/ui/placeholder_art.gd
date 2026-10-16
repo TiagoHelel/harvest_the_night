@@ -152,9 +152,8 @@ const HEAD_ICON := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 8), "draw_s
 const GROUND_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 16), "draw_scale": 1.0}
 const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "draw_scale": 1.0}
 
-## A052's Harvester (task 0253): the Giant's 80x64 standing on (40,60), drawn
-## at 1.0 - the Giant it stands in as gone to rust.
-const HARVESTER := {"canvas": Vector2i(80, 64), "pivot": Vector2i(40, 60), "draw_scale": 1.0}
+## The Giant gone to rust - A052's Harvester's stand-in until task 0266, and
+## still A056's Harvester trophy's.
 const HARVESTER_TINT := Color(1.5, 0.82, 0.55)
 
 ## A053's Scarecrow King (task 0254): the Giant's 80x64 standing on (40,60),
@@ -188,17 +187,6 @@ const ORNAMENT := {"canvas": Vector2i(64, 12), "pivot": Vector2i(32, 6), "draw_s
 ## `bare` is a static file with no frame number (`hud_bait.png`). One line
 ## each, like `POSES`.
 const ART := {
-	# A052's Harvester (task 0253): the Giant gone to rust, until 0266 - its
-	# roll the Giant's walk, its wind-up the Giant's, its charge the walk
-	# again, its crush the slam, its fall the Giant's; and its forecast mark
-	# the Giant's head.
-	&"harvester": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 1, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant", "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER, "bare": true},
-	&"harvester_walk": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.14, "loop": true, "stand_in": &"enemies/giant_walk", "stand_in_frames": 4, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
-	&"harvester_windup": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_windup", "stand_in_frames": 3, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
-	&"harvester_charge": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 4, "seconds": 0.1, "loop": true, "stand_in": &"enemies/giant_walk", "stand_in_frames": 4, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
-	&"harvester_crush": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 3, "seconds": 0.1, "loop": false, "stand_in": &"enemies/giant_slam", "stand_in_frames": 3, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
-	&"harvester_death": {"pack": "A052", "dir": "res://sprites/enemies/", "frames": 5, "seconds": 0.12, "loop": false, "stand_in": &"enemies/giant_death", "stand_in_frames": 5, "tint": HARVESTER_TINT, "geometry": HARVESTER, "final": HARVESTER},
-	&"head_harvester": {"pack": "A052", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"ui/head_giant", "tint": HARVESTER_TINT, "geometry": HEAD_ICON, "final": HEAD_ICON, "bare": true},
 	# A053's Scarecrow King (task 0254): the Giant gone to dark straw, until
 	# 0267 - its walk the Giant's, its cast the Giant's wind-up (four frames
 	# on three: the last held), its attack the slam, its fall the Giant's;

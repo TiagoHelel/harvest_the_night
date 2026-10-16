@@ -10,6 +10,7 @@ PACK_EFFECTS=[('bee_swarm','A038',3,[8,8],[4,4],'center',True,0.1),
               ('zap','A042',3,[12,12],[6,6],'center',False,0.065),
               ('spit','A046',2,[8,8],[4,4],'center',True,0.1),
               ('spit_splat','A046',3,[12,12],[6,6],'center',False,0.08),
+              ('wreck_debris','A052',4,[24,20],[12,18],'base',False,0.08),
               ('ice_shatter','A050',4,[24,24],[12,12],'center',False,0.08)]
 
 

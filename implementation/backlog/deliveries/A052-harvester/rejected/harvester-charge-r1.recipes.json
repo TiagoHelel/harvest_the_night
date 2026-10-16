@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-charge-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        495,
+        793
+      ],
+      "crop_xywh": [
+        14,
+        228,
+        470,
+        390
+      ],
+      "content_scale": 0.1094871794871795,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      15,
+      17,
+      66,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      51,
+      43
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-charge-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r1.png",
+      "sheet_cell_xywh": [
+        495,
+        0,
+        492,
+        793
+      ],
+      "crop_xywh": [
+        508,
+        223,
+        470,
+        387
+      ],
+      "content_scale": 0.1094871794871795,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      15,
+      18,
+      66,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      51,
+      42
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-charge-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r1.png",
+      "sheet_cell_xywh": [
+        987,
+        0,
+        499,
+        793
+      ],
+      "crop_xywh": [
+        998,
+        225,
+        476,
+        393
+      ],
+      "content_scale": 0.1094871794871795,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      14,
+      17,
+      66,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      52,
+      43
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-charge-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r1.png",
+      "sheet_cell_xywh": [
+        1486,
+        0,
+        497,
+        793
+      ],
+      "crop_xywh": [
+        1499,
+        228,
+        470,
+        382
+      ],
+      "content_scale": 0.1094871794871795,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      15,
+      18,
+      66,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      51,
+      42
+    ]
+  }
+]

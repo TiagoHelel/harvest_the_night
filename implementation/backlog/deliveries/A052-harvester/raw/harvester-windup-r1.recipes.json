@@ -1,0 +1,134 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-windup-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-windup-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        723,
+        724
+      ],
+      "crop_xywh": [
+        16,
+        211,
+        684,
+        468
+      ],
+      "content_scale": 0.0891025641025641,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        38,
+        42
+      ]
+    },
+    "native_bounds": [
+      2,
+      18,
+      63,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      61,
+      42
+    ],
+    "windup_hub_registration_dx": 8
+  },
+  {
+    "recipe": {
+      "id": "harvester-windup-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-windup-r1.png",
+      "sheet_cell_xywh": [
+        723,
+        0,
+        742,
+        724
+      ],
+      "crop_xywh": [
+        747,
+        186,
+        708,
+        496
+      ],
+      "content_scale": 0.0891025641025641,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        37,
+        44
+      ]
+    },
+    "native_bounds": [
+      3,
+      16,
+      66,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      63,
+      44
+    ],
+    "windup_hub_registration_dx": 6
+  },
+  {
+    "recipe": {
+      "id": "harvester-windup-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-windup-r1.png",
+      "sheet_cell_xywh": [
+        1465,
+        0,
+        707,
+        724
+      ],
+      "crop_xywh": [
+        1477,
+        27,
+        679,
+        659
+      ],
+      "content_scale": 0.0891025641025641,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        31,
+        59
+      ]
+    },
+    "native_bounds": [
+      9,
+      1,
+      70,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      61,
+      59
+    ],
+    "windup_hub_registration_dx": 1
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "prompt": "Edit INPUT1, the four-frame rolling machine strip, into a charge loop. Keep its exact body, cab, hopper, exhaust stack, wheel diameters, vines, headlamps, perspective, source scale and all four cell positions. The first input is the EDIT TARGET; input2 is identity reference only. Lower the cutting header by about2nativepixels and angle the blades forwardWEST, rotating reel/wheelspokes in four distinct positions. Machine lunges low. Do not narrow the body, enlarge the chimney or shrink the wheels. No dust, speedlines, targets, smoke or extraFX. Same native43pxheight, bodywidth about64px, cabroof-to-ground~33px. Feet/wheels on commonbaseline, midpointbetweenwheels fixed. Transparent alpha0 exceptfullyopaque pixelart, same neutraldaylight, no halos/shadows/background/labels. Four separatecomplete machines, clearfullheightgutters. Preserve visualphysicalidentity, change onlyheaderpose and rotations.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png"
+  ]
+}

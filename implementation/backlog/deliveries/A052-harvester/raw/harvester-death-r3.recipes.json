@@ -1,0 +1,217 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-death-r3-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r3.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        392,
+        793
+      ],
+      "crop_xywh": [
+        27,
+        259,
+        354,
+        298
+      ],
+      "content_scale": 0.16486486486486487,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        29,
+        49
+      ]
+    },
+    "native_bounds": [
+      11,
+      11,
+      69,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      58,
+      49
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r3-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r3.png",
+      "sheet_cell_xywh": [
+        392,
+        0,
+        393,
+        793
+      ],
+      "crop_xywh": [
+        405,
+        298,
+        365,
+        263
+      ],
+      "content_scale": 0.16486486486486487,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        30,
+        43
+      ]
+    },
+    "native_bounds": [
+      10,
+      17,
+      70,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      60,
+      43
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r3-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r3.png",
+      "sheet_cell_xywh": [
+        785,
+        0,
+        395,
+        793
+      ],
+      "crop_xywh": [
+        801,
+        337,
+        359,
+        225
+      ],
+      "content_scale": 0.16486486486486487,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        29,
+        37
+      ]
+    },
+    "native_bounds": [
+      11,
+      23,
+      70,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      59,
+      37
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r3-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r3.png",
+      "sheet_cell_xywh": [
+        1180,
+        0,
+        403,
+        793
+      ],
+      "crop_xywh": [
+        1201,
+        368,
+        363,
+        193
+      ],
+      "content_scale": 0.16486486486486487,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        30,
+        32
+      ]
+    },
+    "native_bounds": [
+      10,
+      28,
+      70,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      60,
+      32
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r3-4",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r3.png",
+      "sheet_cell_xywh": [
+        1583,
+        0,
+        400,
+        793
+      ],
+      "crop_xywh": [
+        1603,
+        446,
+        349,
+        113
+      ],
+      "content_scale": 0.16486486486486487,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        29,
+        19
+      ]
+    },
+    "native_bounds": [
+      11,
+      41,
+      69,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      58,
+      19
+    ]
+  }
+]

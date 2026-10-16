@@ -164,7 +164,7 @@ const SCENARIOS: Array = [
 	["arsenal_locked", "a season still shut: Spring 3's build step with the hotbar turned by hand to autumn's page - the garlic, the catapult and the mortar greyed with their prices, AUTUMN dim, nothing picked", ""],
 	["winter_lord", "the Winter Lord's aura during a cast: Winter 14's night, the year's last, gun towers round open snow south-east of the house - three inside its reach, two outside - the Lord in its cast with its reach laid on the ground in ice, the towers inside still iced from the cast before, the two outside firing", ""],
 	["scarecrow_king", "the Scarecrow King mid-cast: Autumn 14's night, the starter field sown, the King east of it on open ground standing in its cast with rings on the six cells its flock will rise on, and the flock it raised before flying in over the field", ""],
-	["harvester", "the Harvester's charge: Summer 14's night, three layers of stone wall and one of hardwood across open ground east of the house, the Harvester before them winding up with its strip over the line by the shutter; then harvester_after, the line its charge left - a corridor through the stone, the hardwood holding", ""],
+	["harvester", "the Harvester's charge: Summer 14's night, three layers of stone wall and one of hardwood across open ground east of the house, the Harvester before them winding up with its strip over the line by the shutter; then harvester_charging (task 0266), mid-charge through the stone with A052's debris thrown up off the walls it brought down; then harvester_after, the line its charge left - a corridor through the stone, the hardwood holding", ""],
 	["wraith", "wraiths in the light and out of it: Winter 2's night, a searchlight and a gun tower on open snow south-east of the house, one wraith in the lamp's square - solid, a target - and one out in the dark - faint, never gone", ""],
 	["frost", "towers chilled by a frost zombie's burst: Winter 2's night, four gun towers in a row on open snow south-east of the house and a frost zombie killed between the first two by the shutter - those two frosted, the other two not, the ice burst at its widest, and two more frost zombies coming in from the east", ""],
 	["digger", "a digger under a fence: Autumn 2's night, a fence laid across a digger's road home over open ground east of the house, and the digger under it by the shutter - a mound of soil beneath the rails, no body above, the fence untouched", ""],
@@ -185,6 +185,7 @@ const SCENARIOS: Array = [
 	["forecast_dusk", "Spring 14 at 18:30: the boss night's forecast, every kind's head on it", ""],
 	["forecast_summer", "Summer 10 at 18:30: a summer night's forecast, the spitter's and the rat's heads among the kinds coming (task 0260)", ""],
 	["forecast_autumn", "Autumn 10 at 18:30: an autumn night's forecast, the crow's head among the kinds coming (task 0262)", ""],
+	["forecast_harvester", "Summer 14 at 18:30: the Harvester's night forecast, its head among the kinds coming (task 0266)", ""],
 	["cursor_looks", "the guardian's cursor in each look (task 0146): the first night's build step, the cursor on dark grass in neutral, place, blocked, upgrade, sell, repair and aim in turn - Main's own choice of look held off for the picture - then neutral over a field's soil and sell over a wall", ""],
 	["guardian", "the porch guardian awake (task 0145): the first night's build step, the camera on the porch - A003's night idle with its eyes lit; then guardian_point, a wall put down below the porch and the guardian pointing at it", ""],
 	["forecast_build", "the build step on Winter 14: a boss under a Full Moon, from every side", ""],
@@ -890,6 +891,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"forecast_dusk": _set_forecast_dusk(state)
 		"forecast_summer": _set_forecast_summer(state)
 		"forecast_autumn": _set_forecast_autumn(state)
+		"forecast_harvester": _set_forecast_harvester(state)
 		"guardian": _set_guardian(state)
 		"cursor_looks": _set_cursor_looks(state)
 		"forecast_build": _set_forecast_build(state)
@@ -2913,6 +2915,15 @@ func _set_forecast_autumn(state: Dictionary) -> void:
 		- int(state["day_tick"]), 1))
 
 
+## **The Harvester's night forecast** (task 0266): Summer 14 at 18:30, A052's
+## head on the panel by day among the kinds coming.
+func _set_forecast_harvester(state: Dictionary) -> void:
+	_on_date(state, GameData.SEASON_DAYS + 14)
+	_a_sown_field(state)
+	Sim.advance(state, maxi(Phases.tick_at_minute(18 * 60 + 30)
+		- int(state["day_tick"]), 1))
+
+
 ## **The porch guardian awake** (task 0145): the first night's build step,
 ## the means to build, the camera on the porch - A003's night idle, its eyes
 ## lit; `guardian_point` is it pointing at a wall put down below the porch
@@ -4077,6 +4088,32 @@ var _harvester := 0
 ## **The line its charge left** (task 0253): the charge run out, a few frames
 ## for the view to see the wrecks, and `harvester_after`.
 func _take_harvester_after(main: Node, state: Dictionary, folder: String) -> void:
+	# **Mid-charge** (task 0266): the view watching each tick, as the game's
+	# does, until the run has brought the second layer down - its debris held
+	# at its widest.
+	var world := main.get_node("%WorldView") as WorldView
+	var particles := main.get_node("%Particles") as Particles
+	var second := _harvester_from + Enemies.charge_direction(state, _harvester_from) * 3
+	for _i in 300:
+		var one := Entities.get_one(state, _harvester)
+		if one.is_empty() or not one.has("charge_dir") or Farm.occupant(state, second).is_empty():
+			break
+		world.before_tick(state)
+		particles.before_tick(state)
+		Sim.advance(state, 1)
+		particles.after_tick(state)
+		world.after_tick(state)
+	var thrown := 0
+	for record in particles._forms.records:
+		if StringName(record["family"]) == &"wreck_debris":
+			record["age"] = PixelEffects.seconds(&"wreck_debris") * 1.25
+			thrown += 1
+	print("  harvester_charging: at %s, %d debris thrown, posed %s" % [str(Entities.cell_of(state, _harvester)), thrown,
+		world._pose_of(Entities.get_one(state, _harvester)) if Entities.alive(state, _harvester) else &""])
+	for _i in 6:
+		await process_frame
+	await _shoot("harvester_charging", folder)
+	particles._forms.reset()
 	for _i in 300:
 		var one := Entities.get_one(state, _harvester)
 		if one.is_empty() or not one.has("charge_dir"):

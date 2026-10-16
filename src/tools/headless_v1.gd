@@ -9604,8 +9604,9 @@ func _task_0246_bosses() -> void:
 		if SuiteKit.code_lines_of("res://src/ui/" + file).contains("&\"giant\""):
 			by_name.append(file)
 	var voices := SuiteKit.code_lines_of("res://src/ui/sfx.gd").count("&\"giant\"")
+	# The posed bosses by name: the Harvester too since task 0266 (A052).
 	expect(EnemyMotion.posed_boss(&"giant") and not EnemyMotion.posed_boss(&"walker")
-		and EnemyMotion.tracks(&"giant") and EnemyMotion.tracked() == EnemyMotion.FAMILIES + [&"giant"]
+		and EnemyMotion.tracks(&"giant") and EnemyMotion.tracked() == EnemyMotion.FAMILIES + [&"giant", &"harvester"]
 		and EnemyMotion.FAMILIES.slice(0, 4) == [&"walker", &"runner", &"tank", &"breaker"]
 		and EnemyMotion.TRACKED == EnemyMotion.tracked()
 		and Sfx.voice_of(&"giant") == &"sfx/roar_giant" and Sfx.voice_of(&"walker") == &"sfx/groan_walker"
@@ -10762,17 +10763,26 @@ func _task_0253_harvester() -> void:
 	Sim.advance(state, 1)
 	var line := Enemies.charge_line(state, boss)
 	var rearing := WorldView.posed_off_the_rules(state, Entities.get_one(state, boss))
+	# A052's art since task 0266: the view's own pose, and `PixelEffects`
+	# watching every tick of the wind-up and the run.
+	var art_rear := EnemyMotion.new().pose(Entities.get_one(state, boss), state)
+	var debris := PixelEffects.new()
 	var wound := 0
 	while Enemies.is_winding(state, boss) and wound < 1000:
 		wound += 1
 		if wound == telegraph / 2:
 			Farm.place(state, spot + dir, {"id": &"wall", "hp": stone})
+		debris.before_tick(state, [])
 		Sim.advance(state, 1)
+		debris.after_tick(state)
 	var running := WorldView.posed_off_the_rules(state, Entities.get_one(state, boss))
+	var art_run := EnemyMotion.new().pose(Entities.get_one(state, boss), state)
 	var crossed: Array = [Entities.cell_of(state, boss)]
 	var ran := 0
 	while Entities.alive(state, boss) and Entities.get_one(state, boss).has("charge_dir") and ran < 200:
+		debris.before_tick(state, [])
 		Sim.advance(state, 1)
+		debris.after_tick(state)
 		ran += 1
 		var at := Entities.cell_of(state, boss)
 		if crossed.back() != at:
@@ -10793,6 +10803,30 @@ func _task_0253_harvester() -> void:
 		"fixed when the wind-up starts, the wind-up lasts telegraph_ticks; then it runs its line through four stone walls - the one laid while it wound up too - and stops before the hardwood, which loses crush_damage and holds",
 		"wound %d, line %s, crossed %s, hardwood %d, %s / %s" % [wound, str(line), str(crossed),
 			int(Farm.occupant(state, holding).get("hp", 0)), rearing, running])
+
+	# **A052's art since task 0266**: nothing of 0120's road left; a boss in
+	# the Giant's pose names whose rear and run through a charge are still the
+	# rules', as 0253 posed them; its blow the crush; and the debris thrown up
+	# at the foot of each wall the charge brought down, in the order it went
+	# through them - none at the hardwood that held.
+	var thrown: Array = []
+	for record in debris.records:
+		if StringName(record["family"]) == &"wreck_debris":
+			thrown.append(record["at"])
+	var want_thrown: Array = []
+	for k in [1, 2, 3, 4]:
+		want_thrown.append((Vector2(spot + dir * int(k)) + Vector2(0.5, 1.0)) * GameData.TILE_SIZE)
+	var struck := _powers_night(25304)
+	var smasher := Entities.get_one(struck, Entities.spawn(struck, &"harvester", _open_square(struck, 3, &"wall")))
+	var blow := EnemyMotion.new()._boss_pose(smasher, struck, {"tick": int(struck["tick"]), "moving": false,
+		"pos": Vector2i(int(smasher["pos"][0]), int(smasher["pos"][1])), "travel": 0, "strike": int(struck["tick"]) - 4})
+	expect(PlaceholderArt.art(&"harvester_charge").is_empty() and PlaceholderArt.art(&"head_harvester").is_empty()
+		and EnemyMotion.posed_boss(&"harvester") and EnemyMotion.tracks(&"harvester")
+		and art_rear == rearing and art_run == running and blow == &"harvester_crush_1"
+		and EnemyMotion.strike_of(&"giant") == "slam" and EnemyDeaths.death_frames(&"harvester") == 5
+		and thrown == want_thrown,
+		"A052's Harvester is a posed boss: its rear and its run through a charge the rules' own, its blow the crush, five death frames; each wall its charge brings down throws its debris at its foot, none at the hardwood",
+		"%s / %s, %s; %s against %s" % [art_rear, art_run, blow, str(thrown), str(want_thrown)])
 
 	# **It never crosses water**: three cells of land and then the pond on its
 	# line - it stops on the shore.

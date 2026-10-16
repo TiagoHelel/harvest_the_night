@@ -8,7 +8,8 @@ extends RefCounted
 ## `<kind>_windup_0..2`, `<kind>_slam_0..2` and five `<kind>_death_N` - once
 ## its art has them (`posed_boss`). A boss with none drawn yet falls back to
 ## the ordinary path, as any family this does not track; the Giant draws
-## exactly as before.
+## exactly as before. A052's Harvester since task 0266: its blow the crush,
+## and through a charge the rules' rear and run, as 0253 posed them.
 ## The rat since task 0261 (A047): its scurry by the distance it runs, its
 ## bite off the rules' own hit, its death played on.
 ## The digger since task 0263 (A049): its burrow on the tick the rules put it
@@ -23,6 +24,8 @@ var _before: Dictionary = {}
 var _actors: Dictionary = {}
 ## Whether each boss kind has the Giant's poses drawn, asked once.
 static var _posed: Dictionary = {}
+## Each posed boss's blow, `slam` or `crush`, asked once.
+static var _strikes: Dictionary = {}
 
 
 ## **Whether this follows a kind's authored poses**: the four ordinary
@@ -187,10 +190,14 @@ func _burrow_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> Strin
 ## `telegraph_ticks` at an adjacent target - and its standing body otherwise.
 func _boss_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> StringName:
 	var kind: StringName = one["kind"]
+	# **A charger** (task 0266, A052's Harvester): from the line fixed to the
+	# run's end, its rear and its charge are the rules' own.
+	if one.has("charge_dir") and PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_charge_0.png" % kind):
+		return WorldView.posed_off_the_rules(state, one)
 	var current: bool = not memo.is_empty() and int(memo["tick"]) == int(state["tick"]) and memo["pos"] == Vector2i(int(one["pos"][0]), int(one["pos"][1]))
 	var age := int(state["tick"]) - int(memo.get("strike", -1000))
 	if current and age >= 0 and age < SLAM_TICKS:
-		return StringName("%s_slam_%d" % [kind, age / 3])
+		return StringName("%s_%s_%d" % [kind, strike_of(kind), age / 3])
 	if current and bool(memo["moving"]):
 		return StringName("%s_walk_%d" % [kind, (int(memo["travel"]) / (Player.SUBTILE / 4)) % 4])
 	var target := Enemies.winding_at(state, int(one["id"]))
@@ -202,6 +209,14 @@ func _boss_pose(one: Dictionary, state: Dictionary, memo: Dictionary) -> StringN
 			var elapsed := maxi(full - int(one.get("chew_wait", 0)), 0)
 			return StringName("%s_windup_%d" % [kind, mini(elapsed * 3 / full, 2)])
 	return kind
+
+
+## **A posed boss's blow** (task 0266): the Giant's slam, or the crush of a
+## boss drawn with no slam - A052's Harvester.
+static func strike_of(kind: StringName) -> String:
+	if not _strikes.has(kind):
+		_strikes[kind] = "slam" if PlaceholderArt.has_frame(WorldView.ENEMY_DIR + "%s_slam_0.png" % kind) else "crush"
+	return String(_strikes[kind])
 
 
 ## Whether a body's pose is a boss's wind-up - the moment the ring under its

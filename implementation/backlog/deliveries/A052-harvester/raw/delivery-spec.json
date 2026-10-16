@@ -1,0 +1,647 @@
+{
+  "title": "The Harvester",
+  "date": "2026-10-14",
+  "status": "review",
+  "palette_mode": "A",
+  "expected_files": 25,
+  "files": [
+    {
+      "anim": "harvester",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_0",
+      "output": "native/harvester/west/01.png",
+      "runtime_name": "sprites/enemies/harvester.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_walk_0",
+      "output": "native/harvester_walk/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_walk_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_walk_1",
+      "output": "native/harvester_walk/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_walk_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_walk_2",
+      "output": "native/harvester_walk/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_walk_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 3,
+      "pose": "harvester_walk_3",
+      "output": "native/harvester_walk/west/04.png",
+      "runtime_name": "sprites/enemies/harvester_walk_3.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_windup",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_windup_0",
+      "output": "native/harvester_windup/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_windup_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          18
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_windup",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_windup_1",
+      "output": "native/harvester_windup/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_windup_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          62,
+          19
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_windup",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_windup_2",
+      "output": "native/harvester_windup/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_windup_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          67,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_charge_0",
+      "output": "native/harvester_charge/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_charge_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          16
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_charge_1",
+      "output": "native/harvester_charge/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_charge_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          58,
+          16
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_charge_2",
+      "output": "native/harvester_charge/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_charge_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          16
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 3,
+      "pose": "harvester_charge_3",
+      "output": "native/harvester_charge/west/04.png",
+      "runtime_name": "sprites/enemies/harvester_charge_3.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          16
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_crush",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_crush_0",
+      "output": "native/harvester_crush/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_crush_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          59,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_crush",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_crush_1",
+      "output": "native/harvester_crush/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_crush_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          59,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_crush",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_crush_2",
+      "output": "native/harvester_crush/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_crush_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          59,
+          17
+        ]
+      },
+      "grounded": true
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_death_0",
+      "output": "native/harvester_death/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_death_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_death_1",
+      "output": "native/harvester_death/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_death_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_death_2",
+      "output": "native/harvester_death/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_death_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 3,
+      "pose": "harvester_death_3",
+      "output": "native/harvester_death/west/04.png",
+      "runtime_name": "sprites/enemies/harvester_death_3.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 4,
+      "pose": "harvester_death_4",
+      "output": "native/harvester_death/west/05.png",
+      "runtime_name": "sprites/enemies/harvester_death_4.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck_debris_0",
+      "output": "native/wreck_debris/none/01.png",
+      "runtime_name": "sprites/effects/wreck_debris_0.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 1,
+      "pose": "wreck_debris_1",
+      "output": "native/wreck_debris/none/02.png",
+      "runtime_name": "sprites/effects/wreck_debris_1.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 2,
+      "pose": "wreck_debris_2",
+      "output": "native/wreck_debris/none/03.png",
+      "runtime_name": "sprites/effects/wreck_debris_2.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 3,
+      "pose": "wreck_debris_3",
+      "output": "native/wreck_debris/none/04.png",
+      "runtime_name": "sprites/effects/wreck_debris_3.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true
+    },
+    {
+      "anim": "head_harvester",
+      "dir": "none",
+      "frame": 0,
+      "pose": "head_harvester_0",
+      "output": "native/head_harvester/none/01.png",
+      "runtime_name": "sprites/ui/head_harvester.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false
+    }
+  ],
+  "mirror_pairs": {},
+  "deviations": [],
+  "supersedes": [],
+  "comparison": [
+    {
+      "path": "sprites/enemies/giant.png",
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-15**, with task 0265's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-15**, with task 0266's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 296 tasks, 274 done, 22 todo, 0 blocked (93%).**
+**The game backlog: 296 tasks, 275 done, 21 todo, 0 blocked (93%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0266). Only the farmer packs the owner deferred (3c) still wait on
+says 0267). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -70,7 +70,7 @@ The owner approved 15 at 16:56 and the other six's additions at 21:11
 | A049 | The digger (**integrated** by 0263, 2026-10-15) | 0263 |
 | A050 | The frost zombie (**integrated** by 0264, 2026-10-15) | 0264 |
 | A051 | The wraith (**integrated** by 0265, 2026-10-15) | 0265 |
-| A052 | The Harvester | 0266 |
+| A052 | The Harvester (**integrated** by 0266, 2026-10-15) | 0266 |
 | A053 | The Scarecrow King | 0267 |
 | A054 | The Winter Lord | 0268 |
 | A055 | Fog, rain and the Blood Moon icons | 0269 |

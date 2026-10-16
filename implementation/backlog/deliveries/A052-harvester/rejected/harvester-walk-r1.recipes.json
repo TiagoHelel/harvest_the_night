@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-walk-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-walk-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        495,
+        793
+      ],
+      "crop_xywh": [
+        16,
+        231,
+        477,
+        379
+      ],
+      "content_scale": 0.11266490765171505,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      13,
+      17,
+      67,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      54,
+      43
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-walk-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-walk-r1.png",
+      "sheet_cell_xywh": [
+        495,
+        0,
+        490,
+        793
+      ],
+      "crop_xywh": [
+        499,
+        231,
+        482,
+        379
+      ],
+      "content_scale": 0.11266490765171505,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      13,
+      17,
+      67,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      54,
+      43
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-walk-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-walk-r1.png",
+      "sheet_cell_xywh": [
+        985,
+        0,
+        490,
+        793
+      ],
+      "crop_xywh": [
+        990,
+        231,
+        477,
+        381
+      ],
+      "content_scale": 0.11266490765171505,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      13,
+      17,
+      67,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      54,
+      43
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-walk-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-walk-r1.png",
+      "sheet_cell_xywh": [
+        1475,
+        0,
+        508,
+        793
+      ],
+      "crop_xywh": [
+        1484,
+        231,
+        476,
+        381
+      ],
+      "content_scale": 0.11266490765171505,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      13,
+      17,
+      67,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      54,
+      43
+    ]
+  }
+]

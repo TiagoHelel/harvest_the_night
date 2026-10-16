@@ -2,7 +2,8 @@
 
 **Table-driven** (task 0246): `BOSSES` holds each boss family's motion counts,
 canvas, pivot, cell offset and the generation task its sources came from - the
-Giant's today; 0266-0268 add theirs. The five ordinary-and-Giant families keep
+Giant's, and since task 0266 A052's Harvester, whose blow is a crush and which
+charges; 0267-0268 add theirs. The five ordinary-and-Giant families keep
 complete ownership, as a subset: a new enemy family cannot fail this check.
 """
 from PIL import ImageChops
@@ -19,6 +20,13 @@ BOSSES = {
               'task': '0016', 'windup_top': 50, 'death_low': 20,
               'aliases': (('walk_b', 'walk_2'), ('attack', 'slam_0'), ('death', 'death_4'),
                           ('telegraph', 'windup_2'))},
+    # The Harvester (task 0266): the Giant's canvas and contact, its rear the
+    # Giant's tell, a four-frame charge and a three-frame crush for the slam.
+    'harvester': {'counts': {'master': 1, 'walk': 4, 'windup': 3, 'charge': 4, 'crush': 3, 'death': 5},
+                  'canvas': [80, 64], 'pivot': [40, 60], 'offset': [-32, -44],
+                  'task': 'A052', 'windup_top': 50, 'death_low': 20,
+                  'aliases': (('walk_b', 'walk_2'), ('attack', 'crush_0'), ('death', 'death_4'),
+                              ('telegraph', 'windup_2'))},
 }
 ORDINARY = ('walker', 'runner', 'tank', 'breaker')
 WORDS = {1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six'}

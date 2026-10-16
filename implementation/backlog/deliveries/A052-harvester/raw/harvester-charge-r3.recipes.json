@@ -1,0 +1,242 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-charge-r3-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r3.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        520,
+        729
+      ],
+      "crop_xywh": [
+        14,
+        145,
+        487,
+        372
+      ],
+      "content_scale": 0.11828254847645431,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        36,
+        44
+      ]
+    },
+    "native_bounds": [
+      4,
+      16,
+      62,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      58,
+      44
+    ],
+    "registered_wheel_contact_clusters": [
+      [
+        11,
+        13
+      ],
+      [
+        16,
+        19
+      ],
+      [
+        25,
+        33
+      ],
+      [
+        46,
+        56
+      ]
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-charge-r3-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r3.png",
+      "sheet_cell_xywh": [
+        520,
+        0,
+        536,
+        729
+      ],
+      "crop_xywh": [
+        541,
+        145,
+        496,
+        372
+      ],
+      "content_scale": 0.11828254847645431,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        36,
+        44
+      ]
+    },
+    "native_bounds": [
+      4,
+      16,
+      63,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      59,
+      44
+    ],
+    "registered_wheel_contact_clusters": [
+      [
+        13,
+        17
+      ],
+      [
+        25,
+        33
+      ],
+      [
+        46,
+        57
+      ]
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-charge-r3-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r3.png",
+      "sheet_cell_xywh": [
+        1056,
+        0,
+        536,
+        729
+      ],
+      "crop_xywh": [
+        1077,
+        145,
+        496,
+        372
+      ],
+      "content_scale": 0.11828254847645431,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        37,
+        44
+      ]
+    },
+    "native_bounds": [
+      3,
+      16,
+      62,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      59,
+      44
+    ],
+    "registered_wheel_contact_clusters": [
+      [
+        10,
+        11
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        24,
+        33
+      ],
+      [
+        46,
+        56
+      ]
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-charge-r3-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r3.png",
+      "sheet_cell_xywh": [
+        1592,
+        0,
+        565,
+        729
+      ],
+      "crop_xywh": [
+        1613,
+        145,
+        498,
+        371
+      ],
+      "content_scale": 0.11828254847645431,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        37,
+        44
+      ]
+    },
+    "native_bounds": [
+      3,
+      16,
+      62,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      59,
+      44
+    ],
+    "registered_wheel_contact_clusters": [
+      [
+        10,
+        11
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        24,
+        33
+      ],
+      [
+        46,
+        56
+      ]
+    ]
+  }
+]

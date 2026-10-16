@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: stylized-concept\nProduction effect WRECK_DEBRIS for HARVEST THE NIGHT: ONE horizontal strip of exactlyFOUR successiveframes, loose WOOD splinters, STONE chips and BROWNsoil clods thrown upward by a crushed wall. Hard chips andsplinters, NOT a smoke/dustcloud.0 low compactburst;1 wide risingburst at its largest;2piecesfallingapart;3justafew tinychips. Samephysicalscaleall4; do not enlarge first/last. Peak native22wide x17high on24x20canvas, groundpivot12,18,lowestrow17, clear1pxborder. Warmtimberplanes,grey stonefaces,brownsoil,colouroutline, upperleft neutraldaylight, broadcoarsepixelclusters. No rotgreen, fire, flashes, bloom, haze, glow, shadow, actualwall orgroundtile, speedlines/text/UI/gradient/blur. Completeunclipped smallsubjects, large transparentgutters andmargins. Truealpha0 outside fullyopaque shardpixels. Input1 worldstyle; input2 wall material and input3 fencewoodmaterial only.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/wall_join_10.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/sprites/buildings/fence_join_10.png"
+  ]
+}

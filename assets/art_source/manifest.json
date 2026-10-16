@@ -127050,6 +127050,2063 @@
       "operation": "copy",
       "alias_of": "enemies/wraith_death_3",
       "output_sha256": "4719df30dd27b1122eaf5b606503a6a88a0755781d7943abdf251cecc2ce0f95"
+    },
+    {
+      "id": "enemies/harvester",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-master-r2.png",
+      "source_sha256": "55812df0c9cdc7988f2501fbb7a5e13a6754fab1b14c36c9f27d02173e3d78df",
+      "crop_xywh": [
+        49,
+        55,
+        1405,
+        938
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "master",
+      "content_scale": 0.0455223880597015,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester.png",
+      "smoke_xy": [
+        60,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.prompt.txt",
+      "prompt_sha256": "e4910dd01363ce6ddc5a049cacc36308055fbe8bdaeb3d7eb6cc7371acd2f1f7",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.call.json",
+          "sha256": "db1ecbd1573bc4694811a5eb71e9cea0869450476bb61a643a9c13ce7e8161ea",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester/west/01.png",
+          "sha256": "9424f181c26ac4fe60f33bc6d29f435b40dcf58013afde4b36a06414e7492525",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        39,
+        43
+      ],
+      "output_sha256": "9424f181c26ac4fe60f33bc6d29f435b40dcf58013afde4b36a06414e7492525"
+    },
+    {
+      "id": "enemies/harvester_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-walk-r2.png",
+      "source_sha256": "789ac88bb210976b8b48ca2b4403291b5040cceedfb96823b72befde3f51cbd6",
+      "crop_xywh": [
+        9,
+        162,
+        522,
+        361
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "walk",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_walk",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/harvester_walk_0.png",
+      "smoke_xy": [
+        60,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.prompt.txt",
+      "prompt_sha256": "c7f5a42b13c862e1cee82f8ee47367e99884c7636bc9706440bf392a062eb93f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.call.json",
+          "sha256": "e7b4a5c14d469a654a2aa79e5cdc4b9c254ea6b2cdd2e23f821c0c5a8b277d9e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_walk/west/01.png",
+          "sha256": "1988a3425f15a25808c6d76f3445cfd40d45dc6ae7d09a500cae308d22c197be",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        37,
+        43
+      ],
+      "output_sha256": "1988a3425f15a25808c6d76f3445cfd40d45dc6ae7d09a500cae308d22c197be"
+    },
+    {
+      "id": "enemies/harvester_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-walk-r2.png",
+      "source_sha256": "789ac88bb210976b8b48ca2b4403291b5040cceedfb96823b72befde3f51cbd6",
+      "crop_xywh": [
+        548,
+        162,
+        509,
+        361
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "walk",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_walk",
+      "frame": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/harvester_walk_1.png",
+      "smoke_xy": [
+        60,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.prompt.txt",
+      "prompt_sha256": "c7f5a42b13c862e1cee82f8ee47367e99884c7636bc9706440bf392a062eb93f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.call.json",
+          "sha256": "e7b4a5c14d469a654a2aa79e5cdc4b9c254ea6b2cdd2e23f821c0c5a8b277d9e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_walk/west/02.png",
+          "sha256": "0892da8c678e91fc86b6d278a68f3e8abf1c3b7b6e29a708548fba0a14d2db7b",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        35,
+        43
+      ],
+      "output_sha256": "0892da8c678e91fc86b6d278a68f3e8abf1c3b7b6e29a708548fba0a14d2db7b"
+    },
+    {
+      "id": "enemies/harvester_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-walk-r2.png",
+      "source_sha256": "789ac88bb210976b8b48ca2b4403291b5040cceedfb96823b72befde3f51cbd6",
+      "crop_xywh": [
+        1077,
+        162,
+        506,
+        361
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "walk",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_walk",
+      "frame": 2,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/harvester_walk_2.png",
+      "smoke_xy": [
+        60,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.prompt.txt",
+      "prompt_sha256": "c7f5a42b13c862e1cee82f8ee47367e99884c7636bc9706440bf392a062eb93f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.call.json",
+          "sha256": "e7b4a5c14d469a654a2aa79e5cdc4b9c254ea6b2cdd2e23f821c0c5a8b277d9e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_walk/west/03.png",
+          "sha256": "a16cf487984dbe56faa147b0be8cf21d5e9b9564bc36a731a31f39ee530166b7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        35,
+        43
+      ],
+      "output_sha256": "a16cf487984dbe56faa147b0be8cf21d5e9b9564bc36a731a31f39ee530166b7"
+    },
+    {
+      "id": "enemies/harvester_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-walk-r2.png",
+      "source_sha256": "789ac88bb210976b8b48ca2b4403291b5040cceedfb96823b72befde3f51cbd6",
+      "crop_xywh": [
+        1607,
+        161,
+        514,
+        363
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "walk",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_walk",
+      "frame": 3,
+      "seconds": 0.14,
+      "loop": true,
+      "output": "sprites/enemies/harvester_walk_3.png",
+      "smoke_xy": [
+        60,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.prompt.txt",
+      "prompt_sha256": "c7f5a42b13c862e1cee82f8ee47367e99884c7636bc9706440bf392a062eb93f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.call.json",
+          "sha256": "e7b4a5c14d469a654a2aa79e5cdc4b9c254ea6b2cdd2e23f821c0c5a8b277d9e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_walk/west/04.png",
+          "sha256": "54578bd0d1cfc91bfee340e1d6e146b93863e1988e2c4051f796be6b9cfd3efa",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        36,
+        43
+      ],
+      "output_sha256": "54578bd0d1cfc91bfee340e1d6e146b93863e1988e2c4051f796be6b9cfd3efa"
+    },
+    {
+      "id": "enemies/harvester_windup_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-windup-r1.png",
+      "source_sha256": "fba5c0ac2ff5f69ac45b40f92158d1c5027803a992b40e0b43e432b2d3321e4d",
+      "crop_xywh": [
+        16,
+        211,
+        684,
+        468
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "windup",
+      "content_scale": 0.0891025641025641,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_windup",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_windup_0.png",
+      "smoke_xy": [
+        57,
+        18
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.prompt.txt",
+      "prompt_sha256": "fbb1f927e2f8de40e16865e1f4db58826815aa54bbf17fdece08a4209d28dff0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.call.json",
+          "sha256": "57307b2f8aa6e9ffb1f7ef1ddf595ebc75aa8e6ac45154f002188fc4e143594e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_windup/west/01.png",
+          "sha256": "9aaa961ef867a0520a0b6568370e814740f1b8963ebd19e851a444d68062f1c9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        38,
+        42
+      ],
+      "output_sha256": "9aaa961ef867a0520a0b6568370e814740f1b8963ebd19e851a444d68062f1c9"
+    },
+    {
+      "id": "enemies/harvester_windup_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-windup-r1.png",
+      "source_sha256": "fba5c0ac2ff5f69ac45b40f92158d1c5027803a992b40e0b43e432b2d3321e4d",
+      "crop_xywh": [
+        747,
+        186,
+        708,
+        496
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "windup",
+      "content_scale": 0.0891025641025641,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_windup",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_windup_1.png",
+      "smoke_xy": [
+        62,
+        19
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.prompt.txt",
+      "prompt_sha256": "fbb1f927e2f8de40e16865e1f4db58826815aa54bbf17fdece08a4209d28dff0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.call.json",
+          "sha256": "57307b2f8aa6e9ffb1f7ef1ddf595ebc75aa8e6ac45154f002188fc4e143594e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_windup/west/02.png",
+          "sha256": "73bdffba2c6f5146717cb264719b95692025bdd12fecd549badaaf609e4633ad",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        37,
+        44
+      ],
+      "output_sha256": "73bdffba2c6f5146717cb264719b95692025bdd12fecd549badaaf609e4633ad"
+    },
+    {
+      "id": "enemies/harvester_windup_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-windup-r1.png",
+      "source_sha256": "fba5c0ac2ff5f69ac45b40f92158d1c5027803a992b40e0b43e432b2d3321e4d",
+      "crop_xywh": [
+        1477,
+        27,
+        679,
+        659
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "windup",
+      "content_scale": 0.0891025641025641,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_windup",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_windup_2.png",
+      "smoke_xy": [
+        67,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.prompt.txt",
+      "prompt_sha256": "fbb1f927e2f8de40e16865e1f4db58826815aa54bbf17fdece08a4209d28dff0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.call.json",
+          "sha256": "57307b2f8aa6e9ffb1f7ef1ddf595ebc75aa8e6ac45154f002188fc4e143594e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_windup/west/03.png",
+          "sha256": "80108decf8e5a7598406887cdacd28594310a07939ebc4136c54f9df8ebc7057",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        31,
+        59
+      ],
+      "output_sha256": "80108decf8e5a7598406887cdacd28594310a07939ebc4136c54f9df8ebc7057"
+    },
+    {
+      "id": "enemies/harvester_charge_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-charge-r3.png",
+      "source_sha256": "4ae92ffe5ae5cd365caa9c1acb22d20452d5a32f8bed357d3d9ba3f2b00696cc",
+      "crop_xywh": [
+        14,
+        145,
+        487,
+        372
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "charge",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_charge",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/harvester_charge_0.png",
+      "smoke_xy": [
+        57,
+        16
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.prompt.txt",
+      "prompt_sha256": "f88c5c262e89ab564fdf38cd442bd8456d766dd01abb720b3dae8243aecc842e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.call.json",
+          "sha256": "32f72d68b6a787f9eef170733d875bce9632a477c71d4259a2076636a8be5e25",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_charge/west/01.png",
+          "sha256": "36751497b5046c5e0346e959c86ebd6970460c43672a335123798c727b52addc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        36,
+        44
+      ],
+      "output_sha256": "36751497b5046c5e0346e959c86ebd6970460c43672a335123798c727b52addc"
+    },
+    {
+      "id": "enemies/harvester_charge_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-charge-r3.png",
+      "source_sha256": "4ae92ffe5ae5cd365caa9c1acb22d20452d5a32f8bed357d3d9ba3f2b00696cc",
+      "crop_xywh": [
+        541,
+        145,
+        496,
+        372
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "charge",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_charge",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/harvester_charge_1.png",
+      "smoke_xy": [
+        58,
+        16
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.prompt.txt",
+      "prompt_sha256": "f88c5c262e89ab564fdf38cd442bd8456d766dd01abb720b3dae8243aecc842e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.call.json",
+          "sha256": "32f72d68b6a787f9eef170733d875bce9632a477c71d4259a2076636a8be5e25",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_charge/west/02.png",
+          "sha256": "e8a35359eb369ad6da8b77b43b1f5b08d1f6074c3ffe0d7211de7b4f1f70bba1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        36,
+        44
+      ],
+      "output_sha256": "e8a35359eb369ad6da8b77b43b1f5b08d1f6074c3ffe0d7211de7b4f1f70bba1"
+    },
+    {
+      "id": "enemies/harvester_charge_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-charge-r3.png",
+      "source_sha256": "4ae92ffe5ae5cd365caa9c1acb22d20452d5a32f8bed357d3d9ba3f2b00696cc",
+      "crop_xywh": [
+        1077,
+        145,
+        496,
+        372
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "charge",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_charge",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/harvester_charge_2.png",
+      "smoke_xy": [
+        57,
+        16
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.prompt.txt",
+      "prompt_sha256": "f88c5c262e89ab564fdf38cd442bd8456d766dd01abb720b3dae8243aecc842e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.call.json",
+          "sha256": "32f72d68b6a787f9eef170733d875bce9632a477c71d4259a2076636a8be5e25",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_charge/west/03.png",
+          "sha256": "691bbbc478464fb5e379ebef3151aca4d974ebb480ccde1c2a44a1669b78ebdf",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        37,
+        44
+      ],
+      "output_sha256": "691bbbc478464fb5e379ebef3151aca4d974ebb480ccde1c2a44a1669b78ebdf"
+    },
+    {
+      "id": "enemies/harvester_charge_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-charge-r3.png",
+      "source_sha256": "4ae92ffe5ae5cd365caa9c1acb22d20452d5a32f8bed357d3d9ba3f2b00696cc",
+      "crop_xywh": [
+        1613,
+        145,
+        498,
+        371
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "charge",
+      "content_scale": 0.11828254847645431,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_charge",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": true,
+      "output": "sprites/enemies/harvester_charge_3.png",
+      "smoke_xy": [
+        57,
+        16
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.prompt.txt",
+      "prompt_sha256": "f88c5c262e89ab564fdf38cd442bd8456d766dd01abb720b3dae8243aecc842e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-charge-r3.call.json",
+          "sha256": "32f72d68b6a787f9eef170733d875bce9632a477c71d4259a2076636a8be5e25",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_charge/west/04.png",
+          "sha256": "e39650dd62de43482f454bc6cafd9ee299c332596745ff5bce066c8cc4e68544",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        37,
+        44
+      ],
+      "output_sha256": "e39650dd62de43482f454bc6cafd9ee299c332596745ff5bce066c8cc4e68544"
+    },
+    {
+      "id": "enemies/harvester_crush_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-crush-r1.png",
+      "source_sha256": "23f04021ccdaa301449bf87013ff68f530f7e5e515822e2bc85d37564577d1fb",
+      "crop_xywh": [
+        32,
+        128,
+        672,
+        484
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "crush",
+      "content_scale": 0.08840579710144929,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_crush",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_crush_0.png",
+      "smoke_xy": [
+        59,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.prompt.txt",
+      "prompt_sha256": "a0fb1226a9cb3797f3b6595ab9a092edc9770d53e7e0fada0cb47b501d5a1be9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.call.json",
+          "sha256": "a2bfadf36a69e94f72e95389a5151091964dbda766cd8c454ed93f0b7d4009dd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_crush/west/01.png",
+          "sha256": "16542f73665c18908f7622bde03266914e53e724e719cc06732da5e9416702b9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        35,
+        43
+      ],
+      "output_sha256": "16542f73665c18908f7622bde03266914e53e724e719cc06732da5e9416702b9"
+    },
+    {
+      "id": "enemies/harvester_crush_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-crush-r1.png",
+      "source_sha256": "23f04021ccdaa301449bf87013ff68f530f7e5e515822e2bc85d37564577d1fb",
+      "crop_xywh": [
+        725,
+        128,
+        703,
+        491
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "crush",
+      "content_scale": 0.08840579710144929,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_crush",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_crush_1.png",
+      "smoke_xy": [
+        59,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.prompt.txt",
+      "prompt_sha256": "a0fb1226a9cb3797f3b6595ab9a092edc9770d53e7e0fada0cb47b501d5a1be9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.call.json",
+          "sha256": "a2bfadf36a69e94f72e95389a5151091964dbda766cd8c454ed93f0b7d4009dd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_crush/west/02.png",
+          "sha256": "084a88a20f3a65590823936f3b6e40339fdb448d09ff02015616c1e5094f6685",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        38,
+        43
+      ],
+      "output_sha256": "084a88a20f3a65590823936f3b6e40339fdb448d09ff02015616c1e5094f6685"
+    },
+    {
+      "id": "enemies/harvester_crush_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-crush-r1.png",
+      "source_sha256": "23f04021ccdaa301449bf87013ff68f530f7e5e515822e2bc85d37564577d1fb",
+      "crop_xywh": [
+        1476,
+        128,
+        675,
+        483
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "crush",
+      "content_scale": 0.08840579710144929,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_crush",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_crush_2.png",
+      "smoke_xy": [
+        59,
+        17
+      ],
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.prompt.txt",
+      "prompt_sha256": "a0fb1226a9cb3797f3b6595ab9a092edc9770d53e7e0fada0cb47b501d5a1be9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.call.json",
+          "sha256": "a2bfadf36a69e94f72e95389a5151091964dbda766cd8c454ed93f0b7d4009dd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_crush/west/03.png",
+          "sha256": "e974c41a31237e23ce2bc5949809e32a67e1df9e041e9490a8f7c10278269d34",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        36,
+        43
+      ],
+      "output_sha256": "e974c41a31237e23ce2bc5949809e32a67e1df9e041e9490a8f7c10278269d34"
+    },
+    {
+      "id": "enemies/harvester_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-death-r3.png",
+      "source_sha256": "aea4a627b1e9b41124d231f9bf512b8aae2dce20fc5c43f11febffce91b9bd8f",
+      "crop_xywh": [
+        27,
+        259,
+        354,
+        298
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "death",
+      "content_scale": 0.16486486486486487,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_death",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/harvester_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.prompt.txt",
+      "prompt_sha256": "488b9ec76a8eac14d85803f1d96f1824cf06fdee716ac0b91fed1d53af0b499e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.call.json",
+          "sha256": "5e22c83f237206942cd1f0f2c87a548a258b2fd41fe641c241720352f084477f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_death/west/01.png",
+          "sha256": "717e0b5a2cf0a1e1581fca2e7bc3384693fc98bcb135953b1a212786b709acaf",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        29,
+        49
+      ],
+      "output_sha256": "717e0b5a2cf0a1e1581fca2e7bc3384693fc98bcb135953b1a212786b709acaf"
+    },
+    {
+      "id": "enemies/harvester_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-death-r3.png",
+      "source_sha256": "aea4a627b1e9b41124d231f9bf512b8aae2dce20fc5c43f11febffce91b9bd8f",
+      "crop_xywh": [
+        405,
+        298,
+        365,
+        263
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "death",
+      "content_scale": 0.16486486486486487,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_death",
+      "frame": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/harvester_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.prompt.txt",
+      "prompt_sha256": "488b9ec76a8eac14d85803f1d96f1824cf06fdee716ac0b91fed1d53af0b499e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.call.json",
+          "sha256": "5e22c83f237206942cd1f0f2c87a548a258b2fd41fe641c241720352f084477f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_death/west/02.png",
+          "sha256": "803bcce4e17d6f1c768f0e688bf7f9cb132d3d656b20e422c9d07408a8aa8c23",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        30,
+        43
+      ],
+      "output_sha256": "803bcce4e17d6f1c768f0e688bf7f9cb132d3d656b20e422c9d07408a8aa8c23"
+    },
+    {
+      "id": "enemies/harvester_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-death-r3.png",
+      "source_sha256": "aea4a627b1e9b41124d231f9bf512b8aae2dce20fc5c43f11febffce91b9bd8f",
+      "crop_xywh": [
+        801,
+        337,
+        359,
+        225
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "death",
+      "content_scale": 0.16486486486486487,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_death",
+      "frame": 2,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/harvester_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.prompt.txt",
+      "prompt_sha256": "488b9ec76a8eac14d85803f1d96f1824cf06fdee716ac0b91fed1d53af0b499e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.call.json",
+          "sha256": "5e22c83f237206942cd1f0f2c87a548a258b2fd41fe641c241720352f084477f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_death/west/03.png",
+          "sha256": "62b60ba2be71f32e44f2e6b4558be5bd367260952005c1cd2287d1c0f03cc748",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        29,
+        37
+      ],
+      "output_sha256": "62b60ba2be71f32e44f2e6b4558be5bd367260952005c1cd2287d1c0f03cc748"
+    },
+    {
+      "id": "enemies/harvester_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-death-r3.png",
+      "source_sha256": "aea4a627b1e9b41124d231f9bf512b8aae2dce20fc5c43f11febffce91b9bd8f",
+      "crop_xywh": [
+        1201,
+        368,
+        363,
+        193
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "death",
+      "content_scale": 0.16486486486486487,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_death",
+      "frame": 3,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/harvester_death_3.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.prompt.txt",
+      "prompt_sha256": "488b9ec76a8eac14d85803f1d96f1824cf06fdee716ac0b91fed1d53af0b499e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.call.json",
+          "sha256": "5e22c83f237206942cd1f0f2c87a548a258b2fd41fe641c241720352f084477f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_death/west/04.png",
+          "sha256": "add44cce72a3947a7b6408cf6e772b3f8d3a865e40981ca34157847146a4312f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        30,
+        32
+      ],
+      "output_sha256": "add44cce72a3947a7b6408cf6e772b3f8d3a865e40981ca34157847146a4312f"
+    },
+    {
+      "id": "enemies/harvester_death_4",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/harvester/harvester-death-r3.png",
+      "source_sha256": "aea4a627b1e9b41124d231f9bf512b8aae2dce20fc5c43f11febffce91b9bd8f",
+      "crop_xywh": [
+        1603,
+        446,
+        349,
+        113
+      ],
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "enemy_family": "harvester",
+      "enemy_motion": "death",
+      "content_scale": 0.16486486486486487,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_death",
+      "frame": 4,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/harvester_death_4.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.prompt.txt",
+      "prompt_sha256": "488b9ec76a8eac14d85803f1d96f1824cf06fdee716ac0b91fed1d53af0b499e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.call.json",
+          "sha256": "5e22c83f237206942cd1f0f2c87a548a258b2fd41fe641c241720352f084477f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_death/west/05.png",
+          "sha256": "7c7262dc911c58195e4d69b47843e080451b2d57fed5a2c82eb696c13760c289",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        29,
+        19
+      ],
+      "output_sha256": "7c7262dc911c58195e4d69b47843e080451b2d57fed5a2c82eb696c13760c289"
+    },
+    {
+      "id": "effects/wreck_debris_0",
+      "owner": "raster",
+      "source": "assets/art_source/effects/wreck/wreck-debris-r1.png",
+      "source_sha256": "5677946042538c50f3658de10c83864929476c9ee6f19d4867c1242990dfb55d",
+      "crop_xywh": [
+        68,
+        426,
+        385,
+        247
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.030983302411873838,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ],
+      "animation": "effects/wreck_debris",
+      "frame": 0,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "wreck_debris",
+      "fx_origin": "base",
+      "output": "sprites/effects/wreck_debris_0.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.prompt.txt",
+      "prompt_sha256": "37bed2a59770cd9802938dcdcc8b1f5582943ea24d05bee8a15a03c2d59a5bfa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.call.json",
+          "sha256": "7e74b2d5c2083b6c8864d893c176f9e02006e216b39dbfe0de4a9404bef18009",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/wreck_debris/none/01.png",
+          "sha256": "b864de7fe2a04d0786d53753f68b050d1b541f4b8ea4faf611243417276ab854",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        6,
+        8
+      ],
+      "output_sha256": "b864de7fe2a04d0786d53753f68b050d1b541f4b8ea4faf611243417276ab854"
+    },
+    {
+      "id": "effects/wreck_debris_1",
+      "owner": "raster",
+      "source": "assets/art_source/effects/wreck/wreck-debris-r1.png",
+      "source_sha256": "5677946042538c50f3658de10c83864929476c9ee6f19d4867c1242990dfb55d",
+      "crop_xywh": [
+        531,
+        142,
+        571,
+        539
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.030983302411873838,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ],
+      "animation": "effects/wreck_debris",
+      "frame": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "wreck_debris",
+      "fx_origin": "base",
+      "variant_of": "effects/wreck_debris_0",
+      "output": "sprites/effects/wreck_debris_1.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.prompt.txt",
+      "prompt_sha256": "37bed2a59770cd9802938dcdcc8b1f5582943ea24d05bee8a15a03c2d59a5bfa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.call.json",
+          "sha256": "7e74b2d5c2083b6c8864d893c176f9e02006e216b39dbfe0de4a9404bef18009",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/wreck_debris/none/02.png",
+          "sha256": "219e4e27ad0282e22bb2884eadf29a93587d9c6c781554218b0556924e8ee61c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        9,
+        17
+      ],
+      "output_sha256": "219e4e27ad0282e22bb2884eadf29a93587d9c6c781554218b0556924e8ee61c"
+    },
+    {
+      "id": "effects/wreck_debris_2",
+      "owner": "raster",
+      "source": "assets/art_source/effects/wreck/wreck-debris-r1.png",
+      "source_sha256": "5677946042538c50f3658de10c83864929476c9ee6f19d4867c1242990dfb55d",
+      "crop_xywh": [
+        1184,
+        238,
+        480,
+        440
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.030983302411873838,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ],
+      "animation": "effects/wreck_debris",
+      "frame": 2,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "wreck_debris",
+      "fx_origin": "base",
+      "variant_of": "effects/wreck_debris_0",
+      "output": "sprites/effects/wreck_debris_2.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.prompt.txt",
+      "prompt_sha256": "37bed2a59770cd9802938dcdcc8b1f5582943ea24d05bee8a15a03c2d59a5bfa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.call.json",
+          "sha256": "7e74b2d5c2083b6c8864d893c176f9e02006e216b39dbfe0de4a9404bef18009",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/wreck_debris/none/03.png",
+          "sha256": "e3c580f9cd0fdcaf1aa9277310c6fafcf8f7a8894b92578a3a30e46265057832",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        7,
+        14
+      ],
+      "output_sha256": "e3c580f9cd0fdcaf1aa9277310c6fafcf8f7a8894b92578a3a30e46265057832"
+    },
+    {
+      "id": "effects/wreck_debris_3",
+      "owner": "raster",
+      "source": "assets/art_source/effects/wreck/wreck-debris-r1.png",
+      "source_sha256": "5677946042538c50f3658de10c83864929476c9ee6f19d4867c1242990dfb55d",
+      "crop_xywh": [
+        1794,
+        485,
+        287,
+        188
+      ],
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "content_scale": 0.030983302411873838,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ],
+      "animation": "effects/wreck_debris",
+      "frame": 3,
+      "seconds": 0.08,
+      "loop": false,
+      "fx_family": "wreck_debris",
+      "fx_origin": "base",
+      "variant_of": "effects/wreck_debris_0",
+      "output": "sprites/effects/wreck_debris_3.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.prompt.txt",
+      "prompt_sha256": "37bed2a59770cd9802938dcdcc8b1f5582943ea24d05bee8a15a03c2d59a5bfa",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/wreck-debris-r1.call.json",
+          "sha256": "7e74b2d5c2083b6c8864d893c176f9e02006e216b39dbfe0de4a9404bef18009",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/wreck_debris/none/04.png",
+          "sha256": "370113ca3e202e9d2cc65c054b547463f53e4c140265907e71d41dc5993fa299",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        4,
+        6
+      ],
+      "output_sha256": "370113ca3e202e9d2cc65c054b547463f53e4c140265907e71d41dc5993fa299"
+    },
+    {
+      "id": "ui/head_harvester",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/head-harvester-r1.png",
+      "source_sha256": "f838fc5129547f8c30f4dbfa4a5e5a04c97955d0e433f9a9ee2c81015f05a6ac",
+      "crop_xywh": [
+        224,
+        317,
+        767,
+        700
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.018252933507170794,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "leaf_dark",
+        "leaf",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "night",
+        "moon",
+        "rot_dark",
+        "rot",
+        "blood"
+      ],
+      "animation": "ui/head_harvester",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/head_harvester.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/head-harvester-r1.prompt.txt",
+      "prompt_sha256": "cb6cebe03253cffea55c465513a279cc6b77431e6ed96945eb92eda8159c3998",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/head-harvester-r1.call.json",
+          "sha256": "10b7e5d9911234cca7a5f08ede16c80649ade0383f209bbea36c6edc666af70b",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/head_harvester/none/01.png",
+          "sha256": "a48299cc089e071c4d74962520366a26a95f894cc05f9b55c6d79bf86600987c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "approval": "A052 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0266",
+      "content_anchor_xy": [
+        7,
+        6
+      ],
+      "output_sha256": "a48299cc089e071c4d74962520366a26a95f894cc05f9b55c6d79bf86600987c"
+    },
+    {
+      "id": "enemies/harvester_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.14,
+      "loop": false,
+      "output": "sprites/enemies/harvester_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.prompt.txt",
+      "prompt_sha256": "c7f5a42b13c862e1cee82f8ee47367e99884c7636bc9706440bf392a062eb93f",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.call.json",
+          "sha256": "e7b4a5c14d469a654a2aa79e5cdc4b9c254ea6b2cdd2e23f821c0c5a8b277d9e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_walk/west/03.png",
+          "sha256": "a16cf487984dbe56faa147b0be8cf21d5e9b9564bc36a731a31f39ee530166b7",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "enemy_family": "harvester",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/harvester",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/harvester_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/harvester_walk_2",
+      "output_sha256": "a16cf487984dbe56faa147b0be8cf21d5e9b9564bc36a731a31f39ee530166b7"
+    },
+    {
+      "id": "enemies/harvester_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_attack.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.prompt.txt",
+      "prompt_sha256": "a0fb1226a9cb3797f3b6595ab9a092edc9770d53e7e0fada0cb47b501d5a1be9",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-crush-r1.call.json",
+          "sha256": "a2bfadf36a69e94f72e95389a5151091964dbda766cd8c454ed93f0b7d4009dd",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_crush/west/01.png",
+          "sha256": "16542f73665c18908f7622bde03266914e53e724e719cc06732da5e9416702b9",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "enemy_family": "harvester",
+      "enemy_motion": "crush",
+      "enemy_master_id": "enemies/harvester",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/harvester_crush_0",
+      "operation": "copy",
+      "alias_of": "enemies/harvester_crush_0",
+      "output_sha256": "16542f73665c18908f7622bde03266914e53e724e719cc06732da5e9416702b9"
+    },
+    {
+      "id": "enemies/harvester_death",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_compat_death",
+      "frame": 0,
+      "seconds": 0.12,
+      "loop": false,
+      "output": "sprites/enemies/harvester_death.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.prompt.txt",
+      "prompt_sha256": "488b9ec76a8eac14d85803f1d96f1824cf06fdee716ac0b91fed1d53af0b499e",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r3.call.json",
+          "sha256": "5e22c83f237206942cd1f0f2c87a548a258b2fd41fe641c241720352f084477f",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_death/west/05.png",
+          "sha256": "7c7262dc911c58195e4d69b47843e080451b2d57fed5a2c82eb696c13760c289",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "enemy_family": "harvester",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/harvester",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/harvester_death_4",
+      "operation": "copy",
+      "alias_of": "enemies/harvester_death_4",
+      "output_sha256": "7c7262dc911c58195e4d69b47843e080451b2d57fed5a2c82eb696c13760c289"
+    },
+    {
+      "id": "enemies/harvester_telegraph",
+      "owner": "raster",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/harvester_compat_telegraph",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/harvester_telegraph.png",
+      "prompt": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.prompt.txt",
+      "prompt_sha256": "fbb1f927e2f8de40e16865e1f4db58826815aa54bbf17fdece08a4209d28dff0",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/raw/harvester-windup-r1.call.json",
+          "sha256": "57307b2f8aa6e9ffb1f7ef1ddf595ebc75aa8e6ac45154f002188fc4e143594e",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/native/harvester_windup/west/03.png",
+          "sha256": "80108decf8e5a7598406887cdacd28594310a07939ebc4136c54f9df8ebc7057",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/contract.json",
+          "sha256": "5a2136e4598ffe0cf590f37468650f741838437f0d528e06c6c2b320fd9fb60a",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A052-harvester/APPROVAL.json",
+          "sha256": "83b78babcc954b9493be9688981775aadffa3853cd3d8b0e769452ebf1306d6a",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A052",
+      "integration_task": "0266",
+      "revision": 1,
+      "enemy_family": "harvester",
+      "enemy_motion": "windup",
+      "enemy_master_id": "enemies/harvester",
+      "cell_offset_xy": [
+        -32,
+        -44
+      ],
+      "input": "enemies/harvester_windup_2",
+      "operation": "copy",
+      "alias_of": "enemies/harvester_windup_2",
+      "output_sha256": "80108decf8e5a7598406887cdacd28594310a07939ebc4136c54f9df8ebc7057"
     }
   ]
 }

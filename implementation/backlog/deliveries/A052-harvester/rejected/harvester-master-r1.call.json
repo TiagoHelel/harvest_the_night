@@ -1,0 +1,36 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: production boss identity master A052 HARVESTER, HARVEST THE NIGHT.\nCreate ONE old harvesting machine possessed by rot. Side view facing WEST/LEFT in the game's orthographic three-quarter top-down camera. Warm RUST RED and timber chassis, dented iron panels and rivets, green rotten vines/fungus threaded through seams. At the FRONT/LEFT a broad cutting reel with scythe blades; behind it a small cab, hopper and tall exhaust stack at the BACK/RIGHT. Two matte dead headlamps resemble eyes. Big iron wheels, front wheel and rear wheel aligned on one ground baseline. No driver, no human head/arms/legs. It unmistakably reads as a MACHINE in this cozy farm's monster world.\nNative80x64 canvas, ground pivot40,60, visible machine58\u201366W x40\u201346H, target62x44. Width about1.4times height. Ground wheels touch row59, midpoint between wheels centredx40. Complete unclipped machine including blades and chimney, ample empty margins. Coarse hand-crafted pixelart with deliberate broad clusters, coloured dark outline, clean material planes and restrained simple texture; survive reduction to62x44. Neutral warm daylight highlights upperleft, runtime night colours later. Image1 worldstyle, image2 Giant onlyboss scale/outline/palette\u2014notshape, image3farmer is scale reference only.\nTrue transparentbackground alpha0 outside hardopaque pixel silhouette. No groundshadow, scene, dust, smoke, exhaustpuff, glow, bloom, halos, haze, gradient/blur, softpainting, vector,3D, text, labels or UI. Lamps are matte cream bonepixels, never shining. No tinydecorations that disappear atnative size.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/giant/master.png",
+      "sha256": "6f65de383660225fd6bea3da529102ce0f3bf495fa8c657a0b2a62f15362f4f1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-fecfd510-07ea-4541-9762-36b17643d657.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-master-r1.png",
+  "sha256": "001863f17ab296515baf05904f6c65e66ffd5451e804cee9571f7fde7ab4f13d",
+  "revision": 1,
+  "decision": "rejected: Overlongfrontprojection71x44; cannotcentrewheelswithclearborder.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\rejected\\harvester-master-r1.png"
+}

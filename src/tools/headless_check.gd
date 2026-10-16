@@ -13789,26 +13789,32 @@ func _task_0074_zombie_art() -> void:
 	print("  the closest two silhouettes are %s, differing in %d of 256 cells"
 		% [closest_pair, closest])
 
-	# **The Giant is the biggest thing on the field**, which is most of how it
-	# is told apart at a glance.
-	var giant := Image.load_from_file(ProjectSettings.globalize_path(
-		"res://sprites/enemies/giant.png"))
-	expect(giant != null, "the Giant loads")
-	if giant != null:
+	# **Every boss outsizes every non-boss** (the Giant alone until task 0266
+	# landed A052's Harvester), which is most of how one is told apart at a
+	# glance. Authored lunges keep a generous transparent animation envelope:
+	# size dominance concerns the visible body, never empty clearance.
+	var sizes := {}
+	for kind in kinds:
+		var body := Image.load_from_file(ProjectSettings.globalize_path(
+			"res://sprites/enemies/%s.png" % kind))
+		expect(body != null, "%s's body loads" % kind)
+		if body != null:
+			sizes[kind] = body.get_used_rect().size
+	var boss_kinds: Array = []
+	for kind in kinds:
+		if Combat.is_boss(kind) and sizes.has(kind):
+			boss_kinds.append(kind)
+	expect(boss_kinds.has(&"giant") and boss_kinds.has(&"harvester"),
+		"the Giant and the Harvester are the bosses drawn", str(boss_kinds))
+	for boss_kind in boss_kinds:
+		var big: Vector2i = sizes[boss_kind]
 		for kind in kinds:
-			if kind == &"giant":
+			if Combat.is_boss(kind) or not sizes.has(kind):
 				continue
-			var other := Image.load_from_file(ProjectSettings.globalize_path(
-				"res://sprites/enemies/%s.png" % kind))
-			# Authored lunges keep a generous transparent animation envelope.
-			# Size dominance concerns the visible body, never empty clearance.
-			var giant_size := giant.get_used_rect().size
-			var other_size := other.get_used_rect().size if other != null else Vector2i.ZERO
-			expect(other != null and giant_size.y > other_size.y
-				and giant_size.x > other_size.x,
-				"and is bigger than the %s" % kind,
-				"visible %dx%d against %dx%d" % [giant_size.x,
-					giant_size.y, other_size.x, other_size.y])
+			var small: Vector2i = sizes[kind]
+			expect(big.y > small.y and big.x > small.x,
+				"the %s is bigger than the %s" % [boss_kind, kind],
+				"visible %dx%d against %dx%d" % [big.x, big.y, small.x, small.y])
 
 	# Pale outlines follow ambient night like the rest of the body. They must
 	# remain cool and readable against grass without becoming light sources.
@@ -14736,9 +14742,10 @@ func _task_0082_shots() -> void:
 	# twenty-eight since 0145: the porch guardian awake. A hundred and
 	# twenty-nine since 0146: the cursor's looks. A hundred and thirty-two
 	# since 0200: autumn's field by day, by night and growing. A hundred and
-	# thirty-four since 0201: the sprinklers at rest and by night.
-	expect(names.size() == 134,
-		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast, the guardian awake, the cursor's looks, autumn's field, the sprinklers at rest and by night and the 1.0 farm",
+	# thirty-four since 0201: the sprinklers at rest and by night. A hundred
+	# and thirty-five since 0266: the Harvester's night forecast.
+	expect(names.size() == 135,
+		"the original scenarios, options tabs, three farmhouse scenarios, the pad's controls, the pass-out, the day's build mode, the repair cursor, the aim, the morning, bedtime, the night's lessons, the first week's, the Full Moon, the boss's escape, the calm night, the trampled field, the ruins, the decoy's art, the garlic's art, the searchlight's art, a summer and an autumn forecast, the guardian awake, the cursor's looks, autumn's field, the sprinklers at rest and by night, the Harvester's forecast and the 1.0 farm",
 		"%d: %s" % [names.size(), str(names)])
 	for wanted in ["noon", "dusk", "wave", "result", "tech", "pause",
 			"options_access", "options_video", "options_audio",

@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-287 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+288 tarefas em 13 dias, de  a 2026-10-15. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -330,6 +330,7 @@ voz alta.
 | 0263 | Art: the digger | 2026-10-15 |
 | 0264 | Art: the frost zombie | 2026-10-15 |
 | 0265 | Art: the wraith | 2026-10-15 |
+| 0266 | Art: the Harvester | 2026-10-15 |
 
 ## Toda vez que o jogo mudou por baixo
 

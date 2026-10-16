@@ -1,0 +1,12 @@
+{
+  "first_crop_xywh": [
+    27,
+    259,
+    354,
+    298
+  ],
+  "rear_stack_y": 298,
+  "ground_y": 557,
+  "body_height_raw": 259,
+  "body_height_target": 42.7
+}

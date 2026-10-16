@@ -1,0 +1,197 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-death-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        401,
+        793
+      ],
+      "crop_xywh": [
+        22,
+        293,
+        370,
+        273
+      ],
+      "content_scale": 0.1564102564102564,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      11,
+      17,
+      69,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      58,
+      43
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r1.png",
+      "sheet_cell_xywh": [
+        401,
+        0,
+        352,
+        793
+      ],
+      "crop_xywh": [
+        412,
+        282,
+        341,
+        284
+      ],
+      "content_scale": 0.1564102564102564,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      14,
+      16,
+      67,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      53,
+      44
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r1.png",
+      "sheet_cell_xywh": [
+        753,
+        0,
+        418,
+        793
+      ],
+      "crop_xywh": [
+        755,
+        323,
+        405,
+        253
+      ],
+      "content_scale": 0.1564102564102564,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      9,
+      20,
+      72,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      63,
+      40
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r1.png",
+      "sheet_cell_xywh": [
+        1171,
+        0,
+        408,
+        793
+      ],
+      "crop_xywh": [
+        1184,
+        356,
+        381,
+        215
+      ],
+      "content_scale": 0.1564102564102564,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      10,
+      26,
+      70,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      60,
+      34
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-death-r1-4",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-death-r1.png",
+      "sheet_cell_xywh": [
+        1579,
+        0,
+        404,
+        793
+      ],
+      "crop_xywh": [
+        1595,
+        403,
+        364,
+        166
+      ],
+      "content_scale": 0.1564102564102564,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      12,
+      34,
+      69,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      57,
+      26
+    ]
+  }
+]

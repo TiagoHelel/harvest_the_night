@@ -1,6 +1,6 @@
 # A052 - The Harvester
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0266
 - **Dressed by game tasks:** 0253
 - **Spec after game task:** 0253

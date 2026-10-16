@@ -1,0 +1,30 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Edit INPUT1, the four-frame rolling machine strip, into a charge loop. Keep its exact body, cab, hopper, exhaust stack, wheel diameters, vines, headlamps, perspective, source scale and all four cell positions. The first input is the EDIT TARGET; input2 is identity reference only. Lower the cutting header by about2nativepixels and angle the blades forwardWEST, rotating reel/wheelspokes in four distinct positions. Machine lunges low. Do not narrow the body, enlarge the chimney or shrink the wheels. No dust, speedlines, targets, smoke or extraFX. Same native43pxheight, bodywidth about64px, cabroof-to-ground~33px. Feet/wheels on commonbaseline, midpointbetweenwheels fixed. Transparent alpha0 exceptfullyopaque pixelart, same neutraldaylight, no halos/shadows/background/labels. Four separatecomplete machines, clearfullheightgutters. Preserve visualphysicalidentity, change onlyheaderpose and rotations.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-walk-r2.png",
+      "sha256": "789ac88bb210976b8b48ca2b4403291b5040cceedfb96823b72befde3f51cbd6",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png",
+      "sha256": "55812df0c9cdc7988f2501fbb7a5e13a6754fab1b14c36c9f27d02173e3d78df",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-b98214cc-33f1-4562-9922-dd096474f49b.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-charge-r2.png",
+  "sha256": "2ed7387a7912f491a6d2849e1943299316a4821e33e043aeab5f0ae293efd707",
+  "revision": 2,
+  "decision": "rejected: Header tips belowwheelbaseline; r3raisesheader.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\rejected\\harvester-charge-r2.png"
+}

@@ -1,0 +1,210 @@
+[
+  {
+    "recipe": {
+      "id": "wreck-debris-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\wreck-debris-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        491,
+        724
+      ],
+      "crop_xywh": [
+        68,
+        426,
+        385,
+        247
+      ],
+      "content_scale": 0.030983302411873838,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    "native_bounds": [
+      6,
+      10,
+      18,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      12,
+      8
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wreck-debris-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\wreck-debris-r1.png",
+      "sheet_cell_xywh": [
+        491,
+        0,
+        651,
+        724
+      ],
+      "crop_xywh": [
+        531,
+        142,
+        571,
+        539
+      ],
+      "content_scale": 0.030983302411873838,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    "native_bounds": [
+      3,
+      1,
+      21,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      18,
+      17
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wreck-debris-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\wreck-debris-r1.png",
+      "sheet_cell_xywh": [
+        1142,
+        0,
+        586,
+        724
+      ],
+      "crop_xywh": [
+        1184,
+        238,
+        480,
+        440
+      ],
+      "content_scale": 0.030983302411873838,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    "native_bounds": [
+      5,
+      4,
+      20,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      15,
+      14
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wreck-debris-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\wreck-debris-r1.png",
+      "sheet_cell_xywh": [
+        1728,
+        0,
+        444,
+        724
+      ],
+      "crop_xywh": [
+        1794,
+        485,
+        287,
+        188
+      ],
+      "content_scale": 0.030983302411873838,
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    "native_bounds": [
+      8,
+      12,
+      17,
+      18
+    ],
+    "unclipped_scaled_wh": [
+      9,
+      6
+    ]
+  }
+]

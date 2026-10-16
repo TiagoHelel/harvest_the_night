@@ -1,0 +1,7 @@
+{
+  "prompt": "Edit this FIVE-frame Harvester death strip. Preserve machine identity, body scale, wheel/cab sizes, source canvas, cell positions and baseline. Correct ordered poses: frame1 should JOLT with the flying metalpanel now visible in frame2; transfer the panel burst to frame1. Frame2 cuttingREEL breaks off and drops to ground, without a flyingpanel above. Frame3 sags on brokenwheel; frame4 collapses; frame5 is LOW heap of shattered rusty panels, benttimber, wheel and blades—BREAKOFF the tall exhauststack and lay it horizontally in theheap. Finalheap height at most18nativepixels relative to43px originalwholebody, notcurrent26px. Heights mustneverincrease fromframe1to5. Keep bodymass, do NOTscale finalheap smaller, collapse actualparts. No smoke, fire, dustcloud or groundpatch. Sharp coarsepixelart samecolouredoutline anddaylight, transparentalpha0 outsideopaqueshapes. All5complete separatedbyfullheightgutters. No frames, text orlabels.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-death-r1.png"
+  ]
+}

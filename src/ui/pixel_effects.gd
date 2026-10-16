@@ -6,10 +6,12 @@ extends RefCounted
 ## most 24 forms; newer contacts replace older ones during a crowded wave.
 const MAX_FORMS := 24
 ## A050's ice burst since task 0264, moved here from `DRAWN`.
+## A052's wreck debris since task 0266.
 const COUNTS := {&"muzzle":3, &"impact":3, &"flame":4, &"smoke":4,
-	&"dust":3, &"splash":4, &"flare":4, &"ice_shatter":4}
+	&"dust":3, &"splash":4, &"flare":4, &"ice_shatter":4, &"wreck_debris":4}
 const OPACITY := {&"muzzle":1.0, &"impact":0.85, &"flame":1.0,
-	&"smoke":0.6, &"dust":0.8, &"splash":1.0, &"flare":1.0, &"ice_shatter":1.0}
+	&"smoke":0.6, &"dust":0.8, &"splash":1.0, &"flare":1.0, &"ice_shatter":1.0,
+	&"wreck_debris":1.0}
 ## **One-shots drawn in code until their pack lands** (task 0251), frames by
 ## family, played as the raster ones are at full opacity. `COUNTS` stays the
 ## raster families the effect showcase holds to their PNGs; the leaf that
@@ -40,6 +42,9 @@ var _work := PlayerWork.new()
 ## many of this tick's the bursts have spent.
 var _kills: Dictionary = {}
 var _bursts: Dictionary = {}
+## **A charge's line** (task 0266): before the tick, the cells of every
+## charger's line with a structure on them - the ones it may bring down.
+var _wrecks: Dictionary = {}
 
 
 func reset() -> void:
@@ -48,6 +53,7 @@ func reset() -> void:
 	_guns.clear()
 	_kills.clear()
 	_bursts.clear()
+	_wrecks.clear()
 	_work.reset()
 	_tick = -1
 	_credit = 0.0
@@ -155,6 +161,7 @@ func before_tick(state: Dictionary, gun_cells: Array) -> void:
 	_guns.clear()
 	_kills.clear()
 	_bursts.clear()
+	_wrecks.clear()
 	var killed: Dictionary = state["killed_by_kind"]
 	for id in Entities.ids(state):
 		var one := Entities.get_one(state, int(id))
@@ -165,6 +172,10 @@ func before_tick(state: Dictionary, gun_cells: Array) -> void:
 		var kind := StringName(one["kind"])
 		if Combat.chills(kind) and not _kills.has(kind):
 			_kills[kind] = int(killed.get(kind, 0))
+		for cell in Enemies.charge_line(state, int(id)):
+			var on := Farm.occupant(state, cell)
+			if not on.is_empty() and on.get("id", &"") != &"house":
+				_wrecks[Grid.index(cell)] = true
 	for idx in gun_cells:
 		_guns[int(idx)] = int(state["occupants"][int(idx)].get("reload",0))
 	_flares = Ability.used(state, Ability.FLARE)
@@ -175,6 +186,7 @@ func after_tick(state: Dictionary) -> void:
 	if _tick < 0 or int(state["tick"]) != _tick+1:
 		_entities.clear()
 		_guns.clear()
+		_wrecks.clear()
 		_tick = -1
 		_work.reset()
 		return
@@ -196,6 +208,14 @@ func after_tick(state: Dictionary) -> void:
 			emit(&"impact", at-Vector2(0,20 if EnemyMotion.posed_boss(was[3]) else 12))
 		if Combat.is_burning(state,int(id)) and not bool(was[2]):
 			emit(&"flame", at-Vector2(0,4))
+	# **A structure a charge brought down** (task 0266): A052's debris thrown
+	# up at its foot, the bottom middle of its cell.
+	var crushed: Array = _wrecks.keys()
+	crushed.sort()
+	for idx in crushed:
+		var cell := Grid.cell(int(idx))
+		if Farm.occupant(state, cell).is_empty():
+			emit(&"wreck_debris", (Vector2(cell) + Vector2(0.5, 1.0)) * GameData.TILE_SIZE)
 	for idx in _guns:
 		var on: Dictionary = state["occupants"].get(idx,{})
 		# Reload rises on the actual firing tick, including powered towers.
@@ -219,6 +239,7 @@ func after_tick(state: Dictionary) -> void:
 	_guns.clear()
 	_kills.clear()
 	_bursts.clear()
+	_wrecks.clear()
 	_tick = -1
 
 

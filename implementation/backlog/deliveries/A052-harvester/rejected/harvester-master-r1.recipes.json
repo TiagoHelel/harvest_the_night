@@ -1,0 +1,41 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-master-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-master-r1.png",
+      "crop_xywh": [
+        35,
+        89,
+        1419,
+        882
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1479,
+        1064
+      ],
+      "content_scale": 0.049886621315192746,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      5,
+      16,
+      76,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      71,
+      44
+    ]
+  }
+]

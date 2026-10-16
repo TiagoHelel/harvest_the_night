@@ -1,0 +1,9 @@
+{
+  "prompt": "Create one pixel-art forecast icon for Harvester, a compact 16x16 mark, not a full vehicle. Show ONLY its front cutting reel and the front cab as a close three-quarter bust turned left, with two small dead cream headlamps that read like eyes. The visual silhouette must be contained in a square icon like the framing example. Use the cropped Harvester master only to identify the front reel and rusty palette; do not continue or reproduce the whole machine, wheels, hopper, rear stack, or ground. Use the Giant icon only for framing and the wood icon only for the game's palette/style. Flat cut at row 14, centered at x=8, max 14px extent, one transparent pixel on top/left/right. Bone or bone-dark lamps, matte and unlit. Coarse crisp pixel art, a few broad color clusters, no fine texture. Transparent background, binary alpha, sharp hard edges. No text, frame, HUD, shadow, halo, haze, glow, gradient, blur, 3D, contact sheet or extra objects. Return a single isolated head icon.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/preview/harvester-front-reference-4x.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/preview/head-giant-framing-6x.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+  ]
+}

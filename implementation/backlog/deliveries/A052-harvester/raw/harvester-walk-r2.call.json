@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Create FOUR horizontal pixel-art roll-animation frames of the EXACT harvesting machine in input1. Each frame must retain the complete machine silhouette width-to-height ratio approximately1.5:1 and the exact wheel/cab/hopper/cutter/chimney proportions. Do not make it narrower or grow the exhaust stack. At native size the machine is64wide x43high including stack; cabroof-to-wheelground is33px, frontwheel16diameter and rearwheel18diameter. Both lamps mattecream. WEST-facing. The midpoint between the wheelhubs must be at pivot40,60 and wheelcontacts on row59, cutting tips aboveground. Change only four reel-blade and wheel-spoke rotation positions; chassis bob\u22641px, vines stayonbody. Four distinct wheel/reel drawings, no duplicateframes or horizontal shifts. Huge FULL HEIGHT transparent column gutters and generous margins, bodies small within each cell, completeunclipped. Same coarse hand-crafted pixel clusters and neutralupperleftdaylight asreference. Alpha0 outside hardopaque sprite silhouettes, no groundshadow/dust/smoke/haze/glow/scene/labels/blur. Keep 64x43 proportions exactly, NOT54x43.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/raw/harvester-master-r2.png",
+      "sha256": "55812df0c9cdc7988f2501fbb7a5e13a6754fab1b14c36c9f27d02173e3d78df",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-64cee232-bc84-40cd-9549-343e8a5638b4.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-walk-r2.png",
+  "sha256": "789ac88bb210976b8b48ca2b4403291b5040cceedfb96823b72befde3f51cbd6",
+  "revision": 2,
+  "decision": "selected for final owner review; not approved"
+}

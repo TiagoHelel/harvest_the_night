@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-287 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
+288 tasks over 13 days,  to 2026-10-15. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -331,6 +331,7 @@ is the sort of thing this list exists to say out loud.
 | 0263 | Art: the digger | 2026-10-15 |
 | 0264 | Art: the frost zombie | 2026-10-15 |
 | 0265 | Art: the wraith | 2026-10-15 |
+| 0266 | Art: the Harvester | 2026-10-15 |
 
 ## Every time the game changed underneath itself
 

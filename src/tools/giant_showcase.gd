@@ -4,11 +4,13 @@ extends "res://src/tools/enemy_showcase.gd"
 ##
 ## **Any boss drawn in the Giant's pose names** (task 0246): `--boss=<family>`
 ## picks it, `--giant` and no flag the Giant, whose pictures and report are as
-## before. The leaves 0266-0268 run it for theirs.
+## before. The leaves 0266-0268 run it for theirs: a boss's blow is its own
+## (`EnemyMotion.strike_of`, the Harvester's crush) and its wind-up its own
+## `telegraph_ticks`.
 
 ## The boss family shown, and each one's ground pivot.
 var _family: StringName = &"giant"
-const PIVOTS := {&"giant": Vector2(40, 60)}
+const PIVOTS := {&"giant": Vector2(40, 60), &"harvester": Vector2(40, 60)}
 
 
 func _run() -> void:
@@ -42,7 +44,12 @@ func _lineup() -> Array[StringName]:
 	return out
 
 
-## The boss's pose name: `walk`, `windup`, `slam` and a frame.
+## The boss's blow: the Giant's slam, the Harvester's crush (task 0266).
+func _strike() -> String:
+	return EnemyMotion.strike_of(_family)
+
+
+## The boss's pose name: `walk`, `windup`, its blow and a frame.
 func _pose_name(motion: String, frame: int) -> StringName:
 	return StringName("%s_%s_%d" % [_family, motion, frame])
 
@@ -106,7 +113,7 @@ func _boss_attack(right: bool) -> void:
 		_step()
 		var one := Entities.get_one(_state,id)
 		var pose := _world._pose_of(one)
-		if str(pose).begins_with(_prefix("windup")) or str(pose).begins_with(_prefix("slam")):
+		if str(pose).begins_with(_prefix("windup")) or str(pose).begins_with(_prefix(_strike())):
 			if not poses.has(pose):
 				await _settle()
 				await _shoot("attack_%d_%s" % [int(right),str(pose)], "Actual core target/wait/hit / body and ring agree")
@@ -118,12 +125,12 @@ func _boss_attack(right: bool) -> void:
 		var hp := int(Farm.occupant(_state,cell+toward).get("hp",0))
 		if hp < last_hp and hit_tick < 0:
 			hit_tick = t
-			expect(str(pose).begins_with(_prefix("slam")),"The slam starts on the actual damage tick")
+			expect(str(pose).begins_with(_prefix(_strike())),"The slam starts on the actual damage tick")
 		if hit_tick < 0:
 			expect(hp==120,"Telegraph does not invent early wall damage")
 		last_hp = hp
 	expect(hit_tick>=int(GameData.ENEMIES[_family]["telegraph_ticks"]),"Giant's first strike preserves the existing warning")
-	for prefix in ["windup","slam"]:
+	for prefix in ["windup",_strike()]:
 		for frame in 3:
 			expect(poses.has(_pose_name(prefix,frame)),"All three actual "+prefix+" poses played")
 	# A loaded target is read directly; a stale distant target is not a tell.
@@ -144,7 +151,7 @@ func _house_warning() -> void:
 	var id := Entities.spawn(_state,_family,Vector2i(26,8))
 	await _settle()
 	var seen: Dictionary = {}
-	for t in 34:
+	for t in int(GameData.ENEMIES[_family]["telegraph_ticks"])+4:
 		_step()
 		var one := Entities.get_one(_state,id)
 		if one.is_empty():

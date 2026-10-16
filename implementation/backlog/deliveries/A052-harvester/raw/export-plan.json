@@ -1,0 +1,1592 @@
+{
+  "title": "The Harvester",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "palette_mode": "A",
+  "expected_files": 25,
+  "files": [
+    {
+      "anim": "harvester",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_0",
+      "output": "native/harvester/west/01.png",
+      "runtime_name": "sprites/enemies/harvester.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-master-r2.png",
+      "prompt": "raw/harvester-master-r2.prompt.txt",
+      "call": "raw/harvester-master-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          49,
+          55,
+          1405,
+          938
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1491,
+          1055
+        ],
+        "content_scale": 0.0455223880597015,
+        "content_anchor_xy": [
+          39,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          23,
+          33
+        ],
+        [
+          47,
+          57
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_walk_0",
+      "output": "native/harvester_walk/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_walk_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-walk-r2.png",
+      "prompt": "raw/harvester-walk-r2.prompt.txt",
+      "call": "raw/harvester-walk-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          9,
+          162,
+          522,
+          361
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          539,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          37,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          47,
+          58
+        ],
+        [
+          24,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_walk_1",
+      "output": "native/harvester_walk/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_walk_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-walk-r2.png",
+      "prompt": "raw/harvester-walk-r2.prompt.txt",
+      "call": "raw/harvester-walk-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          548,
+          162,
+          509,
+          361
+        ],
+        "sheet_cell_xywh": [
+          539,
+          0,
+          527,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          35,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          47,
+          58
+        ],
+        [
+          24,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_walk_2",
+      "output": "native/harvester_walk/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_walk_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-walk-r2.png",
+      "prompt": "raw/harvester-walk-r2.prompt.txt",
+      "call": "raw/harvester-walk-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1077,
+          162,
+          506,
+          361
+        ],
+        "sheet_cell_xywh": [
+          1066,
+          0,
+          528,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          35,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          47,
+          58
+        ],
+        [
+          23,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_walk",
+      "dir": "west",
+      "frame": 3,
+      "pose": "harvester_walk_3",
+      "output": "native/harvester_walk/west/04.png",
+      "runtime_name": "sprites/enemies/harvester_walk_3.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.14,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          60,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-walk-r2.png",
+      "prompt": "raw/harvester-walk-r2.prompt.txt",
+      "call": "raw/harvester-walk-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1607,
+          161,
+          514,
+          363
+        ],
+        "sheet_cell_xywh": [
+          1594,
+          0,
+          564,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          36,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          47,
+          57
+        ],
+        [
+          23,
+          31
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_windup",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_windup_0",
+      "output": "native/harvester_windup/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_windup_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          18
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-windup-r1.png",
+      "prompt": "raw/harvester-windup-r1.prompt.txt",
+      "call": "raw/harvester-windup-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          16,
+          211,
+          684,
+          468
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          723,
+          724
+        ],
+        "content_scale": 0.0891025641025641,
+        "content_anchor_xy": [
+          38,
+          42
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_hubs_xy": [
+        [
+          28,
+          50
+        ],
+        [
+          52,
+          50
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_windup",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_windup_1",
+      "output": "native/harvester_windup/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_windup_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          62,
+          19
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-windup-r1.png",
+      "prompt": "raw/harvester-windup-r1.prompt.txt",
+      "call": "raw/harvester-windup-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          747,
+          186,
+          708,
+          496
+        ],
+        "sheet_cell_xywh": [
+          723,
+          0,
+          742,
+          724
+        ],
+        "content_scale": 0.0891025641025641,
+        "content_anchor_xy": [
+          37,
+          44
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_hubs_xy": [
+        [
+          27,
+          43
+        ],
+        [
+          52,
+          51
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_windup",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_windup_2",
+      "output": "native/harvester_windup/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_windup_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          67,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-windup-r1.png",
+      "prompt": "raw/harvester-windup-r1.prompt.txt",
+      "call": "raw/harvester-windup-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1477,
+          27,
+          679,
+          659
+        ],
+        "sheet_cell_xywh": [
+          1465,
+          0,
+          707,
+          724
+        ],
+        "content_scale": 0.0891025641025641,
+        "content_anchor_xy": [
+          31,
+          59
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_hubs_xy": [
+        [
+          30,
+          31
+        ],
+        [
+          50,
+          50
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_charge_0",
+      "output": "native/harvester_charge/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_charge_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          16
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-charge-r3.png",
+      "prompt": "raw/harvester-charge-r3.prompt.txt",
+      "call": "raw/harvester-charge-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          14,
+          145,
+          487,
+          372
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          520,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          36,
+          44
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          46,
+          56
+        ],
+        [
+          25,
+          33
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_charge_1",
+      "output": "native/harvester_charge/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_charge_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          58,
+          16
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-charge-r3.png",
+      "prompt": "raw/harvester-charge-r3.prompt.txt",
+      "call": "raw/harvester-charge-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          541,
+          145,
+          496,
+          372
+        ],
+        "sheet_cell_xywh": [
+          520,
+          0,
+          536,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          36,
+          44
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          46,
+          57
+        ],
+        [
+          25,
+          33
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_charge_2",
+      "output": "native/harvester_charge/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_charge_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          16
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-charge-r3.png",
+      "prompt": "raw/harvester-charge-r3.prompt.txt",
+      "call": "raw/harvester-charge-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1077,
+          145,
+          496,
+          372
+        ],
+        "sheet_cell_xywh": [
+          1056,
+          0,
+          536,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          37,
+          44
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          46,
+          56
+        ],
+        [
+          24,
+          33
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_charge",
+      "dir": "west",
+      "frame": 3,
+      "pose": "harvester_charge_3",
+      "output": "native/harvester_charge/west/04.png",
+      "runtime_name": "sprites/enemies/harvester_charge_3.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          57,
+          16
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-charge-r3.png",
+      "prompt": "raw/harvester-charge-r3.prompt.txt",
+      "call": "raw/harvester-charge-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1613,
+          145,
+          498,
+          371
+        ],
+        "sheet_cell_xywh": [
+          1592,
+          0,
+          565,
+          729
+        ],
+        "content_scale": 0.11828254847645431,
+        "content_anchor_xy": [
+          37,
+          44
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          46,
+          56
+        ],
+        [
+          24,
+          33
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_crush",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_crush_0",
+      "output": "native/harvester_crush/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_crush_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          59,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-crush-r1.png",
+      "prompt": "raw/harvester-crush-r1.prompt.txt",
+      "call": "raw/harvester-crush-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          32,
+          128,
+          672,
+          484
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          714,
+          724
+        ],
+        "content_scale": 0.08840579710144929,
+        "content_anchor_xy": [
+          35,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          47,
+          57
+        ],
+        [
+          24,
+          33
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_crush",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_crush_1",
+      "output": "native/harvester_crush/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_crush_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          59,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-crush-r1.png",
+      "prompt": "raw/harvester-crush-r1.prompt.txt",
+      "call": "raw/harvester-crush-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          725,
+          128,
+          703,
+          491
+        ],
+        "sheet_cell_xywh": [
+          714,
+          0,
+          737,
+          724
+        ],
+        "content_scale": 0.08840579710144929,
+        "content_anchor_xy": [
+          38,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          48,
+          57
+        ],
+        [
+          24,
+          32
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_crush",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_crush_2",
+      "output": "native/harvester_crush/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_crush_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {
+        "smoke_xy": [
+          59,
+          17
+        ]
+      },
+      "grounded": true,
+      "source": "raw/harvester-crush-r1.png",
+      "prompt": "raw/harvester-crush-r1.prompt.txt",
+      "call": "raw/harvester-crush-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1476,
+          128,
+          675,
+          483
+        ],
+        "sheet_cell_xywh": [
+          1451,
+          0,
+          721,
+          724
+        ],
+        "content_scale": 0.08840579710144929,
+        "content_anchor_xy": [
+          36,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      },
+      "inspection_wheel_contacts": [
+        [
+          23,
+          33
+        ],
+        [
+          47,
+          57
+        ]
+      ]
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 0,
+      "pose": "harvester_death_0",
+      "output": "native/harvester_death/west/01.png",
+      "runtime_name": "sprites/enemies/harvester_death_0.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/harvester-death-r3.png",
+      "prompt": "raw/harvester-death-r3.prompt.txt",
+      "call": "raw/harvester-death-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          27,
+          259,
+          354,
+          298
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          392,
+          793
+        ],
+        "content_scale": 0.16486486486486487,
+        "content_anchor_xy": [
+          29,
+          49
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 1,
+      "pose": "harvester_death_1",
+      "output": "native/harvester_death/west/02.png",
+      "runtime_name": "sprites/enemies/harvester_death_1.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/harvester-death-r3.png",
+      "prompt": "raw/harvester-death-r3.prompt.txt",
+      "call": "raw/harvester-death-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          405,
+          298,
+          365,
+          263
+        ],
+        "sheet_cell_xywh": [
+          392,
+          0,
+          393,
+          793
+        ],
+        "content_scale": 0.16486486486486487,
+        "content_anchor_xy": [
+          30,
+          43
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 2,
+      "pose": "harvester_death_2",
+      "output": "native/harvester_death/west/03.png",
+      "runtime_name": "sprites/enemies/harvester_death_2.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/harvester-death-r3.png",
+      "prompt": "raw/harvester-death-r3.prompt.txt",
+      "call": "raw/harvester-death-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          801,
+          337,
+          359,
+          225
+        ],
+        "sheet_cell_xywh": [
+          785,
+          0,
+          395,
+          793
+        ],
+        "content_scale": 0.16486486486486487,
+        "content_anchor_xy": [
+          29,
+          37
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 3,
+      "pose": "harvester_death_3",
+      "output": "native/harvester_death/west/04.png",
+      "runtime_name": "sprites/enemies/harvester_death_3.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/harvester-death-r3.png",
+      "prompt": "raw/harvester-death-r3.prompt.txt",
+      "call": "raw/harvester-death-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1201,
+          368,
+          363,
+          193
+        ],
+        "sheet_cell_xywh": [
+          1180,
+          0,
+          403,
+          793
+        ],
+        "content_scale": 0.16486486486486487,
+        "content_anchor_xy": [
+          30,
+          32
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "harvester_death",
+      "dir": "west",
+      "frame": 4,
+      "pose": "harvester_death_4",
+      "output": "native/harvester_death/west/05.png",
+      "runtime_name": "sprites/enemies/harvester_death_4.png",
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1,
+      "seconds": 0.12,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/harvester-death-r3.png",
+      "prompt": "raw/harvester-death-r3.prompt.txt",
+      "call": "raw/harvester-death-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1603,
+          446,
+          349,
+          113
+        ],
+        "sheet_cell_xywh": [
+          1583,
+          0,
+          400,
+          793
+        ],
+        "content_scale": 0.16486486486486487,
+        "content_anchor_xy": [
+          29,
+          19
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": null,
+        "mirrored_from": null
+      }
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 0,
+      "pose": "wreck_debris_0",
+      "output": "native/wreck_debris/none/01.png",
+      "runtime_name": "sprites/effects/wreck_debris_0.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wreck-debris-r1.png",
+      "prompt": "raw/wreck-debris-r1.prompt.txt",
+      "call": "raw/wreck-debris-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          68,
+          426,
+          385,
+          247
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          491,
+          724
+        ],
+        "content_scale": 0.030983302411873838,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "soil_dark",
+          "soil",
+          "soil_light"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 1,
+      "pose": "wreck_debris_1",
+      "output": "native/wreck_debris/none/02.png",
+      "runtime_name": "sprites/effects/wreck_debris_1.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wreck-debris-r1.png",
+      "prompt": "raw/wreck-debris-r1.prompt.txt",
+      "call": "raw/wreck-debris-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          531,
+          142,
+          571,
+          539
+        ],
+        "sheet_cell_xywh": [
+          491,
+          0,
+          651,
+          724
+        ],
+        "content_scale": 0.030983302411873838,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "soil_dark",
+          "soil",
+          "soil_light"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 2,
+      "pose": "wreck_debris_2",
+      "output": "native/wreck_debris/none/03.png",
+      "runtime_name": "sprites/effects/wreck_debris_2.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wreck-debris-r1.png",
+      "prompt": "raw/wreck-debris-r1.prompt.txt",
+      "call": "raw/wreck-debris-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1184,
+          238,
+          480,
+          440
+        ],
+        "sheet_cell_xywh": [
+          1142,
+          0,
+          586,
+          724
+        ],
+        "content_scale": 0.030983302411873838,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "soil_dark",
+          "soil",
+          "soil_light"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    {
+      "anim": "wreck_debris",
+      "dir": "none",
+      "frame": 3,
+      "pose": "wreck_debris_3",
+      "output": "native/wreck_debris/none/04.png",
+      "runtime_name": "sprites/effects/wreck_debris_3.png",
+      "canvas_wh": [
+        24,
+        20
+      ],
+      "pivot_xy": [
+        12,
+        18
+      ],
+      "draw_scale": 1,
+      "seconds": 0.08,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wreck-debris-r1.png",
+      "prompt": "raw/wreck-debris-r1.prompt.txt",
+      "call": "raw/wreck-debris-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1794,
+          485,
+          287,
+          188
+        ],
+        "sheet_cell_xywh": [
+          1728,
+          0,
+          444,
+          724
+        ],
+        "content_scale": 0.030983302411873838,
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "soil_dark",
+          "soil",
+          "soil_light"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "soil_dark",
+        "soil",
+        "soil_light"
+      ]
+    },
+    {
+      "anim": "head_harvester",
+      "dir": "none",
+      "frame": 0,
+      "pose": "head_harvester_0",
+      "output": "native/head_harvester/none/01.png",
+      "runtime_name": "sprites/ui/head_harvester.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/head-harvester-r1.png",
+      "prompt": "raw/head-harvester-r1.prompt.txt",
+      "call": "raw/head-harvester-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          224,
+          317,
+          767,
+          700
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.018252933507170794,
+        "content_anchor_xy": [
+          7,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "grass_dark",
+          "grass",
+          "grass_light",
+          "soil_dark",
+          "soil",
+          "soil_light",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "wood_dark",
+          "wood",
+          "wood_light",
+          "leaf_dark",
+          "leaf",
+          "roof_dark",
+          "roof",
+          "roof_light",
+          "gold_dark",
+          "gold",
+          "gold_light",
+          "flame",
+          "flame_hot",
+          "bone",
+          "bone_dark",
+          "skin_dark",
+          "skin",
+          "skin_light",
+          "night",
+          "moon",
+          "rot_dark",
+          "rot",
+          "blood"
+        ],
+        "mirrored_from": null
+      },
+      "inspection_eye_xy": [
+        [
+          6,
+          7
+        ],
+        [
+          9,
+          8
+        ]
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "leaf_dark",
+        "leaf",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "night",
+        "moon",
+        "rot_dark",
+        "rot",
+        "blood"
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "deviations": [],
+  "supersedes": [],
+  "comparison": [
+    {
+      "path": "sprites/enemies/giant.png",
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "quality_issues": [
+    "Wind-up anchors are registered to measured wheelhub centres; contact-only anchoring would incorrectlyplace liftedwheel poses. Smoke is metadata only.",
+    "Charge r3 is an edit of roll r2 at matching source dimensions and inherits its exactcontent_scale; do not fit each newheaderangle independently.",
+    "Death0 scale is measured from rearstack/ground, excluding airbornepanel. No per-frame resize. Final owner must judge machineproportions and rotation/charge/readability at1x in assembledscene."
+  ]
+}

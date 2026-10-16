@@ -1,0 +1,169 @@
+[
+  {
+    "recipe": {
+      "id": "harvester-crush-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-crush-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        714,
+        724
+      ],
+      "crop_xywh": [
+        32,
+        128,
+        672,
+        484
+      ],
+      "content_scale": 0.08840579710144929,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        35,
+        43
+      ]
+    },
+    "native_bounds": [
+      5,
+      17,
+      64,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      59,
+      43
+    ],
+    "registered_wheel_contact_clusters": [
+      [
+        24,
+        33
+      ],
+      [
+        47,
+        57
+      ]
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-crush-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-crush-r1.png",
+      "sheet_cell_xywh": [
+        714,
+        0,
+        737,
+        724
+      ],
+      "crop_xywh": [
+        725,
+        128,
+        703,
+        491
+      ],
+      "content_scale": 0.08840579710144929,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        38,
+        43
+      ]
+    },
+    "native_bounds": [
+      2,
+      17,
+      64,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      62,
+      43
+    ],
+    "registered_wheel_contact_clusters": [
+      [
+        10,
+        12
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        24,
+        32
+      ],
+      [
+        48,
+        57
+      ]
+    ]
+  },
+  {
+    "recipe": {
+      "id": "harvester-crush-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A052-harvester\\raw\\harvester-crush-r1.png",
+      "sheet_cell_xywh": [
+        1451,
+        0,
+        721,
+        724
+      ],
+      "crop_xywh": [
+        1476,
+        128,
+        675,
+        483
+      ],
+      "content_scale": 0.08840579710144929,
+      "canvas_wh": [
+        80,
+        64
+      ],
+      "pivot_xy": [
+        40,
+        60
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        36,
+        43
+      ]
+    },
+    "native_bounds": [
+      4,
+      17,
+      64,
+      60
+    ],
+    "unclipped_scaled_wh": [
+      60,
+      43
+    ],
+    "registered_wheel_contact_clusters": [
+      [
+        23,
+        33
+      ],
+      [
+        47,
+        57
+      ]
+    ]
+  }
+]

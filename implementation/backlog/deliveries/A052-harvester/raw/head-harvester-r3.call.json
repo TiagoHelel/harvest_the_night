@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Create one pixel-art forecast icon for Harvester, a compact 16x16 mark, not a full vehicle. Show ONLY its front cutting reel and the front cab as a close three-quarter bust turned left, with two small dead cream headlamps that read like eyes. The visual silhouette must be contained in a square icon like the framing example. Use the cropped Harvester master only to identify the front reel and rusty palette; do not continue or reproduce the whole machine, wheels, hopper, rear stack, or ground. Use the Giant icon only for framing and the wood icon only for the game's palette/style. Flat cut at row 14, centered at x=8, max 14px extent, one transparent pixel on top/left/right. Bone or bone-dark lamps, matte and unlit. Coarse crisp pixel art, a few broad color clusters, no fine texture. Transparent background, binary alpha, sharp hard edges. No text, frame, HUD, shadow, halo, haze, glow, gradient, blur, 3D, contact sheet or extra objects. Return a single isolated head icon.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/preview/harvester-front-reference-4x.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/preview/head-giant-framing-6x.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/preview/harvester-front-reference-4x.png",
+      "sha256": "0a55c9e86fed8d3386d9fcb510ca3e8273acc158e96b06b55184abc89785ce1a",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A052-harvester/preview/head-giant-framing-6x.png",
+      "sha256": "5d379bfb39fc0b17fcb1e2e2dd43d68d18e2caf01b4e21eb7e77eae77d8b8805",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-8cc92410-013e-43a5-941e-f4233eba33b0.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A052-harvester\\raw\\head-harvester-r3.png",
+  "sha256": "47400fca25a8e87a771e9f055e1ea4e2f250c685a89011be6447936e819083c9",
+  "revision": 3,
+  "decision": "pending native-size inspection"
+}

@@ -1,0 +1,278 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "body_border_and_ground": true,
+  "canvas_and_pivot_consistent": true,
+  "charge_inherits_roll_scale": true,
+  "colours_allowed": true,
+  "death_heights": [
+    49,
+    43,
+    37,
+    32,
+    19
+  ],
+  "death_settles": true,
+  "dominates_ordinary_enemies": true,
+  "effect_expands_then_fades": true,
+  "effect_peak_and_border": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_distinct": true,
+  "frames_expected": 25,
+  "frames_found": 25,
+  "grounded_on_pivot": true,
+  "head_body_palette_only": true,
+  "head_lamps_bone": false,
+  "icon_bounds_ok": true,
+  "importer_recipe_matches": true,
+  "master_size_ok": true,
+  "measurements": {
+    "native/harvester/west/01.png": {
+      "bounds": [
+        1,
+        17,
+        65,
+        60
+      ],
+      "opaque_pixels": 1657
+    },
+    "native/harvester_charge/west/01.png": {
+      "bounds": [
+        4,
+        16,
+        62,
+        60
+      ],
+      "opaque_pixels": 1597
+    },
+    "native/harvester_charge/west/02.png": {
+      "bounds": [
+        4,
+        16,
+        63,
+        60
+      ],
+      "opaque_pixels": 1608
+    },
+    "native/harvester_charge/west/03.png": {
+      "bounds": [
+        3,
+        16,
+        62,
+        60
+      ],
+      "opaque_pixels": 1622
+    },
+    "native/harvester_charge/west/04.png": {
+      "bounds": [
+        3,
+        16,
+        62,
+        60
+      ],
+      "opaque_pixels": 1624
+    },
+    "native/harvester_crush/west/01.png": {
+      "bounds": [
+        5,
+        17,
+        64,
+        60
+      ],
+      "opaque_pixels": 1594
+    },
+    "native/harvester_crush/west/02.png": {
+      "bounds": [
+        2,
+        17,
+        64,
+        60
+      ],
+      "opaque_pixels": 1577
+    },
+    "native/harvester_crush/west/03.png": {
+      "bounds": [
+        4,
+        17,
+        64,
+        60
+      ],
+      "opaque_pixels": 1593
+    },
+    "native/harvester_death/west/01.png": {
+      "bounds": [
+        11,
+        11,
+        69,
+        60
+      ],
+      "opaque_pixels": 1697
+    },
+    "native/harvester_death/west/02.png": {
+      "bounds": [
+        10,
+        17,
+        70,
+        60
+      ],
+      "opaque_pixels": 1533
+    },
+    "native/harvester_death/west/03.png": {
+      "bounds": [
+        11,
+        23,
+        70,
+        60
+      ],
+      "opaque_pixels": 1334
+    },
+    "native/harvester_death/west/04.png": {
+      "bounds": [
+        10,
+        28,
+        70,
+        60
+      ],
+      "opaque_pixels": 1187
+    },
+    "native/harvester_death/west/05.png": {
+      "bounds": [
+        11,
+        41,
+        69,
+        60
+      ],
+      "opaque_pixels": 763
+    },
+    "native/harvester_walk/west/01.png": {
+      "bounds": [
+        3,
+        17,
+        65,
+        60
+      ],
+      "opaque_pixels": 1614
+    },
+    "native/harvester_walk/west/02.png": {
+      "bounds": [
+        5,
+        17,
+        65,
+        60
+      ],
+      "opaque_pixels": 1568
+    },
+    "native/harvester_walk/west/03.png": {
+      "bounds": [
+        5,
+        17,
+        65,
+        60
+      ],
+      "opaque_pixels": 1581
+    },
+    "native/harvester_walk/west/04.png": {
+      "bounds": [
+        4,
+        17,
+        65,
+        60
+      ],
+      "opaque_pixels": 1586
+    },
+    "native/harvester_windup/west/01.png": {
+      "bounds": [
+        2,
+        18,
+        63,
+        60
+      ],
+      "opaque_pixels": 1613
+    },
+    "native/harvester_windup/west/02.png": {
+      "bounds": [
+        3,
+        16,
+        66,
+        60
+      ],
+      "opaque_pixels": 1723
+    },
+    "native/harvester_windup/west/03.png": {
+      "bounds": [
+        9,
+        1,
+        70,
+        60
+      ],
+      "opaque_pixels": 1922
+    },
+    "native/head_harvester/none/01.png": {
+      "bounds": [
+        1,
+        2,
+        15,
+        15
+      ],
+      "opaque_pixels": 115
+    },
+    "native/wreck_debris/none/01.png": {
+      "bounds": [
+        6,
+        10,
+        18,
+        18
+      ],
+      "opaque_pixels": 50
+    },
+    "native/wreck_debris/none/02.png": {
+      "bounds": [
+        3,
+        1,
+        21,
+        18
+      ],
+      "opaque_pixels": 121
+    },
+    "native/wreck_debris/none/03.png": {
+      "bounds": [
+        5,
+        4,
+        20,
+        18
+      ],
+      "opaque_pixels": 59
+    },
+    "native/wreck_debris/none/04.png": {
+      "bounds": [
+        8,
+        12,
+        17,
+        18
+      ],
+      "opaque_pixels": 12
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [
+    "head_lamps_bone"
+  ],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "roll_charge_not_vertical_shifts": true,
+  "smoke_points_count15": true,
+  "wheel_midpoints_centred": true,
+  "windup_heights": [
+    42,
+    44,
+    59
+  ],
+  "windup_rises": true
+}

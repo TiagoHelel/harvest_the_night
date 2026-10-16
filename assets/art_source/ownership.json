@@ -3826,6 +3826,22 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/effects/wreck_debris_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/wreck_debris_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/wreck_debris_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/effects/wreck_debris_3.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/effects/zap_0.png",
       "owner": "raster"
     },
@@ -4203,6 +4219,102 @@
     },
     {
       "output": "sprites/enemies/giant_windup_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_charge_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_charge_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_charge_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_charge_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_crush_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_crush_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_crush_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_death_4.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_telegraph.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_walk_b.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_windup_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_windup_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/harvester_windup_2.png",
       "owner": "raster"
     },
     {
@@ -5547,6 +5659,10 @@
     },
     {
       "output": "sprites/ui/head_giant.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_harvester.png",
       "owner": "raster"
     },
     {

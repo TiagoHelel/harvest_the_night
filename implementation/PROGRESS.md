@@ -33375,3 +33375,79 @@ and faint outside it.
 - `python implementation/backlog/assets.py set A051 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0266 - Art: the Harvester - done 2026-10-15
+
+A052 is integrated. The Harvester is the owner-approved art now:
+
+- standing, its four-frame roll, its three-frame rear, its four-frame
+  charge, its three-frame crush and its five-frame collapse;
+- its head in the forecast;
+- its wreck debris, four frames on 24x20 standing on (12,18), thrown up
+  where a charge brings a structure down.
+
+The owner approved it on 2026-10-14 in the batch review, as recorded in the
+delivery's `APPROVAL.json`. 0253's Giant gone to rust is gone.
+
+- **Promotion**:
+  - The 25 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their raw sources were copied byte for byte into
+    `assets/art_source/enemies/harvester/`, `assets/art_source/effects/wreck/`
+    and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - The Harvester is on the Giant's 80x64 at (40,60), [-32,-44], with
+    `enemy_family`/`enemy_motion` and four aliases (`walk_b` = walk 2,
+    `attack` = crush 0, `death` = death 4, `telegraph` = windup 2).
+  - The debris carries `fx_family` `wreck_debris` and its `base` origin.
+- **A posed boss** (`EnemyMotion`): it has the Giant's wind-up on disk, so
+  it is tracked in the Giant's pose names.
+  - Its blow is its own: `strike_of` is the Giant's slam, or the crush of a
+    boss drawn with no slam.
+  - Through a charge (from the rules' `charge_dir`) its rear and its run are
+    the rules' own, as 0253 posed them (`WorldView.posed_off_the_rules`).
+  - Its collapse plays its five frames.
+- **The debris** (`PixelEffects`):
+  - Before each tick it notes the cells of every charger's line with a
+    structure on them, the house aside (`_wrecks`).
+  - After the tick, each of those that stands empty throws A052's debris
+    up at its foot, the bottom middle of its cell, in cell order.
+  - `wreck_debris` is a raster one-shot in `COUNTS` at full opacity.
+- **The stand-ins retired**: A052's seven `PlaceholderArt` entries and
+  `HARVESTER`. `HARVESTER_TINT` stays: A056's Harvester trophy still stands
+  in with it. `placeholders.py --check` passes, with 81 stand-ins left over
+  10 packs.
+- **Checks**:
+  - `check_giant_art.py`'s `BOSSES` takes the Harvester: its counts, the
+    Giant's canvas and contact, a rear that rises to 50 and a collapse that
+    ends at most 20 tall, and its four aliases.
+  - `check_effect_art.py`'s `PACK_EFFECTS` takes `wreck_debris`: A052, four
+    frames, 24x20 at (12,18), base, one-shot, 0.08 s.
+  - `check_ui_art.py` takes its head.
+- **The boss showcase** (`giant_showcase.gd`): `--boss=harvester` runs it
+  with the Harvester's own blow and pivot. Its house watch now lasts the
+  boss's `telegraph_ticks` and four more, not a fixed 34.
+- **Tests**:
+  - The bosses' size rule in `headless_check.gd` is now "every boss
+    outsizes every non-boss", not the Giant's alone. The Giant and the
+    Harvester are the bosses drawn.
+  - 0253's charge check asks for A052's art:
+    - the view's own pose through the rear and the run, the rules' own;
+    - its blow the crush and five death frames;
+    - the debris thrown at the foot of each wall the charge brought down,
+      in the order it went through them, none at the hardwood that held.
+  - 0246's tracked list is the families, the Giant and the Harvester.
+- **Shots** (`implementation/shots/0266/`, FHD 1920x1080, looked at):
+  - `harvester`: Summer 14's night, the Harvester rearing with its strip
+    over the line through three layers of stone and one of hardwood.
+  - `harvester_charging` (new, inside the same scenario): mid-charge
+    through the stone, the debris thrown up off the walls it brought down.
+  - `harvester_after`: stopped at the hardwood that held.
+  - `forecast_harvester` (new scene): Summer 14 at 18:30, its head among
+    the kinds coming. `headless_check` counts 135 scenes.
+- **The delivery folder** `implementation/backlog/deliveries/A052-harvester/`
+  is committed, as A051's was.
+- `python implementation/backlog/assets.py set A052 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).
