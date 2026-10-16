@@ -71,6 +71,10 @@ TROPHIES = ['giant', 'harvester', 'scarecrow_king', 'winter_lord']
 BADGES = ['first_night', 'hundred_nights', 'slayer', 'builder', 'gatherer', 'angler', 'regular',
           'long_haul', 'full_moon', 'legend', 'arsenal', 'year_two']
 
+## A057's morning report header (task 0289), its own section: one band the
+## width of the report's rows, standing on its bottom centre.
+REPORT_HEADER = ('ui/report_header', [206, 40], [103, 40])
+
 ## A022's book portraits (task 0205): each species' third cut, 32x32 at
 ## (16,16), from its icon pair's source and crop. The book draws a fish never
 ## landed as its portrait in black, so no two portraits share a silhouette:
@@ -182,6 +186,23 @@ def check_collection(manifest, images, files, registry):
         assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
         check_approved(e,art)
     return len(pieces)
+
+
+def check_report_header(manifest, images, files, registry):
+    """A057's header (task 0289): the band at its box, opaque edge to edge as
+    the report's sunrise was, binary alpha, its exact bytes on disk and the
+    approved pixels."""
+    ident,canvas,pivot=REPORT_HEADER
+    packed=[e for e in manifest['assets'] if e.get('generation_task')=='A057']
+    assert [e['id'] for e in packed]==[ident],'A057 is one header: %s' % [e['id'] for e in packed]
+    e=packed[0]
+    assert e['canvas_wh']==canvas and e['pivot_xy']==pivot and not e['loop'] and e['frame']==0,'Header box drift'
+    assert registry[e['output']]=='raster'
+    art=images[ident];pixels=list(import_art.samples(art))
+    assert all(p[3] in (0,255) for p in pixels),'Header alpha'
+    assert art.getbbox()==(0,0,canvas[0],canvas[1]),'The header does not fill its band: %s' % (art.getbbox(),)
+    assert (import_art.ROOT/e['output']).read_bytes()==files[e['output']]
+    check_approved(e,art)
 
 
 def main():
@@ -349,6 +370,8 @@ def main():
     collection=check_collection(manifest,images,files,registry)
     print('OK: %d collection pieces - the cover, the ornament, %d trophies and %d badges, each its own source at its box, at its approved pixels (A056)'
           % (collection,len(TROPHIES),len(BADGES)))
+    check_report_header(manifest,images,files,registry)
+    print('OK: the morning report header - 206x40 on its bottom centre, edge to edge, at its approved pixels (A057)')
     print('OK: 14 exact generated resources / 28 distinct native cuts / %d pack icons at their approved pixels (%s) / ingots, gold and coal / cream milk and wool / %d book portraits, no shared silhouette (%s) / %d exact forecast heads (%s) / clear margins / palette alpha / preserved three-pixel frame profiles / focus ring'
           % (pairs,', '.join(sorted(PAIRS)),portraits,', '.join(sorted(PORTRAITS)),heads,', '.join(sorted(HEADS))))
 

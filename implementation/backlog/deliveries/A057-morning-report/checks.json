@@ -1,0 +1,35 @@
+{
+  "binary_alpha": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "family_checks_complete": true,
+  "frame_count_matches": true,
+  "frames_expected": 1,
+  "frames_found": 1,
+  "grounded_on_pivot": true,
+  "header_exact_aspect_crop": true,
+  "header_fully_opaque": true,
+  "importer_recipe_matches": true,
+  "measurements": {
+    "native/report_header/none/01.png": {
+      "bounds": [
+        0,
+        0,
+        206,
+        40
+      ],
+      "opaque_pixels": 8240
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "sky_band_ramp_matches": true,
+  "source_transparency_matches_call": true,
+  "visible_targets": true
+}

@@ -1,0 +1,58 @@
+{
+  "expected_files": 1,
+  "status": "blocked",
+  "palette_mode": "A",
+  "colour_ramp": [],
+  "files": [
+    {
+      "anim": "report_header",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/report_header/none/01.png",
+      "runtime_name": "sprites/ui/report_header.png",
+      "canvas_wh": [
+        206,
+        40
+      ],
+      "pivot_xy": [
+        103,
+        40
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "pose": "report_header 0",
+      "source": "rejected/report_header-r3.png",
+      "prompt": "rejected/report_header-r3.prompt.txt",
+      "call": "rejected/report_header-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          0,
+          200,
+          1957,
+          380
+        ],
+        "content_scale": 0.10526315789473684,
+        "content_anchor_xy": [
+          103,
+          40
+        ]
+      },
+      "grounded": true,
+      "points": {}
+    }
+  ],
+  "comparison": [
+    {
+      "path": "sprites/buildings/house.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 2
+    }
+  ],
+  "deviations": [],
+  "supersedes": []
+}

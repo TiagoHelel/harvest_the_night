@@ -1761,6 +1761,7 @@ const FRAMES := {
 	"res://sprites/ui/portrait_sunfish.png": {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "cell_offset": Vector2i(0, 0), "seconds": 1.0, "loop": false},
 	"res://sprites/ui/portrait_tilapia.png": {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "cell_offset": Vector2i(0, 0), "seconds": 1.0, "loop": false},
 	"res://sprites/ui/portrait_trout.png": {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "cell_offset": Vector2i(0, 0), "seconds": 1.0, "loop": false},
+	"res://sprites/ui/report_header.png": {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40), "cell_offset": Vector2i(0, 0), "seconds": 1, "loop": false},
 	"res://sprites/ui/trophy_giant.png": {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "cell_offset": Vector2i(0, 0), "seconds": 1.0, "loop": false},
 	"res://sprites/ui/trophy_harvester.png": {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "cell_offset": Vector2i(0, 0), "seconds": 1.0, "loop": false},
 	"res://sprites/ui/trophy_scarecrow_king.png": {"canvas": Vector2i(32, 32), "pivot": Vector2i(16, 16), "cell_offset": Vector2i(0, 0), "seconds": 1.0, "loop": false},

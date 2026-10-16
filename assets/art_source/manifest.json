@@ -134312,6 +134312,108 @@
         4
       ],
       "output_sha256": "0cbe7f865d95fbbb1b7704e1cd534041dd8512e2e8db1a3b1f5c52a8e981c2e1"
+    },
+    {
+      "id": "ui/report_header",
+      "owner": "raster",
+      "source": "assets/art_source/ui/report/recovered-report_header-r3.png",
+      "source_sha256": "cc72f77c6cba94dbd1c85eb5d1b5b79eadb92abf6a2ab12df4d2eb3f2dfd7059",
+      "crop_xywh": [
+        0,
+        220,
+        1957,
+        380
+      ],
+      "canvas_wh": [
+        206,
+        40
+      ],
+      "pivot_xy": [
+        103,
+        40
+      ],
+      "content_scale": 0.10526315789473684,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "water_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "cloth_light",
+        "night",
+        "night_light",
+        "moon",
+        "rot_dark",
+        "rot",
+        "blood"
+      ],
+      "animation": "ui/report_header",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/report_header.png",
+      "prompt": "implementation/backlog/deliveries/A057-morning-report/raw/recovered-report_header-r3.prompt.txt",
+      "prompt_sha256": "df99d093a92734b9a5209a77f40f042f0600fdd0bda24c77beb1d22290658af5",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A057-morning-report/raw/recovered-report_header-r3.call.json",
+          "sha256": "74f6a91233e842156675e55650def591440705ab8c30354864afae6bea840825",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A057-morning-report/native/report_header/none/01.png",
+          "sha256": "76304255b93cb786bf1d6b0a9883cf13a6e7c83e1b4d767207c13517d766b517",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A057-morning-report/contract.json",
+          "sha256": "9b9c476e2a7025201dcb93f543fcc178e7817315266b4b12dbef1c346c496cc2",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A057-morning-report/APPROVAL.json",
+          "sha256": "b4ff14109fdcf7014da215046589905090b850f0b9d886ce26c8012ad83fbc48",
+          "role": "Owner's approval for integration, 2026-10-15: \"tudo aprovado, avisa o claude, que mais temos pra fazer?\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A057",
+      "integration_task": "0289",
+      "revision": 1,
+      "approval": "A057 approved for integration 2026-10-15, owner's words \"tudo aprovado, avisa o claude, que mais temos pra fazer?\"; integrated by task 0289",
+      "content_anchor_xy": [
+        103,
+        40
+      ],
+      "output_sha256": "be348a8f401af66d9c82ff6ddd6bb6821f61ff3f7f9d3e158bd7e4c89d1ba0c1"
     }
   ]
 }

@@ -1,0 +1,112 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "report_header",
+      "canvas_wh": [
+        206,
+        40
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/report_header-none-0-night.png",
+          "path": "preview/candidates/report_header/none/01.png",
+          "points": {},
+          "pose": "report_header 0"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        103,
+        40
+      ],
+      "poses": [
+        "report_header 0"
+      ]
+    }
+  ],
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 2,
+      "path": "sprites/buildings/house.png",
+      "pivot_xy": [
+        32,
+        60
+      ]
+    }
+  ],
+  "date": "2026-10-10",
+  "delivery_type": "rejected / incomplete diagnostic candidates, never runtime art",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "report_header",
+      "call": "rejected/report_header-r3.call.json",
+      "canvas_wh": [
+        206,
+        40
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "preview/candidates/report_header/none/01.png",
+      "pivot_xy": [
+        103,
+        40
+      ],
+      "points": {},
+      "pose": "report_header 0",
+      "prompt": "rejected/report_header-r3.prompt.txt",
+      "prompt_sha256": "df99d093a92734b9a5209a77f40f042f0600fdd0bda24c77beb1d22290658af5",
+      "recipe": {
+        "content_anchor_xy": [
+          103,
+          40
+        ],
+        "content_scale": 0.10526315789473684,
+        "crop_xywh": [
+          0,
+          200,
+          1957,
+          380
+        ]
+      },
+      "runtime_name": "sprites/ui/report_header.png",
+      "seconds": 1,
+      "sha256": "99b87e18e317f65a6d6449ff6b885a0b59a0a89771d9ee01b99664138be66b7a",
+      "source": "rejected/report_header-r3.png",
+      "source_sha256": "cc72f77c6cba94dbd1c85eb5d1b5b79eadb92abf6a2ab12df4d2eb3f2dfd7059"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A057",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A057-morning-report",
+  "status": "blocked",
+  "supersedes": [],
+  "tool": "built-in ImageGen"
+}

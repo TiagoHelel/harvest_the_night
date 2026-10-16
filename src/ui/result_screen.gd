@@ -37,10 +37,9 @@ var _frame: PanelContainer
 
 var _built_for := ""
 
-## **The sunrise is A057's** (`sprites/ui/report_header.png`), registered on
-## the placeholder road: until the pack is integrated - and for good if the
-## owner declines it - the band below is drawn in code at its canvas.
-const HEADER := &"report_header"
+## **The sunrise is A057's** (task 0289), over the report at its 206x40 -
+## 0138 drew the band in code until the pack landed.
+const HEADER := "res://sprites/ui/report_header.png"
 
 
 func _ready() -> void:
@@ -115,20 +114,13 @@ func _ready() -> void:
 	add_child(_credits)
 
 
-## A057's picture once it is on disk, the code-drawn band until then.
+## A057's picture over the report (task 0289).
 func _make_header() -> Control:
-	var path := PlaceholderArt.art_path(HEADER, 0)
-	var made: Control
-	if PlaceholderArt.is_drawn(path):
-		made = Control.new()
-		made.draw.connect(_draw_sunrise)
-	else:
-		var picture := TextureRect.new()
-		picture.texture = load(PlaceholderArt.texture_path(path))
-		picture.stretch_mode = TextureRect.STRETCH_KEEP
-		made = picture
+	var made := TextureRect.new()
+	made.texture = load(HEADER)
+	made.stretch_mode = TextureRect.STRETCH_KEEP
 	made.name = "ReportHeader"
-	made.custom_minimum_size = Vector2(PlaceholderArt.frame(path).get("canvas", Vector2i(206, 40)))
+	made.custom_minimum_size = Vector2(PlaceholderArt.frame(HEADER).get("canvas", Vector2i(206, 40)))
 	made.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	made.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return made
@@ -544,69 +536,6 @@ func _gap() -> void:
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(0, 5)
 	_lines.add_child(spacer)
-
-
-## **The code-drawn sunrise** over the farmhouse, at A057's 206x40 canvas and
-## in its composition: the sky in flat stepped bands down to the horizon at
-## row 26, a half sun rising left of a small distant house - lit from the
-## upper left as in the game - and the fields in front with the path to the
-## door. Palette colours only, opaque edge to edge; no text, no frame.
-func _draw_sunrise() -> void:
-	var w := int(_header.size.x)
-	var c: Dictionary = PaletteData.COLOURS
-	# The sky, top to bottom, each band stepping into the next in clusters
-	# rather than a straight edge.
-	var bands := [[0, &"night_light"], [6, &"cloth_light"], [12, &"water_light"],
-		[17, &"roof_light"], [22, &"flame"]]
-	for i in bands.size():
-		var top: int = bands[i][0]
-		var bottom: int = bands[i + 1][0] if i + 1 < bands.size() else 26
-		_header.draw_rect(Rect2(0, top, w, bottom - top), c[bands[i][1]])
-		if i + 1 < bands.size():
-			for x in range(4 + i * 3, w, 11):
-				_header.draw_rect(Rect2(x, bottom - 1, mini(5, w - x), 1),
-					c[bands[i + 1][1]])
-	# The sun, half over the horizon: a gold rim round a hot core.
-	var sun := Vector2(70, 26)
-	for dy in range(-7, 0):
-		var half := int(sqrt(49.0 - dy * dy))
-		_header.draw_rect(Rect2(sun.x - half, sun.y + dy, half * 2, 1), c[&"gold_light"])
-		if dy >= -5:
-			var core := int(sqrt(25.0 - dy * dy))
-			_header.draw_rect(Rect2(sun.x - core, sun.y + dy, core * 2, 1), c[&"flame_hot"])
-	# The fields: grass to the bottom edge, quieter at the sides.
-	_header.draw_rect(Rect2(0, 26, w, 14), c[&"grass"])
-	_header.draw_rect(Rect2(0, 26, w, 2), c[&"grass_dark"])
-	for row in [31, 35]:
-		_header.draw_rect(Rect2(14, row, 104, 2), c[&"soil_dark"])
-		_header.draw_rect(Rect2(178, row, w - 192, 2), c[&"soil_dark"])
-		for x in range(16, 116, 4):
-			_header.draw_rect(Rect2(x, row - 1, 2, 1), c[&"grass_light"])
-		for x in range(180, w - 16, 4):
-			_header.draw_rect(Rect2(x, row - 1, 2, 1), c[&"grass_light"])
-	# The path from the door down to the bottom edge, widening as it comes.
-	for y in range(29, 40):
-		var spread := (y - 29) / 3
-		_header.draw_rect(Rect2(147 - spread, y, 7 + spread * 2, 1), c[&"soil_light"])
-	# The farmhouse, small and distant, centre-right: stone foundation,
-	# timber walls lit on the left, dark panes and door, the chimney, and a
-	# terracotta roof in tile courses.
-	_header.draw_rect(Rect2(131, 27, 40, 2), c[&"stone"])
-	_header.draw_rect(Rect2(132, 16, 38, 11), c[&"wood"])
-	_header.draw_rect(Rect2(132, 16, 3, 11), c[&"wood_light"])
-	_header.draw_rect(Rect2(166, 16, 4, 11), c[&"wood_dark"])
-	for x in [137, 159]:
-		_header.draw_rect(Rect2(x, 19, 5, 4), c[&"ink"])
-	_header.draw_rect(Rect2(148, 20, 6, 7), c[&"wood_dark"])
-	_header.draw_rect(Rect2(160, 4, 4, 8), c[&"stone_dark"])
-	for y in range(6, 17):
-		var reach := (y - 5) * 2
-		var left := 151 - reach
-		var right := 151 + reach
-		var tone: StringName = &"roof" if y % 2 == 0 else &"roof_dark"
-		_header.draw_rect(Rect2(left, y, right - left, 1), c[tone])
-		# The lit slope on the left, as the house in the world is lit.
-		_header.draw_rect(Rect2(left, y, maxi(reach / 2, 1), 1), c[&"roof_light"])
 
 
 ## The keys of a dictionary, in an order that is the same on every machine.

@@ -1,6 +1,6 @@
 # A057 - The morning report header (optional)
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0289
 - **Dressed by game tasks:** 0138
 - **Spec after game task:** 0138

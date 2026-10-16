@@ -144,6 +144,7 @@ const SCENARIOS: Array = [
 	["tut_cursor", "the first week: the first build step, the cursor's line on its cell", ""],
 	["tut_forecast", "the first week: Spring 3 at dusk, the forecast's line by its panel", ""],
 	["morning", "the morning report, every line it has", "ResultScreen"],
+	["morning_lost", "the morning report after a lost night: the house at its last hit point and a walker on its porch, the night played until it falls (task 0289)", "ResultScreen"],
 	["boss_escaped", "the morning after Spring 14's boss got away", "ResultScreen"],
 	["year_end", "the year survived, after the credits", "ResultScreen"],
 	["year_credits", "the credits before the year ending", "ResultScreen"],
@@ -831,6 +832,7 @@ func _take(main: Node, entry: Array, folder: String) -> void:
 		"tut_cursor": _set_tut_cursor(state)
 		"tut_forecast": _set_tut_forecast(state)
 		"morning": _set_morning(state)
+		"morning_lost": _set_morning_lost(state)
 		"boss_escaped": _set_boss_escaped(state)
 		"calm_morning": _set_calm_morning(state)
 		"year_end": _set_year_end(state)
@@ -1899,6 +1901,22 @@ func _set_passed_out(state: Dictionary) -> void:
 ## **The morning report with every line it has** (task 0138): a night that
 ## began with a pass-out and ended at dawn, a wall lost in it and two still
 ## on the farm to walk off.
+## **The morning after a lost night** (task 0289): the house at its last hit
+## point and a walker set down on its porch, the night played until it falls,
+## A057's sunrise over the report all the same.
+func _set_morning_lost(state: Dictionary) -> void:
+	NightRoad.to_night(state)
+	NightRoad.park(state)
+	state["house_hp"] = 1
+	Entities.spawn(state, &"walker", House.porch(state))
+	for _i in 900:
+		if int(state["phase"]) == Phases.RESULT:
+			break
+		Sim.advance(state, 1)
+	print("  morning_lost: %s, survived %s" % [Phases.name_of(int(state["phase"])),
+		(state["last_result"] as Dictionary).get("survived", true)])
+
+
 func _set_morning(state: Dictionary) -> void:
 	Phases.pass_out(state)
 	NightRoad.through_build(state)

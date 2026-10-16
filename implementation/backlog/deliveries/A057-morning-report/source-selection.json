@@ -1,0 +1,33 @@
+{
+  "pack": "A057",
+  "artwork_approval": "approved for integration",
+  "selected_sources": [
+    {
+      "source": "raw/recovered-report_header-r3.png",
+      "source_sha256": "cc72f77c6cba94dbd1c85eb5d1b5b79eadb92abf6a2ab12df4d2eb3f2dfd7059",
+      "usage": "Recorded raw provenance and source crop; final parts are authoritative when present.",
+      "recipes": [
+        {
+          "output": "native/report_header/none/01.png",
+          "recipe": {
+            "content_anchor_xy": [
+              103,
+              40
+            ],
+            "content_scale": 0.10526315789473684,
+            "crop_xywh": [
+              0,
+              220,
+              1957,
+              380
+            ]
+          },
+          "parts": []
+        }
+      ]
+    }
+  ],
+  "selection_rule": "Only listed measured crops and component parts are proposed. This never accepts every cell of a historical sheet or every unused return.",
+  "approval_date": "2026-10-15",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+}

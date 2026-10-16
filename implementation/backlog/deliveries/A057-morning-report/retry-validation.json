@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-14",
+  "pack": "A057",
+  "status": "review",
+  "build_twice_byte_identical": true,
+  "check_mode_passed": true,
+  "all_measured_checks_passed": true,
+  "native_outputs": 1,
+  "validated_generated_files": {
+    "checks.json": "3e839c2664cd958a84ee8c9f3eb679449a75734fd69365c76d7e0e75cd0c3583",
+    "contract.json": "67a2f66faa565b2fe5c565d8452f295cffebaa76f2ef31b4c44c71642fe829f1",
+    "index.html": "6aa2cb51be585786967b86847177c7062bdd30c6d856caa37bcddc4ddc6e75c8",
+    "native/report_header/none/01.png": "76304255b93cb786bf1d6b0a9883cf13a6e7c83e1b4d767207c13517d766b517",
+    "preview/all-candidates-inspect.png": "d8716f65e89f733cc69983c8e1cb4f5938194d9b23989488e56aaa0ff3c36419",
+    "preview/candidates/report_header/none/01.png": "99b87e18e317f65a6d6449ff6b885a0b59a0a89771d9ee01b99664138be66b7a",
+    "preview/grass.png": "6b021b165a511b51dae1f47e6920c7768f69243e97da5bc627086d59b8169cb3",
+    "preview/index-script-check.js": "f236739d5f0d6a5391cd60b8f4dbb9c2697afb6edc6d0c5968ee2677fa546922",
+    "preview/morning-report-mock-night.png": "43624ecf36e0eb43a26955d0df1b7e063e2e73446f1b1ec381e96036292eb250",
+    "preview/morning-report-mock.png": "55a0f5582ff38709ae3484cc39cf47df28d1920058b017a3e5d0fd363b3d1d1c",
+    "preview/prior-native-exports/report_header/none/01.png": "99b87e18e317f65a6d6449ff6b885a0b59a0a89771d9ee01b99664138be66b7a",
+    "preview/report_header-latest-inspect.png": "839ddf987bc8c3c24ac2cd96c8c796b66d8f652c394de0d1a48429f421c66349",
+    "preview/report_header-none-0-night.png": "a2bdc6b6522d376869a933025e58ca6ba9a8330ae8b4b9cf74bde47158f5e91e",
+    "preview/report_header-none-context-day.png": "4f9ed825d3e4a888997ff3d4b193d8be7e32c1406b6a5bfb82631474328f5c4f",
+    "preview/report_header-none-context-night.png": "9fcd136003225924aa4b1ab528a0b1a7af998351d4c5d01c829ed3942adac574",
+    "preview/report_header-none-strip.png": "46573958d13346567ccb57a6e7cdefe203aef1936d4c0dfc29ef2d50ce5bc168",
+    "preview/retry-palette-header.png": "1fc7a3b75ea20694398e3a39c90788961a19d489c69d9fd38fbfae6b4476039a",
+    "preview/retry-palette-header2.png": "a76c49e0a36b3f7c6e76fed57c6db6054925c4d02f9938904165623c0fb77f2f",
+    "preview/source-inspection-board.png": "cea3aa50093cfca415c8c2d7271d8bef109e1e5ca4d68cda241d06c526720133",
+    "retry-before-20261014/checks.json": "10d8ac3f913af18901241ad74d9356c11fd9796eecdfb69f578dd7512d1e054b",
+    "retry-before-20261014/contract.json": "4aca4b1b9cfbeb3ae59045cda43a83aa361f5ceeab560b29b51b475bd8dafa5b"
+  },
+  "approval": "pending owner artwork review"
+}

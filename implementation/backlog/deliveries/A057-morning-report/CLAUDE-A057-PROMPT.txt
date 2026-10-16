@@ -1,0 +1,34 @@
+A057 - The morning report header (optional)
+Approval date: 2026-10-15
+Owner words, verbatim: "tudo aprovado, avisa o claude, que mais temos pra fazer?"
+Status: approved for integration; runtime not yet integrated.
+
+Authoritative folder: implementation/backlog/deliveries/A057-morning-report/
+All 1 native output PNGs and the recorded source/component assembly are owner-approved.
+Integration game task: 0289.
+The optional morning-report header is now explicitly approved too. UI canvas206x40, pivot per contract, draw1.0, unlit. Fit it into the existing report panel without world relight or aspect stretching.
+
+Read APPROVAL.json, contract.json, checks.json, source-selection.json and the shared detailed correction notes:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-REVIEW.md
+That file is the historical correction/assembly explanation. The approved batch handoff below supersedes its old pending-review instructions:
+implementation/backlog/deliveries/A003-guardian/CLAUDE-RETRY-APPROVED.md
+No older delivery folder is superseded unless listed in contract.supersedes; prior candidate sources in rejected/, preview/ and retry-before-20261014/ are never integration inputs.
+
+Palette mode A: preserve every per-file override, palette_keys, alpha_threshold128, colour_ramp and draw scale.
+Mode A: promote raw sources with the recorded importer crop/nearest scale/anchor/palette recipe. Mode B: final native pixels are exact-source; do not re-quantize.
+Layered outputs: parts/components are authoritative. The primary source/recipe also records provenance; do NOT treat it as a direct crop for a composed file.
+Promote the DAG recursively, maximum5parts per compose node. Derived compose entries must omit source (otherwise the importer bypasses composition), use input=first part input and preserve part order.
+Exact reference, mode-B and baked mirror component PNGs are hashed exact-source leaves. Quarter-turns use the existing rotate operation. Preserve source recipes and approval provenance.
+Canonical importer replay already reproduces all outputs pixel-exact; see pipeline-replay-check.json and the shared check_pipeline_replay.py.
+
+Native -> runtime mapping (01.png is frame0):
+native/report_header/none/01.png -> sprites/ui/report_header.png | 206x40 pivot (103, 40) draw 1 | report_header none frame0 1s loop=false mirror=none | points={}
+
+Aliases: bind listed runtime names directly, replace the named game task's placeholders and retain any existing required aliases to the appropriate approved first frames. Do not invent additional raster frames.
+Mirrors: runtime east mirroring applies only to the authored west-facing animal/NPC cycles identified above. All UI, crop, guardian and static building files bind with no flip. Preserve any per-file mirror field.
+Metadata coordinates are native pixels. Component files are supporting assembly nodes, not extra runtime animations.
+Deviations and owner authorization: []
+
+Never regenerate, repaint, recolour, resample or retime approved art; never cut sprites out of previews, GIFs or screenshots; never add a second flip. Do not use unlisted candidates.
+Next: verify approved output and component hashes; promote versioned sources/assembly via the raster manifest and ownership records; extend hard-coded family checks; run tools/verify.py; inspect actual FHD day/night behavior; set this pack integrated only after successful integration. Claude owns game-task state and assets.py unblock.
+No new commit/push is authorized by this art approval.

@@ -1,0 +1,31 @@
+{
+  "alpha_threshold": 128,
+  "animations": [],
+  "candidate_review": "candidate-contract.json",
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 2,
+      "path": "sprites/buildings/house.png",
+      "pivot_xy": [
+        32,
+        60
+      ]
+    }
+  ],
+  "date": "2026-10-10",
+  "delivery_type": "blocked; no production export",
+  "deviations": [],
+  "expected_files": 1,
+  "files": [],
+  "mirror_pairs": {},
+  "pack": "A057",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [],
+  "runtime_integrated": false,
+  "slug": "A057-morning-report",
+  "status": "blocked",
+  "supersedes": [],
+  "tool": "built-in ImageGen"
+}

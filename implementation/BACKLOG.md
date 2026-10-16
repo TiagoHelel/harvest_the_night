@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######################.`  **279 / 296 done**
+`#######################.`  **280 / 296 done**
 
-0 doing / 17 todo / 0 blocked across 18 phases.
+0 doing / 16 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-17 task(s) left, the ready ones first, then what they
+16 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -199,25 +199,6 @@ After the Winter Lord the farm carries on, and today that means the MVP's endles
   - done when: Year 3's heaviest night is inside `TICK_BUDGET_US` and `PATH_BUDGET_US` (`python tools/perf.py --date=<it>`) - the numbers in the journal
   - done when: The `python tools/nights.py --years 3` summary and where the `balanced` policy fell in Year 2 are in the journal
   - done when: `python tools/shot.py 0279 year_two --fhd` opened: the year label fits, in English and in Portuguese
-
-### 0289 - Art: the morning report
-
-Ready to pick up.  Likely files: `assets/art_source/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_ui_art.py, src/tools/ui_art_showcase.gd, src/ui/placeholder_art.gd, src/ui/result_screen.gd`.
-
-A small sunrise over the farmhouse heads 0138's morning report. Optional: if the owner declines the pack, the header 0138 drew becomes the shipped look and this task closes with a note.
-
-- `python tools/task.py next` only offers this task once `python implementation/backlog/assets.py status A057` says `approved`. Check it again first; if it does not, stop and change nothing (the task stays todo and waits). This task never draws, generates or substitutes art.
-- The one exception, because A057 is optional: if its status is `blocked` with the owner's decline in the note, do not wait. Delete A057's entries from 0120's placeholder registry (`src/ui/placeholder_art.gd`) and draw 0138's code-drawn band directly in `result_screen.gd`, so it is the final look and no longer a stand-in (or drop the header if it only made sense as art), quote the decline in the journal and close with `python tools/task.py done 0289`. `task.py next` never offers a task whose pack is not approved, so this path is run by hand or by 0290
-- Use only the folder named in the pack's `CLAUDE-A057-PROMPT.txt` handoff; check every file against its `contract.json` sha256 before promoting; never resample, regenerate, or cut from previews or GIFs.
-- Promote through the raster pipeline: versioned sources under `assets/art_source/<family>/`, manifest entries with prompt/approval provenance, `assets/art_source/ownership.json`, then `python tools/import_art.py`; extend the hard-coded family lists the art checks use (`tools/check_<family>_art.py`, `ArtPlacement` if needed).
-- Family `ui`: one header at the canvas and pivot 0138 settled in A057's Deliverables table, drawn by `result_screen.gd` above the report through the lookup it already uses, replacing 0138's stand-in (delete A057's registry entries in `src/ui/placeholder_art.gd` once the raster lands at the same path); no text in it (the report's words stay strings), checked in its own section of `tools/check_ui_art.py` and shown in `ui_art_showcase.gd`
-- Set the pack to integrated: `python implementation/backlog/assets.py set A057 integrated`.
-
-  - done when: `python tools/check_ui_art.py` and `python tools/show_art.py --ui --check` pass with the header counted
-  - done when: `python tools/import_art.py --check` passes
-  - done when: FHD (1920x1080) captures of the morning report after a won and after a lost night, and of the farm around it by day and by night, opened and looked at, in `implementation/shots/0289/`
-  - done when: The sim and data hashes are unchanged (art never moves them)
-  - done when: On the decline path instead: `python tools/placeholders.py` no longer lists A057, a capture of the morning report shows the band drawn directly, and the journal quotes the owner's words
 
 ### 0280 - Checkpoint: do fifty-six nights tire?
 
@@ -683,7 +664,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [ ] **0279** [Year 2](prompts/0279-year-two.md)
 - [ ] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md) - needs 0278, 0279
 
-## 16 - Sound, collections and polish  (8/10)
+## 16 - Sound, collections and polish  (9/10)
 
 - [x] **0281** [The new day's sounds](prompts/0281-sfx-day-v2.md)
 - [x] **0282** [The sounds of the fishing minigame](prompts/0282-sfx-fishing.md)
@@ -693,7 +674,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0286** [Fog, rain and winter wind](prompts/0286-ambience-v2.md)
 - [x] **0287** [Collections and achievements](prompts/0287-collections.md)
 - [x] **0288** [Art: the collection book, trophies and badges](prompts/0288-art-collections.md)
-- [ ] **0289** [Art: the morning report](prompts/0289-art-morning.md)
+- [x] **0289** [Art: the morning report](prompts/0289-art-morning.md)
 - [ ] **0290** [The 1.0 visual gate](prompts/0290-visual-gate-v1.md) - needs 0123, 0124, 0125, 0143, 0144, 0207, 0208
 
 ## 17 - Ship 1.0  (2/7)

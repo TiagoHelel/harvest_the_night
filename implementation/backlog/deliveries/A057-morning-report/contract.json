@@ -1,0 +1,157 @@
+{
+  "alpha_threshold": 128,
+  "animations": [
+    {
+      "anim": "report_header",
+      "canvas_wh": [
+        206,
+        40
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "entries": [
+        {
+          "issue": "",
+          "night": "preview/report_header-none-0-night.png",
+          "path": "native/report_header/none/01.png",
+          "points": {},
+          "pose": "quiet dawn bands, farmhouse and crop rows"
+        }
+      ],
+      "frame_seconds": 1,
+      "frames": 1,
+      "loop": false,
+      "mirror": "none",
+      "pivot_xy": [
+        103,
+        40
+      ],
+      "poses": [
+        "quiet dawn bands, farmhouse and crop rows"
+      ]
+    }
+  ],
+  "approval": {
+    "date": "2026-10-15",
+    "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+    "path": "APPROVAL.json"
+  },
+  "colour_ramp": [],
+  "comparison": [
+    {
+      "draw_scale": 2,
+      "path": "sprites/buildings/house.png",
+      "pivot_xy": [
+        32,
+        60
+      ]
+    }
+  ],
+  "date": "2026-10-14",
+  "deviations": [],
+  "files": [
+    {
+      "anim": "report_header",
+      "call": "raw/recovered-report_header-r3.call.json",
+      "canvas_wh": [
+        206,
+        40
+      ],
+      "dir": "none",
+      "draw_scale": 1,
+      "frame": 0,
+      "grounded": true,
+      "loop": false,
+      "mirror": "none",
+      "output": "native/report_header/none/01.png",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "water_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "cloth_light",
+        "night",
+        "night_light",
+        "moon",
+        "rot_dark",
+        "rot",
+        "blood"
+      ],
+      "pivot_xy": [
+        103,
+        40
+      ],
+      "points": {},
+      "pose": "quiet dawn bands, farmhouse and crop rows",
+      "prompt": "raw/recovered-report_header-r3.prompt.txt",
+      "prompt_sha256": "df99d093a92734b9a5209a77f40f042f0600fdd0bda24c77beb1d22290658af5",
+      "recipe": {
+        "content_anchor_xy": [
+          103,
+          40
+        ],
+        "content_scale": 0.10526315789473684,
+        "crop_xywh": [
+          0,
+          220,
+          1957,
+          380
+        ]
+      },
+      "runtime_name": "sprites/ui/report_header.png",
+      "seconds": 1,
+      "sha256": "76304255b93cb786bf1d6b0a9883cf13a6e7c83e1b4d767207c13517d766b517",
+      "source": "raw/recovered-report_header-r3.png",
+      "source_sha256": "cc72f77c6cba94dbd1c85eb5d1b5b79eadb92abf6a2ab12df4d2eb3f2dfd7059"
+    }
+  ],
+  "mirror_pairs": {},
+  "pack": "A057",
+  "palette": "tools/palette.py:COLOURS",
+  "palette_mode": "A",
+  "references": [
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\docs\\reference-sheet.png",
+      "role": "global scene/style reference",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c"
+    },
+    {
+      "path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\fhd-player\\pilots\\2026-10-06\\walk-final-mirrored\\native-40\\walk\\down\\01.png",
+      "role": "approved farmer scale/camera reference",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01"
+    }
+  ],
+  "runtime_integrated": false,
+  "slug": "A057-morning-report",
+  "status": "approved for integration",
+  "supersedes": [],
+  "title": "The morning report header (optional)",
+  "tool": "built-in ImageGen"
+}

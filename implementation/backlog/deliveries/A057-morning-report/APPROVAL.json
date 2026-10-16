@@ -1,0 +1,15 @@
+{
+  "pack": "A057",
+  "date": "2026-10-15",
+  "status": "approved for integration",
+  "owner_words": "tudo aprovado, avisa o claude, que mais temos pra fazer?",
+  "approved_folder": "implementation/backlog/deliveries/A057-morning-report",
+  "approved_sha256": {
+    "native/report_header/none/01.png": "76304255b93cb786bf1d6b0a9883cf13a6e7c83e1b4d767207c13517d766b517"
+  },
+  "approved_component_sha256": {},
+  "frames": 1,
+  "runtime_integrated": false,
+  "review_page": "implementation/backlog/deliveries/A003-guardian/retry-final-review.html",
+  "approval_scope": "All outputs on the final thirteen-pack correction review; no source pixels changed on approval."
+}

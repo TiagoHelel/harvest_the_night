@@ -1,0 +1,9 @@
+{
+  "pack": "A057",
+  "date": "2026-10-10",
+  "reason": "Third header still uses the wrong saturated sky ramp/noisy native clusters instead of the requested quiet stepped dawn bands.",
+  "imagegen_available": true,
+  "owner_direction_required": "Continue ImageGen attempts, change the brief, or stop; no fourth attempt made.",
+  "candidate_review_only": true,
+  "production_files": 0
+}

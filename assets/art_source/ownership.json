@@ -7086,6 +7086,10 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/ui/report_header.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/ui/slider_grab.png",
       "owner": "ascii"
     },

@@ -1,0 +1,99 @@
+{
+  "expected_files": 1,
+  "status": "review",
+  "palette_mode": "A",
+  "colour_ramp": [],
+  "files": [
+    {
+      "anim": "report_header",
+      "dir": "none",
+      "frame": 0,
+      "output": "native/report_header/none/01.png",
+      "runtime_name": "sprites/ui/report_header.png",
+      "canvas_wh": [
+        206,
+        40
+      ],
+      "pivot_xy": [
+        103,
+        40
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "pose": "quiet dawn bands, farmhouse and crop rows",
+      "source": "raw/recovered-report_header-r3.png",
+      "prompt": "raw/recovered-report_header-r3.prompt.txt",
+      "call": "raw/recovered-report_header-r3.call.json",
+      "recipe": {
+        "crop_xywh": [
+          0,
+          220,
+          1957,
+          380
+        ],
+        "content_scale": 0.10526315789473684,
+        "content_anchor_xy": [
+          103,
+          40
+        ]
+      },
+      "grounded": true,
+      "points": {},
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "grass_dark",
+        "grass",
+        "grass_light",
+        "soil_dark",
+        "soil",
+        "soil_light",
+        "water_light",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "wood_dark",
+        "wood",
+        "wood_light",
+        "leaf_dark",
+        "leaf",
+        "leaf_light",
+        "roof_dark",
+        "roof",
+        "roof_light",
+        "gold_dark",
+        "gold",
+        "gold_light",
+        "flame",
+        "flame_hot",
+        "bone",
+        "bone_dark",
+        "skin_dark",
+        "skin",
+        "skin_light",
+        "cloth_light",
+        "night",
+        "night_light",
+        "moon",
+        "rot_dark",
+        "rot",
+        "blood"
+      ]
+    }
+  ],
+  "comparison": [
+    {
+      "path": "sprites/buildings/house.png",
+      "pivot_xy": [
+        32,
+        60
+      ],
+      "draw_scale": 2
+    }
+  ],
+  "deviations": [],
+  "supersedes": [],
+  "title": "The morning report header (optional)"
+}

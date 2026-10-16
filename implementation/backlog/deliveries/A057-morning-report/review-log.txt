@@ -1,0 +1,15 @@
+2026-10-10 Owner requested all eligible art: "gere todos e no final faca um arquivo html pra eu revisar". Spec task verified done. Review deferred, no approval inferred; runtime untouched. Latest all-pack request includes this optional header; no separate approval inferred.
+
+2026-10-10 Final batch disposition: blocked. Third header still uses the wrong saturated sky ramp/noisy native clusters instead of the requested quiet stepped dawn bands. All false checks concern rejected diagnostic candidates or missing production export. Owner words authorising batch/final review: "gere todos e no final faca um arquivo html pra eu revisar". No approval, integration, commit or push.
+
+2026-10-14 / New thirteen-pack correction pass
+Owner requested correction of the 13 old blocked packs ("bora"). Previous sources and diagnostics preserved in retry-before-20261014; no approval inferred. Only ImageGen raster sources and permitted measured conversions are used. Any unresolved visual measurement remains false and is shown in review.
+Header correction: moved the exact206:40 source crop down20raw pixels to remove the navy margin; restricted palette keys to exclude water_dark/water/cloth_dark/cloth so sky planes land in the requested dawn ramp. No pixels painted; original source bytes unchanged.
+
+2026-10-14 / Final thirteen-pack correction review
+Optional dawn illustration for the morning report. It is a UI header and stays unlit in the game.
+All measured checks pass. Two builds are byte-identical; --check and canonical tools/import_art.py replay pass. Final art approval remains pending. Unified page: ../A003-guardian/retry-final-review.html. Runtime not integrated.
+
+2026-10-15 / Owner approved the full corrected pack
+Owner words, verbatim: tudo aprovado, avisa o claude, que mais temos pra fazer?
+All 1 reviewed native PNGs and their recorded component assembly approved for integration. Exact reviewed bytes preserved; approval hashes frozen in APPROVAL.json. Handoff prepared for Claude.

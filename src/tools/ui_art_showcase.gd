@@ -191,6 +191,11 @@ func _families(speaking: String, high: bool) -> void:
 	for i in badges.size():
 		_picture(StringName("badge_%s" % badges[i]), Vector2(12+(i%6)*32,104+(i/6)*30))
 	await _check_icons("family_A056_book_"+speaking+("_contrast" if high else ""))
+	# A057's morning report header (task 0289), at its band.
+	_new_room()
+	_label("A057 / the morning report header / native 206x40 / %s" % speaking, Vector2(12,5), UiKit.WARM)
+	_picture(&"report_header", Vector2(12,30))
+	await _check_icons("family_A057_header_"+speaking+("_contrast" if high else ""))
 	_new_room()
 	var kinds: Array = [&"walker", &"runner", &"tank", &"breaker", &"giant"]
 	_label("A011 / %d forecast heads / native 16px / %s" % [kinds.size(), speaking],
@@ -227,7 +232,8 @@ func _picture(name: StringName, at: Vector2) -> TextureRect:
 
 ## A picture's native box by its name: a `hud_` cut 10x10, a book `portrait_`
 ## or a boss's `trophy_` 32x32, a `badge_` 24x24, the book's cover 48x64 and
-## its ornament 64x12 (task 0288), anything else 16x16.
+## its ornament 64x12 (task 0288), the report's header 206x40 (task 0289),
+## anything else 16x16.
 static func _box(name: StringName) -> Vector2:
 	var text := String(name)
 	if text.begins_with("hud_"):
@@ -236,7 +242,8 @@ static func _box(name: StringName) -> Vector2:
 		return Vector2(32,32)
 	if text.begins_with("badge_"):
 		return Vector2(24,24)
-	return {"collection_cover": Vector2(48,64), "collection_ornament": Vector2(64,12)}.get(text, Vector2(16,16))
+	return {"collection_cover": Vector2(48,64), "collection_ornament": Vector2(64,12),
+		"report_header": Vector2(206,40)}.get(text, Vector2(16,16))
 
 
 ## Every icon of the room: it loads, at its native size, with the imported

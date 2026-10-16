@@ -126,10 +126,6 @@ const CROP_TALL := {"canvas": Vector2i(16, 32), "pivot": Vector2i(8, 30), "draw_
 const CROP_CORN := {"canvas": Vector2i(16, 24), "pivot": Vector2i(8, 22), "draw_scale": 1.0}
 const CROP_TILE := {"canvas": Vector2i(16, 16), "pivot": Vector2i(8, 14), "draw_scale": 1.0}
 
-## A057's morning report header: a 206x40 band, the width of the report's
-## rows, pivot at its bottom centre, drawn at 1.0 (task 0138).
-const REPORT_HEADER := {"canvas": Vector2i(206, 40), "pivot": Vector2i(103, 40), "draw_scale": 1.0}
-
 ## A010's calendar marks' boxes (task 0158): `icon_<id>` 16x16 at (8,8) and
 ## `hud_<id>` 10x10 at (5,5), drawn at 1.0 - raster art since task 0161. The
 ## other packs' icon pairs stand in at the same boxes until they land.
@@ -163,7 +159,6 @@ const GROUND_ATLAS := {"canvas": Vector2i(256, 80), "pivot": Vector2i(0, 0), "dr
 ## `bare` is a static file with no frame number (`hud_bait.png`). One line
 ## each, like `POSES`.
 const ART := {
-	&"report_header": {"pack": "A057", "dir": "res://sprites/ui/", "frames": 1, "seconds": 1.0, "loop": false, "stand_in": &"", "geometry": REPORT_HEADER, "final": REPORT_HEADER, "bare": true},
 }
 
 

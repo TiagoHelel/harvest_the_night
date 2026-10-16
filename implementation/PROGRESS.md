@@ -33722,3 +33722,45 @@ badges stay the same art dimmed by code.
 - `python implementation/backlog/assets.py set A056 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0289 - Art: the morning report - done 2026-10-16
+
+A057 is integrated. The morning report's header is the owner-approved art
+now: a sunrise over the farmhouse and its fields, 206x40 standing on
+(103,40), the width of the report's rows, opaque edge to edge and with no
+text in it. The owner approved it on 2026-10-14 in the batch review, as
+recorded in the delivery's `APPROVAL.json`. 0138's band drawn in code is
+gone.
+
+- **Promotion**:
+  - The native PNG was checked against `contract.json` and `APPROVAL.json`
+    (sha256).
+  - Its raw source was copied byte for byte into
+    `assets/art_source/ui/report/`.
+  - It has a manifest entry with full provenance and an `ownership.json`
+    row, and decodes to the approved pixels exactly.
+- **The report draws the pack** (`ResultScreen`): `_make_header` is the
+  picture at its band, by its path (`HEADER`). `_draw_sunrise` and its
+  drawing branch are deleted.
+- **The stand-in retired**: A057's `PlaceholderArt` entry and
+  `REPORT_HEADER`. `placeholders.py --check` passes, with 36 stand-ins left
+  over 5 packs, all of them the farmer's deferred packs.
+- **Checks**:
+  - `check_ui_art.py` takes A057 in its own section,
+    `check_report_header`: one header, at its box, binary alpha, filling
+    its band edge to edge, its exact bytes on disk and the approved pixels.
+  - The `--ui` showcase shows it at 206x40.
+- **Tests**: input_v1's morning case (0138) asks that the header be A057's
+  file at 206x40, with no stand-in entry left.
+- **Shots** (`implementation/shots/0289/`, FHD 1920x1080, looked at):
+  - `result`: the report after a won night.
+  - `morning_lost` (new scene): after a lost night - the house at its last
+    hit point, a walker on its porch, the night played until it fell.
+  - `morning`: after a pass-out night, every line.
+  - `noon` and `wave`: the farm around it by day and by night.
+  - `headless_check` counts 141 scenes.
+- **The delivery folder** `implementation/backlog/deliveries/A057-morning-report/`
+  is committed, as A056's was.
+- `python implementation/backlog/assets.py set A057 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

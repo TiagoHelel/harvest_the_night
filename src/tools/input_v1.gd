@@ -1393,8 +1393,12 @@ func _case_0138_morning() -> void:
 			str(outside))
 	I18n.use("en")
 	var header: Control = locate_control("ReportHeader") as Control
+	# A057's since task 0289: the pack's own file, nothing drawn in code.
+	var picture := header as TextureRect
 	expect(header != null and header.is_visible_in_tree()
-		and header.size == Vector2(206, 40), "under a 206x40 sunrise",
+		and header.size == Vector2(206, 40) and picture != null and picture.texture != null
+		and picture.texture.resource_path == "res://sprites/ui/report_header.png"
+		and PlaceholderArt.art(&"report_header").is_empty(), "under A057's 206x40 sunrise",
 		str(header.size) if header != null else "none")
 
 	# **Confirming brings up the house**, him already standing beside the

@@ -1,0 +1,1 @@
+Third header still uses the wrong saturated sky ramp/noisy native clusters instead of the requested quiet stepped dawn bands.
