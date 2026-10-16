@@ -4502,6 +4502,66 @@
       "owner": "raster"
     },
     {
+      "output": "sprites/enemies/wraith.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_attack.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_attack_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_attack_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_attack_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_death.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_death_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_death_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_death_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_death_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_walk_0.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_walk_1.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_walk_2.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_walk_3.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/enemies/wraith_walk_b.png",
+      "owner": "raster"
+    },
+    {
       "output": "sprites/interior/bed.png",
       "owner": "raster"
     },
@@ -5507,6 +5567,10 @@
     },
     {
       "output": "sprites/ui/head_walker.png",
+      "owner": "raster"
+    },
+    {
+      "output": "sprites/ui/head_wraith.png",
       "owner": "raster"
     },
     {

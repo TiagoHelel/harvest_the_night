@@ -1,0 +1,158 @@
+[
+  {
+    "recipe": {
+      "id": "wraith-death-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-death-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        544,
+        768
+      ],
+      "crop_xywh": [
+        103,
+        140,
+        395,
+        534
+      ],
+      "content_scale": 0.05805243445692884,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      13,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      31
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wraith-death-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-death-r1.png",
+      "sheet_cell_xywh": [
+        544,
+        0,
+        495,
+        768
+      ],
+      "crop_xywh": [
+        592,
+        207,
+        399,
+        482
+      ],
+      "content_scale": 0.05805243445692884,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      16,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      28
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wraith-death-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-death-r1.png",
+      "sheet_cell_xywh": [
+        1039,
+        0,
+        501,
+        768
+      ],
+      "crop_xywh": [
+        1089,
+        364,
+        417,
+        322
+      ],
+      "content_scale": 0.05805243445692884,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      20,
+      25,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      24,
+      19
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wraith-death-r1-3",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-death-r1.png",
+      "sheet_cell_xywh": [
+        1540,
+        0,
+        508,
+        768
+      ],
+      "crop_xywh": [
+        1576,
+        565,
+        397,
+        124
+      ],
+      "content_scale": 0.05805243445692884,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS"
+    },
+    "native_bounds": [
+      21,
+      37,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      7
+    ]
+  }
+]

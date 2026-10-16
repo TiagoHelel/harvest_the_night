@@ -1,7 +1,7 @@
 # 0265 - Art: the wraith
 
 - **Phase:** 14 - Enemies and bosses
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0252, 0246
 - **Likely files:** assets/art_source/enemies/wraith/, assets/art_source/manifest.json, assets/art_source/ownership.json, tools/check_enemy_art.py, tools/gen_sprites.py, src/ui/enemy_motion.gd, src/ui/wraith_fade.gdshader
 - **Art packs:** A051

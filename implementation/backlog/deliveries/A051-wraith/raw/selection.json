@@ -1,0 +1,310 @@
+{
+  "status": "review",
+  "issues": [
+    "Raw display may expose invisibleRGB in zero-alpha area; correctRGBA composite and actualalpha audit show clean hard cutouts. Binary threshold128 is applied as prescribed. No runtime fade baked in.",
+    "Final owner approval pending; wraith-walk-r2 request was not executed after alpha audit corrected the misleadingrawpreview."
+  ],
+  "files": {
+    "wraith/west/0": {
+      "stem": "wraith-master-r1",
+      "index": 0,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_walk/west/0": {
+      "stem": "wraith-walk-r1",
+      "index": 0,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_walk/west/1": {
+      "stem": "wraith-walk-r1",
+      "index": 1,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_walk/west/2": {
+      "stem": "wraith-walk-r1",
+      "index": 2,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_walk/west/3": {
+      "stem": "wraith-walk-r1",
+      "index": 3,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_attack/west/0": {
+      "stem": "wraith-attack-r1",
+      "index": 0,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_attack/west/1": {
+      "stem": "wraith-attack-r1",
+      "index": 1,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_attack/west/2": {
+      "stem": "wraith-attack-r1",
+      "index": 2,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_death/west/0": {
+      "stem": "wraith-death-r2",
+      "index": 0,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_death/west/1": {
+      "stem": "wraith-death-r2",
+      "index": 1,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_death/west/2": {
+      "stem": "wraith-death-r2",
+      "index": 2,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "wraith_death/west/3": {
+      "stem": "wraith-death-r2",
+      "index": 3,
+      "fields": {
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ]
+      }
+    },
+    "head_wraith/none/0": {
+      "stem": "head-wraith-r1",
+      "index": 0,
+      "fields": {
+        "inspection_eye_xy": [
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            6
+          ]
+        ],
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "bone",
+          "bone_dark",
+          "night",
+          "night_light",
+          "moon"
+        ]
+      }
+    }
+  },
+  "rejected": {
+    "wraith-master-r2": "Unselected alternate; master1 has clearer three-pronged clothhem at1x.",
+    "wraith-death-r1": "Finalknot7pxhigh; corrected r2 is5pxhigh."
+  },
+  "decisions": {
+    "wraith-master-r1": {
+      "decision": "selected for final review; no approval inferred"
+    },
+    "wraith-walk-r1": {
+      "decision": "selected for final review; no approval inferred"
+    },
+    "wraith-attack-r1": {
+      "decision": "selected for final review; no approval inferred"
+    },
+    "wraith-death-r2": {
+      "decision": "selected for final review; no approval inferred"
+    },
+    "head-wraith-r1": {
+      "decision": "selected for final review; no approval inferred"
+    }
+  }
+}

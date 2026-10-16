@@ -1,0 +1,1018 @@
+{
+  "title": "The wraith",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "palette_mode": "A",
+  "expected_files": 13,
+  "files": [
+    {
+      "anim": "wraith",
+      "dir": "west",
+      "frame": 0,
+      "pose": "wraith_0",
+      "output": "native/wraith/west/01.png",
+      "runtime_name": "sprites/enemies/wraith.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-master-r1.png",
+      "prompt": "raw/wraith-master-r1.prompt.txt",
+      "call": "raw/wraith-master-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          413,
+          131,
+          614,
+          842
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1448,
+          1086
+        ],
+        "content_scale": 0.03681710213776722,
+        "content_anchor_xy": [
+          11,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_walk",
+      "dir": "west",
+      "frame": 0,
+      "pose": "wraith_walk_0",
+      "output": "native/wraith_walk/west/01.png",
+      "runtime_name": "sprites/enemies/wraith_walk_0.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-walk-r1.png",
+      "prompt": "raw/wraith-walk-r1.prompt.txt",
+      "call": "raw/wraith-walk-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          100,
+          133,
+          424,
+          551
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          563,
+          768
+        ],
+        "content_scale": 0.056261343012704176,
+        "content_anchor_xy": [
+          12,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_walk",
+      "dir": "west",
+      "frame": 1,
+      "pose": "wraith_walk_1",
+      "output": "native/wraith_walk/west/02.png",
+      "runtime_name": "sprites/enemies/wraith_walk_1.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-walk-r1.png",
+      "prompt": "raw/wraith-walk-r1.prompt.txt",
+      "call": "raw/wraith-walk-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          603,
+          133,
+          398,
+          551
+        ],
+        "sheet_cell_xywh": [
+          563,
+          0,
+          454,
+          768
+        ],
+        "content_scale": 0.056261343012704176,
+        "content_anchor_xy": [
+          11,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_walk",
+      "dir": "west",
+      "frame": 2,
+      "pose": "wraith_walk_2",
+      "output": "native/wraith_walk/west/03.png",
+      "runtime_name": "sprites/enemies/wraith_walk_2.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-walk-r1.png",
+      "prompt": "raw/wraith-walk-r1.prompt.txt",
+      "call": "raw/wraith-walk-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1035,
+          133,
+          477,
+          554
+        ],
+        "sheet_cell_xywh": [
+          1017,
+          0,
+          543,
+          768
+        ],
+        "content_scale": 0.056261343012704176,
+        "content_anchor_xy": [
+          13,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_walk",
+      "dir": "west",
+      "frame": 3,
+      "pose": "wraith_walk_3",
+      "output": "native/wraith_walk/west/04.png",
+      "runtime_name": "sprites/enemies/wraith_walk_3.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-walk-r1.png",
+      "prompt": "raw/wraith-walk-r1.prompt.txt",
+      "call": "raw/wraith-walk-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1609,
+          133,
+          379,
+          551
+        ],
+        "sheet_cell_xywh": [
+          1560,
+          0,
+          488,
+          768
+        ],
+        "content_scale": 0.056261343012704176,
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_attack",
+      "dir": "west",
+      "frame": 0,
+      "pose": "wraith_attack_0",
+      "output": "native/wraith_attack/west/01.png",
+      "runtime_name": "sprites/enemies/wraith_attack_0.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-attack-r1.png",
+      "prompt": "raw/wraith-attack-r1.prompt.txt",
+      "call": "raw/wraith-attack-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          183,
+          214,
+          372,
+          556
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          571,
+          887
+        ],
+        "content_scale": 0.05575539568345324,
+        "content_anchor_xy": [
+          10,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_attack",
+      "dir": "west",
+      "frame": 1,
+      "pose": "wraith_attack_1",
+      "output": "native/wraith_attack/west/02.png",
+      "runtime_name": "sprites/enemies/wraith_attack_1.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-attack-r1.png",
+      "prompt": "raw/wraith-attack-r1.prompt.txt",
+      "call": "raw/wraith-attack-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          589,
+          224,
+          629,
+          536
+        ],
+        "sheet_cell_xywh": [
+          571,
+          0,
+          680,
+          887
+        ],
+        "content_scale": 0.05575539568345324,
+        "content_anchor_xy": [
+          17,
+          30
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_attack",
+      "dir": "west",
+      "frame": 2,
+      "pose": "wraith_attack_2",
+      "output": "native/wraith_attack/west/03.png",
+      "runtime_name": "sprites/enemies/wraith_attack_2.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-attack-r1.png",
+      "prompt": "raw/wraith-attack-r1.prompt.txt",
+      "call": "raw/wraith-attack-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1286,
+          214,
+          418,
+          556
+        ],
+        "sheet_cell_xywh": [
+          1251,
+          0,
+          523,
+          887
+        ],
+        "content_scale": 0.05575539568345324,
+        "content_anchor_xy": [
+          11,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_death",
+      "dir": "west",
+      "frame": 0,
+      "pose": "wraith_death_0",
+      "output": "native/wraith_death/west/01.png",
+      "runtime_name": "sprites/enemies/wraith_death_0.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-death-r2.png",
+      "prompt": "raw/wraith-death-r2.prompt.txt",
+      "call": "raw/wraith-death-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          103,
+          139,
+          396,
+          534
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          545,
+          768
+        ],
+        "content_scale": 0.05805243445692884,
+        "content_anchor_xy": [
+          11,
+          31
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_death",
+      "dir": "west",
+      "frame": 1,
+      "pose": "wraith_death_1",
+      "output": "native/wraith_death/west/02.png",
+      "runtime_name": "sprites/enemies/wraith_death_1.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-death-r2.png",
+      "prompt": "raw/wraith-death-r2.prompt.txt",
+      "call": "raw/wraith-death-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          592,
+          206,
+          399,
+          482
+        ],
+        "sheet_cell_xywh": [
+          545,
+          0,
+          494,
+          768
+        ],
+        "content_scale": 0.05805243445692884,
+        "content_anchor_xy": [
+          11,
+          28
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_death",
+      "dir": "west",
+      "frame": 2,
+      "pose": "wraith_death_2",
+      "output": "native/wraith_death/west/03.png",
+      "runtime_name": "sprites/enemies/wraith_death_2.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-death-r2.png",
+      "prompt": "raw/wraith-death-r2.prompt.txt",
+      "call": "raw/wraith-death-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1089,
+          363,
+          418,
+          323
+        ],
+        "sheet_cell_xywh": [
+          1039,
+          0,
+          501,
+          768
+        ],
+        "content_scale": 0.05805243445692884,
+        "content_anchor_xy": [
+          12,
+          19
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "wraith_death",
+      "dir": "west",
+      "frame": 3,
+      "pose": "wraith_death_3",
+      "output": "native/wraith_death/west/04.png",
+      "runtime_name": "sprites/enemies/wraith_death_3.png",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "mirror": "runtime",
+      "points": {},
+      "grounded": true,
+      "source": "raw/wraith-death-r2.png",
+      "prompt": "raw/wraith-death-r2.prompt.txt",
+      "call": "raw/wraith-death-r2.call.json",
+      "recipe": {
+        "crop_xywh": [
+          1574,
+          587,
+          404,
+          86
+        ],
+        "sheet_cell_xywh": [
+          1540,
+          0,
+          508,
+          768
+        ],
+        "content_scale": 0.05805243445692884,
+        "content_anchor_xy": [
+          11,
+          5
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "night",
+          "night_light",
+          "moon",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "cloth_dark",
+          "cloth",
+          "water_dark",
+          "bone",
+          "bone_dark"
+        ],
+        "mirrored_from": null
+      },
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ]
+    },
+    {
+      "anim": "head_wraith",
+      "dir": "none",
+      "frame": 0,
+      "pose": "head_wraith_0",
+      "output": "native/head_wraith/none/01.png",
+      "runtime_name": "sprites/ui/head_wraith.png",
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "draw_scale": 1,
+      "seconds": 1,
+      "loop": false,
+      "mirror": "none",
+      "points": {},
+      "grounded": false,
+      "source": "raw/head-wraith-r1.png",
+      "prompt": "raw/head-wraith-r1.prompt.txt",
+      "call": "raw/head-wraith-r1.call.json",
+      "recipe": {
+        "crop_xywh": [
+          404,
+          375,
+          479,
+          537
+        ],
+        "sheet_cell_xywh": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "content_scale": 0.024208566108007448,
+        "content_anchor_xy": [
+          6,
+          6
+        ],
+        "alpha_threshold": 128,
+        "palette_keys": [
+          "ink",
+          "ink_soft",
+          "stone_dark",
+          "stone",
+          "stone_light",
+          "bone",
+          "bone_dark",
+          "night",
+          "night_light",
+          "moon"
+        ],
+        "mirrored_from": null
+      },
+      "inspection_eye_xy": [
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          6
+        ]
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone",
+        "bone_dark",
+        "night",
+        "night_light",
+        "moon"
+      ]
+    }
+  ],
+  "mirror_pairs": {},
+  "deviations": [],
+  "supersedes": [],
+  "comparison": [
+    {
+      "path": "sprites/enemies/walker.png",
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "draw_scale": 1
+    }
+  ],
+  "quality_issues": [
+    "Raw display may expose invisibleRGB in zero-alpha area; correctRGBA composite and actualalpha audit show clean hard cutouts. Binary threshold128 is applied as prescribed. No runtime fade baked in.",
+    "Final owner approval pending; wraith-walk-r2 request was not executed after alpha audit corrected the misleadingrawpreview."
+  ]
+}

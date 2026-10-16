@@ -1,0 +1,10 @@
+
+2026-10-14 / Measured native export
+Raw display may expose invisibleRGB in zero-alpha area; correctRGBA composite and actualalpha audit show clean hard cutouts. Binary threshold128 is applied as prescribed. No runtime fade baked in.
+Final owner approval pending; wraith-walk-r2 request was not executed after alpha audit corrected the misleadingrawpreview.
+No art approval inferred. 13 of 13 candidate frames measured. All art pixels derive from recorded ImageGen PNGs through read-only render_source.
+
+2026-10-14 / Batch approval reconciliation
+Owner words: meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html
+Prior owner words: tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?
+13/13 reviewed outputs approved. All approved pixels, crops, palette choices and timing preserved. Accepted visual differences remain measured in checks.json: none. Complete delivery released for Claude integration.

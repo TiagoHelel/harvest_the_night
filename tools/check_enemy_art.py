@@ -28,6 +28,9 @@ PACK_FAMILIES = {
     'digger':dict(ORDINARY,task='A049',counts={'master':1,'walk':4,'burrow':4,'mound':3,'emerge':4,'attack':3,'death':4}),
     # The frost zombie (task 0264): the four's frame and motion.
     'frost_zombie':dict(ORDINARY,task='A050'),
+    # The wraith (task 0265): the four's frame and motion, opaque with
+    # binary alpha like every pose here - its fading is 0252's shader.
+    'wraith':dict(ORDINARY,task='A051'),
 }
 
 def bodies(image):

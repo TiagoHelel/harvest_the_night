@@ -1,0 +1,35 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Create ONE forecasthead bust of the exact opaque shrouded wraith in input1. Image2 is native colour/identity reference, image3 icon outline/framing styleonly. A pointed violet-grey hood with darkopening, TWO small matte creamBONE eyes, solidpale shroudshoulders. Three-quarter LEFT, flatbottomchestcut. 16x16icon, visible12\u201313high and\u226413wide, centredx8, lowestopaque14. Eyes bold enough for1nativepixel each, separatelyspaced withdarkgap; they are BONEcream NOT emission. Coarsepixelart, few broadclusters andcoloureddarkrim, samebodypaletteandcamera. Solidopaqueclothpixels, alphaZERO outside hardpixel edges. No translucentbody, no softedge/mistcloud, halo/aura/glow/bloom/shadow, scenery/labels/frame/text/gradient/blur or3D. Completeunclipped narrowuprightbust withwideemptymargins.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A051-wraith/raw/wraith-master-r1.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A051-wraith/preview/walk0-head-reference-4x.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A051-wraith/raw/wraith-master-r1.png",
+      "sha256": "cd57085a4c8f9a65b894ef49121e868902f5b833dbc9c9729c0f81d0c90d0ee0",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A051-wraith/preview/walk0-head-reference-4x.png",
+      "sha256": "c6f1fac9b5b8d2ac677f42b967ab718af7f6ebeae63b84cf31f1d123c2c08f49",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/ui/wood.png",
+      "sha256": "6c501258c6a9aa1f0427123693877a00c6e3845ad3b7a3cc902c948be30abfa2",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-2347142b-9a17-46e5-a1cf-1a07d8dac61d.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A051-wraith\\raw\\head-wraith-r1.png",
+  "sha256": "854545a71d79508812d7457813b53233bc457ce35a520c7125ce6f3f9638f6eb",
+  "revision": 1,
+  "decision": "selected for final review; no approval inferred"
+}

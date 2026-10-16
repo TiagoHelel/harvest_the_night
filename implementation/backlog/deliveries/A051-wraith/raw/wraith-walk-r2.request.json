@@ -1,0 +1,7 @@
+{
+  "prompt": "Create one four-pose horizontal PIXEL SPRITE SHEET of the exact opaque cloth character in input1, facing LEFT. Pale violet shroud, dark hood with two bone eyes, claw arms, NOlegs. Four different arm/hem poses, fixed hood/torso size androws±1. Wisp tips remain on samebaseline. Fullheight clear gutters and amplemargins. IMPORTANT: there is no painted cloud, diffusehalo or softbackground. Every pixel outside each HARD PIXEL SILHOUETTE must have alpha0. Solidopaque clothbody; naturalflatupperleftlighting ONBODYONLY. No aura, shadow, mist, fade, softedge. Do not generate a ghost illustration withglow; generate a solidcutout game sprite sheet. The pixeloutline must stay crisp allaround. Native31pxbodyheight and20–24width at samephysicalscale allfour, broadpixelclusters, sharpcloththreads.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A051-wraith/raw/wraith-master-r1.png"
+  ]
+}

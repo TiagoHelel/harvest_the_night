@@ -1,0 +1,36 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nAsset type: A051 wraith identity master for HARVEST THE NIGHT.\nONE SOLID CLOTH figure: a hooded legless shade in a long tattered shroud. Pale grey-violet fabric with cool white edge highlights, deep DARK hood opening and two small matte cream eyes, long thin solid arms and claw fingers. Thick solid fabric outline enclosing an opaque pale body. The hem frays into a FEW sharp thin fabric wisps tapering to ground. No legs/feet. Side view facing WEST/LEFT. Body18\u201324logicalpixels wide x30\u201332 tall, on64x48canvas pivot32,44. Mainbody bottomhovers3\u20134pxaboveground, but ONE thin wisp toucheslowestopaque43. Bodycenter32. Native about31px high, coarsehandcraftedpixelart with broadsimpleclusters and coloureddarkoutline, orthographicthree-quarter top-down farmcamera, neutralupperleftdaylight. Sameworld as input1 andwalkerinput2; farmerinput3size only, NOTsubject.\nThis is an OPAQUE CLOTH sprite, not a translucent ghost illustration. Every fabricpixel fullyOPAQUE255. Outsidehardpixel silhouette alphaZERO. NO outside mistcloud or aura, NO glow, bloom, halo, diffusion, partialbodyalpha, softedge, shadow, backdrop, floor, scenery, labels/text, gradient/blur or3D. The game itself later fades it; sourceMUST besolid, crisp and opaque. Completeunclippedfigurewithwideempty margins.\nSecond independent candidate: narrow triangular hood, long curved pale shroud and distinct inward-curving clawhands, no legs. Floating solidclothbody distinct from walkingzombie. Wisptip touches ground, darkrim allaround, no airbrush.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+      "sha256": "7c0311c422ca0856a6dc9630f9d111fbe6d642e017be2dceede83403e9b6c87c",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+      "sha256": "c9cbd7ae7fb219c00809ecc11e478696567a56287afc488b9eb38352e65fcde1",
+      "role": "reference image; exact role specified in the recorded prompt"
+    },
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png",
+      "sha256": "5dd6704f22e6d6595115fe72fec9969452eb9af23bb1c0cf958b6491c1f23e01",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-50ee1726-9af2-4cbd-8e62-b9d75d9e0640.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-master-r2.png",
+  "sha256": "cab623822b2dad8e531f3b11e482c2ef8e3ac9fb6d64d93ee4c12045bc35f05c",
+  "revision": 2,
+  "decision": "rejected: Unselected alternate; master1 has clearer three-pronged clothhem at1x.",
+  "archived_path": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\rejected\\wraith-master-r2.png"
+}

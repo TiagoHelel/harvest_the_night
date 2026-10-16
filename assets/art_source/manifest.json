@@ -125809,6 +125809,1247 @@
       "operation": "copy",
       "alias_of": "enemies/frost_zombie_death_3",
       "output_sha256": "03ce8e10c810ec81ece9d9ecb0cad9a4f3de4a9594aa0426e870581c43a46ad7"
+    },
+    {
+      "id": "enemies/wraith",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-master-r1.png",
+      "source_sha256": "cd57085a4c8f9a65b894ef49121e868902f5b833dbc9c9729c0f81d0c90d0ee0",
+      "crop_xywh": [
+        413,
+        131,
+        614,
+        842
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "master",
+      "content_scale": 0.03681710213776722,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-master-r1.prompt.txt",
+      "prompt_sha256": "830ba1fa1053d10603245017473a13878fc85bd2b2db2e3c38d17ee3c7e4f407",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-master-r1.call.json",
+          "sha256": "801fe763b14d8f0ff620cfb0e02bb8075dc2d11dc736c7abfd1de957ebde6093",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith/west/01.png",
+          "sha256": "fc080f5592f4c48ba263bd278d00a2bcf69e9ac37cdf1989d4ac6af10dcee5e6",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        11,
+        31
+      ],
+      "output_sha256": "fc080f5592f4c48ba263bd278d00a2bcf69e9ac37cdf1989d4ac6af10dcee5e6"
+    },
+    {
+      "id": "enemies/wraith_walk_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-walk-r1.png",
+      "source_sha256": "1891081fa28b8be6effe76f84ab7cd5d96059465640e74f63abfc96edde0cfb8",
+      "crop_xywh": [
+        100,
+        133,
+        424,
+        551
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "walk",
+      "content_scale": 0.056261343012704176,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_walk",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/wraith_walk_0.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.prompt.txt",
+      "prompt_sha256": "6a78c09b592de604735325c61efd4c0ca7c063b71c4cc6f6a062a9163b611d71",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.call.json",
+          "sha256": "2e4fbaf403319879de3fb0b4aa96d85f154a08be8e7fb890c71ea2f7652b49da",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_walk/west/01.png",
+          "sha256": "c16dc0bdbf5f96980d01353a0f922c94009217d135dbc637923b1b7913429358",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        12,
+        31
+      ],
+      "output_sha256": "c16dc0bdbf5f96980d01353a0f922c94009217d135dbc637923b1b7913429358"
+    },
+    {
+      "id": "enemies/wraith_walk_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-walk-r1.png",
+      "source_sha256": "1891081fa28b8be6effe76f84ab7cd5d96059465640e74f63abfc96edde0cfb8",
+      "crop_xywh": [
+        603,
+        133,
+        398,
+        551
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "walk",
+      "content_scale": 0.056261343012704176,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_walk",
+      "frame": 1,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/wraith_walk_1.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.prompt.txt",
+      "prompt_sha256": "6a78c09b592de604735325c61efd4c0ca7c063b71c4cc6f6a062a9163b611d71",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.call.json",
+          "sha256": "2e4fbaf403319879de3fb0b4aa96d85f154a08be8e7fb890c71ea2f7652b49da",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_walk/west/02.png",
+          "sha256": "ea7d804682b8ae2f6e4d8c28500f84691f341c4fe4d86ae4c4e35469b99aedc3",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        11,
+        31
+      ],
+      "output_sha256": "ea7d804682b8ae2f6e4d8c28500f84691f341c4fe4d86ae4c4e35469b99aedc3"
+    },
+    {
+      "id": "enemies/wraith_walk_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-walk-r1.png",
+      "source_sha256": "1891081fa28b8be6effe76f84ab7cd5d96059465640e74f63abfc96edde0cfb8",
+      "crop_xywh": [
+        1035,
+        133,
+        477,
+        554
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "walk",
+      "content_scale": 0.056261343012704176,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_walk",
+      "frame": 2,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/wraith_walk_2.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.prompt.txt",
+      "prompt_sha256": "6a78c09b592de604735325c61efd4c0ca7c063b71c4cc6f6a062a9163b611d71",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.call.json",
+          "sha256": "2e4fbaf403319879de3fb0b4aa96d85f154a08be8e7fb890c71ea2f7652b49da",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_walk/west/03.png",
+          "sha256": "c758c52e6a9944f64f876e093a638fd866fb54dd1a19946a0d450e52bcf45ecb",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        13,
+        31
+      ],
+      "output_sha256": "c758c52e6a9944f64f876e093a638fd866fb54dd1a19946a0d450e52bcf45ecb"
+    },
+    {
+      "id": "enemies/wraith_walk_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-walk-r1.png",
+      "source_sha256": "1891081fa28b8be6effe76f84ab7cd5d96059465640e74f63abfc96edde0cfb8",
+      "crop_xywh": [
+        1609,
+        133,
+        379,
+        551
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "walk",
+      "content_scale": 0.056261343012704176,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_walk",
+      "frame": 3,
+      "seconds": 0.125,
+      "loop": true,
+      "output": "sprites/enemies/wraith_walk_3.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.prompt.txt",
+      "prompt_sha256": "6a78c09b592de604735325c61efd4c0ca7c063b71c4cc6f6a062a9163b611d71",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.call.json",
+          "sha256": "2e4fbaf403319879de3fb0b4aa96d85f154a08be8e7fb890c71ea2f7652b49da",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_walk/west/04.png",
+          "sha256": "2b363fa146a0b6d68c7e284c431c7b615f29255183691133c3a371fce527b6d1",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        10,
+        31
+      ],
+      "output_sha256": "2b363fa146a0b6d68c7e284c431c7b615f29255183691133c3a371fce527b6d1"
+    },
+    {
+      "id": "enemies/wraith_attack_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-attack-r1.png",
+      "source_sha256": "0b514c0cfd491d736854a3b97b13718ee8e09c70524a9c688fd51a77545d30e9",
+      "crop_xywh": [
+        183,
+        214,
+        372,
+        556
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "attack",
+      "content_scale": 0.05575539568345324,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_attack_0.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.prompt.txt",
+      "prompt_sha256": "891ea6ea883da3a1268307306206c589b3dbc465280f26c19fe1c10433c4ddb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.call.json",
+          "sha256": "89e0d5a5b4dfe383b9b3f9f8591f13aefb915842538230d1b1f14deba2af5f61",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_attack/west/01.png",
+          "sha256": "029cfd367576b55b960d6b07019434eed1c5869c8f789d8735b9a5b95b1b436f",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        10,
+        31
+      ],
+      "output_sha256": "029cfd367576b55b960d6b07019434eed1c5869c8f789d8735b9a5b95b1b436f"
+    },
+    {
+      "id": "enemies/wraith_attack_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-attack-r1.png",
+      "source_sha256": "0b514c0cfd491d736854a3b97b13718ee8e09c70524a9c688fd51a77545d30e9",
+      "crop_xywh": [
+        589,
+        224,
+        629,
+        536
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "attack",
+      "content_scale": 0.05575539568345324,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_attack",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_attack_1.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.prompt.txt",
+      "prompt_sha256": "891ea6ea883da3a1268307306206c589b3dbc465280f26c19fe1c10433c4ddb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.call.json",
+          "sha256": "89e0d5a5b4dfe383b9b3f9f8591f13aefb915842538230d1b1f14deba2af5f61",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_attack/west/02.png",
+          "sha256": "d566fbb7be2f7a1f3e62b8f0a7ba1705bd7b799fbefb1ac60059eb2080b4cf05",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        17,
+        30
+      ],
+      "output_sha256": "d566fbb7be2f7a1f3e62b8f0a7ba1705bd7b799fbefb1ac60059eb2080b4cf05"
+    },
+    {
+      "id": "enemies/wraith_attack_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-attack-r1.png",
+      "source_sha256": "0b514c0cfd491d736854a3b97b13718ee8e09c70524a9c688fd51a77545d30e9",
+      "crop_xywh": [
+        1286,
+        214,
+        418,
+        556
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "attack",
+      "content_scale": 0.05575539568345324,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_attack",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_attack_2.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.prompt.txt",
+      "prompt_sha256": "891ea6ea883da3a1268307306206c589b3dbc465280f26c19fe1c10433c4ddb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.call.json",
+          "sha256": "89e0d5a5b4dfe383b9b3f9f8591f13aefb915842538230d1b1f14deba2af5f61",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_attack/west/03.png",
+          "sha256": "0ab72d77a47e604e2a19ae45a9035499b916049e3ed8e4e01c61cb6c8369c15c",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        11,
+        31
+      ],
+      "output_sha256": "0ab72d77a47e604e2a19ae45a9035499b916049e3ed8e4e01c61cb6c8369c15c"
+    },
+    {
+      "id": "enemies/wraith_death_0",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-death-r2.png",
+      "source_sha256": "ead4a77edb40f248408e441c6486c44957270ecc2126aaa024357fd8f789f623",
+      "crop_xywh": [
+        103,
+        139,
+        396,
+        534
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "death",
+      "content_scale": 0.05805243445692884,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_death_0.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.prompt.txt",
+      "prompt_sha256": "2aaf54e76c13305268203bc4b339a39edcb1bc99d8c7e78dcefcbc81761514f6",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.call.json",
+          "sha256": "97a87c2aabfd7eca346e3dbfc52e477ba8a61b179cc9cff4cf3cb2e307b54ac3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_death/west/01.png",
+          "sha256": "afb84633d06ac2704001154dc876a8efb07e33fa26a0425dca18e9876a902095",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        11,
+        31
+      ],
+      "output_sha256": "afb84633d06ac2704001154dc876a8efb07e33fa26a0425dca18e9876a902095"
+    },
+    {
+      "id": "enemies/wraith_death_1",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-death-r2.png",
+      "source_sha256": "ead4a77edb40f248408e441c6486c44957270ecc2126aaa024357fd8f789f623",
+      "crop_xywh": [
+        592,
+        206,
+        399,
+        482
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "death",
+      "content_scale": 0.05805243445692884,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_death",
+      "frame": 1,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_death_1.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.prompt.txt",
+      "prompt_sha256": "2aaf54e76c13305268203bc4b339a39edcb1bc99d8c7e78dcefcbc81761514f6",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.call.json",
+          "sha256": "97a87c2aabfd7eca346e3dbfc52e477ba8a61b179cc9cff4cf3cb2e307b54ac3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_death/west/02.png",
+          "sha256": "36bc7caa04e2931091f8ed7631ea2dc4387e14ad1892b2063aee0ebc12445c2a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        11,
+        28
+      ],
+      "output_sha256": "36bc7caa04e2931091f8ed7631ea2dc4387e14ad1892b2063aee0ebc12445c2a"
+    },
+    {
+      "id": "enemies/wraith_death_2",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-death-r2.png",
+      "source_sha256": "ead4a77edb40f248408e441c6486c44957270ecc2126aaa024357fd8f789f623",
+      "crop_xywh": [
+        1089,
+        363,
+        418,
+        323
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "death",
+      "content_scale": 0.05805243445692884,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_death",
+      "frame": 2,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_death_2.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.prompt.txt",
+      "prompt_sha256": "2aaf54e76c13305268203bc4b339a39edcb1bc99d8c7e78dcefcbc81761514f6",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.call.json",
+          "sha256": "97a87c2aabfd7eca346e3dbfc52e477ba8a61b179cc9cff4cf3cb2e307b54ac3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_death/west/03.png",
+          "sha256": "1d258328b61b97f2c83d1a9571df1bc4bc9d9b737afb18f42c6280eb41574d5a",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        12,
+        19
+      ],
+      "output_sha256": "1d258328b61b97f2c83d1a9571df1bc4bc9d9b737afb18f42c6280eb41574d5a"
+    },
+    {
+      "id": "enemies/wraith_death_3",
+      "owner": "raster",
+      "source": "assets/art_source/enemies/wraith/wraith-death-r2.png",
+      "source_sha256": "ead4a77edb40f248408e441c6486c44957270ecc2126aaa024357fd8f789f623",
+      "crop_xywh": [
+        1574,
+        587,
+        404,
+        86
+      ],
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "enemy_family": "wraith",
+      "enemy_motion": "death",
+      "content_scale": 0.05805243445692884,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "animation": "enemies/wraith_death",
+      "frame": 3,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_death_3.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.prompt.txt",
+      "prompt_sha256": "2aaf54e76c13305268203bc4b339a39edcb1bc99d8c7e78dcefcbc81761514f6",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.call.json",
+          "sha256": "97a87c2aabfd7eca346e3dbfc52e477ba8a61b179cc9cff4cf3cb2e307b54ac3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_death/west/04.png",
+          "sha256": "4719df30dd27b1122eaf5b606503a6a88a0755781d7943abdf251cecc2ce0f95",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        11,
+        5
+      ],
+      "output_sha256": "4719df30dd27b1122eaf5b606503a6a88a0755781d7943abdf251cecc2ce0f95"
+    },
+    {
+      "id": "ui/head_wraith",
+      "owner": "raster",
+      "source": "assets/art_source/ui/heads/head-wraith-r1.png",
+      "source_sha256": "854545a71d79508812d7457813b53233bc457ce35a520c7125ce6f3f9638f6eb",
+      "crop_xywh": [
+        404,
+        375,
+        479,
+        537
+      ],
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "content_scale": 0.024208566108007448,
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone",
+        "bone_dark",
+        "night",
+        "night_light",
+        "moon"
+      ],
+      "animation": "ui/head_wraith",
+      "frame": 0,
+      "seconds": 1,
+      "loop": false,
+      "output": "sprites/ui/head_wraith.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/head-wraith-r1.prompt.txt",
+      "prompt_sha256": "211e711c2bc217bd83ba55e1c96e2bcf85e348022aaa59a6ff7fb10fc1fc5a0a",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/head-wraith-r1.call.json",
+          "sha256": "f43e979a79f5c3c429562b1c5309b89181ede0f224f5e284e3280778f442080b",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/head_wraith/none/01.png",
+          "sha256": "11e6ead2b65695b5371548342202fda743f4b5496ecb39f552a9f40e4e2d73fc",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "approval": "A051 approved for integration 2026-10-14, owner's words \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\"; integrated by task 0265",
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "output_sha256": "11e6ead2b65695b5371548342202fda743f4b5496ecb39f552a9f40e4e2d73fc"
+    },
+    {
+      "id": "enemies/wraith_walk_b",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/wraith_compat_walk_b",
+      "frame": 0,
+      "seconds": 0.125,
+      "loop": false,
+      "output": "sprites/enemies/wraith_walk_b.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.prompt.txt",
+      "prompt_sha256": "6a78c09b592de604735325c61efd4c0ca7c063b71c4cc6f6a062a9163b611d71",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-walk-r1.call.json",
+          "sha256": "2e4fbaf403319879de3fb0b4aa96d85f154a08be8e7fb890c71ea2f7652b49da",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_walk/west/03.png",
+          "sha256": "c758c52e6a9944f64f876e093a638fd866fb54dd1a19946a0d450e52bcf45ecb",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "enemy_family": "wraith",
+      "enemy_motion": "walk",
+      "enemy_master_id": "enemies/wraith",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/wraith_walk_2",
+      "operation": "copy",
+      "alias_of": "enemies/wraith_walk_2",
+      "output_sha256": "c758c52e6a9944f64f876e093a638fd866fb54dd1a19946a0d450e52bcf45ecb"
+    },
+    {
+      "id": "enemies/wraith_attack",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/wraith_compat_attack",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_attack.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.prompt.txt",
+      "prompt_sha256": "891ea6ea883da3a1268307306206c589b3dbc465280f26c19fe1c10433c4ddb2",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-attack-r1.call.json",
+          "sha256": "89e0d5a5b4dfe383b9b3f9f8591f13aefb915842538230d1b1f14deba2af5f61",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_attack/west/02.png",
+          "sha256": "d566fbb7be2f7a1f3e62b8f0a7ba1705bd7b799fbefb1ac60059eb2080b4cf05",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "enemy_family": "wraith",
+      "enemy_motion": "attack",
+      "enemy_master_id": "enemies/wraith",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/wraith_attack_1",
+      "operation": "copy",
+      "alias_of": "enemies/wraith_attack_1",
+      "output_sha256": "d566fbb7be2f7a1f3e62b8f0a7ba1705bd7b799fbefb1ac60059eb2080b4cf05"
+    },
+    {
+      "id": "enemies/wraith_death",
+      "owner": "raster",
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "palette": "tools/palette.py:COLOURS",
+      "animation": "enemies/wraith_compat_death",
+      "frame": 0,
+      "seconds": 0.1,
+      "loop": false,
+      "output": "sprites/enemies/wraith_death.png",
+      "prompt": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.prompt.txt",
+      "prompt_sha256": "2aaf54e76c13305268203bc4b339a39edcb1bc99d8c7e78dcefcbc81761514f6",
+      "references": [
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/raw/wraith-death-r2.call.json",
+          "sha256": "97a87c2aabfd7eca346e3dbfc52e477ba8a61b179cc9cff4cf3cb2e307b54ac3",
+          "role": "ImageGen call record: the exact arguments, input hashes and returned file"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/native/wraith_death/west/04.png",
+          "sha256": "4719df30dd27b1122eaf5b606503a6a88a0755781d7943abdf251cecc2ce0f95",
+          "role": "Approved native export; the runtime output decodes to the same RGBA pixels"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/contract.json",
+          "sha256": "d10370ceaa494409a0262c3f9cec69b18bef50f6f4de756b8a8609ed7afd3758",
+          "role": "Delivery contract: this file's recipe, source, prompt and export hashes"
+        },
+        {
+          "path": "implementation/backlog/deliveries/A051-wraith/APPROVAL.json",
+          "sha256": "541441e6a3380c762d8cef2eead9c92bc0eebb4b43e1a91ef51a059974535b09",
+          "role": "Owner's approval for integration, 2026-10-14: \"meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html\""
+        }
+      ],
+      "tool": "built-in ImageGen",
+      "generation_task": "A051",
+      "integration_task": "0265",
+      "revision": 1,
+      "enemy_family": "wraith",
+      "enemy_motion": "death",
+      "enemy_master_id": "enemies/wraith",
+      "cell_offset_xy": [
+        -24,
+        -28
+      ],
+      "input": "enemies/wraith_death_3",
+      "operation": "copy",
+      "alias_of": "enemies/wraith_death_3",
+      "output_sha256": "4719df30dd27b1122eaf5b606503a6a88a0755781d7943abdf251cecc2ce0f95"
     }
   ]
 }

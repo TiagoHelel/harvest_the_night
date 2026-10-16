@@ -1,6 +1,6 @@
 # A051 - The wraith
 
-- **Status:** todo
+- **Status:** integrated
 - **For game task:** 0265
 - **Dressed by game tasks:** 0252
 - **Spec after game task:** 0252

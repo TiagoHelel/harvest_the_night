@@ -1,0 +1,23 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-10-14",
+  "arguments": {
+    "prompt": "Use case: stylized-concept\nProduction pixel sprite sheet for A051 wraith. Image1 is EXACT character identity: SOLID opaque pale grey-violet tattered cloth, dark purple hood opening with two matte cream eyes, long thin solid pale clawhands, legless tapered hem. Facing WEST/LEFT. Same world camera: orthographic three-quarter top-down farm view, neutral upper-left daylight. Coarse handcrafted pixelart with broad clusters, crisp coloured dark rim around all pale cloth. Native body31px tall,18\u201324wide in64x48canvas, pivot32,44. Body centred32; ONE narrow hemwisp reaches lowest opaque row43 while main body floats3\u20134pxabove. One physical scale acrossstrip, NEVER enlarge smallerpose into its cell. Exact frame count and one horizontalrow. Eachfigure SMALL within cell, generous FULLHEIGHT empty verticalgutters andoutermargins, complete unclipped forms.\nAll actualpixels OPAQUE255; outside silhouette ALPHA ZERO. No ghosttranslucency or outside fog, mistcloud, glow, halo, bloom, softedge, groundshadow, background, scenery, labels, text, blur, gradient or3D. The only wisps are a few SHARP SOLID cloththreads connected to hem. Shaderfading is latercode, not paintedin.\nONE horizontalstrip EXACTLY 4 sequentialdistinctframes.\nFour FLOAT poses: first arms slightlyahead;second driftback;third one clawextends whileotherrecedes;fourth returnarmsforward. Hood/torso remain same physicalsize and same rows\u00b11px. Hemripples in genuinelydifferentdrawings, nottranslatedclones. Wispbottom touches groundall4. No legs, no feet, no smoke.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A051-wraith/raw/wraith-master-r1.png"
+    ]
+  },
+  "input_images": [
+    {
+      "path": "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A051-wraith/raw/wraith-master-r1.png",
+      "sha256": "cd57085a4c8f9a65b894ef49121e868902f5b833dbc9c9729c0f81d0c90d0ee0",
+      "role": "reference image; exact role specified in the recorded prompt"
+    }
+  ],
+  "returned_file": "C:\\Users\\Helel\\.codex\\generated_images\\01a0f7e5-4a37-7612-b3d9-590f2b3bfba5\\exec-3305391c-443a-47ec-ada7-cd869e227fe4.png",
+  "raw_path": "implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-walk-r1.png",
+  "sha256": "1891081fa28b8be6effe76f84ab7cd5d96059465640e74f63abfc96edde0cfb8",
+  "revision": 1,
+  "decision": "selected for final review; no approval inferred"
+}

@@ -1,0 +1,30 @@
+{
+  "pack": "A051",
+  "date": "2026-10-14",
+  "status": "approved for integration",
+  "scope": "complete_reviewed_delivery",
+  "owner_words": "meu amigo, todos aqueles assets que voce mandou pra eu aprovar hoje eu aprovei -> file:///C:/Users/Helel/Documents/repos/harvest_the_night/implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "prior_owner_words": "tudo aprovado, mas eu vi 2 que ficaram sem imagens, ta certo?",
+  "approved_folder": "implementation/backlog/deliveries/A051-wraith",
+  "review_page": "implementation/backlog/deliveries/A028-dog/all-packs-review.html",
+  "approved_sha256": {
+    "native/wraith/west/01.png": "fc080f5592f4c48ba263bd278d00a2bcf69e9ac37cdf1989d4ac6af10dcee5e6",
+    "native/wraith_walk/west/01.png": "c16dc0bdbf5f96980d01353a0f922c94009217d135dbc637923b1b7913429358",
+    "native/wraith_walk/west/02.png": "ea7d804682b8ae2f6e4d8c28500f84691f341c4fe4d86ae4c4e35469b99aedc3",
+    "native/wraith_walk/west/03.png": "c758c52e6a9944f64f876e093a638fd866fb54dd1a19946a0d450e52bcf45ecb",
+    "native/wraith_walk/west/04.png": "2b363fa146a0b6d68c7e284c431c7b615f29255183691133c3a371fce527b6d1",
+    "native/wraith_attack/west/01.png": "029cfd367576b55b960d6b07019434eed1c5869c8f789d8735b9a5b95b1b436f",
+    "native/wraith_attack/west/02.png": "d566fbb7be2f7a1f3e62b8f0a7ba1705bd7b799fbefb1ac60059eb2080b4cf05",
+    "native/wraith_attack/west/03.png": "0ab72d77a47e604e2a19ae45a9035499b916049e3ed8e4e01c61cb6c8369c15c",
+    "native/wraith_death/west/01.png": "afb84633d06ac2704001154dc876a8efb07e33fa26a0425dca18e9876a902095",
+    "native/wraith_death/west/02.png": "36bc7caa04e2931091f8ed7631ea2dc4387e14ad1892b2063aee0ebc12445c2a",
+    "native/wraith_death/west/03.png": "1d258328b61b97f2c83d1a9571df1bc4bc9d9b737afb18f42c6280eb41574d5a",
+    "native/wraith_death/west/04.png": "4719df30dd27b1122eaf5b606503a6a88a0755781d7943abdf251cecc2ce0f95",
+    "native/head_wraith/none/01.png": "11e6ead2b65695b5371548342202fda743f4b5496ecb39f552a9f40e4e2d73fc"
+  },
+  "frames": 13,
+  "frames_expected": 13,
+  "accepted_visual_checks": [],
+  "missing_outputs": [],
+  "runtime_integrated": false
+}

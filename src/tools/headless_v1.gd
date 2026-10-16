@@ -10620,6 +10620,18 @@ func _task_0252_wraith() -> void:
 		"the view's light is the rules' light, asked without writing; a wraith shows solid in it and faint - never gone - outside",
 		"%s %s %s" % [untouched, agree, str(seen)])
 
+	# **A051's art** (task 0265): nothing of 0120's road, every pose its own
+	# PNG, and the wraith tracked as the families are.
+	var drawn: Array = []
+	for pose in ["wraith", "wraith_walk", "wraith_attack", "wraith_death", "head_wraith"]:
+		if not PlaceholderArt.art(StringName(pose)).is_empty():
+			drawn.append(pose)
+	expect(drawn.is_empty() and EnemyMotion.tracks(&"wraith")
+		and ResourceLoader.exists("res://sprites/enemies/wraith_walk_3.png")
+		and ResourceLoader.exists("res://sprites/ui/head_wraith.png"),
+		"the wraith is A051's art since 0265, tracked by the families' motion, nothing of 0120's road left",
+		str(drawn))
+
 	# **The words and the voice.**
 	expect(Names.of(&"wraith") == I18n.t(&"ENEMY_WRAITH") and Describe.enemy(&"wraith").contains(I18n.t(&"DESC_NEEDS_LIGHT"))
 		and Sfx.ENEMY_SOUNDS.get(&"wraith", &"") == &"sfx/whisper",

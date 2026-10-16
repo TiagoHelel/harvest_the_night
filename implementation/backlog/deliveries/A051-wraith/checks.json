@@ -1,0 +1,170 @@
+{
+  "approved_art_hashes_match": true,
+  "binary_alpha": true,
+  "body_border_centre": true,
+  "canvas_and_pivot_consistent": true,
+  "colours_allowed": true,
+  "death_heights": [
+    31,
+    28,
+    19,
+    5
+  ],
+  "death_settles": true,
+  "family_checks_complete": true,
+  "float_height_ok": true,
+  "float_not_vertical_shift": true,
+  "frame_count_matches": true,
+  "frames_distinct": true,
+  "frames_expected": 13,
+  "frames_found": 13,
+  "grounded_on_pivot": true,
+  "head_body_palette_only": true,
+  "head_eyes_bone": true,
+  "icon_bounds_ok": true,
+  "importer_recipe_matches": true,
+  "master_size_ok": true,
+  "measurements": {
+    "native/head_wraith/none/01.png": {
+      "bounds": [
+        2,
+        2,
+        14,
+        15
+      ],
+      "opaque_pixels": 109
+    },
+    "native/wraith/west/01.png": {
+      "bounds": [
+        21,
+        13,
+        44,
+        44
+      ],
+      "opaque_pixels": 340
+    },
+    "native/wraith_attack/west/01.png": {
+      "bounds": [
+        22,
+        13,
+        43,
+        44
+      ],
+      "opaque_pixels": 359
+    },
+    "native/wraith_attack/west/02.png": {
+      "bounds": [
+        15,
+        14,
+        50,
+        44
+      ],
+      "opaque_pixels": 412
+    },
+    "native/wraith_attack/west/03.png": {
+      "bounds": [
+        21,
+        13,
+        44,
+        44
+      ],
+      "opaque_pixels": 349
+    },
+    "native/wraith_death/west/01.png": {
+      "bounds": [
+        21,
+        13,
+        44,
+        44
+      ],
+      "opaque_pixels": 351
+    },
+    "native/wraith_death/west/02.png": {
+      "bounds": [
+        21,
+        16,
+        44,
+        44
+      ],
+      "opaque_pixels": 302
+    },
+    "native/wraith_death/west/03.png": {
+      "bounds": [
+        20,
+        25,
+        44,
+        44
+      ],
+      "opaque_pixels": 231
+    },
+    "native/wraith_death/west/04.png": {
+      "bounds": [
+        21,
+        39,
+        44,
+        44
+      ],
+      "opaque_pixels": 66
+    },
+    "native/wraith_walk/west/01.png": {
+      "bounds": [
+        20,
+        13,
+        44,
+        44
+      ],
+      "opaque_pixels": 342
+    },
+    "native/wraith_walk/west/02.png": {
+      "bounds": [
+        21,
+        13,
+        43,
+        44
+      ],
+      "opaque_pixels": 314
+    },
+    "native/wraith_walk/west/03.png": {
+      "bounds": [
+        19,
+        13,
+        46,
+        44
+      ],
+      "opaque_pixels": 350
+    },
+    "native/wraith_walk/west/04.png": {
+      "bounds": [
+        22,
+        13,
+        43,
+        44
+      ],
+      "opaque_pixels": 329
+    }
+  },
+  "mirror_pairs_exact": true,
+  "no_empty_frame": true,
+  "one_scale_per_animation": true,
+  "owner_accepted_visual_checks": [],
+  "owner_visual_approval_recorded": true,
+  "points_on_opaque": true,
+  "prompts_match_calls": true,
+  "raw_outside_alpha_max": {
+    "raw/wraith-attack-r1.png": 1,
+    "raw/wraith-death-r2.png": 1,
+    "raw/wraith-master-r1.png": 1,
+    "raw/wraith-walk-r1.png": 1
+  },
+  "raw_provenance_matches": true,
+  "rebuild_identical": true,
+  "reference_hashes_match": true,
+  "silhouette_distances": {
+    "breaker": 62,
+    "runner": 69,
+    "tank": 66,
+    "walker": 49
+  },
+  "silhouette_distinct": true,
+  "source_halo_absent": true
+}

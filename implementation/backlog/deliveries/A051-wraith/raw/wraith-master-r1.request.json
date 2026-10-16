@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: stylized-concept\nAsset type: A051 wraith identity master for HARVEST THE NIGHT.\nONE SOLID CLOTH figure: a hooded legless shade in a long tattered shroud. Pale grey-violet fabric with cool white edge highlights, deep DARK hood opening and two small matte cream eyes, long thin solid arms and claw fingers. Thick solid fabric outline enclosing an opaque pale body. The hem frays into a FEW sharp thin fabric wisps tapering to ground. No legs/feet. Side view facing WEST/LEFT. Body18–24logicalpixels wide x30–32 tall, on64x48canvas pivot32,44. Mainbody bottomhovers3–4pxaboveground, but ONE thin wisp toucheslowestopaque43. Bodycenter32. Native about31px high, coarsehandcraftedpixelart with broadsimpleclusters and coloureddarkoutline, orthographicthree-quarter top-down farmcamera, neutralupperleftdaylight. Sameworld as input1 andwalkerinput2; farmerinput3size only, NOTsubject.\nThis is an OPAQUE CLOTH sprite, not a translucent ghost illustration. Every fabricpixel fullyOPAQUE255. Outsidehardpixel silhouette alphaZERO. NO outside mistcloud or aura, NO glow, bloom, halo, diffusion, partialbodyalpha, softedge, shadow, backdrop, floor, scenery, labels/text, gradient/blur or3D. The game itself later fades it; sourceMUST besolid, crisp and opaque. Completeunclippedfigurewithwideempty margins.",
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/Helel/Documents/repos/harvest_the_night/docs/reference-sheet.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/assets/art_source/enemies/walker/master.png",
+    "C:/Users/Helel/Documents/repos/harvest_the_night/implementation/fhd-player/pilots/2026-10-06/walk-final-mirrored/native-40/walk/down/01.png"
+  ]
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "recipe": {
+      "id": "head-wraith-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\head-wraith-r1.png",
+      "crop_xywh": [
+        404,
+        375,
+        479,
+        537
+      ],
+      "sheet_cell_xywh": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "content_scale": 0.024208566108007448,
+      "canvas_wh": [
+        16,
+        16
+      ],
+      "pivot_xy": [
+        8,
+        8
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "content_anchor_xy": [
+        6,
+        6
+      ],
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "bone",
+        "bone_dark",
+        "night",
+        "night_light",
+        "moon"
+      ]
+    },
+    "native_bounds": [
+      2,
+      2,
+      14,
+      15
+    ],
+    "unclipped_scaled_wh": [
+      12,
+      13
+    ]
+  }
+]

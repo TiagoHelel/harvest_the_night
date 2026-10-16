@@ -33333,3 +33333,45 @@ burst are gone.
 - `python implementation/backlog/assets.py set A050 integrated`.
 - **Hashes**: unchanged; art never moves them.
 - **Checks**: `python tools/verify.py` - PASS (65 of 65), on the second run: the first lost only the backlog index, to a transient Errno 22 writing `BACKLOG.md`.
+
+## 0265 - Art: the wraith - done 2026-10-15
+
+A051 is integrated. The wraith is the owner-approved art now: standing,
+its four-frame float, its three-frame lunge, its four-frame dissipate and
+its head in the forecast. The owner approved it on 2026-10-14 in the batch
+review, as recorded in the delivery's `APPROVAL.json`. 0252's walker gone
+pale is gone. Its fading stays `wraith_fade.gdshader`'s, solid in the light
+and faint outside it.
+
+- **Promotion**:
+  - The 13 native PNGs were checked against `contract.json` and
+    `APPROVAL.json` (sha256 each).
+  - Their raw sources were copied byte for byte into
+    `assets/art_source/enemies/wraith/` and `assets/art_source/ui/heads/`.
+  - Each output has a manifest entry with full provenance and an
+    `ownership.json` row, and decodes to the approved pixels exactly.
+  - The wraith is on the families' 64x48 at (32,44), [-24,-28], with
+    `enemy_family`/`enemy_motion` and the three aliases (`walk_b` = walk 2,
+    `attack` = attack 1, `death` = death 3).
+- **Tracked** (`EnemyMotion.FAMILIES`): it floats on its walk frames by the
+  distance it covers and bites by the rules' own hits, so `attack` no longer
+  waits on its walk. Its dissipate plays when it is killed.
+- **The stand-ins retired**: A051's five `PlaceholderArt` entries, `WRAITH`
+  and `WRAITH_TINT`. `placeholders.py --check` passes, with 88 stand-ins
+  left over 11 packs.
+- **Checks**: `check_enemy_art.py` takes the wraith at the families' frame,
+  opaque with binary alpha as every pose there. `check_ui_art.py` takes its
+  head.
+- **Tests**: 0252's check asks for A051's art: no pose left on 0120's road,
+  its last float frame and its head on disk, and the wraith tracked.
+- **Shots** (`implementation/shots/0265/`, FHD 1920x1080, looked at):
+  - `wraith`: Winter 2's night, a searchlight and a gun tower on open snow,
+    one wraith in the lamp's square drawn solid and one out in the dark
+    drawn faint.
+  - `forecast_build`: Winter 14's forecast with the winter kinds' heads, the
+    wraith's hooded shade among them.
+- **The delivery folder** `implementation/backlog/deliveries/A051-wraith/`
+  is committed, as A050's was.
+- `python implementation/backlog/assets.py set A051 integrated`.
+- **Hashes**: unchanged; art never moves them.
+- **Checks**: `python tools/verify.py` - PASS (65 of 65).

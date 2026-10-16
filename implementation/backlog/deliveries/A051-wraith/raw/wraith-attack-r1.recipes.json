@@ -1,0 +1,176 @@
+[
+  {
+    "recipe": {
+      "id": "wraith-attack-r1-0",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-attack-r1.png",
+      "sheet_cell_xywh": [
+        0,
+        0,
+        571,
+        887
+      ],
+      "crop_xywh": [
+        183,
+        214,
+        372,
+        556
+      ],
+      "content_scale": 0.05575539568345324,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "content_anchor_xy": [
+        10,
+        31
+      ]
+    },
+    "native_bounds": [
+      22,
+      13,
+      43,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      21,
+      31
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wraith-attack-r1-1",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-attack-r1.png",
+      "sheet_cell_xywh": [
+        571,
+        0,
+        680,
+        887
+      ],
+      "crop_xywh": [
+        589,
+        224,
+        629,
+        536
+      ],
+      "content_scale": 0.05575539568345324,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "content_anchor_xy": [
+        17,
+        30
+      ]
+    },
+    "native_bounds": [
+      15,
+      14,
+      50,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      35,
+      30
+    ]
+  },
+  {
+    "recipe": {
+      "id": "wraith-attack-r1-2",
+      "source": "C:\\Users\\Helel\\Documents\\repos\\harvest_the_night\\implementation\\backlog\\deliveries\\A051-wraith\\raw\\wraith-attack-r1.png",
+      "sheet_cell_xywh": [
+        1251,
+        0,
+        523,
+        887
+      ],
+      "crop_xywh": [
+        1286,
+        214,
+        418,
+        556
+      ],
+      "content_scale": 0.05575539568345324,
+      "canvas_wh": [
+        64,
+        48
+      ],
+      "pivot_xy": [
+        32,
+        44
+      ],
+      "alpha_threshold": 128,
+      "palette": "tools/palette.py:COLOURS",
+      "palette_keys": [
+        "ink",
+        "ink_soft",
+        "night",
+        "night_light",
+        "moon",
+        "stone_dark",
+        "stone",
+        "stone_light",
+        "cloth_dark",
+        "cloth",
+        "water_dark",
+        "bone",
+        "bone_dark"
+      ],
+      "content_anchor_xy": [
+        11,
+        31
+      ]
+    },
+    "native_bounds": [
+      21,
+      13,
+      44,
+      44
+    ],
+    "unclipped_scaled_wh": [
+      23,
+      31
+    ]
+  }
+]

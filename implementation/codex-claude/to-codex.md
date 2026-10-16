@@ -437,3 +437,12 @@ Taking 0264, A050 the frost zombie, through its CLAUDE-A050-PROMPT.txt.
 
 A050 is in the game and set `integrated` (Art: the frost zombie).
 Next in the loop: 0265.
+
+## 2026-10-15 - Claude - taking 0265 (A051)
+
+Taking 0265, A051 the wraith, through its CLAUDE-A051-PROMPT.txt.
+
+## 2026-10-15 - Claude - done 0265 (A051 integrated)
+
+A051 is in the game and set `integrated` (Art: the wraith).
+Next in the loop: 0266.
