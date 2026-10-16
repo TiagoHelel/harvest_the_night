@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-296 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+297 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -339,6 +339,7 @@ voz alta.
 | 0278 | The economy across a year | 2026-10-16 |
 | 0279 | Year 2 | 2026-10-16 |
 | 0280 | Checkpoint: do fifty-six nights tire? | 2026-10-16 |
+| 0291 | Saves into 1.0 | 2026-10-16 |
 
 ## Toda vez que o jogo mudou por baixo
 

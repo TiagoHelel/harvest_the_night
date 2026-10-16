@@ -489,9 +489,16 @@ func _wear_trouble() -> void:
 		_trouble_text.text = ""
 		_trouble.visible = false
 		return
-	_trouble_text.text = "%s%s%s%s%s" % [I18n.t(&"SAVE_UNREADABLE"),
-		"\n", I18n.t(_why), "\n", I18n.t(&"SAVE_KEPT")]
-	_trouble_text.theme_type_variation = UiKit.WARN
+	# **A 0.1 run kept in the archive** (task 0291) is not a file that would
+	# not read, so it is not said as one: its own line, alone, and not a
+	# warning - nothing went wrong.
+	if _why == Save.ARCHIVED:
+		_trouble_text.text = I18n.t(&"SAVE_ARCHIVED")
+		_trouble_text.theme_type_variation = &""
+	else:
+		_trouble_text.text = "%s%s%s%s%s" % [I18n.t(&"SAVE_UNREADABLE"),
+			"\n", I18n.t(_why), "\n", I18n.t(&"SAVE_KEPT")]
+		_trouble_text.theme_type_variation = UiKit.WARN
 	_trouble.visible = _router != null and _router.here() == _router.MENU
 
 

@@ -187,6 +187,7 @@ func _run() -> void:
 	_task_0285_season_music()
 	_task_0286_weather_ambience()
 	_task_0287_collections()
+	_task_0291_saves()
 	_task_0292_options()
 	_task_0293_first_week()
 	_task_0147_night_icons()
@@ -2291,25 +2292,36 @@ func _task_0151_migration() -> void:
 	# **Endless means past the year now.** A v4 run that was endless and is
 	# already past Winter 14 stays so; one that was endless before it goes
 	# back to the year; and 0160 now reads a date past Winter 14 as a completed year.
+	# **Past Winter 14 only with the year's four bosses down** (task 0291):
+	# without them its date has passed four boss nights whose bosses never
+	# came, and `Save.verdict` archives it.
 	var long_gone := _a_v4_run(1520, Phases.DAY)
 	long_gone["day"] = Calendar.year_days() + 4
 	long_gone["endless"] = true
+	expect(_through_a_save(long_gone.duplicate(true), "v4_endless").is_empty()
+		and Save.trouble() == Save.ARCHIVED,
+		"an endless v4 run past day 56 with no boss down is archived (0291)",
+		String(Save.trouble()))
+	long_gone["bosses_down"] = 4
 	var kept := _through_a_save(long_gone, "v4_endless")
 	expect(Run.is_endless(kept) and not Run.is_over(kept),
-		"an endless v4 run past day 56 stays endless, and is not over")
+		"one with the four down stays endless, and is not over")
 	var early := _a_v4_run(1521, Phases.DAY)
 	early["endless"] = true
 	expect(not Run.is_endless(_through_a_save(early, "v4_early_endless")),
 		"one that went endless after the MVP's ten goes back to the year")
 	var not_endless := _a_v4_run(1522, Phases.DAY)
 	not_endless["day"] = Calendar.year_days() + 4
+	not_endless["bosses_down"] = 4
 	expect(Run.is_over(_through_a_save(not_endless, "v4_past_the_year")),
 		"0160 reads the released date; legacy past-year reconciliation belongs to 0291")
 
-	# **Every golden loads and plays**: v1, v4 and v5.
+	# **Every golden loads and plays**: v1, v4 and v5 - the runs `verdict`
+	# plays on (0291 archives two 0.1 shapes, `_task_0291_saves`).
 	var versions: Dictionary = {}
 	for name in DirAccess.get_files_at("res://tools/goldens"):
-		if not String(name).ends_with(".sav"):
+		if not String(name).begins_with("run-v") or not String(name).ends_with(".sav") \
+				or ARCHIVED_GOLDENS.has(String(name)):
 			continue
 		var loaded := Save.read_run_at("res://tools/goldens/" + String(name))
 		expect(not loaded.is_empty() and int(loaded.get("version", 0)) == State.VERSION,
@@ -2982,10 +2994,11 @@ func _task_0156_map_v1() -> void:
 		and (stepped["regrowing"] as Array).is_empty(),
 		"an untouched map tree leaves a band, a chopped-at one stays, and nothing regrows there")
 
-	# **Every golden loads.**
+	# **Every golden loads** - every run `verdict` plays on (task 0291).
 	var golden_trouble: Array = []
 	for name in DirAccess.get_files_at("res://tools/goldens"):
-		if String(name).ends_with(".sav") \
+		if String(name).begins_with("run-v") and String(name).ends_with(".sav") \
+				and not ARCHIVED_GOLDENS.has(String(name)) \
 				and Save.read_run_at("res://tools/goldens/" + String(name)).is_empty():
 			golden_trouble.append(name)
 	expect(golden_trouble.is_empty(), "every golden loads", str(golden_trouble))
@@ -13534,6 +13547,193 @@ func _week_probe(one: Dictionary, day: int, done: Array) -> Dictionary:
 	for id in done:
 		((probe["tutorial"] as Dictionary)["done"] as Array).append(id)
 	return probe
+
+## The run goldens `Save.verdict` archives (task 0291): the 0.1 prototype
+## won, and carried on past its ten nights.
+const ARCHIVED_GOLDENS: Array = ["run-v4-endless.sav", "run-v4-finished.sav"]
+
+
+## 0291 - saves into 1.0. Each 0.1 shape gets the rule's verdict - the run
+## inside the ten nights lands on its date and plays, the won prototype and
+## the one carried on past it are archived; an archived run read as the
+## player's own moves byte for byte under `user://archive/`, never over a file,
+## and the title says so in one line; and the 0.1 profile keeps its numbers,
+## its `runs_won` carried by a named step.
+func _task_0291_saves() -> void:
+	# **The shapes are what they say**: state 4, their counters the MVP's.
+	var shapes := {
+		"run-v4.sav": {"verdict": Save.MIGRATE, "won": 0, "phase": Phases.RESULT, "endless": false},
+		"run-v4-endless.sav": {"verdict": Save.ARCHIVE, "won": 11, "phase": Phases.DAY, "endless": true},
+		"run-v4-finished.sav": {"verdict": Save.ARCHIVE, "won": 10, "phase": Phases.RESULT, "endless": false},
+	}
+	var names: Array = shapes.keys()
+	names.sort()
+	for name in names:
+		var path := "res://tools/goldens/" + String(name)
+		var want: Dictionary = shapes[name]
+		var raw: Dictionary = (Save._read(path).get("state", {}) as Dictionary)
+		var won := int(raw.get("nights_won", -1))
+		var paid: Array = raw.get("nights_paid", [])
+		expect(int(raw.get("version", 0)) == 4 and won == int(want["won"])
+			and int(raw.get("phase", -1)) == int(want["phase"])
+			and bool(raw.get("endless", false)) == bool(want["endless"])
+			and int(raw.get("day", 0)) == 2 + won and paid.size() == won
+			and (won == 0 or (int(paid.back()) == won and int(raw.get("night", 0)) == won)),
+			"%s is a 0.1 run, state 4, its counters moved as the MVP moved them" % name,
+			"v%d, won %d, phase %d, day %d, paid %s" % [int(raw.get("version", 0)), won,
+				int(raw.get("phase", -1)), int(raw.get("day", 0)), str(paid)])
+		expect(Combat.bosses_down(raw) == (1 if won >= 10 else 0),
+			"%s: the Giant down only once night ten was won" % name)
+
+		# **The rule, asked of the state a load brings forward.**
+		var brought := Save.bring_forward(raw.duplicate(true))
+		var said := Save.verdict(brought, 4)
+		expect(said == StringName(want["verdict"]),
+			"%s: the rule says %s" % [name, want["verdict"]],
+			"%s - %s" % [said, Save.why_archived(brought, 4)])
+		var loaded := Save.read_run_at(path)
+		if said == Save.MIGRATE:
+			expect(not loaded.is_empty() and Calendar.date(loaded) == 2
+				and int(loaded["phase"]) == Phases.RESULT and not Run.is_endless(loaded),
+				"%s migrates to its calendar day, Spring 2, over the report it was saved on" % name,
+				"date %d" % Calendar.date(loaded) if not loaded.is_empty() else String(Save.trouble()))
+			if loaded.is_empty():
+				continue
+			var at := int(loaded["tick"])
+			Sim.advance(loaded, 600)
+			expect(int(loaded["tick"]) == at + 600, "%s plays 600 ticks" % name)
+		else:
+			expect(loaded.is_empty() and Save.trouble() == Save.ARCHIVED,
+				"%s is refused as ARCHIVED, not as unreadable" % name, String(Save.trouble()))
+			expect(FileAccess.file_exists(path) and Save.archived_to() == "",
+				"and read from res:// it is not moved")
+
+	# **What the rule hinges on**, one piece at a time: the Giant's night is
+	# the first boss night, so a boss down before day 15 is not the
+	# calendar's; and a report that ends the run is only the year's end.
+	expect(Save.bosses_behind(14) == 0 and Save.bosses_behind(15) == 1
+		and Save.bosses_behind(Calendar.year_days() + 1) == 4,
+		"the calendar's boss nights behind a date: none on Spring 14, one on Summer 1, four past Winter 14")
+	var inside := State.create(291001)
+	inside["day"] = 9
+	expect(Save.verdict(inside, 4) == Save.MIGRATE,
+		"a 0.1 run on day 9 with nobody's boss down plays on")
+	inside["day"] = 16
+	expect(Save.verdict(inside, 4) == Save.ARCHIVE,
+		"one on day 16 - five nights lost - has passed the Giant's night without him",
+		Save.why_archived(inside, 4))
+	expect(Save.verdict(inside, Save.CALENDAR_STATE) == Save.MIGRATE,
+		"and a run written with the calendar always plays on: the rule is the prototype's")
+
+	# **Archived for real**: the won prototype as the player's own run.
+	# Their save and its backup are held and put back.
+	var held := {}
+	for path in [Save.RUN_PATH, Save.RUN_PATH + ".bak"]:
+		if FileAccess.file_exists(path):
+			held[path] = FileAccess.get_file_as_bytes(path)
+	Save.delete_run()
+	var golden := FileAccess.get_file_as_bytes("res://tools/goldens/run-v4-finished.sav")
+	_write_bytes(Save.RUN_PATH, golden)
+	expect(Save.read_run().is_empty() and Save.trouble() == Save.ARCHIVED,
+		"the player's 0.1 run, read, is archived", String(Save.trouble()))
+	var first := Save.archived_to()
+	expect(first.begins_with(Save.ARCHIVE_DIR) and first.get_file().begins_with("run-v4-")
+		and first.ends_with(".sav") and FileAccess.get_file_as_bytes(first) == golden,
+		"and ends byte for byte under user://archive/ as run-v4-<k>.sav", first)
+	expect(not Save.has_run() and not Save.can_continue() and Save.trouble() == Save.ARCHIVED,
+		"CONTINUE has nothing to offer, and the reads after still say archived")
+	_write_bytes(Save.RUN_PATH, golden)
+	Save.read_run()
+	var second := Save.archived_to()
+	expect(second != first and second.begins_with(Save.ARCHIVE_DIR)
+		and FileAccess.get_file_as_bytes(first) == golden
+		and FileAccess.get_file_as_bytes(second) == golden,
+		"a second one goes beside the first, never over it", "%s, %s" % [first, second])
+
+	# **And the title says so, once**: the archive line alone, worn the way
+	# its menu catches the read. A bare `TitleScreen` with a panel of its
+	# own - this suite has no frames to give the scene, and the scene left
+	# loaded holds resources past exit; `input_v2`'s 0291 case opens the
+	# whole title over an archived run.
+	var title := TitleScreen.new()
+	var panel := PanelContainer.new()
+	var words := Label.new()
+	panel.add_child(words)
+	title._trouble = panel
+	title._trouble_text = words
+	expect(not Save.can_continue(), "the title's read finds nothing to continue")
+	title._why = Save.trouble()
+	title._wear_trouble()
+	var says := title.trouble_says()
+	expect(says == I18n.t(&"SAVE_ARCHIVED") and not says.contains(I18n.t(&"SAVE_UNREADABLE"))
+		and not says.contains(I18n.t(&"SAVE_KEPT")),
+		"the title holds the SAVE_ARCHIVED line, on its own", says)
+	title.free()
+	panel.free()
+	Save.delete_run()
+	expect(Save.archived_to() == "" and Save.read_run().is_empty()
+		and Save.trouble() == Save.NO_SAVE,
+		"a new run ends it: nothing to continue, nothing to say")
+	for path in [first, second]:
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	if DirAccess.get_files_at(Save.ARCHIVE_DIR).is_empty():
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(Save.ARCHIVE_DIR))
+	for path in held:
+		_write_bytes(String(path), held[path])
+
+	# **The 0.1 profile keeps its numbers.** Read underneath first: it is the
+	# prototype's four keys and nothing 1.0 added.
+	var profile_path := "res://tools/goldens/profile-v1.sav"
+	var raw_profile: Dictionary = (Save._read(profile_path).get("profile", {}) as Dictionary)
+	expect(int(raw_profile.get("version", 0)) == 1 and int(raw_profile.get("runs_won", 0)) == 1
+		and not raw_profile.has("tips_seen") and not raw_profile.has("collections")
+		and not raw_profile.has("achievements"),
+		"profile-v1.sav is a 0.1 profile: version 1, a prototype won, no 1.0 key")
+	var profile := Save.read_profile_at(profile_path)
+	var life := Stats.lifetime(profile)
+	expect(int(profile["runs_started"]) == 3 and int(profile["best_night"]) == 10
+		and int(life["nights"]) == 17 and int(life["killed"]) == 1240
+		and int((life["killed_by_kind"] as Dictionary).get(&"giant", 0)) == 1
+		and int((life["gathered"] as Dictionary).get(&"wood", 0)) == 2100,
+		"it loads with its numbers: runs started, the best night - still the most nights won in one run - and the lifetime tallies",
+		str(life))
+	expect(int(profile["runs_won"]) == 0 and int(profile.get("prototype_runs_won", -1)) == 1
+		and int(profile["version"]) == Save.PROFILE_VERSION,
+		"a run won meant ten nights: kept as prototype_runs_won, and no 1.0 year is won",
+		"%d, %d" % [int(profile["runs_won"]), int(profile.get("prototype_runs_won", -1))])
+	var fresh := Save.default_profile()
+	var defaults_held := true
+	for key in ["tips_seen", "collections", "achievements"]:
+		defaults_held = defaults_held and profile[key] == fresh[key]
+	expect(defaults_held and (life["fish_book"] as Dictionary).is_empty(),
+		"and every 1.0 key at its default: the tips, the collections, the achievements, the fish book")
+
+	# **The step is named and runs once**: a profile at version 2 is not
+	# stepped again, and a newer build's keeps its version.
+	expect(Save.profile_migrations().has(1) and not Save.profile_migrations().has(2),
+		"the profile has one step, from 1")
+	var current := Save.default_profile()
+	current["runs_won"] = 2
+	var here := "user://profile_0291.sav"
+	Save.write_profile_at(here, current)
+	var again := Save.read_profile_at(here)
+	expect(int(again["runs_won"]) == 2 and not again.has("prototype_runs_won"),
+		"a profile already at version 2 keeps its years won")
+	current["version"] = Save.PROFILE_VERSION + 1
+	Save.write_profile_at(here, current)
+	expect(int(Save.read_profile_at(here)["version"]) == Save.PROFILE_VERSION + 1,
+		"and a newer build's profile keeps its version")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(here))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(here + ".bak"))
+	_completed += 1
+
+
+func _write_bytes(path: String, bytes: PackedByteArray) -> void:
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f != null:
+		f.store_buffer(bytes)
+		f.close()
+
 
 ## 0292 - the options for the new controls. Five keys with their defaults
 ## (0131's rate, 0130's band on, 0121's 0.2, both game switches off), each on

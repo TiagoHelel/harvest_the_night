@@ -31,9 +31,48 @@ extends RefCounted
 ## null and prints two engine errors on the way; checking the length and the
 ## checksum first means a damaged save is refused cleanly, with a message about
 ## the save rather than about Variant decoding.
+##
+## ## A 0.1 run in 1.0 (task 0291)
+##
+## Only one shape of save was ever in a player's hands: the 0.1 prototype's,
+## state 4, ten nights and the Giant. Every state version from 1 to 9 has its
+## step in `migrations()`, so any run comes forward - and then **one pure
+## function decides whether 1.0 plays it on**, `verdict()`:
+## - **A run written with the calendar** (state 5 on, task 0151) is the
+##   calendar's own: it migrates, always.
+## - **A run from before it** - the prototype's - migrates to its calendar
+##   day through 0151's step when the date it lands on is one 1.0 could have
+##   reached: its report, if it is in one, ends the run only where the
+##   calendar's year has ended; and the bosses it has put down are the boss
+##   nights its calendar has passed, because 0153 holds the date on a boss
+##   night until its boss falls. A run inside the prototype's ten nights
+##   lands on Spring 1-14 with nobody's boss down, and plays on.
+## - **Otherwise it is archived**: a won prototype run's report says the run
+##   is over on Spring 12, and one carried on past night ten has the Giant
+##   down on a date the calendar has not brought him to. Neither is a day
+##   1.0 can play honestly. `read_run()` moves it to `ARCHIVE_DIR`, never
+##   over a file already there and never deleting it, and the title says so
+##   in one line (`ARCHIVED`). `read_run_at()` gives the same verdict and
+##   moves nothing, so a golden in `res://` stays where it is.
 
 const MAGIC := "HTNS"
 const FORMAT_VERSION := 1
+
+## **The profile's own version** (task 0291), beside the state's: the file
+## header is `FORMAT_VERSION`'s, and what a profile key means is this. 2
+## since task 0291, when a run won stopped meaning the prototype's ten nights.
+const PROFILE_VERSION := 2
+
+## Where a run 1.0 will not play is kept (task 0291).
+const ARCHIVE_DIR := "user://archive/"
+
+## The first state version written with the calendar (task 0151): a run from
+## this one on is the calendar's own, and `verdict` plays it on.
+const CALENDAR_STATE := 5
+
+## `verdict`'s two answers.
+const MIGRATE := &"migrate"
+const ARCHIVE := &"archive"
 
 const RUN_PATH := "user://run.sav"
 const PROFILE_PATH := "user://profile.sav"
@@ -54,6 +93,14 @@ static var _trouble: StringName = &""
 ## And what the trouble was about, for the log and for a check.
 static var _trouble_detail := ""
 
+## The state version the last run read was written at, for the archive's
+## file name.
+static var _read_version := 0
+
+## Where `read_run()` archived a run this session, or "" (task 0291): the
+## title keeps saying so after the file has moved, until a new run starts.
+static var _archived_to := ""
+
 ## The trouble a save can be in. Each is a string key with a line behind it.
 const NO_SAVE := &""
 const TOO_SHORT := &"SAVE_TOO_SHORT"
@@ -63,6 +110,9 @@ const DAMAGED := &"SAVE_DAMAGED"
 const FROM_THE_FUTURE := &"SAVE_FROM_THE_FUTURE"
 const NO_MIGRATION := &"SAVE_NO_MIGRATION"
 const NOT_A_SAVE := &"SAVE_NOT_A_SAVE"
+## **Not a trouble with the file** (task 0291): it read, and 1.0 does not play
+## it on - it is kept in `ARCHIVE_DIR` instead. The title says this line alone.
+const ARCHIVED := &"SAVE_ARCHIVED"
 
 
 ## What a player who has never finished anything has.
@@ -71,7 +121,7 @@ const NOT_A_SAVE := &"SAVE_NOT_A_SAVE"
 ## has somewhere obvious to go.
 static func default_profile() -> Dictionary:
 	return {
-		"version": FORMAT_VERSION,
+		"version": PROFILE_VERSION,
 		"runs_started": 0,
 		"runs_won": 0,
 		"best_night": 0,
@@ -112,8 +162,27 @@ static func write_run_at(path: String, state: Dictionary) -> bool:
 ## Read the game in progress, or an empty Dictionary when there is not one, or
 ## when the file is damaged. **Never crashes and never half-loads**: a bad file
 ## leaves the caller with nothing, which it can tell from a good one.
+##
+## **And a run `verdict` archives is moved, here and only here** (task 0291):
+## the player's own file, to `ARCHIVE_DIR`. Once it has gone, the reads after
+## it in this session still say `ARCHIVED`, so the title does not forget it
+## on a relabel; a new run (`delete_run`) ends that.
 static func read_run() -> Dictionary:
-	return read_run_at(RUN_PATH)
+	var state := read_run_at(RUN_PATH)
+	if _trouble == ARCHIVED:
+		var to := _archive(RUN_PATH, _read_version)
+		if to != "":
+			_archived_to = to
+			_trouble_detail = "%s - kept as %s" % [_trouble_detail, to]
+	elif state.is_empty() and _trouble == NO_SAVE and _archived_to != "" and not has_run():
+		_trouble = ARCHIVED
+		_trouble_detail = "the run was kept as %s" % _archived_to
+	return state
+
+
+## Where this session archived a run, or "" (task 0291).
+static func archived_to() -> String:
+	return _archived_to
 
 
 ## Read a run from somewhere else, through every step the real one takes -
@@ -121,13 +190,30 @@ static func read_run() -> Dictionary:
 ## saves are loaded with this, so what is checked is the road a player's save
 ## travels and not a shorter one built for the check.
 static func read_run_at(path: String) -> Dictionary:
+	_read_version = 0
 	var payload := _read(path)
 	if payload.is_empty():
 		return {}
 	var state: Dictionary = payload.get("state", {})
 	if state.is_empty() or not state.has("tick"):
 		return _no(NOT_A_SAVE, "%s parsed but holds no game" % path)
+	var was := int(state.get("version", 1))
+	_read_version = was
+	var brought := bring_forward(state)
+	if brought.is_empty():
+		return {}
+	# **And then whether 1.0 plays it on** (task 0291), asked of the run as
+	# this build has it.
+	if verdict(brought, was) == ARCHIVE:
+		return _no(ARCHIVED, "%s is a state %d run 1.0 does not play on: %s"
+			% [path, was, why_archived(brought, was)])
+	return brought
 
+
+## **A run brought to this build**: its migrations and then the reconcile,
+## or an empty Dictionary with the trouble said. Split out of `read_run_at`
+## (task 0291) so a check can put `verdict` to the very state a load would.
+static func bring_forward(state: Dictionary) -> Dictionary:
 	# **The numbered migrations first, then the shape.** A migration is
 	# written against the shape of the version it starts from, so a
 	# reconcile that ran before it would hand it a state with this build's
@@ -153,6 +239,73 @@ static func read_run_at(path: String) -> Dictionary:
 		push_warning("Save: %s" % note)
 	state["version"] = State.VERSION
 	return state
+
+
+## **Migrate or archive** (task 0291): what 1.0 does with a run brought
+## forward from state `written_at`. A pure function of the two - the rule in
+## this file's header - and `why_archived` says which part of it refused.
+static func verdict(state: Dictionary, written_at: int) -> StringName:
+	return MIGRATE if why_archived(state, written_at) == "" else ARCHIVE
+
+
+## Why `verdict` archives a run, in a sentence for the log, or "" when it
+## plays it on.
+static func why_archived(state: Dictionary, written_at: int) -> String:
+	if written_at >= CALENDAR_STATE:
+		return ""
+	var date := Calendar.date(state)
+	var phase := int(state.get("phase", Phases.DAY))
+	# **The night resolves**: a report that ends the run must be the
+	# calendar's ending, or confirming it would show the year's end on a
+	# spring morning.
+	if phase == Phases.RESULT:
+		var ending := bool((state.get("last_result", {}) as Dictionary).get("run_over", false))
+		if ending != Run.is_over(state):
+			return "its report %s the run on day %d, where the calendar %s" % [
+				"ends" if ending else "carries on", date,
+				"goes on" if ending else "has ended it"]
+	# **The bosses are the calendar's**: one down for every boss night behind
+	# the date, since 0153 holds a boss night until its boss falls - and on a
+	# boss night under way, its boss may be down already.
+	var behind := bosses_behind(date)
+	var down := Combat.bosses_down(state)
+	var tonight := 1 if (phase == Phases.NIGHT and Calendar.is_boss_night(date)) else 0
+	if down < behind or down > behind + tonight:
+		return "%d boss%s down on day %d, where the calendar has passed %d boss night%s" % [
+			down, "" if down == 1 else "es", date, behind, "" if behind == 1 else "s"]
+	return ""
+
+
+## How many boss nights come before `date` in the calendar (task 0291).
+static func bosses_behind(date: int) -> int:
+	var count := 0
+	for day in range(1, maxi(date, 1)):
+		if Calendar.is_boss_night(day):
+			count += 1
+	return count
+
+
+## Move a run 1.0 will not play to `ARCHIVE_DIR` as `run-v<N>-<k>.sav`, the
+## first `k` with nothing there, its backup beside it. **Never over a file
+## and never a delete**: a rename, and on failure the file stays where it
+## was. Returns where it went, or "".
+static func _archive(path: String, written_at: int) -> String:
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(ARCHIVE_DIR))
+	var k := 1
+	var to := ARCHIVE_DIR + "run-v%d-%d.sav" % [written_at, k]
+	while FileAccess.file_exists(to) or FileAccess.file_exists(to + ".bak"):
+		k += 1
+		to = ARCHIVE_DIR + "run-v%d-%d.sav" % [written_at, k]
+	var err := DirAccess.rename_absolute(ProjectSettings.globalize_path(path),
+		ProjectSettings.globalize_path(to))
+	if err != OK:
+		push_error("Save: cannot archive %s as %s (error %d)" % [path, to, err])
+		return ""
+	if FileAccess.file_exists(path + ".bak"):
+		DirAccess.rename_absolute(ProjectSettings.globalize_path(path + ".bak"),
+			ProjectSettings.globalize_path(to + ".bak"))
+	push_warning("Save: %s kept as %s" % [path, to])
+	return to
 
 
 ## Whether there is a run worth offering to continue.
@@ -189,6 +342,7 @@ static func _no(which: StringName, why: String) -> Dictionary:
 static func delete_run() -> void:
 	_remove(RUN_PATH)
 	_remove(RUN_PATH + ".bak")
+	_archived_to = ""
 
 
 # ------------------------------------------------------------------ profile
@@ -211,6 +365,12 @@ static func read_profile() -> Dictionary:
 
 
 ## The profile at `path`, merged over the defaults (task 0287 split it out).
+##
+## **Its steps first** (task 0291): a key whose meaning moved is carried over
+## by a named step in `profile_migrations()`, never reread in silence. A step
+## that gives nothing keeps the profile as it was - statistics are never
+## refused - and a newer build's profile keeps its version, so that build
+## does not run its own steps on it twice.
 static func read_profile_at(path: String) -> Dictionary:
 	var payload := _read(path)
 	if payload.is_empty():
@@ -218,13 +378,41 @@ static func read_profile_at(path: String) -> Dictionary:
 	var profile: Dictionary = payload.get("profile", {})
 	if profile.is_empty():
 		return default_profile()
+	var was := int(profile.get("version", 1))
+	if was < PROFILE_VERSION:
+		var brought := step_up(profile, was, PROFILE_VERSION, profile_migrations())
+		if not brought.is_empty():
+			profile = brought
 	# A profile from a newer build keeps what this build understands rather
 	# than being thrown away: losing somebody's statistics because they opened
 	# an older copy of the game would be unforgivable.
 	var base := default_profile()
 	base.merge(profile, true)
-	base["version"] = FORMAT_VERSION
+	base["version"] = maxi(was, PROFILE_VERSION)
 	return base
+
+
+## One `Callable` per profile version, keyed by the version it starts from,
+## run through `step_up` as `migrations()` is (task 0291).
+static func profile_migrations() -> Dictionary:
+	return {1: _runs_won_were_ten_nights_v1}
+
+
+## **Profile 1 to 2: a run won was ten nights** (task 0291).
+##
+## Every profile before this task is version 1, and the only ones a player
+## ever had were the 0.1 prototype's, where `runs_won` counted runs that beat
+## the ten nights and the Giant. In 1.0 a run is won when the year is: the
+## Winter Lord down (`Run.is_over`). So the old count is kept under its own
+## name, `prototype_runs_won`, and `runs_won` starts at nought - nobody has
+## won a 1.0 year yet. `best_night` keeps its number: it was and is the most
+## nights won in one run.
+static func _runs_won_were_ten_nights_v1(previous: Dictionary) -> Dictionary:
+	var profile := previous.duplicate(true)
+	profile["prototype_runs_won"] = int(profile.get("runs_won", 0))
+	profile["runs_won"] = 0
+	profile["version"] = 2
+	return profile
 
 
 # ------------------------------------------------------------ the file itself

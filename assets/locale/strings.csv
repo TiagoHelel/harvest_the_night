@@ -522,6 +522,7 @@ RES_WALKED.other,200,%d walked off at dawn,%d foram embora ao amanhecer
 RES_WAS_LOST,0,LOST,PERDIDA
 RES_YEAR_SURVIVED,200,YEAR %d SURVIVED,ANO %d SOBREVIVIDO
 RES_ZOMBIES,0,zombies killed,zumbis mortos
+SAVE_ARCHIVED,600,Your 0.1 run is kept in the archive folder. 1.0 starts a new year.,Sua partida da 0.1 ficou guardada no arquivo. A 1.0 começa um ano novo.
 SAVE_DAMAGED,0,the file is damaged,o arquivo está danificado
 SAVE_FROM_THE_FUTURE,0,it was written by a newer version of the game,foi escrito por uma versão mais nova do jogo
 SAVE_KEPT,0,The file is still there. NEW RUN starts a fresh one.,O arquivo continua lá. NOVA PARTIDA começa outra do zero.

@@ -527,3 +527,8 @@ Taking 0280, the checkpoint: do fifty-six nights tire?
 
 0280 is done: the first week of every season does not tire, the second (days 9-13) does - five same nights four times a year. New task 0298 "The seasons' second weeks" is in 0295's deps. No art involved.
 Next in the loop: 0291.
+
+## 2026-10-16 - Claude - done 0291 (saves into 1.0)
+
+0291 is done. A 0.1 save inside the ten nights loads on its calendar day. The prototype won, or carried on past night ten, is moved to `user://archive/` and the title says so in one line. The 0.1 profile keeps its numbers, and its "runs won" is kept as `prototype_runs_won`. There are three new goldens in `tools/goldens/` and a `goldens` row in verify. No art involved.
+Next in the loop: 0294 (every new word in Portuguese).

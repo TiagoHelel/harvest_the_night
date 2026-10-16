@@ -802,6 +802,14 @@ func _task_0104_saves() -> void:
 		var name := String(path).get_file()
 
 		var loaded := Save.read_run_at(String(path))
+		# **A shape the rule archives is refused, and says so** (task 0291):
+		# the 0.1 prototype won, or carried on past its ten nights.
+		if ARCHIVED_GOLDENS.has(name):
+			expect(loaded.is_empty() and Save.trouble() == Save.ARCHIVED,
+				"%s is archived, not loaded" % name, String(Save.trouble()))
+			expect(FileAccess.file_exists(String(path)),
+				"and read from res:// it stays where it is")
+			continue
 		expect(not loaded.is_empty(), "%s loads" % name,
 			String(Save.trouble()))
 		if loaded.is_empty():
@@ -822,9 +830,14 @@ func _task_0104_saves() -> void:
 		expect(int(loaded["tick"]) == at + 600, "%s plays on" % name)
 		expect(int(loaded["day"]) >= 1 and int(loaded["seed"]) != 0,
 			"%s is a run and not an empty state" % name)
-		expect((loaded["occupants"] as Dictionary).size() > 106,
+		# **Against a new farm of its seed in this build** (task 0291), not
+		# the MVP's 106: since 0156 a fresh farm stands 634 on its own, and
+		# `run-v1.sav` 625 - the 1.0 farm's nodes go only where the old one
+		# had room. What a fresh farm never has is a defence.
+		var a_new_farm := State.create(int(loaded["seed"]))
+		expect(_defences_on(loaded) > _defences_on(a_new_farm),
 			"%s is a farm somebody built on" % name,
-			str((loaded["occupants"] as Dictionary).size()))
+			"%d defences, a new farm %d" % [_defences_on(loaded), _defences_on(a_new_farm)])
 
 	# **The old golden really is old.** Read underneath `read_run_at`, which
 	# would have mended it on the way past: a fixture that quietly stopped
@@ -901,15 +914,33 @@ func _a_bad_migration(_payload: Dictionary) -> Dictionary:
 
 
 ## Every golden in the repository, sorted.
+## The run goldens: `run-v*.sav` only - the profile golden and the settings
+## fixture are not runs (task 0291).
 func _goldens() -> Array:
 	var found: Array = []
 	if not DirAccess.dir_exists_absolute("res://tools/goldens"):
 		return found
 	for name in DirAccess.get_files_at("res://tools/goldens"):
-		if String(name).ends_with(".sav"):
+		if String(name).begins_with("run-v") and String(name).ends_with(".sav"):
 			found.append("res://tools/goldens/" + String(name))
 	found.sort()
 	return found
+
+
+## The run goldens `Save.verdict` archives (task 0291): the 0.1 prototype won,
+## and carried on past its ten nights.
+const ARCHIVED_GOLDENS: Array = ["run-v4-endless.sav", "run-v4-finished.sav"]
+
+
+## How many defence cells stand on a farm.
+func _defences_on(state: Dictionary) -> int:
+	var count := 0
+	var occupants: Dictionary = state.get("occupants", {})
+	for idx in occupants:
+		var on: Variant = occupants[idx]
+		if on is Dictionary and GameData.DEFENCES.has(StringName((on as Dictionary).get("id", &""))):
+			count += 1
+	return count
 
 
 ## A save's payload with nothing done to it - no migration, no reconcile.

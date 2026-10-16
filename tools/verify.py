@@ -621,8 +621,12 @@ def check_scripts_parse():
 # Every script run is bounded, and the timeout reads as a FAIL.
 SCRIPT_TIMEOUT_S = 120
 
+# The goldens row's (task 0291): two dozen saves, each a day and a night.
+GOLDENS_TIMEOUT_S = 300
 
-def check_script(name, script, missing_note, args=(), pattern=None):
+
+def check_script(name, script, missing_note, args=(), pattern=None,
+                 timeout=SCRIPT_TIMEOUT_S):
     """Run a Godot tool script, or skip when the backlog has not written it."""
     if not os.path.exists(rel("project.godot")):
         return skip(name, "no project yet")
@@ -631,7 +635,7 @@ def check_script(name, script, missing_note, args=(), pattern=None):
         return skip(name, missing_note)
     code, out = godot(["--headless", "--script", "res://" + script,
                        *(["--", *args] if args else [])],
-                      timeout=SCRIPT_TIMEOUT_S)
+                      timeout=timeout)
     if code == 124:
         return check(name, False, "hung - it never reached quit(). A script "
                                   "error leaves the SceneTree running.")
@@ -835,6 +839,14 @@ def main():
         check_script("nights", "src/tools/nights.gd",
                      "not written yet - task 0059", args=("--check",),
                      pattern=r"\d+ nights a year[^\n]*")
+        # **Every golden save a day and a night** (task 0291): loaded,
+        # played to bed and through a night to dawn, woken on its next date
+        # with no enemy left. A night to dawn a golden is a couple of minutes
+        # in all, so it has a timeout of its own rather than the suites'.
+        check_script("goldens", "src/tools/play_goldens.gd",
+                     "not written yet - task 0291",
+                     pattern=r"\d+ goldens woke on their next date[^\n]*",
+                     timeout=GOLDENS_TIMEOUT_S)
     check_determinism(accept)
     if not hashes_only:
         check_script("input_check", "src/tools/input_check.gd",

@@ -27,7 +27,7 @@ extends "res://src/tools/input_v1.gd"
 
 ## How many `_case_NNNN_*` functions `_run()` is expected to finish.
 ## **Adding a case means bumping this.**
-const V2_CASES := 12
+const V2_CASES := 13
 
 ## The run the weather's hash check plays (task 0258).
 const WEATHER_SEED := 2580258
@@ -52,6 +52,7 @@ func _run() -> void:
 	await _case_0285_season_music()
 	await _case_0286_weather_ambience()
 	await _case_0287_collections()
+	await _case_0291_archived_title()
 	await _case_0292_options()
 	# `input_v1`'s three slowest (task 0277), its functions inherited - last,
 	# because they leave a run saved that 0287's title menu would see.
@@ -695,6 +696,65 @@ func _case_0287_collections() -> void:
 		"and cancel closes it back to the run", router.name_of(router.here()))
 	await close_scene()
 	_completed += 1     # last line: an abandoned case never gets here
+
+
+## 0291 - the title over a 0.1 run it archives. The won prototype as the
+## player's `user://run.sav`: the title moves it under `user://archive/`,
+## CONTINUE is absent, and the panel says so in the one archive line - on the
+## screen, clear of the menu, and still there after the language changes.
+## The player's own save is held and put back.
+func _case_0291_archived_title() -> void:
+	var held := {}
+	for path in [Save.RUN_PATH, Save.RUN_PATH + ".bak"]:
+		if FileAccess.file_exists(path):
+			held[path] = FileAccess.get_file_as_bytes(path)
+	Save.delete_run()
+	var golden := FileAccess.get_file_as_bytes("res://tools/goldens/run-v4-finished.sav")
+	var f := FileAccess.open(Save.RUN_PATH, FileAccess.WRITE)
+	f.store_buffer(golden)
+	f.close()
+
+	_forget_any_loaded_scene()
+	await open_scene("res://scenes/Title.tscn")
+	await frames(3)
+	var title: TitleScreen = _scene as TitleScreen
+	var router: Node = root.get_node_or_null(^"App")
+	router.goto(router.MENU)
+	await frames(3)
+	var kept := Save.archived_to()
+	expect(kept.begins_with(Save.ARCHIVE_DIR) and FileAccess.get_file_as_bytes(kept) == golden
+		and not Save.has_run(),
+		"the title's read moved the 0.1 run under user://archive/, byte for byte", kept)
+	expect(locate_control("Menu_continue") == null and locate_control("Menu_new") != null,
+		"CONTINUE is absent and NEW GAME is there")
+	var says := title.trouble_says()
+	expect(says == I18n.t(&"SAVE_ARCHIVED"), "the title says the archive line, alone", says)
+	var panel := locate_control("SaveTrouble") as Control
+	var menu := locate_control("Menu") as Control
+	var screen := root.get_visible_rect()
+	expect(panel != null and panel.visible and screen.encloses(panel.get_global_rect()),
+		"on a panel on the screen", str(panel.get_global_rect()) if panel != null else "")
+	expect(panel != null and menu != null
+		and not panel.get_global_rect().intersects(menu.get_global_rect()),
+		"clear of the menu",
+		"%s, %s" % [str(panel.get_global_rect()), str(menu.get_global_rect())]
+			if panel != null and menu != null else "")
+	# **A relabel reads again**, and the run has gone: the line stays.
+	title.relabel()
+	await frames(2)
+	expect(title.trouble_says() == I18n.t(&"SAVE_ARCHIVED"),
+		"and it is still said after the language is worn again", title.trouble_says())
+	await close_scene()
+
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(kept))
+	if DirAccess.get_files_at(Save.ARCHIVE_DIR).is_empty():
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(Save.ARCHIVE_DIR))
+	Save.delete_run()
+	for path in held:
+		var back := FileAccess.open(String(path), FileAccess.WRITE)
+		back.store_buffer(held[path])
+		back.close()
+	_completed += 1
 
 
 ## 0292 - the options for the new controls. Each new row stepped by the keys

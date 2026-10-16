@@ -1,7 +1,7 @@
 # 0291 - Saves into 1.0
 
 - **Phase:** 17 - Ship 1.0
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0151, 0156, 0165, 0279, 0287
 - **Likely files:** src/app/save.gd, src/tools/make_goldens.gd, src/tools/play_goldens.gd (new), tools/verify.py, tools/goldens/, src/ui/title_screen.gd, src/tools/shot.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd, assets/locale/strings.csv
 

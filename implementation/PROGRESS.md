@@ -34195,3 +34195,222 @@ tools/backlog/part13.py, implementation/prompts/0290-visual-gate-v1.md,
 implementation/prompts/0295-playtest-v1.md,
 implementation/prompts/0298-second-weeks.md (new), implementation/shots/0280/
 - **Checks**: `python tools/verify.py` - PASS (65 of 65).
+
+## 0291 - Saves into 1.0 - done 2026-10-16
+
+Somebody who played the 0.1 prototype opens 1.0 and either finds their farm
+on the calendar or is told plainly where it went. It is never a crash and
+never an empty title. One pure function now decides between the two,
+`Save.verdict`. A run it will not play is moved, never deleted, and the title
+says so in one line. The 0.1 profile keeps its numbers. One key in it, whose
+meaning moved, is carried by a named step in a profile version of its own.
+
+### The inventory: every state version and its step
+
+| State | Bumped by | Its step in `Save.migrations()` | Golden |
+|---|---|---|---|
+| 1 | 0002 (`6b4f05f9`) | `1: _expand_farm_v1` (40x18 -> 45x20) | `run-v1.sav` (0104) |
+| 2 | the owner's `bcb81526` (2026-10-02) | `2: _expand_farm_v2` (45x25, larger buildings) | - |
+| 3 | the owner's `023dd62d` (2026-10-02) | `3: _expand_farm_v3` (80x65) | - |
+| 4 | the owner's `aece33f8` (2026-10-05); **0.1, the MVP `bea89a88`** | `4: _night_is_the_date_v4` | `run-v4.sav` (0151, from `bea89a88`) |
+| 5 | 0151 | `5: _farm_v1_0_from_v5` | `run-v5.sav` |
+| 6 | 0156 | `6: _crops_by_days_v6` | `run-v6.sav` |
+| 7 | 0165 | `7: _fish_by_species_v7` | `run-v7.sav` |
+| 8 | 0179 | `8: _shipping_bin_v8` | `run-v8.sav` |
+| 9 | 0189 (today's) | - | `run-v9.sav` |
+
+- **No version is missing a step.** States 2 and 3 were the owner's own
+  commits and never in a player's hands, so they have their step and no
+  golden, as the prompt says.
+- **The real 0.1 golden was already there.** 0151's `run-v4.sav` is state 4
+  from `bea89a88`, read underneath: day 2, night 1 lost, RESULT, 624
+  occupants. It was not regenerated and no worktree was needed.
+
+### The rule: migrate or archive
+
+`Save.verdict(state, written_at)` is asked of the run as `bring_forward`
+(split out of `read_run_at`) brings it to this build. Its reason, for the
+log, is `Save.why_archived`. The rule is in `Save`'s header doc as well.
+
+- **A run written with the calendar** (state 5 on, `CALENDAR_STATE`, task
+  0151) **always migrates.** It is the calendar's own. Applying the rule to
+  it could only ever take a 1.0 player's run away on a bug.
+- **A 0.1 run (state 4 and older) migrates to its calendar day through
+  0151's step** when the date it lands on is one 1.0 could have reached. Two
+  things are checked:
+  - **the night resolves**: a run saved over its report says `run_over`
+    only where `Run.is_over` agrees. Otherwise confirming it would show the
+    year's ending on a spring morning;
+  - **the bosses are the calendar's**: `bosses_down` equals the boss nights
+    behind the date (`Save.bosses_behind`), since 0153 holds a boss night
+    until its boss falls. On a boss night under way, its boss may already be
+    down.
+- **Otherwise it is archived.**
+
+What that makes of each 0.1 shape:
+
+| Shape | Lands on | Verdict | Why |
+|---|---|---|---|
+| `run-v4.sav`, inside the ten nights | Spring 2, RESULT | **migrate** | nothing claims more than the date |
+| `run-v4-endless.sav`, carried on past night ten | day 13 | **archive** | "1 boss down on day 13, where the calendar has passed 0 boss nights" |
+| `run-v4-finished.sav`, the prototype won | day 12, RESULT | **archive** | "its report ends the run on day 12, where the calendar goes on" |
+
+- **Why these are archived and not mended.** The Giant was the MVP's tenth
+  night; in 1.0 he is Spring 14's. A run on Spring 13 with him already
+  down would count him twice. Its achievements and collections would read
+  a boss the calendar never sent. And a won report has no honest morning.
+- **The one run inside the ten nights the rule refuses:** a prototype that
+  lost five or more nights is past day 14 without the Giant, and 1.0 never
+  lets a season pass its boss. It is archived the same way, and
+  `_task_0291_saves` asserts both day 9 (plays on) and day 16 (archived).
+
+0151 and 0160 left "legacy past-year reconciliation" to this task. A v4 run
+past Winter 14 now plays on only with the year's four bosses down. The two
+0151 asserts that read it were updated:
+- an endless v4 run on day 60 with no boss down is archived;
+- with four down, it stays endless and the year reads as beaten.
+
+### The archive
+
+- **`Save.read_run()` moves an archived run, and only it.** The player's
+  `user://run.sav` goes to `user://archive/run-v<N>-<k>.sav`, with N the
+  state it was written at. It takes the first `k` with nothing there, so it
+  never lands over a file, and its `.bak` goes beside it. It is a rename and
+  never a delete: a failed rename leaves the file where it was.
+- **The trouble is the new `Save.ARCHIVED`.** `read_run_at` gives the same
+  verdict and moves nothing, so a golden in `res://` stays put.
+- **For the rest of the session, a read that finds nothing still says
+  `ARCHIVED`.** The title catches the read on every menu build, so a
+  relabel (a language change) would otherwise lose the line. A new run
+  (`delete_run`) ends it. The next launch has no file and no line: the title
+  says it once.
+- **The title's line stands on its own.** It is `SAVE_ARCHIVED` alone, not
+  under `SAVE_UNREADABLE`/`SAVE_KEPT` (nothing was unreadable), and not in
+  the warning colour:
+  - "Your 0.1 run is kept in the archive folder. 1.0 starts a new year."
+  - "Sua partida da 0.1 ficou guardada no arquivo. A 1.0 começa um ano
+    novo."
+  - Width 600: two lines of the panel. It measures 333 / 372.
+
+### The profile
+
+- **`Save.PROFILE_VERSION` is 2**, beside `FORMAT_VERSION`, which stays the
+  file header's. `default_profile` writes it.
+- **`read_profile_at` runs `profile_migrations()` through `Save.step_up`**
+  before the merge:
+  - a step that gives nothing keeps the profile, since statistics are never
+    refused;
+  - a newer build's profile keeps its version, so that build never runs its
+    own steps twice.
+- **The step, `1: _runs_won_were_ten_nights_v1`.** In 0.1, `runs_won`
+  counted runs that beat the ten nights and the Giant. In 1.0 a run is won
+  when the year is (`Run.is_over`). So the old count is kept as
+  `prototype_runs_won`, and `runs_won` starts at 0, because nobody has won a
+  1.0 year.
+  - Every version 1 profile takes the step, a developer's in-between one
+    too. Only 0.1's were in a player's hands.
+- **`best_night`, as 0160 left it to this task: it keeps its number.** It
+  meant and still means "the most nights won in one run":
+  - 0.1's `Run.record` took `nights_won`, and so does 1.0's;
+  - the label reads "best night reached";
+  - a prototype's 10 is ten nights won in one run in either build.
+- **The rest moves nothing:**
+  - the lifetime tallies keep their meaning;
+  - the haul's one 0.1 `fish` stays a count in the haul's total;
+  - `stats.last_run` is written by `Run.record` and read by nothing.
+- **`tools/goldens/profile-v1.sav`** is the declared 0.1 profile:
+  - the prototype's four keys plus `unlocks`, version 1;
+  - three runs started, one won, best night 10, the lifetime tallies.
+- **It loads with its numbers.** `runs_won` 0 and `prototype_runs_won` 1.
+  `tips_seen`, the collections, the achievements and the fish book are all
+  at their defaults.
+- `read_profile_at`/`write_profile_at` were already the pair (0287).
+
+### The goldens
+
+- **`make_goldens.gd` writes the two 0.1 shapes**, from `run-v4.sav`'s raw
+  payload with no migration and no reconcile. Their counters move as the
+  MVP's `enter_result` moved them, after the golden's one loss:
+  - each win is a day, `nights_won` +1 and its night in `nights_paid`;
+  - the Giant is down (`bosses_down` 1, his kill in the run's tallies);
+  - the won night left nobody on the farm and the house standing.
+- **`run-v4-endless.sav`**: eleven won, `endless`, DAY on day 13.
+- **`run-v4-finished.sav`**: ten won, RESULT on day 12, `run_over`.
+- **The script also writes `profile-v1.sav`.** All three are declared in its
+  header as shapes, like `run-v1-newer.sav`. Nothing existing was rewritten.
+- **`headless_check`'s `_task_0104_saves`:**
+  - `_goldens()` lists `run-v*.sav` only;
+  - the two archived shapes are asserted refused with `Save.ARCHIVED` and
+    left in place;
+  - "a farm somebody built on" now compares with `State.create(seed)` in
+    this build, by its defences. The total of occupants could not do it:
+    a fresh farm stands 634 since 0156, and `run-v1.sav` 625, because the
+    1.0 farm's nodes go only where the old one had room.
+  - `headless_v1`'s two "every golden loads" loops skip the profile and
+    the archived shapes.
+
+### A day and a night for every golden
+
+`src/tools/play_goldens.gd` (new) runs as verify's new `goldens` row. For
+every run golden the rule migrates, it:
+- confirms the report it was saved over;
+- plays 600 day ticks, then goes to bed;
+- presses START and runs the night to dawn, then confirms the report;
+- checks that the run wakes on the next date, in DAY, with no enemy on the
+  farm.
+
+- **21 goldens woke on day 3, and the 2 archived shapes were named.** Every
+  golden fights night 2 and loses it, its house down (3,872 ticks for v1's
+  farm, 3,081 for v4-v8, 3,123 for v9). The loss is the road, not a fault.
+- **It took 14.7 s in verify.** Its first run on its own, through a pipe
+  that echoed every reconcile warning, took 105 s, which is too near the
+  suites' 120. So `check_script` gained a `timeout`, and the row keeps
+  `GOLDENS_TIMEOUT_S` 300 of room.
+
+### The captures
+
+`python tools/shot.py 0291 --title --fhd`, and with `--pt_BR`, both opened:
+- `save_archived.png` and `save_archived-pt_BR.png` are new.
+  `_take_the_save_archived` stages the won prototype as `user://run.sav`.
+  It holds the player's save and backup and puts them back, and removes the
+  archived copy and an empty `archive` folder.
+- **The line fits on two lines, centred in the panel, clear of the menu.**
+  NEW RUN is the first entry, with no CONTINUE.
+- **The panel is the one the unreadable notice uses**, sized for three
+  lines, so two leave room under them. It reads well and was left as it is.
+- **Seen, not this task's:** the corner still says "v0.1.0 prototype".
+  That is `BuildInfo`'s, and 0297 makes it 1.0.0.
+
+### Tests
+
+- `_task_0291_saves` in `src/tools/headless_v1.gd`:
+  - each 0.1 shape: its counters as the MVP moved them, and the rule's
+    verdict asked of `bring_forward`;
+  - the migrated run lands on Spring 2 and plays 600 ticks;
+  - the archived ones are refused as `ARCHIVED` and left in `res://`;
+  - `bosses_behind`, and a 0.1 run on day 9 against day 16;
+  - the won prototype as the player's run: it ends byte for byte under
+    `user://archive/`, `can_continue()` is false, and a second one goes
+    beside the first, never over it;
+  - the title's `trouble_says()` is the `SAVE_ARCHIVED` line alone, on a
+    bare `TitleScreen`. The `Title` scene, instanced in a suite with no
+    frames, holds resources past exit;
+  - a new run ends it;
+  - the 0.1 profile's numbers and defaults, and its step run once.
+- `_case_0291_archived_title` in `src/tools/input_v2.gd` (`V2_CASES` 13)
+  opens the real title over the won prototype:
+  - it is moved under `user://archive/` byte for byte;
+  - CONTINUE is absent and NEW GAME is there;
+  - the line is alone, on the screen and clear of the menu;
+  - it is still there after `relabel()`.
+- `_task_0104_saves` in `src/tools/headless_check.gd`, as above.
+- Saves never touch the scenario: SIM 2260114289 and DATA 2003073212 are
+  unchanged.
+
+Files: src/app/save.gd, src/ui/title_screen.gd, assets/locale/strings.csv,
+src/tools/make_goldens.gd, src/tools/play_goldens.gd (new),
+src/tools/headless_check.gd, src/tools/headless_v1.gd, src/tools/input_v2.gd,
+src/tools/shot.gd, tools/verify.py, tools/goldens/run-v4-endless.sav (new),
+tools/goldens/run-v4-finished.sav (new), tools/goldens/profile-v1.sav (new),
+implementation/shots/0291/
+- **Checks**: `python tools/verify.py` - PASS (66 of 66, the new `goldens` row "21 goldens woke on their next date, 2 archived, 0 failed" in 14.7 s); SIM 2260114289 and DATA 2003073212 unchanged.

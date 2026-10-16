@@ -649,6 +649,7 @@ func _take_the_front(folder: String) -> void:
 	title.free()
 	await _take_the_crash(folder)
 	await _take_the_save_trouble(folder)
+	await _take_the_save_archived(folder)
 
 
 ## And the crash dialogue, which lives on the title screen.
@@ -722,6 +723,49 @@ func _take_the_save_trouble(folder: String) -> void:
 		if f != null:
 			f.store_buffer(theirs)
 			f.close()
+
+
+## And the title with a 0.1 run it has just put in the archive (task 0291):
+## the won prototype, `tools/goldens/run-v4-finished.sav`, as the player's
+## `user://run.sav`.
+##
+## **Their save and its backup are held and put back**, and the archived copy
+## goes - it was a golden, not theirs.
+func _take_the_save_archived(folder: String) -> void:
+	var held := {}
+	for path in [Save.RUN_PATH, Save.RUN_PATH + ".bak"]:
+		if FileAccess.file_exists(path):
+			held[path] = FileAccess.get_file_as_bytes(path)
+	Save.delete_run()
+	var f := FileAccess.open(Save.RUN_PATH, FileAccess.WRITE)
+	if f != null:
+		f.store_buffer(FileAccess.get_file_as_bytes("res://tools/goldens/run-v4-finished.sav"))
+		f.close()
+
+	var title: Node = load("res://scenes/Title.tscn").instantiate()
+	root.add_child(title)
+	await process_frame
+	_say_it_in(title)
+	var router := _router()
+	if router != null:
+		router.goto(router.MENU)
+	for _i in SETTLE:
+		await process_frame
+	await _shoot("save_archived", folder)
+	root.remove_child(title)
+	title.free()
+
+	var kept := Save.archived_to()
+	if kept != "":
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(kept))
+	if DirAccess.get_files_at(Save.ARCHIVE_DIR).is_empty():
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(Save.ARCHIVE_DIR))
+	Save.delete_run()
+	for path in held:
+		var back := FileAccess.open(String(path), FileAccess.WRITE)
+		if back != null:
+			back.store_buffer(held[path])
+			back.close()
 
 
 ## The router, asked of the engine rather than of this script.
