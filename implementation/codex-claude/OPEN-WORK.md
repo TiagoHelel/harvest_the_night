@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-16**, with task 0291's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-16**, with task 0294's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 297 tasks, 284 done, 13 todo, 0 blocked (96%).**
+**The game backlog: 297 tasks, 285 done, 12 todo, 0 blocked (96%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0294). Only the farmer packs the owner deferred (3c) still wait on
+says 0298). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -29,7 +29,7 @@ What is left goes to 0278 and 0280. Every call and trial is in
 | 0279 | Year 2 - **done 2026-10-16**: the calendar replays the seasons a year heavier (`LATER_YEARS`), the endless curve retired | 0277 |
 | 0280 | Checkpoint: do fifty-six nights tire? - **done 2026-10-16**: the seasons' second weeks tire; task 0298 added before the playtest | 0277, 0278, 0279 |
 | 0291 | Saves into 1.0 - **done 2026-10-16**: a 0.1 run inside the ten nights plays on its date; the prototype won or carried on past it is kept in `user://archive/`, and the title says so | 0279 |
-| 0294 | Every new word in Portuguese | 0291 |
+| 0294 | Every new word in Portuguese - **done 2026-10-16**: the plan's names under a glossary, plurals, agreement, real widths; raw ids, cost letters and the circumflex fixed on screen | 0291 |
 | 0295 | A playtest build of the year | 0280, 0291, 0294 |
 | 0290 | The 1.0 visual gate | every art task below |
 | 0296 | The store page and trailer for 1.0 | 0290, 0294 |

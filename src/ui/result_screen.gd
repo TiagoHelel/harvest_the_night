@@ -317,8 +317,8 @@ func _build(payout: Dictionary) -> void:
 		_row(I18n.t(&"RES_GIFT"), "", UiKit.GOOD)
 		var gift: Array = []
 		for id in _sorted(payout["gained"] as Dictionary):
-			gift.append(I18n.f(&"RES_GAINED", [int((payout["gained"] as Dictionary)[id]),
-				Names.of(id)]))
+			var given := int((payout["gained"] as Dictionary)[id])
+			gift.append(I18n.f(&"RES_GAINED", [given, Names.of_count(id, given)]))
 		_row(I18n.f(&"RES_INDENT", ["  ".join(gift)]), "", UiKit.GOOD)
 	elif survived:
 		_row(I18n.t(&"RES_PAID"), "", UiKit.GOOD)
@@ -329,7 +329,7 @@ func _build(payout: Dictionary) -> void:
 		var purse: Array = []
 		for id in _sorted(payout["gained"] as Dictionary):
 			var n := int((payout["gained"] as Dictionary)[id])
-			var said := I18n.f(&"RES_GAINED", [n, Names.of(id)])
+			var said := I18n.f(&"RES_GAINED", [n, Names.of_count(id, n)])
 			if id == GameData.MONEY or id == GameData.TECH:
 				purse.append(said)
 			else:
@@ -371,7 +371,7 @@ func _build(payout: Dictionary) -> void:
 			var taken: Array = []
 			for id in _sorted(lost):
 				taken.append(I18n.f(&"RES_TAKEN",
-					[int(lost[id]), Names.of(id)]))
+					[int(lost[id]), Names.of_count(id, int(lost[id]))]))
 			_row(I18n.f(&"RES_INDENT", ["  ".join(taken)]), "", UiKit.BAD)
 		_row(I18n.t(&"RES_UNTOUCHED_ALL"), "", UiKit.DIM)
 

@@ -77,7 +77,9 @@ func _ready() -> void:
 		var side: StringName = which
 		var tab := Button.new()
 		tab.name = "tab_%s" % side
-		tab.text = str(side).to_upper()
+		# **Its word, not its id** (task 0294): "SELL" and "BUY" stood on the
+		# Portuguese stall.
+		tab.text = _tab_word(side)
 		tab.toggle_mode = true
 		tab.custom_minimum_size = Vector2(72, 14)
 		tab.theme_type_variation = UiKit.TAB
@@ -101,6 +103,21 @@ func _ready() -> void:
 	_hint.text = I18n.t(&"SHOP_HINT")
 	_hint.theme_type_variation = UiKit.DIM
 	column.add_child(_hint)
+
+
+## A tab's word in the language up.
+static func _tab_word(side: StringName) -> String:
+	return I18n.t(&"SHOP_SELL" if side == Shop.SELL else &"SHOP_BUY")
+
+
+## **Its words in the language up** (task 0294): the tabs are written once,
+## and the rows are built again on the next frame.
+func relabel() -> void:
+	for child in _tabs.get_children():
+		var tab := child as Button
+		if tab != null:
+			tab.text = _tab_word(StringName(str(tab.name).trim_prefix("tab_")))
+	_built_for = -1
 
 
 func show_state(state: Dictionary) -> void:
@@ -357,7 +374,7 @@ func _one_row(id: StringName) -> void:
 	var price := Shop.cost_of(id)
 	for res in GameData.sorted_names(price.keys()):
 		cost.append("$%d" % int(price[res]) if res == GameData.MONEY
-			else "%d %s" % [int(price[res]), Names.of(res)])
+			else Names.counted(res, int(price[res])))
 	var label := Label.new()
 	label.name = "buy_label_%s" % id
 	label.text = I18n.f(&"SHOP_ONE_ROW", [Names.of(id), " ".join(cost), Shop.stock_of(_state, id)])

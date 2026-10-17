@@ -124,10 +124,12 @@ static func defence(id: StringName) -> String:
 	var ammo: Dictionary = one.get("ammo", {})
 	for res in GameData.sorted_names(ammo.keys()):
 		if int(one.get("ammo_every_ticks", 0)) > 0:
-			lines.append(I18n.f(&"DESC_AMMO_EVERY", [int(ammo[res]), Names.of(res),
+			lines.append(I18n.f(&"DESC_AMMO_EVERY", [int(ammo[res]),
+				Names.of_count(res, int(ammo[res])),
 				_seconds(int(one["ammo_every_ticks"]))]))
 		else:
-			lines.append(I18n.f(&"DESC_AMMO_SHOT", [int(ammo[res]), Names.of(res)]))
+			lines.append(I18n.f(&"DESC_AMMO_SHOT", [int(ammo[res]),
+				Names.of_count(res, int(ammo[res]))]))
 	if StringName(one.get("shape", &"")) == GameData.SHAPE_SPLASH:
 		lines.append(I18n.f(&"DESC_SPLASHES", [int(one.get("splash_tiles", 1))]))
 	if int(one.get("energy_draw", 0)) > 0:
@@ -413,7 +415,7 @@ static func _amounts(amounts: Dictionary) -> String:
 	var parts: Array = []
 	for id in GameData.sorted_names(amounts.keys()):
 		parts.append(I18n.f(&"DESC_AMOUNT",
-			[int(amounts[id]), Names.of(id)]))
+			[int(amounts[id]), Names.of_count(id, int(amounts[id]))]))
 	return ", ".join(parts)
 
 

@@ -532,3 +532,11 @@ Next in the loop: 0291.
 
 0291 is done. A 0.1 save inside the ten nights loads on its calendar day. The prototype won, or carried on past night ten, is moved to `user://archive/` and the title says so in one line. The 0.1 profile keeps its numbers, and its "runs won" is kept as `prototype_runs_won`. There are three new goldens in `tools/goldens/` and a `goldens` row in verify. No art involved.
 Next in the loop: 0294 (every new word in Portuguese).
+
+## 2026-10-16 - Claude - done 0294 (every new word in Portuguese)
+
+0294 is done. Every name follows the plan: lança-chamas, destruidor, tanque, espantalho, conserva and banca. A glossary in `tools/i18n_check.py` now holds them. Items have plurals, and rows drawn in fixed controls have real widths.
+
+One thing touches the art side. The font's circumflex mark was identical to the diaeresis, so `tools/font_maps.py` now draws ê as a two-row peak. `gen_font.py` regenerated `assets/fonts/*.png` (code-generated, not a Codex pack).
+
+Next in the loop: 0298 (the seasons' second weeks).

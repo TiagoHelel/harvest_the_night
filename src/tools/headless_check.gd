@@ -16800,15 +16800,16 @@ func _task_0097_strings() -> void:
 		"a line puts its number where Portuguese puts it",
 		I18n.f(&"LOG_NIGHT_BEGAN", [3]))
 
-	# **Plurals are rows, not an s on the end.** "brutamontes" is the same
-	# word twice over, which no amount of suffixing produces.
+	# **Plurals are rows, not an s on the end.** "picles" is the same word
+	# twice over, which no amount of suffixing produces (it was "brutamontes"
+	# until task 0294 made the tank a tanque, as the plan names it).
 	expect(I18n.plural(&"ENEMY_WALKER", 1) == "andarilho",
 		"one of them", I18n.plural(&"ENEMY_WALKER", 1))
 	expect(I18n.plural(&"ENEMY_WALKER", 6) == "andarilhos",
 		"six of them", I18n.plural(&"ENEMY_WALKER", 6))
-	expect(I18n.plural(&"ENEMY_TANK", 1) == I18n.plural(&"ENEMY_TANK", 6),
+	expect(I18n.plural(&"ITEM_PICKLES", 1) == I18n.plural(&"ITEM_PICKLES", 6),
 		"and a word that does not change does not change",
-		I18n.plural(&"ENEMY_TANK", 6))
+		I18n.plural(&"ITEM_PICKLES", 6))
 
 	# **Numbers are grouped the way the language groups them.**
 	expect(I18n.number(1234567) == "1.234.567",

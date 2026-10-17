@@ -21,6 +21,13 @@ Four questions, and none of them can be answered by reading:
 A fifth, thrown in because it costs nothing: both languages have to use the
 same format specifiers. `%d` in English and nothing in Portuguese is a line
 that silently loses its number.
+
+And a sixth (task 0294): **one name per thing, and the plan's.** `GLOSSARY`
+holds the Portuguese `docs/PLANO-DO-JOGO.md` gives each thing - the
+seasons, the events, the crops, fish, machines, defences, enemies and
+bosses - and a row that drifts from it fails, compared without case. A
+rename is a change here first, and the plan's word wins unless the journal
+records the owner choosing another.
 """
 import io
 import os
@@ -51,6 +58,74 @@ KEY_IN_CODE = re.compile(
 PLURAL = re.compile(r'^(.*)\.(one|other)$')
 
 SPECIFIER = re.compile(r'%[-+ #0-9.]*[a-zA-Z%]')
+
+## **The plan's names** (task 0294): key -> the pt_BR it must read, without
+## case. From `docs/PLANO-DO-JOGO.md`: the calendar and its events (section
+## 2), the crops (3.1), the fish (3.2), the machines (3.5), the stall and the
+## shipping bin (3.6), the powers (4.4), START (4.2), the night's leftovers
+## (4.6), the defences (5), the enemies and bosses (6) and essence (7).
+GLOSSARY = {
+    # The year and its nights.
+    "SEASON_SPRING": "primavera", "SEASON_SUMMER": "verão",
+    "SEASON_AUTUMN": "outono", "SEASON_WINTER": "inverno",
+    "FCAST_FULL_MOON": "lua cheia", "RES_ESSENCE_FULL_MOON": "lua cheia",
+    "FCAST_BLOOD_MOON": "lua de sangue", "RES_ESSENCE_BLOOD_MOON": "lua de sangue",
+    "FCAST_FOG": "neblina", "FCAST_RAIN": "chuva",
+    "NHUD_START": "começar",
+    # What the night leaves and pays.
+    "ITEM_TECH": "essência", "ITEM_TECH.other": "essência",
+    "ITEM_BONES": "ossos", "ITEM_BONES.other": "ossos",
+    "ITEM_BONE_MEAL": "farinha de osso",
+    "ITEM_MOON_STONE": "pedra da lua", "ITEM_MOON_STONE.other": "pedras da lua",
+    # Selling.
+    "FIX_SHIPPING_BIN": "caixa de envio", "SHIP_TITLE": "caixa de envio",
+    "SHOP_TITLE": "banca",
+    # The crops.
+    "ITEM_CARROT": "cenoura", "ITEM_POTATO": "batata", "ITEM_GARLIC": "alho",
+    "ITEM_STRAWBERRY": "morango", "ITEM_CORN": "milho", "ITEM_PEPPER": "pimenta",
+    "ITEM_SUNFLOWER": "girassol", "ITEM_MELON": "melancia", "ITEM_WHEAT": "trigo",
+    "ITEM_PUMPKIN": "abóbora", "ITEM_GRAPE": "uva", "ITEM_BEET": "beterraba",
+    # The fish the plan names.
+    "ITEM_CARP": "carpa", "ITEM_PERCH": "perca", "ITEM_CATFISH": "bagre",
+    "ITEM_TILAPIA": "tilápia", "ITEM_TROUT": "truta", "ITEM_PIKE": "lúcio",
+    "ITEM_EEL": "enguia", "ITEM_DORADO": "dourado", "ITEM_SALMON": "salmão",
+    "ITEM_STURGEON": "esturjão", "ITEM_OLD_CATFISH": "velho bagre",
+    "ITEM_GOLDEN_QUEEN": "rainha dourada", "ITEM_GHOST_PIKE": "lúcio fantasma",
+    "ITEM_ICE_STURGEON": "esturjão de gelo",
+    # The machines.
+    "BLD_WORKSHOP": "oficina", "BLD_PRESS": "prensa", "BLD_KITCHEN": "cozinha",
+    "BLD_GENERATOR": "gerador", "BLD_KEG": "barril", "BLD_PRESERVES_JAR": "conserva",
+    "BLD_DAIRY": "laticínios", "BLD_LOOM": "tear", "BLD_MILL": "moinho",
+    # The powers.
+    "POWER_FARM_BELL": "sino da fazenda", "POWER_CALL_DOG": "chamar o cão",
+    "POWER_EMERGENCY_REPAIR": "conserto de emergência",
+    # The defences.
+    "DEF_GUN_TOWER": "torre de tiro", "DEF_AUTO_CROSSBOW": "besta automática",
+    "DEF_MINE": "mina", "DEF_FENCE": "cerca", "DEF_BARRICADE": "barricada",
+    "DEF_WALL": "muro", "DEF_FLAME_TOWER": "lança-chamas", "DEF_DECOY": "espantalho",
+    "DEF_BEEHIVE": "colmeia", "DEF_MORTAR": "morteiro",
+    "DEF_CATAPULT": "catapulta de abóbora", "DEF_GARLIC_BRAID": "réstia de alho",
+    "DEF_SEARCHLIGHT": "holofote", "DEF_ELECTRIC_FENCE": "cerca elétrica",
+    # The enemies - one of the rat swarm is a rat - and the bosses.
+    "ENEMY_WALKER": "andarilho", "ENEMY_WALKER.other": "andarilhos",
+    "ENEMY_RUNNER": "corredor", "ENEMY_RUNNER.other": "corredores",
+    "ENEMY_TANK": "tanque", "ENEMY_TANK.other": "tanques",
+    "ENEMY_BREAKER": "destruidor", "ENEMY_BREAKER.other": "destruidores",
+    "ENEMY_SPITTER": "cuspidor", "ENEMY_SPITTER.other": "cuspidores",
+    "ENEMY_RAT": "rato", "ENEMY_RAT.other": "ratos",
+    "ENEMY_CROW": "corvo", "ENEMY_CROW.other": "corvos",
+    "ENEMY_DIGGER": "escavador", "ENEMY_DIGGER.other": "escavadores",
+    "ENEMY_FROST_ZOMBIE": "zumbi de gelo", "ENEMY_FROST_ZOMBIE.other": "zumbis de gelo",
+    "ENEMY_WRAITH": "assombração", "ENEMY_WRAITH.other": "assombrações",
+    "ENEMY_GIANT": "gigante", "ENEMY_HARVESTER": "colheitadeira",
+    "ENEMY_SCARECROW_KING": "rei espantalho",
+    "ENEMY_WINTER_LORD": "senhor do inverno",
+}
+
+## **Names the same in both languages, on purpose** (task 0294). A thing's
+## pt_BR name that reads as its English one is a name nobody translated -
+## `_task_0294_names` fails it - unless it is listed here. None is, today.
+SAME_IN_BOTH = []
 
 
 def read_table():
@@ -153,7 +228,21 @@ def check():
             elif width > 0 and drawn > width:
                 bad.append("%s: %s is %dpx and its control gives it %d"
                            % (key, locale, drawn, width))
+    bad.extend(glossary_drift(rows))
     return rows, locales, bad
+
+
+def glossary_drift(rows):
+    """Every glossary row that is missing or reads other than the plan."""
+    texts = dict((key, t.get("pt_BR", "")) for key, _, t in rows)
+    out = []
+    for key in sorted(GLOSSARY):
+        if key not in texts:
+            out.append("%s is in the glossary and not in the table" % key)
+        elif texts[key].strip().lower() != GLOSSARY[key].lower():
+            out.append("%s reads '%s' in pt_BR and the glossary says '%s'"
+                       % (key, texts[key], GLOSSARY[key]))
+    return out
 
 
 def report():

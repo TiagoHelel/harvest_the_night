@@ -46,6 +46,10 @@ var _built_for := ""
 ## {station cell index: the tally this panel last showed for it}
 var _last_seen: Dictionary = {}
 var _tool_tab := false
+
+## Where the frame's right edge stays (task 0294): a longer Portuguese row
+## grows the frame to the left rather than off the screen.
+var _right := 476.0
 var _tool_tabs: HBoxContainer
 var _tool_pending: Label
 var _recipe_scroll: ScrollContainer
@@ -63,6 +67,7 @@ func _ready() -> void:
 	_frame.custom_minimum_size = Vector2(140, 0)
 	_frame.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(_frame)
+	_frame.resized.connect(_keep_on_screen)
 
 	var column := VBoxContainer.new()
 	column.name = "WorkshopColumn"
@@ -193,7 +198,7 @@ func _what_happened(cell: Vector2i) -> String:
 	for id in GameData.sorted_names(made.keys()):
 		var since := int(made[id]) - int(seen.get(id, 0))
 		if since > 0:
-			parts.append(I18n.f(&"WORK_AWAY_ONE", [since, Names.of(id)]))
+			parts.append(I18n.f(&"WORK_AWAY_ONE", [since, Names.of_count(id, since)]))
 	if parts.is_empty():
 		return ""
 	return I18n.f(&"WORK_AWAY", [", ".join(parts)])
@@ -224,6 +229,7 @@ func _build(cell: Vector2i) -> void:
 	_tool_pending.text = I18n.t(&"WORK_TOOL_PENDING")
 	_frame.position = Vector2(248, 20) if tools else Vector2(336, 32)
 	_frame.custom_minimum_size.x = 224 if tools else 140
+	_right = _frame.position.x + _frame.custom_minimum_size.x
 	_frame.size = Vector2.ZERO
 	_recipe_scroll.custom_minimum_size.x = 214 if tools else 130
 	_recipe_scroll.custom_minimum_size.y = 140 if tools else 80
@@ -262,7 +268,9 @@ func _build(cell: Vector2i) -> void:
 		var row := Button.new()
 		row.name = "make_%s" % recipe_id
 		Tooltip.describes(row, StringName("recipe:%s" % recipe_id))
-		row.text = Names.of(output) if tools else str(recipe_id)
+		# **Its name, not its id** (task 0294): the craft tab printed
+		# `make_wine` on a Portuguese screen.
+		row.text = Names.of(output) if tools else Names.of(recipe_id)
 		if tools:
 			row.text = "    " + row.text
 			row.alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -321,7 +329,7 @@ func _house_row() -> void:
 		var price := House.next_cost(_state)
 		for res in GameData.sorted_names(price.keys()):
 			cost.append("$%d" % int(price[res]) if res == GameData.MONEY
-				else "%d %s" % [int(price[res]), Names.of(res)])
+				else Names.counted(res, int(price[res])))
 		row.text = "    " + I18n.f(&"WORK_HOUSE_NEXT", [I18n.t(HOUSE_TIER_KEYS[tier]), " ".join(cost)])
 	row.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_style(row)
@@ -334,6 +342,12 @@ func _house_row() -> void:
 			int((GameData.HOUSE_TIERS[tier] as Dictionary)["repair_discount"])]))))
 	row.pressed.connect(func() -> void: House.buy_tier(_state))
 	_recipes.add_child(row)
+
+
+## Keep the right edge where it was laid out, the frame growing to the left
+## when a row is wider than it (task 0294) - and never off the left either.
+func _keep_on_screen() -> void:
+	_frame.position.x = maxf(_right - _frame.size.x, 4.0)
 
 
 ## The compact row the build palette settled on in task 0032, which is now

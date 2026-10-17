@@ -291,7 +291,7 @@ static func _two_lines(amounts: Dictionary) -> Array:
 		parts.append(I18n.f(&"HOTBAR_MONEY", [int(amounts[GameData.MONEY])]))
 	for res in GameData.sorted_names(amounts.keys()):
 		if res != GameData.MONEY:
-			parts.append("%d%s" % [amounts[res], str(res).substr(0, 1)])
+			parts.append("%d%s" % [amounts[res], Names.short_of(res)])
 	if parts.size() <= 2:
 		return [" ".join(parts)]
 	return [" ".join(parts.slice(0, 2)), " ".join(parts.slice(2))]

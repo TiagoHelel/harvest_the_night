@@ -209,6 +209,14 @@ static func width_of(key: StringName) -> int:
 	return int(_widths.get(String(key), 0))
 
 
+## Whether the table has a row for `key` (task 0294): a counted name's
+## `.other` is asked for before it is used, so a word that does not change
+## in the plural can go without one.
+static func has(key: StringName) -> bool:
+	load_all()
+	return (_table.get(FALLBACK, {}) as Dictionary).has(String(key))
+
+
 static func keys() -> Array:
 	load_all()
 	var out: Array = (_table.get(FALLBACK, {}) as Dictionary).keys()

@@ -34414,3 +34414,229 @@ src/tools/shot.gd, tools/verify.py, tools/goldens/run-v4-endless.sav (new),
 tools/goldens/run-v4-finished.sav (new), tools/goldens/profile-v1.sav (new),
 implementation/shots/0291/
 - **Checks**: `python tools/verify.py` - PASS (66 of 66, the new `goldens` row "21 goldens woke on their next date, 2 archived, 0 failed" in 14.7 s); SIM 2260114289 and DATA 2003073212 unchanged.
+
+## 0294 - Every new word in Portuguese - done 2026-10-16
+
+Every row added since 0112 was read in both languages and then on screen in
+Portuguese at 1920x1080. That was 525 rows, 79 more for the plurals and
+13 for the short cost letters. Every thing now has one name, the plan's,
+and a glossary holds them there. Counted names have plurals. Sentences
+that put a name in no longer get its gender wrong. The rows drawn in
+fixed controls have real widths.
+
+The captures found four things worse than a word. They are fixed:
+- **Raw ids** on Portuguese screens: `copper_sprinkler` in the build
+  palette, `make_wine` in the craft tab, SELL/BUY on the stall.
+- **English cost letters**: "12i 10w".
+- **A circumflex drawn as a diaeresis**: "essëncia".
+- **A workshop panel running off the screen.**
+
+### The plan's names
+
+`GLOSSARY` in `tools/i18n_check.py` maps a key to the pt_BR text it must
+have, compared without case. It holds 97 rows from
+`docs/PLANO-DO-JOGO.md`:
+- the seasons, Lua Cheia, Lua de Sangue, neblina and chuva;
+- COMEÇAR, essência, ossos, farinha de osso and pedra(s) da lua;
+- caixa de envio and banca;
+- the twelve crops of section 3.1 and the sixteen fish of 3.2;
+- the machines of 3.5 and the powers of 4.4;
+- the fourteen defences of section 5;
+- the ten enemies and four bosses of section 6, with their plurals.
+
+`SAME_IN_BOTH` lists names that read the same in both languages on
+purpose. It is empty.
+
+- **Tried once by hand.** `DEF_FLAME_TOWER` was set back to "torre de fogo".
+  `i18n_check` failed with "DEF_FLAME_TOWER reads 'torre de fogo' in pt_BR
+  and the glossary says 'lança-chamas'". It was then reverted, and the table
+  was byte for byte as before.
+- **Words with no row.** The plan's *mascate* and *guardião* have no row:
+  neither name is drawn yet. The glossary can hold only a key, so they wait
+  for the row that draws them.
+- **The rat.** The plan's "enxame de ratos" is the kind. A counted one is a
+  rato (`ENEMY_RAT` rato/ratos), as in "34 ratos".
+
+### Every pt_BR change, before and after
+
+| Key | Before | After |
+|---|---|---|
+| `DEF_FLAME_TOWER` | torre de fogo | lança-chamas (the plan's) |
+| `ENEMY_BREAKER` / `.other` | quebrador / quebradores | destruidor / destruidores (the plan's) |
+| `ENEMY_TANK` / `.other` | brutamontes / brutamontes | tanque / tanques (the plan's) |
+| `DEF_DECOY` | espantalho-isca | espantalho (the plan's) |
+| `BLD_PRESERVES_JAR` | pote de conserva | conserva (the plan's) |
+| `SHOP_TITLE` | MERCADO | BANCA (the plan's stall) |
+| `ACT_EMERGENCY_REPAIR` | CONSERTO URGENTE | CONSERTO DE EMERG. (the plan's name, at 112 px) |
+| `NHUD_HINT_AIM` | %s: soltar o sinal | %s: soltar o sinalizador (the plan's flare) |
+| `TECHNOTE_AN_EMERGENCY_KIT` | um conserto de emergência: uma estrutura recupera três décimos na hora | conserto de emergência: três décimos da vida de volta na hora (it ran 26 px off the screen) |
+| `NHUD_START_IN` | AGORA %d | COMEÇAR %d (START is COMEÇAR) |
+| `COLL_TAB_CROPS` | COLHEITAS %d/%d | CULTURAS %d/%d (one name for crops) |
+| `FCAST_BOSS` | %s ESTÁ VINDO | VEM AÍ: %s (the name alone; it had no article) |
+| `COLL_BOSS_FELL` | DERROTADO: %d | VITÓRIAS: %d (the Colheitadeira is feminine) |
+| `LOG_CROP_READY` | %s está pronto | dá para colher: %s (cenoura is feminine) |
+| `LOG_CROP_EATEN` | um corvo comeu %s | um corvo comeu um pé de %s |
+| `LOG_CRAFT_DONE` | %s ficou pronto | concluído: %s |
+| `LOG_STRUCTURE_LOST` | %s destruído | caiu: %s (cerca, muro) |
+| `DESC_AT_THE` | na %s | local: %s (barril, tear, moinho are masculine) |
+| `WHY_GATHER_SEASON` | Disponível a partir de %s | Disponível a partir do %s |
+| `DHUD_AMMO_NONE` | MUNIÇÃO  nenhuma precisa | MUNIÇÃO  não precisa |
+| `BOOK_HINT_CARP` | ...: noroeste e lagoa da mata. | ...: lago do noroeste e lagoa da mata. |
+| `BOOK_HINT_PERCH` | Fora do verão, o dia todo: noroeste e lago do sudeste. | Fora do verão: lago do noroeste e lago do sudeste. |
+| `BOOK_HINT_GHOST_PIKE` | Noite alta de outono no noroeste, ... | Noite alta no outono, lago do noroeste, ... |
+| `BOOK_HINT_ICE_STURGEON` | Alvorada de inverno no sudeste, em dia de Lua Cheia. | Alvorada de inverno no lago do sudeste, na Lua Cheia. |
+
+- **The ponds now carry one name each** (lago do noroeste, lagoa da mata,
+  lago do sudeste) where they fit in 300 px. `BOOK_HINT_EEL` cannot fit both
+  full names and keeps "na mata e no sudeste".
+- **Templates checked and kept, since they agree with every name they
+  take:**
+  - `DESC_SEASON` "chega no %s" and `WHY_NOT_YET_SEASON` "abre no %s" take
+    only summer, autumn and winter, since spring is always open;
+  - `DESC_KIT_ONLY` "na %s" and `WHY_KIT_ONLY` "faça uma na %s" take only
+    the press and the bait;
+  - `LOG_STRUCTURE_WRECKED` "%s arrasado" takes only the coop and the barn;
+  - `DESC_STUNS` "quem a morde" takes only the electric fence;
+  - `DESC_NEEDS_LIGHT` "nela" takes only the wraith.
+- **Kept as it is:**
+  - `NHUD_EMERGENCY_REPAIR` is "KIT" on a 26 px button. It echoes the tech
+    node "kit de emergência".
+  - `ACH_LONG_HAUL_DESC` stays "%d noites numa partida": "Sobreviva a..."
+    is 183 px of a 138 px badge.
+
+### Counted names have plurals
+
+79 new rows:
+- **An `.other` for each of the 78 item names.** The 78 rows are every
+  resource, crop, seed and fish, in both languages: "cenouras", "pedras",
+  "peixes-sol", "salmões", "pedras da lua", "sementes de cenoura".
+  - A word that does not change keeps it: madeira, ferro, picles.
+- **An `ITEM_BONES.one`, "osso".** The name "ossos" is plural, and one is a
+  bone.
+
+`Names.of_count(id, n)` and `Names.counted(id, n)` pick the row through
+`I18n.plural`. A thing with no `.other` row (a building) reads its name at
+any count. They are used by:
+- the morning report's paid and taken lines ("+3 pedras", "-2 cenouras");
+- the tooltips' costs and ammunition;
+- the workshop's "while you were away";
+- the stall's and the house's costs;
+- every refusal that names a pile ("falta 2 cenouras, 5 madeira").
+
+`I18n.has(key)` is new for the check.
+
+### Widths
+
+- **140 rows given their real width.** An Explore agent traced every
+  zero-width row added since 0112 to the control that draws it. Each
+  number is what the code gives the text:
+  - inventory names 156, the collections' crop names 90, bone meal in the
+    seed strip 111;
+  - tech nodes 118, and each tech note 456 less its node's name (328-388);
+  - placeable names in the night hint 113, the hint itself 256, the boss
+    banner 240;
+  - the hotbar season 54 and price 40;
+  - seed pager 47 and page 37;
+  - the stall's headings 276 and 278;
+  - the report's rows 142, 150 and 206;
+  - the workshop's aging line 130, house rows 192, house tiers 52.
+- **Rows left at 0, because their controls grow or wrap:** tooltips, the
+  log, the forecast's lines, `DHUD_BAIT`, the recipes. `HOTBAR_LEFT` stays
+  0 too: its raw "%d/noite" measures 44 though it draws 38 in its 40.
+- **Widths that were already there:**
+  - `ITEM_COAL`/`COPPER`/`GOLD`/`HARDWOOD` had 96, which matched no
+    control. They are now 156.
+  - `TOOL_*` 180 is 10 px generous for the inventory's 170. It was kept,
+    since the widest is 97.
+- **`python tools/i18n_check.py --report`** names the tightest rows:
+  `SEED_PREVIOUS` 47/47, `SEED_PAGE` 37/37, `BOOK_HINT_GHOST_PIKE` 300/300
+  and `SEASON_SPRING` 53/54. Each was looked at on screen and fits.
+  - `SEED_PREVIOUS` "ANTERIOR" is 47 against its button's 44. The button
+    grows to 53 and overlaps nothing. It was given 47, its grown room.
+
+### What the captures found, and what was done
+
+`python tools/shot.py 0294 --fhd --pt_BR`, with 27 scenes:
+- both HUDs, the forecast at dusk, in the build step, on a boss night and
+  in fog;
+- the hotbar, the morning report and the boss's escape;
+- the year's end, the fish book, the shipping bin, every inventory page;
+- the tech tree, the powers, the winter arsenal;
+- the cursor over a hurt tower, refused, the build palette;
+- the kitchen and the keg, the house tiers, the stall, the seed picker;
+- the tutorial's START, the decoy and Year 2.
+
+Also `capture_menus.gd -- --out=res://implementation/shots/0294/ --pt_BR`,
+which covers every options page, the pause menu and its questions, and the
+title. And `capture_collections.gd` the same way, for every tab, empty and
+full, by day and by night. That makes 88 pictures. They were opened one by
+one. The 12 fish-book pages whose text did not change were taken and not
+each opened.
+
+Fixed:
+- **The build palette printed ids.** "copper_sprinkler 3c 50m" became
+  "aspersor de cobre $50 3co". Its money was "50m", the m of money, which
+  in Portuguese is madeira's; it is now "$50" first, as on the hotbar.
+  `BuildMode.relabel()` is new, since the palette title stayed "BUILD"
+  after a language change.
+- **The craft tab printed recipe ids** ("cook_fish", "make_wine"). It
+  shows their names now.
+- **The stall's tabs printed SELL and BUY,** which were ids. They read
+  VENDER and COMPRAR, through `ShopPanel.relabel()` too.
+- **Cost letters were the English ids' first letters** ("12i 10w").
+  `Names.SHORT_KEYS` gives 13 rows, `ABBR_*`. English keeps i, w, s and the
+  rest unchanged. Portuguese gets m, p, f, co, ou, v (pólvora), ó (óleo),
+  pa, ab, al, gi, sa and pe, and no two clash. `input_v1`'s 0234 case
+  caught "15pó 35f" and "25f 10ól" over 40 px; v and ó fit.
+- **The circumflex was the diaeresis.** Both marks were one row, `.#.#.`,
+  in `tools/font_maps.py`, so ê read as ë in "essência" and "você". It is
+  now a two-row peak (`..#../.#.#.`), and `gen_font.py` re-wrote both font
+  pages. `gen_font --check` passes. The `.fnt` metrics did not move, so
+  Godot did not re-import on its own: the local font cache was cleared
+  once.
+- **The workshop frame ran off the right edge.** "1. fazer ensopado
+  (fazendo)" is wider than its 124 px row. The frame now grows to the left
+  and keeps its right edge (`_keep_on_screen`). `input_v1` holds it inside
+  480x270.
+
+Seen and not changed:
+- **Key names stay as printed on the keys**, by `input_actions.gd`'s
+  standing rule: "W / UP", "SPACE / ENTER", "ESCAPE". The tutorial's lines
+  say "ESPAÇO". That rule is the owner's to revisit.
+- **"v0.1.0 prototype"** on the title is `BuildInfo`'s, and 0297's.
+- **The tutorial's line crosses the build palette** and the seed strip. It
+  is drawn over whatever is there, in English too, and goes to 0290.
+- **The night HUD draws over the collections book.** That is already filed
+  as its own task.
+
+### Tests
+
+- `_task_0294_names` in `src/tools/headless_v1.gd`:
+  - every id of `CROPS`, `RESOURCES`, `DEFENCES`, `ENEMIES`, `BUILDINGS`,
+    `RECIPES`, `TECH_TREE` and `FISH_SPECIES` (over 150) has a
+    `Names.KEYS` key;
+  - its row reads in en and pt_BR, straight from `strings.csv` with no
+    fallback, and its Portuguese is not its English unless `SAME_IN_BOTH`
+    says so;
+  - the plan's three renames, and essence;
+  - every resource and enemy has its `.other` row;
+  - `Names.counted` and `refusal` say "3 cenouras", "1 cenoura",
+    "12 madeira", "1 osso", "4 ossos", "tanques";
+  - a cost's letters are the language's and do not clash;
+  - the stall's tabs read VENDER and COMPRAR.
+- Two tests that held the old words were updated:
+  - `headless_check`'s plural assert holds "picles" (was "brutamontes");
+  - `headless_v1`'s 0224 decoy line holds "ESPANTALHO".
+- Text and the view only: SIM 2260114289 and DATA 2003073212 are
+  unchanged.
+
+Files:
+- **Strings and checks:** assets/locale/strings.csv, tools/i18n_check.py.
+- **Font:** tools/font_maps.py, assets/fonts/harvest_hud.png,
+  assets/fonts/harvest_heading.png.
+- **Code:** src/app/i18n.gd, src/ui/names.gd, src/ui/describe.gd,
+  src/ui/result_screen.gd, src/ui/shop_panel.gd, src/ui/workshop_panel.gd,
+  src/ui/build_mode.gd, src/ui/hotbar.gd, src/ui/log_panel.gd.
+- **Tests:** src/tools/headless_v1.gd, src/tools/headless_check.gd.
+- **Captures:** implementation/shots/0294/.
+- **Checks**: `python tools/verify.py` - PASS (66 of 66); SIM 2260114289 and DATA 2003073212 unchanged.

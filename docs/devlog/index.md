@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-297 tasks over 14 days,  to 2026-10-16. One at a time, each one finished and checked before the next was started.
+298 tasks over 14 days,  to 2026-10-16. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -341,6 +341,7 @@ is the sort of thing this list exists to say out loud.
 | 0279 | Year 2 | 2026-10-16 |
 | 0280 | Checkpoint: do fifty-six nights tire? | 2026-10-16 |
 | 0291 | Saves into 1.0 | 2026-10-16 |
+| 0294 | Every new word in Portuguese | 2026-10-16 |
 
 ## Every time the game changed underneath itself
 
@@ -491,7 +492,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 
 ## What went wrong
 
-74 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
+75 of them, taken out of the journal by the words it uses when something did not work. This is the part a devlog is for.
 
 - **0039** - The clock was counting the wrong thing *(The day clock and dusk)*
 - **0040** - A long, expensive bug hunt, and what it was *(The shop grows)*
@@ -567,6 +568,7 @@ Two hashes guard this project: one over the rules and one over the balance table
 - **0274** - Found *(Winter's fourteen nights)*
 - **0275** - Found *(The worst night of the year, within budget)*
 - **0276** - Found *(The autoplayer plays a whole year)*
+- **0294** - What the captures found, and what was done *(Every new word in Portuguese)*
 
 ## What is not in it
 

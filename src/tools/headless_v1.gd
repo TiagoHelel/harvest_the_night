@@ -190,6 +190,7 @@ func _run() -> void:
 	_task_0291_saves()
 	_task_0292_options()
 	_task_0293_first_week()
+	_task_0294_names()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -7427,7 +7428,7 @@ func _task_0224_decoy() -> void:
 		said[locale] = Describe.defence(&"decoy")
 	I18n.use("en")
 	expect(Names.KEYS.get(&"decoy") == &"DEF_DECOY" and said["en"].contains("from up to %d tiles" % reach)
-		and said["pt_BR"].contains("%d ladrilhos" % reach) and said["pt_BR"].contains("ESPANTALHO-ISCA"),
+		and said["pt_BR"].contains("%d ladrilhos" % reach) and said["pt_BR"].begins_with("ESPANTALHO\n"),
 		"its name and its pull, in both languages", str(said))
 
 	# **Perf and the picture**: decoys in the swarm, the rebuild with them
@@ -13733,6 +13734,149 @@ func _write_bytes(path: String, bytes: PackedByteArray) -> void:
 	if f != null:
 		f.store_buffer(bytes)
 		f.close()
+
+
+## 0294 - every name in Portuguese. Every id of the crops, resources,
+## defences, enemies, buildings, recipes, tech nodes and fish has a
+## `Names.KEYS` key whose row reads in English and in Portuguese straight from
+## the table - no fallback, no key printed as itself - and whose Portuguese is
+## not its English unless `tools/i18n_check.py` marks it the same on purpose.
+## The plan's three renames hold, a counted resource has its plural, and
+## `Names.counted` and `Names.of_count` pick it.
+func _task_0294_names() -> void:
+	var table := _string_table()
+	var same := _same_in_both()
+	var ids: Dictionary = {}
+	for id in GameData.CROPS.keys():
+		ids[StringName(id)] = "crop"
+	for id in GameData.RESOURCES:
+		ids[StringName(id)] = "resource"
+	for id in GameData.DEFENCES.keys():
+		ids[StringName(id)] = "defence"
+	for id in GameData.ENEMIES.keys():
+		ids[StringName(id)] = "enemy"
+	for id in GameData.BUILDINGS.keys():
+		ids[StringName(id)] = "building"
+	for id in GameData.RECIPES.keys():
+		ids[StringName(id)] = "recipe"
+	for row in GameData.TECH_TREE:
+		ids[StringName((row as Dictionary)["id"])] = "tech node"
+	for id in GameData.FISH_SPECIES.keys():
+		ids[StringName(id)] = "fish"
+	var unnamed: Array = []
+	var empty: Array = []
+	var untranslated: Array = []
+	for id in GameData.sorted_names(ids.keys()):
+		if not Names.KEYS.has(id):
+			unnamed.append("%s %s" % [ids[id], id])
+			continue
+		var key := String(Names.KEYS[id])
+		var both: Array = table.get(key, ["", ""])
+		var en := String(both[0]).strip_edges()
+		var pt := String(both[1]).strip_edges()
+		if en == "" or pt == "" or en == key or pt == key:
+			empty.append(key)
+		elif en.to_lower() == pt.to_lower() and not same.has(key):
+			untranslated.append(key)
+	expect(ids.size() > 150 and unnamed.is_empty(),
+		"every crop, resource, defence, enemy, building, recipe, tech node and fish has a Names.KEYS key",
+		"%d ids; unnamed: %s" % [ids.size(), str(unnamed)])
+	expect(empty.is_empty(), "and its row reads in en and in pt_BR, straight from the table",
+		str(empty))
+	expect(untranslated.is_empty(),
+		"and its Portuguese is not its English, unless the glossary says the same on purpose",
+		str(untranslated))
+
+	# **The plan's names** - the three the MVP had otherwise.
+	expect(String((table.get("DEF_FLAME_TOWER", ["", ""]) as Array)[1]) == "lança-chamas"
+		and String((table.get("ENEMY_BREAKER", ["", ""]) as Array)[1]) == "destruidor"
+		and String((table.get("ENEMY_TANK", ["", ""]) as Array)[1]) == "tanque"
+		and String((table.get("ENEMY_TANK.other", ["", ""]) as Array)[1]) == "tanques",
+		"the flame tower is a lança-chamas, the breaker a destruidor and the tank a tanque")
+	expect(String((table.get("ITEM_TECH", ["", ""]) as Array)[0]) == "essence"
+		and String((table.get("ITEM_TECH", ["", ""]) as Array)[1]) == "essência",
+		"the tech points read essence / essência, the id still tech")
+
+	# **Counted names have plurals**: every resource and enemy a line counts.
+	var no_plural: Array = []
+	for id in GameData.RESOURCES + GameData.ENEMIES.keys():
+		var key := String(Names.KEYS.get(StringName(id), &""))
+		var other: Array = table.get(key + ".other", [])
+		if key == "" or other.size() < 2 or String(other[0]).strip_edges() == "" \
+				or String(other[1]).strip_edges() == "":
+			no_plural.append(key if key != "" else String(id))
+	expect(no_plural.is_empty(), "every resource and enemy has its .other row in both languages",
+		str(no_plural))
+
+	# **And the counting picks them**, in Portuguese and back.
+	var was := I18n.locale()
+	I18n.use("pt_BR")
+	var said := [Names.counted(GameData.CARROT, 3), Names.counted(GameData.CARROT, 1),
+		Names.counted(GameData.WOOD, 12), Names.counted(&"bones", 1),
+		Names.counted(&"bones", 4), Names.of_count(&"tank", 2),
+		Names.refusal([&"WHY_SHORT", {GameData.CARROT: 2, GameData.WOOD: 5}])]
+	I18n.use(was)
+	expect(said[0] == "3 cenouras" and said[1] == "1 cenoura" and said[2] == "12 madeira"
+		and said[3] == "1 osso" and said[4] == "4 ossos" and said[5] == "tanques"
+		and String(said[6]).contains("2 cenouras") and String(said[6]).contains("5 madeira"),
+		"3 cenouras, 1 cenoura, 12 madeira, 1 osso, 4 ossos, tanques - and a refusal counts its pile",
+		str(said))
+	expect(Names.of_count(&"gun_tower", 2) == Names.of(&"gun_tower"),
+		"a thing with no plural row reads its name at any count")
+
+	# **A cost's short letters are the language's** - "12f", not the "12i"
+	# of iron - and no two resources a build can cost share one in
+	# Portuguese; and the stall's tabs are words, not ids.
+	I18n.use("pt_BR")
+	var letters: Dictionary = {}
+	var clash: Array = []
+	for res in GameData.sorted_names(Names.SHORT_KEYS.keys()):
+		var short := Names.short_of(res)
+		if letters.has(short):
+			clash.append("%s and %s: %s" % [letters[short], res, short])
+		letters[short] = res
+	var pt_iron := Names.short_of(GameData.IRON)
+	var pt_tabs := [ShopPanel._tab_word(Shop.SELL), ShopPanel._tab_word(Shop.BUY)]
+	I18n.use(was)
+	expect(clash.is_empty() and pt_iron == "f" and Names.short_of(GameData.IRON) == "i",
+		"iron is f in Portuguese and i in English, and no two Portuguese letters clash",
+		str(clash))
+	expect(pt_tabs == ["VENDER", "COMPRAR"], "the stall's tabs read VENDER and COMPRAR",
+		str(pt_tabs))
+	_completed += 1
+
+
+## The string table as written: key -> [en, pt_BR], no fallback (task 0294).
+func _string_table() -> Dictionary:
+	var out := {}
+	var f := FileAccess.open("res://assets/locale/strings.csv", FileAccess.READ)
+	if f == null:
+		return out
+	var header := f.get_csv_line()
+	var en := header.find("en")
+	var pt := header.find("pt_BR")
+	while not f.eof_reached():
+		var row := f.get_csv_line()
+		if row.size() > maxi(en, pt) and row[0] != "":
+			out[row[0]] = [row[en], row[pt]]
+	f.close()
+	return out
+
+
+## The keys `tools/i18n_check.py` marks the same in both languages, read off
+## its `SAME_IN_BOTH = [...]` line.
+func _same_in_both() -> Array:
+	var source := FileAccess.get_file_as_string("res://tools/i18n_check.py")
+	var at := source.find("SAME_IN_BOTH = [")
+	if at < 0:
+		return []
+	var end := source.find("]", at)
+	var out: Array = []
+	for piece in source.substr(at + 16, end - at - 16).split(","):
+		var key := piece.strip_edges().trim_prefix("\"").trim_suffix("\"")
+		if key != "":
+			out.append(key)
+	return out
 
 
 ## 0292 - the options for the new controls. Five keys with their defaults

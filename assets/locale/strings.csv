@@ -1,4 +1,17 @@
 key,width,en,pt_BR
+ABBR_WOOD,12,w,m
+ABBR_STONE,12,s,p
+ABBR_IRON,12,i,f
+ABBR_COPPER,12,c,co
+ABBR_GOLD,12,g,ou
+ABBR_GUNPOWDER,12,g,v
+ABBR_OIL,12,o,ó
+ABBR_STRAW,12,s,pa
+ABBR_PUMPKIN,12,p,ab
+ABBR_GARLIC,12,g,al
+ABBR_SUNFLOWER,12,s,gi
+ABBR_SANDBAG,12,s,sa
+ABBR_FISH,12,f,pe
 ACC_CONTRAST,112,HIGH CONTRAST,ALTO CONTRASTE
 ACC_FLASHING,112,FLASHING,PISCA-PISCA
 ACC_FULL,62,FULL,TUDO
@@ -77,7 +90,7 @@ ACT_REMOVE,112,SELL,VENDER
 ACT_SKIP_NIGHT,112,SKIP THE NIGHT,PULAR A NOITE
 ACT_FARM_BELL,112,FARM BELL,SINO DA FAZENDA
 ACT_CALL_DOG,112,CALL THE DOG,CHAMAR O CÃO
-ACT_EMERGENCY_REPAIR,112,EMERGENCY REPAIR,CONSERTO URGENTE
+ACT_EMERGENCY_REPAIR,112,EMERGENCY REPAIR,CONSERTO DE EMERG.
 ACT_SLOT_1,112,SLOT 1,ATALHO 1
 ACT_SLOT_2,112,SLOT 2,ATALHO 2
 ACT_SLOT_3,112,SLOT 3,ATALHO 3
@@ -99,16 +112,16 @@ AUD_NOTE_MUTED,0,muted - the levels below are kept,mudo - os níveis abaixo fica
 AUD_NOTE_TRY,0,change a level to hear it,mude um nível para ouvir
 AUD_SFX,76,EFFECTS,EFEITOS
 BLD_GENERATOR,0,generator,gerador
-BLD_COPPER_SPRINKLER,0,copper sprinkler,aspersor de cobre
-BLD_IRON_SPRINKLER,0,iron sprinkler,aspersor de ferro
-BLD_GOLD_SPRINKLER,0,gold sprinkler,aspersor de ouro
-BLD_COOP,0,coop,galinheiro
-BLD_BARN,0,barn,celeiro
-BLD_KEG,0,keg,barril
-BLD_PRESERVES_JAR,0,preserves jar,pote de conserva
-BLD_DAIRY,0,dairy,laticínios
-BLD_LOOM,0,loom,tear
-BLD_MILL,0,mill,moinho
+BLD_COPPER_SPRINKLER,113,copper sprinkler,aspersor de cobre
+BLD_IRON_SPRINKLER,113,iron sprinkler,aspersor de ferro
+BLD_GOLD_SPRINKLER,113,gold sprinkler,aspersor de ouro
+BLD_COOP,113,coop,galinheiro
+BLD_BARN,113,barn,celeiro
+BLD_KEG,113,keg,barril
+BLD_PRESERVES_JAR,113,preserves jar,conserva
+BLD_DAIRY,113,dairy,laticínios
+BLD_LOOM,113,loom,tear
+BLD_MILL,113,mill,moinho
 FIX_SHIPPING_BIN,0,shipping bin,caixa de envio
 ANIMAL_CHICKEN,0,chicken,galinha
 ANIMAL_COW,0,cow,vaca
@@ -143,26 +156,26 @@ CURSOR_REPAIR,0,mend all: %s - %d of %d HP paid for,consertar tudo: %s - %d de %
 CURSOR_STRUCTURE,0,%s - %d/%d HP - level %d,%s - %d/%d de vida - nível %d
 DEF_AUTO_CROSSBOW,0,auto crossbow,besta automática
 DEF_BARRICADE,0,barricade,barricada
-DEF_BEEHIVE,0,beehive,colmeia
-DEF_CATAPULT,0,pumpkin catapult,catapulta de abóbora
-DEF_DECOY,0,decoy,espantalho-isca
-DEF_ELECTRIC_FENCE,0,electric fence,cerca elétrica
+DEF_BEEHIVE,113,beehive,colmeia
+DEF_CATAPULT,113,pumpkin catapult,catapulta de abóbora
+DEF_DECOY,113,decoy,espantalho
+DEF_ELECTRIC_FENCE,113,electric fence,cerca elétrica
 DEF_FENCE,0,fence,cerca
-DEF_FLAME_TOWER,0,flame tower,torre de fogo
-DEF_GARLIC_BRAID,0,garlic braid,réstia de alho
+DEF_FLAME_TOWER,0,flame tower,lança-chamas
+DEF_GARLIC_BRAID,113,garlic braid,réstia de alho
 DEF_GUN_TOWER,0,gun tower,torre de tiro
 DEF_MINE,0,mine,mina
 DEF_MORTAR,0,mortar,morteiro
-DEF_SANDBAG_WALL,0,sandbag wall,sacos de areia
-DEF_SEARCHLIGHT,0,searchlight,holofote
+DEF_SANDBAG_WALL,113,sandbag wall,sacos de areia
+DEF_SEARCHLIGHT,113,searchlight,holofote
 DEF_WALL,0,wall,muro
 DEF_WALL_2,0,hardwood wall,muro de madeira de lei
-DEF_ZOMBIE_BAIT,0,zombie bait,isca de zumbi
+DEF_ZOMBIE_BAIT,113,zombie bait,isca de zumbi
 DESC_AFTER,0,after %s,depois de %s
 DESC_AMMO,0,loaded into towers,carregada nas torres
 DESC_AMOUNT,0,%d %s,%d %s
 DESC_ARMOUR,0,shrugs off %d a hit,ignora %d por golpe
-DESC_AT_THE,0,at the %s,na %s
+DESC_AT_THE,0,at the %s,local: %s
 DESC_BLOCKS,0,things walk round it if they can,eles desviam disso se der
 DESC_COSTS,0,costs %s,custa %s
 DESC_DAMAGE,0,%d %s damage,%d de dano %s
@@ -216,7 +229,7 @@ DESC_TILE_EVERY,0,a tile every %s,um ladrilho a cada %s
 DESC_WINDS_UP,0,winds up before it swings,toma impulso antes de bater
 DESC_WORTH,0,worth $%s,vale $%s
 DHUD_AMMO,0,AMMO  %s,MUNIÇÃO  %s
-DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  nenhuma precisa
+DHUD_AMMO_NONE,0,AMMO  none needed,MUNIÇÃO  não precisa
 DHUD_AMMO_ONE,0,%s %d,%s %d
 DHUD_BAIT,0,BAIT  %s x%d  (%s/%s),ISCA  %s x%d  (%s/%s)
 DHUD_BAIT_NONE,0,BAIT  none  (%s/%s),ISCA  nenhuma  (%s/%s)
@@ -248,8 +261,8 @@ DMG_EXPLOSIVE,0,explosive,explosivo
 DMG_FIRE,0,fire,fogo
 DMG_IMPACT,0,impact,impacto
 DMG_STING,0,sting,ferrão
-ENEMY_BREAKER,0,breaker,quebrador
-ENEMY_BREAKER.other,0,breakers,quebradores
+ENEMY_BREAKER,0,breaker,destruidor
+ENEMY_BREAKER.other,0,breakers,destruidores
 ENEMY_CROW,0,crow,corvo
 ENEMY_CROW.other,0,crows,corvos
 ENEMY_DIGGER,0,digger,escavador
@@ -260,10 +273,10 @@ ENEMY_GIANT,0,giant,gigante
 ENEMY_GIANT.other,0,giants,gigantes
 ENEMY_HARVESTER,0,harvester,colheitadeira
 ENEMY_HARVESTER.other,0,harvesters,colheitadeiras
-BOSS_INTRO_GIANT,0,the giant is coming,o gigante está vindo
-BOSS_INTRO_HARVESTER,0,the harvester is coming,a colheitadeira está vindo
-BOSS_INTRO_SCARECROW_KING,0,the scarecrow king is coming,o rei espantalho está vindo
-BOSS_INTRO_WINTER_LORD,0,the winter lord is coming,o senhor do inverno está vindo
+BOSS_INTRO_GIANT,240,the giant is coming,o gigante está vindo
+BOSS_INTRO_HARVESTER,240,the harvester is coming,a colheitadeira está vindo
+BOSS_INTRO_SCARECROW_KING,240,the scarecrow king is coming,o rei espantalho está vindo
+BOSS_INTRO_WINTER_LORD,240,the winter lord is coming,o senhor do inverno está vindo
 ENEMY_RAT,0,rat,rato
 ENEMY_RAT.other,0,rats,ratos
 ENEMY_RUNNER,0,runner,corredor
@@ -272,8 +285,8 @@ ENEMY_SCARECROW_KING,0,scarecrow king,rei espantalho
 ENEMY_SCARECROW_KING.other,0,scarecrow kings,reis espantalhos
 ENEMY_SPITTER,0,spitter,cuspidor
 ENEMY_SPITTER.other,0,spitters,cuspidores
-ENEMY_TANK,0,tank,brutamontes
-ENEMY_TANK.other,0,tanks,brutamontes
+ENEMY_TANK,0,tank,tanque
+ENEMY_TANK.other,0,tanks,tanques
 ENEMY_WRAITH,0,wraith,assombração
 ENEMY_WRAITH.other,0,wraiths,assombrações
 ENEMY_WINTER_LORD,0,winter lord,senhor do inverno
@@ -281,7 +294,7 @@ ENEMY_WINTER_LORD.other,0,winter lords,senhores do inverno
 ENEMY_WALKER,0,walker,andarilho
 ENEMY_WALKER.other,0,walkers,andarilhos
 FCAST_BLOOD_MOON,142,BLOOD MOON,LUA DE SANGUE
-FCAST_BOSS,142,%s IS COMING,%s ESTÁ VINDO
+FCAST_BOSS,142,%s IS COMING,VEM AÍ: %s
 FCAST_CALM,142,A CALM NIGHT,NOITE CALMA
 FCAST_EVERY_SIDE,142,from every side,por todos os lados
 FCAST_FOG,142,FOG,NEBLINA
@@ -293,8 +306,8 @@ FCAST_WAVES,142,%d WAVE,%d ONDA
 FCAST_WAVES.other,142,%d WAVES,%d ONDAS
 GAME_LANGUAGE,86,LANGUAGE,IDIOMA
 GAME_NIGHT_SPEED,200,NIGHT SPEED,VELOCIDADE DA NOITE
-HOTBAR_KITS,0,x%d,x%d
-HOTBAR_MONEY,0,$%d,$%d
+HOTBAR_KITS,40,x%d,x%d
+HOTBAR_MONEY,40,$%d,$%d
 HOTBAR_PAGE,54,%d/%d,%d/%d
 HOTBAR_PAGE_NEXT,12,>,>
 HOTBAR_PAGE_PREV,12,<,<
@@ -302,61 +315,115 @@ HOTBAR_LEFT,0,%d/night,%d/noite
 INV_TITLE,0,WHAT YOU HAVE,O QUE VOCÊ TEM
 INV_WORTH,0,all of it sells for  $%d,tudo isso vale  $%d
 ITEM_CARROT,0,carrot,cenoura
+ITEM_CARROT.other,0,carrots,cenouras
 ITEM_CORN,0,corn,milho
+ITEM_CORN.other,0,corn,milho
 ITEM_ENERGY,0,energy,energia
+ITEM_ENERGY.other,0,energy,energia
 ITEM_FISH,0,fish,peixe
-ITEM_CARP,0,carp,carpa
-ITEM_PERCH,0,perch,perca
-ITEM_CATFISH,0,catfish,bagre
-ITEM_TILAPIA,0,tilapia,tilápia
-ITEM_SUNFISH,0,sunfish,peixe-sol
-ITEM_BREAM,0,bream,brema
-ITEM_TROUT,0,trout,truta
-ITEM_PIKE,0,pike,lúcio
-ITEM_EEL,0,eel,enguia
-ITEM_DORADO,0,dorado,dourado
-ITEM_SALMON,0,salmon,salmão
-ITEM_STURGEON,0,sturgeon,esturjão
-ITEM_OLD_CATFISH,0,Old Catfish,Velho Bagre
-ITEM_GOLDEN_QUEEN,0,Golden Queen,Rainha Dourada
-ITEM_GHOST_PIKE,0,Ghost Pike,Lúcio Fantasma
-ITEM_ICE_STURGEON,0,Ice Sturgeon,Esturjão de Gelo
-ITEM_WORM,0,worm,minhoca
-ITEM_BAIT,0,fish bait,isca de peixe
-ITEM_STRAW,0,straw,palha
-ITEM_HAY,0,hay,feno
-ITEM_EGG,0,egg,ovo
-ITEM_MILK,0,milk,leite
-ITEM_WOOL,0,wool,lã
-ITEM_TRUFFLE,0,truffle,trufa
-ITEM_WINE,0,wine,vinho
-ITEM_JUICE,0,juice,suco
-ITEM_JELLY,0,jelly,geleia
-ITEM_PICKLES,0,pickles,picles
-ITEM_CHEESE,0,cheese,queijo
-ITEM_BUTTER,0,butter,manteiga
-ITEM_CLOTH,0,cloth,tecido
-ITEM_SANDBAG,0,sandbag,saco de areia
-ITEM_FLOUR,0,flour,farinha
-ITEM_BREAD,0,bread,pão
-ITEM_SUGAR,0,sugar,açúcar
+ITEM_FISH.other,0,fish,peixes
+ITEM_CARP,156,carp,carpa
+ITEM_CARP.other,0,carp,carpas
+ITEM_PERCH,156,perch,perca
+ITEM_PERCH.other,0,perch,percas
+ITEM_CATFISH,156,catfish,bagre
+ITEM_CATFISH.other,0,catfish,bagres
+ITEM_TILAPIA,156,tilapia,tilápia
+ITEM_TILAPIA.other,0,tilapia,tilápias
+ITEM_SUNFISH,156,sunfish,peixe-sol
+ITEM_SUNFISH.other,0,sunfish,peixes-sol
+ITEM_BREAM,156,bream,brema
+ITEM_BREAM.other,0,bream,bremas
+ITEM_TROUT,156,trout,truta
+ITEM_TROUT.other,0,trout,trutas
+ITEM_PIKE,156,pike,lúcio
+ITEM_PIKE.other,0,pike,lúcios
+ITEM_EEL,156,eel,enguia
+ITEM_EEL.other,0,eels,enguias
+ITEM_DORADO,156,dorado,dourado
+ITEM_DORADO.other,0,dorado,dourados
+ITEM_SALMON,156,salmon,salmão
+ITEM_SALMON.other,0,salmon,salmões
+ITEM_STURGEON,156,sturgeon,esturjão
+ITEM_STURGEON.other,0,sturgeon,esturjões
+ITEM_OLD_CATFISH,156,Old Catfish,Velho Bagre
+ITEM_OLD_CATFISH.other,0,Old Catfish,Velhos Bagres
+ITEM_GOLDEN_QUEEN,156,Golden Queen,Rainha Dourada
+ITEM_GOLDEN_QUEEN.other,0,Golden Queens,Rainhas Douradas
+ITEM_GHOST_PIKE,156,Ghost Pike,Lúcio Fantasma
+ITEM_GHOST_PIKE.other,0,Ghost Pike,Lúcios Fantasmas
+ITEM_ICE_STURGEON,156,Ice Sturgeon,Esturjão de Gelo
+ITEM_ICE_STURGEON.other,0,Ice Sturgeon,Esturjões de Gelo
+ITEM_WORM,156,worm,minhoca
+ITEM_WORM.other,0,worms,minhocas
+ITEM_BAIT,156,fish bait,isca de peixe
+ITEM_BAIT.other,0,fish bait,iscas de peixe
+ITEM_STRAW,156,straw,palha
+ITEM_STRAW.other,0,straw,palha
+ITEM_HAY,156,hay,feno
+ITEM_HAY.other,0,hay,feno
+ITEM_EGG,156,egg,ovo
+ITEM_EGG.other,0,eggs,ovos
+ITEM_MILK,156,milk,leite
+ITEM_MILK.other,0,milk,leite
+ITEM_WOOL,156,wool,lã
+ITEM_WOOL.other,0,wool,lã
+ITEM_TRUFFLE,156,truffle,trufa
+ITEM_TRUFFLE.other,0,truffles,trufas
+ITEM_WINE,156,wine,vinho
+ITEM_WINE.other,0,wine,vinhos
+ITEM_JUICE,156,juice,suco
+ITEM_JUICE.other,0,juice,sucos
+ITEM_JELLY,156,jelly,geleia
+ITEM_JELLY.other,0,jelly,geleias
+ITEM_PICKLES,156,pickles,picles
+ITEM_PICKLES.other,0,pickles,picles
+ITEM_CHEESE,156,cheese,queijo
+ITEM_CHEESE.other,0,cheese,queijos
+ITEM_BUTTER,156,butter,manteiga
+ITEM_BUTTER.other,0,butter,manteiga
+ITEM_CLOTH,156,cloth,tecido
+ITEM_CLOTH.other,0,cloth,tecido
+ITEM_SANDBAG,156,sandbag,saco de areia
+ITEM_SANDBAG.other,0,sandbags,sacos de areia
+ITEM_FLOUR,156,flour,farinha
+ITEM_FLOUR.other,0,flour,farinha
+ITEM_BREAD,156,bread,pão
+ITEM_BREAD.other,0,bread,pães
+ITEM_SUGAR,156,sugar,açúcar
+ITEM_SUGAR.other,0,sugar,açúcar
 ITEM_FOOD,0,food,comida
+ITEM_FOOD.other,0,food,comida
 ITEM_GUNPOWDER,0,gunpowder,pólvora
+ITEM_GUNPOWDER.other,0,gunpowder,pólvora
 ITEM_INCENDIARY,0,incendiary,incendiária
+ITEM_INCENDIARY.other,0,incendiary,incendiárias
 ITEM_IRON,0,iron,ferro
+ITEM_IRON.other,0,iron,ferro
 ITEM_MEAT,0,meat,carne
+ITEM_MEAT.other,0,meat,carne
 ITEM_MONEY,0,money,dinheiro
+ITEM_MONEY.other,0,money,dinheiro
 ITEM_OIL,0,oil,óleo
+ITEM_OIL.other,0,oil,óleo
 ITEM_STONE,0,stone,pedra
+ITEM_STONE.other,0,stone,pedras
 ITEM_TECH,0,essence,essência
-ITEM_BONES,0,bones,ossos
-ITEM_BONE_MEAL,0,bone meal,farinha de osso
-ITEM_MOON_STONE,0,moon stone,pedra da lua
+ITEM_TECH.other,0,essence,essência
+ITEM_BONES,156,bones,ossos
+ITEM_BONES.one,0,bone,osso
+ITEM_BONES.other,0,bones,ossos
+ITEM_BONE_MEAL,111,bone meal,farinha de osso
+ITEM_BONE_MEAL.other,0,bone meal,farinha de osso
+ITEM_MOON_STONE,156,moon stone,pedra da lua
+ITEM_MOON_STONE.other,0,moon stones,pedras da lua
 ITEM_WHEAT,0,wheat,trigo
+ITEM_WHEAT.other,0,wheat,trigo
 ITEM_WOOD,0,wood,madeira
-LOG_CRAFT_DONE,0,%s finished,%s ficou pronto
-LOG_CROP_EATEN,0,a crow ate the %s,um corvo comeu %s
-LOG_CROP_READY,0,%s is ready,%s está pronto
+ITEM_WOOD.other,0,wood,madeira
+LOG_CRAFT_DONE,0,%s finished,concluído: %s
+LOG_CROP_EATEN,0,a crow ate the %s,um corvo comeu um pé de %s
+LOG_CROP_READY,0,%s is ready,dá para colher: %s
 LOG_DAWN,0,dawn - %d walked off,amanheceu - %d foram embora
 LOG_SHIPPED,0,the shipping bin paid $%d,a caixa de envio pagou $%d
 LOG_HOUSE_TIER,0,the house is now %s,a casa agora é %s
@@ -365,7 +432,7 @@ LOG_NIGHT_BEGAN,0,night %d begins,a noite %d começa
 LOG_NIGHT_LOST,0,night %d lost,noite %d perdida
 LOG_NIGHT_WON,0,night %d survived,noite %d vencida
 LOG_PASSED_OUT,0,passed out at 02:00 - a short night to build,desmaiou às 02:00 - pouco tempo para construir
-LOG_STRUCTURE_LOST,0,%s destroyed,%s destruído
+LOG_STRUCTURE_LOST,0,%s destroyed,caiu: %s
 LOG_STRUCTURE_WRECKED,0,%s wrecked - mend it by day,%s arrasado - conserte de dia
 LOG_TITLE,0,WHAT HAPPENED,O QUE ACONTECEU
 LOG_WAVE_BEGAN,0,wave %d of %d: %s,onda %d de %d: %s
@@ -374,11 +441,11 @@ NHUD_BOSS_MANY,0,%s x%d,%s x%d
 NHUD_DAWN,110,DAWN %d:%02d,AMANHECER %d:%02d
 NHUD_FLARE,34,FLARE,SINAL
 NHUD_FLARE_CHARGE,34,%d%%,%d%%
-NHUD_HINT_AIM,0,%s: fire the flare,%s: soltar o sinal
-NHUD_HINT_PLACE,0,%s: place %s,%s: colocar %s
-NHUD_HINT_REPAIR,0,%s: mend %s,%s: consertar %s
-NHUD_HINT_SELL,0,%s: sell %s,%s: vender %s
-NHUD_HINT_UPGRADE,0,%s: upgrade %s,%s: melhorar %s
+NHUD_HINT_AIM,256,%s: fire the flare,%s: soltar o sinalizador
+NHUD_HINT_PLACE,256,%s: place %s,%s: colocar %s
+NHUD_HINT_REPAIR,256,%s: mend %s,%s: consertar %s
+NHUD_HINT_SELL,256,%s: sell %s,%s: vender %s
+NHUD_HINT_UPGRADE,256,%s: upgrade %s,%s: melhorar %s
 NHUD_HOUSE,120,HOUSE %d/%d,CASA %d/%d
 NHUD_INCOMING,0,WAVE %d INCOMING  %ds,ONDA %d CHEGANDO  %ds
 NHUD_LEFT,110,%d LEFT,FALTAM %d
@@ -387,9 +454,9 @@ NHUD_SKIP,46,SKIP,PULAR
 NHUD_FARM_BELL,26,BELL,SINO
 NHUD_CALL_DOG,26,DOG,CÃO
 NHUD_EMERGENCY_REPAIR,26,MEND,KIT
-NHUD_HINT_FARM_BELL,0,%s: ring the farm bell,%s: tocar o sino
-NHUD_HINT_CALL_DOG,0,%s: send the dog here,%s: mandar o cão aqui
-NHUD_HINT_EMERGENCY_REPAIR,0,%s: mend it at once,%s: consertar já
+NHUD_HINT_FARM_BELL,256,%s: ring the farm bell,%s: tocar o sino
+NHUD_HINT_CALL_DOG,256,%s: send the dog here,%s: mandar o cão aqui
+NHUD_HINT_EMERGENCY_REPAIR,256,%s: mend it at once,%s: consertar já
 POWER_FARM_BELL,0,farm bell,sino da fazenda
 POWER_CALL_DOG,0,call the dog,chamar o cão
 POWER_EMERGENCY_REPAIR,0,emergency repair,conserto de emergência
@@ -400,7 +467,7 @@ POWER_WAITS,0,comes back in %s,volta em %s
 NHUD_SKIP_TIP,0,run the rest of the night now,rodar o resto da noite agora
 NHUD_SPEED,18,%dx,%dx
 NHUD_START,126,START,COMEÇAR
-NHUD_START_IN,126,START %d,AGORA %d
+NHUD_START_IN,126,START %d,COMEÇAR %d
 NHUD_WAVE,110,WAVE %d/%d,ONDA %d/%d
 OPT_BACK,0,BACK,VOLTAR
 OPT_EMPTY,0,nothing to set yet,nada para ajustar ainda
@@ -484,7 +551,7 @@ RES_ESSENCE_HOUSE_UNTOUCHED,0,house untouched,casa intacta
 RES_ESSENCE_NOTHING_LOST,0,nothing lost,nada perdido
 RES_ESSENCE_NOT_ONE_GOT_THROUGH,0,nobody through,ninguém passou
 RES_ESSENCE_PART,0,%s +%d,%s +%d
-RES_FULL_MOON,0,FULL MOON BONUS,BÔNUS DE LUA CHEIA
+RES_FULL_MOON,142,FULL MOON BONUS,BÔNUS DE LUA CHEIA
 RES_GAINED,0,+%d %s,+%d %s
 RES_GET_UP,190,GET UP,LEVANTAR
 RES_GIFT,200,A GIFT ON THE PORCH,UM PRESENTE NA VARANDA
@@ -508,7 +575,7 @@ RES_PAID,0,PAID,PAGO
 RES_PASSED_OUT,200,you passed out at %02d:%02d,você desmaiou às %02d:%02d
 RES_PLAY_ON,0,CARRY ON INTO YEAR %d,SEGUIR PARA O ANO %d
 RES_PLUS,0,+%d,+%d
-RES_BIN,0,the shipping bin pays $%d,a caixa de envio paga $%d
+RES_BIN,206,the shipping bin pays $%d,a caixa de envio paga $%d
 RES_RUN_LINE,0,"%d days lived, %d nights won","%d dias vividos, %d noites vencidas"
 RES_STRUCTURES_LOST,0,structures lost,estruturas perdidas
 RES_SURVIVED,0,SURVIVED,VENCIDA
@@ -532,12 +599,12 @@ SAVE_NO_MIGRATION,0,this version cannot bring that run forward,esta versão não
 SAVE_TOO_SHORT,0,the file is too small to be a save,o arquivo é pequeno demais para ser um save
 SAVE_TRUNCATED,0,the file was cut short,o arquivo foi cortado pela metade
 SAVE_UNREADABLE,0,THE SAVED RUN COULD NOT BE READ,A PARTIDA SALVA NÃO PÔDE SER LIDA
-SEASON_AUTUMN,0,AUTUMN,OUTONO
-SEASON_SPRING,0,SPRING,PRIMAVERA
-SEASON_SUMMER,0,SUMMER,VERÃO
-SEASON_WINTER,0,WINTER,INVERNO
+SEASON_AUTUMN,54,AUTUMN,OUTONO
+SEASON_SPRING,54,SPRING,PRIMAVERA
+SEASON_SUMMER,54,SUMMER,VERÃO
+SEASON_WINTER,54,WINTER,INVERNO
 SHOP_ALL,0,all,tudo
-SHOP_ANIMALS,0,ANIMALS,ANIMAIS
+SHOP_ANIMALS,276,ANIMALS,ANIMAIS
 SHOP_BUY,0,BUY,COMPRAR
 SHOP_BUY_ROW,0,%s  @ $%d   %d left,%s  @ $%d   %d restam
 SHOP_FIVE,0,5,5
@@ -550,12 +617,12 @@ SHOP_SEED_ROW,0,%s x%d  %dd  $%d/season,%s x%d  %dd  $%d/estação
 SHOP_SELL,0,SELL,VENDER
 SHOP_SELL_ROW,0,%s  x%d  @ $%d,%s  x%d  @ $%d
 SHOP_SOW,0,sow,plantar
-SHOP_TITLE,0,MARKET,MERCADO
-SHOP_TOOLS,0,TOOLS,FERRAMENTAS
-SHIP_TITLE,0,SHIPPING BIN,CAIXA DE ENVIO
-SHIP_HEADING,0,PUT IN - PAID AT DAWN,COLOCAR - PAGO DE MANHÃ
-SHIP_DUE,0,in the bin: $%d tomorrow,na caixa: $%d amanhã
-SHIP_HINT,0,esc to close the lid,esc para fechar a tampa
+SHOP_TITLE,0,MARKET,BANCA
+SHOP_TOOLS,276,TOOLS,FERRAMENTAS
+SHIP_TITLE,278,SHIPPING BIN,CAIXA DE ENVIO
+SHIP_HEADING,276,PUT IN - PAID AT DAWN,COLOCAR - PAGO DE MANHÃ
+SHIP_DUE,278,in the bin: $%d tomorrow,na caixa: $%d amanhã
+SHIP_HINT,278,esc to close the lid,esc para fechar a tampa
 SIDE_EAST,0,EAST,LESTE
 SIDE_NORTH,0,NORTH,NORTE
 SIDE_SOUTH,0,SOUTH,SUL
@@ -581,18 +648,18 @@ STATS_TITLE,0,RECORDS,REGISTROS
 TECHNOTE_A_FULL_LARDER,0,mending costs two fifths less,consertar custa dois quintos a menos
 TECHNOTE_A_NAME_AT_MARKET,0,everything you sell fetches a quarter more,tudo que você vende rende um quarto a mais
 TECHNOTE_A_SECOND_FLARE,0,the flare comes back in a little over half the time,o sinalizador volta em pouco mais da metade do tempo
-TECHNOTE_KEEN_EDGES,0,chopping and mining speed +25%,velocidade para cortar e minerar +25%
-TECHNOTE_A_FULL_LEDGER,0,everything you sell fetches two fifths more,tudo que você vende rende dois quintos a mais
-TECHNOTE_MASTER_HANDS,0,every bench and machine works seven tenths faster,toda bancada e máquina trabalha sete décimos mais rápido
-TECHNOTE_HEAVY_SHOT,0,every tower hits two fifths harder,toda torre bate dois quintos mais forte
-TECHNOTE_TALL_MOUNTS,0,every tower reaches two tiles further,toda torre alcança dois ladrilhos a mais
-TECHNOTE_GREASED_WORKS,0,every tower reloads a third sooner,toda torre recarrega um terço mais rápido
-TECHNOTE_BRICK_FOOTINGS,0,the house takes eighty more before it falls,a casa aguenta oitenta a mais antes de cair
-TECHNOTE_CHEAP_TIMBER,0,mending costs three fifths less,consertar custa três quintos a menos
-TECHNOTE_A_STAKE_PILE,0,six more barricades a night,mais seis barricadas por noite
-TECHNOTE_A_FARM_BELL,0,the farm bell: every zombie on the farm stops for two seconds,o sino da fazenda: todo zumbi da fazenda para por dois segundos
-TECHNOTE_A_GOOD_DOG,0,the dog runs out at night and bites the zombie nearest the cursor,o cão sai correndo à noite e morde o zumbi mais perto do cursor
-TECHNOTE_AN_EMERGENCY_KIT,0,an emergency repair: a structure gets back three tenths at once,um conserto de emergência: uma estrutura recupera três décimos na hora
+TECHNOTE_KEEN_EDGES,371,chopping and mining speed +25%,velocidade para cortar e minerar +25%
+TECHNOTE_A_FULL_LEDGER,355,everything you sell fetches two fifths more,tudo que você vende rende dois quintos a mais
+TECHNOTE_MASTER_HANDS,366,every bench and machine works seven tenths faster,toda bancada e máquina trabalha sete décimos mais rápido
+TECHNOTE_HEAVY_SHOT,384,every tower hits two fifths harder,toda torre bate dois quintos mais forte
+TECHNOTE_TALL_MOUNTS,383,every tower reaches two tiles further,toda torre alcança dois ladrilhos a mais
+TECHNOTE_GREASED_WORKS,328,every tower reloads a third sooner,toda torre recarrega um terço mais rápido
+TECHNOTE_BRICK_FOOTINGS,370,the house takes eighty more before it falls,a casa aguenta oitenta a mais antes de cair
+TECHNOTE_CHEAP_TIMBER,367,mending costs three fifths less,consertar custa três quintos a menos
+TECHNOTE_A_STAKE_PILE,357,six more barricades a night,mais seis barricadas por noite
+TECHNOTE_A_FARM_BELL,361,the farm bell: every zombie on the farm stops for two seconds,o sino da fazenda: todo zumbi da fazenda para por dois segundos
+TECHNOTE_A_GOOD_DOG,388,the dog runs out at night and bites the zombie nearest the cursor,o cão sai correndo à noite e morde o zumbi mais perto do cursor
+TECHNOTE_AN_EMERGENCY_KIT,353,an emergency repair: a structure gets back three tenths at once,conserto de emergência: três décimos da vida de volta na hora
 TECHNOTE_A_STANDING_ORDER,0,towers cost a quarter less to build,as torres custam um quarto a menos
 TECHNOTE_FULL_CANS,0,the watering can holds two more,o regador leva dois a mais
 TECHNOTE_LONG_BARRELS,0,every tower reaches one tile further,toda torre alcança um ladrilho a mais
@@ -605,18 +672,18 @@ TECHNOTE_TRUE_SIGHTS,0,every tower hits a fifth harder,toda torre bate um quinto
 TECH_A_FULL_LARDER,0,a full larder,despensa cheia
 TECH_A_NAME_AT_MARKET,0,a name at market,nome na feira
 TECH_A_SECOND_FLARE,0,a second flare,um segundo sinalizador
-TECH_KEEN_EDGES,0,keen edges,gumes afiados
-TECH_A_FULL_LEDGER,0,a full ledger,livro-caixa cheio
-TECH_MASTER_HANDS,0,master hands,mãos de mestre
-TECH_HEAVY_SHOT,0,heavy shot,tiro pesado
-TECH_TALL_MOUNTS,0,tall mounts,bases altas
-TECH_GREASED_WORKS,0,greased works,engrenagem engraxada
-TECH_BRICK_FOOTINGS,0,brick footings,base de tijolo
-TECH_CHEAP_TIMBER,0,cheap timber,madeira barata
-TECH_A_STAKE_PILE,0,a stake pile,pilha de estacas
-TECH_A_FARM_BELL,0,a farm bell,sino na fazenda
-TECH_A_GOOD_DOG,0,a good dog,um bom cão
-TECH_AN_EMERGENCY_KIT,0,an emergency kit,kit de emergência
+TECH_KEEN_EDGES,118,keen edges,gumes afiados
+TECH_A_FULL_LEDGER,118,a full ledger,livro-caixa cheio
+TECH_MASTER_HANDS,118,master hands,mãos de mestre
+TECH_HEAVY_SHOT,118,heavy shot,tiro pesado
+TECH_TALL_MOUNTS,118,tall mounts,bases altas
+TECH_GREASED_WORKS,118,greased works,engrenagem engraxada
+TECH_BRICK_FOOTINGS,118,brick footings,base de tijolo
+TECH_CHEAP_TIMBER,118,cheap timber,madeira barata
+TECH_A_STAKE_PILE,118,a stake pile,pilha de estacas
+TECH_A_FARM_BELL,118,a farm bell,sino na fazenda
+TECH_A_GOOD_DOG,118,a good dog,um bom cão
+TECH_AN_EMERGENCY_KIT,118,an emergency kit,kit de emergência
 TECH_A_STANDING_ORDER,0,a standing order,encomenda fixa
 TECH_BRANCH_DEFENCE,0,DEFENCE,DEFESA
 TECH_BRANCH_PRODUCTION,0,PRODUCTION,PRODUÇÃO
@@ -625,7 +692,7 @@ TECH_FULL_CANS,0,full cans,regadores cheios
 TECH_HELD,0,%d essence,%d de essência
 TECH_HINT,0,T or ESC to close,T ou ESC para fechar
 TECH_TRADE,140,TRADE A MOON STONE (%d),TROCAR PEDRA DA LUA (%d)
-TECH_TRADE_NOTE,0,a moon stone for %d essence,uma pedra da lua por %d de essência
+TECH_TRADE_NOTE,456,a moon stone for %d essence,uma pedra da lua por %d de essência
 TECH_LONG_BARRELS,0,long barrels,canos longos
 TECH_NODE,0,%s   %d,%s   %d
 TECH_NOTE,0,%s - %s,%s - %s
@@ -712,8 +779,8 @@ WORK_AWAY_ONE,0,%d %s,%d %s
 WORK_IDLE,0,idle,parada
 WORK_MAKE,0,- MAKE,- FAZER
 WORK_MAKING,0,%s  %.1fs,%s  %.1fs
-WORK_AGING,0,%s  %d day left,%s  falta %d dia
-WORK_AGING.other,0,%s  %d days left,%s  faltam %d dias
+WORK_AGING,130,%s  %d day left,%s  falta %d dia
+WORK_AGING.other,130,%s  %d days left,%s  faltam %d dias
 WORK_QUEUED,0,%d. %s,%d. %s
 WORK_QUEUED_RUNNING,0,%d. %s  (running),%d. %s  (fazendo)
 WORK_ROOM,0,  %d slot free,  %d lugar livre
@@ -724,25 +791,34 @@ HOUSE_EXIT_HINT,456,Walk to the door or %s near it to leave.,Caminhe ate a porta
 HOUSE_BED_HINT,456,%s: go to bed,%s: ir dormir
 HOUSE_ENTER_HINT,240,%s: enter the farmhouse,%s: entrar na casa
 END_TITLE,300,YOU SURVIVED A YEAR,VOCÊ SOBREVIVEU UM ANO
-END_BOSSES,0,bosses down,chefes derrotados
+END_BOSSES,150,bosses down,chefes derrotados
 CRED_GAME,300,HARVEST THE NIGHT,HARVEST THE NIGHT
 CRED_DESIGN,300,A farm built one night at a time,Uma fazenda construída noite após noite
 CRED_ENGINE,300,Made with Godot Engine,Feito com Godot Engine
 CRED_ART,300,Art from approved Codex packs,Arte de pacotes Codex aprovados
 CRED_THANKS,300,Thank you for keeping the farm alive,Obrigado por manter a fazenda viva
 CRED_SKIP,300,CONTINUE / SKIP CREDITS,CONTINUAR / PULAR CRÉDITOS
-ITEM_POTATO,0,potato,batata
-ITEM_GARLIC,0,garlic,alho
-ITEM_STRAWBERRY,0,strawberry,morango
-ITEM_PEPPER,0,pepper,pimenta
-ITEM_SUNFLOWER,0,sunflower,girassol
-ITEM_MELON,0,melon,melancia
-ITEM_PUMPKIN,0,pumpkin,abóbora
-ITEM_GRAPE,0,grape,uva
-ITEM_BEET,0,beet,beterraba
-SEED_PREVIOUS,0,PREV,ANTERIOR
-SEED_NEXT,0,NEXT,PRÓXIMA
-SEED_PAGE,0,%d / %d,%d / %d
+ITEM_POTATO,90,potato,batata
+ITEM_POTATO.other,0,potatoes,batatas
+ITEM_GARLIC,90,garlic,alho
+ITEM_GARLIC.other,0,garlic,alhos
+ITEM_STRAWBERRY,90,strawberry,morango
+ITEM_STRAWBERRY.other,0,strawberries,morangos
+ITEM_PEPPER,90,pepper,pimenta
+ITEM_PEPPER.other,0,peppers,pimentas
+ITEM_SUNFLOWER,90,sunflower,girassol
+ITEM_SUNFLOWER.other,0,sunflowers,girassóis
+ITEM_MELON,90,melon,melancia
+ITEM_MELON.other,0,melons,melancias
+ITEM_PUMPKIN,90,pumpkin,abóbora
+ITEM_PUMPKIN.other,0,pumpkins,abóboras
+ITEM_GRAPE,90,grape,uva
+ITEM_GRAPE.other,0,grapes,uvas
+ITEM_BEET,90,beet,beterraba
+ITEM_BEET.other,0,beets,beterrabas
+SEED_PREVIOUS,47,PREV,ANTERIOR
+SEED_NEXT,47,NEXT,PRÓXIMA
+SEED_PAGE,37,%d / %d,%d / %d
 INV_GROUP_MATERIALS,112,MATERIALS,MATERIAIS
 INV_GROUP_CROPS,112,CROPS,CULTURAS
 INV_GROUP_SEEDS,112,SEEDS,SEMENTES
@@ -758,18 +834,30 @@ INV_PAGE,300,%s - %d/%d,%s - %d/%d
 INV_PREVIOUS,140,< %s,< %s
 INV_NEXT,140,%s >,%s >
 INV_PRICE,64,$%d each,$%d cada
-ITEM_CARROT_SEED,0,carrot seed,semente de cenoura
-ITEM_POTATO_SEED,0,potato seed,semente de batata
-ITEM_GARLIC_SEED,0,garlic seed,semente de alho
-ITEM_STRAWBERRY_SEED,0,strawberry seed,semente de morango
-ITEM_CORN_SEED,0,corn seed,semente de milho
-ITEM_PEPPER_SEED,0,pepper seed,semente de pimenta
-ITEM_SUNFLOWER_SEED,0,sunflower seed,semente de girassol
-ITEM_MELON_SEED,0,melon seed,semente de melancia
-ITEM_WHEAT_SEED,0,wheat seed,semente de trigo
-ITEM_PUMPKIN_SEED,0,pumpkin seed,semente de abóbora
-ITEM_GRAPE_SEED,0,grape seed,semente de uva
-ITEM_BEET_SEED,0,beet seed,semente de beterraba
+ITEM_CARROT_SEED,156,carrot seed,semente de cenoura
+ITEM_CARROT_SEED.other,0,carrot seeds,sementes de cenoura
+ITEM_POTATO_SEED,156,potato seed,semente de batata
+ITEM_POTATO_SEED.other,0,potato seeds,sementes de batata
+ITEM_GARLIC_SEED,156,garlic seed,semente de alho
+ITEM_GARLIC_SEED.other,0,garlic seeds,sementes de alho
+ITEM_STRAWBERRY_SEED,156,strawberry seed,semente de morango
+ITEM_STRAWBERRY_SEED.other,0,strawberry seeds,sementes de morango
+ITEM_CORN_SEED,156,corn seed,semente de milho
+ITEM_CORN_SEED.other,0,corn seeds,sementes de milho
+ITEM_PEPPER_SEED,156,pepper seed,semente de pimenta
+ITEM_PEPPER_SEED.other,0,pepper seeds,sementes de pimenta
+ITEM_SUNFLOWER_SEED,156,sunflower seed,semente de girassol
+ITEM_SUNFLOWER_SEED.other,0,sunflower seeds,sementes de girassol
+ITEM_MELON_SEED,156,melon seed,semente de melancia
+ITEM_MELON_SEED.other,0,melon seeds,sementes de melancia
+ITEM_WHEAT_SEED,156,wheat seed,semente de trigo
+ITEM_WHEAT_SEED.other,0,wheat seeds,sementes de trigo
+ITEM_PUMPKIN_SEED,156,pumpkin seed,semente de abóbora
+ITEM_PUMPKIN_SEED.other,0,pumpkin seeds,sementes de abóbora
+ITEM_GRAPE_SEED,156,grape seed,semente de uva
+ITEM_GRAPE_SEED.other,0,grape seeds,sementes de uva
+ITEM_BEET_SEED,156,beet seed,semente de beterraba
+ITEM_BEET_SEED.other,0,beet seeds,sementes de beterraba
 DHUD_NO_SEEDS,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no inverno
 WHY_NO_OUTDOOR_GROWTH,224,Nothing grows outdoors in winter,Nada cresce ao ar livre no inverno
 DHUD_HOE_CLEAR,224,%s: clear with hoe,%s: limpar com enxada
@@ -816,8 +904,8 @@ BOOK_CAUGHT,300,caught %d in every run,pescados %d em todas as partidas
 BOOK_NOT_YET,300,never caught yet,nunca pescado ainda
 BOOK_FIRST,300,this run: the first on %s %d,nesta partida: o primeiro em %s %d
 BOOK_NOT_THIS_RUN,300,none yet this run,nenhum nesta partida ainda
-BOOK_HINT_CARP,300,"All year, all day: the north-west and forest ponds.","O ano todo e o dia todo: noroeste e lagoa da mata."
-BOOK_HINT_PERCH,300,"Any season but summer: north-west and south-east.","Fora do verão, o dia todo: noroeste e lago do sudeste."
+BOOK_HINT_CARP,300,"All year, all day: the north-west and forest ponds.","O ano todo, o dia todo: lago do noroeste e lagoa da mata."
+BOOK_HINT_PERCH,300,"Any season but summer: north-west and south-east.","Fora do verão: lago do noroeste e lago do sudeste."
 BOOK_HINT_CATFISH,300,"After dark, all year, in every water on the farm.","Depois de escurecer, o ano todo, em todas as águas."
 BOOK_HINT_TILAPIA,300,"Summer days in the forest pond and the south-east lake.","Dias de verão na lagoa da mata e no lago do sudeste."
 BOOK_HINT_SUNFISH,300,"Summer daylight in the forest pond.","Luz do dia no verão, na lagoa da mata."
@@ -830,15 +918,15 @@ BOOK_HINT_SALMON,300,"Autumn daylight in the north-west pond.","Luz do dia no ou
 BOOK_HINT_STURGEON,300,"Winter nights on the south-east lake.","Noites de inverno no lago do sudeste."
 BOOK_HINT_OLD_CATFISH,300,"Spring nights in the forest pond, under a Full Moon.","Noites de primavera na lagoa da mata, sob a Lua Cheia."
 BOOK_HINT_GOLDEN_QUEEN,300,"Summer noons on the south-east lake, to a worm.","Meio-dia de verão no lago do sudeste, com minhoca."
-BOOK_HINT_GHOST_PIKE,300,"Late autumn nights in the north-west pond, to fish bait.","Noite alta de outono no noroeste, com isca de peixe."
-BOOK_HINT_ICE_STURGEON,300,"Winter dawns on the south-east lake, on a Full Moon day.","Alvorada de inverno no sudeste, em dia de Lua Cheia."
+BOOK_HINT_GHOST_PIKE,300,"Late autumn nights in the north-west pond, to fish bait.","Noite alta no outono, lago do noroeste, com isca de peixe."
+BOOK_HINT_ICE_STURGEON,300,"Winter dawns on the south-east lake, on a Full Moon day.","Alvorada de inverno no lago do sudeste, na Lua Cheia."
 WORK_TOOL_TAB,85,UPGRADES,MELHORIAS
-WORK_HOUSE_NEXT,0,%s  %s,%s  %s
-WORK_HOUSE_TOP,0,%s - as sturdy as it gets,%s - o mais forte que há
+WORK_HOUSE_NEXT,192,%s  %s,%s  %s
+WORK_HOUSE_TOP,192,%s - as sturdy as it gets,%s - o mais forte que há
 WORK_HOUSE_GIVES,0,the house holds %d tonight and mends %d%% cheaper,a casa aguenta %d esta noite e conserta %d%% mais barato
-HOUSE_TIER_1,0,house I,casa I
-HOUSE_TIER_2,0,house II,casa II
-HOUSE_TIER_3,0,house III,casa III
+HOUSE_TIER_1,52,house I,casa I
+HOUSE_TIER_2,52,house II,casa II
+HOUSE_TIER_3,52,house III,casa III
 WORK_RECIPE_TAB,85,CRAFT,FABRICAR
 WORK_TOOL_PENDING,180,* Ready next morning,* Pronta amanhã
 INV_TOOL_PENDING,110,Ready tomorrow,Pronta amanhã
@@ -848,26 +936,30 @@ WHY_TOOL_PREVIOUS,224,Upgrade the previous tier first,Melhore o nível anterior 
 WHY_TOOL_PENDING,224,This tool already has an order,Esta ferramenta já tem um pedido
 WHY_GATHER_TOOL,224,Needs %s,Precisa de %s
 DESC_TOOL_NEXT_MORNING,224,Keep your tool; ready next morning,Use sua ferramenta; pronta amanhã
-ITEM_COPPER,96,copper,cobre
-ITEM_COAL,96,coal,carvão
-ITEM_GOLD,96,gold,ouro
-ITEM_HARDWOOD,96,hardwood,madeira de lei
+ITEM_COPPER,156,copper,cobre
+ITEM_COPPER.other,0,copper,cobre
+ITEM_COAL,156,coal,carvão
+ITEM_COAL.other,0,coal,carvão
+ITEM_GOLD,156,gold,ouro
+ITEM_GOLD.other,0,gold,ouro
+ITEM_HARDWOOD,156,hardwood,madeira de lei
+ITEM_HARDWOOD.other,0,hardwood,madeira de lei
 WHY_ON_A_CROP,224,Not on a crop,Não em cima de uma planta
 WHY_HOME_IN_USE,224,Animals live here,Tem animais morando aqui
 DESC_SPRINKLES,224,Waters %d plots each morning,Rega %d canteiros toda manhã
 DESC_WALKED_OVER,224,Zombies walk over it,Zumbis passam por cima
 DESC_HOUSES,224,Houses %d animals,Abriga %d animais
 DESC_EATS,224,Each eats %d %s a day,Cada um come %d de %s por dia
-WHY_GATHER_SEASON,224,Available from %s,Disponível a partir de %s
+WHY_GATHER_SEASON,224,Available from %s,Disponível a partir do %s
 DESC_FUEL_FALLBACK,224,Oil first; coal when empty,Óleo primeiro; carvão se acabar
 ACT_COLLECTIONS,112,COLLECTIONS,COLEÇÕES
 ACT_PAD_SHARE,104,SHARE,COMPARTILHAR
 TITLE_COLLECTIONS,140,COLLECTIONS,COLEÇÕES
-COLL_TITLE,0,COLLECTIONS,COLEÇÕES
+COLL_TITLE,332,COLLECTIONS,COLEÇÕES
 COLL_HINT_TITLE,0,%s / %s or up / down: tabs. ESC to go back.,%s / %s ou cima / baixo: abas. ESC para voltar.
 COLL_HINT_RUN,0,%s / %s or up / down: tabs. %s or ESC to close.,%s / %s ou cima / baixo: abas. %s ou ESC para fechar.
 COLL_TAB_FISH,96,FISH %d/%d,PEIXES %d/%d
-COLL_TAB_CROPS,96,CROPS %d/%d,COLHEITAS %d/%d
+COLL_TAB_CROPS,96,CROPS %d/%d,CULTURAS %d/%d
 COLL_TAB_BOSSES,96,TROPHIES %d/%d,TROFÉUS %d/%d
 COLL_TAB_YEAR,96,YEARS %d,ANOS %d
 COLL_TAB_ACHIEVEMENTS,96,BADGES %d/%d,CONQUISTAS %d/%d
@@ -876,7 +968,7 @@ COLL_CROPS_COUNT,332,%d OF %d CROPS HARVESTED,%d DE %d CULTURAS COLHIDAS
 COLL_CROP_HARVESTED,90,HARVESTED %d,COLHIDAS %d
 COLL_NOT_YET,83,NOT YET,AINDA NÃO
 COLL_BOSSES_COUNT,332,%d OF %d TROPHIES,%d DE %d TROFÉUS
-COLL_BOSS_FELL,83,DEFEATED: %d,DERROTADO: %d
+COLL_BOSS_FELL,83,DEFEATED: %d,VITÓRIAS: %d
 COLL_BOSSES_RULE,332,A trophy for every boss that falls,Um troféu para cada chefe que cai
 COLL_YEAR_COUNT,332,YEARS WON WITHOUT LOSING THE HOUSE: %d,ANOS VENCIDOS SEM PERDER A CASA: %d
 COLL_YEAR_RULE,0,Beat Winter 14's boss without the house falling on a single night.,Derrote o chefe do Inverno 14 sem que a casa caia em nenhuma noite.

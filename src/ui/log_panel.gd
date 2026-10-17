@@ -291,9 +291,9 @@ static func line_for(event: Dictionary) -> String:
 ## "1 walker" or "6 walkers".
 ##
 ## **Two rows in the table, not an `s` on the end.** English makes a plural by
-## adding one letter and Portuguese does not always make one at all - "6
-## brutamontes" is the same word as one of them - so the count picks a line
-## rather than editing it.
+## adding one letter and Portuguese does not put it on the end - "6 zumbis
+## de gelo" takes its s in the middle - so the count picks a line rather than
+## editing it.
 static func _how_many(event: Dictionary) -> String:
 	var many := int(event.get("count", 0))
 	return "%d %s" % [many, I18n.plural(

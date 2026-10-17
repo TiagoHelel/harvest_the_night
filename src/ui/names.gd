@@ -307,6 +307,34 @@ const GROUP_KEYS: Dictionary = {
 }
 
 
+## **A cost's short letters** (task 0294): "12f" for ferro in Portuguese,
+## "12i" for iron in English, on a 40-pixel hotbar slot and the build
+## palette. One literal key a resource a build can cost; one the table does
+## not name is the first letter of its name in the language up.
+const SHORT_KEYS: Dictionary = {
+	&"wood": &"ABBR_WOOD",
+	&"stone": &"ABBR_STONE",
+	&"iron": &"ABBR_IRON",
+	&"copper": &"ABBR_COPPER",
+	&"gold": &"ABBR_GOLD",
+	&"gunpowder": &"ABBR_GUNPOWDER",
+	&"oil": &"ABBR_OIL",
+	&"straw": &"ABBR_STRAW",
+	&"pumpkin": &"ABBR_PUMPKIN",
+	&"garlic": &"ABBR_GARLIC",
+	&"sunflower": &"ABBR_SUNFLOWER",
+	&"sandbag": &"ABBR_SANDBAG",
+	&"fish": &"ABBR_FISH",
+}
+
+
+## A resource's short letters, for a cost too narrow for its name.
+static func short_of(id: StringName) -> String:
+	if SHORT_KEYS.has(id):
+		return I18n.t(SHORT_KEYS[id])
+	return of(id).substr(0, 1)
+
+
 ## What an inventory category is called.
 static func group_of(id: StringName) -> String:
 	return I18n.t(GROUP_KEYS[id]) if GROUP_KEYS.has(id) else of(id)
@@ -371,6 +399,23 @@ static func of(id: StringName) -> String:
 	return String(id).replace("_", " ")
 
 
+## **Its name for a count** (task 0294): "cenoura" for one and "cenouras"
+## for three, off its plural rows - `I18n.plural` over its key. A thing with
+## no `.other` row reads its plain name at every count.
+static func of_count(id: StringName, count: int) -> String:
+	if not KEYS.has(id):
+		return of(id)
+	var key: StringName = KEYS[id]
+	if absi(count) != 1 and not I18n.has(StringName("%s.other" % key)):
+		return of(id)
+	return I18n.plural(key, count)
+
+
+## **A thing counted** (task 0294): "3 cenouras", "12 madeira".
+static func counted(id: StringName, count: int) -> String:
+	return "%d %s" % [count, of_count(id, count)]
+
+
 ## **A thing at its level** (task 0231): the level's own name where it has
 ## one - the hardwood wall - and the thing's otherwise.
 static func of_level(id: StringName, level: int) -> String:
@@ -390,7 +435,8 @@ static func of_level(id: StringName, level: int) -> String:
 ## and goes through `of()`, so a player is told "gun tower" and never
 ## `gun_tower`. A `Dictionary` is a pile of resources - `{wood: 3}` - and
 ## comes out as "3 wood, 2 stone", sorted so two runs read the same. Anything
-## else is a number and is printed.
+## else is a number and is printed. Each pile is counted (task 0294): "3
+## cenouras", not "3 cenoura".
 static func refusal(reason: Array) -> String:
 	if reason.is_empty():
 		return ""
@@ -408,8 +454,7 @@ static func _said(arg: Variant) -> Variant:
 	if arg is Dictionary:
 		var parts := PackedStringArray()
 		for id in GameData.sorted_names((arg as Dictionary).keys()):
-			parts.append("%d %s" % [int((arg as Dictionary)[id]),
-				of(StringName(id))])
+			parts.append(counted(StringName(id), int((arg as Dictionary)[id])))
 		return ", ".join(parts)
 	return arg
 

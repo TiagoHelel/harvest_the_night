@@ -1,7 +1,7 @@
 # 0294 - Every new word in Portuguese
 
 - **Phase:** 17 - Ship 1.0
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0287, 0293, 0291, 0292
 - **Likely files:** assets/locale/strings.csv, tools/i18n_check.py, src/ui/names.gd, src/tools/headless_v1.gd
 

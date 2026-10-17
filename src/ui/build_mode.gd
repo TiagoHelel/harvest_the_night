@@ -89,6 +89,16 @@ func _ready() -> void:
 	column.add_child(_reason)
 
 
+## **Its title in the language up** (task 0294): it is written once in
+## `_ready`, so a language picked in the options kept the old one - and the
+## rows are built again on the next frame, their names with it.
+func relabel() -> void:
+	var title := find_child("BuildTitle", true, false) as Label
+	if title != null:
+		title.text = I18n.t(&"BUILD_TITLE")
+	_built_for = ""
+
+
 func show_state(state: Dictionary, view: WorldView) -> void:
 	_state = state
 	_view = view
@@ -303,7 +313,9 @@ func _build_palette() -> void:
 		# press row landed at y=294 and could not be clicked at all. There is
 		# an assert in input_check that the whole palette is on screen.
 		row.theme_type_variation = UiKit.ROW
-		row.text = "%s  %s" % [id, _price_of(id)]
+		# **Its name, not its id** (task 0294): the palette printed
+		# `copper_sprinkler` on a Portuguese screen.
+		row.text = "%s  %s" % [Names.of(id), _price_of(id)]
 		# **Its compact picture** where its pack drew one (task 0201: A018's
 		# three sprinklers), 10x10 inside the 11-pixel row.
 		var picture := UiKit.picture(StringName("hud_%s" % id))
@@ -330,6 +342,11 @@ func _price_of(id: StringName) -> String:
 	# the price of a fence read "5 wood 3 iron" on one run and "3 iron 5
 	# wood" on the next. See `result_screen._sorted`, where the same mistake
 	# was caught by comparing two screenshots byte for byte.
+	# Money first, as the hotbar puts it (task 0294): its first letter was
+	# the "m" of money, which in Portuguese is madeira's.
+	if cost.has(GameData.MONEY):
+		parts.append(I18n.f(&"HOTBAR_MONEY", [int(cost[GameData.MONEY])]))
 	for res in GameData.sorted_names(cost.keys()):
-		parts.append("%d%s" % [cost[res], str(res).substr(0, 1)])
+		if res != GameData.MONEY:
+			parts.append("%d%s" % [cost[res], Names.short_of(res)])
 	return " ".join(parts)
