@@ -1024,7 +1024,8 @@ func _task_0105_playtest() -> void:
 	expect(log_text.contains("seed    %d" % int(state["seed"])),
 		"which run it was")
 	expect(log_text.contains(BuildInfo.VERSION), "and which build")
-	expect(log_text.contains("day 1 began"), "how far the days got")
+	# The calendar's day since task 0295.
+	expect(log_text.contains("Spring 1 began (date 1)"), "how far the days got")
 	expect(log_text.contains("night 1 began"), "that a night happened")
 	expect(log_text.contains("NOTE 1") and log_text.contains("NOTE 2"),
 		"and where the tester put their markers")

@@ -545,3 +545,9 @@ Next in the loop: 0298 (the seasons' second weeks).
 
 0298 is done. Every season's day 11 is a written pinch, and days 9, 10 and 12 each rest a kind, so no second-week night repeats. The year still holds 0277's target. DATA hash 2003073212 -> 1240930267 on purpose. No art involved.
 Next in the loop: 0295 (a playtest build of the year).
+
+## 2026-10-16 - Claude - done 0295 (a playtest build of the year)
+
+0295 is done. The playtest build is in `build/playtest/`, built and booted but not sent. The log speaks the calendar, and `tools/playtest.py` asks 1.0's questions. `docs/PLAYTEST.md` is rewritten.
+
+`task.py next` now says nothing actionable. Everything left waits on the farmer packs the owner deferred (A001, A002, A007, A008, A009, A024, A025): their seven art tasks, then 0290, 0296 and 0297. The loop stops here until the owner reopens those packs.

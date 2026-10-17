@@ -37,6 +37,16 @@ class_name Playtest
 ## about afterwards, in whatever they are writing back to you. One key press
 ## in the middle of a fight is also a great deal more likely to happen than a
 ## typed sentence.
+##
+## ## A year, not ten nights (task 0295)
+##
+## The log speaks the calendar's language: `Spring 3 began (date 3)` when a
+## day begins, the hour he went to bed or that he passed out at 02:00, how
+## long the build step ran before START, how each night ended - at dawn, all
+## killed, the house down, or a boss that got away - and when a boss night
+## comes round again. **A lost night is a setback, not an ending**: a session
+## ends at the end of the year (0160's ending), at Abandon or when the window
+## closes. `tools/playtest.py` reads every one of these lines.
 
 ## Where session logs go.
 const DIR := "user://playtest"
@@ -66,6 +76,14 @@ static var _seen := 0
 ## What the last frame saw, to notice a day or a phase turning over.
 static var _day := 0
 static var _phase := -1
+
+## The calendar date the session last wrote a day for, when the build step
+## began (for its length), whether tonight has seen dawn, and the night that
+## last began - for a boss night that comes round again (task 0295).
+static var _date := 0
+static var _build_ms := 0
+static var _dawned := false
+static var _last_night := 0
 
 
 ## Whether this is a playtest build.
@@ -115,6 +133,10 @@ static func begin(state: Dictionary) -> String:
 	_seen = 0
 	_day = 0
 	_phase = -1
+	_date = 0
+	_build_ms = 0
+	_dawned = false
+	_last_night = 0
 
 	var f := FileAccess.open(_path, FileAccess.WRITE)
 	if f == null:
@@ -180,48 +202,77 @@ static func watch(state: Dictionary) -> void:
 	if _path == "" or state.is_empty():
 		return
 
-	var day := int(state.get("day", 0))
-	if day != _day:
-		if _day != 0:
-			_write("day %d ended - %s" % [_day, _built_so_far(state)])
-		_day = day
-		_write("day %d began" % day)
-
+	# **The calendar's day, as the player has it** (task 0295): it begins
+	# with the morning - the report read, the day back - and not when the
+	# day counter moves at the night's end. The line says the date, which a
+	# boss holds on its night until it falls.
 	var phase := int(state.get("phase", -1))
+	if _date == 0 or (phase != _phase and phase == Phases.DAY):
+		if _date != 0:
+			_write("%s ended - %s" % [_date_name(_date), _built_so_far(state)])
+		_day = int(state.get("day", 0))
+		_date = Calendar.date(state)
+		_write("%s began (date %d)" % [_date_name(_date), _date])
+
+	var into_result := false
 	if phase != _phase:
+		var was := _phase
 		_phase = phase
-		_write("%s" % _phase_line(state, phase))
+		into_result = phase == Phases.RESULT
+		_write(_phase_line(state, phase, was))
 
 	# **The rules' own record, with a clock beside it.** `Events` is bounded
 	# and already ordered, so this is a walk of at most `Events.CAP` entries
 	# and a comparison - not a diff of two states.
+	# **Against the tick the walk began at**, not the one it has reached: dawn
+	# and the night won land on one tick, and comparing with the running
+	# mark skipped the second (found by task 0295).
 	var fresh := Events.since(state, _seen)
+	var from := _seen
 	for one in fresh:
 		var entry: Dictionary = one
 		var at := int(entry.get("tick", 0))
-		if at < _seen:
+		if at < from:
 			continue
-		_write(_event_line(entry))
 		_seen = maxi(_seen, at + 1)
-		# **The one event that ends a session.** Noticed here rather than by
-		# a screen watching for it, because this is already the thing
-		# walking the events and a second watcher would drift from it.
-		if StringName(entry.get("kind", &"?")) == &"night_lost":
-			run_ended(state, "the house fell on night %d"
-				% int(entry.get("night", 0)))
-			return
+		var kind := StringName(entry.get("kind", &"?"))
+		if kind == &"night_began":
+			_dawned = false
+			# **A boss night again** (task 0153): the calendar held it.
+			var night := int(entry.get("night", 0))
+			if night == _last_night and Calendar.is_boss_night(night):
+				_write("  %s again - %s is back" % [_date_name(night),
+					String(Calendar.boss_of(night))])
+			_last_night = night
+		elif kind == &"dawn":
+			_dawned = true
+		_write(_event_line(entry))
+
+	# **How the night ended**, said once its report is up: a boss that got
+	# away at dawn has no event of its own (0153), and the year's ending is
+	# the session's (0160).
+	if into_result:
+		var last: Dictionary = state.get("last_result", {})
+		if bool(last.get("escaped", false)):
+			_write("night %d: the boss got away at dawn - it comes back"
+				% int(last.get("night", 0)))
+		if bool(last.get("run_over", false)):
+			run_ended(state, "the year is over - the winter boss fell")
 
 
-## The run is over, one way or the other.
+## The run is over, one way or the other: the year's end, Abandon, or the
+## check that stops it. **Not a lost night** (task 0295).
 static func run_ended(state: Dictionary, how: String) -> void:
 	if _path == "":
 		return
 	_write("the run ended: %s" % how)
-	# The night fought last: the calendar day's since task 0151.
-	_write("  reached night %d, day %d, tick %d"
-		% [int(state.get("night", 0)), int(state.get("day", 0)),
+	# **The calendar date reached** (task 0295, finishing 0151's reader):
+	# the night it holds, then the days lived.
+	var date := Calendar.date(state)
+	_write("  reached night %d - %s, %d days lived, tick %d"
+		% [date, _date_name(date), int(state.get("day", 0)),
 			int(state.get("tick", 0))])
-	_write("  built %s" % _built_so_far(state))
+	_write("  %s" % _built_so_far(state))
 	end_session(how)
 
 
@@ -276,20 +327,45 @@ static func _event_line(entry: Dictionary) -> String:
 			return "  crafted a %s" % String(entry.get("id", &"?"))
 		&"boss_arrived":
 			return "  something big arrived"
+		&"dawn":
+			return "  dawn - %d walked off" % int(entry.get("walked", 0))
 		&"night_won":
-			return "night %d won" % int(entry.get("night", 0))
+			return "night %d won %s" % [int(entry.get("night", 0)),
+				"at dawn" if _dawned else "- all killed"]
 		&"night_lost":
-			return "night %d lost" % int(entry.get("night", 0))
+			return "night %d lost - the house fell" % int(entry.get("night", 0))
 	return "  %s" % String(kind)
 
 
-static func _phase_line(state: Dictionary, phase: int) -> String:
+## A phase turning over (task 0295): to bed or passed out, START after so
+## long a build step, the night, and the report.
+static func _phase_line(state: Dictionary, phase: int, was: int = -1) -> String:
 	match phase:
-		Phases.DAY: return "  the day is theirs"
-		Phases.PREPARATION: return "  they sent for the night"
-		Phases.NIGHT: return "  the night is here"
-		Phases.RESULT: return "  the payout is on the screen"
+		Phases.DAY:
+			return "  the day is theirs"
+		Phases.PREPARATION:
+			_build_ms = Time.get_ticks_msec()
+			if House.passed_out(state):
+				return "passed out at 02:00"
+			var minute := Phases.clock_minute(state)
+			return "went to bed at %02d:%02d" % [(minute / 60) % 24, minute % 60]
+		Phases.NIGHT:
+			if was == Phases.PREPARATION:
+				var spent := int((Time.get_ticks_msec() - _build_ms) / 1000)
+				return "START after %d:%02d of building" % [spent / 60, spent % 60]
+			return "  the night is here"
+		Phases.RESULT:
+			return "  the report is on the screen"
 	return "  phase %d" % [phase]
+
+
+## A date as the calendar says it: `Spring 3`, `Winter 14 of year 2`.
+static func _date_name(date: int) -> String:
+	var name := "%s %d" % [String(Calendar.season_id(date)).capitalize(),
+		Calendar.day_of_season(date)]
+	if Calendar.year_of(date) > 1:
+		name += " of year %d" % Calendar.year_of(date)
+	return name
 
 
 ## What is standing, counted by kind, sorted so two logs can be read side by

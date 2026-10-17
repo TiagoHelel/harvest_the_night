@@ -192,6 +192,7 @@ func _run() -> void:
 	_task_0293_first_week()
 	_task_0294_names()
 	_task_0298_second_weeks()
+	_task_0295_playtest_log()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -13878,6 +13879,92 @@ func _same_in_both() -> Array:
 		if key != "":
 			out.append(key)
 	return out
+
+
+## Where `_task_0295_playtest_log` keeps its session for `tools/playtest.py`.
+const PLAYTEST_CHECK_LOG := "user://playtest-check/session-check.log"
+
+
+## 0295 - the playtest log learns the year. A short scripted run - Spring 1,
+## to bed, START, dawn, the morning; Spring 2, to bed, START, a night the
+## house falls on, and the morning after - writes, in order, the lines
+## `tools/playtest.py` reads, and the session is still open after the lost
+## night. The lost night is parked on 0118's road and the house set to fall,
+## so the group takes seconds. Its log is kept as `PLAYTEST_CHECK_LOG`, for
+## `python tools/playtest.py` to read.
+func _task_0295_playtest_log() -> void:
+	Playtest.force(true)
+	var state := State.create(295001)
+	var path := Playtest.begin(state)
+	expect(path != "", "a playtest session opens", path)
+	Playtest.watch(state)
+	# **Spring 1**: some of the day, and to bed by the bed's own intent.
+	for _i in 10:
+		Sim.advance(state, 30)
+		Playtest.watch(state)
+	(state["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(state, 1)
+	Playtest.watch(state)
+	NightRoad.through_build(state)
+	Playtest.watch(state)
+	# **Dawn**, as the rules end a night the house held.
+	(state["wave"] as Dictionary)["dawn_at"] = int(state["night_tick"]) + 2
+	state["house_hp"] = Phases.house_full(state)
+	for _i in 10:
+		Sim.advance(state, 1)
+		Playtest.watch(state)
+		if int(state["phase"]) != Phases.NIGHT:
+			break
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+	Playtest.watch(state)
+	# **Spring 2**: to bed, START, and the house falls on a parked night.
+	(state["intent"] as Dictionary)["sleep"] = true
+	Sim.advance(state, 1)
+	Playtest.watch(state)
+	NightRoad.through_build(state)
+	NightRoad.park(state)
+	Playtest.watch(state)
+	Sim.advance(state, 30)
+	Playtest.watch(state)
+	state["house_hp"] = 0
+	Rewards.settle(state, false)
+	Phases.enter_result(state, false)
+	Playtest.watch(state)
+	expect(Playtest.running(), "a lost night does not end the session")
+	(state["intent"] as Dictionary)["confirm_result"] = true
+	Sim.advance(state, 2)
+	Playtest.watch(state)
+
+	var text := FileAccess.get_file_as_string(path)
+	var want := ["Spring 1 began (date 1)", "went to bed at ", "START after ",
+		"night 1 began", "dawn - ", "night 1 won at dawn", "Spring 2 began (date 2)",
+		"went to bed at ", "START after ", "night 2 began", "night 2 lost - the house fell",
+		"Spring 3 began (date 3)"]
+	var at := 0
+	var missing: Array = []
+	for line in want:
+		var found := text.find(String(line), at)
+		if found < 0:
+			missing.append(line)
+		else:
+			at = found + String(line).length()
+	expect(missing.is_empty() and not text.contains("the run ended") and Playtest.running(),
+		"the log reads, in order: the date, to bed, START, the night, dawn, won at dawn, the next date, to bed, START, the night, lost, the next date - and the session is still open",
+		"missing %s" % str(missing))
+
+	# **Kept for the reader**, closed off the way Abandon closes one.
+	Playtest.run_ended(state, "the player left from the pause menu")
+	text = FileAccess.get_file_as_string(path)
+	expect(text.contains("the run ended: the player left from the pause menu")
+		and text.contains("reached night 3 - Spring 3"),
+		"Abandon ends it, reading the calendar date reached", text.right(200))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(PLAYTEST_CHECK_LOG.get_base_dir()))
+	DirAccess.copy_absolute(ProjectSettings.globalize_path(path),
+		ProjectSettings.globalize_path(PLAYTEST_CHECK_LOG))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	Playtest.force(false)
+	_completed += 1
 
 
 ## 0298 - the seasons' second weeks. For seeds 0-3, the three targets of

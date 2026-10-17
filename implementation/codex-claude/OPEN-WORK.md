@@ -1,14 +1,14 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-16**, with task 0298's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-16**, with task 0295's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
 - `implementation/backlog/INDEX.md`.
 
-**The game backlog: 297 tasks, 286 done, 11 todo, 0 blocked (96%).**
+**The game backlog: 297 tasks, 287 done, 10 todo, 0 blocked (97%).**
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
-says 0295). Only the farmer packs the owner deferred (3c) still wait on
+says nothing actionable). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
@@ -31,7 +31,7 @@ What is left goes to 0278 and 0280. Every call and trial is in
 | 0291 | Saves into 1.0 - **done 2026-10-16**: a 0.1 run inside the ten nights plays on its date; the prototype won or carried on past it is kept in `user://archive/`, and the title says so | 0279 |
 | 0294 | Every new word in Portuguese - **done 2026-10-16**: the plan's names under a glossary, plurals, agreement, real widths; raw ids, cost letters and the circumflex fixed on screen | 0291 |
 | 0298 | The seasons' second weeks - **done 2026-10-16**: a written pinch on day 11 and rested kinds on 9, 10 and 12; towers 3.1 nights lost before Winter 1, inside 0277's target | 0280 |
-| 0295 | A playtest build of the year | 0280, 0291, 0294 |
+| 0295 | A playtest build of the year - **done 2026-10-16**: built in `build/playtest/`, not sent - handing it to a tester is the owner's call | 0280, 0291, 0294 |
 | 0290 | The 1.0 visual gate | every art task below |
 | 0296 | The store page and trailer for 1.0 | 0290, 0294 |
 | 0297 | Releasing 1.0 | 0290, 0291, 0294, 0295, 0296 |

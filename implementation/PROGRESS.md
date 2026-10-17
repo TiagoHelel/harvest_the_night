@@ -34761,3 +34761,122 @@ Files:
 - src/tools/nights.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd
 - implementation/BALANCE.md, tools/determinism_data_hash.txt
 - **Checks**: `python tools/verify.py --accept` - PASS (66 of 66); the data hash recorded 1240930267 (was 2003073212), SIM 2260114289 unchanged.
+
+## 0295 - A playtest build of the year - done 2026-10-16
+
+The playtest build now speaks 1.0. Its log follows the calendar, a lost
+night no longer ends a session, and the reader answers the year's questions
+instead of the MVP's. The build is made, it boots, and it is in
+`build/playtest/` with `READ ME FIRST.md` beside it. **Nothing was sent**:
+handing it to a tester is the owner's call.
+
+### The log learns the calendar (`src/app/playtest.gd`)
+
+- **`Spring 3 began (date 3)`, written when the morning begins** - the
+  report read, the day back - not when the day counter moves at the night's
+  end. That had put the next morning before the night's own ending. A later
+  year reads `Spring 3 of year 2`. Each date also ends in a line with what
+  was built that day.
+- **`went to bed at 21:40`, or `passed out at 02:00`**, as the build step
+  begins.
+- **`START after 0:48 of building`**, timed from bed to the night.
+- **How each night ended:**
+  - `dawn - N walked off` then `night N won at dawn`;
+  - `night N won - all killed`;
+  - `night N lost - the house fell`;
+  - `night N: the boss got away at dawn - it comes back`.
+  - A boss night that comes round again is `Spring 14 again - giant is
+    back`.
+- **A lost night no longer ends the session.** `watch` used to call
+  `run_ended` on `night_lost`. Now a session ends at the year's end (a
+  report with `run_over`, 0160's ending), at Abandon (`main.gd`, unchanged)
+  or when the window closes.
+  - `run_ended`'s "reached night" reads the calendar date
+    (`reached night 3 - Spring 3, 3 days lived`), finishing 0151's list.
+- **Found on the way:** two events on one tick lost the second. The event
+  walk compared each event with the mark it was moving, so `dawn` and
+  `night won` on the same tick wrote only the dawn. It compares with the
+  tick the walk began at now.
+- **"built built"** at the run's end is now "built".
+
+### The reader (`tools/playtest.py`)
+
+It asks 1.0's questions:
+- **Did they reach the first night?**
+- **How long was Spring 1 in real minutes?** The day from `Spring 1 began`
+  to bed, the night from `night 1 began` to its end. Each median is set
+  against the plan's 8-10 and 3-5.
+- **Bed or pass-out, night by night**, per session.
+- **How long the build step ran:** the median and range of every START.
+- **How far into the year, and nights lost a season.** Each session's
+  furthest date, its losses by season and those before winter, against the
+  plan's 2-4, and every boss that got away.
+- **Where the runs ended, and where the notes are.**
+
+`--self-check` reads a 1.0 sample, whose lines are the ones the headless
+group asserts the game writes. It fails on any field read wrong and on any
+question left empty, and a session that just stops is still the finding it
+was.
+
+### `docs/PLAYTEST.md`, rewritten for 1.0
+
+- **What the game is now:** the day's work, the bed, the guardian's cursor,
+  START, dawn, the four seasons and their bosses, a lost night's cost and
+  the year's end.
+- **The most useful stretch** is Spring 1 to the Giant on Spring 14,
+  played once untold.
+- **What to try:** bed early and late, and a pass-out; mouse and pad; time
+  before START; the bin; the rod.
+- **What to ignore:** the farmer's stand-in animations, as `python
+  tools/placeholders.py` lists them (A001, A002, A007, A008, A009: 36
+  stand-ins, all his); the sound mix; the tech tree's prices; the version
+  in the corner; the badge.
+- **What to report** carries the three questions the loop cannot answer:
+  - 0293's: do the first week's lines read to a stranger?
+  - whether a night is long enough;
+  - 0196's: are the pond, the cliff and the animals worth doing for
+    themselves, or only for the night?
+- **The F1 and local-log promises stand.** No "ten nights", "night ten" or
+  "tenth" is left in it, in any case.
+
+### The build
+
+- **`python tools/release.py --playtest --skip-verify`:**
+  - stamped 2026-10-16;
+  - built the Windows Playtest preset to
+    `build/playtest/HarvestTheNight.exe`;
+  - wrote `READ ME FIRST.md` beside it;
+  - found nothing of the repository in the pack;
+  - booted it for 400 frames, with no errors.
+  - Its own verify step was skipped: `python tools/verify.py` was run on
+    the same tree, below.
+- `BuildInfo.BUILT` moved to 2026-10-16 with the stamp. It is the title's
+  date line, not a rule.
+- **`python tools/shot.py 0295 --title --playtest --fhd`** shows PLAYTEST
+  BUILD in the corner of the first screen, over the version line. Opened.
+
+### Tests
+
+- `_task_0295_playtest_log` in `src/tools/headless_v1.gd` runs, in a few
+  seconds:
+  - Spring 1 by the bed's intent, START, dawn, the morning;
+  - Spring 2, a parked night the house falls on, and the next morning.
+  - The log holds, in order: the date, to bed, START, the night, dawn, won
+    at dawn, the next date, to bed, START, the night, lost, the next date.
+  - The session is still open after the lost night. Abandon then ends it,
+    reading the date reached.
+  - Its log is kept as `user://playtest-check/session-check.log`.
+- **`python tools/playtest.py` on that folder answers every question.**
+  It reports 1 of 1 reached night 1, Spring 1's day and night (0:00 in a
+  scripted run), two bedtimes and no pass-out, two build steps, date 3 and
+  spring's one loss, and the ending, Abandon.
+- **`_task_0105_playtest` in `headless_check`** reads `Spring 1 began
+  (date 1)` where it read `day 1 began`.
+- Playtest code only reads the state: SIM and DATA are unchanged.
+
+Files:
+- **Code:** src/app/playtest.gd, src/core/build_info.gd.
+- **Tools and docs:** tools/playtest.py, docs/PLAYTEST.md.
+- **Tests:** src/tools/headless_v1.gd, src/tools/headless_check.gd.
+- **Captures:** implementation/shots/0295/.
+- **Checks**: `python tools/verify.py` - PASS (66 of 66); SIM 2260114289 and DATA 1240930267 unchanged.

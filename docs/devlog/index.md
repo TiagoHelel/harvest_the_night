@@ -40,7 +40,7 @@ is the sort of thing this list exists to say out loud.
 
 ## What it turned out to be
 
-299 tasks over 14 days,  to 2026-10-16. One at a time, each one finished and checked before the next was started.
+300 tasks over 14 days,  to 2026-10-16. One at a time, each one finished and checked before the next was started.
 
 | # | What was built | Finished |
 |---|---|---|
@@ -343,6 +343,7 @@ is the sort of thing this list exists to say out loud.
 | 0291 | Saves into 1.0 | 2026-10-16 |
 | 0294 | Every new word in Portuguese | 2026-10-16 |
 | 0298 | The seasons' second weeks | 2026-10-16 |
+| 0295 | A playtest build of the year | 2026-10-16 |
 
 ## Every time the game changed underneath itself
 

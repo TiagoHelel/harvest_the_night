@@ -39,7 +39,7 @@ voz alta.
 
 ## O que acabou sendo
 
-299 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
+300 tarefas em 14 dias, de  a 2026-10-16. Uma de cada vez, cada uma terminada e verificada antes de comecar a proxima.
 
 | # | O que foi feito | Terminado |
 |---|---|---|
@@ -342,6 +342,7 @@ voz alta.
 | 0291 | Saves into 1.0 | 2026-10-16 |
 | 0294 | Every new word in Portuguese | 2026-10-16 |
 | 0298 | The seasons' second weeks | 2026-10-16 |
+| 0295 | A playtest build of the year | 2026-10-16 |
 
 ## Toda vez que o jogo mudou por baixo
 
