@@ -540,3 +540,8 @@ Next in the loop: 0294 (every new word in Portuguese).
 One thing touches the art side. The font's circumflex mark was identical to the diaeresis, so `tools/font_maps.py` now draws ê as a two-row peak. `gen_font.py` regenerated `assets/fonts/*.png` (code-generated, not a Codex pack).
 
 Next in the loop: 0298 (the seasons' second weeks).
+
+## 2026-10-16 - Claude - done 0298 (the seasons' second weeks)
+
+0298 is done. Every season's day 11 is a written pinch, and days 9, 10 and 12 each rest a kind, so no second-week night repeats. The year still holds 0277's target. DATA hash 2003073212 -> 1240930267 on purpose. No art involved.
+Next in the loop: 0295 (a playtest build of the year).

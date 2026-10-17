@@ -191,6 +191,7 @@ func _run() -> void:
 	_task_0292_options()
 	_task_0293_first_week()
 	_task_0294_names()
+	_task_0298_second_weeks()
 	_task_0147_night_icons()
 	_task_0161_calendar_icons()
 	_task_0162_forecast_heads()
@@ -13877,6 +13878,152 @@ func _same_in_both() -> Array:
 		if key != "":
 			out.append(key)
 	return out
+
+
+## 0298 - the seasons' second weeks. For seeds 0-3, the three targets of
+## `nights.py --sameness`: no two nights of a season's days 9-13 share their
+## mix of kinds and sides; the longest run of nights that bring nothing new
+## is three at most; the forecast says the same thing two nights running at
+## most once a season - spring's first week aside, whose one side and one new
+## kind a night, each sent more the night after (0271), leave its nights no
+## other forecast. Day 11 of every season is the written pinch - its
+## made night's hit points, the heavy kinds, one side. A made night rests what
+## its template rests, and a later year's does too; `check_nights` refuses a
+## rest off the season's days, of a kind the template does not mix, or of
+## every kind a day has.
+func _task_0298_second_weeks() -> void:
+	var off: Array = []
+	for seed_value in range(4):
+		var found := _sameness_of(seed_value)
+		var shared: Array = found["shared"]
+		var again: Dictionary = found["again"]
+		var too_often: Array = []
+		for season in GameData.sorted_names(again.keys()):
+			if int(again[season]) > 1:
+				too_often.append("%s %d" % [season, int(again[season])])
+		# The days 1-6 repeats spring cannot help, counted apart.
+		var firsts: Array = found["spring_first_week"]
+		if not shared.is_empty() or int(found["longest"]) > 3 or not too_often.is_empty() \
+				or firsts.size() > 3:
+			off.append([seed_value, shared, found["longest"], too_often, firsts])
+	expect(off.is_empty(),
+		"for seeds 0-3 no second-week mix repeats, no run of plain nights passes three, and no season's forecast repeats twice",
+		str(off))
+
+	# **The pinch, written**: the made night's hit points, the heavy kinds,
+	# one side, on day 11 of every season.
+	var pinches: Array = []
+	for season in GameData.SEASONS.size():
+		var day := season * GameData.SEASON_DAYS + 11
+		var template: Dictionary = GameData.SEASON_NIGHTS[season]
+		var written: Dictionary = GameData.KEY_NIGHTS.get(day, {})
+		var kinds := Waves.kinds_in(written)
+		var light := 0
+		for kind in [&"walker", &"runner", &"rat", &"crow"]:
+			light += int(kinds.get(kind, 0))
+		# Within a body of each of its kinds, as a made night is (0270).
+		var slack := 0
+		for kind in GameData.sorted_names(kinds.keys()):
+			slack += int((GameData.ENEMIES[kind] as Dictionary)["hp"])
+		if not Almanac.is_pinch(day) or absi(Waves.hit_points_in(written)
+				- Almanac.on_day(template["size"], GameData.PINCH_DAY)) >= slack \
+				or Waves.spawns_in(written).size() != 1 or light > 0 or not kinds.has(&"tank"):
+			pinches.append([day, Waves.hit_points_in(written), Waves.spawns_in(written), kinds.keys()])
+	expect(pinches.is_empty(),
+		"days 11, 25, 39 and 53 are written: the made night's hit points, from one side, tanks and no light kind",
+		str(pinches))
+
+	# **A rest is a made night's, and a later year's**: spring 10 sends no
+	# runner in Year 1 or in Year 2, and spring 13 sends every kind.
+	var spring_10 := Waves.kinds_of(10, 0)
+	var spring_10_later := Waves.kinds_of(Calendar.year_days() + 10, 0)
+	var spring_13 := Waves.kinds_of(13, 0)
+	expect(not spring_10.has(&"runner") and spring_10.has(&"walker")
+		and not spring_10_later.has(&"runner") and spring_10_later.has(&"walker")
+		and spring_13.size() == 4,
+		"spring 10 rests its runners in Year 1 and in Year 2, and spring 13 sends all four kinds",
+		"%s / %s / %s" % [str(spring_10.keys()), str(spring_10_later.keys()), str(spring_13.keys())])
+
+	# **What a rest may not be.**
+	var refused: Array = []
+	for case in [[{15: [&"walker"]}, "rests on '15', not a day 1-14"],
+			[{9: [&"vampire"]}, "rests 'vampire' on day 9, which it does not mix"],
+			[{2: [&"walker"]}, "rests every kind it has on day 2"]]:
+		var templates: Array = GameData.SEASON_NIGHTS.duplicate(true)
+		(templates[0] as Dictionary)["rests"] = case[0]
+		var said := " ".join(GameData.check_nights(templates, GameData.KEY_NIGHTS))
+		if not said.contains(String(case[1])):
+			refused.append([case[1], said])
+	expect(refused.is_empty() and GameData.check_nights(GameData.SEASON_NIGHTS, GameData.KEY_NIGHTS).is_empty(),
+		"check_nights refuses a rest off the season, of a kind not mixed, or of every kind a day has - and passes the year's",
+		str(refused))
+	_completed += 1
+
+
+## **The year's sameness on `seed_value`** (task 0298), as `nights.py
+## --sameness` counts it: the second-week mixes a season sends twice, the
+## longest run of nights that bring nothing new - no kind, side, weather or
+## Full Moon met for the first time, no boss and no written night - and how
+## often each season's forecast says the same thing two nights running.
+func _sameness_of(seed_value: int) -> Dictionary:
+	var seen := {}
+	var week := {}
+	var again := {}
+	var previous := ""
+	var run := 0
+	var longest := 0
+	var firsts: Array = []
+	for day in range(1, Calendar.year_days() + 1):
+		var one := Waves.night_of(day, seed_value)
+		if bool(one.get("calm", false)):
+			previous = ""
+			continue
+		var season := Calendar.season_id(day)
+		var of_season := Calendar.day_of_season(day)
+		var kinds := GameData.sorted_names(Waves.kinds_in(one).keys())
+		var sides: Array = []
+		for side in Waves.spawns_in(one):
+			if not sides.has(int(side)):
+				sides.append(int(side))
+		sides.sort()
+		var mix := "%s|%s" % [",".join(kinds), str(sides)]
+		if of_season >= 9 and of_season <= 13:
+			var mixes: Dictionary = week.get(season, {})
+			mixes[mix] = int(mixes.get(mix, 0)) + 1
+			week[season] = mixes
+		var event := Weather.event(seed_value, day)
+		var moon := Calendar.is_full_moon(day)
+		var news := Calendar.is_boss_night(day) or Almanac.is_key(day)
+		var marks: Array = []
+		for kind in kinds:
+			marks.append("kind %s" % kind)
+		for side in sides:
+			marks.append("side %d" % int(side))
+		if event != &"":
+			marks.append("event %s" % event)
+		if moon:
+			marks.append("full moon")
+		for mark in marks:
+			if not seen.has(mark):
+				seen[mark] = true
+				news = true
+		run = 0 if news else run + 1
+		longest = maxi(longest, run)
+		var said := "%s|%s|%s|%s|%s" % [str(sides), ",".join(kinds), event, moon,
+			Calendar.boss_of(day) if Calendar.is_boss_night(day) else &""]
+		if said == previous:
+			if season == &"spring" and of_season <= 6:
+				firsts.append(day)
+			else:
+				again[season] = int(again.get(season, 0)) + 1
+		previous = said
+	var shared: Array = []
+	for season in GameData.sorted_names(week.keys()):
+		var mixes: Dictionary = week[season]
+		for mix in mixes:
+			if int(mixes[mix]) > 1:
+				shared.append("%s %s x%d" % [season, mix, int(mixes[mix])])
+	return {"shared": shared, "longest": longest, "again": again, "spring_first_week": firsts}
 
 
 ## 0292 - the options for the new controls. Five keys with their defaults

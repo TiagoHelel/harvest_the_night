@@ -11260,10 +11260,12 @@ func _task_0059_wave_data() -> void:
 ## **Spring's key nights** (task 0270): the days `KEY_NIGHTS` writes in the
 ## first season - since task 0271 its four introductions and its two Full
 ## Moons, 1, 3, 5, 7, 8 and 14.
+## Spring's introductions and Full Moons: its key nights but the second
+## week's pinch (task 0298), which is no step of that curve.
 func _spring_keys() -> Array:
 	var out: Array = []
 	for day in range(1, GameData.SEASON_DAYS + 1):
-		if Almanac.is_key(day):
+		if Almanac.is_key(day) and not Almanac.is_pinch(day):
 			out.append(day)
 	return out
 

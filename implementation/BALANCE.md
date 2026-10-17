@@ -1,3 +1,72 @@
+# The seasons' second weeks - task 0298 (2026-10-16)
+
+0280 found where the year tires: each season's days 9-13 sent the same
+kinds from the same sides five nights running, only bigger. The second weeks
+now vary, and the year 0277 balanced still holds its target.
+
+**What moved:**
+- **A written pinch on day 11 of every season** (`GameData.PINCH_DAY`,
+  `KEY_NIGHTS` 11, 25, 39 and 53). It has its made night's hit points, from
+  one side, the season's heaviest kinds alone:
+  - spring: tanks and breakers from the east;
+  - summer: tanks, breakers and spitters from the south east;
+  - autumn: tanks, breakers and diggers from the north;
+  - winter: tanks, breakers and frost zombies from the south.
+  - Each kind is dealt in three groups, so no wave is all tanks.
+- **A template rests kinds on chosen days** (`SEASON_NIGHTS[...]["rests"]`,
+  read by `Almanac.mix_on`). Each night of the second week leans on part of
+  the season:
+  - spring rests its tanks on 9, its runners on 10 and its breakers on 12;
+  - summer rests its runners on 9, its rats on 10 and its spitters on 12;
+  - autumn rests its crows on 9, its runners on 10 and its tanks on 12;
+  - winter rests its runners on 9, its rats on 10 and its diggers on 12;
+  - day 13 sends the whole season.
+  - From summer on, the night after an introduction rests one kind too:
+    - summer rests its runners on 4 and its tanks on 6;
+    - autumn rests its rats on 4 and its spitters on 6;
+    - winter rests its crows on 6.
+  - Spring's first week rests nothing. It has one side and a kind at a
+    time, and 0271 holds the night after each introduction to sending more
+    of it.
+- **A later year rests the same kinds on the same days.** Its day 11 sends
+  the pinch's kinds from every side.
+
+**The sameness** (`python tools/nights.py --sameness`, seed 0; seeds 1-3
+match within a night):
+
+| | Before | After |
+|---|---|---|
+| distinct mixes, spring / summer / autumn / winter | 5 / 5 / 5 / 6 | 8 / 10 / 11 / 11 |
+| a second-week mix sent twice | every season | none |
+| the forecast the same two nights running | 5 / 6 / 3 / 6 | 2 / 0 / 0 / 0 (spring's are its days 1-6) |
+| the longest run of nights bringing nothing new | 5 (days 9-13, three seasons) | 2 |
+
+**The year** (`python tools/autoplay.py --year 8`, after):
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.1    0.0    1.5    1.4         2.1  0.2  0.9  0.0   6/8    2/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.1    2.6    3.4         0.0  0.0  1.8  0.0   6/8    2/8
+  walls              8.9    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+```
+
+- **`towers` loses 3.1 nights before Winter 1, against 3.4 at 0280.** That
+  is inside 0277's target of two to four.
+- **`balanced` loses 3.6, against 6.0.**
+- **Twelve runs of sixteen win the year, where 0280 had fourteen.** The
+  difference is two runs held at a boss: one at autumn's King, one at the
+  Giant. The year is chaotic: a lost night is never won back, so a seed's
+  run swings from clean to a cascade on one night. The previous run of
+  these tables, with spring resting on its days 4 and 6 too, had `towers`
+  at 4.5 and `balanced` at 2.6.
+- **The pinches held by `towers`:**
+  - autumn's (day 39) 75% of the runs that reached it, its hardest;
+  - spring's and summer's 100%;
+  - winter's 67%.
+
+---
+
 # The economy across a year - task 0278 (2026-10-16)
 
 The plan's rule of thumb, measured in every season and not only the first:

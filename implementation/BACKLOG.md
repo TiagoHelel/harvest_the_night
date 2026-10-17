@@ -1,8 +1,8 @@
 # Backlog - HARVEST THE NIGHT
 
-`#######################.`  **285 / 297 done**
+`#######################.`  **286 / 297 done**
 
-0 doing / 12 todo / 0 blocked across 18 phases.
+0 doing / 11 todo / 0 blocked across 18 phases.
 
 Run one task - `/next-task`, which reads
 `implementation/prompts/00-RUNNER-LOOP.md` and does exactly one:
@@ -26,7 +26,7 @@ which rewrites this file for you.
 
 ## What is open
 
-12 task(s) left, the ready ones first, then what they
+11 task(s) left, the ready ones first, then what they
 unlock. Generated from `tools/backlog/part*.py` together
 with the prompt files, so the two cannot disagree.
 
@@ -158,23 +158,25 @@ The farmer milks, shears and feeds with a proper pose, and pets the dog, at the 
   - done when: FHD (1920x1080) captures by day and by night of the art in the real game, opened and looked at, in `implementation/shots/0208/`
   - done when: the sim and data hashes are unchanged (art never moves them)
 
-### 0298 - The seasons' second weeks
+### 0295 - A playtest build of the year
 
-Ready to pick up.  Likely files: `src/core/game_data.gd, src/core/almanac.gd, src/tools/nights.gd, src/tools/headless_v1.gd, implementation/BALANCE.md`.
+Ready to pick up.  Likely files: `src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, docs/PLAYTEST.md, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
 
-0280 found where the year tires: each season's days 9-13 send the same kinds from the same sides five nights running, only bigger - twenty of the year's 56 nights - and the forecast says the same thing two nights running about twenty times a year, most of them there. Give every second week something to meet without breaking the rhythm the plan wants (days 8-13 grow again with the season's novelty) or the year 0277 balanced.
+Put the year in front of somebody and learn from it: a build that says it is a playtest, a log of what 1.0 is about - bedtimes, the build step, dawn, seasons, lost nights - and a reader that answers 1.0's questions instead of the MVP's. It goes out with the art that has arrived, placeholders and all.
 
-- Measure first: `python tools/nights.py --sameness` for seeds 0-3, before and after, in the journal
-- One written key night in each season's second week (day 11 is free of every other rule: no Full Moon, no boss, no introduction): a pinch rather than a bigger copy - the season's heaviest kinds from one side, or its newest kind leading - at the made night's hit points for that day, so `check_nights`' rules (a size never falls, a gap never grows) hold as written
-- The made nights of days 9-13 no longer share a mix: a template's `mix` may name a day a kind's weight changes (`[weight, the day it joins]` gains an optional third, `[weight, day, weight from day 9]`), read by `Almanac.mix_on`, checked by `check_nights`; Year 2's `_later` follows it
-- Targets, asserted in `_task_0298_second_weeks` in `src/tools/headless_v1.gd`: no two nights of a season's days 9-13 share their mix of kinds and sides; the longest run of nights that bring nothing new is three at most; the forecast says the same thing two nights running at most once a season
-- The year still holds: `python tools/autoplay.py --year 8` after the change keeps 0277's target (`towers` two to four nights lost before Winter 1) or the journal says why and the owner calls it; the table in the journal
-- DATA moves on purpose (the key nights and the templates), SIM should not - the determinism night is day 1 - both in `implementation/PROGRESS.md`
+- The log learns the calendar: `Playtest.watch` writes the season and day when a day begins ('Spring 3 began'), the hour he went to bed or that he passed out at 02:00, how long the build step ran before START, how the night ended (dawn, all killed, the house fell) and when a boss night repeats - all in the `  m:ss  what` shape the reader parses
+- A lost night no longer ends the session: today `watch` calls `run_ended` on `night_lost` ('the house fell on night N'), which in 1.0 is a setback inside a run. A session ends at the end of the year (0160's ending), at Abandon (`main.gd`) or when the window closes. `run_ended`'s 'reached night' reads the calendar date - 0151 named `playtest.gd` among the `nights_won + 1` readers; finish it here if it did not
+- `tools/playtest.py` asks 1.0's questions: did they reach the first night; how long was Spring 1 in real minutes (the plan wants 8-10 for the day and 3-5 for the night); bed or pass-out, night by night; how long the build step ran; how far into the year they got and how many nights they lost per season (the plan's target is 2-4 lost before winter); where the notes cluster. `--self-check` gets a 1.0 sample log and fails when any answer comes back empty
+- `docs/PLAYTEST.md` rewritten for 1.0 (it still says ten nights and a night you send for; 0117 only corrected what happens after night ten): what the game is now; the most useful stretch to play (Spring 1 to the Giant on day 14); what to try (bed early and late, the cursor by mouse and by pad, START, the bin, the rod); what to ignore, including the placeholders still on screen as `python tools/placeholders.py` (0120) lists them; the same F1 and local-log promises
+- `_task_0105_playtest` in `headless_check.gd` stays true: if a line it reads has moved, rewrite it in the same change
+- The build: `python tools/release.py --playtest` writes `build/playtest/` with `READ ME FIRST.md` beside it, and the badge says playtest. It builds only the Windows playtest preset, so no web budget is weighed here - `PACK_BUDGET` and `WIRE_BUDGET` are 0297's
+- Nothing is sent: the build is made and checked and the journal says where it is. Handing it to a tester is the owner's call. Playtest code is `src/app/` and only reads the state: neither hash moves
+- Questions the loop cannot answer - whether a stranger reads the week's lines (0293), whether a night is long enough, and 0196's: after the morning's field, are the pond, the cliff and the animals worth doing for themselves or only for the night - go into PLAYTEST.md's 'what to report', not into a guess in the journal
 
-  - done when: `_task_0298_second_weeks` in `src/tools/headless_v1.gd` holds the three sameness targets for seeds 0-3
-  - done when: `python tools/nights.py --sameness` before and after, and the `--year 8` table after, are in the journal
-  - done when: `python tools/verify.py` prints PASS
-  - done when: the determinism hash is unchanged, or the change is deliberate and both the old and the new number are in the journal
+  - done when: `_task_0295_playtest_log` in `src/tools/headless_v1.gd`: a short scripted run through bed, START, dawn, a lost night and the next morning writes, in order, the lines the reader parses, and the session is still open after the lost night - the lost night parked through 0118's road with the house set to fall, so the group takes seconds, not two whole nights
+  - done when: `python tools/playtest.py --self-check` passes with the 1.0 sample, and `python tools/playtest.py <folder>` on the log that group wrote answers every question
+  - done when: `python tools/release.py --playtest` succeeds, including its 400-frame boot of the playtest build; `python tools/shot.py 0295 --title --playtest --fhd` shows the badge on the first screen - opened
+  - done when: no 'ten nights' or 'night ten' is left in `docs/PLAYTEST.md`, in any case
 
 ### 0290 - The 1.0 visual gate
 
@@ -194,26 +196,6 @@ Before 1.0 ships, look at the whole game in its real frame - every screen, seaso
   - done when: 0120's placeholder check prints zero packs pending (A057 excepted only when declined and 0289 closed), quoted in the journal
   - done when: The catalogue names a capture for every family and state in the lists above
   - done when: Every follow-up is filed as a task (and a pack when it needs art) with ids, each one in 0297's deps, none left as prose
-
-### 0295 - A playtest build of the year
-
-Waits on 0298.  Likely files: `src/app/playtest.gd, src/ui/main.gd, tools/playtest.py, docs/PLAYTEST.md, src/tools/headless_v1.gd, src/tools/headless_check.gd`.
-
-Put the year in front of somebody and learn from it: a build that says it is a playtest, a log of what 1.0 is about - bedtimes, the build step, dawn, seasons, lost nights - and a reader that answers 1.0's questions instead of the MVP's. It goes out with the art that has arrived, placeholders and all.
-
-- The log learns the calendar: `Playtest.watch` writes the season and day when a day begins ('Spring 3 began'), the hour he went to bed or that he passed out at 02:00, how long the build step ran before START, how the night ended (dawn, all killed, the house fell) and when a boss night repeats - all in the `  m:ss  what` shape the reader parses
-- A lost night no longer ends the session: today `watch` calls `run_ended` on `night_lost` ('the house fell on night N'), which in 1.0 is a setback inside a run. A session ends at the end of the year (0160's ending), at Abandon (`main.gd`) or when the window closes. `run_ended`'s 'reached night' reads the calendar date - 0151 named `playtest.gd` among the `nights_won + 1` readers; finish it here if it did not
-- `tools/playtest.py` asks 1.0's questions: did they reach the first night; how long was Spring 1 in real minutes (the plan wants 8-10 for the day and 3-5 for the night); bed or pass-out, night by night; how long the build step ran; how far into the year they got and how many nights they lost per season (the plan's target is 2-4 lost before winter); where the notes cluster. `--self-check` gets a 1.0 sample log and fails when any answer comes back empty
-- `docs/PLAYTEST.md` rewritten for 1.0 (it still says ten nights and a night you send for; 0117 only corrected what happens after night ten): what the game is now; the most useful stretch to play (Spring 1 to the Giant on day 14); what to try (bed early and late, the cursor by mouse and by pad, START, the bin, the rod); what to ignore, including the placeholders still on screen as `python tools/placeholders.py` (0120) lists them; the same F1 and local-log promises
-- `_task_0105_playtest` in `headless_check.gd` stays true: if a line it reads has moved, rewrite it in the same change
-- The build: `python tools/release.py --playtest` writes `build/playtest/` with `READ ME FIRST.md` beside it, and the badge says playtest. It builds only the Windows playtest preset, so no web budget is weighed here - `PACK_BUDGET` and `WIRE_BUDGET` are 0297's
-- Nothing is sent: the build is made and checked and the journal says where it is. Handing it to a tester is the owner's call. Playtest code is `src/app/` and only reads the state: neither hash moves
-- Questions the loop cannot answer - whether a stranger reads the week's lines (0293), whether a night is long enough, and 0196's: after the morning's field, are the pond, the cliff and the animals worth doing for themselves or only for the night - go into PLAYTEST.md's 'what to report', not into a guess in the journal
-
-  - done when: `_task_0295_playtest_log` in `src/tools/headless_v1.gd`: a short scripted run through bed, START, dawn, a lost night and the next morning writes, in order, the lines the reader parses, and the session is still open after the lost night - the lost night parked through 0118's road with the house set to fall, so the group takes seconds, not two whole nights
-  - done when: `python tools/playtest.py --self-check` passes with the 1.0 sample, and `python tools/playtest.py <folder>` on the log that group wrote answers every question
-  - done when: `python tools/release.py --playtest` succeeds, including its 400-frame boot of the playtest build; `python tools/shot.py 0295 --title --playtest --fhd` shows the badge on the first screen - opened
-  - done when: no 'ten nights' or 'night ten' is left in `docs/PLAYTEST.md`, in any case
 
 ### 0296 - The store page and trailer for 1.0
 
@@ -569,7 +551,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0268** [Art: the Winter Lord](prompts/0268-art-winter-lord.md)
 - [x] **0269** [Art: fog, rain and the Blood Moon icons](prompts/0269-art-event-icons.md)
 
-## 15 - Fifty-six nights and balance  (11/12)
+## 15 - Fifty-six nights and balance  (12/12)
 
 - [x] **0270** [Fifty-six nights as data](prompts/0270-night-records-v2.md)
 - [x] **0271** [Spring's fourteen nights](prompts/0271-spring-nights.md)
@@ -582,7 +564,7 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0278** [The economy across a year](prompts/0278-economy-seasons.md)
 - [x] **0279** [Year 2](prompts/0279-year-two.md)
 - [x] **0280** [Checkpoint: do fifty-six nights tire?](prompts/0280-checkpoint-year.md)
-- [ ] **0298** [The seasons' second weeks](prompts/0298-second-weeks.md)
+- [x] **0298** [The seasons' second weeks](prompts/0298-second-weeks.md)
 
 ## 16 - Sound, collections and polish  (9/10)
 
@@ -603,6 +585,6 @@ Run the checklist 0106 wrote, for 1.0: one version everywhere, a changelog a pla
 - [x] **0292** [Options for the new controls](prompts/0292-options-v1.md)
 - [x] **0293** [The first week, taught](prompts/0293-onboarding-v1.md)
 - [x] **0294** [Every new word in Portuguese](prompts/0294-translation-v1.md)
-- [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md) - needs 0298
+- [ ] **0295** [A playtest build of the year](prompts/0295-playtest-v1.md)
 - [ ] **0296** [The store page and trailer for 1.0](prompts/0296-store-v1.md) - needs 0290
 - [ ] **0297** [Releasing 1.0](prompts/0297-release-v1.md) - needs 0290, 0295, 0296

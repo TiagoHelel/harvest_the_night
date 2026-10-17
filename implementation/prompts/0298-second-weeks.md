@@ -1,7 +1,7 @@
 # 0298 - The seasons' second weeks
 
 - **Phase:** 15 - Fifty-six nights and balance
-- **Status:** todo
+- **Status:** done
 - **Depends on:** 0280
 - **Likely files:** src/core/game_data.gd, src/core/almanac.gd, src/tools/nights.gd, src/tools/headless_v1.gd, implementation/BALANCE.md
 

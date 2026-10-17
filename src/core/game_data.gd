@@ -3051,6 +3051,14 @@ const SEASON_NIGHTS: Array = [
 	{
 		"sides": [[0, 1]],                      # LEVER: [side, the day of the season it joins]
 		"mix": {&"walker": [30, 1], &"runner": [10, 3], &"tank": [25, 5], &"breaker": [35, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		# **The kinds a made night rests** (task 0298): each of the second
+		# week's nights - and, from summer, the night after an introduction -
+		# leans on part of the season, so no two nights running send the
+		# same kinds. Spring's first week rests nothing: one side, a kind at
+		# a time, and the night after each sends more of it (0271). Day 11 is
+		# the written pinch in Year 1; its rest is a later year's.
+		"rests": {9: [&"tank"], 10: [&"runner"],
+			11: [&"walker", &"runner"], 12: [&"breaker"]},  # LEVER: day of the season -> the kinds it leaves out
 		"size": [380, 2800],             # LEVER: hit points on its second and thirteenth day, 200-12000
 		"waves": [4, 7],                    # LEVER: waves on its second and thirteenth day, 2-12
 		"gap_ticks": [40 * SECONDS, 18 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
@@ -3064,6 +3072,8 @@ const SEASON_NIGHTS: Array = [
 		"sides": [[0, 1], [1, 3]],              # LEVER: [side, the day of the season it joins]
 		"mix": {&"walker": [26, 1], &"runner": [10, 1], &"tank": [22, 1], &"breaker": [22, 1],
 			&"spitter": [12, 5], &"rat": [8, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"rests": {4: [&"runner"], 6: [&"tank"], 9: [&"runner"], 10: [&"rat"],
+			11: [&"walker", &"runner", &"rat"], 12: [&"spitter"]},  # LEVER: day of the season -> the kinds it leaves out
 		"size": [1800, 5000],            # LEVER: hit points on its second and thirteenth day, 200-12000
 		"waves": [5, 7],                    # LEVER: waves on its second and thirteenth day, 2-12
 		"gap_ticks": [24 * SECONDS, 6 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
@@ -3076,6 +3086,8 @@ const SEASON_NIGHTS: Array = [
 		"sides": [[0, 1], [1, 1], [2, 3]],      # LEVER: [side, the day of the season it joins]
 		"mix": {&"walker": [22, 1], &"runner": [9, 1], &"tank": [18, 1], &"breaker": [18, 1],
 			&"spitter": [10, 1], &"rat": [4, 1], &"crow": [2, 5], &"digger": [10, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"rests": {4: [&"rat"], 6: [&"spitter"], 9: [&"crow"], 10: [&"runner"],
+			11: [&"walker", &"runner", &"rat", &"crow", &"spitter"], 12: [&"tank"]},  # LEVER: day of the season -> the kinds it leaves out
 		# **Autumn's thirteenth day at 6,400, not 8,400** (task 0277, the
 		# owner's call: "baixa o outono e ajusta as noites"): the year's robot
 		# held to Autumn 11 and fell from 12 on six seeds of eight. With the
@@ -3097,6 +3109,9 @@ const SEASON_NIGHTS: Array = [
 		"mix": {&"walker": [18, 1], &"runner": [6, 1], &"tank": [20, 1], &"breaker": [14, 1],
 			&"spitter": [8, 1], &"rat": [2, 1], &"crow": [1, 1], &"digger": [8, 1],
 			&"frost_zombie": [10, 5], &"wraith": [3, 8]},  # LEVER: kind -> [weight in hit points, the day it joins]
+		"rests": {6: [&"crow"], 9: [&"runner"], 10: [&"rat"],
+			11: [&"walker", &"runner", &"rat", &"crow", &"spitter", &"digger", &"wraith"],
+			12: [&"digger"]},  # LEVER: day of the season -> the kinds it leaves out
 		# **Winter at 78% of 8,400-9,800** (task 0277): 0274's rule is that
 		# winter's made nights send no more bodies than autumn's, and autumn's
 		# came down. Its hand-written nights 45-50 came down alike so its
@@ -3107,6 +3122,11 @@ const SEASON_NIGHTS: Array = [
 		"gap_ticks": [10 * SECONDS, 3 * SECONDS],  # LEVER: the least gap on its second and thirteenth day, 2-60 seconds
 	},
 ]
+
+## **The second week's pinch** (task 0298): the day of each season written as
+## the season's heaviest kinds from one side, at its made night's hit points.
+## A day of the second week (9-13) that is no Full Moon.
+const PINCH_DAY := 11  # LEVER: the day of the season, 9-13
 
 const KEY_NIGHTS: Dictionary = {
 	# ---------------------------------------------------------------- spring
@@ -3177,6 +3197,23 @@ const KEY_NIGHTS: Dictionary = {
 			[&"tank", 4, 0],
 			[&"walker", 18, 0],
 			[&"breaker", 3, 0],
+		],
+	},
+	# **The second week's pinch** (task 0298): day 11 of every season, free
+	# of every other rule, is written - the season's heaviest kinds, from one
+	# side, at the hit points its made night would have had. A pinch rather
+	# than a bigger copy, between the made nights the template rests.
+	11: {
+		"note": "spring's pinch: the heavy ones alone, from the east",
+		"opening_ticks": 0,
+		"gap_ticks": 22 * SECONDS,  # the fill line's spacing for six waves
+		"waves": [
+			[&"breaker", 10, 0],
+			[&"tank", 3, 0],
+			[&"breaker", 10, 0],
+			[&"tank", 3, 0],
+			[&"breaker", 10, 0],
+			[&"tank", 2, 0],
 		],
 	},
 	14: {
@@ -3278,6 +3315,26 @@ const KEY_NIGHTS: Dictionary = {
 			[&"rat", 18, 0],
 			[&"tank", 3, 1],
 			[&"breaker", 8, 0],
+		],
+	},
+	# **The second week's pinch** (task 0298): day 11 of every season, free
+	# of every other rule, is written - the season's heaviest kinds, from one
+	# side, at the hit points its made night would have had. A pinch rather
+	# than a bigger copy, between the made nights the template rests.
+	25: {
+		"note": "summer's pinch: the heavy ones and the spitters, all from the south east",
+		"opening_ticks": 0,
+		"gap_ticks": 279,  # ticks: the fill line's spacing for nine waves
+		"waves": [
+			[&"breaker", 13, 1],
+			[&"tank", 5, 1],
+			[&"spitter", 11, 1],
+			[&"breaker", 13, 1],
+			[&"tank", 5, 1],
+			[&"spitter", 10, 1],
+			[&"breaker", 12, 1],
+			[&"tank", 4, 1],
+			[&"spitter", 10, 1],
 		],
 	},
 	28: {
@@ -3410,6 +3467,26 @@ const KEY_NIGHTS: Dictionary = {
 			[&"spitter", 8, 1],
 			[&"runner", 18, 2],
 			[&"rat", 20, 0],
+		],
+	},
+	# **The second week's pinch** (task 0298): day 11 of every season, free
+	# of every other rule, is written - the season's heaviest kinds, from one
+	# side, at the hit points its made night would have had. A pinch rather
+	# than a bigger copy, between the made nights the template rests.
+	39: {
+		"note": "autumn's pinch: the heavy ones and the diggers, all from the north",
+		"opening_ticks": 0,
+		"gap_ticks": 232,  # ticks: the fill line's spacing for nine waves
+		"waves": [
+			[&"breaker", 18, 2],
+			[&"tank", 7, 2],
+			[&"digger", 13, 2],
+			[&"breaker", 18, 2],
+			[&"tank", 7, 2],
+			[&"digger", 13, 2],
+			[&"breaker", 17, 2],
+			[&"tank", 6, 2],
+			[&"digger", 12, 2],
 		],
 	},
 	42: {
@@ -3588,6 +3665,26 @@ const KEY_NIGHTS: Dictionary = {
 			[&"frost_zombie", 5, 4],
 			[&"spitter", 8, 3],
 			[&"runner", 17, 0],
+		],
+	},
+	# **The second week's pinch** (task 0298): day 11 of every season, free
+	# of every other rule, is written - the season's heaviest kinds, from one
+	# side, at the hit points its made night would have had. A pinch rather
+	# than a bigger copy, between the made nights the template rests.
+	53: {
+		"note": "winter's pinch: the heavy ones and the frost zombies, all from the south",
+		"opening_ticks": 0,
+		"gap_ticks": 137,  # ticks: the fill line's spacing for nine waves
+		"waves": [
+			[&"breaker", 18, 4],
+			[&"tank", 10, 4],
+			[&"frost_zombie", 16, 4],
+			[&"breaker", 17, 4],
+			[&"tank", 9, 4],
+			[&"frost_zombie", 16, 4],
+			[&"breaker", 17, 4],
+			[&"tank", 9, 4],
+			[&"frost_zombie", 16, 4],
 		],
 	},
 	56: {
@@ -6472,6 +6569,33 @@ static func check_nights(templates: Array, key_nights: Dictionary) -> Array:
 					or int(pair[1]) < 1 or int(pair[1]) > SEASON_DAYS:
 				errors.append("the %s template's '%s' is not [a weight of one or more, a day of the season]"
 					% [season, kind])
+		# **What a made night rests** (task 0298): a day of the season, kinds
+		# the template mixes, and never every kind the day has joined - a
+		# rest leans a night, it never empties one.
+		var rests: Variant = template.get("rests", {})
+		if not (rests is Dictionary):
+			errors.append("the %s template's rests are not a record of days" % season)
+		else:
+			var rest_days: Array = (rests as Dictionary).keys()
+			rest_days.sort()
+			for day in rest_days:
+				if typeof(day) != TYPE_INT or int(day) < 1 or int(day) > SEASON_DAYS:
+					errors.append("the %s template rests on '%s', not a day 1-%d" % [season, str(day), SEASON_DAYS])
+					continue
+				if not ((rests as Dictionary)[day] is Array):
+					errors.append("the %s template's rest on day %d is not a list of kinds" % [season, int(day)])
+					continue
+				var resting: Array = (rests as Dictionary)[day]
+				for kind in resting:
+					if not mix.has(kind):
+						errors.append("the %s template rests '%s' on day %d, which it does not mix"
+							% [season, str(kind), int(day)])
+				var left := 0
+				for kind in sorted_names(mix.keys()):
+					if (mix[kind] is Array) and int((mix[kind] as Array)[1]) <= int(day) and not resting.has(kind):
+						left += 1
+				if left == 0:
+					errors.append("the %s template rests every kind it has on day %d" % [season, int(day)])
 		var pairs := {}
 		for field in ["size", "waves", "gap_ticks"]:
 			var pair: Variant = template.get(field, [])
@@ -6534,6 +6658,13 @@ static func check_nights(templates: Array, key_nights: Dictionary) -> Array:
 	for day in range(1, year + 1):
 		if Calendar.is_full_moon(day) and not key_nights.has(day):
 			errors.append("day %d is a Full Moon with no key night" % day)
+	# **Every season's pinch is written** (task 0298), on a second-week day
+	# that is no Full Moon.
+	if PINCH_DAY < 9 or PINCH_DAY > 13 or FULL_MOON_DAYS.has(PINCH_DAY):
+		errors.append("the pinch is on day %d of the season: keep it to 9-13, off a Full Moon" % PINCH_DAY)
+	for season in SEASONS.size():
+		if not key_nights.has(season * SEASON_DAYS + PINCH_DAY):
+			errors.append("%s has no pinch written on its day %d" % [SEASONS[season], PINCH_DAY])
 
 	# **The years after the first** (task 0279).
 	errors.append_array(check_later_years(LATER_YEARS))

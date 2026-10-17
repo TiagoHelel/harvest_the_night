@@ -58,6 +58,12 @@ static func is_key(day: int) -> bool:
 	return day <= Calendar.year_days() and GameData.KEY_NIGHTS.has(day)
 
 
+## **Whether `day` is a second week's pinch** (task 0298): Year 1's key night
+## on `GameData.PINCH_DAY` of its season.
+static func is_pinch(day: int) -> bool:
+	return is_key(day) and Calendar.day_of_season(day) == GameData.PINCH_DAY
+
+
 ## **Whether `day` is a later year's** (task 0279): past Year 1 and not a calm
 ## date, so made by `_later`.
 static func is_later(day: int) -> bool:
@@ -95,13 +101,17 @@ static func sides_on(template: Dictionary, of_season: int) -> Array:
 
 
 ## The kinds a template mixes on day `of_season`, with their weights: every one
-## that has joined by then.
-static func mix_on(template: Dictionary, of_season: int) -> Dictionary:
+## that has joined by then - every one of the season's, `whole`, for a later
+## year - less those the template **rests** that day (task 0298), so the
+## night after an introduction and each night of the second week lean on
+## part of the season rather than all of it.
+static func mix_on(template: Dictionary, of_season: int, whole: bool = false) -> Dictionary:
 	var out := {}
 	var mix: Dictionary = template.get("mix", {})
+	var resting: Array = (template.get("rests", {}) as Dictionary).get(of_season, [])
 	for kind in GameData.sorted_names(mix.keys()):
 		var pair: Array = mix[kind]
-		if int(pair[1]) <= of_season:
+		if (whole or int(pair[1]) <= of_season) and not resting.has(kind):
 			out[kind] = int(pair[0])
 	return out
 
@@ -136,7 +146,8 @@ static func _made(seed_value: int, day: int) -> Dictionary:
 ## grown by `LATER_YEARS.growth_percent` for each year past the first, added
 ## and never compounded. It is made from its season's **whole** template:
 ## every kind of the season mixed from its first day, for nothing is new any
-## more and a later year has no introductions. Each share is rounded **up**
+## more and a later year has no introductions - less the kinds the template
+## rests that day, as Year 1's made nights do (task 0298). Each share is rounded **up**
 ## to whole bodies, so a later year never sends fewer hit points than the
 ## year before it. Its sides open day by day as Year 1's did, its waves and
 ## gaps are the template's, and it fills the night as a made one does. The
@@ -144,7 +155,7 @@ static func _made(seed_value: int, day: int) -> Dictionary:
 static func _later(seed_value: int, day: int) -> Dictionary:
 	var of_season := Calendar.day_of_season(day)
 	var template: Dictionary = GameData.SEASON_NIGHTS[Calendar.season_of(day)]
-	var points := share_out(later_hit_points(day), mix_on(template, GameData.SEASON_DAYS))
+	var points := share_out(later_hit_points(day), mix_on(template, of_season, true))
 	var bodies := {}
 	for kind in GameData.sorted_names(points.keys()):
 		var hp := maxi(int((GameData.ENEMIES[kind] as Dictionary)["hp"]), 1)

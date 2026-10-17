@@ -243,8 +243,10 @@ func _side_code(side: int) -> String:
 ##   another night's of its season;
 ## - **nothing new**: a night that meets no kind, side or event (fog, rain,
 ##   a Blood Moon, a Full Moon) for the first time this year, opens no weapon
-##   (the season's arsenal on its first day) and brings no boss; the longest
-##   runs of them, by day;
+##   (the season's arsenal on its first day), brings no boss and is no night
+##   a person wrote (task 0298: an introduction, a Full Moon or a second
+##   week's pinch is met once, as written); the longest runs of them, by
+##   day - and how many there are without counting the written nights;
 ## - **the forecast again**: two nights running whose forecast says the same
 ##   thing - its sides, its kinds, its weather, its moon and its boss - the
 ##   counts aside.
@@ -256,6 +258,7 @@ func _print_sameness(seed_value: int) -> void:
 	var seen_events := {}
 	var weapons := {}
 	var plain_days: Array = []
+	var plain_unwritten := 0
 	var forecast_again: Dictionary = {}
 	var previous := ""
 	var by_season := {}
@@ -298,6 +301,11 @@ func _print_sameness(seed_value: int) -> void:
 		if Calendar.is_boss_night(day):
 			news.append(String(Calendar.boss_of(day)))
 		if news.is_empty() and not calm:
+			plain_unwritten += 1
+		# **A night a person wrote** (task 0298) is met once, as written.
+		if Almanac.is_key(day):
+			news.append("written")
+		if news.is_empty() and not calm:
 			plain_days.append(day)
 		var said := "%s|%s|%s|%s|%s" % [str(sides), ",".join(kinds), event, moon, Calendar.boss_of(day) if Calendar.is_boss_night(day) else &""]
 		if not calm and said == previous:
@@ -335,7 +343,8 @@ func _print_sameness(seed_value: int) -> void:
 	runs.sort_custom(func(a: Array, b: Array) -> bool:
 		return int(a[1]) - int(a[0]) > int(b[1]) - int(b[0]) or (int(a[1]) - int(a[0]) == int(b[1]) - int(b[0]) and int(a[0]) < int(b[0])))
 	print("")
-	print("  %d of the year's nights bring nothing new; the longest runs of them:" % plain_days.size())
+	print("  %d of the year's nights bring nothing new (%d without counting the written nights); the longest runs of them:"
+		% [plain_days.size(), plain_unwritten])
 	for run in runs.slice(0, 6):
 		var nights := 0
 		for day in range(int(run[0]), int(run[1]) + 1):

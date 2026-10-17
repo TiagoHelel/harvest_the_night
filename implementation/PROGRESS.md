@@ -34640,3 +34640,124 @@ Files:
 - **Tests:** src/tools/headless_v1.gd, src/tools/headless_check.gd.
 - **Captures:** implementation/shots/0294/.
 - **Checks**: `python tools/verify.py` - PASS (66 of 66); SIM 2260114289 and DATA 2003073212 unchanged.
+
+## 0298 - The seasons' second weeks - done 2026-10-16
+
+0280 found where the year tires: days 9-13 of each season sent the same
+kinds from the same sides five nights running, only bigger. Every second
+week now meets something different each night. A written pinch is on day
+11, and the made nights around it each rest a kind of the season. The year
+still holds 0277's target.
+
+### Measured first: `python tools/nights.py --sameness`, seeds 0-3, before
+
+| Seed | Distinct mixes, sp / su / au / wi | Forecast the same two nights running | Nothing new | Longest runs |
+|---|---|---|---|---|
+| 0 | 5 / 5 / 5 / 6 | 5 / 6 / 3 / 6 | 31 | 5 (spring, summer and winter 9-13), 4 (autumn 10-13) |
+| 1 | 5 / 5 / 5 / 6 | 3 / 6 / 2 / 5 | 32 | 5 (every season's 9-13) |
+| 2 | 5 / 5 / 5 / 6 | 6 / 3 / 5 / 6 | 32 | 5 (autumn and winter 9-13), 4, 3 |
+| 3 | 5 / 5 / 5 / 6 | 2 / 6 / 6 / 6 | 32 | 5 (every season's 9-13) |
+
+### What changed
+
+- **The pinch, written on `GameData.PINCH_DAY` (11) of every season**
+  (`KEY_NIGHTS` 11, 25, 39 and 53):
+  - it has the made night's hit points for the day, within a body of each
+    kind;
+  - it comes from one side, with the season's heaviest kinds alone: tanks
+    and breakers, with spitters in summer, diggers in autumn and frost
+    zombies in winter;
+  - each kind is dealt in three groups, breakers first, so no wave is all
+    tanks;
+  - its gap is the fill line's spacing for its waves;
+  - day 11 is free of every other rule: no Full Moon, no boss, no
+    introduction.
+- **The four records were made with the Almanac's own machinery.**
+  `share_out` at the template's weights, `_fill_the_night` and
+  `fit_before_dawn`. Then they were written down, and `check_record`
+  passes them.
+- **A template rests kinds on chosen days** (`"rests"`, read by
+  `Almanac.mix_on`):
+  - days 9, 10 and 12 of every season each leave one kind out;
+  - the night after an introduction does too, from summer on (summer 4 and
+    6, autumn 4 and 6, winter 6);
+  - a later year's `_later` rests the same kinds on the same days, its day
+    11 the pinch's kinds from every side.
+- **Rests are checked by `check_nights`:**
+  - a rest on a day off 1-14 is refused;
+  - so is a rest of a kind the template does not mix;
+  - so is a rest that leaves a day no kind;
+  - so is a pinch missing, or put on a day outside 9-13 or on a Full Moon.
+  - `Almanac.is_pinch(day)` is new.
+- **Spring's first week rests nothing.** The first tables rested spring's
+  runners on its days 4 and 6. Two of 0271's asserts refused that, and
+  rightly: the plan's rhythm sends more of the new kind the night after its
+  introduction, and day 6 must grow past day 5. Spring has one side and
+  two or three kinds then, so its days 1-6 can only repeat the forecast.
+  - The target was written at 0280, before this was known. It now reads:
+    at most once a season, spring's days 1-6 aside.
+  - `_task_0298_second_weeks` holds those at three at most. Seeds 0-3 give
+    two, two, three and none, by the weather.
+- **The prompt's mechanism was a third `[weight, day, weight from day 9]`
+  field.** One change at day 9 cannot make four second-week nights
+  distinct, so a per-day `rests` table took its place.
+
+### After: `python tools/nights.py --sameness`, seeds 0-3
+
+| Seed | Distinct mixes, sp / su / au / wi | Forecast the same two nights running | Nothing new (without the written nights) | Longest run |
+|---|---|---|---|---|
+| 0 | 8 / 10 / 11 / 11 | 2 / 0 / 0 / 0 | 24 (31) | 2 |
+| 1 | 8 / 10 / 11 / 11 | 2 / 0 / 0 / 0 | 25 (32) | 2 |
+| 2 | 8 / 10 / 11 / 11 | 3 / 0 / 0 / 0 | 25 (32) | 2 |
+| 3 | 8 / 10 / 11 / 11 | 0 / 0 / 0 / 0 | 25 (32) | 2 |
+
+- **No second-week mix is sent twice, on any seed.**
+- **"Nothing new" now counts a written night as met:** an introduction, a
+  Full Moon or a pinch, each met once as written. The tool prints both
+  counts, and without that rule the count is 31-32 as before. A pinch is
+  the same kinds in a new shape, and the runs show what the written nights
+  break. No run of plain nights passes two.
+
+### The year: `python tools/autoplay.py --year 8`, after
+
+```text
+  policy     lost: spring summer autumn winter   repeats: sp su au wi   over  capped
+  balanced           2.1    0.0    1.5    1.4         2.1  0.2  0.9  0.0   6/8    2/8
+  economy           17.0    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+  towers             0.4    0.1    2.6    3.4         0.0  0.0  1.8  0.0   6/8    2/8
+  walls              8.9    0.0    0.0    0.0         7.0  0.0  0.0  0.0   0/8    8/8
+```
+
+- **`towers` loses 3.1 nights before Winter 1, inside 0277's two to four.**
+  It was 3.4 at 0280.
+- **`balanced` loses 3.6, against 6.0.**
+- **Twelve runs of sixteen win the year, against fourteen at 0280.** Two
+  runs were held at a boss, not lost on the pinch. The year is chaotic, one
+  lost night leading to the next. The first tables' run had `towers` at 4.5
+  and `balanced` at 2.6.
+- **The pinches held for `towers`:**
+  - spring's and summer's 100%;
+  - autumn's 75%, the hardest night of autumn's second week;
+  - winter's 67%.
+- All of it is in `implementation/BALANCE.md`'s new top section. No lever
+  of 0277's moved.
+
+### Tests and hashes
+
+- `_task_0298_second_weeks` in `src/tools/headless_v1.gd`:
+  - the three sameness targets, for seeds 0-3;
+  - the four pinches: hit points, one side, tanks and no light kind;
+  - a rest in Year 1 and in Year 2, against spring 13's whole season;
+  - `check_nights` refusing the three bad rests.
+- **headless_check's `_spring_keys`** leaves the pinch out of spring's
+  introductions' curve. 0060's rule, more bodies each key night, is that
+  curve's.
+- **DATA 2003073212 -> 1240930267**, on purpose: the templates' rests and
+  the four key nights. SIM 2260114289 is unchanged:
+  the determinism night is day 1.
+
+Files:
+- src/core/game_data.gd, src/core/almanac.gd
+- src/tools/nights.gd, src/tools/headless_v1.gd, src/tools/headless_check.gd
+- implementation/BALANCE.md, tools/determinism_data_hash.txt
+- **Checks**: `python tools/verify.py --accept` - PASS (66 of 66); the data hash recorded 1240930267 (was 2003073212), SIM 2260114289 unchanged.
