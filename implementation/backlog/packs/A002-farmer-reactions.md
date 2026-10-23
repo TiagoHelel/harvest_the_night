@@ -1,6 +1,6 @@
 # A002 - The farmer's reactions and Zzz
 
-- **Status:** todo
+- **Status:** blocked - Owner deferred all farmer sprites until later, one at a time. Await an explicit request; no generation or integration now.
 - **For game task:** 0144
 - **Dressed by game tasks:** 0129
 - **Family:** farmer

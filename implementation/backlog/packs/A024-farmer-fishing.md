@@ -1,6 +1,6 @@
 # A024 - The farmer fishing
 
-- **Status:** todo
+- **Status:** blocked - Owner deferred all farmer sprites until later, one at a time. Await an explicit request; no generation or integration now.
 - **For game task:** 0207
 - **Dressed by game tasks:** 0180
 - **Spec after game task:** 0180

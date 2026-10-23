@@ -1,6 +1,6 @@
 # A006 - The farmer's run, eight directions
 
-- **Status:** todo
+- **Status:** blocked - Cancelled by owner: remove all eight run directions; reuse existing walk; see delivery/RUN-REMOVAL.txt
 - **For game task:** 0122
 - **Family:** farmer
 - **Mode:** B - finished native pixel art (`exact-source`), the approved blue 32px farmer's colours

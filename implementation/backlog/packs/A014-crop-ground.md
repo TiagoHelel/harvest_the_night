@@ -13,7 +13,7 @@
 Three pieces of farm ground the 1.0 rules add. When a night is lost, the horde
 tramples every crop on its routes (game task 0155): the plot stays tilled and
 shows a flattened, broken plant until something is planted there. On the first
-morning of a season, crops of the old season wither (0170) and stay as dead
+morning of a season, crops of the old season wither (0171) and stay as dead
 plants until harvested or hoed. And any grass can now be tilled (0167), so a
 tilled patch in open grass needs a turf border where it meets untilled grass.
 The player sees these in the morning light right after a loss or a season
@@ -23,7 +23,7 @@ the edge of a hoed patch, all quieter than a growing crop.
 
 ## Deliverables
 
-The table is provisional: game task 0167 settles the final canvas/footprint/states and updates it; start only when `python implementation/backlog/assets.py next` offers this pack.
+Final geometry settled by game task 0167: all four pieces use 16x16 canvases, drawn at 1.0; ground overlays have pivot (8,16), plants (8,14). Start only when `python implementation/backlog/assets.py next` offers this pack.
 
 | Runtime name | Native canvas | Pivot | Frames / seconds / loop | Notes |
 |---|---|---|---|---|
@@ -32,13 +32,17 @@ The table is provisional: game task 0167 settles the final canvas/footprint/stat
 | `crops/tilled_edge_n` | 16x16 | (8,16) | 1, static | Overlay drawn on a tilled-grass plot whose north neighbour is untilled grass: torn turf curling over the plot's edge, with a thin `soil_dark` cut line under it. Row 0 full width; tufts reach row 2 at most; columns 0 and 15 identical; one 4-connected piece containing (0,0). |
 | `crops/tilled_edge_corner_nw` | 16x16 | (8,16) | 1, static | Corner cap for an exposed diagonal: at most 3x3 from (0,0); its column 0 and its row 0 both equal `tilled_edge_n`'s column 0. |
 
-**Default edge scheme** (until 0167 rewrites it): like the terrain edges. The
-plot's mask counts its untilled-grass neighbours, N=1, E=2, S=4, W=8. Claude
-derives `tilled_edge_e/s/w` (clockwise quarter-turns 1/2/3 of the north piece,
-the importer's `rotate`) and `tilled_edge_corner_ne/se/sw` at integration;
-composites lay the sides in N, E, S, W order as `tools/gen_sprites.py`
-`edge_row()` does, and corner caps go where `world_view._corner_mask` would put
-them. They are not delivered.
+**Final edge scheme (0167).** The plot's mask counts its untilled-grass
+neighbours, N=1, E=2, S=4, W=8. Adjacent SOIL beds or tilled grass join with
+no internal border. The view rotates `tilled_edge_n` clockwise by 0/1/2/3
+quarter-turns about the tile centre, laying sides in N/E/S/W order. It rotates
+`tilled_edge_corner_nw` in NW/NE/SE/SW order for an exposed diagonal only
+when neither adjacent cardinal edge is exposed, as terrain corners do.
+The view loads the two delivered names through `PlaceholderArt`; derived
+rotation files and precomposited masks are unnecessary. The canvas remains
+16x16, pivot (8,16), draw scale 1.0 for every orientation. The turf uses
+`SeasonView.ground` so it follows the grass remap by season. Dry and wet
+plots share the border and keep their existing earth textures underneath.
 
 **Recipe values (mode A).** `trampled`, `withered`: no `palette_keys` (full
 palette, like today's crops), crop = the measured box, default anchor (bottom
@@ -96,7 +100,7 @@ Ask the owner (pt-BR):
 
 ## Acceptance
 
-- [ ] 4 files with the canvases and pivots of the table (or of 0167's final table); 1 static frame each.
+- [ ] 4 files with the final canvases and pivots of the table; 1 static frame each.
 - [ ] Binary alpha, true transparent background; no baked soil patch, shadow, glow, night version or text.
 - [ ] Mode A: `render_source` with each recorded recipe reproduces `native/`; the edge pieces only use their 4 keys.
 - [ ] `trampled` and `withered`: bounding box inside x 1-14 and y >= 1, lowest opaque row 13, centred on x=8 ±1, sizes and pixel counts as the table; over `tilled_wet.png` at least 80 wet-soil px stay visible (`check_crop_art.py`'s rule); their silhouettes differ from each other and from every crop stage.
@@ -106,5 +110,5 @@ Ask the owner (pt-BR):
 ## Delivery
 
 - Folder `implementation/backlog/deliveries/A014-crop-ground/`, with the files of contract 9.1: `raw/` (+ `.prompt.txt`, `.call.json`), `native/<name>/none/01.png` (e.g. `native/tilled_edge_n/none/01.png`), `preview/`, `rejected/`, `contract.json`, `checks.json` (with `edge_geometry` and `wet_cue_exposed`), `build.py`, `index.html`, `review-log.txt`.
-- `CLAUDE-A014-PROMPT.txt` maps each file, e.g. `native/trampled/none/01.png -> sprites/crops/trampled.png  16x16 pivot (8,14) draw 1.0 static` and `native/tilled_edge_n/none/01.png -> sprites/crops/tilled_edge_n.png  16x16 pivot (8,16)`; lists the rotations Claude derives; and names the stand-ins it replaces (0155's trampled plot, 0170's withered crop, 0167's tilled-grass border).
+- `CLAUDE-A014-PROMPT.txt` maps each file, e.g. `native/trampled/none/01.png -> sprites/crops/trampled.png  16x16 pivot (8,14) draw 1.0 static` and `native/tilled_edge_n/none/01.png -> sprites/crops/tilled_edge_n.png  16x16 pivot (8,16)`; lists the runtime quarter-turns described above; and names the stand-ins it replaces (0155's trampled plot, 0171's withered crop, 0167's tilled-grass border).
 - Last step, only after the owner approves in words recorded in `APPROVAL.json`: `python implementation/backlog/assets.py set A014 approved`.

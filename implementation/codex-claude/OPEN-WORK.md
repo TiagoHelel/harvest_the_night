@@ -1,6 +1,6 @@
 # Everything left before 1.0
 
-Kept by Claude. Last updated **2026-10-16**, with task 0295's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
+Kept by Claude. Last updated **2026-10-23**: the art remake in Aseprite (below); before that 2026-10-16, with task 0295's commit; section 3a after Codex's two messages of 21:11 (all 21 packs approved).
 Sources:
 - `python tools/task.py stats`, `next` and `list todo`;
 - `implementation/BACKLOG.md`;
@@ -10,6 +10,17 @@ Sources:
 Every art integration in 3a and 3b is ready, one a run (`task.py next`
 says nothing actionable). Only the farmer packs the owner deferred (3c) still wait on
 art, and the rest of the backlog waits on those (section 2).
+
+**2026-10-23: the owner is remaking all the art in Aseprite.**
+- A separate chat redraws every sprite with the procedural toolkit
+  (`C:\Users\Helel\Documents\aseprite`): 1332 frames in 20 batches, B00-B19,
+  the farmer's deferred packs included.
+- The instructions, the inventory and the delivery contract are in
+  [`implementation/aseprite/`](../aseprite/README.md).
+- An approved batch comes back to Claude with "Integra o lote Bxx do
+  Aseprite", following `implementation/aseprite/INTEGRATION.md`.
+- The Codex packs in section 3 are history for the remake: its briefs, not
+  its sources.
 
 ## 1. Task 0277, balancing the year: done 2026-10-14
 

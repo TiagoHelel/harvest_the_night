@@ -1,6 +1,6 @@
 # A007 - The farmer tilling, planting, watering, harvesting
 
-- **Status:** todo
+- **Status:** blocked - Owner deferred all farmer sprites until later, one at a time. Await an explicit request; no generation or integration now.
 - **For game task:** 0123
 - **Family:** farmer
 - **Mode:** B - finished native pixel art (`exact-source`), the approved blue 32px farmer's colours

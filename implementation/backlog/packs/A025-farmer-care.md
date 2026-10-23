@@ -1,6 +1,6 @@
 # A025 - The farmer tending animals
 
-- **Status:** todo
+- **Status:** blocked - Owner deferred all farmer sprites until later, one at a time. Await an explicit request; no generation or integration now.
 - **For game task:** 0208
 - **Dressed by game tasks:** 0185
 - **Spec after game task:** 0185

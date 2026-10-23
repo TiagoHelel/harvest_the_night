@@ -1,6 +1,6 @@
 # A001 - Going to bed, sleeping, waking, passing out
 
-- **Status:** todo
+- **Status:** blocked - Owner deferred all farmer sprites until later, one at a time. Await an explicit request; no generation or integration now.
 - **For game task:** 0143
 - **Dressed by game tasks:** 0129
 - **Family:** farmer

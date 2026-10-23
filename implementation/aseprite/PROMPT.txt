@@ -1,0 +1,15 @@
+Vamos refazer toda a arte do jogo HARVEST THE NIGHT no Aseprite, com o toolkit
+C:\Users\Helel\Documents\aseprite e a skill pixel-sprites.
+
+Leia e execute C:\Users\Helel\Documents\repos\harvest_the_night\implementation\aseprite\RUNNER.md
+(antes de desenhar, leia também o CONTRACT.md e o inventory/DERIVED.md da mesma pasta).
+
+Faça os lotes em ordem, do B00 ao B19, um de cada vez: desenhe, rode a
+checagem até dar PASS, me mostre a revisão e espere eu aprovar. Quando eu
+aprovar, grave o APPROVAL.json e o HANDOFF.md na entrega e siga para o próximo
+lote. O B00 vem primeiro: a paleta e um piloto do estilo, para eu aprovar o
+visual antes de tudo.
+
+A arte deste jogo fica em game_assets/harvest_the_night/ no toolkit, e as
+entregas só em implementation/aseprite/deliveries/ no repositório. Não mude
+nada do jogo, não faça commit nem push. Fale comigo em português.

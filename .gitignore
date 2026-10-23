@@ -13,6 +13,25 @@ export/
 implementation/logs/
 __pycache__/
 *.pyc
+.balance-lock
+# shot.py with no task id writes here; a task's captures go in shots/<id>/
+implementation/shots/latest/
+
+# Claude Code's per-machine files (.claude/commands/ is shared and stays)
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+
+# The Codex art era, closed 2026-10-23: the art is being remade in Aseprite
+# (implementation/aseprite/). Everything the game uses from these folders is
+# already committed - every source, prompt and reference that
+# assets/art_source/manifest.json names. What is left on disk - candidates,
+# retries, previews, pilots and the farmer packs never approved - stays on the
+# machine that made it. Already-tracked files here stay tracked.
+implementation/backlog/deliveries/
+implementation/fhd-player/
+implementation/fhd-enemies/
+implementation/shots/sprites/fhd-*/
+assets/art_source/player-fhd/
 
 # Editor and OS
 .vscode/
@@ -25,4 +44,3 @@ desktop.ini
 
 # Godot writes these next to .gd files; they ARE source and must be committed:
 # !*.gd.uid
-.balance-lock

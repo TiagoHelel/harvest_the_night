@@ -61,20 +61,26 @@ de dia. Eles têm a linha **"Spec after game task"**, e o `assets.py next` só
 oferece esses pacotes depois que a tarefa do jogo indicada terminar e
 preencher as medidas finais. Até lá, o Codex pula para o próximo.
 
-**Já dá para começar agora** (não dependem de código novo):
+**O que dá para fazer agora** muda a cada pacote aprovado e a cada tarefa do
+jogo terminada, por isso não fica escrito aqui: pergunte à fila.
 
-| Pacote | O quê |
-|---|---|
-| A001 | dormir, acordar e desmaiar |
-| A002 | reações e o "Zzz" |
-| A005 | ícones da barra de armas da noite |
-| A006 | a corrida |
-| A007–A009 | o fazendeiro trabalhando, no corpo novo |
-| A010–A011 | calendário e rostos da previsão |
-| A012 | o chão de inverno |
-| A013 | as árvores nas estações |
-| A019–A020 | ícones de ferramentas e de materiais |
-| A029 | produtos dos animais |
+```
+python implementation/backlog/assets.py next     # o que o Codex pega na próxima rodada
+python implementation/backlog/assets.py list     # todos, com o estado e o que esperam
+```
+
+O `next` segue sempre esta ordem:
+
+1. **Retoma** um pacote deixado em `generating` ou `review`. Um pacote em
+   revisão espera a sua resposta: o Codex mostra a página e pergunta de
+   novo.
+2. **Oferece o próximo `todo` pela numeração**, pulando dois tipos:
+   - um pacote cuja "Spec after game task" ainda não terminou (a coluna
+     *Starts after* do [`INDEX.md`](INDEX.md));
+   - um pacote `blocked`. Todos os do fazendeiro (A001, A002, A007–A009,
+     A024, A025) estão bloqueados porque você os adiou, e a corrida (A006)
+     foi cancelada. Só voltam com `assets.py set Axxx todo`, quando você
+     pedir.
 
 ## O que tem aqui
 
